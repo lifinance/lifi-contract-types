@@ -186,6 +186,7 @@ interface NXTPFacetInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
+    "Inited(address,uint64)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
     "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
@@ -193,12 +194,17 @@ interface NXTPFacetInterface extends ethers.utils.Interface {
     "NXTPBridgeStarted(bytes32,bytes32,tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Inited"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferConfirmed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRefunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NXTPBridgeStarted"): EventFragment;
 }
+
+export type InitedEvent = TypedEvent<
+  [string, BigNumber] & { bridge: string; chainId: BigNumber }
+>;
 
 export type LiFiTransferCompletedEvent = TypedEvent<
   [string, string, string, BigNumber, BigNumber] & {
@@ -797,6 +803,22 @@ export class NXTPFacet extends BaseContract {
   };
 
   filters: {
+    "Inited(address,uint64)"(
+      bridge?: string | null,
+      chainId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { bridge: string; chainId: BigNumber }
+    >;
+
+    Inited(
+      bridge?: string | null,
+      chainId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { bridge: string; chainId: BigNumber }
+    >;
+
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: BytesLike | null,
       receivingAssetId?: null,

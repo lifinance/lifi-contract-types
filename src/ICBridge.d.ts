@@ -21,49 +21,34 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ICBridgeInterface extends ethers.utils.Interface {
   functions: {
-    "confirm(bytes32,bytes32)": FunctionFragment;
-    "refund(bytes32)": FunctionFragment;
-    "transferIn(address,address,uint256,bytes32,uint64,uint64,bytes32)": FunctionFragment;
-    "transferOut(address,address,uint256,bytes32,uint64,uint64,address)": FunctionFragment;
+    "relay(bytes,bytes[],address[],uint256[])": FunctionFragment;
+    "send(address,address,uint256,uint64,uint64,uint32)": FunctionFragment;
+    "sendNative(address,uint256,uint64,uint64,uint32)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "confirm",
-    values: [BytesLike, BytesLike]
+    functionFragment: "relay",
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
-  encodeFunctionData(functionFragment: "refund", values: [BytesLike]): string;
   encodeFunctionData(
-    functionFragment: "transferIn",
+    functionFragment: "send",
     values: [
       string,
       string,
       BigNumberish,
-      BytesLike,
       BigNumberish,
       BigNumberish,
-      BytesLike
+      BigNumberish
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "transferOut",
-    values: [
-      string,
-      string,
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      string
-    ]
+    functionFragment: "sendNative",
+    values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: "confirm", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "refund", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "transferIn", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOut",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "relay", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sendNative", data: BytesLike): Result;
 
   events: {};
 }
@@ -112,101 +97,86 @@ export class ICBridge extends BaseContract {
   interface: ICBridgeInterface;
 
   functions: {
-    confirm(
-      _transferId: BytesLike,
-      _preimage: BytesLike,
+    relay(
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    refund(
-      _transferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    transferIn(
-      _dstAddress: string,
+    send(
+      _receiver: string,
       _token: string,
       _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
-      _srcChainId: BigNumberish,
-      _srcTransferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    transferOut(
-      _bridge: string,
-      _token: string,
-      _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
       _dstChinId: BigNumberish,
-      _dstAddress: string,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    sendNative(
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChinId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  confirm(
-    _transferId: BytesLike,
-    _preimage: BytesLike,
+  relay(
+    _relayRequest: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  refund(
-    _transferId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  transferIn(
-    _dstAddress: string,
+  send(
+    _receiver: string,
     _token: string,
     _amount: BigNumberish,
-    _hashlock: BytesLike,
-    _timelock: BigNumberish,
-    _srcChainId: BigNumberish,
-    _srcTransferId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  transferOut(
-    _bridge: string,
-    _token: string,
-    _amount: BigNumberish,
-    _hashlock: BytesLike,
-    _timelock: BigNumberish,
     _dstChinId: BigNumberish,
-    _dstAddress: string,
+    _nonce: BigNumberish,
+    _maxSlippage: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  sendNative(
+    _receiver: string,
+    _amount: BigNumberish,
+    _dstChinId: BigNumberish,
+    _nonce: BigNumberish,
+    _maxSlippage: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    confirm(
-      _transferId: BytesLike,
-      _preimage: BytesLike,
+    relay(
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    refund(_transferId: BytesLike, overrides?: CallOverrides): Promise<void>;
-
-    transferIn(
-      _dstAddress: string,
+    send(
+      _receiver: string,
       _token: string,
       _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
-      _srcChainId: BigNumberish,
-      _srcTransferId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    transferOut(
-      _bridge: string,
-      _token: string,
-      _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
       _dstChinId: BigNumberish,
-      _dstAddress: string,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sendNative(
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChinId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -214,71 +184,59 @@ export class ICBridge extends BaseContract {
   filters: {};
 
   estimateGas: {
-    confirm(
-      _transferId: BytesLike,
-      _preimage: BytesLike,
+    relay(
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    refund(
-      _transferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    transferIn(
-      _dstAddress: string,
+    send(
+      _receiver: string,
       _token: string,
       _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
-      _srcChainId: BigNumberish,
-      _srcTransferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    transferOut(
-      _bridge: string,
-      _token: string,
-      _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
       _dstChinId: BigNumberish,
-      _dstAddress: string,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    sendNative(
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChinId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    confirm(
-      _transferId: BytesLike,
-      _preimage: BytesLike,
+    relay(
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    refund(
-      _transferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferIn(
-      _dstAddress: string,
+    send(
+      _receiver: string,
       _token: string,
       _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
-      _srcChainId: BigNumberish,
-      _srcTransferId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferOut(
-      _bridge: string,
-      _token: string,
-      _amount: BigNumberish,
-      _hashlock: BytesLike,
-      _timelock: BigNumberish,
       _dstChinId: BigNumberish,
-      _dstAddress: string,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sendNative(
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChinId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

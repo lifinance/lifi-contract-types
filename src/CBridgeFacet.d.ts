@@ -22,49 +22,14 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface CBridgeFacetInterface extends ethers.utils.Interface {
   functions: {
-    "confirmTransaction((bytes32,string,address,address,address,address,uint256,uint256),bytes32,bytes32)": FunctionFragment;
-    "initCbridge(address,uint256)": FunctionFragment;
-    "refund((bytes32,string,address,address,address,address,uint256,uint256),bytes32)": FunctionFragment;
-    "startBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,bytes32,uint64,uint64,address))": FunctionFragment;
-    "swapAndStartBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),tuple[],(address,address,uint256,bytes32,uint64,uint64,address))": FunctionFragment;
+    "initCbridge(address,uint64)": FunctionFragment;
+    "startBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,uint64,uint64,uint32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),tuple[],(address,address,uint256,uint64,uint64,uint32))": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "confirmTransaction",
-    values: [
-      {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      BytesLike,
-      BytesLike
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "initCbridge",
     values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "refund",
-    values: [
-      {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      BytesLike
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCBridge",
@@ -80,13 +45,12 @@ interface CBridgeFacetInterface extends ethers.utils.Interface {
         amount: BigNumberish;
       },
       {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       }
     ]
   ): string;
@@ -112,26 +76,20 @@ interface CBridgeFacetInterface extends ethers.utils.Interface {
         callData: BytesLike;
       }[],
       {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       }
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "confirmTransaction",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "initCbridge",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "refund", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaCBridge",
     data: BytesLike
@@ -142,17 +100,23 @@ interface CBridgeFacetInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
+    "Inited(address,uint64)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
     "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Inited"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferConfirmed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRefunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+
+export type InitedEvent = TypedEvent<
+  [string, BigNumber] & { bridge: string; chainId: BigNumber }
+>;
 
 export type LiFiTransferCompletedEvent = TypedEvent<
   [string, string, string, BigNumber, BigNumber] & {
@@ -280,40 +244,9 @@ export class CBridgeFacet extends BaseContract {
   interface: CBridgeFacetInterface;
 
   functions: {
-    confirmTransaction(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
-      _preimage: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     initCbridge(
       _cBridge: string,
       _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    refund(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -329,13 +262,12 @@ export class CBridgeFacet extends BaseContract {
         amount: BigNumberish;
       },
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -360,52 +292,20 @@ export class CBridgeFacet extends BaseContract {
         callData: BytesLike;
       }[],
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  confirmTransaction(
-    _lifiData: {
-      transactionId: BytesLike;
-      integrator: string;
-      referrer: string;
-      sendingAssetId: string;
-      receivingAssetId: string;
-      receiver: string;
-      destinationChainId: BigNumberish;
-      amount: BigNumberish;
-    },
-    _transferId: BytesLike,
-    _preimage: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   initCbridge(
     _cBridge: string,
     _chainId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  refund(
-    _lifiData: {
-      transactionId: BytesLike;
-      integrator: string;
-      referrer: string;
-      sendingAssetId: string;
-      receivingAssetId: string;
-      receiver: string;
-      destinationChainId: BigNumberish;
-      amount: BigNumberish;
-    },
-    _transferId: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -421,13 +321,12 @@ export class CBridgeFacet extends BaseContract {
       amount: BigNumberish;
     },
     _cBridgeData: {
-      bridge: string;
+      receiver: string;
       token: string;
       amount: BigNumberish;
-      hashlock: BytesLike;
-      timelock: BigNumberish;
       dstChainId: BigNumberish;
-      dstAddress: string;
+      nonce: BigNumberish;
+      maxSlippage: BigNumberish;
     },
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -452,52 +351,20 @@ export class CBridgeFacet extends BaseContract {
       callData: BytesLike;
     }[],
     _cBridgeData: {
-      bridge: string;
+      receiver: string;
       token: string;
       amount: BigNumberish;
-      hashlock: BytesLike;
-      timelock: BigNumberish;
       dstChainId: BigNumberish;
-      dstAddress: string;
+      nonce: BigNumberish;
+      maxSlippage: BigNumberish;
     },
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    confirmTransaction(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
-      _preimage: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     initCbridge(
       _cBridge: string,
       _chainId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    refund(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -513,13 +380,12 @@ export class CBridgeFacet extends BaseContract {
         amount: BigNumberish;
       },
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: CallOverrides
     ): Promise<void>;
@@ -544,19 +410,34 @@ export class CBridgeFacet extends BaseContract {
         callData: BytesLike;
       }[],
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
+    "Inited(address,uint64)"(
+      bridge?: string | null,
+      chainId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { bridge: string; chainId: BigNumber }
+    >;
+
+    Inited(
+      bridge?: string | null,
+      chainId?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { bridge: string; chainId: BigNumber }
+    >;
+
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: BytesLike | null,
       receivingAssetId?: null,
@@ -803,40 +684,9 @@ export class CBridgeFacet extends BaseContract {
   };
 
   estimateGas: {
-    confirmTransaction(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
-      _preimage: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     initCbridge(
       _cBridge: string,
       _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    refund(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -852,13 +702,12 @@ export class CBridgeFacet extends BaseContract {
         amount: BigNumberish;
       },
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -883,53 +732,21 @@ export class CBridgeFacet extends BaseContract {
         callData: BytesLike;
       }[],
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    confirmTransaction(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
-      _preimage: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     initCbridge(
       _cBridge: string,
       _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    refund(
-      _lifiData: {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
-      },
-      _transferId: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -945,13 +762,12 @@ export class CBridgeFacet extends BaseContract {
         amount: BigNumberish;
       },
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -976,13 +792,12 @@ export class CBridgeFacet extends BaseContract {
         callData: BytesLike;
       }[],
       _cBridgeData: {
-        bridge: string;
+        receiver: string;
         token: string;
         amount: BigNumberish;
-        hashlock: BytesLike;
-        timelock: BigNumberish;
         dstChainId: BigNumberish;
-        dstAddress: string;
+        nonce: BigNumberish;
+        maxSlippage: BigNumberish;
       },
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

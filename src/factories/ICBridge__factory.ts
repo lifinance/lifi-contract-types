@@ -10,30 +10,27 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "bytes32",
-        name: "_transferId",
-        type: "bytes32",
+        internalType: "bytes",
+        name: "_relayRequest",
+        type: "bytes",
       },
       {
-        internalType: "bytes32",
-        name: "_preimage",
-        type: "bytes32",
+        internalType: "bytes[]",
+        name: "_sigs",
+        type: "bytes[]",
       },
-    ],
-    name: "confirm",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       {
-        internalType: "bytes32",
-        name: "_transferId",
-        type: "bytes32",
+        internalType: "address[]",
+        name: "_signers",
+        type: "address[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "_powers",
+        type: "uint256[]",
       },
     ],
-    name: "refund",
+    name: "relay",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -42,7 +39,7 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "_dstAddress",
+        name: "_receiver",
         type: "address",
       },
       {
@@ -54,59 +51,6 @@ const _abi = [
         internalType: "uint256",
         name: "_amount",
         type: "uint256",
-      },
-      {
-        internalType: "bytes32",
-        name: "_hashlock",
-        type: "bytes32",
-      },
-      {
-        internalType: "uint64",
-        name: "_timelock",
-        type: "uint64",
-      },
-      {
-        internalType: "uint64",
-        name: "_srcChainId",
-        type: "uint64",
-      },
-      {
-        internalType: "bytes32",
-        name: "_srcTransferId",
-        type: "bytes32",
-      },
-    ],
-    name: "transferIn",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_bridge",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes32",
-        name: "_hashlock",
-        type: "bytes32",
-      },
-      {
-        internalType: "uint64",
-        name: "_timelock",
-        type: "uint64",
       },
       {
         internalType: "uint64",
@@ -114,12 +58,50 @@ const _abi = [
         type: "uint64",
       },
       {
-        internalType: "address",
-        name: "_dstAddress",
-        type: "address",
+        internalType: "uint64",
+        name: "_nonce",
+        type: "uint64",
+      },
+      {
+        internalType: "uint32",
+        name: "_maxSlippage",
+        type: "uint32",
       },
     ],
-    name: "transferOut",
+    name: "send",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_receiver",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "_dstChinId",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "_nonce",
+        type: "uint64",
+      },
+      {
+        internalType: "uint32",
+        name: "_maxSlippage",
+        type: "uint32",
+      },
+    ],
+    name: "sendNative",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

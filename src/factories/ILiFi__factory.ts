@@ -12,6 +12,25 @@ const _abi = [
     inputs: [
       {
         indexed: true,
+        internalType: "address",
+        name: "bridge",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "chainId",
+        type: "uint64",
+      },
+    ],
+    name: "Inited",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: "bytes32",
         name: "transactionId",
         type: "bytes32",
