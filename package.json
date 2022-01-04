@@ -2,14 +2,22 @@
   "name": "lifi-contract-typings",
   "version": "1.0.0",
   "description": "Typings from LiFi Solidity contracts",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "author": "Ed Zynda",
   "license": "MIT",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "dependencies": {
     "@ethersproject/abi": "^5.5.0",
     "@ethersproject/bytes": "^5.5.0",
     "@ethersproject/providers": "^5.5.1",
     "ethers": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.7"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json"
   }
 }
