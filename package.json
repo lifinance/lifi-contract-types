@@ -1,6 +1,6 @@
 {
   "name": "lifi-contract-typings",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Typings from LiFi Solidity contracts",
   "main": "dist/index.js",
   "author": "Ed Zynda",
