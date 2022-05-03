@@ -27,62 +27,40 @@ import type {
   OnEvent,
 } from "../../common";
 
-export declare namespace ITransactionManager {
-  export type TransactionDataStruct = {
-    receivingChainTxManagerAddress: string;
-    user: string;
-    router: string;
-    initiator: string;
+export declare namespace ILiFi {
+  export type LiFiDataStruct = {
+    transactionId: BytesLike;
+    integrator: string;
+    referrer: string;
     sendingAssetId: string;
     receivingAssetId: string;
-    sendingChainFallback: string;
-    receivingAddress: string;
-    callTo: string;
-    callDataHash: BytesLike;
-    transactionId: BytesLike;
-    sendingChainId: BigNumberish;
-    receivingChainId: BigNumberish;
+    receiver: string;
+    destinationChainId: BigNumberish;
     amount: BigNumberish;
-    expiry: BigNumberish;
-    preparedBlockNumber: BigNumberish;
   };
 
-  export type TransactionDataStructOutput = [
+  export type LiFiDataStructOutput = [
     string,
     string,
     string,
     string,
     string,
     string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
     BigNumber,
     BigNumber
   ] & {
-    receivingChainTxManagerAddress: string;
-    user: string;
-    router: string;
-    initiator: string;
+    transactionId: string;
+    integrator: string;
+    referrer: string;
     sendingAssetId: string;
     receivingAssetId: string;
-    sendingChainFallback: string;
-    receivingAddress: string;
-    callTo: string;
-    callDataHash: string;
-    transactionId: string;
-    sendingChainId: BigNumber;
-    receivingChainId: BigNumber;
+    receiver: string;
+    destinationChainId: BigNumber;
     amount: BigNumber;
-    expiry: BigNumber;
-    preparedBlockNumber: BigNumber;
   };
+}
 
+export declare namespace ITransactionManager {
   export type InvariantTransactionDataStruct = {
     receivingChainTxManagerAddress: string;
     user: string;
@@ -155,39 +133,6 @@ export declare namespace ITransactionManager {
     encodedBid: string;
     bidSignature: string;
     encodedMeta: string;
-  };
-}
-
-export declare namespace ILiFi {
-  export type LiFiDataStruct = {
-    transactionId: BytesLike;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumberish;
-    amount: BigNumberish;
-  };
-
-  export type LiFiDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-  ] & {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumber;
-    amount: BigNumber;
   };
 }
 
@@ -287,29 +232,15 @@ export interface NXTPFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "Inited(address,uint64)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "NXTPBridgeStarted(bytes32,bytes32,tuple)": EventFragment;
+    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "NXTPInitialized(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Inited"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiTransferConfirmed"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiTransferRefunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NXTPBridgeStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NXTPInitialized"): EventFragment;
 }
-
-export interface InitedEventObject {
-  bridge: string;
-  chainId: BigNumber;
-}
-export type InitedEvent = TypedEvent<[string, BigNumber], InitedEventObject>;
-
-export type InitedEventFilter = TypedEventFilter<InitedEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -326,66 +257,10 @@ export type LiFiTransferCompletedEvent = TypedEvent<
 export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
-export interface LiFiTransferConfirmedEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  timestamp: BigNumber;
-}
-export type LiFiTransferConfirmedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ],
-  LiFiTransferConfirmedEventObject
->;
-
-export type LiFiTransferConfirmedEventFilter =
-  TypedEventFilter<LiFiTransferConfirmedEvent>;
-
-export interface LiFiTransferRefundedEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  timestamp: BigNumber;
-}
-export type LiFiTransferRefundedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ],
-  LiFiTransferRefundedEventObject
->;
-
-export type LiFiTransferRefundedEventFilter =
-  TypedEventFilter<LiFiTransferRefundedEvent>;
-
 export interface LiFiTransferStartedEventObject {
   transactionId: string;
+  bridge: string;
+  bridgeData: string;
   integrator: string;
   referrer: string;
   sendingAssetId: string;
@@ -393,7 +268,8 @@ export interface LiFiTransferStartedEventObject {
   receiver: string;
   amount: BigNumber;
   destinationChainId: BigNumber;
-  timestamp: BigNumber;
+  hasSourceSwap: boolean;
+  hasDestinationCall: boolean;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
   [
@@ -403,9 +279,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
     string,
     string,
     string,
+    string,
+    string,
     BigNumber,
     BigNumber,
-    BigNumber
+    boolean,
+    boolean
   ],
   LiFiTransferStartedEventObject
 >;
@@ -413,18 +292,15 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface NXTPBridgeStartedEventObject {
-  lifiTransactionId: string;
-  nxtpTransactionId: string;
-  txData: ITransactionManager.TransactionDataStructOutput;
+export interface NXTPInitializedEventObject {
+  txMgrAddr: string;
 }
-export type NXTPBridgeStartedEvent = TypedEvent<
-  [string, string, ITransactionManager.TransactionDataStructOutput],
-  NXTPBridgeStartedEventObject
+export type NXTPInitializedEvent = TypedEvent<
+  [string],
+  NXTPInitializedEventObject
 >;
 
-export type NXTPBridgeStartedEventFilter =
-  TypedEventFilter<NXTPBridgeStartedEvent>;
+export type NXTPInitializedEventFilter = TypedEventFilter<NXTPInitializedEvent>;
 
 export interface NXTPFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -562,12 +438,6 @@ export interface NXTPFacet extends BaseContract {
   };
 
   filters: {
-    "Inited(address,uint64)"(
-      bridge?: string | null,
-      chainId?: null
-    ): InitedEventFilter;
-    Inited(bridge?: string | null, chainId?: null): InitedEventFilter;
-
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: BytesLike | null,
       receivingAssetId?: null,
@@ -583,8 +453,10 @@ export interface NXTPFacet extends BaseContract {
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
+    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
       transactionId?: BytesLike | null,
+      bridge?: null,
+      bridgeData?: null,
       integrator?: null,
       referrer?: null,
       sendingAssetId?: null,
@@ -592,56 +464,13 @@ export interface NXTPFacet extends BaseContract {
       receiver?: null,
       amount?: null,
       destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferConfirmedEventFilter;
-    LiFiTransferConfirmed(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferConfirmedEventFilter;
-
-    "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferRefundedEventFilter;
-    LiFiTransferRefunded(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferRefundedEventFilter;
-
-    "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
+      hasSourceSwap?: null,
+      hasDestinationCall?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(
       transactionId?: BytesLike | null,
+      bridge?: null,
+      bridgeData?: null,
       integrator?: null,
       referrer?: null,
       sendingAssetId?: null,
@@ -649,19 +478,12 @@ export interface NXTPFacet extends BaseContract {
       receiver?: null,
       amount?: null,
       destinationChainId?: null,
-      timestamp?: null
+      hasSourceSwap?: null,
+      hasDestinationCall?: null
     ): LiFiTransferStartedEventFilter;
 
-    "NXTPBridgeStarted(bytes32,bytes32,tuple)"(
-      lifiTransactionId?: BytesLike | null,
-      nxtpTransactionId?: null,
-      txData?: null
-    ): NXTPBridgeStartedEventFilter;
-    NXTPBridgeStarted(
-      lifiTransactionId?: BytesLike | null,
-      nxtpTransactionId?: null,
-      txData?: null
-    ): NXTPBridgeStartedEventFilter;
+    "NXTPInitialized(address)"(txMgrAddr?: null): NXTPInitializedEventFilter;
+    NXTPInitialized(txMgrAddr?: null): NXTPInitializedEventFilter;
   };
 
   estimateGas: {

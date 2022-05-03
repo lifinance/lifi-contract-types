@@ -49,7 +49,7 @@ export interface WithdrawFacetInterface extends utils.Interface {
 
 export interface LogWithdrawEventObject {
   _assetAddress: string;
-  _from: string;
+  _to: string;
   amount: BigNumber;
 }
 export type LogWithdrawEvent = TypedEvent<
@@ -113,12 +113,12 @@ export interface WithdrawFacet extends BaseContract {
   filters: {
     "LogWithdraw(address,address,uint256)"(
       _assetAddress?: string | null,
-      _from?: null,
+      _to?: null,
       amount?: null
     ): LogWithdrawEventFilter;
     LogWithdraw(
       _assetAddress?: string | null,
-      _from?: null,
+      _to?: null,
       amount?: null
     ): LogWithdrawEventFilter;
   };

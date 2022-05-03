@@ -27,20 +27,42 @@ import type {
 
 export interface OwnershipFacetInterface extends utils.Interface {
   functions: {
+    "cancelOnwershipTransfer()": FunctionFragment;
+    "confirmOwnershipTransfer()": FunctionFragment;
     "owner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "owner" | "transferOwnership"
+    nameOrSignatureOrTopic:
+      | "cancelOnwershipTransfer"
+      | "confirmOwnershipTransfer"
+      | "owner"
+      | "transferOwnership"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "cancelOnwershipTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "confirmOwnershipTransfer",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "cancelOnwershipTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "confirmOwnershipTransfer",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -48,11 +70,25 @@ export interface OwnershipFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export interface OwnershipTransferRequestedEventObject {
+  _from: string;
+  _to: string;
+}
+export type OwnershipTransferRequestedEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferRequestedEventObject
+>;
+
+export type OwnershipTransferRequestedEventFilter =
+  TypedEventFilter<OwnershipTransferRequestedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -93,6 +129,14 @@ export interface OwnershipFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    cancelOnwershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     owner(overrides?: CallOverrides): Promise<[string] & { owner_: string }>;
 
     transferOwnership(
@@ -100,6 +144,14 @@ export interface OwnershipFacet extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  cancelOnwershipTransfer(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  confirmOwnershipTransfer(
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -109,6 +161,10 @@ export interface OwnershipFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    cancelOnwershipTransfer(overrides?: CallOverrides): Promise<void>;
+
+    confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
@@ -118,6 +174,15 @@ export interface OwnershipFacet extends BaseContract {
   };
 
   filters: {
+    "OwnershipTransferRequested(address,address)"(
+      _from?: string | null,
+      _to?: string | null
+    ): OwnershipTransferRequestedEventFilter;
+    OwnershipTransferRequested(
+      _from?: string | null,
+      _to?: string | null
+    ): OwnershipTransferRequestedEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -129,6 +194,14 @@ export interface OwnershipFacet extends BaseContract {
   };
 
   estimateGas: {
+    cancelOnwershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
@@ -138,6 +211,14 @@ export interface OwnershipFacet extends BaseContract {
   };
 
   populateTransaction: {
+    cancelOnwershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
