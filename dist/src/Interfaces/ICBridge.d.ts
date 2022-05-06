@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
@@ -45,7 +45,7 @@ export interface ICBridge extends BaseContract {
         send(_receiver: string, _token: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
@@ -55,7 +55,7 @@ export interface ICBridge extends BaseContract {
     send(_receiver: string, _token: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+    sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
@@ -71,7 +71,7 @@ export interface ICBridge extends BaseContract {
         send(_receiver: string, _token: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
@@ -82,7 +82,7 @@ export interface ICBridge extends BaseContract {
         send(_receiver: string, _token: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChinId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

@@ -16,7 +16,7 @@ export interface WithdrawFacetInterface extends utils.Interface {
 }
 export interface LogWithdrawEventObject {
     _assetAddress: string;
-    _from: string;
+    _to: string;
     amount: BigNumber;
 }
 export declare type LogWithdrawEvent = TypedEvent<[
@@ -51,8 +51,8 @@ export interface WithdrawFacet extends BaseContract {
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "LogWithdraw(address,address,uint256)"(_assetAddress?: string | null, _from?: null, amount?: null): LogWithdrawEventFilter;
-        LogWithdraw(_assetAddress?: string | null, _from?: null, amount?: null): LogWithdrawEventFilter;
+        "LogWithdraw(address,address,uint256)"(_assetAddress?: string | null, _to?: null, amount?: null): LogWithdrawEventFilter;
+        LogWithdraw(_assetAddress?: string | null, _to?: null, amount?: null): LogWithdrawEventFilter;
     };
     estimateGas: {
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {

@@ -32,9 +32,9 @@ var _abi = [
             },
             {
                 indexed: false,
-                internalType: "uint64",
+                internalType: "uint256",
                 name: "chainId",
-                type: "uint64",
+                type: "uint256",
             },
         ],
         name: "Inited",
@@ -261,7 +261,7 @@ var _abi = [
         type: "event",
     },
 ];
-var _bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122074c20891417ba22638253b97d39884011293c212d6883f535a10b47e476cb6b364736f6c63430008070033";
+var _bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220103b00593357e558c75d256be164e9869bac4f3958c7e3c6b1debf037214654764736f6c63430008070033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var Swapper__factory = /** @class */ (function (_super) {
     __extends(Swapper__factory, _super);

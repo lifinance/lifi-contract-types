@@ -35,27 +35,27 @@ export declare namespace ILiFi {
 }
 export declare namespace CBridgeFacet {
     type CBridgeDataStruct = {
-        receiver: string;
-        token: string;
-        amount: BigNumberish;
+        maxSlippage: BigNumberish;
         dstChainId: BigNumberish;
         nonce: BigNumberish;
-        maxSlippage: BigNumberish;
-    };
-    type CBridgeDataStructOutput = [
-        string,
-        string,
-        BigNumber,
-        BigNumber,
-        BigNumber,
-        number
-    ] & {
+        amount: BigNumberish;
         receiver: string;
         token: string;
-        amount: BigNumber;
+    };
+    type CBridgeDataStructOutput = [
+        number,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        string,
+        string
+    ] & {
+        maxSlippage: number;
         dstChainId: BigNumber;
         nonce: BigNumber;
-        maxSlippage: number;
+        amount: BigNumber;
+        receiver: string;
+        token: string;
     };
 }
 export declare namespace LibSwap {
@@ -86,8 +86,8 @@ export declare namespace LibSwap {
 export interface CBridgeFacetInterface extends utils.Interface {
     functions: {
         "initCbridge(address,uint64)": FunctionFragment;
-        "startBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,uint64,uint64,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,uint256,uint64,uint64,uint32))": FunctionFragment;
+        "startBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(uint32,uint64,uint64,uint256,address,address))": FunctionFragment;
+        "swapAndStartBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(uint32,uint64,uint64,uint256,address,address))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "initCbridge" | "startBridgeTokensViaCBridge" | "swapAndStartBridgeTokensViaCBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "initCbridge", values: [string, BigNumberish]): string;
@@ -101,24 +101,23 @@ export interface CBridgeFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "startBridgeTokensViaCBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaCBridge", data: BytesLike): Result;
     events: {
-        "Inited(address,uint64)": EventFragment;
+        "CBridgeInitialized(address,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-        "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
+        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "Inited"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "CBridgeInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "LiFiTransferConfirmed"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "LiFiTransferRefunded"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface InitedEventObject {
-    bridge: string;
+export interface CBridgeInitializedEventObject {
+    cBridge: string;
     chainId: BigNumber;
 }
-export declare type InitedEvent = TypedEvent<[string, BigNumber], InitedEventObject>;
-export declare type InitedEventFilter = TypedEventFilter<InitedEvent>;
+export declare type CBridgeInitializedEvent = TypedEvent<[
+    string,
+    BigNumber
+], CBridgeInitializedEventObject>;
+export declare type CBridgeInitializedEventFilter = TypedEventFilter<CBridgeInitializedEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -134,54 +133,10 @@ export declare type LiFiTransferCompletedEvent = TypedEvent<[
     BigNumber
 ], LiFiTransferCompletedEventObject>;
 export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
-export interface LiFiTransferConfirmedEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    timestamp: BigNumber;
-}
-export declare type LiFiTransferConfirmedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-], LiFiTransferConfirmedEventObject>;
-export declare type LiFiTransferConfirmedEventFilter = TypedEventFilter<LiFiTransferConfirmedEvent>;
-export interface LiFiTransferRefundedEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    timestamp: BigNumber;
-}
-export declare type LiFiTransferRefundedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-], LiFiTransferRefundedEventObject>;
-export declare type LiFiTransferRefundedEventFilter = TypedEventFilter<LiFiTransferRefundedEvent>;
 export interface LiFiTransferStartedEventObject {
     transactionId: string;
+    bridge: string;
+    bridgeData: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
@@ -189,7 +144,8 @@ export interface LiFiTransferStartedEventObject {
     receiver: string;
     amount: BigNumber;
     destinationChainId: BigNumber;
-    timestamp: BigNumber;
+    hasSourceSwap: boolean;
+    hasDestinationCall: boolean;
 }
 export declare type LiFiTransferStartedEvent = TypedEvent<[
     string,
@@ -198,9 +154,12 @@ export declare type LiFiTransferStartedEvent = TypedEvent<[
     string,
     string,
     string,
+    string,
+    string,
     BigNumber,
     BigNumber,
-    BigNumber
+    boolean,
+    boolean
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface CBridgeFacet extends BaseContract {
@@ -243,16 +202,12 @@ export interface CBridgeFacet extends BaseContract {
         swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "Inited(address,uint64)"(bridge?: string | null, chainId?: null): InitedEventFilter;
-        Inited(bridge?: string | null, chainId?: null): InitedEventFilter;
+        "CBridgeInitialized(address,uint256)"(cBridge?: null, chainId?: null): CBridgeInitializedEventFilter;
+        CBridgeInitialized(cBridge?: null, chainId?: null): CBridgeInitializedEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferConfirmedEventFilter;
-        LiFiTransferConfirmed(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferConfirmedEventFilter;
-        "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferRefundedEventFilter;
-        LiFiTransferRefunded(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferRefundedEventFilter;
-        "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferStartedEventFilter;
-        LiFiTransferStarted(transactionId?: BytesLike | null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, timestamp?: null): LiFiTransferStartedEventFilter;
+        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
         initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: Overrides & {

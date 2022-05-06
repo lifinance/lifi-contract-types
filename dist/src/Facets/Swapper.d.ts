@@ -5,7 +5,7 @@ import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../..
 export interface SwapperInterface extends utils.Interface {
     functions: {};
     events: {
-        "Inited(address,uint64)": EventFragment;
+        "Inited(address,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
         "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
@@ -124,7 +124,7 @@ export interface Swapper extends BaseContract {
     functions: {};
     callStatic: {};
     filters: {
-        "Inited(address,uint64)"(bridge?: string | null, chainId?: null): InitedEventFilter;
+        "Inited(address,uint256)"(bridge?: string | null, chainId?: null): InitedEventFilter;
         Inited(bridge?: string | null, chainId?: null): InitedEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;

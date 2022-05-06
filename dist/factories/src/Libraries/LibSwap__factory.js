@@ -22,6 +22,11 @@ exports.LibSwap__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        inputs: [],
+        name: "NoSwapFromZeroBalance",
+        type: "error",
+    },
+    {
         anonymous: false,
         inputs: [
             {
@@ -71,7 +76,7 @@ var _abi = [
         type: "event",
     },
 ];
-var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220c5c5fdb7e0fb92ff5c105e0f734aee145b3e0b30cce4a1edb55a8a2a91df003d64736f6c63430008070033";
+var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b887a5d43f77dc34ca01ea9fbd7c70e57e0dbe986c01c9c8b4e00c9d6ea1b15264736f6c634300080d0033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var LibSwap__factory = /** @class */ (function (_super) {
     __extends(LibSwap__factory, _super);

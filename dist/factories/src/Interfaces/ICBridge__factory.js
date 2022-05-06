@@ -102,7 +102,7 @@ var _abi = [
         ],
         name: "sendNative",
         outputs: [],
-        stateMutability: "nonpayable",
+        stateMutability: "payable",
         type: "function",
     },
 ];
