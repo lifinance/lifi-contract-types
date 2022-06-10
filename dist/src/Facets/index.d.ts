@@ -12,5 +12,6 @@ export type { HopFacet } from "./HopFacet";
 export type { HyphenFacet } from "./HyphenFacet";
 export type { NXTPFacet } from "./NXTPFacet";
 export type { OwnershipFacet } from "./OwnershipFacet";
+export type { StargateFacet } from "./StargateFacet";
 export type { WithdrawFacet } from "./WithdrawFacet";
 export type { WormholeFacet } from "./WormholeFacet";

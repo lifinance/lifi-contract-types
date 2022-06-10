@@ -1,3 +1,4 @@
+export * as iStargateRouterSol from "./IStargateRouter.sol";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
 export { IAnyswapRouter__factory } from "./IAnyswapRouter__factory";
 export { IAnyswapToken__factory } from "./IAnyswapToken__factory";

@@ -4,10 +4,13 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
 export interface WithdrawFacetInterface extends utils.Interface {
     functions: {
+        "executeCallAndWithdraw(address,bytes,address,address,uint256)": FunctionFragment;
         "withdraw(address,address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "withdraw"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "executeCallAndWithdraw" | "withdraw"): FunctionFragment;
+    encodeFunctionData(functionFragment: "executeCallAndWithdraw", values: [string, BytesLike, string, string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "withdraw", values: [string, string, BigNumberish]): string;
+    decodeFunctionResult(functionFragment: "executeCallAndWithdraw", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
     events: {
         "LogWithdraw(address,address,uint256)": EventFragment;
@@ -40,14 +43,21 @@ export interface WithdrawFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        executeCallAndWithdraw(_callTo: string, _callData: BytesLike, _assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
+    executeCallAndWithdraw(_callTo: string, _callData: BytesLike, _assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
     withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
+        executeCallAndWithdraw(_callTo: string, _callData: BytesLike, _assetAddress: string, _to: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -55,11 +65,17 @@ export interface WithdrawFacet extends BaseContract {
         LogWithdraw(_assetAddress?: string | null, _to?: null, amount?: null): LogWithdrawEventFilter;
     };
     estimateGas: {
+        executeCallAndWithdraw(_callTo: string, _callData: BytesLike, _assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
+        executeCallAndWithdraw(_callTo: string, _callData: BytesLike, _assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
         withdraw(_assetAddress: string, _to: string, _amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
