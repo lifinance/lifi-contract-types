@@ -1,3 +1,5 @@
+import type * as iStargateRouterSol from "./IStargateRouter.sol";
+export type { iStargateRouterSol };
 export type { IAcrossSpokePool } from "./IAcrossSpokePool";
 export type { IAnyswapRouter } from "./IAnyswapRouter";
 export type { IAnyswapToken } from "./IAnyswapToken";

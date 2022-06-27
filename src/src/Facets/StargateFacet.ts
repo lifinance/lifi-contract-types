@@ -212,29 +212,15 @@ export interface StargateFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "Inited(address,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)": EventFragment;
+    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
     "StargateInitialized(address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Inited"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiTransferConfirmed"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiTransferRefunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "StargateInitialized"): EventFragment;
 }
-
-export interface InitedEventObject {
-  bridge: string;
-  chainId: BigNumber;
-}
-export type InitedEvent = TypedEvent<[string, BigNumber], InitedEventObject>;
-
-export type InitedEventFilter = TypedEventFilter<InitedEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -251,66 +237,10 @@ export type LiFiTransferCompletedEvent = TypedEvent<
 export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
-export interface LiFiTransferConfirmedEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  timestamp: BigNumber;
-}
-export type LiFiTransferConfirmedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ],
-  LiFiTransferConfirmedEventObject
->;
-
-export type LiFiTransferConfirmedEventFilter =
-  TypedEventFilter<LiFiTransferConfirmedEvent>;
-
-export interface LiFiTransferRefundedEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  timestamp: BigNumber;
-}
-export type LiFiTransferRefundedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ],
-  LiFiTransferRefundedEventObject
->;
-
-export type LiFiTransferRefundedEventFilter =
-  TypedEventFilter<LiFiTransferRefundedEvent>;
-
 export interface LiFiTransferStartedEventObject {
   transactionId: string;
+  bridge: string;
+  bridgeData: string;
   integrator: string;
   referrer: string;
   sendingAssetId: string;
@@ -318,7 +248,8 @@ export interface LiFiTransferStartedEventObject {
   receiver: string;
   amount: BigNumber;
   destinationChainId: BigNumber;
-  timestamp: BigNumber;
+  hasSourceSwap: boolean;
+  hasDestinationCall: boolean;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
   [
@@ -328,9 +259,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
     string,
     string,
     string,
+    string,
+    string,
     BigNumber,
     BigNumber,
-    BigNumber
+    boolean,
+    boolean
   ],
   LiFiTransferStartedEventObject
 >;
@@ -527,12 +461,6 @@ export interface StargateFacet extends BaseContract {
   };
 
   filters: {
-    "Inited(address,uint256)"(
-      bridge?: string | null,
-      chainId?: null
-    ): InitedEventFilter;
-    Inited(bridge?: string | null, chainId?: null): InitedEventFilter;
-
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: BytesLike | null,
       receivingAssetId?: null,
@@ -548,8 +476,10 @@ export interface StargateFacet extends BaseContract {
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferConfirmed(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
+    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
       transactionId?: BytesLike | null,
+      bridge?: null,
+      bridgeData?: null,
       integrator?: null,
       referrer?: null,
       sendingAssetId?: null,
@@ -557,56 +487,13 @@ export interface StargateFacet extends BaseContract {
       receiver?: null,
       amount?: null,
       destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferConfirmedEventFilter;
-    LiFiTransferConfirmed(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferConfirmedEventFilter;
-
-    "LiFiTransferRefunded(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferRefundedEventFilter;
-    LiFiTransferRefunded(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
-    ): LiFiTransferRefundedEventFilter;
-
-    "LiFiTransferStarted(bytes32,string,address,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: BytesLike | null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      timestamp?: null
+      hasSourceSwap?: null,
+      hasDestinationCall?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(
       transactionId?: BytesLike | null,
+      bridge?: null,
+      bridgeData?: null,
       integrator?: null,
       referrer?: null,
       sendingAssetId?: null,
@@ -614,7 +501,8 @@ export interface StargateFacet extends BaseContract {
       receiver?: null,
       amount?: null,
       destinationChainId?: null,
-      timestamp?: null
+      hasSourceSwap?: null,
+      hasDestinationCall?: null
     ): LiFiTransferStartedEventFilter;
 
     "StargateInitialized(address)"(

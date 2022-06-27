@@ -11,5 +11,6 @@ export { HopFacet__factory } from "./HopFacet__factory";
 export { HyphenFacet__factory } from "./HyphenFacet__factory";
 export { NXTPFacet__factory } from "./NXTPFacet__factory";
 export { OwnershipFacet__factory } from "./OwnershipFacet__factory";
+export { StargateFacet__factory } from "./StargateFacet__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
 export { WormholeFacet__factory } from "./WormholeFacet__factory";
