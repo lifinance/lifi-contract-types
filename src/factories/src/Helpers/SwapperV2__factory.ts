@@ -3,7 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { Swapper, SwapperInterface } from "../../../src/Helpers/Swapper";
+import type {
+  SwapperV2,
+  SwapperV2Interface,
+} from "../../../src/Helpers/SwapperV2";
 
 const _abi = [
   {
@@ -125,18 +128,18 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212204a7148a806d3dce83b40137b3b08e3be085b11acd27d9fdde1ed64bc38f0b27d64736f6c634300080d0033";
+  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212207b87e2fda442e54b070d7635b8ac0f70deca589857b4dba14087b1c1f274fbdb64736f6c634300080d0033";
 
-type SwapperConstructorParams =
+type SwapperV2ConstructorParams =
   | [signer?: Signer]
   | ConstructorParameters<typeof ContractFactory>;
 
 const isSuperArgs = (
-  xs: SwapperConstructorParams
+  xs: SwapperV2ConstructorParams
 ): xs is ConstructorParameters<typeof ContractFactory> => xs.length > 1;
 
-export class Swapper__factory extends ContractFactory {
-  constructor(...args: SwapperConstructorParams) {
+export class SwapperV2__factory extends ContractFactory {
+  constructor(...args: SwapperV2ConstructorParams) {
     if (isSuperArgs(args)) {
       super(...args);
     } else {
@@ -146,30 +149,30 @@ export class Swapper__factory extends ContractFactory {
 
   override deploy(
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<Swapper> {
-    return super.deploy(overrides || {}) as Promise<Swapper>;
+  ): Promise<SwapperV2> {
+    return super.deploy(overrides || {}) as Promise<SwapperV2>;
   }
   override getDeployTransaction(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
-  override attach(address: string): Swapper {
-    return super.attach(address) as Swapper;
+  override attach(address: string): SwapperV2 {
+    return super.attach(address) as SwapperV2;
   }
-  override connect(signer: Signer): Swapper__factory {
-    return super.connect(signer) as Swapper__factory;
+  override connect(signer: Signer): SwapperV2__factory {
+    return super.connect(signer) as SwapperV2__factory;
   }
 
   static readonly bytecode = _bytecode;
   static readonly abi = _abi;
-  static createInterface(): SwapperInterface {
-    return new utils.Interface(_abi) as SwapperInterface;
+  static createInterface(): SwapperV2Interface {
+    return new utils.Interface(_abi) as SwapperV2Interface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): Swapper {
-    return new Contract(address, _abi, signerOrProvider) as Swapper;
+  ): SwapperV2 {
+    return new Contract(address, _abi, signerOrProvider) as SwapperV2;
   }
 }

@@ -273,7 +273,7 @@ export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
 export interface StargateInitializedEventObject {
-  stargateRoutert: string;
+  stargateRouter: string;
 }
 export type StargateInitializedEvent = TypedEvent<
   [string],
@@ -329,10 +329,10 @@ export interface StargateFacet extends BaseContract {
     ): Promise<[BigNumber, BigNumber]>;
 
     sgReceive(
-      _srcChainId: BigNumberish,
-      _srcAddress: BytesLike,
-      _nonce: BigNumberish,
-      _token: string,
+      arg0: BigNumberish,
+      arg1: BytesLike,
+      arg2: BigNumberish,
+      arg3: string,
       _amountLD: BigNumberish,
       _payload: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -379,10 +379,10 @@ export interface StargateFacet extends BaseContract {
   ): Promise<[BigNumber, BigNumber]>;
 
   sgReceive(
-    _srcChainId: BigNumberish,
-    _srcAddress: BytesLike,
-    _nonce: BigNumberish,
-    _token: string,
+    arg0: BigNumberish,
+    arg1: BytesLike,
+    arg2: BigNumberish,
+    arg3: string,
     _amountLD: BigNumberish,
     _payload: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -429,10 +429,10 @@ export interface StargateFacet extends BaseContract {
     ): Promise<[BigNumber, BigNumber]>;
 
     sgReceive(
-      _srcChainId: BigNumberish,
-      _srcAddress: BytesLike,
-      _nonce: BigNumberish,
-      _token: string,
+      arg0: BigNumberish,
+      arg1: BytesLike,
+      arg2: BigNumberish,
+      arg3: string,
       _amountLD: BigNumberish,
       _payload: BytesLike,
       overrides?: CallOverrides
@@ -506,9 +506,9 @@ export interface StargateFacet extends BaseContract {
     ): LiFiTransferStartedEventFilter;
 
     "StargateInitialized(address)"(
-      stargateRoutert?: null
+      stargateRouter?: null
     ): StargateInitializedEventFilter;
-    StargateInitialized(stargateRoutert?: null): StargateInitializedEventFilter;
+    StargateInitialized(stargateRouter?: null): StargateInitializedEventFilter;
   };
 
   estimateGas: {
@@ -531,10 +531,10 @@ export interface StargateFacet extends BaseContract {
     ): Promise<BigNumber>;
 
     sgReceive(
-      _srcChainId: BigNumberish,
-      _srcAddress: BytesLike,
-      _nonce: BigNumberish,
-      _token: string,
+      arg0: BigNumberish,
+      arg1: BytesLike,
+      arg2: BigNumberish,
+      arg3: string,
       _amountLD: BigNumberish,
       _payload: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -582,10 +582,10 @@ export interface StargateFacet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     sgReceive(
-      _srcChainId: BigNumberish,
-      _srcAddress: BytesLike,
-      _nonce: BigNumberish,
-      _token: string,
+      arg0: BigNumberish,
+      arg1: BytesLike,
+      arg2: BigNumberish,
+      arg3: string,
       _amountLD: BigNumberish,
       _payload: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
