@@ -9,4 +9,6 @@ import type * as interfaces from "./Interfaces";
 export type { interfaces };
 import type * as libraries from "./Libraries";
 export type { libraries };
+import type * as periphery from "./Periphery";
+export type { periphery };
 export type { LiFiDiamond } from "./LiFiDiamond";

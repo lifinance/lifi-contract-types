@@ -182,7 +182,7 @@ export declare type LiFiTransferStartedEvent = TypedEvent<[
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface StargateInitializedEventObject {
-    stargateRoutert: string;
+    stargateRouter: string;
 }
 export declare type StargateInitializedEvent = TypedEvent<[
     string
@@ -210,7 +210,7 @@ export interface StargateFacet extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         quoteLayerZeroFee(_stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-        sgReceive(_srcChainId: BigNumberish, _srcAddress: BytesLike, _nonce: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         startBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
@@ -230,7 +230,7 @@ export interface StargateFacet extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     quoteLayerZeroFee(_stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-    sgReceive(_srcChainId: BigNumberish, _srcAddress: BytesLike, _nonce: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+    sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     startBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
@@ -246,7 +246,7 @@ export interface StargateFacet extends BaseContract {
         completeBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _assetId: string, _receiver: string, _amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
         initStargate(_stargateRouter: string, overrides?: CallOverrides): Promise<void>;
         quoteLayerZeroFee(_stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-        sgReceive(_srcChainId: BigNumberish, _srcAddress: BytesLike, _nonce: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: CallOverrides): Promise<void>;
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _finalAssetId: string, _receiver: string, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
@@ -256,8 +256,8 @@ export interface StargateFacet extends BaseContract {
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        "StargateInitialized(address)"(stargateRoutert?: null): StargateInitializedEventFilter;
-        StargateInitialized(stargateRoutert?: null): StargateInitializedEventFilter;
+        "StargateInitialized(address)"(stargateRouter?: null): StargateInitializedEventFilter;
+        StargateInitialized(stargateRouter?: null): StargateInitializedEventFilter;
     };
     estimateGas: {
         completeBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _assetId: string, _receiver: string, _amount: BigNumberish, overrides?: Overrides & {
@@ -267,7 +267,7 @@ export interface StargateFacet extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         quoteLayerZeroFee(_stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        sgReceive(_srcChainId: BigNumberish, _srcAddress: BytesLike, _nonce: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         startBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
@@ -288,7 +288,7 @@ export interface StargateFacet extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         quoteLayerZeroFee(_stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        sgReceive(_srcChainId: BigNumberish, _srcAddress: BytesLike, _nonce: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         startBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
