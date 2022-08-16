@@ -12,7 +12,7 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212207b87e2fda442e54b070d7635b8ac0f70deca589857b4dba14087b1c1f274fbdb64736f6c634300080d0033";
+    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220025a2dbd0041328c6755bd92ca98187e984fb574993444af4ef762e6c49b662e64736f6c634300080d0033";
     static readonly abi: {
         anonymous: boolean;
         inputs: {
