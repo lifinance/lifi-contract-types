@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
@@ -35,23 +35,29 @@ export declare namespace ILiFi {
 }
 export declare namespace WormholeFacet {
     type WormholeDataStruct = {
+        wormholeRouter: string;
         token: string;
         amount: BigNumberish;
         recipient: string;
         toChainId: BigNumberish;
+        arbiterFee: BigNumberish;
         nonce: BigNumberish;
     };
     type WormholeDataStructOutput = [
         string,
+        string,
         BigNumber,
         string,
         number,
+        BigNumber,
         number
     ] & {
+        wormholeRouter: string;
         token: string;
         amount: BigNumber;
         recipient: string;
         toChainId: number;
+        arbiterFee: BigNumber;
         nonce: number;
     };
 }
@@ -82,32 +88,24 @@ export declare namespace LibSwap {
 }
 export interface WormholeFacetInterface extends utils.Interface {
     functions: {
-        "changeWormholeRouter(address)": FunctionFragment;
-        "initWormhole(address)": FunctionFragment;
-        "startBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,uint256,address,uint16,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,uint256,address,uint16,uint32))": FunctionFragment;
+        "startBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,address,uint16,uint256,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,uint256,address,uint16,uint256,uint32))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "changeWormholeRouter" | "initWormhole" | "startBridgeTokensViaWormhole" | "swapAndStartBridgeTokensViaWormhole"): FunctionFragment;
-    encodeFunctionData(functionFragment: "changeWormholeRouter", values: [string]): string;
-    encodeFunctionData(functionFragment: "initWormhole", values: [string]): string;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaWormhole" | "swapAndStartBridgeTokensViaWormhole"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaWormhole", values: [ILiFi.LiFiDataStruct, WormholeFacet.WormholeDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaWormhole", values: [
         ILiFi.LiFiDataStruct,
         LibSwap.SwapDataStruct[],
         WormholeFacet.WormholeDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "changeWormholeRouter", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "initWormhole", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaWormhole", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaWormhole", data: BytesLike): Result;
     events: {
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
-        "WormholeInitialized(address)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "WormholeInitialized"): EventFragment;
 }
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
@@ -153,13 +151,6 @@ export declare type LiFiTransferStartedEvent = TypedEvent<[
     boolean
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface WormholeInitializedEventObject {
-    _wormholeRouter: string;
-}
-export declare type WormholeInitializedEvent = TypedEvent<[
-    string
-], WormholeInitializedEventObject>;
-export declare type WormholeInitializedEventFilter = TypedEventFilter<WormholeInitializedEvent>;
 export interface WormholeFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -175,12 +166,6 @@ export interface WormholeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        changeWormholeRouter(_newRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        initWormhole(_wormholeRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         startBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -188,12 +173,6 @@ export interface WormholeFacet extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    changeWormholeRouter(_newRouter: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    initWormhole(_wormholeRouter: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     startBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -201,8 +180,6 @@ export interface WormholeFacet extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        changeWormholeRouter(_newRouter: string, overrides?: CallOverrides): Promise<void>;
-        initWormhole(_wormholeRouter: string, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -211,16 +188,8 @@ export interface WormholeFacet extends BaseContract {
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        "WormholeInitialized(address)"(_wormholeRouter?: null): WormholeInitializedEventFilter;
-        WormholeInitialized(_wormholeRouter?: null): WormholeInitializedEventFilter;
     };
     estimateGas: {
-        changeWormholeRouter(_newRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        initWormhole(_wormholeRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         startBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -229,12 +198,6 @@ export interface WormholeFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        changeWormholeRouter(_newRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        initWormhole(_wormholeRouter: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
         startBridgeTokensViaWormhole(_lifiData: ILiFi.LiFiDataStruct, _wormholeData: WormholeFacet.WormholeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;

@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
@@ -35,6 +35,8 @@ export declare namespace ILiFi {
 }
 export declare namespace AcrossFacet {
     type AcrossDataStruct = {
+        weth: string;
+        spokePool: string;
         recipient: string;
         token: string;
         amount: BigNumberish;
@@ -45,11 +47,15 @@ export declare namespace AcrossFacet {
     type AcrossDataStructOutput = [
         string,
         string,
+        string,
+        string,
         BigNumber,
         BigNumber,
         BigNumber,
         number
     ] & {
+        weth: string;
+        spokePool: string;
         recipient: string;
         token: string;
         amount: BigNumber;
@@ -85,45 +91,25 @@ export declare namespace LibSwap {
 }
 export interface AcrossFacetInterface extends utils.Interface {
     functions: {
-        "initAcross(address,address)": FunctionFragment;
-        "setSpokePool(address)": FunctionFragment;
-        "setWeth(address)": FunctionFragment;
-        "startBridgeTokensViaAcross((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,uint256,uint64,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAcross((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,uint256,uint256,uint64,uint32))": FunctionFragment;
+        "startBridgeTokensViaAcross((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,uint256,uint64,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAcross((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,address,address,uint256,uint256,uint64,uint32))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "initAcross" | "setSpokePool" | "setWeth" | "startBridgeTokensViaAcross" | "swapAndStartBridgeTokensViaAcross"): FunctionFragment;
-    encodeFunctionData(functionFragment: "initAcross", values: [string, string]): string;
-    encodeFunctionData(functionFragment: "setSpokePool", values: [string]): string;
-    encodeFunctionData(functionFragment: "setWeth", values: [string]): string;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAcross" | "swapAndStartBridgeTokensViaAcross"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAcross", values: [ILiFi.LiFiDataStruct, AcrossFacet.AcrossDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAcross", values: [
         ILiFi.LiFiDataStruct,
         LibSwap.SwapDataStruct[],
         AcrossFacet.AcrossDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "initAcross", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setSpokePool", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setWeth", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAcross", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaAcross", data: BytesLike): Result;
     events: {
-        "AcrossInitialized(address,address)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "AcrossInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface AcrossInitializedEventObject {
-    weth: string;
-    spokePool: string;
-}
-export declare type AcrossInitializedEvent = TypedEvent<[
-    string,
-    string
-], AcrossInitializedEventObject>;
-export declare type AcrossInitializedEventFilter = TypedEventFilter<AcrossInitializedEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -183,15 +169,6 @@ export interface AcrossFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        initAcross(_weth: string, _spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        setSpokePool(_spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        setWeth(_weth: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
         startBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _acrossData: AcrossFacet.AcrossDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -199,15 +176,6 @@ export interface AcrossFacet extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    initAcross(_weth: string, _spokePool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    setSpokePool(_spokePool: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    setWeth(_weth: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
     startBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _acrossData: AcrossFacet.AcrossDataStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -215,30 +183,16 @@ export interface AcrossFacet extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        initAcross(_weth: string, _spokePool: string, overrides?: CallOverrides): Promise<void>;
-        setSpokePool(_spokePool: string, overrides?: CallOverrides): Promise<void>;
-        setWeth(_weth: string, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _acrossData: AcrossFacet.AcrossDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _acrossData: AcrossFacet.AcrossDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "AcrossInitialized(address,address)"(weth?: null, spokePool?: null): AcrossInitializedEventFilter;
-        AcrossInitialized(weth?: null, spokePool?: null): AcrossInitializedEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        initAcross(_weth: string, _spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        setSpokePool(_spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        setWeth(_weth: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
         startBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _acrossData: AcrossFacet.AcrossDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -247,15 +201,6 @@ export interface AcrossFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        initAcross(_weth: string, _spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        setSpokePool(_spokePool: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        setWeth(_weth: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
         startBridgeTokensViaAcross(_lifiData: ILiFi.LiFiDataStruct, _acrossData: AcrossFacet.AcrossDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
