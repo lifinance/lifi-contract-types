@@ -9,7 +9,11 @@ export declare class IWormholeRouter__factory {
             type: string;
         }[];
         name: string;
-        outputs: never[];
+        outputs: {
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
         stateMutability: string;
         type: string;
     }[];

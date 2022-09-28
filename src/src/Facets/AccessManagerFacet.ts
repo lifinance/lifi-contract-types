@@ -12,7 +12,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -49,8 +53,37 @@ export interface AccessManagerFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "ExecutionAllowed(address,bytes4)": EventFragment;
+    "ExecutionDenied(address,bytes4)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "ExecutionAllowed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ExecutionDenied"): EventFragment;
 }
+
+export interface ExecutionAllowedEventObject {
+  account: string;
+  method: string;
+}
+export type ExecutionAllowedEvent = TypedEvent<
+  [string, string],
+  ExecutionAllowedEventObject
+>;
+
+export type ExecutionAllowedEventFilter =
+  TypedEventFilter<ExecutionAllowedEvent>;
+
+export interface ExecutionDeniedEventObject {
+  account: string;
+  method: string;
+}
+export type ExecutionDeniedEvent = TypedEvent<
+  [string, string],
+  ExecutionDeniedEventObject
+>;
+
+export type ExecutionDeniedEventFilter = TypedEventFilter<ExecutionDeniedEvent>;
 
 export interface AccessManagerFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -121,7 +154,25 @@ export interface AccessManagerFacet extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "ExecutionAllowed(address,bytes4)"(
+      account?: string | null,
+      method?: BytesLike | null
+    ): ExecutionAllowedEventFilter;
+    ExecutionAllowed(
+      account?: string | null,
+      method?: BytesLike | null
+    ): ExecutionAllowedEventFilter;
+
+    "ExecutionDenied(address,bytes4)"(
+      account?: string | null,
+      method?: BytesLike | null
+    ): ExecutionDeniedEventFilter;
+    ExecutionDenied(
+      account?: string | null,
+      method?: BytesLike | null
+    ): ExecutionDeniedEventFilter;
+  };
 
   estimateGas: {
     addressCanExecuteMethod(

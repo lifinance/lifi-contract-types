@@ -6,7 +6,7 @@ export interface FeeCollectorInterface extends utils.Interface {
     functions: {
         "batchWithdrawIntegratorFees(address[])": FunctionFragment;
         "batchWithdrawLifiFees(address[])": FunctionFragment;
-        "cancelOnwershipTransfer()": FunctionFragment;
+        "cancelOwnershipTransfer()": FunctionFragment;
         "collectNativeFees(uint256,uint256,address)": FunctionFragment;
         "collectTokenFees(address,uint256,uint256,address)": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
@@ -18,10 +18,10 @@ export interface FeeCollectorInterface extends utils.Interface {
         "withdrawIntegratorFees(address)": FunctionFragment;
         "withdrawLifiFees(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "batchWithdrawIntegratorFees" | "batchWithdrawLifiFees" | "cancelOnwershipTransfer" | "collectNativeFees" | "collectTokenFees" | "confirmOwnershipTransfer" | "getLifiTokenBalance" | "getTokenBalance" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawIntegratorFees" | "withdrawLifiFees"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "batchWithdrawIntegratorFees" | "batchWithdrawLifiFees" | "cancelOwnershipTransfer" | "collectNativeFees" | "collectTokenFees" | "confirmOwnershipTransfer" | "getLifiTokenBalance" | "getTokenBalance" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawIntegratorFees" | "withdrawLifiFees"): FunctionFragment;
     encodeFunctionData(functionFragment: "batchWithdrawIntegratorFees", values: [string[]]): string;
     encodeFunctionData(functionFragment: "batchWithdrawLifiFees", values: [string[]]): string;
-    encodeFunctionData(functionFragment: "cancelOnwershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "collectNativeFees", values: [BigNumberish, BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "collectTokenFees", values: [string, BigNumberish, BigNumberish, string]): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
@@ -34,7 +34,7 @@ export interface FeeCollectorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "withdrawLifiFees", values: [string]): string;
     decodeFunctionResult(functionFragment: "batchWithdrawIntegratorFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "batchWithdrawLifiFees", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "cancelOnwershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectNativeFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectTokenFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
@@ -132,7 +132,7 @@ export interface FeeCollector extends BaseContract {
         batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
+        cancelOwnershipTransfer(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
@@ -164,7 +164,7 @@ export interface FeeCollector extends BaseContract {
     batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    cancelOnwershipTransfer(overrides?: Overrides & {
+    cancelOwnershipTransfer(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
@@ -192,7 +192,7 @@ export interface FeeCollector extends BaseContract {
     callStatic: {
         batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: CallOverrides): Promise<void>;
         batchWithdrawLifiFees(tokenAddresses: string[], overrides?: CallOverrides): Promise<void>;
-        cancelOnwershipTransfer(overrides?: CallOverrides): Promise<void>;
+        cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: CallOverrides): Promise<void>;
         collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
@@ -223,7 +223,7 @@ export interface FeeCollector extends BaseContract {
         batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
+        cancelOwnershipTransfer(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
@@ -256,7 +256,7 @@ export interface FeeCollector extends BaseContract {
         batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
+        cancelOwnershipTransfer(overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {

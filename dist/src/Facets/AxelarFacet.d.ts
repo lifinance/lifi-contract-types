@@ -1,22 +1,71 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+export declare namespace AxelarFacet {
+    type AxelarCallParametersStruct = {
+        destinationChain: BigNumberish;
+        destinationAddress: string;
+        callTo: string;
+        callData: BytesLike;
+    };
+    type AxelarCallParametersStructOutput = [
+        BigNumber,
+        string,
+        string,
+        string
+    ] & {
+        destinationChain: BigNumber;
+        destinationAddress: string;
+        callTo: string;
+        callData: string;
+    };
+}
 export interface AxelarFacetInterface extends utils.Interface {
     functions: {
-        "executeCallViaAxelar(string,string,address,bytes)": FunctionFragment;
-        "executeCallWithTokenViaAxelar(string,string,string,uint256,address,bytes)": FunctionFragment;
-        "initAxelar(address,address)": FunctionFragment;
+        "executeCallViaAxelar((uint256,address,address,bytes))": FunctionFragment;
+        "executeCallWithTokenViaAxelar((uint256,address,address,bytes),address,uint256,address)": FunctionFragment;
+        "setChainName(uint256,string)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "executeCallViaAxelar" | "executeCallWithTokenViaAxelar" | "initAxelar"): FunctionFragment;
-    encodeFunctionData(functionFragment: "executeCallViaAxelar", values: [string, string, string, BytesLike]): string;
-    encodeFunctionData(functionFragment: "executeCallWithTokenViaAxelar", values: [string, string, string, BigNumberish, string, BytesLike]): string;
-    encodeFunctionData(functionFragment: "initAxelar", values: [string, string]): string;
+    getFunction(nameOrSignatureOrTopic: "executeCallViaAxelar" | "executeCallWithTokenViaAxelar" | "setChainName"): FunctionFragment;
+    encodeFunctionData(functionFragment: "executeCallViaAxelar", values: [AxelarFacet.AxelarCallParametersStruct]): string;
+    encodeFunctionData(functionFragment: "executeCallWithTokenViaAxelar", values: [
+        AxelarFacet.AxelarCallParametersStruct,
+        string,
+        BigNumberish,
+        string
+    ]): string;
+    encodeFunctionData(functionFragment: "setChainName", values: [BigNumberish, string]): string;
     decodeFunctionResult(functionFragment: "executeCallViaAxelar", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "executeCallWithTokenViaAxelar", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "initAxelar", data: BytesLike): Result;
-    events: {};
+    decodeFunctionResult(functionFragment: "setChainName", data: BytesLike): Result;
+    events: {
+        "ChainNameRegistered(uint256,string)": EventFragment;
+        "LifiXChainTXStarted(uint256,address,bytes)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "ChainNameRegistered"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LifiXChainTXStarted"): EventFragment;
 }
+export interface ChainNameRegisteredEventObject {
+    chainID: BigNumber;
+    chainName: string;
+}
+export declare type ChainNameRegisteredEvent = TypedEvent<[
+    BigNumber,
+    string
+], ChainNameRegisteredEventObject>;
+export declare type ChainNameRegisteredEventFilter = TypedEventFilter<ChainNameRegisteredEvent>;
+export interface LifiXChainTXStartedEventObject {
+    destinationChain: BigNumber;
+    callTo: string;
+    callData: string;
+}
+export declare type LifiXChainTXStartedEvent = TypedEvent<[
+    BigNumber,
+    string,
+    string
+], LifiXChainTXStartedEventObject>;
+export declare type LifiXChainTXStartedEventFilter = TypedEventFilter<LifiXChainTXStartedEvent>;
 export interface AxelarFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -32,50 +81,55 @@ export interface AxelarFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        executeCallViaAxelar(destinationChain: string, destinationAddress: string, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        executeCallWithTokenViaAxelar(destinationChain: string, destinationAddress: string, symbol: string, amount: BigNumberish, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallWithTokenViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, token: string, amount: BigNumberish, recoveryAddress: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        initAxelar(_gateway: string, _gasReceiver: string, overrides?: Overrides & {
+        setChainName(_chainId: BigNumberish, _name: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    executeCallViaAxelar(destinationChain: string, destinationAddress: string, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+    executeCallViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    executeCallWithTokenViaAxelar(destinationChain: string, destinationAddress: string, symbol: string, amount: BigNumberish, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+    executeCallWithTokenViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, token: string, amount: BigNumberish, recoveryAddress: string, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    initAxelar(_gateway: string, _gasReceiver: string, overrides?: Overrides & {
+    setChainName(_chainId: BigNumberish, _name: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        executeCallViaAxelar(destinationChain: string, destinationAddress: string, callTo: string, callData: BytesLike, overrides?: CallOverrides): Promise<void>;
-        executeCallWithTokenViaAxelar(destinationChain: string, destinationAddress: string, symbol: string, amount: BigNumberish, callTo: string, callData: BytesLike, overrides?: CallOverrides): Promise<void>;
-        initAxelar(_gateway: string, _gasReceiver: string, overrides?: CallOverrides): Promise<void>;
+        executeCallViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, overrides?: CallOverrides): Promise<void>;
+        executeCallWithTokenViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, token: string, amount: BigNumberish, recoveryAddress: string, overrides?: CallOverrides): Promise<void>;
+        setChainName(_chainId: BigNumberish, _name: string, overrides?: CallOverrides): Promise<void>;
     };
-    filters: {};
+    filters: {
+        "ChainNameRegistered(uint256,string)"(chainID?: BigNumberish | null, chainName?: null): ChainNameRegisteredEventFilter;
+        ChainNameRegistered(chainID?: BigNumberish | null, chainName?: null): ChainNameRegisteredEventFilter;
+        "LifiXChainTXStarted(uint256,address,bytes)"(destinationChain?: BigNumberish | null, callTo?: string | null, callData?: null): LifiXChainTXStartedEventFilter;
+        LifiXChainTXStarted(destinationChain?: BigNumberish | null, callTo?: string | null, callData?: null): LifiXChainTXStartedEventFilter;
+    };
     estimateGas: {
-        executeCallViaAxelar(destinationChain: string, destinationAddress: string, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        executeCallWithTokenViaAxelar(destinationChain: string, destinationAddress: string, symbol: string, amount: BigNumberish, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallWithTokenViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, token: string, amount: BigNumberish, recoveryAddress: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        initAxelar(_gateway: string, _gasReceiver: string, overrides?: Overrides & {
+        setChainName(_chainId: BigNumberish, _name: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        executeCallViaAxelar(destinationChain: string, destinationAddress: string, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        executeCallWithTokenViaAxelar(destinationChain: string, destinationAddress: string, symbol: string, amount: BigNumberish, callTo: string, callData: BytesLike, overrides?: PayableOverrides & {
+        executeCallWithTokenViaAxelar(params: AxelarFacet.AxelarCallParametersStruct, token: string, amount: BigNumberish, recoveryAddress: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        initAxelar(_gateway: string, _gasReceiver: string, overrides?: Overrides & {
+        setChainName(_chainId: BigNumberish, _name: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

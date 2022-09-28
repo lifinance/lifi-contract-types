@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -27,18 +28,20 @@ import type {
 } from "../../common";
 
 export declare namespace ILiFi {
-  export type LiFiDataStruct = {
+  export type BridgeDataStruct = {
     transactionId: BytesLike;
+    bridge: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
-    receivingAssetId: string;
     receiver: string;
+    minAmount: BigNumberish;
     destinationChainId: BigNumberish;
-    amount: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
-  export type LiFiDataStructOutput = [
+  export type BridgeDataStructOutput = [
     string,
     string,
     string,
@@ -46,44 +49,30 @@ export declare namespace ILiFi {
     string,
     string,
     BigNumber,
-    BigNumber
+    BigNumber,
+    boolean,
+    boolean
   ] & {
     transactionId: string;
+    bridge: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
-    receivingAssetId: string;
     receiver: string;
+    minAmount: BigNumber;
     destinationChainId: BigNumber;
-    amount: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 }
 
 export declare namespace WormholeFacet {
   export type WormholeDataStruct = {
-    wormholeRouter: string;
-    token: string;
-    amount: BigNumberish;
-    recipient: string;
-    toChainId: BigNumberish;
     arbiterFee: BigNumberish;
     nonce: BigNumberish;
   };
 
-  export type WormholeDataStructOutput = [
-    string,
-    string,
-    BigNumber,
-    string,
-    number,
-    BigNumber,
-    number
-  ] & {
-    wormholeRouter: string;
-    token: string;
-    amount: BigNumber;
-    recipient: string;
-    toChainId: number;
+  export type WormholeDataStructOutput = [BigNumber, number] & {
     arbiterFee: BigNumber;
     nonce: number;
   };
@@ -97,6 +86,7 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumberish;
     callData: BytesLike;
+    requiresDeposit: boolean;
   };
 
   export type SwapDataStructOutput = [
@@ -105,7 +95,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -113,34 +104,45 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface WormholeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,address,uint16,uint256,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaWormhole((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,uint256,address,uint16,uint256,uint32))": FunctionFragment;
+    "setWormholeChainId(uint256,uint16)": FunctionFragment;
+    "startBridgeTokensViaWormhole((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaWormhole((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "setWormholeChainId"
       | "startBridgeTokensViaWormhole"
       | "swapAndStartBridgeTokensViaWormhole"
   ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "setWormholeChainId",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "startBridgeTokensViaWormhole",
-    values: [ILiFi.LiFiDataStruct, WormholeFacet.WormholeDataStruct]
+    values: [ILiFi.BridgeDataStruct, WormholeFacet.WormholeDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaWormhole",
     values: [
-      ILiFi.LiFiDataStruct,
+      ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
       WormholeFacet.WormholeDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "setWormholeChainId",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaWormhole",
     data: BytesLike
@@ -152,11 +154,13 @@ export interface WormholeFacetInterface extends utils.Interface {
 
   events: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
+    "WormholeChainIdMapped(uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WormholeChainIdMapped"): EventFragment;
 }
 
 export interface LiFiTransferCompletedEventObject {
@@ -175,39 +179,27 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
+
+export interface WormholeChainIdMappedEventObject {
+  lifiChainId: BigNumber;
+  wormholeChainId: BigNumber;
+}
+export type WormholeChainIdMappedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  WormholeChainIdMappedEventObject
+>;
+
+export type WormholeChainIdMappedEventFilter =
+  TypedEventFilter<WormholeChainIdMappedEvent>;
 
 export interface WormholeFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -236,42 +228,60 @@ export interface WormholeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    setWormholeChainId(
+      _lifiChainId: BigNumberish,
+      _wormholeChainId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     startBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
+  setWormholeChainId(
+    _lifiChainId: BigNumberish,
+    _wormholeChainId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   startBridgeTokensViaWormhole(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _wormholeData: WormholeFacet.WormholeDataStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaWormhole(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
     _wormholeData: WormholeFacet.WormholeDataStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    setWormholeChainId(
+      _lifiChainId: BigNumberish,
+      _wormholeChainId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     startBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: CallOverrides
@@ -294,45 +304,38 @@ export interface WormholeFacet extends BaseContract {
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: ILiFi.BridgeDataStruct | null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+      bridgeData?: ILiFi.BridgeDataStruct | null
     ): LiFiTransferStartedEventFilter;
+
+    "WormholeChainIdMapped(uint256,uint256)"(
+      lifiChainId?: BigNumberish | null,
+      wormholeChainId?: BigNumberish | null
+    ): WormholeChainIdMappedEventFilter;
+    WormholeChainIdMapped(
+      lifiChainId?: BigNumberish | null,
+      wormholeChainId?: BigNumberish | null
+    ): WormholeChainIdMappedEventFilter;
   };
 
   estimateGas: {
+    setWormholeChainId(
+      _lifiChainId: BigNumberish,
+      _wormholeChainId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     startBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -340,14 +343,20 @@ export interface WormholeFacet extends BaseContract {
   };
 
   populateTransaction: {
+    setWormholeChainId(
+      _lifiChainId: BigNumberish,
+      _wormholeChainId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaWormhole(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _wormholeData: WormholeFacet.WormholeDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }

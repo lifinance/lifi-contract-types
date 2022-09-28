@@ -10,6 +10,61 @@ import type {
 
 const _abi = [
   {
+    inputs: [],
+    name: "CalldataEmptyButInitNotZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetAddressIsNotZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetAddressIsZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetContainsNoCode",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionAlreadyExists",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionDoesNotExist",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionIsImmutable",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "IncorrectFacetCutAction",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InitReverted",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InitZeroButCalldataNotEmpty",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoSelectorsInFace",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -73,7 +128,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212206cfceced8f45674eea6f62c7108461e042a5982c776452bdd3462906cdc5d39e64736f6c634300080d0033";
+  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202582069f188bb3c4eb1d8c1ee222eef0c27a2b202e6c01f1ea5c34b9f53a337164736f6c63430008100033";
 
 type LibDiamondConstructorParams =
   | [signer?: Signer]

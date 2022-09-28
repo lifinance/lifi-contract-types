@@ -22,12 +22,45 @@ exports.LibAccess__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [],
-        name: "UnAuthorized",
-        type: "error",
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "address",
+                name: "account",
+                type: "address",
+            },
+            {
+                indexed: true,
+                internalType: "bytes4",
+                name: "method",
+                type: "bytes4",
+            },
+        ],
+        name: "AccessGranted",
+        type: "event",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "address",
+                name: "account",
+                type: "address",
+            },
+            {
+                indexed: true,
+                internalType: "bytes4",
+                name: "method",
+                type: "bytes4",
+            },
+        ],
+        name: "AccessRevoked",
+        type: "event",
     },
 ];
-var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212209ada6795b50e70b6fb51455493ba90f6b39c3dbd6ad8f76d0f8569292d0fcbff64736f6c634300080d0033";
+var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212200a69866e045c6a3793349d578310a67075ef04b526e7495ae7e3baede1abaf2964736f6c63430008100033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var LibAccess__factory = /** @class */ (function (_super) {
     __extends(LibAccess__factory, _super);

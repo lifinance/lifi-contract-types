@@ -12,8 +12,8 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220025a2dbd0041328c6755bd92ca98187e984fb574993444af4ef762e6c49b662e64736f6c634300080d0033";
-    static readonly abi: {
+    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212202808ba5f6a0863db191e831939ba46087ef73450756ff9157ccf74aee7c0369c64736f6c63430008100033";
+    static readonly abi: ({
         anonymous: boolean;
         inputs: {
             indexed: boolean;
@@ -23,7 +23,22 @@ export declare class SwapperV2__factory extends ContractFactory {
         }[];
         name: string;
         type: string;
-    }[];
+    } | {
+        anonymous: boolean;
+        inputs: {
+            components: {
+                internalType: string;
+                name: string;
+                type: string;
+            }[];
+            indexed: boolean;
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
+        name: string;
+        type: string;
+    })[];
     static createInterface(): SwapperV2Interface;
     static connect(address: string, signerOrProvider: Signer | Provider): SwapperV2;
 }

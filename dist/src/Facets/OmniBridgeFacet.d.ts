@@ -3,17 +3,19 @@ import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
 export declare namespace ILiFi {
-    type LiFiDataStruct = {
+    type BridgeDataStruct = {
         transactionId: BytesLike;
+        bridge: string;
         integrator: string;
         referrer: string;
         sendingAssetId: string;
-        receivingAssetId: string;
         receiver: string;
+        minAmount: BigNumberish;
         destinationChainId: BigNumberish;
-        amount: BigNumberish;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
-    type LiFiDataStructOutput = [
+    type BridgeDataStructOutput = [
         string,
         string,
         string,
@@ -21,30 +23,20 @@ export declare namespace ILiFi {
         string,
         string,
         BigNumber,
-        BigNumber
+        BigNumber,
+        boolean,
+        boolean
     ] & {
         transactionId: string;
+        bridge: string;
         integrator: string;
         referrer: string;
         sendingAssetId: string;
-        receivingAssetId: string;
         receiver: string;
+        minAmount: BigNumber;
         destinationChainId: BigNumber;
-        amount: BigNumber;
-    };
-}
-export declare namespace OmniBridgeFacet {
-    type BridgeDataStruct = {
-        bridge: string;
-        assetId: string;
-        receiver: string;
-        amount: BigNumberish;
-    };
-    type BridgeDataStructOutput = [string, string, string, BigNumber] & {
-        bridge: string;
-        assetId: string;
-        receiver: string;
-        amount: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
 }
 export declare namespace LibSwap {
@@ -55,6 +47,7 @@ export declare namespace LibSwap {
         receivingAssetId: string;
         fromAmount: BigNumberish;
         callData: BytesLike;
+        requiresDeposit: boolean;
     };
     type SwapDataStructOutput = [
         string,
@@ -62,7 +55,8 @@ export declare namespace LibSwap {
         string,
         string,
         BigNumber,
-        string
+        string,
+        boolean
     ] & {
         callTo: string;
         approveTo: string;
@@ -70,25 +64,22 @@ export declare namespace LibSwap {
         receivingAssetId: string;
         fromAmount: BigNumber;
         callData: string;
+        requiresDeposit: boolean;
     };
 }
 export interface OmniBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaOmniBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaOmniBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,address,uint256))": FunctionFragment;
+        "startBridgeTokensViaOmniBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
+        "swapAndStartBridgeTokensViaOmniBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaOmniBridge" | "swapAndStartBridgeTokensViaOmniBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaOmniBridge", values: [ILiFi.LiFiDataStruct, OmniBridgeFacet.BridgeDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaOmniBridge", values: [
-        ILiFi.LiFiDataStruct,
-        LibSwap.SwapDataStruct[],
-        OmniBridgeFacet.BridgeDataStruct
-    ]): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaOmniBridge", values: [ILiFi.BridgeDataStruct]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaOmniBridge", values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]): string;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaOmniBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaOmniBridge", data: BytesLike): Result;
     events: {
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+        "LiFiTransferStarted(tuple)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
@@ -109,32 +100,10 @@ export declare type LiFiTransferCompletedEvent = TypedEvent<[
 ], LiFiTransferCompletedEventObject>;
 export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferStartedEventObject {
-    transactionId: string;
-    bridge: string;
-    bridgeData: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    hasSourceSwap: boolean;
-    hasDestinationCall: boolean;
+    bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export declare type LiFiTransferStartedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
+    ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface OmniBridgeFacet extends BaseContract {
@@ -152,42 +121,42 @@ export interface OmniBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        startBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    startBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+    startBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        startBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
+        "LiFiTransferStarted(tuple)"(bridgeData?: ILiFi.BridgeDataStruct | null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(bridgeData?: ILiFi.BridgeDataStruct | null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        startBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        startBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaOmniBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _bridgeData: OmniBridgeFacet.BridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaOmniBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

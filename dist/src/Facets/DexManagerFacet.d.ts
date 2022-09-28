@@ -8,10 +8,10 @@ export interface DexManagerFacetInterface extends utils.Interface {
         "approvedDexs()": FunctionFragment;
         "batchAddDex(address[])": FunctionFragment;
         "batchRemoveDex(address[])": FunctionFragment;
-        "batchSetFunctionApprovalBySignature(bytes32[],bool)": FunctionFragment;
-        "isFunctionApproved(bytes32)": FunctionFragment;
+        "batchSetFunctionApprovalBySignature(bytes4[],bool)": FunctionFragment;
+        "isFunctionApproved(bytes4)": FunctionFragment;
         "removeDex(address)": FunctionFragment;
-        "setFunctionApprovalBySignature(bytes32,bool)": FunctionFragment;
+        "setFunctionApprovalBySignature(bytes4,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "addDex" | "approvedDexs" | "batchAddDex" | "batchRemoveDex" | "batchSetFunctionApprovalBySignature" | "isFunctionApproved" | "removeDex" | "setFunctionApprovalBySignature"): FunctionFragment;
     encodeFunctionData(functionFragment: "addDex", values: [string]): string;
@@ -33,7 +33,7 @@ export interface DexManagerFacetInterface extends utils.Interface {
     events: {
         "DexAdded(address)": EventFragment;
         "DexRemoved(address)": EventFragment;
-        "FunctionSignatureApprovalChanged(bytes32,bool)": EventFragment;
+        "FunctionSignatureApprovalChanged(bytes4,bool)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "DexAdded"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "DexRemoved"): EventFragment;
@@ -133,7 +133,7 @@ export interface DexManagerFacet extends BaseContract {
         DexAdded(dexAddress?: string | null): DexAddedEventFilter;
         "DexRemoved(address)"(dexAddress?: string | null): DexRemovedEventFilter;
         DexRemoved(dexAddress?: string | null): DexRemovedEventFilter;
-        "FunctionSignatureApprovalChanged(bytes32,bool)"(functionSignature?: BytesLike | null, approved?: boolean | null): FunctionSignatureApprovalChangedEventFilter;
+        "FunctionSignatureApprovalChanged(bytes4,bool)"(functionSignature?: BytesLike | null, approved?: boolean | null): FunctionSignatureApprovalChangedEventFilter;
         FunctionSignatureApprovalChanged(functionSignature?: BytesLike | null, approved?: boolean | null): FunctionSignatureApprovalChangedEventFilter;
     };
     estimateGas: {

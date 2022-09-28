@@ -1,5 +1,5 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
 export interface AccessManagerFacetInterface extends utils.Interface {
@@ -12,8 +12,31 @@ export interface AccessManagerFacetInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "setCanExecute", values: [BytesLike, string, boolean]): string;
     decodeFunctionResult(functionFragment: "addressCanExecuteMethod", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setCanExecute", data: BytesLike): Result;
-    events: {};
+    events: {
+        "ExecutionAllowed(address,bytes4)": EventFragment;
+        "ExecutionDenied(address,bytes4)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "ExecutionAllowed"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "ExecutionDenied"): EventFragment;
 }
+export interface ExecutionAllowedEventObject {
+    account: string;
+    method: string;
+}
+export declare type ExecutionAllowedEvent = TypedEvent<[
+    string,
+    string
+], ExecutionAllowedEventObject>;
+export declare type ExecutionAllowedEventFilter = TypedEventFilter<ExecutionAllowedEvent>;
+export interface ExecutionDeniedEventObject {
+    account: string;
+    method: string;
+}
+export declare type ExecutionDeniedEvent = TypedEvent<[
+    string,
+    string
+], ExecutionDeniedEventObject>;
+export declare type ExecutionDeniedEventFilter = TypedEventFilter<ExecutionDeniedEvent>;
 export interface AccessManagerFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -42,7 +65,12 @@ export interface AccessManagerFacet extends BaseContract {
         addressCanExecuteMethod(_selector: BytesLike, _executor: string, overrides?: CallOverrides): Promise<boolean>;
         setCanExecute(_selector: BytesLike, _executor: string, _canExecute: boolean, overrides?: CallOverrides): Promise<void>;
     };
-    filters: {};
+    filters: {
+        "ExecutionAllowed(address,bytes4)"(account?: string | null, method?: BytesLike | null): ExecutionAllowedEventFilter;
+        ExecutionAllowed(account?: string | null, method?: BytesLike | null): ExecutionAllowedEventFilter;
+        "ExecutionDenied(address,bytes4)"(account?: string | null, method?: BytesLike | null): ExecutionDeniedEventFilter;
+        ExecutionDenied(account?: string | null, method?: BytesLike | null): ExecutionDeniedEventFilter;
+    };
     estimateGas: {
         addressCanExecuteMethod(_selector: BytesLike, _executor: string, overrides?: CallOverrides): Promise<BigNumber>;
         setCanExecute(_selector: BytesLike, _executor: string, _canExecute: boolean, overrides?: Overrides & {

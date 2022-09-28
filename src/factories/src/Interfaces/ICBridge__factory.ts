@@ -13,34 +13,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "bytes",
-        name: "_relayRequest",
-        type: "bytes",
-      },
-      {
-        internalType: "bytes[]",
-        name: "_sigs",
-        type: "bytes[]",
-      },
-      {
-        internalType: "address[]",
-        name: "_signers",
-        type: "address[]",
-      },
-      {
-        internalType: "uint256[]",
-        name: "_powers",
-        type: "uint256[]",
-      },
-    ],
-    name: "relay",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "_receiver",
         type: "address",
@@ -57,7 +29,7 @@ const _abi = [
       },
       {
         internalType: "uint64",
-        name: "_dstChinId",
+        name: "_dstChainId",
         type: "uint64",
       },
       {
@@ -90,7 +62,7 @@ const _abi = [
       },
       {
         internalType: "uint64",
-        name: "_dstChinId",
+        name: "_dstChainId",
         type: "uint64",
       },
       {

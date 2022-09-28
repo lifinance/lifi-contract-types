@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -25,9 +26,12 @@ import type {
 export interface IWormholeRouterInterface extends utils.Interface {
   functions: {
     "transferTokens(address,uint256,uint16,bytes32,uint256,uint32)": FunctionFragment;
+    "wrapAndTransferETH(uint16,bytes32,uint256,uint32)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "transferTokens"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "transferTokens" | "wrapAndTransferETH"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "transferTokens",
@@ -40,9 +44,17 @@ export interface IWormholeRouterInterface extends utils.Interface {
       BigNumberish
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "wrapAndTransferETH",
+    values: [BigNumberish, BytesLike, BigNumberish, BigNumberish]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "transferTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wrapAndTransferETH",
     data: BytesLike
   ): Result;
 
@@ -85,6 +97,14 @@ export interface IWormholeRouter extends BaseContract {
       nonce: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    wrapAndTransferETH(
+      recipientChain: BigNumberish,
+      recipient: BytesLike,
+      arbiterFee: BigNumberish,
+      nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   transferTokens(
@@ -97,6 +117,14 @@ export interface IWormholeRouter extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  wrapAndTransferETH(
+    recipientChain: BigNumberish,
+    recipient: BytesLike,
+    arbiterFee: BigNumberish,
+    nonce: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     transferTokens(
       token: string,
@@ -107,6 +135,14 @@ export interface IWormholeRouter extends BaseContract {
       nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    wrapAndTransferETH(
+      recipientChain: BigNumberish,
+      recipient: BytesLike,
+      arbiterFee: BigNumberish,
+      nonce: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {};
@@ -121,6 +157,14 @@ export interface IWormholeRouter extends BaseContract {
       nonce: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    wrapAndTransferETH(
+      recipientChain: BigNumberish,
+      recipient: BytesLike,
+      arbiterFee: BigNumberish,
+      nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -132,6 +176,14 @@ export interface IWormholeRouter extends BaseContract {
       arbiterFee: BigNumberish,
       nonce: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    wrapAndTransferETH(
+      recipientChain: BigNumberish,
+      recipient: BytesLike,
+      arbiterFee: BigNumberish,
+      nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

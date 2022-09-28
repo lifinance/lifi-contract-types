@@ -31,7 +31,7 @@ export interface FeeCollectorInterface extends utils.Interface {
   functions: {
     "batchWithdrawIntegratorFees(address[])": FunctionFragment;
     "batchWithdrawLifiFees(address[])": FunctionFragment;
-    "cancelOnwershipTransfer()": FunctionFragment;
+    "cancelOwnershipTransfer()": FunctionFragment;
     "collectNativeFees(uint256,uint256,address)": FunctionFragment;
     "collectTokenFees(address,uint256,uint256,address)": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
@@ -48,7 +48,7 @@ export interface FeeCollectorInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "batchWithdrawIntegratorFees"
       | "batchWithdrawLifiFees"
-      | "cancelOnwershipTransfer"
+      | "cancelOwnershipTransfer"
       | "collectNativeFees"
       | "collectTokenFees"
       | "confirmOwnershipTransfer"
@@ -70,7 +70,7 @@ export interface FeeCollectorInterface extends utils.Interface {
     values: [string[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "cancelOnwershipTransfer",
+    functionFragment: "cancelOwnershipTransfer",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -120,7 +120,7 @@ export interface FeeCollectorInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "cancelOnwershipTransfer",
+    functionFragment: "cancelOwnershipTransfer",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -275,7 +275,7 @@ export interface FeeCollector extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    cancelOnwershipTransfer(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -339,7 +339,7 @@ export interface FeeCollector extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  cancelOnwershipTransfer(
+  cancelOwnershipTransfer(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -403,7 +403,7 @@ export interface FeeCollector extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    cancelOnwershipTransfer(overrides?: CallOverrides): Promise<void>;
+    cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     collectNativeFees(
       integratorFee: BigNumberish,
@@ -519,7 +519,7 @@ export interface FeeCollector extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    cancelOnwershipTransfer(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -584,7 +584,7 @@ export interface FeeCollector extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    cancelOnwershipTransfer(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

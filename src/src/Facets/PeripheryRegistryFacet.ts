@@ -12,7 +12,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -49,8 +53,26 @@ export interface PeripheryRegistryFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "PeripheryContractRegistered(string,address)": EventFragment;
+  };
+
+  getEvent(
+    nameOrSignatureOrTopic: "PeripheryContractRegistered"
+  ): EventFragment;
 }
+
+export interface PeripheryContractRegisteredEventObject {
+  name: string;
+  contractAddress: string;
+}
+export type PeripheryContractRegisteredEvent = TypedEvent<
+  [string, string],
+  PeripheryContractRegisteredEventObject
+>;
+
+export type PeripheryContractRegisteredEventFilter =
+  TypedEventFilter<PeripheryContractRegisteredEvent>;
 
 export interface PeripheryRegistryFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -115,7 +137,16 @@ export interface PeripheryRegistryFacet extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "PeripheryContractRegistered(string,address)"(
+      name?: null,
+      contractAddress?: null
+    ): PeripheryContractRegisteredEventFilter;
+    PeripheryContractRegistered(
+      name?: null,
+      contractAddress?: null
+    ): PeripheryContractRegisteredEventFilter;
+  };
 
   estimateGas: {
     getPeripheryContract(

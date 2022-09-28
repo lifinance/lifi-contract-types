@@ -50,76 +50,62 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        components: [
+          {
+            internalType: "bytes32",
+            name: "transactionId",
+            type: "bytes32",
+          },
+          {
+            internalType: "string",
+            name: "bridge",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "integrator",
+            type: "string",
+          },
+          {
+            internalType: "address",
+            name: "referrer",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "sendingAssetId",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "receiver",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "minAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "destinationChainId",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "hasSourceSwaps",
+            type: "bool",
+          },
+          {
+            internalType: "bool",
+            name: "hasDestinationCall",
+            type: "bool",
+          },
+        ],
         indexed: true,
-        internalType: "bytes32",
-        name: "transactionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "bridge",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
+        internalType: "struct ILiFi.BridgeData",
         name: "bridgeData",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "integrator",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "referrer",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "sendingAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receivingAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "destinationChainId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "hasSourceSwap",
-        type: "bool",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "hasDestinationCall",
-        type: "bool",
+        type: "tuple",
       },
     ],
     name: "LiFiTransferStarted",
@@ -128,7 +114,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220025a2dbd0041328c6755bd92ca98187e984fb574993444af4ef762e6c49b662e64736f6c634300080d0033";
+  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212202808ba5f6a0863db191e831939ba46087ef73450756ff9157ccf74aee7c0369c64736f6c63430008100033";
 
 type SwapperV2ConstructorParams =
   | [signer?: Signer]

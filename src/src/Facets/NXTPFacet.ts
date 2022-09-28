@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -28,18 +27,20 @@ import type {
 } from "../../common";
 
 export declare namespace ILiFi {
-  export type LiFiDataStruct = {
+  export type BridgeDataStruct = {
     transactionId: BytesLike;
+    bridge: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
-    receivingAssetId: string;
     receiver: string;
+    minAmount: BigNumberish;
     destinationChainId: BigNumberish;
-    amount: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
-  export type LiFiDataStructOutput = [
+  export type BridgeDataStructOutput = [
     string,
     string,
     string,
@@ -47,16 +48,20 @@ export declare namespace ILiFi {
     string,
     string,
     BigNumber,
-    BigNumber
+    BigNumber,
+    boolean,
+    boolean
   ] & {
     transactionId: string;
+    bridge: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
-    receivingAssetId: string;
     receiver: string;
+    minAmount: BigNumber;
     destinationChainId: BigNumber;
-    amount: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 }
 
@@ -106,10 +111,11 @@ export declare namespace ITransactionManager {
     callDataHash: string;
     transactionId: string;
   };
+}
 
-  export type PrepareArgsStruct = {
+export declare namespace NXTPFacet {
+  export type NXTPDataStruct = {
     invariantData: ITransactionManager.InvariantTransactionDataStruct;
-    amount: BigNumberish;
     expiry: BigNumberish;
     encryptedCallData: BytesLike;
     encodedBid: BytesLike;
@@ -117,9 +123,8 @@ export declare namespace ITransactionManager {
     encodedMeta: BytesLike;
   };
 
-  export type PrepareArgsStructOutput = [
+  export type NXTPDataStructOutput = [
     ITransactionManager.InvariantTransactionDataStructOutput,
-    BigNumber,
     BigNumber,
     string,
     string,
@@ -127,7 +132,6 @@ export declare namespace ITransactionManager {
     string
   ] & {
     invariantData: ITransactionManager.InvariantTransactionDataStructOutput;
-    amount: BigNumber;
     expiry: BigNumber;
     encryptedCallData: string;
     encodedBid: string;
@@ -144,6 +148,7 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumberish;
     callData: BytesLike;
+    requiresDeposit: boolean;
   };
 
   export type SwapDataStructOutput = [
@@ -152,7 +157,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -160,70 +166,37 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface NXTPFacetInterface extends utils.Interface {
   functions: {
-    "completeBridgeTokensViaNXTP((bytes32,string,address,address,address,address,uint256,uint256),address,address,uint256)": FunctionFragment;
-    "getNXTPTransactionManager()": FunctionFragment;
-    "initNXTP(address)": FunctionFragment;
-    "startBridgeTokensViaNXTP((bytes32,string,address,address,address,address,uint256,uint256),((address,address,address,address,address,address,address,address,address,uint256,uint256,bytes32,bytes32),uint256,uint256,bytes,bytes,bytes,bytes))": FunctionFragment;
-    "swapAndCompleteBridgeTokensViaNXTP((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],address,address)": FunctionFragment;
-    "swapAndStartBridgeTokensViaNXTP((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],((address,address,address,address,address,address,address,address,address,uint256,uint256,bytes32,bytes32),uint256,uint256,bytes,bytes,bytes,bytes))": FunctionFragment;
+    "startBridgeTokensViaNXTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),((address,address,address,address,address,address,address,address,address,uint256,uint256,bytes32,bytes32),uint256,bytes,bytes,bytes,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaNXTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],((address,address,address,address,address,address,address,address,address,uint256,uint256,bytes32,bytes32),uint256,bytes,bytes,bytes,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "completeBridgeTokensViaNXTP"
-      | "getNXTPTransactionManager"
-      | "initNXTP"
       | "startBridgeTokensViaNXTP"
-      | "swapAndCompleteBridgeTokensViaNXTP"
       | "swapAndStartBridgeTokensViaNXTP"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "completeBridgeTokensViaNXTP",
-    values: [ILiFi.LiFiDataStruct, string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getNXTPTransactionManager",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "initNXTP", values: [string]): string;
-  encodeFunctionData(
     functionFragment: "startBridgeTokensViaNXTP",
-    values: [ILiFi.LiFiDataStruct, ITransactionManager.PrepareArgsStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndCompleteBridgeTokensViaNXTP",
-    values: [ILiFi.LiFiDataStruct, LibSwap.SwapDataStruct[], string, string]
+    values: [ILiFi.BridgeDataStruct, NXTPFacet.NXTPDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaNXTP",
     values: [
-      ILiFi.LiFiDataStruct,
+      ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      ITransactionManager.PrepareArgsStruct
+      NXTPFacet.NXTPDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "completeBridgeTokensViaNXTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getNXTPTransactionManager",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "initNXTP", data: BytesLike): Result;
-  decodeFunctionResult(
     functionFragment: "startBridgeTokensViaNXTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndCompleteBridgeTokensViaNXTP",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -233,13 +206,11 @@ export interface NXTPFacetInterface extends utils.Interface {
 
   events: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
-    "NXTPInitialized(address)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NXTPInitialized"): EventFragment;
 }
 
 export interface LiFiTransferCompletedEventObject {
@@ -258,49 +229,15 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
-
-export interface NXTPInitializedEventObject {
-  txMgrAddr: string;
-}
-export type NXTPInitializedEvent = TypedEvent<
-  [string],
-  NXTPInitializedEventObject
->;
-
-export type NXTPInitializedEventFilter = TypedEventFilter<NXTPInitializedEvent>;
 
 export interface NXTPFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -329,110 +266,44 @@ export interface NXTPFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    completeBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      assetId: string,
-      receiver: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    getNXTPTransactionManager(overrides?: CallOverrides): Promise<[string]>;
-
-    initNXTP(
-      _txMgrAddr: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     startBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    swapAndCompleteBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      finalAssetId: string,
-      receiver: string,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  completeBridgeTokensViaNXTP(
-    _lifiData: ILiFi.LiFiDataStruct,
-    assetId: string,
-    receiver: string,
-    amount: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  getNXTPTransactionManager(overrides?: CallOverrides): Promise<string>;
-
-  initNXTP(
-    _txMgrAddr: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   startBridgeTokensViaNXTP(
-    _lifiData: ILiFi.LiFiDataStruct,
-    _nxtpData: ITransactionManager.PrepareArgsStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  swapAndCompleteBridgeTokensViaNXTP(
-    _lifiData: ILiFi.LiFiDataStruct,
-    _swapData: LibSwap.SwapDataStruct[],
-    finalAssetId: string,
-    receiver: string,
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _nxtpData: NXTPFacet.NXTPDataStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaNXTP(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _nxtpData: ITransactionManager.PrepareArgsStruct,
+    _nxtpData: NXTPFacet.NXTPDataStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    completeBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      assetId: string,
-      receiver: string,
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    getNXTPTransactionManager(overrides?: CallOverrides): Promise<string>;
-
-    initNXTP(_txMgrAddr: string, overrides?: CallOverrides): Promise<void>;
-
     startBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    swapAndCompleteBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      finalAssetId: string,
-      receiver: string,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -453,113 +324,40 @@ export interface NXTPFacet extends BaseContract {
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: ILiFi.BridgeDataStruct | null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+      bridgeData?: ILiFi.BridgeDataStruct | null
     ): LiFiTransferStartedEventFilter;
-
-    "NXTPInitialized(address)"(txMgrAddr?: null): NXTPInitializedEventFilter;
-    NXTPInitialized(txMgrAddr?: null): NXTPInitializedEventFilter;
   };
 
   estimateGas: {
-    completeBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      assetId: string,
-      receiver: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    getNXTPTransactionManager(overrides?: CallOverrides): Promise<BigNumber>;
-
-    initNXTP(
-      _txMgrAddr: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     startBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    swapAndCompleteBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      finalAssetId: string,
-      receiver: string,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    completeBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      assetId: string,
-      receiver: string,
-      amount: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    getNXTPTransactionManager(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    initNXTP(
-      _txMgrAddr: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     startBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    swapAndCompleteBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      finalAssetId: string,
-      receiver: string,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaNXTP(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _nxtpData: ITransactionManager.PrepareArgsStruct,
+      _nxtpData: NXTPFacet.NXTPDataStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

@@ -86,10 +86,10 @@ export interface IERC20Metadata extends BaseContract {
         name(overrides?: CallOverrides): Promise<[string]>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
         totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
@@ -102,10 +102,10 @@ export interface IERC20Metadata extends BaseContract {
     name(overrides?: CallOverrides): Promise<string>;
     symbol(overrides?: CallOverrides): Promise<string>;
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
+    transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
-    transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
+    transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
@@ -116,8 +116,8 @@ export interface IERC20Metadata extends BaseContract {
         name(overrides?: CallOverrides): Promise<string>;
         symbol(overrides?: CallOverrides): Promise<string>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        transfer(to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {
         "Approval(address,address,uint256)"(owner?: string | null, spender?: string | null, value?: null): ApprovalEventFilter;
@@ -135,10 +135,10 @@ export interface IERC20Metadata extends BaseContract {
         name(overrides?: CallOverrides): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
@@ -152,10 +152,10 @@ export interface IERC20Metadata extends BaseContract {
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transfer(recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transfer(to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
-        transferFrom(sender: string, recipient: string, amount: BigNumberish, overrides?: Overrides & {
+        transferFrom(from: string, to: string, amount: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };
