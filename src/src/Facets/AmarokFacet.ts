@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,7 +68,6 @@ export declare namespace ILiFi {
 
 export declare namespace AmarokFacet {
   export type AmarokDataStruct = {
-    dstChainDomain: BigNumberish;
     callData: BytesLike;
     forceSlow: boolean;
     receiveLocal: boolean;
@@ -79,7 +79,6 @@ export declare namespace AmarokFacet {
   };
 
   export type AmarokDataStructOutput = [
-    number,
     string,
     boolean,
     boolean,
@@ -89,7 +88,6 @@ export declare namespace AmarokFacet {
     BigNumber,
     BigNumber
   ] & {
-    dstChainDomain: number;
     callData: string;
     forceSlow: boolean;
     receiveLocal: boolean;
@@ -133,16 +131,22 @@ export declare namespace LibSwap {
 
 export interface AmarokFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,bytes,bool,bool,address,uint256,uint256,uint256,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,bytes,bool,bool,address,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "setAmarokDomain(uint256,uint32)": FunctionFragment;
+    "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bool,bool,address,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bool,bool,address,uint256,uint256,uint256,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "setAmarokDomain"
       | "startBridgeTokensViaAmarok"
       | "swapAndStartBridgeTokensViaAmarok"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "setAmarokDomain",
+    values: [BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAmarok",
     values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]
@@ -157,6 +161,10 @@ export interface AmarokFacetInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "setAmarokDomain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "startBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
@@ -166,13 +174,26 @@ export interface AmarokFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "AmarokDomainSet(uint256,uint32)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AmarokDomainSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+
+export interface AmarokDomainSetEventObject {
+  chainId: BigNumber;
+  domain: number;
+}
+export type AmarokDomainSetEvent = TypedEvent<
+  [BigNumber, number],
+  AmarokDomainSetEventObject
+>;
+
+export type AmarokDomainSetEventFilter = TypedEventFilter<AmarokDomainSetEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -227,6 +248,12 @@ export interface AmarokFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    setAmarokDomain(
+      _chainId: BigNumberish,
+      _domain: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _amarokData: AmarokFacet.AmarokDataStruct,
@@ -240,6 +267,12 @@ export interface AmarokFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  setAmarokDomain(
+    _chainId: BigNumberish,
+    _domain: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   startBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -255,6 +288,12 @@ export interface AmarokFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    setAmarokDomain(
+      _chainId: BigNumberish,
+      _domain: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _amarokData: AmarokFacet.AmarokDataStruct,
@@ -270,6 +309,15 @@ export interface AmarokFacet extends BaseContract {
   };
 
   filters: {
+    "AmarokDomainSet(uint256,uint32)"(
+      chainId?: BigNumberish | null,
+      domain?: BigNumberish | null
+    ): AmarokDomainSetEventFilter;
+    AmarokDomainSet(
+      chainId?: BigNumberish | null,
+      domain?: BigNumberish | null
+    ): AmarokDomainSetEventFilter;
+
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: BytesLike | null,
       receivingAssetId?: null,
@@ -294,6 +342,12 @@ export interface AmarokFacet extends BaseContract {
   };
 
   estimateGas: {
+    setAmarokDomain(
+      _chainId: BigNumberish,
+      _domain: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _amarokData: AmarokFacet.AmarokDataStruct,
@@ -309,6 +363,12 @@ export interface AmarokFacet extends BaseContract {
   };
 
   populateTransaction: {
+    setAmarokDomain(
+      _chainId: BigNumberish,
+      _domain: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _amarokData: AmarokFacet.AmarokDataStruct,

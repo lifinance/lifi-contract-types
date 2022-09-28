@@ -67,13 +67,11 @@ export declare namespace ILiFi {
 
 export declare namespace AcrossFacet {
   export type AcrossDataStruct = {
-    weth: string;
     relayerFeePct: BigNumberish;
     quoteTimestamp: BigNumberish;
   };
 
-  export type AcrossDataStructOutput = [string, BigNumber, number] & {
-    weth: string;
+  export type AcrossDataStructOutput = [BigNumber, number] & {
     relayerFeePct: BigNumber;
     quoteTimestamp: number;
   };
@@ -111,8 +109,8 @@ export declare namespace LibSwap {
 
 export interface AcrossFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint64,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint64,uint32))": FunctionFragment;
+    "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint64,uint32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint64,uint32))": FunctionFragment;
   };
 
   getFunction(
