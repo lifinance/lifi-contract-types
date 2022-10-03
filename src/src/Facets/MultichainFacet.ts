@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -103,16 +104,34 @@ export declare namespace LibSwap {
 
 export interface MultichainFacetInterface extends utils.Interface {
   functions: {
+    "initMultichain(address[])": FunctionFragment;
+    "registerBridge(address,bool)": FunctionFragment;
+    "registerBridge(address[],bool[])": FunctionFragment;
     "startBridgeTokensViaMultichain((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address))": FunctionFragment;
     "swapAndStartBridgeTokensViaMultichain((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "initMultichain"
+      | "registerBridge(address,bool)"
+      | "registerBridge(address[],bool[])"
       | "startBridgeTokensViaMultichain"
       | "swapAndStartBridgeTokensViaMultichain"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "initMultichain",
+    values: [string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerBridge(address,bool)",
+    values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerBridge(address[],bool[])",
+    values: [string[], boolean[]]
+  ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaMultichain",
     values: [ILiFi.BridgeDataStruct, MultichainFacet.MultichainDataStruct]
@@ -127,6 +146,18 @@ export interface MultichainFacetInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "initMultichain",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerBridge(address,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerBridge(address[],bool[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "startBridgeTokensViaMultichain",
     data: BytesLike
   ): Result;
@@ -138,10 +169,14 @@ export interface MultichainFacetInterface extends utils.Interface {
   events: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
+    "MultichainInitialized()": EventFragment;
+    "MultichainRouterRegistered(address,bool)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MultichainInitialized"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MultichainRouterRegistered"): EventFragment;
 }
 
 export interface LiFiTransferCompletedEventObject {
@@ -170,6 +205,27 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
+export interface MultichainInitializedEventObject {}
+export type MultichainInitializedEvent = TypedEvent<
+  [],
+  MultichainInitializedEventObject
+>;
+
+export type MultichainInitializedEventFilter =
+  TypedEventFilter<MultichainInitializedEvent>;
+
+export interface MultichainRouterRegisteredEventObject {
+  router: string;
+  allowed: boolean;
+}
+export type MultichainRouterRegisteredEvent = TypedEvent<
+  [string, boolean],
+  MultichainRouterRegisteredEventObject
+>;
+
+export type MultichainRouterRegisteredEventFilter =
+  TypedEventFilter<MultichainRouterRegisteredEvent>;
+
 export interface MultichainFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
@@ -197,6 +253,23 @@ export interface MultichainFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    initMultichain(
+      routers: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "registerBridge(address,bool)"(
+      router: string,
+      allowed: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "registerBridge(address[],bool[])"(
+      routers: string[],
+      allowed: boolean[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     startBridgeTokensViaMultichain(
       _bridgeData: ILiFi.BridgeDataStruct,
       _multichainData: MultichainFacet.MultichainDataStruct,
@@ -210,6 +283,23 @@ export interface MultichainFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  initMultichain(
+    routers: string[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "registerBridge(address,bool)"(
+    router: string,
+    allowed: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "registerBridge(address[],bool[])"(
+    routers: string[],
+    allowed: boolean[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   startBridgeTokensViaMultichain(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -225,6 +315,20 @@ export interface MultichainFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    initMultichain(routers: string[], overrides?: CallOverrides): Promise<void>;
+
+    "registerBridge(address,bool)"(
+      router: string,
+      allowed: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "registerBridge(address[],bool[])"(
+      routers: string[],
+      allowed: boolean[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     startBridgeTokensViaMultichain(
       _bridgeData: ILiFi.BridgeDataStruct,
       _multichainData: MultichainFacet.MultichainDataStruct,
@@ -261,9 +365,38 @@ export interface MultichainFacet extends BaseContract {
     LiFiTransferStarted(
       bridgeData?: ILiFi.BridgeDataStruct | null
     ): LiFiTransferStartedEventFilter;
+
+    "MultichainInitialized()"(): MultichainInitializedEventFilter;
+    MultichainInitialized(): MultichainInitializedEventFilter;
+
+    "MultichainRouterRegistered(address,bool)"(
+      router?: string | null,
+      allowed?: null
+    ): MultichainRouterRegisteredEventFilter;
+    MultichainRouterRegistered(
+      router?: string | null,
+      allowed?: null
+    ): MultichainRouterRegisteredEventFilter;
   };
 
   estimateGas: {
+    initMultichain(
+      routers: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "registerBridge(address,bool)"(
+      router: string,
+      allowed: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "registerBridge(address[],bool[])"(
+      routers: string[],
+      allowed: boolean[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     startBridgeTokensViaMultichain(
       _bridgeData: ILiFi.BridgeDataStruct,
       _multichainData: MultichainFacet.MultichainDataStruct,
@@ -279,6 +412,23 @@ export interface MultichainFacet extends BaseContract {
   };
 
   populateTransaction: {
+    initMultichain(
+      routers: string[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "registerBridge(address,bool)"(
+      router: string,
+      allowed: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "registerBridge(address[],bool[])"(
+      routers: string[],
+      allowed: boolean[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaMultichain(
       _bridgeData: ILiFi.BridgeDataStruct,
       _multichainData: MultichainFacet.MultichainDataStruct,

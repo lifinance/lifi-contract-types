@@ -4,6 +4,11 @@ import type { IExecutor, IExecutorInterface } from "../../../src/Interfaces/IExe
 export declare class IExecutor__factory {
     static readonly abi: {
         inputs: ({
+            internalType: string;
+            name: string;
+            type: string;
+            components?: undefined;
+        } | {
             components: {
                 internalType: string;
                 name: string;
@@ -12,11 +17,6 @@ export declare class IExecutor__factory {
             internalType: string;
             name: string;
             type: string;
-        } | {
-            internalType: string;
-            name: string;
-            type: string;
-            components?: undefined;
         })[];
         name: string;
         outputs: never[];

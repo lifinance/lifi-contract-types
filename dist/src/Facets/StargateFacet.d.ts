@@ -44,6 +44,8 @@ export declare namespace StargateFacet {
         dstPoolId: BigNumberish;
         minAmountLD: BigNumberish;
         dstGasForCall: BigNumberish;
+        lzFee: BigNumberish;
+        refundAddress: string;
         callTo: BytesLike;
         callData: BytesLike;
     };
@@ -51,12 +53,16 @@ export declare namespace StargateFacet {
         BigNumber,
         BigNumber,
         BigNumber,
+        BigNumber,
+        string,
         string,
         string
     ] & {
         dstPoolId: BigNumber;
         minAmountLD: BigNumber;
         dstGasForCall: BigNumber;
+        lzFee: BigNumber;
+        refundAddress: string;
         callTo: string;
         callData: string;
     };
@@ -91,11 +97,11 @@ export declare namespace LibSwap {
 }
 export interface StargateFacetInterface extends utils.Interface {
     functions: {
-        "quoteLayerZeroFee(uint256,(uint256,uint256,uint256,bytes,bytes))": FunctionFragment;
+        "quoteLayerZeroFee(uint256,(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
         "setLayerZeroChainId(uint256,uint16)": FunctionFragment;
         "setStargatePoolId(address,uint16)": FunctionFragment;
-        "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,bytes,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,bytes,bytes))": FunctionFragment;
+        "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "quoteLayerZeroFee" | "setLayerZeroChainId" | "setStargatePoolId" | "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate"): FunctionFragment;
     encodeFunctionData(functionFragment: "quoteLayerZeroFee", values: [BigNumberish, StargateFacet.StargateDataStruct]): string;

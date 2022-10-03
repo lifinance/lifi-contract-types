@@ -69,10 +69,17 @@ export declare namespace LibSwap {
 }
 export interface GenericSwapFacetInterface extends utils.Interface {
     functions: {
-        "swapTokensGeneric(bytes32,string,string,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+        "swapTokensGeneric(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "swapTokensGeneric"): FunctionFragment;
-    encodeFunctionData(functionFragment: "swapTokensGeneric", values: [BytesLike, string, string, BigNumberish, LibSwap.SwapDataStruct[]]): string;
+    encodeFunctionData(functionFragment: "swapTokensGeneric", values: [
+        BytesLike,
+        string,
+        string,
+        string,
+        BigNumberish,
+        LibSwap.SwapDataStruct[]
+    ]): string;
     decodeFunctionResult(functionFragment: "swapTokensGeneric", data: BytesLike): Result;
     events: {
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -139,15 +146,15 @@ export interface GenericSwapFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _receiver: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+    swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _receiver: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
+        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _receiver: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
@@ -158,12 +165,12 @@ export interface GenericSwapFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: ILiFi.BridgeDataStruct | null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _receiver: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: BytesLike, _integrator: string, _referrer: string, _receiver: string, _minAmount: BigNumberish, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
     };

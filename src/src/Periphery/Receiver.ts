@@ -107,7 +107,7 @@ export interface ReceiverInterface extends utils.Interface {
     "setStargateRouter(address)": FunctionFragment;
     "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
     "sgRouter()": FunctionFragment;
-    "swapAndCompleteBridgeTokens((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
+    "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -162,7 +162,7 @@ export interface ReceiverInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "sgRouter", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "swapAndCompleteBridgeTokens",
-    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[], string, string]
+    values: [BytesLike, LibSwap.SwapDataStruct[], string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -341,7 +341,7 @@ export interface Receiver extends BaseContract {
     sgRouter(overrides?: CallOverrides): Promise<[string]>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       assetId: string,
       receiver: string,
@@ -393,7 +393,7 @@ export interface Receiver extends BaseContract {
   sgRouter(overrides?: CallOverrides): Promise<string>;
 
   swapAndCompleteBridgeTokens(
-    _bridgeData: ILiFi.BridgeDataStruct,
+    _transactionId: BytesLike,
     _swapData: LibSwap.SwapDataStruct[],
     assetId: string,
     receiver: string,
@@ -441,7 +441,7 @@ export interface Receiver extends BaseContract {
     sgRouter(overrides?: CallOverrides): Promise<string>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       assetId: string,
       receiver: string,
@@ -541,7 +541,7 @@ export interface Receiver extends BaseContract {
     sgRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       assetId: string,
       receiver: string,
@@ -594,7 +594,7 @@ export interface Receiver extends BaseContract {
     sgRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       assetId: string,
       receiver: string,

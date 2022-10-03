@@ -78,7 +78,7 @@ export interface ReceiverInterface extends utils.Interface {
         "setStargateRouter(address)": FunctionFragment;
         "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
         "sgRouter()": FunctionFragment;
-        "swapAndCompleteBridgeTokens((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
+        "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executor" | "owner" | "pendingOwner" | "pullToken" | "setStargateRouter" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "transferOwnership"): FunctionFragment;
@@ -98,7 +98,7 @@ export interface ReceiverInterface extends utils.Interface {
         BytesLike
     ]): string;
     encodeFunctionData(functionFragment: "sgRouter", values?: undefined): string;
-    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[], string, string]): string;
+    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [BytesLike, LibSwap.SwapDataStruct[], string, string]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
@@ -205,7 +205,7 @@ export interface Receiver extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         sgRouter(overrides?: CallOverrides): Promise<[string]>;
-        swapAndCompleteBridgeTokens(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         transferOwnership(_newOwner: string, overrides?: Overrides & {
@@ -231,7 +231,7 @@ export interface Receiver extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     sgRouter(overrides?: CallOverrides): Promise<string>;
-    swapAndCompleteBridgeTokens(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+    swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     transferOwnership(_newOwner: string, overrides?: Overrides & {
@@ -247,7 +247,7 @@ export interface Receiver extends BaseContract {
         setStargateRouter(_router: string, overrides?: CallOverrides): Promise<void>;
         sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: CallOverrides): Promise<void>;
         sgRouter(overrides?: CallOverrides): Promise<string>;
-        swapAndCompleteBridgeTokens(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: CallOverrides): Promise<void>;
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: CallOverrides): Promise<void>;
         transferOwnership(_newOwner: string, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -282,7 +282,7 @@ export interface Receiver extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         sgRouter(overrides?: CallOverrides): Promise<BigNumber>;
-        swapAndCompleteBridgeTokens(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         transferOwnership(_newOwner: string, overrides?: Overrides & {
@@ -309,7 +309,7 @@ export interface Receiver extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         sgRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        swapAndCompleteBridgeTokens(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         transferOwnership(_newOwner: string, overrides?: Overrides & {

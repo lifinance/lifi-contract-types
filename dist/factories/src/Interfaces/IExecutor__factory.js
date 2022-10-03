@@ -9,61 +9,9 @@ var _abi = [
     {
         inputs: [
             {
-                components: [
-                    {
-                        internalType: "bytes32",
-                        name: "transactionId",
-                        type: "bytes32",
-                    },
-                    {
-                        internalType: "string",
-                        name: "bridge",
-                        type: "string",
-                    },
-                    {
-                        internalType: "string",
-                        name: "integrator",
-                        type: "string",
-                    },
-                    {
-                        internalType: "address",
-                        name: "referrer",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "sendingAssetId",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "receiver",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "minAmount",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "destinationChainId",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bool",
-                        name: "hasSourceSwaps",
-                        type: "bool",
-                    },
-                    {
-                        internalType: "bool",
-                        name: "hasDestinationCall",
-                        type: "bool",
-                    },
-                ],
-                internalType: "struct ILiFi.BridgeData",
-                name: "_bridgeData",
-                type: "tuple",
+                internalType: "bytes32",
+                name: "_transactionId",
+                type: "bytes32",
             },
             {
                 components: [

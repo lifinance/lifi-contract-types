@@ -22,45 +22,6 @@ import type {
   OnEvent,
 } from "../../common";
 
-export declare namespace ILiFi {
-  export type BridgeDataStruct = {
-    transactionId: BytesLike;
-    bridge: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receiver: string;
-    minAmount: BigNumberish;
-    destinationChainId: BigNumberish;
-    hasSourceSwaps: boolean;
-    hasDestinationCall: boolean;
-  };
-
-  export type BridgeDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ] & {
-    transactionId: string;
-    bridge: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receiver: string;
-    minAmount: BigNumber;
-    destinationChainId: BigNumber;
-    hasSourceSwaps: boolean;
-    hasDestinationCall: boolean;
-  };
-}
-
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: string;
@@ -93,7 +54,7 @@ export declare namespace LibSwap {
 
 export interface IExecutorInterface extends utils.Interface {
   functions: {
-    "swapAndCompleteBridgeTokens((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
+    "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
   };
 
   getFunction(
@@ -102,7 +63,7 @@ export interface IExecutorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "swapAndCompleteBridgeTokens",
-    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[], string, string]
+    values: [BytesLike, LibSwap.SwapDataStruct[], string, string]
   ): string;
 
   decodeFunctionResult(
@@ -141,7 +102,7 @@ export interface IExecutor extends BaseContract {
 
   functions: {
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       transferredAssetId: string,
       receiver: string,
@@ -150,7 +111,7 @@ export interface IExecutor extends BaseContract {
   };
 
   swapAndCompleteBridgeTokens(
-    _bridgeData: ILiFi.BridgeDataStruct,
+    _transactionId: BytesLike,
     _swapData: LibSwap.SwapDataStruct[],
     transferredAssetId: string,
     receiver: string,
@@ -159,7 +120,7 @@ export interface IExecutor extends BaseContract {
 
   callStatic: {
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       transferredAssetId: string,
       receiver: string,
@@ -171,7 +132,7 @@ export interface IExecutor extends BaseContract {
 
   estimateGas: {
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       transferredAssetId: string,
       receiver: string,
@@ -181,7 +142,7 @@ export interface IExecutor extends BaseContract {
 
   populateTransaction: {
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
       transferredAssetId: string,
       receiver: string,

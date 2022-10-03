@@ -41,18 +41,11 @@ export declare namespace ILiFi {
 }
 export declare namespace ArbitrumBridgeFacet {
     type ArbitrumDataStruct = {
-        tokenRouter: string;
         maxSubmissionCost: BigNumberish;
         maxGas: BigNumberish;
         maxGasPrice: BigNumberish;
     };
-    type ArbitrumDataStructOutput = [
-        string,
-        BigNumber,
-        BigNumber,
-        BigNumber
-    ] & {
-        tokenRouter: string;
+    type ArbitrumDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
         maxSubmissionCost: BigNumber;
         maxGas: BigNumber;
         maxGasPrice: BigNumber;
@@ -88,8 +81,8 @@ export declare namespace LibSwap {
 }
 export interface ArbitrumBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256,uint256,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256,uint256,uint256))": FunctionFragment;
+        "startBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256))": FunctionFragment;
+        "swapAndStartBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaArbitrumBridge" | "swapAndStartBridgeTokensViaArbitrumBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaArbitrumBridge", values: [ILiFi.BridgeDataStruct, ArbitrumBridgeFacet.ArbitrumDataStruct]): string;

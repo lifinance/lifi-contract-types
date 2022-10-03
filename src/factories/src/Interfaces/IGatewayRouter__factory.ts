@@ -33,60 +33,6 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "_destAddr",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_l2CallValue",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_maxSubmissionCost",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_excessFeeRefundAddress",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_callValueRefundAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_maxGas",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_gasPriceBid",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes",
-        name: "_data",
-        type: "bytes",
-      },
-    ],
-    name: "createRetryableTicketNoRefundAliasRewrite",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "_token",
         type: "address",
       },
@@ -141,6 +87,60 @@ const _abi = [
         internalType: "bytes",
         name: "",
         type: "bytes",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_destAddr",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_l2CallValue",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxSubmissionCost",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_excessFeeRefundAddress",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_callValueRefundAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxGas",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_gasPriceBid",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes",
+        name: "_data",
+        type: "bytes",
+      },
+    ],
+    name: "unsafeCreateRetryableTicket",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "payable",

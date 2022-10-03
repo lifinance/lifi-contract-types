@@ -97,14 +97,21 @@ export declare namespace LibSwap {
 
 export interface GenericSwapFacetInterface extends utils.Interface {
   functions: {
-    "swapTokensGeneric(bytes32,string,string,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "swapTokensGeneric(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "swapTokensGeneric"): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "swapTokensGeneric",
-    values: [BytesLike, string, string, BigNumberish, LibSwap.SwapDataStruct[]]
+    values: [
+      BytesLike,
+      string,
+      string,
+      string,
+      BigNumberish,
+      LibSwap.SwapDataStruct[]
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -197,6 +204,7 @@ export interface GenericSwapFacet extends BaseContract {
       _transactionId: BytesLike,
       _integrator: string,
       _referrer: string,
+      _receiver: string,
       _minAmount: BigNumberish,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -207,6 +215,7 @@ export interface GenericSwapFacet extends BaseContract {
     _transactionId: BytesLike,
     _integrator: string,
     _referrer: string,
+    _receiver: string,
     _minAmount: BigNumberish,
     _swapData: LibSwap.SwapDataStruct[],
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -217,6 +226,7 @@ export interface GenericSwapFacet extends BaseContract {
       _transactionId: BytesLike,
       _integrator: string,
       _referrer: string,
+      _receiver: string,
       _minAmount: BigNumberish,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: CallOverrides
@@ -271,6 +281,7 @@ export interface GenericSwapFacet extends BaseContract {
       _transactionId: BytesLike,
       _integrator: string,
       _referrer: string,
+      _receiver: string,
       _minAmount: BigNumberish,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -282,6 +293,7 @@ export interface GenericSwapFacet extends BaseContract {
       _transactionId: BytesLike,
       _integrator: string,
       _referrer: string,
+      _receiver: string,
       _minAmount: BigNumberish,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: string | Promise<string> }

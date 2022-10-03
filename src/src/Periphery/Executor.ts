@@ -104,8 +104,8 @@ export interface ExecutorInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "setERC20Proxy(address)": FunctionFragment;
-    "swapAndCompleteBridgeTokens((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
-    "swapAndExecute((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],address,address,uint256)": FunctionFragment;
+    "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
+    "swapAndExecute(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -145,17 +145,11 @@ export interface ExecutorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndCompleteBridgeTokens",
-    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[], string, string]
+    values: [BytesLike, LibSwap.SwapDataStruct[], string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndExecute",
-    values: [
-      ILiFi.BridgeDataStruct,
-      LibSwap.SwapDataStruct[],
-      string,
-      string,
-      BigNumberish
-    ]
+    values: [BytesLike, LibSwap.SwapDataStruct[], string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -312,19 +306,19 @@ export interface Executor extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
+      _transferredAssetId: string,
+      _receiver: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     swapAndExecute(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
-      amount: BigNumberish,
+      _transferredAssetId: string,
+      _receiver: string,
+      _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -354,19 +348,19 @@ export interface Executor extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swapAndCompleteBridgeTokens(
-    _bridgeData: ILiFi.BridgeDataStruct,
+    _transactionId: BytesLike,
     _swapData: LibSwap.SwapDataStruct[],
-    transferredAssetId: string,
-    receiver: string,
+    _transferredAssetId: string,
+    _receiver: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   swapAndExecute(
-    _bridgeData: ILiFi.BridgeDataStruct,
+    _transactionId: BytesLike,
     _swapData: LibSwap.SwapDataStruct[],
-    transferredAssetId: string,
-    receiver: string,
-    amount: BigNumberish,
+    _transferredAssetId: string,
+    _receiver: string,
+    _amount: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -392,19 +386,19 @@ export interface Executor extends BaseContract {
     ): Promise<void>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
+      _transferredAssetId: string,
+      _receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndExecute(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
-      amount: BigNumberish,
+      _transferredAssetId: string,
+      _receiver: string,
+      _amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -480,19 +474,19 @@ export interface Executor extends BaseContract {
     ): Promise<BigNumber>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
+      _transferredAssetId: string,
+      _receiver: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     swapAndExecute(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
-      amount: BigNumberish,
+      _transferredAssetId: string,
+      _receiver: string,
+      _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -523,19 +517,19 @@ export interface Executor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapAndCompleteBridgeTokens(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
+      _transferredAssetId: string,
+      _receiver: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndExecute(
-      _bridgeData: ILiFi.BridgeDataStruct,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: string,
-      receiver: string,
-      amount: BigNumberish,
+      _transferredAssetId: string,
+      _receiver: string,
+      _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
