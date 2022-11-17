@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../../common";
 export interface IAxelarExecutableInterface extends utils.Interface {
     functions: {
         "execute(bytes32,string,string,bytes)": FunctionFragment;
@@ -9,8 +9,20 @@ export interface IAxelarExecutableInterface extends utils.Interface {
         "gateway()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "execute" | "executeWithToken" | "gateway"): FunctionFragment;
-    encodeFunctionData(functionFragment: "execute", values: [BytesLike, string, string, BytesLike]): string;
-    encodeFunctionData(functionFragment: "executeWithToken", values: [BytesLike, string, string, BytesLike, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "execute", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "executeWithToken", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "gateway", values?: undefined): string;
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "executeWithToken", data: BytesLike): Result;
@@ -32,42 +44,42 @@ export interface IAxelarExecutable extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeWithToken(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, tokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         gateway(overrides?: CallOverrides): Promise<[string]>;
     };
-    execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    execute(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    executeWithToken(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, tokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     gateway(overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: CallOverrides): Promise<void>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        execute(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        executeWithToken(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, tokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         gateway(overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeWithToken(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, tokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         gateway(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        execute(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        executeWithToken(commandId: PromiseOrValue<BytesLike>, sourceChain: PromiseOrValue<string>, sourceAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, tokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         gateway(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

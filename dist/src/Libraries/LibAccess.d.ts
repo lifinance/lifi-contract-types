@@ -1,10 +1,34 @@
-import type { BaseContract, Signer, utils } from "ethers";
+import type { BaseContract, BytesLike, Signer, utils } from "ethers";
+import type { EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface LibAccessInterface extends utils.Interface {
     functions: {};
-    events: {};
+    events: {
+        "AccessGranted(address,bytes4)": EventFragment;
+        "AccessRevoked(address,bytes4)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "AccessGranted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "AccessRevoked"): EventFragment;
 }
+export interface AccessGrantedEventObject {
+    account: string;
+    method: string;
+}
+export declare type AccessGrantedEvent = TypedEvent<[
+    string,
+    string
+], AccessGrantedEventObject>;
+export declare type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
+export interface AccessRevokedEventObject {
+    account: string;
+    method: string;
+}
+export declare type AccessRevokedEvent = TypedEvent<[
+    string,
+    string
+], AccessRevokedEventObject>;
+export declare type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
 export interface LibAccess extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -21,7 +45,12 @@ export interface LibAccess extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {};
     callStatic: {};
-    filters: {};
+    filters: {
+        "AccessGranted(address,bytes4)"(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
+        AccessGranted(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
+        "AccessRevoked(address,bytes4)"(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessRevokedEventFilter;
+        AccessRevoked(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessRevokedEventFilter;
+    };
     estimateGas: {};
     populateTransaction: {};
 }

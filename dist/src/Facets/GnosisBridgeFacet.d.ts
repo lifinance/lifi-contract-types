@@ -1,19 +1,21 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export declare namespace ILiFi {
-    type LiFiDataStruct = {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
+    type BridgeDataStruct = {
+        transactionId: PromiseOrValue<BytesLike>;
+        bridge: PromiseOrValue<string>;
+        integrator: PromiseOrValue<string>;
+        referrer: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receiver: PromiseOrValue<string>;
+        minAmount: PromiseOrValue<BigNumberish>;
+        destinationChainId: PromiseOrValue<BigNumberish>;
+        hasSourceSwaps: PromiseOrValue<boolean>;
+        hasDestinationCall: PromiseOrValue<boolean>;
     };
-    type LiFiDataStructOutput = [
+    type BridgeDataStructOutput = [
         string,
         string,
         string,
@@ -21,36 +23,31 @@ export declare namespace ILiFi {
         string,
         string,
         BigNumber,
-        BigNumber
+        BigNumber,
+        boolean,
+        boolean
     ] & {
         transactionId: string;
+        bridge: string;
         integrator: string;
         referrer: string;
         sendingAssetId: string;
-        receivingAssetId: string;
         receiver: string;
+        minAmount: BigNumber;
         destinationChainId: BigNumber;
-        amount: BigNumber;
-    };
-}
-export declare namespace GnosisBridgeFacet {
-    type GnosisBridgeDataStruct = {
-        receiver: string;
-        amount: BigNumberish;
-    };
-    type GnosisBridgeDataStructOutput = [string, BigNumber] & {
-        receiver: string;
-        amount: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
 }
 export declare namespace LibSwap {
     type SwapDataStruct = {
-        callTo: string;
-        approveTo: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        fromAmount: BigNumberish;
-        callData: BytesLike;
+        callTo: PromiseOrValue<string>;
+        approveTo: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receivingAssetId: PromiseOrValue<string>;
+        fromAmount: PromiseOrValue<BigNumberish>;
+        callData: PromiseOrValue<BytesLike>;
+        requiresDeposit: PromiseOrValue<boolean>;
     };
     type SwapDataStructOutput = [
         string,
@@ -58,7 +55,8 @@ export declare namespace LibSwap {
         string,
         string,
         BigNumber,
-        string
+        string,
+        boolean
     ] & {
         callTo: string;
         approveTo: string;
@@ -66,45 +64,26 @@ export declare namespace LibSwap {
         receivingAssetId: string;
         fromAmount: BigNumber;
         callData: string;
+        requiresDeposit: boolean;
     };
 }
 export interface GnosisBridgeFacetInterface extends utils.Interface {
     functions: {
-        "initGnosisBridge(address,address,uint64)": FunctionFragment;
-        "startBridgeTokensViaXDaiBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaXDaiBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,uint256))": FunctionFragment;
+        "startBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
+        "swapAndStartBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "initGnosisBridge" | "startBridgeTokensViaXDaiBridge" | "swapAndStartBridgeTokensViaXDaiBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "initGnosisBridge", values: [string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaXDaiBridge", values: [ILiFi.LiFiDataStruct, GnosisBridgeFacet.GnosisBridgeDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaXDaiBridge", values: [
-        ILiFi.LiFiDataStruct,
-        LibSwap.SwapDataStruct[],
-        GnosisBridgeFacet.GnosisBridgeDataStruct
-    ]): string;
-    decodeFunctionResult(functionFragment: "initGnosisBridge", data: BytesLike): Result;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaXDaiBridge" | "swapAndStartBridgeTokensViaXDaiBridge"): FunctionFragment;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaXDaiBridge", values: [ILiFi.BridgeDataStruct]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaXDaiBridge", values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]): string;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaXDaiBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaXDaiBridge", data: BytesLike): Result;
     events: {
-        "GnosisBridgeInitialized(address,address,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+        "LiFiTransferStarted(tuple)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "GnosisBridgeInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface GnosisBridgeInitializedEventObject {
-    xDaiBridge: string;
-    token: string;
-    dstChainId: BigNumber;
-}
-export declare type GnosisBridgeInitializedEvent = TypedEvent<[
-    string,
-    string,
-    BigNumber
-], GnosisBridgeInitializedEventObject>;
-export declare type GnosisBridgeInitializedEventFilter = TypedEventFilter<GnosisBridgeInitializedEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -121,32 +100,10 @@ export declare type LiFiTransferCompletedEvent = TypedEvent<[
 ], LiFiTransferCompletedEventObject>;
 export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferStartedEventObject {
-    transactionId: string;
-    bridge: string;
-    bridgeData: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    hasSourceSwap: boolean;
-    hasDestinationCall: boolean;
+    bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export declare type LiFiTransferStartedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
+    ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface GnosisBridgeFacet extends BaseContract {
@@ -164,58 +121,43 @@ export interface GnosisBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        initGnosisBridge(xDaiBridge: string, token: string, dstChainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        startBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, swapData: LibSwap.SwapDataStruct[], gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    initGnosisBridge(xDaiBridge: string, token: string, dstChainId: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    startBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, swapData: LibSwap.SwapDataStruct[], gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        initGnosisBridge(xDaiBridge: string, token: string, dstChainId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        startBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, swapData: LibSwap.SwapDataStruct[], gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "GnosisBridgeInitialized(address,address,uint256)"(xDaiBridge?: null, token?: null, dstChainId?: null): GnosisBridgeInitializedEventFilter;
-        GnosisBridgeInitialized(xDaiBridge?: null, token?: null, dstChainId?: null): GnosisBridgeInitializedEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        initGnosisBridge(xDaiBridge: string, token: string, dstChainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        startBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, swapData: LibSwap.SwapDataStruct[], gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        initGnosisBridge(xDaiBridge: string, token: string, dstChainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        startBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaXDaiBridge(lifiData: ILiFi.LiFiDataStruct, swapData: LibSwap.SwapDataStruct[], gnosisBridgeData: GnosisBridgeFacet.GnosisBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

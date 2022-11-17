@@ -1,19 +1,19 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface IAcrossSpokePoolInterface extends utils.Interface {
     functions: {
         "deposit(address,address,uint256,uint256,uint64,uint32)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "deposit"): FunctionFragment;
     encodeFunctionData(functionFragment: "deposit", values: [
-        string,
-        string,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
     events: {};
@@ -33,25 +33,25 @@ export interface IAcrossSpokePool extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        deposit(recipient: string, originToken: string, amount: BigNumberish, destinationChainId: BigNumberish, relayerFeePct: BigNumberish, quoteTimestamp: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(recipient: PromiseOrValue<string>, originToken: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, relayerFeePct: PromiseOrValue<BigNumberish>, quoteTimestamp: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    deposit(recipient: string, originToken: string, amount: BigNumberish, destinationChainId: BigNumberish, relayerFeePct: BigNumberish, quoteTimestamp: BigNumberish, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    deposit(recipient: PromiseOrValue<string>, originToken: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, relayerFeePct: PromiseOrValue<BigNumberish>, quoteTimestamp: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        deposit(recipient: string, originToken: string, amount: BigNumberish, destinationChainId: BigNumberish, relayerFeePct: BigNumberish, quoteTimestamp: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        deposit(recipient: PromiseOrValue<string>, originToken: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, relayerFeePct: PromiseOrValue<BigNumberish>, quoteTimestamp: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        deposit(recipient: string, originToken: string, amount: BigNumberish, destinationChainId: BigNumberish, relayerFeePct: BigNumberish, quoteTimestamp: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(recipient: PromiseOrValue<string>, originToken: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, relayerFeePct: PromiseOrValue<BigNumberish>, quoteTimestamp: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        deposit(recipient: string, originToken: string, amount: BigNumberish, destinationChainId: BigNumberish, relayerFeePct: BigNumberish, quoteTimestamp: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        deposit(recipient: PromiseOrValue<string>, originToken: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, relayerFeePct: PromiseOrValue<BigNumberish>, quoteTimestamp: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

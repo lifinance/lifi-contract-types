@@ -1,19 +1,21 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export declare namespace ILiFi {
-    type LiFiDataStruct = {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
+    type BridgeDataStruct = {
+        transactionId: PromiseOrValue<BytesLike>;
+        bridge: PromiseOrValue<string>;
+        integrator: PromiseOrValue<string>;
+        referrer: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receiver: PromiseOrValue<string>;
+        minAmount: PromiseOrValue<BigNumberish>;
+        destinationChainId: PromiseOrValue<BigNumberish>;
+        hasSourceSwaps: PromiseOrValue<boolean>;
+        hasDestinationCall: PromiseOrValue<boolean>;
     };
-    type LiFiDataStructOutput = [
+    type BridgeDataStructOutput = [
         string,
         string,
         string,
@@ -21,26 +23,31 @@ export declare namespace ILiFi {
         string,
         string,
         BigNumber,
-        BigNumber
+        BigNumber,
+        boolean,
+        boolean
     ] & {
         transactionId: string;
+        bridge: string;
         integrator: string;
         referrer: string;
         sendingAssetId: string;
-        receivingAssetId: string;
         receiver: string;
+        minAmount: BigNumber;
         destinationChainId: BigNumber;
-        amount: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
 }
 export declare namespace LibSwap {
     type SwapDataStruct = {
-        callTo: string;
-        approveTo: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        fromAmount: BigNumberish;
-        callData: BytesLike;
+        callTo: PromiseOrValue<string>;
+        approveTo: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receivingAssetId: PromiseOrValue<string>;
+        fromAmount: PromiseOrValue<BigNumberish>;
+        callData: PromiseOrValue<BytesLike>;
+        requiresDeposit: PromiseOrValue<boolean>;
     };
     type SwapDataStructOutput = [
         string,
@@ -48,7 +55,8 @@ export declare namespace LibSwap {
         string,
         string,
         BigNumber,
-        string
+        string,
+        boolean
     ] & {
         callTo: string;
         approveTo: string;
@@ -56,103 +64,64 @@ export declare namespace LibSwap {
         receivingAssetId: string;
         fromAmount: BigNumber;
         callData: string;
+        requiresDeposit: boolean;
     };
 }
 export interface ExecutorInterface extends utils.Interface {
     functions: {
+        "cancelOwnershipTransfer()": FunctionFragment;
+        "confirmOwnershipTransfer()": FunctionFragment;
         "erc20Proxy()": FunctionFragment;
-        "execute(bytes32,string,string,bytes)": FunctionFragment;
-        "executeWithToken(bytes32,string,string,bytes,string,uint256)": FunctionFragment;
-        "gateway()": FunctionFragment;
         "owner()": FunctionFragment;
-        "renounceOwnership()": FunctionFragment;
-        "setAxelarGateway(address)": FunctionFragment;
+        "pendingOwner()": FunctionFragment;
         "setERC20Proxy(address)": FunctionFragment;
-        "setStargateRouter(address)": FunctionFragment;
-        "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
-        "sgRouter()": FunctionFragment;
-        "swapAndCompleteBridgeTokens((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],address,address)": FunctionFragment;
-        "swapAndCompleteBridgeTokensViaStargate((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],address,address)": FunctionFragment;
-        "swapAndExecute((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],address,address,uint256)": FunctionFragment;
+        "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
+        "swapAndExecute(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address,uint256)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "erc20Proxy" | "execute" | "executeWithToken" | "gateway" | "owner" | "renounceOwnership" | "setAxelarGateway" | "setERC20Proxy" | "setStargateRouter" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "swapAndCompleteBridgeTokensViaStargate" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "erc20Proxy" | "owner" | "pendingOwner" | "setERC20Proxy" | "swapAndCompleteBridgeTokens" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
+    encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "erc20Proxy", values?: undefined): string;
-    encodeFunctionData(functionFragment: "execute", values: [BytesLike, string, string, BytesLike]): string;
-    encodeFunctionData(functionFragment: "executeWithToken", values: [BytesLike, string, string, BytesLike, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "gateway", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-    encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setAxelarGateway", values: [string]): string;
-    encodeFunctionData(functionFragment: "setERC20Proxy", values: [string]): string;
-    encodeFunctionData(functionFragment: "setStargateRouter", values: [string]): string;
-    encodeFunctionData(functionFragment: "sgReceive", values: [
-        BigNumberish,
-        BytesLike,
-        BigNumberish,
-        string,
-        BigNumberish,
-        BytesLike
-    ]): string;
-    encodeFunctionData(functionFragment: "sgRouter", values?: undefined): string;
-    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [ILiFi.LiFiDataStruct, LibSwap.SwapDataStruct[], string, string]): string;
-    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokensViaStargate", values: [ILiFi.LiFiDataStruct, LibSwap.SwapDataStruct[], string, string]): string;
-    encodeFunctionData(functionFragment: "swapAndExecute", values: [
-        ILiFi.LiFiDataStruct,
+    encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+    encodeFunctionData(functionFragment: "setERC20Proxy", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [
+        PromiseOrValue<BytesLike>,
         LibSwap.SwapDataStruct[],
-        string,
-        string,
-        BigNumberish
+        PromiseOrValue<string>,
+        PromiseOrValue<string>
     ]): string;
-    encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
+    encodeFunctionData(functionFragment: "swapAndExecute", values: [
+        PromiseOrValue<BytesLike>,
+        LibSwap.SwapDataStruct[],
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "erc20Proxy", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "executeWithToken", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "gateway", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setAxelarGateway", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setERC20Proxy", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setStargateRouter", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "sgReceive", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "sgRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndCompleteBridgeTokens", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "swapAndCompleteBridgeTokensViaStargate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndExecute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     events: {
-        "AxelarExecutionComplete(address,bytes4)": EventFragment;
-        "AxelarGatewaySet(address)": EventFragment;
         "ERC20ProxySet(address)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+        "LiFiTransferStarted(tuple)": EventFragment;
+        "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
-        "StargateRouterSet(address)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "AxelarExecutionComplete"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "AxelarGatewaySet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ERC20ProxySet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "StargateRouterSet"): EventFragment;
 }
-export interface AxelarExecutionCompleteEventObject {
-    callTo: string;
-    selector: string;
-}
-export declare type AxelarExecutionCompleteEvent = TypedEvent<[
-    string,
-    string
-], AxelarExecutionCompleteEventObject>;
-export declare type AxelarExecutionCompleteEventFilter = TypedEventFilter<AxelarExecutionCompleteEvent>;
-export interface AxelarGatewaySetEventObject {
-    gateway: string;
-}
-export declare type AxelarGatewaySetEvent = TypedEvent<[
-    string
-], AxelarGatewaySetEventObject>;
-export declare type AxelarGatewaySetEventFilter = TypedEventFilter<AxelarGatewaySetEvent>;
 export interface ERC20ProxySetEventObject {
     proxy: string;
 }
@@ -174,34 +143,21 @@ export declare type LiFiTransferCompletedEvent = TypedEvent<[
 ], LiFiTransferCompletedEventObject>;
 export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferStartedEventObject {
-    transactionId: string;
-    bridge: string;
-    bridgeData: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    hasSourceSwap: boolean;
-    hasDestinationCall: boolean;
+    bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export declare type LiFiTransferStartedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
+    ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
+export interface OwnershipTransferRequestedEventObject {
+    _from: string;
+    _to: string;
+}
+export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+    string,
+    string
+], OwnershipTransferRequestedEventObject>;
+export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
@@ -211,13 +167,6 @@ export declare type OwnershipTransferredEvent = TypedEvent<[
     string
 ], OwnershipTransferredEventObject>;
 export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
-export interface StargateRouterSetEventObject {
-    router: string;
-}
-export declare type StargateRouterSetEvent = TypedEvent<[
-    string
-], StargateRouterSetEventObject>;
-export declare type StargateRouterSetEventFilter = TypedEventFilter<StargateRouterSetEvent>;
 export interface Executor extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -233,190 +182,116 @@ export interface Executor extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<[string]>;
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        gateway(overrides?: CallOverrides): Promise<[string]>;
         owner(overrides?: CallOverrides): Promise<[string]>;
-        renounceOwnership(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+        setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setAxelarGateway(_gateway: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setERC20Proxy(_erc20Proxy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndExecute(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setStargateRouter(_router: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, arg4: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        sgRouter(overrides?: CallOverrides): Promise<[string]>;
-        swapAndCompleteBridgeTokens(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        swapAndExecute(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, amount: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        transferOwnership(newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
+    cancelOwnershipTransfer(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    confirmOwnershipTransfer(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     erc20Proxy(overrides?: CallOverrides): Promise<string>;
-    execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    gateway(overrides?: CallOverrides): Promise<string>;
     owner(overrides?: CallOverrides): Promise<string>;
-    renounceOwnership(overrides?: Overrides & {
-        from?: string | Promise<string>;
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
+    setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setAxelarGateway(_gateway: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setERC20Proxy(_erc20Proxy: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    swapAndExecute(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setStargateRouter(_router: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, arg4: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    sgRouter(overrides?: CallOverrides): Promise<string>;
-    swapAndCompleteBridgeTokens(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    swapAndExecute(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, amount: BigNumberish, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    transferOwnership(newOwner: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
+        cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         erc20Proxy(overrides?: CallOverrides): Promise<string>;
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: CallOverrides): Promise<void>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        gateway(overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
-        renounceOwnership(overrides?: CallOverrides): Promise<void>;
-        setAxelarGateway(_gateway: string, overrides?: CallOverrides): Promise<void>;
-        setERC20Proxy(_erc20Proxy: string, overrides?: CallOverrides): Promise<void>;
-        setStargateRouter(_router: string, overrides?: CallOverrides): Promise<void>;
-        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, arg4: BigNumberish, _payload: BytesLike, overrides?: CallOverrides): Promise<void>;
-        sgRouter(overrides?: CallOverrides): Promise<string>;
-        swapAndCompleteBridgeTokens(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: CallOverrides): Promise<void>;
-        swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: CallOverrides): Promise<void>;
-        swapAndExecute(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
+        pendingOwner(overrides?: CallOverrides): Promise<string>;
+        setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        swapAndExecute(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "AxelarExecutionComplete(address,bytes4)"(callTo?: string | null, selector?: null): AxelarExecutionCompleteEventFilter;
-        AxelarExecutionComplete(callTo?: string | null, selector?: null): AxelarExecutionCompleteEventFilter;
-        "AxelarGatewaySet(address)"(gateway?: string | null): AxelarGatewaySetEventFilter;
-        AxelarGatewaySet(gateway?: string | null): AxelarGatewaySetEventFilter;
-        "ERC20ProxySet(address)"(proxy?: string | null): ERC20ProxySetEventFilter;
-        ERC20ProxySet(proxy?: string | null): ERC20ProxySetEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
-        "StargateRouterSet(address)"(router?: string | null): StargateRouterSetEventFilter;
-        StargateRouterSet(router?: string | null): StargateRouterSetEventFilter;
+        "ERC20ProxySet(address)"(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
+        ERC20ProxySet(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+        "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         erc20Proxy(overrides?: CallOverrides): Promise<BigNumber>;
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        gateway(overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
-        renounceOwnership(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+        setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setAxelarGateway(_gateway: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setERC20Proxy(_erc20Proxy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndExecute(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setStargateRouter(_router: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, arg4: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        sgRouter(overrides?: CallOverrides): Promise<BigNumber>;
-        swapAndCompleteBridgeTokens(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        swapAndExecute(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, amount: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        transferOwnership(newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        execute(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        executeWithToken(commandId: BytesLike, sourceChain: string, sourceAddress: string, payload: BytesLike, tokenSymbol: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        gateway(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        renounceOwnership(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setAxelarGateway(_gateway: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setERC20Proxy(_erc20Proxy: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        swapAndExecute(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], _transferredAssetId: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setStargateRouter(_router: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, arg3: string, arg4: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        sgRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        swapAndCompleteBridgeTokens(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        swapAndCompleteBridgeTokensViaStargate(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        swapAndExecute(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], transferredAssetId: string, receiver: string, amount: BigNumberish, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        transferOwnership(newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

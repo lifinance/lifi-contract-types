@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export interface IFactoryInterface extends utils.Interface {
     functions: {
         "getPool(uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "getPool"): FunctionFragment;
-    encodeFunctionData(functionFragment: "getPool", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getPool", values: [PromiseOrValue<BigNumberish>]): string;
     decodeFunctionResult(functionFragment: "getPool", data: BytesLike): Result;
     events: {};
 }
@@ -26,17 +26,17 @@ export interface IFactory extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+        getPool(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
     };
-    getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getPool(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        getPool(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getPool(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getPool(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

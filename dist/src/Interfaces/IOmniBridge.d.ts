@@ -1,15 +1,19 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface IOmniBridgeInterface extends utils.Interface {
     functions: {
         "relayTokens(address,address,uint256)": FunctionFragment;
         "wrapAndRelayTokens(address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "relayTokens" | "wrapAndRelayTokens"): FunctionFragment;
-    encodeFunctionData(functionFragment: "relayTokens", values: [string, string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "wrapAndRelayTokens", values: [string]): string;
+    encodeFunctionData(functionFragment: "relayTokens", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "wrapAndRelayTokens", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "relayTokens", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "wrapAndRelayTokens", data: BytesLike): Result;
     events: {};
@@ -29,38 +33,38 @@ export interface IOmniBridge extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        relayTokens(token: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        relayTokens(token: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        wrapAndRelayTokens(receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        wrapAndRelayTokens(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    relayTokens(token: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    relayTokens(token: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    wrapAndRelayTokens(receiver: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    wrapAndRelayTokens(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        relayTokens(token: string, receiver: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        wrapAndRelayTokens(receiver: string, overrides?: CallOverrides): Promise<void>;
+        relayTokens(token: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        wrapAndRelayTokens(receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        relayTokens(token: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        relayTokens(token: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        wrapAndRelayTokens(receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        wrapAndRelayTokens(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        relayTokens(token: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        relayTokens(token: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        wrapAndRelayTokens(receiver: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        wrapAndRelayTokens(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

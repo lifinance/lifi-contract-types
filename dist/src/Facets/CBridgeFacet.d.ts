@@ -1,19 +1,21 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export declare namespace ILiFi {
-    type LiFiDataStruct = {
-        transactionId: BytesLike;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        receiver: string;
-        destinationChainId: BigNumberish;
-        amount: BigNumberish;
+    type BridgeDataStruct = {
+        transactionId: PromiseOrValue<BytesLike>;
+        bridge: PromiseOrValue<string>;
+        integrator: PromiseOrValue<string>;
+        referrer: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receiver: PromiseOrValue<string>;
+        minAmount: PromiseOrValue<BigNumberish>;
+        destinationChainId: PromiseOrValue<BigNumberish>;
+        hasSourceSwaps: PromiseOrValue<boolean>;
+        hasDestinationCall: PromiseOrValue<boolean>;
     };
-    type LiFiDataStructOutput = [
+    type BridgeDataStructOutput = [
         string,
         string,
         string,
@@ -21,51 +23,41 @@ export declare namespace ILiFi {
         string,
         string,
         BigNumber,
-        BigNumber
+        BigNumber,
+        boolean,
+        boolean
     ] & {
         transactionId: string;
+        bridge: string;
         integrator: string;
         referrer: string;
         sendingAssetId: string;
-        receivingAssetId: string;
         receiver: string;
+        minAmount: BigNumber;
         destinationChainId: BigNumber;
-        amount: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
 }
 export declare namespace CBridgeFacet {
     type CBridgeDataStruct = {
-        maxSlippage: BigNumberish;
-        dstChainId: BigNumberish;
-        nonce: BigNumberish;
-        amount: BigNumberish;
-        receiver: string;
-        token: string;
+        maxSlippage: PromiseOrValue<BigNumberish>;
+        nonce: PromiseOrValue<BigNumberish>;
     };
-    type CBridgeDataStructOutput = [
-        number,
-        BigNumber,
-        BigNumber,
-        BigNumber,
-        string,
-        string
-    ] & {
+    type CBridgeDataStructOutput = [number, BigNumber] & {
         maxSlippage: number;
-        dstChainId: BigNumber;
         nonce: BigNumber;
-        amount: BigNumber;
-        receiver: string;
-        token: string;
     };
 }
 export declare namespace LibSwap {
     type SwapDataStruct = {
-        callTo: string;
-        approveTo: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        fromAmount: BigNumberish;
-        callData: BytesLike;
+        callTo: PromiseOrValue<string>;
+        approveTo: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receivingAssetId: PromiseOrValue<string>;
+        fromAmount: PromiseOrValue<BigNumberish>;
+        callData: PromiseOrValue<BytesLike>;
+        requiresDeposit: PromiseOrValue<boolean>;
     };
     type SwapDataStructOutput = [
         string,
@@ -73,7 +65,8 @@ export declare namespace LibSwap {
         string,
         string,
         BigNumber,
-        string
+        string,
+        boolean
     ] & {
         callTo: string;
         approveTo: string;
@@ -81,43 +74,30 @@ export declare namespace LibSwap {
         receivingAssetId: string;
         fromAmount: BigNumber;
         callData: string;
+        requiresDeposit: boolean;
     };
 }
 export interface CBridgeFacetInterface extends utils.Interface {
     functions: {
-        "initCbridge(address,uint64)": FunctionFragment;
-        "startBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(uint32,uint64,uint64,uint256,address,address))": FunctionFragment;
-        "swapAndStartBridgeTokensViaCBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(uint32,uint64,uint64,uint256,address,address))": FunctionFragment;
+        "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
+        "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "initCbridge" | "startBridgeTokensViaCBridge" | "swapAndStartBridgeTokensViaCBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "initCbridge", values: [string, BigNumberish]): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaCBridge", values: [ILiFi.LiFiDataStruct, CBridgeFacet.CBridgeDataStruct]): string;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaCBridge" | "swapAndStartBridgeTokensViaCBridge"): FunctionFragment;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaCBridge", values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaCBridge", values: [
-        ILiFi.LiFiDataStruct,
+        ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         CBridgeFacet.CBridgeDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "initCbridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaCBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaCBridge", data: BytesLike): Result;
     events: {
-        "CBridgeInitialized(address,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+        "LiFiTransferStarted(tuple)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "CBridgeInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface CBridgeInitializedEventObject {
-    cBridge: string;
-    chainId: BigNumber;
-}
-export declare type CBridgeInitializedEvent = TypedEvent<[
-    string,
-    BigNumber
-], CBridgeInitializedEventObject>;
-export declare type CBridgeInitializedEventFilter = TypedEventFilter<CBridgeInitializedEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -134,32 +114,10 @@ export declare type LiFiTransferCompletedEvent = TypedEvent<[
 ], LiFiTransferCompletedEventObject>;
 export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferStartedEventObject {
-    transactionId: string;
-    bridge: string;
-    bridgeData: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    amount: BigNumber;
-    destinationChainId: BigNumber;
-    hasSourceSwap: boolean;
-    hasDestinationCall: boolean;
+    bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export declare type LiFiTransferStartedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
+    ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface CBridgeFacet extends BaseContract {
@@ -177,58 +135,43 @@ export interface CBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        startBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    startBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    startBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
-    }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    swapAndStartBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-        startBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "CBridgeInitialized(address,uint256)"(cBridge?: null, chainId?: null): CBridgeInitializedEventFilter;
-        CBridgeInitialized(cBridge?: null, chainId?: null): CBridgeInitializedEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
-        LiFiTransferStarted(transactionId?: BytesLike | null, bridge?: null, bridgeData?: null, integrator?: null, referrer?: null, sendingAssetId?: null, receivingAssetId?: null, receiver?: null, amount?: null, destinationChainId?: null, hasSourceSwap?: null, hasDestinationCall?: null): LiFiTransferStartedEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        startBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        initCbridge(_cBridge: string, _chainId: BigNumberish, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        startBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        startBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
-        }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaCBridge(_lifiData: ILiFi.LiFiDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swapAndStartBridgeTokensViaCBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export declare namespace IDiamondCut {
     type FacetCutStruct = {
-        facetAddress: string;
-        action: BigNumberish;
-        functionSelectors: BytesLike[];
+        facetAddress: PromiseOrValue<string>;
+        action: PromiseOrValue<BigNumberish>;
+        functionSelectors: PromiseOrValue<BytesLike>[];
     };
     type FacetCutStructOutput = [string, number, string[]] & {
         facetAddress: string;
@@ -19,7 +19,11 @@ export interface DiamondCutFacetInterface extends utils.Interface {
         "diamondCut((address,uint8,bytes4[])[],address,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "diamondCut"): FunctionFragment;
-    encodeFunctionData(functionFragment: "diamondCut", values: [IDiamondCut.FacetCutStruct[], string, BytesLike]): string;
+    encodeFunctionData(functionFragment: "diamondCut", values: [
+        IDiamondCut.FacetCutStruct[],
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
     events: {
         "DiamondCut(tuple[],address,bytes)": EventFragment;
@@ -52,28 +56,28 @@ export interface DiamondCutFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: string, _calldata: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: PromiseOrValue<string>, _calldata: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: string, _calldata: BytesLike, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: PromiseOrValue<string>, _calldata: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: string, _calldata: BytesLike, overrides?: CallOverrides): Promise<void>;
+        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: PromiseOrValue<string>, _calldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "DiamondCut(tuple[],address,bytes)"(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
         DiamondCut(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
     };
     estimateGas: {
-        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: string, _calldata: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: PromiseOrValue<string>, _calldata: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: string, _calldata: BytesLike, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        diamondCut(_diamondCut: IDiamondCut.FacetCutStruct[], _init: PromiseOrValue<string>, _calldata: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

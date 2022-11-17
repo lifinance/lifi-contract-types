@@ -1,13 +1,13 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface IERC165Interface extends utils.Interface {
     functions: {
         "supportsInterface(bytes4)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "supportsInterface"): FunctionFragment;
-    encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
     decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
     events: {};
 }
@@ -26,17 +26,17 @@ export interface IERC165 extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
+        supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
     };
-    supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
-        supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
+        supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {};
     estimateGas: {
-        supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

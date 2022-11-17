@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../../common";
 export declare namespace IStargateRouter {
     type LzTxObjStruct = {
-        dstGasForCall: BigNumberish;
-        dstNativeAmount: BigNumberish;
-        dstNativeAddr: BytesLike;
+        dstGasForCall: PromiseOrValue<BigNumberish>;
+        dstNativeAmount: PromiseOrValue<BigNumberish>;
+        dstNativeAddr: PromiseOrValue<BytesLike>;
     };
     type LzTxObjStructOutput = [BigNumber, BigNumber, string] & {
         dstGasForCall: BigNumber;
@@ -23,22 +23,22 @@ export interface IStargateRouterInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "factory" | "quoteLayerZeroFee" | "swap"): FunctionFragment;
     encodeFunctionData(functionFragment: "factory", values?: undefined): string;
     encodeFunctionData(functionFragment: "quoteLayerZeroFee", values: [
-        BigNumberish,
-        BigNumberish,
-        BytesLike,
-        BytesLike,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>,
         IStargateRouter.LzTxObjStruct
     ]): string;
     encodeFunctionData(functionFragment: "swap", values: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        string,
-        BigNumberish,
-        BigNumberish,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
         IStargateRouter.LzTxObjStruct,
-        BytesLike,
-        BytesLike
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
     ]): string;
     decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "quoteLayerZeroFee", data: BytesLike): Result;
@@ -61,52 +61,52 @@ export interface IStargateRouter extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         factory(overrides?: CallOverrides): Promise<[string]>;
-        quoteLayerZeroFee(dstChainId: BigNumberish, functionType: BigNumberish, toAddress: BytesLike, transferAndCallPayload: BytesLike, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
+        quoteLayerZeroFee(dstChainId: PromiseOrValue<BigNumberish>, functionType: PromiseOrValue<BigNumberish>, toAddress: PromiseOrValue<BytesLike>, transferAndCallPayload: PromiseOrValue<BytesLike>, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             nativeFee: BigNumber;
             zroFee: BigNumber;
         }>;
-        swap(dstChainId: BigNumberish, srcPoolId: BigNumberish, dstPoolId: BigNumberish, refundAddress: string, amountLD: BigNumberish, minAmountLD: BigNumberish, lzTxParams: IStargateRouter.LzTxObjStruct, to: BytesLike, payload: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        swap(dstChainId: PromiseOrValue<BigNumberish>, srcPoolId: PromiseOrValue<BigNumberish>, dstPoolId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, minAmountLD: PromiseOrValue<BigNumberish>, lzTxParams: IStargateRouter.LzTxObjStruct, to: PromiseOrValue<BytesLike>, payload: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     factory(overrides?: CallOverrides): Promise<string>;
-    quoteLayerZeroFee(dstChainId: BigNumberish, functionType: BigNumberish, toAddress: BytesLike, transferAndCallPayload: BytesLike, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
+    quoteLayerZeroFee(dstChainId: PromiseOrValue<BigNumberish>, functionType: PromiseOrValue<BigNumberish>, toAddress: PromiseOrValue<BytesLike>, transferAndCallPayload: PromiseOrValue<BytesLike>, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
         BigNumber,
         BigNumber
     ] & {
         nativeFee: BigNumber;
         zroFee: BigNumber;
     }>;
-    swap(dstChainId: BigNumberish, srcPoolId: BigNumberish, dstPoolId: BigNumberish, refundAddress: string, amountLD: BigNumberish, minAmountLD: BigNumberish, lzTxParams: IStargateRouter.LzTxObjStruct, to: BytesLike, payload: BytesLike, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    swap(dstChainId: PromiseOrValue<BigNumberish>, srcPoolId: PromiseOrValue<BigNumberish>, dstPoolId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, minAmountLD: PromiseOrValue<BigNumberish>, lzTxParams: IStargateRouter.LzTxObjStruct, to: PromiseOrValue<BytesLike>, payload: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         factory(overrides?: CallOverrides): Promise<string>;
-        quoteLayerZeroFee(dstChainId: BigNumberish, functionType: BigNumberish, toAddress: BytesLike, transferAndCallPayload: BytesLike, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
+        quoteLayerZeroFee(dstChainId: PromiseOrValue<BigNumberish>, functionType: PromiseOrValue<BigNumberish>, toAddress: PromiseOrValue<BytesLike>, transferAndCallPayload: PromiseOrValue<BytesLike>, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
             nativeFee: BigNumber;
             zroFee: BigNumber;
         }>;
-        swap(dstChainId: BigNumberish, srcPoolId: BigNumberish, dstPoolId: BigNumberish, refundAddress: string, amountLD: BigNumberish, minAmountLD: BigNumberish, lzTxParams: IStargateRouter.LzTxObjStruct, to: BytesLike, payload: BytesLike, overrides?: CallOverrides): Promise<void>;
+        swap(dstChainId: PromiseOrValue<BigNumberish>, srcPoolId: PromiseOrValue<BigNumberish>, dstPoolId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, minAmountLD: PromiseOrValue<BigNumberish>, lzTxParams: IStargateRouter.LzTxObjStruct, to: PromiseOrValue<BytesLike>, payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         factory(overrides?: CallOverrides): Promise<BigNumber>;
-        quoteLayerZeroFee(dstChainId: BigNumberish, functionType: BigNumberish, toAddress: BytesLike, transferAndCallPayload: BytesLike, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        swap(dstChainId: BigNumberish, srcPoolId: BigNumberish, dstPoolId: BigNumberish, refundAddress: string, amountLD: BigNumberish, minAmountLD: BigNumberish, lzTxParams: IStargateRouter.LzTxObjStruct, to: BytesLike, payload: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        quoteLayerZeroFee(dstChainId: PromiseOrValue<BigNumberish>, functionType: PromiseOrValue<BigNumberish>, toAddress: PromiseOrValue<BytesLike>, transferAndCallPayload: PromiseOrValue<BytesLike>, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<BigNumber>;
+        swap(dstChainId: PromiseOrValue<BigNumberish>, srcPoolId: PromiseOrValue<BigNumberish>, dstPoolId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, minAmountLD: PromiseOrValue<BigNumberish>, lzTxParams: IStargateRouter.LzTxObjStruct, to: PromiseOrValue<BytesLike>, payload: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        quoteLayerZeroFee(dstChainId: BigNumberish, functionType: BigNumberish, toAddress: BytesLike, transferAndCallPayload: BytesLike, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        swap(dstChainId: BigNumberish, srcPoolId: BigNumberish, dstPoolId: BigNumberish, refundAddress: string, amountLD: BigNumberish, minAmountLD: BigNumberish, lzTxParams: IStargateRouter.LzTxObjStruct, to: BytesLike, payload: BytesLike, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        quoteLayerZeroFee(dstChainId: PromiseOrValue<BigNumberish>, functionType: PromiseOrValue<BigNumberish>, toAddress: PromiseOrValue<BytesLike>, transferAndCallPayload: PromiseOrValue<BytesLike>, lzTxParams: IStargateRouter.LzTxObjStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        swap(dstChainId: PromiseOrValue<BigNumberish>, srcPoolId: PromiseOrValue<BigNumberish>, dstPoolId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, minAmountLD: PromiseOrValue<BigNumberish>, lzTxParams: IStargateRouter.LzTxObjStruct, to: PromiseOrValue<BytesLike>, payload: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }

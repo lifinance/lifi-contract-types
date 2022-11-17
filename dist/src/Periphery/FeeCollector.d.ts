@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface FeeCollectorInterface extends utils.Interface {
     functions: {
         "batchWithdrawIntegratorFees(address[])": FunctionFragment;
         "batchWithdrawLifiFees(address[])": FunctionFragment;
-        "cancelOnwershipTransfer()": FunctionFragment;
+        "cancelOwnershipTransfer()": FunctionFragment;
         "collectNativeFees(uint256,uint256,address)": FunctionFragment;
         "collectTokenFees(address,uint256,uint256,address)": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
@@ -18,23 +18,32 @@ export interface FeeCollectorInterface extends utils.Interface {
         "withdrawIntegratorFees(address)": FunctionFragment;
         "withdrawLifiFees(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "batchWithdrawIntegratorFees" | "batchWithdrawLifiFees" | "cancelOnwershipTransfer" | "collectNativeFees" | "collectTokenFees" | "confirmOwnershipTransfer" | "getLifiTokenBalance" | "getTokenBalance" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawIntegratorFees" | "withdrawLifiFees"): FunctionFragment;
-    encodeFunctionData(functionFragment: "batchWithdrawIntegratorFees", values: [string[]]): string;
-    encodeFunctionData(functionFragment: "batchWithdrawLifiFees", values: [string[]]): string;
-    encodeFunctionData(functionFragment: "cancelOnwershipTransfer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "collectNativeFees", values: [BigNumberish, BigNumberish, string]): string;
-    encodeFunctionData(functionFragment: "collectTokenFees", values: [string, BigNumberish, BigNumberish, string]): string;
+    getFunction(nameOrSignatureOrTopic: "batchWithdrawIntegratorFees" | "batchWithdrawLifiFees" | "cancelOwnershipTransfer" | "collectNativeFees" | "collectTokenFees" | "confirmOwnershipTransfer" | "getLifiTokenBalance" | "getTokenBalance" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawIntegratorFees" | "withdrawLifiFees"): FunctionFragment;
+    encodeFunctionData(functionFragment: "batchWithdrawIntegratorFees", values: [PromiseOrValue<string>[]]): string;
+    encodeFunctionData(functionFragment: "batchWithdrawLifiFees", values: [PromiseOrValue<string>[]]): string;
+    encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "collectNativeFees", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "collectTokenFees", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getLifiTokenBalance", values: [string]): string;
-    encodeFunctionData(functionFragment: "getTokenBalance", values: [string, string]): string;
+    encodeFunctionData(functionFragment: "getLifiTokenBalance", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "getTokenBalance", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
-    encodeFunctionData(functionFragment: "withdrawIntegratorFees", values: [string]): string;
-    encodeFunctionData(functionFragment: "withdrawLifiFees", values: [string]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "withdrawIntegratorFees", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "withdrawLifiFees", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "batchWithdrawIntegratorFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "batchWithdrawLifiFees", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "cancelOnwershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectNativeFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectTokenFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
@@ -126,160 +135,160 @@ export interface FeeCollector extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawIntegratorFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawLifiFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        collectNativeFees(integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectTokenFees(tokenAddress: PromiseOrValue<string>, integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        getLifiTokenBalance(tokenAddress: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getTokenBalance(integratorAddress: string, tokenAddress: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getLifiTokenBalance(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getTokenBalance(integratorAddress: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-        transferOwnership(_newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        withdrawIntegratorFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawIntegratorFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        withdrawLifiFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawLifiFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    batchWithdrawIntegratorFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
-        from?: string | Promise<string>;
+    batchWithdrawLifiFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    cancelOnwershipTransfer(overrides?: Overrides & {
-        from?: string | Promise<string>;
+    cancelOwnershipTransfer(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
-        from?: string | Promise<string>;
+    collectNativeFees(integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    collectTokenFees(tokenAddress: PromiseOrValue<string>, integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     confirmOwnershipTransfer(overrides?: Overrides & {
-        from?: string | Promise<string>;
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    getLifiTokenBalance(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
-    getTokenBalance(integratorAddress: string, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getLifiTokenBalance(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    getTokenBalance(integratorAddress: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
-    transferOwnership(_newOwner: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    withdrawIntegratorFees(tokenAddress: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    withdrawIntegratorFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    withdrawLifiFees(tokenAddress: string, overrides?: Overrides & {
-        from?: string | Promise<string>;
+    withdrawLifiFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: CallOverrides): Promise<void>;
-        batchWithdrawLifiFees(tokenAddresses: string[], overrides?: CallOverrides): Promise<void>;
-        cancelOnwershipTransfer(overrides?: CallOverrides): Promise<void>;
-        collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: CallOverrides): Promise<void>;
-        collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: CallOverrides): Promise<void>;
+        batchWithdrawIntegratorFees(tokenAddresses: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
+        batchWithdrawLifiFees(tokenAddresses: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
+        cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        collectNativeFees(integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        collectTokenFees(tokenAddress: PromiseOrValue<string>, integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-        getLifiTokenBalance(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
-        getTokenBalance(integratorAddress: string, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getLifiTokenBalance(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTokenBalance(integratorAddress: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
-        transferOwnership(_newOwner: string, overrides?: CallOverrides): Promise<void>;
-        withdrawIntegratorFees(tokenAddress: string, overrides?: CallOverrides): Promise<void>;
-        withdrawLifiFees(tokenAddress: string, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        withdrawIntegratorFees(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        withdrawLifiFees(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "FeesCollected(address,address,uint256,uint256)"(_token?: string | null, _integrator?: string | null, _integratorFee?: null, _lifiFee?: null): FeesCollectedEventFilter;
-        FeesCollected(_token?: string | null, _integrator?: string | null, _integratorFee?: null, _lifiFee?: null): FeesCollectedEventFilter;
-        "FeesWithdrawn(address,address,uint256)"(_token?: string | null, _to?: string | null, _amount?: null): FeesWithdrawnEventFilter;
-        FeesWithdrawn(_token?: string | null, _to?: string | null, _amount?: null): FeesWithdrawnEventFilter;
-        "LiFiFeesWithdrawn(address,address,uint256)"(_token?: string | null, _to?: string | null, _amount?: null): LiFiFeesWithdrawnEventFilter;
-        LiFiFeesWithdrawn(_token?: string | null, _to?: string | null, _amount?: null): LiFiFeesWithdrawnEventFilter;
-        "OwnershipTransferRequested(address,address)"(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
-        OwnershipTransferRequested(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
-        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        "FeesCollected(address,address,uint256,uint256)"(_token?: PromiseOrValue<string> | null, _integrator?: PromiseOrValue<string> | null, _integratorFee?: null, _lifiFee?: null): FeesCollectedEventFilter;
+        FeesCollected(_token?: PromiseOrValue<string> | null, _integrator?: PromiseOrValue<string> | null, _integratorFee?: null, _lifiFee?: null): FeesCollectedEventFilter;
+        "FeesWithdrawn(address,address,uint256)"(_token?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null, _amount?: null): FeesWithdrawnEventFilter;
+        FeesWithdrawn(_token?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null, _amount?: null): FeesWithdrawnEventFilter;
+        "LiFiFeesWithdrawn(address,address,uint256)"(_token?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null, _amount?: null): LiFiFeesWithdrawnEventFilter;
+        LiFiFeesWithdrawn(_token?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null, _amount?: null): LiFiFeesWithdrawnEventFilter;
+        "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
-        batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawIntegratorFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawLifiFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        collectNativeFees(integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectTokenFees(tokenAddress: PromiseOrValue<string>, integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        getLifiTokenBalance(tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
-        getTokenBalance(integratorAddress: string, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getLifiTokenBalance(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        getTokenBalance(integratorAddress: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-        transferOwnership(_newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        withdrawIntegratorFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawIntegratorFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        withdrawLifiFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawLifiFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        batchWithdrawIntegratorFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawIntegratorFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        batchWithdrawLifiFees(tokenAddresses: string[], overrides?: Overrides & {
-            from?: string | Promise<string>;
+        batchWithdrawLifiFees(tokenAddresses: PromiseOrValue<string>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        cancelOnwershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        collectNativeFees(integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: PayableOverrides & {
-            from?: string | Promise<string>;
+        collectNativeFees(integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        collectTokenFees(tokenAddress: string, integratorFee: BigNumberish, lifiFee: BigNumberish, integratorAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        collectTokenFees(tokenAddress: PromiseOrValue<string>, integratorFee: PromiseOrValue<BigNumberish>, lifiFee: PromiseOrValue<BigNumberish>, integratorAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: string | Promise<string>;
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        getLifiTokenBalance(tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTokenBalance(integratorAddress: string, tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getLifiTokenBalance(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTokenBalance(integratorAddress: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        transferOwnership(_newOwner: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        withdrawIntegratorFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawIntegratorFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        withdrawLifiFees(tokenAddress: string, overrides?: Overrides & {
-            from?: string | Promise<string>;
+        withdrawLifiFees(tokenAddress: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
 }
