@@ -23,6 +23,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface IUpgradableInterface extends utils.Interface {
@@ -42,10 +43,17 @@ export interface IUpgradableInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setup", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "setup",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(
     functionFragment: "upgrade",
-    values: [string, BytesLike, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "contractId", data: BytesLike): Result;
@@ -112,15 +120,15 @@ export interface IUpgradable extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     setup(
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -129,15 +137,15 @@ export interface IUpgradable extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   setup(
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   upgrade(
-    newImplementation: string,
-    newImplementationCodeHash: BytesLike,
-    params: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newImplementation: PromiseOrValue<string>,
+    newImplementationCodeHash: PromiseOrValue<BytesLike>,
+    params: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -145,26 +153,33 @@ export interface IUpgradable extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    setup(data: BytesLike, overrides?: CallOverrides): Promise<void>;
+    setup(
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      params: BytesLike,
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      params: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "OwnershipTransferred(address)"(
-      newOwner?: string | null
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      newOwner?: string | null
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
-    "Upgraded(address)"(newImplementation?: string | null): UpgradedEventFilter;
-    Upgraded(newImplementation?: string | null): UpgradedEventFilter;
+    "Upgraded(address)"(
+      newImplementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
+    Upgraded(
+      newImplementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
   };
 
   estimateGas: {
@@ -173,15 +188,15 @@ export interface IUpgradable extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setup(
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -191,15 +206,15 @@ export interface IUpgradable extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setup(
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

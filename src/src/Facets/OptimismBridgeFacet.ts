@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -24,66 +25,67 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace ILiFi {
-  export type LiFiDataStruct = {
-    transactionId: BytesLike;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumberish;
-    amount: BigNumberish;
-  };
-
-  export type LiFiDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-  ] & {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumber;
-    amount: BigNumber;
-  };
-}
-
-export declare namespace OptimismBridgeFacet {
   export type BridgeDataStruct = {
-    assetId: string;
-    assetIdOnL2: string;
-    amount: BigNumberish;
-    receiver: string;
-    bridge: string;
-    l2Gas: BigNumberish;
-    isSynthetix: boolean;
+    transactionId: PromiseOrValue<BytesLike>;
+    bridge: PromiseOrValue<string>;
+    integrator: PromiseOrValue<string>;
+    referrer: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receiver: PromiseOrValue<string>;
+    minAmount: PromiseOrValue<BigNumberish>;
+    destinationChainId: PromiseOrValue<BigNumberish>;
+    hasSourceSwaps: PromiseOrValue<boolean>;
+    hasDestinationCall: PromiseOrValue<boolean>;
   };
 
   export type BridgeDataStructOutput = [
     string,
     string,
+    string,
+    string,
+    string,
+    string,
     BigNumber,
-    string,
-    string,
-    number,
+    BigNumber,
+    boolean,
     boolean
   ] & {
-    assetId: string;
-    assetIdOnL2: string;
-    amount: BigNumber;
-    receiver: string;
+    transactionId: string;
     bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumber;
+    destinationChainId: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
+  };
+}
+
+export declare namespace OptimismBridgeFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
+  export type OptimismDataStruct = {
+    assetIdOnL2: PromiseOrValue<string>;
+    l2Gas: PromiseOrValue<BigNumberish>;
+    isSynthetix: PromiseOrValue<boolean>;
+  };
+
+  export type OptimismDataStructOutput = [string, number, boolean] & {
+    assetIdOnL2: string;
     l2Gas: number;
     isSynthetix: boolean;
   };
@@ -91,12 +93,13 @@ export declare namespace OptimismBridgeFacet {
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: string;
-    approveTo: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    fromAmount: BigNumberish;
-    callData: BytesLike;
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
   };
 
   export type SwapDataStructOutput = [
@@ -105,7 +108,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -113,34 +117,55 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface OptimismBridgeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaOptimismBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,uint256,address,address,uint32,bool))": FunctionFragment;
-    "swapAndStartBridgeTokensViaOptimismBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,address,uint256,address,address,uint32,bool))": FunctionFragment;
+    "initOptimism((address,address)[],address)": FunctionFragment;
+    "registerOptimismBridge(address,address)": FunctionFragment;
+    "startBridgeTokensViaOptimismBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaOptimismBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "initOptimism"
+      | "registerOptimismBridge"
       | "startBridgeTokensViaOptimismBridge"
       | "swapAndStartBridgeTokensViaOptimismBridge"
   ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "initOptimism",
+    values: [OptimismBridgeFacet.ConfigStruct[], PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerOptimismBridge",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "startBridgeTokensViaOptimismBridge",
-    values: [ILiFi.LiFiDataStruct, OptimismBridgeFacet.BridgeDataStruct]
+    values: [ILiFi.BridgeDataStruct, OptimismBridgeFacet.OptimismDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaOptimismBridge",
     values: [
-      ILiFi.LiFiDataStruct,
+      ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      OptimismBridgeFacet.BridgeDataStruct
+      OptimismBridgeFacet.OptimismDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "initOptimism",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerOptimismBridge",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaOptimismBridge",
     data: BytesLike
@@ -152,11 +177,15 @@ export interface OptimismBridgeFacetInterface extends utils.Interface {
 
   events: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
+    "OptimismBridgeRegistered(address,address)": EventFragment;
+    "OptimismInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OptimismBridgeRegistered"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OptimismInitialized"): EventFragment;
 }
 
 export interface LiFiTransferCompletedEventObject {
@@ -175,39 +204,38 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
+
+export interface OptimismBridgeRegisteredEventObject {
+  assetId: string;
+  bridge: string;
+}
+export type OptimismBridgeRegisteredEvent = TypedEvent<
+  [string, string],
+  OptimismBridgeRegisteredEventObject
+>;
+
+export type OptimismBridgeRegisteredEventFilter =
+  TypedEventFilter<OptimismBridgeRegisteredEvent>;
+
+export interface OptimismInitializedEventObject {
+  configs: OptimismBridgeFacet.ConfigStructOutput[];
+}
+export type OptimismInitializedEvent = TypedEvent<
+  [OptimismBridgeFacet.ConfigStructOutput[]],
+  OptimismInitializedEventObject
+>;
+
+export type OptimismInitializedEventFilter =
+  TypedEventFilter<OptimismInitializedEvent>;
 
 export interface OptimismBridgeFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -236,121 +264,171 @@ export interface OptimismBridgeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    initOptimism(
+      configs: OptimismBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    registerOptimismBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     startBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
+  initOptimism(
+    configs: OptimismBridgeFacet.ConfigStruct[],
+    standardBridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  registerOptimismBridge(
+    assetId: PromiseOrValue<string>,
+    bridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   startBridgeTokensViaOptimismBridge(
-    _lifiData: ILiFi.LiFiDataStruct,
-    _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaOptimismBridge(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    initOptimism(
+      configs: OptimismBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    registerOptimismBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     startBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: null
     ): LiFiTransferStartedEventFilter;
-    LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
-    ): LiFiTransferStartedEventFilter;
+    LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+
+    "OptimismBridgeRegistered(address,address)"(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): OptimismBridgeRegisteredEventFilter;
+    OptimismBridgeRegistered(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): OptimismBridgeRegisteredEventFilter;
+
+    "OptimismInitialized(tuple[])"(
+      configs?: null
+    ): OptimismInitializedEventFilter;
+    OptimismInitialized(configs?: null): OptimismInitializedEventFilter;
   };
 
   estimateGas: {
+    initOptimism(
+      configs: OptimismBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    registerOptimismBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     startBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    initOptimism(
+      configs: OptimismBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    registerOptimismBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaOptimismBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: OptimismBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _optimismData: OptimismBridgeFacet.OptimismDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

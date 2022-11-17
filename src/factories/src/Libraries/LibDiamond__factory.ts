@@ -3,12 +3,68 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../../common";
 import type {
   LibDiamond,
   LibDiamondInterface,
 } from "../../../src/Libraries/LibDiamond";
 
 const _abi = [
+  {
+    inputs: [],
+    name: "CalldataEmptyButInitNotZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetAddressIsNotZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetAddressIsZero",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FacetContainsNoCode",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionAlreadyExists",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionDoesNotExist",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "FunctionIsImmutable",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "IncorrectFacetCutAction",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InitReverted",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InitZeroButCalldataNotEmpty",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoSelectorsInFace",
+    type: "error",
+  },
   {
     anonymous: false,
     inputs: [
@@ -73,7 +129,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212206cfceced8f45674eea6f62c7108461e042a5982c776452bdd3462906cdc5d39e64736f6c634300080d0033";
+  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220ca667345260d270b1c0d3bbd81e2f4beee15836b12495a345327848e32fedcb264736f6c63430008110033";
 
 type LibDiamondConstructorParams =
   | [signer?: Signer]
@@ -93,12 +149,12 @@ export class LibDiamond__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<LibDiamond> {
     return super.deploy(overrides || {}) as Promise<LibDiamond>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

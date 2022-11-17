@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IFactoryInterface extends utils.Interface {
@@ -29,7 +30,7 @@ export interface IFactoryInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getPool",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "getPool", data: BytesLike): Result;
@@ -64,24 +65,36 @@ export interface IFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+    getPool(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
-  getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  getPool(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getPool(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    getPool(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getPool(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getPool(
-      arg0: BigNumberish,
+      arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

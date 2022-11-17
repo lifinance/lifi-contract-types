@@ -48,6 +48,40 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "recipientChain",
+        type: "uint16",
+      },
+      {
+        internalType: "bytes32",
+        name: "recipient",
+        type: "bytes32",
+      },
+      {
+        internalType: "uint256",
+        name: "arbiterFee",
+        type: "uint256",
+      },
+      {
+        internalType: "uint32",
+        name: "nonce",
+        type: "uint32",
+      },
+    ],
+    name: "wrapAndTransferETH",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "sequence",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
 ];
 
 export class IWormholeRouter__factory {

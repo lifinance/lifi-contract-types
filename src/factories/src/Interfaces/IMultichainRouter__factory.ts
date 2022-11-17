@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
 import type {
-  IAnyswapRouter,
-  IAnyswapRouterInterface,
-} from "../../../src/Interfaces/IAnyswapRouter";
+  IMultichainRouter,
+  IMultichainRouterInterface,
+} from "../../../src/Interfaces/IMultichainRouter";
 
 const _abi = [
   {
@@ -104,15 +104,15 @@ const _abi = [
   },
 ];
 
-export class IAnyswapRouter__factory {
+export class IMultichainRouter__factory {
   static readonly abi = _abi;
-  static createInterface(): IAnyswapRouterInterface {
-    return new utils.Interface(_abi) as IAnyswapRouterInterface;
+  static createInterface(): IMultichainRouterInterface {
+    return new utils.Interface(_abi) as IMultichainRouterInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IAnyswapRouter {
-    return new Contract(address, _abi, signerOrProvider) as IAnyswapRouter;
+  ): IMultichainRouter {
+    return new Contract(address, _abi, signerOrProvider) as IMultichainRouter;
   }
 }

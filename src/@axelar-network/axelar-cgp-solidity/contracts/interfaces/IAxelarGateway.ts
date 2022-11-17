@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface IAxelarGatewayInterface extends utils.Interface {
@@ -82,11 +83,11 @@ export interface IAxelarGatewayInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "adminThreshold",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "admins",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "allTokensFrozen",
@@ -94,62 +95,116 @@ export interface IAxelarGatewayInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "callContract",
-    values: [string, string, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "callContractWithToken",
-    values: [string, string, BytesLike, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
-  encodeFunctionData(functionFragment: "execute", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "execute",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(
     functionFragment: "implementation",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "isCommandExecuted",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "isContractCallAndMintApproved",
-    values: [BytesLike, string, string, string, BytesLike, string, BigNumberish]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "isContractCallApproved",
-    values: [BytesLike, string, string, string, BytesLike]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "sendToken",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "setTokenDailyMintLimits",
-    values: [string[], BigNumberish[]]
+    values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
   ): string;
-  encodeFunctionData(functionFragment: "setup", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "setup",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
   encodeFunctionData(
     functionFragment: "tokenAddresses",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "tokenDailyMintAmount",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "tokenDailyMintLimit",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "tokenFrozen", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "tokenFrozen",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "upgrade",
-    values: [string, BytesLike, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "validateContractCall",
-    values: [BytesLike, string, string, BytesLike]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "validateContractCallAndMint",
-    values: [BytesLike, string, string, BytesLike, string, BigNumberish]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "adminEpoch", data: BytesLike): Result;
@@ -415,406 +470,436 @@ export interface IAxelarGateway extends BaseContract {
     adminEpoch(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     adminThreshold(
-      epoch: BigNumberish,
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    admins(epoch: BigNumberish, overrides?: CallOverrides): Promise<[string[]]>;
+    admins(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[string[]]>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<[boolean]>;
 
     callContract(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     callContractWithToken(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     execute(
-      input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      input: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     implementation(overrides?: CallOverrides): Promise<[string]>;
 
     isCommandExecuted(
-      commandId: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     isContractCallAndMintApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     isContractCallApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     sendToken(
-      destinationChain: string,
-      destinationAddress: string,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      destinationAddress: PromiseOrValue<string>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setTokenDailyMintLimits(
-      symbols: string[],
-      limits: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      symbols: PromiseOrValue<string>[],
+      limits: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setup(
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     tokenAddresses(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     tokenDailyMintAmount(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     tokenDailyMintLimit(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    tokenFrozen(symbol: string, overrides?: CallOverrides): Promise<[boolean]>;
+    tokenFrozen(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      setupParams: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      setupParams: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     validateContractCall(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     validateContractCallAndMint(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   adminEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
   adminThreshold(
-    epoch: BigNumberish,
+    epoch: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  admins(epoch: BigNumberish, overrides?: CallOverrides): Promise<string[]>;
+  admins(
+    epoch: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<string[]>;
 
   allTokensFrozen(overrides?: CallOverrides): Promise<boolean>;
 
   callContract(
-    destinationChain: string,
-    contractAddress: string,
-    payload: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    destinationChain: PromiseOrValue<string>,
+    contractAddress: PromiseOrValue<string>,
+    payload: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callContractWithToken(
-    destinationChain: string,
-    contractAddress: string,
-    payload: BytesLike,
-    symbol: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    destinationChain: PromiseOrValue<string>,
+    contractAddress: PromiseOrValue<string>,
+    payload: PromiseOrValue<BytesLike>,
+    symbol: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   execute(
-    input: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    input: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   implementation(overrides?: CallOverrides): Promise<string>;
 
   isCommandExecuted(
-    commandId: BytesLike,
+    commandId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   isContractCallAndMintApproved(
-    commandId: BytesLike,
-    sourceChain: string,
-    sourceAddress: string,
-    contractAddress: string,
-    payloadHash: BytesLike,
-    symbol: string,
-    amount: BigNumberish,
+    commandId: PromiseOrValue<BytesLike>,
+    sourceChain: PromiseOrValue<string>,
+    sourceAddress: PromiseOrValue<string>,
+    contractAddress: PromiseOrValue<string>,
+    payloadHash: PromiseOrValue<BytesLike>,
+    symbol: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   isContractCallApproved(
-    commandId: BytesLike,
-    sourceChain: string,
-    sourceAddress: string,
-    contractAddress: string,
-    payloadHash: BytesLike,
+    commandId: PromiseOrValue<BytesLike>,
+    sourceChain: PromiseOrValue<string>,
+    sourceAddress: PromiseOrValue<string>,
+    contractAddress: PromiseOrValue<string>,
+    payloadHash: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   sendToken(
-    destinationChain: string,
-    destinationAddress: string,
-    symbol: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    destinationChain: PromiseOrValue<string>,
+    destinationAddress: PromiseOrValue<string>,
+    symbol: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setTokenDailyMintLimits(
-    symbols: string[],
-    limits: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    symbols: PromiseOrValue<string>[],
+    limits: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setup(
-    params: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    params: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  tokenAddresses(symbol: string, overrides?: CallOverrides): Promise<string>;
+  tokenAddresses(
+    symbol: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   tokenDailyMintAmount(
-    symbol: string,
+    symbol: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   tokenDailyMintLimit(
-    symbol: string,
+    symbol: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  tokenFrozen(symbol: string, overrides?: CallOverrides): Promise<boolean>;
+  tokenFrozen(
+    symbol: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   upgrade(
-    newImplementation: string,
-    newImplementationCodeHash: BytesLike,
-    setupParams: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    newImplementation: PromiseOrValue<string>,
+    newImplementationCodeHash: PromiseOrValue<BytesLike>,
+    setupParams: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   validateContractCall(
-    commandId: BytesLike,
-    sourceChain: string,
-    sourceAddress: string,
-    payloadHash: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    commandId: PromiseOrValue<BytesLike>,
+    sourceChain: PromiseOrValue<string>,
+    sourceAddress: PromiseOrValue<string>,
+    payloadHash: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   validateContractCallAndMint(
-    commandId: BytesLike,
-    sourceChain: string,
-    sourceAddress: string,
-    payloadHash: BytesLike,
-    symbol: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    commandId: PromiseOrValue<BytesLike>,
+    sourceChain: PromiseOrValue<string>,
+    sourceAddress: PromiseOrValue<string>,
+    payloadHash: PromiseOrValue<BytesLike>,
+    symbol: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     adminEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
     adminThreshold(
-      epoch: BigNumberish,
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    admins(epoch: BigNumberish, overrides?: CallOverrides): Promise<string[]>;
+    admins(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string[]>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<boolean>;
 
     callContract(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     callContractWithToken(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    execute(input: BytesLike, overrides?: CallOverrides): Promise<void>;
+    execute(
+      input: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     implementation(overrides?: CallOverrides): Promise<string>;
 
     isCommandExecuted(
-      commandId: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     isContractCallAndMintApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     isContractCallApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     sendToken(
-      destinationChain: string,
-      destinationAddress: string,
-      symbol: string,
-      amount: BigNumberish,
+      destinationChain: PromiseOrValue<string>,
+      destinationAddress: PromiseOrValue<string>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setTokenDailyMintLimits(
-      symbols: string[],
-      limits: BigNumberish[],
+      symbols: PromiseOrValue<string>[],
+      limits: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setup(params: BytesLike, overrides?: CallOverrides): Promise<void>;
+    setup(
+      params: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
-    tokenAddresses(symbol: string, overrides?: CallOverrides): Promise<string>;
+    tokenAddresses(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     tokenDailyMintAmount(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     tokenDailyMintLimit(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    tokenFrozen(symbol: string, overrides?: CallOverrides): Promise<boolean>;
+    tokenFrozen(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      setupParams: BytesLike,
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      setupParams: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     validateContractCall(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     validateContractCallAndMint(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
 
   filters: {
     "ContractCall(address,string,string,bytes32,bytes)"(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationContractAddress?: null,
-      payloadHash?: BytesLike | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       payload?: null
     ): ContractCallEventFilter;
     ContractCall(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationContractAddress?: null,
-      payloadHash?: BytesLike | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       payload?: null
     ): ContractCallEventFilter;
 
     "ContractCallApproved(bytes32,string,string,address,bytes32,bytes32,uint256)"(
-      commandId?: BytesLike | null,
+      commandId?: PromiseOrValue<BytesLike> | null,
       sourceChain?: null,
       sourceAddress?: null,
-      contractAddress?: string | null,
-      payloadHash?: BytesLike | null,
+      contractAddress?: PromiseOrValue<string> | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       sourceTxHash?: null,
       sourceEventIndex?: null
     ): ContractCallApprovedEventFilter;
     ContractCallApproved(
-      commandId?: BytesLike | null,
+      commandId?: PromiseOrValue<BytesLike> | null,
       sourceChain?: null,
       sourceAddress?: null,
-      contractAddress?: string | null,
-      payloadHash?: BytesLike | null,
+      contractAddress?: PromiseOrValue<string> | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       sourceTxHash?: null,
       sourceEventIndex?: null
     ): ContractCallApprovedEventFilter;
 
     "ContractCallApprovedWithMint(bytes32,string,string,address,bytes32,string,uint256,bytes32,uint256)"(
-      commandId?: BytesLike | null,
+      commandId?: PromiseOrValue<BytesLike> | null,
       sourceChain?: null,
       sourceAddress?: null,
-      contractAddress?: string | null,
-      payloadHash?: BytesLike | null,
+      contractAddress?: PromiseOrValue<string> | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       symbol?: null,
       amount?: null,
       sourceTxHash?: null,
       sourceEventIndex?: null
     ): ContractCallApprovedWithMintEventFilter;
     ContractCallApprovedWithMint(
-      commandId?: BytesLike | null,
+      commandId?: PromiseOrValue<BytesLike> | null,
       sourceChain?: null,
       sourceAddress?: null,
-      contractAddress?: string | null,
-      payloadHash?: BytesLike | null,
+      contractAddress?: PromiseOrValue<string> | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       symbol?: null,
       amount?: null,
       sourceTxHash?: null,
@@ -822,26 +907,28 @@ export interface IAxelarGateway extends BaseContract {
     ): ContractCallApprovedWithMintEventFilter;
 
     "ContractCallWithToken(address,string,string,bytes32,bytes,string,uint256)"(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationContractAddress?: null,
-      payloadHash?: BytesLike | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       payload?: null,
       symbol?: null,
       amount?: null
     ): ContractCallWithTokenEventFilter;
     ContractCallWithToken(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationContractAddress?: null,
-      payloadHash?: BytesLike | null,
+      payloadHash?: PromiseOrValue<BytesLike> | null,
       payload?: null,
       symbol?: null,
       amount?: null
     ): ContractCallWithTokenEventFilter;
 
-    "Executed(bytes32)"(commandId?: BytesLike | null): ExecutedEventFilter;
-    Executed(commandId?: BytesLike | null): ExecutedEventFilter;
+    "Executed(bytes32)"(
+      commandId?: PromiseOrValue<BytesLike> | null
+    ): ExecutedEventFilter;
+    Executed(commandId?: PromiseOrValue<BytesLike> | null): ExecutedEventFilter;
 
     "OperatorshipTransferred(bytes)"(
       newOperatorsData?: null
@@ -869,143 +956,153 @@ export interface IAxelarGateway extends BaseContract {
     ): TokenDeployedEventFilter;
 
     "TokenSent(address,string,string,string,uint256)"(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationAddress?: null,
       symbol?: null,
       amount?: null
     ): TokenSentEventFilter;
     TokenSent(
-      sender?: string | null,
+      sender?: PromiseOrValue<string> | null,
       destinationChain?: null,
       destinationAddress?: null,
       symbol?: null,
       amount?: null
     ): TokenSentEventFilter;
 
-    "Upgraded(address)"(implementation?: string | null): UpgradedEventFilter;
-    Upgraded(implementation?: string | null): UpgradedEventFilter;
+    "Upgraded(address)"(
+      implementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
+    Upgraded(
+      implementation?: PromiseOrValue<string> | null
+    ): UpgradedEventFilter;
   };
 
   estimateGas: {
     adminEpoch(overrides?: CallOverrides): Promise<BigNumber>;
 
     adminThreshold(
-      epoch: BigNumberish,
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    admins(epoch: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    admins(
+      epoch: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<BigNumber>;
 
     callContract(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     callContractWithToken(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     execute(
-      input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      input: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     implementation(overrides?: CallOverrides): Promise<BigNumber>;
 
     isCommandExecuted(
-      commandId: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isContractCallAndMintApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isContractCallApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sendToken(
-      destinationChain: string,
-      destinationAddress: string,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      destinationAddress: PromiseOrValue<string>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setTokenDailyMintLimits(
-      symbols: string[],
-      limits: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      symbols: PromiseOrValue<string>[],
+      limits: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setup(
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     tokenAddresses(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     tokenDailyMintAmount(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     tokenDailyMintLimit(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    tokenFrozen(symbol: string, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenFrozen(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      setupParams: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      setupParams: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     validateContractCall(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     validateContractCallAndMint(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -1013,127 +1110,127 @@ export interface IAxelarGateway extends BaseContract {
     adminEpoch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     adminThreshold(
-      epoch: BigNumberish,
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     admins(
-      epoch: BigNumberish,
+      epoch: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     callContract(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     callContractWithToken(
-      destinationChain: string,
-      contractAddress: string,
-      payload: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payload: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     execute(
-      input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      input: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     implementation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isCommandExecuted(
-      commandId: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isContractCallAndMintApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isContractCallApproved(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      contractAddress: string,
-      payloadHash: BytesLike,
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      contractAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     sendToken(
-      destinationChain: string,
-      destinationAddress: string,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      destinationChain: PromiseOrValue<string>,
+      destinationAddress: PromiseOrValue<string>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setTokenDailyMintLimits(
-      symbols: string[],
-      limits: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      symbols: PromiseOrValue<string>[],
+      limits: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setup(
-      params: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      params: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     tokenAddresses(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     tokenDailyMintAmount(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     tokenDailyMintLimit(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     tokenFrozen(
-      symbol: string,
+      symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     upgrade(
-      newImplementation: string,
-      newImplementationCodeHash: BytesLike,
-      setupParams: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      newImplementation: PromiseOrValue<string>,
+      newImplementationCodeHash: PromiseOrValue<BytesLike>,
+      setupParams: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     validateContractCall(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     validateContractCallAndMint(
-      commandId: BytesLike,
-      sourceChain: string,
-      sourceAddress: string,
-      payloadHash: BytesLike,
-      symbol: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      commandId: PromiseOrValue<BytesLike>,
+      sourceChain: PromiseOrValue<string>,
+      sourceAddress: PromiseOrValue<string>,
+      payloadHash: PromiseOrValue<BytesLike>,
+      symbol: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

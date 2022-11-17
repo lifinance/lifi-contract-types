@@ -15,13 +15,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace IDiamondCut {
   export type FacetCutStruct = {
-    facetAddress: string;
-    action: BigNumberish;
-    functionSelectors: BytesLike[];
+    facetAddress: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    functionSelectors: PromiseOrValue<BytesLike>[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {
@@ -110,12 +111,12 @@ export interface LibDiamond extends BaseContract {
     ): DiamondCutEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
   };
 

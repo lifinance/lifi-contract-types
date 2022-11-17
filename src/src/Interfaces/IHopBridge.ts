@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IHopBridgeInterface extends utils.Interface {
@@ -35,26 +36,26 @@ export interface IHopBridgeInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "sendToL2",
     values: [
-      BigNumberish,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      string,
-      BigNumberish
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndSend",
     values: [
-      BigNumberish,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
 
@@ -95,73 +96,73 @@ export interface IHopBridge extends BaseContract {
 
   functions: {
     sendToL2(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      relayer: string,
-      relayerFee: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      relayer: PromiseOrValue<string>,
+      relayerFee: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndSend(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      bonderFee: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      destinationAmountOutMin: BigNumberish,
-      destinationDeadline: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      destinationDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   sendToL2(
-    chainId: BigNumberish,
-    recipient: string,
-    amount: BigNumberish,
-    amountOutMin: BigNumberish,
-    deadline: BigNumberish,
-    relayer: string,
-    relayerFee: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    chainId: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    relayer: PromiseOrValue<string>,
+    relayerFee: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndSend(
-    chainId: BigNumberish,
-    recipient: string,
-    amount: BigNumberish,
-    bonderFee: BigNumberish,
-    amountOutMin: BigNumberish,
-    deadline: BigNumberish,
-    destinationAmountOutMin: BigNumberish,
-    destinationDeadline: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    chainId: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    bonderFee: PromiseOrValue<BigNumberish>,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+    destinationDeadline: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     sendToL2(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      relayer: string,
-      relayerFee: BigNumberish,
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      relayer: PromiseOrValue<string>,
+      relayerFee: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndSend(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      bonderFee: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      destinationAmountOutMin: BigNumberish,
-      destinationDeadline: BigNumberish,
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      destinationDeadline: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -170,51 +171,51 @@ export interface IHopBridge extends BaseContract {
 
   estimateGas: {
     sendToL2(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      relayer: string,
-      relayerFee: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      relayer: PromiseOrValue<string>,
+      relayerFee: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndSend(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      bonderFee: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      destinationAmountOutMin: BigNumberish,
-      destinationDeadline: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      destinationDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     sendToL2(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      relayer: string,
-      relayerFee: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      relayer: PromiseOrValue<string>,
+      relayerFee: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndSend(
-      chainId: BigNumberish,
-      recipient: string,
-      amount: BigNumberish,
-      bonderFee: BigNumberish,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      destinationAmountOutMin: BigNumberish,
-      destinationDeadline: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      chainId: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      destinationDeadline: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

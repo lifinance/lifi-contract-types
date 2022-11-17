@@ -4,11 +4,8 @@
 import type {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
-  ContractTransaction,
-  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -20,31 +17,32 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
-export interface HomeInterface extends utils.Interface {
+export interface IFusePoolDirectoryInterface extends utils.Interface {
   functions: {
-    "dispatch(uint32,bytes32,bytes)": FunctionFragment;
+    "poolExists(address)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "dispatch"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "poolExists"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "dispatch",
-    values: [BigNumberish, BytesLike, BytesLike]
+    functionFragment: "poolExists",
+    values: [PromiseOrValue<string>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "dispatch", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "poolExists", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface Home extends BaseContract {
+export interface IFusePoolDirectory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: HomeInterface;
+  interface: IFusePoolDirectoryInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,47 +64,37 @@ export interface Home extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    dispatch(
-      _destinationDomain: BigNumberish,
-      _recipientAddress: BytesLike,
-      _messageBody: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    poolExists(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
   };
 
-  dispatch(
-    _destinationDomain: BigNumberish,
-    _recipientAddress: BytesLike,
-    _messageBody: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  poolExists(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   callStatic: {
-    dispatch(
-      _destinationDomain: BigNumberish,
-      _recipientAddress: BytesLike,
-      _messageBody: BytesLike,
+    poolExists(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
-    dispatch(
-      _destinationDomain: BigNumberish,
-      _recipientAddress: BytesLike,
-      _messageBody: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+    poolExists(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    dispatch(
-      _destinationDomain: BigNumberish,
-      _recipientAddress: BytesLike,
-      _messageBody: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+    poolExists(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

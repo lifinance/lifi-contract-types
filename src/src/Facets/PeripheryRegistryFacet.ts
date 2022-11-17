@@ -12,13 +12,18 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface PeripheryRegistryFacetInterface extends utils.Interface {
@@ -33,11 +38,11 @@ export interface PeripheryRegistryFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getPeripheryContract",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "registerPeripheryContract",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -49,8 +54,26 @@ export interface PeripheryRegistryFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "PeripheryContractRegistered(string,address)": EventFragment;
+  };
+
+  getEvent(
+    nameOrSignatureOrTopic: "PeripheryContractRegistered"
+  ): EventFragment;
 }
+
+export interface PeripheryContractRegisteredEventObject {
+  name: string;
+  contractAddress: string;
+}
+export type PeripheryContractRegisteredEvent = TypedEvent<
+  [string, string],
+  PeripheryContractRegisteredEventObject
+>;
+
+export type PeripheryContractRegisteredEventFilter =
+  TypedEventFilter<PeripheryContractRegisteredEvent>;
 
 export interface PeripheryRegistryFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -80,66 +103,75 @@ export interface PeripheryRegistryFacet extends BaseContract {
 
   functions: {
     getPeripheryContract(
-      _name: string,
+      _name: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     registerPeripheryContract(
-      _name: string,
-      _contractAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _name: PromiseOrValue<string>,
+      _contractAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   getPeripheryContract(
-    _name: string,
+    _name: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   registerPeripheryContract(
-    _name: string,
-    _contractAddress: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _name: PromiseOrValue<string>,
+    _contractAddress: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     getPeripheryContract(
-      _name: string,
+      _name: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     registerPeripheryContract(
-      _name: string,
-      _contractAddress: string,
+      _name: PromiseOrValue<string>,
+      _contractAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "PeripheryContractRegistered(string,address)"(
+      name?: null,
+      contractAddress?: null
+    ): PeripheryContractRegisteredEventFilter;
+    PeripheryContractRegistered(
+      name?: null,
+      contractAddress?: null
+    ): PeripheryContractRegisteredEventFilter;
+  };
 
   estimateGas: {
     getPeripheryContract(
-      _name: string,
+      _name: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     registerPeripheryContract(
-      _name: string,
-      _contractAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _name: PromiseOrValue<string>,
+      _contractAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getPeripheryContract(
-      _name: string,
+      _name: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     registerPeripheryContract(
-      _name: string,
-      _contractAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _name: PromiseOrValue<string>,
+      _contractAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

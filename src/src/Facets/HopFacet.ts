@@ -25,83 +25,35 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
-export declare namespace IHopBridge {
-  export type BridgeConfigStruct = {
-    token: string;
-    bridge: string;
-    ammWrapper: string;
-  };
-
-  export type BridgeConfigStructOutput = [string, string, string] & {
-    token: string;
-    bridge: string;
-    ammWrapper: string;
-  };
-}
-
-export declare namespace ILiFi {
-  export type LiFiDataStruct = {
-    transactionId: BytesLike;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumberish;
-    amount: BigNumberish;
-  };
-
-  export type LiFiDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-  ] & {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumber;
-    amount: BigNumber;
-  };
-}
-
 export declare namespace HopFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
   export type HopDataStruct = {
-    asset: string;
-    recipient: string;
-    chainId: BigNumberish;
-    amount: BigNumberish;
-    bonderFee: BigNumberish;
-    amountOutMin: BigNumberish;
-    deadline: BigNumberish;
-    destinationAmountOutMin: BigNumberish;
-    destinationDeadline: BigNumberish;
+    bonderFee: PromiseOrValue<BigNumberish>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    destinationAmountOutMin: PromiseOrValue<BigNumberish>;
+    destinationDeadline: PromiseOrValue<BigNumberish>;
   };
 
   export type HopDataStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
     BigNumber
   ] & {
-    asset: string;
-    recipient: string;
-    chainId: BigNumber;
-    amount: BigNumber;
     bonderFee: BigNumber;
     amountOutMin: BigNumber;
     deadline: BigNumber;
@@ -110,14 +62,54 @@ export declare namespace HopFacet {
   };
 }
 
+export declare namespace ILiFi {
+  export type BridgeDataStruct = {
+    transactionId: PromiseOrValue<BytesLike>;
+    bridge: PromiseOrValue<string>;
+    integrator: PromiseOrValue<string>;
+    referrer: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receiver: PromiseOrValue<string>;
+    minAmount: PromiseOrValue<BigNumberish>;
+    destinationChainId: PromiseOrValue<BigNumberish>;
+    hasSourceSwaps: PromiseOrValue<boolean>;
+    hasDestinationCall: PromiseOrValue<boolean>;
+  };
+
+  export type BridgeDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    boolean,
+    boolean
+  ] & {
+    transactionId: string;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumber;
+    destinationChainId: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
+  };
+}
+
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: string;
-    approveTo: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    fromAmount: BigNumberish;
-    callData: BytesLike;
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
   };
 
   export type SwapDataStructOutput = [
@@ -126,7 +118,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -134,41 +127,52 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface HopFacetInterface extends utils.Interface {
   functions: {
-    "initHop(string[],(address,address,address)[],uint256)": FunctionFragment;
-    "startBridgeTokensViaHop((bytes32,string,address,address,address,address,uint256,uint256),(string,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaHop((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(string,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "initHop((address,address)[])": FunctionFragment;
+    "registerBridge(address,address)": FunctionFragment;
+    "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "initHop"
+      | "registerBridge"
       | "startBridgeTokensViaHop"
       | "swapAndStartBridgeTokensViaHop"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "initHop",
-    values: [string[], IHopBridge.BridgeConfigStruct[], BigNumberish]
+    values: [HopFacet.ConfigStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerBridge",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHop",
-    values: [ILiFi.LiFiDataStruct, HopFacet.HopDataStruct]
+    values: [ILiFi.BridgeDataStruct, HopFacet.HopDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaHop",
     values: [
-      ILiFi.LiFiDataStruct,
+      ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
       HopFacet.HopDataStruct
     ]
   ): string;
 
   decodeFunctionResult(functionFragment: "initHop", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "registerBridge",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaHop",
     data: BytesLike
@@ -179,23 +183,35 @@ export interface HopFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "HopInitialized(string[],tuple[],uint256)": EventFragment;
+    "HopBridgeRegistered(address,address)": EventFragment;
+    "HopInitialized(tuple[])": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HopInitialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
 
+export interface HopBridgeRegisteredEventObject {
+  assetId: string;
+  bridge: string;
+}
+export type HopBridgeRegisteredEvent = TypedEvent<
+  [string, string],
+  HopBridgeRegisteredEventObject
+>;
+
+export type HopBridgeRegisteredEventFilter =
+  TypedEventFilter<HopBridgeRegisteredEvent>;
+
 export interface HopInitializedEventObject {
-  tokens: string[];
-  bridgeConfigs: IHopBridge.BridgeConfigStructOutput[];
-  chainId: BigNumber;
+  configs: HopFacet.ConfigStructOutput[];
 }
 export type HopInitializedEvent = TypedEvent<
-  [string[], IHopBridge.BridgeConfigStructOutput[], BigNumber],
+  [HopFacet.ConfigStructOutput[]],
   HopInitializedEventObject
 >;
 
@@ -217,34 +233,10 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
@@ -279,62 +271,74 @@ export interface HopFacet extends BaseContract {
 
   functions: {
     initHop(
-      _tokens: string[],
-      _bridgeConfigs: IHopBridge.BridgeConfigStruct[],
-      _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      configs: HopFacet.ConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    registerBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   initHop(
-    _tokens: string[],
-    _bridgeConfigs: IHopBridge.BridgeConfigStruct[],
-    _chainId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    configs: HopFacet.ConfigStruct[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  registerBridge(
+    assetId: PromiseOrValue<string>,
+    bridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHop(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _hopData: HopFacet.HopDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaHop(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
     _hopData: HopFacet.HopDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     initHop(
-      _tokens: string[],
-      _bridgeConfigs: IHopBridge.BridgeConfigStruct[],
-      _chainId: BigNumberish,
+      configs: HopFacet.ConfigStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    registerBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     startBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _hopData: HopFacet.HopDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _hopData: HopFacet.HopDataStruct,
       overrides?: CallOverrides
@@ -342,103 +346,88 @@ export interface HopFacet extends BaseContract {
   };
 
   filters: {
-    "HopInitialized(string[],tuple[],uint256)"(
-      tokens?: null,
-      bridgeConfigs?: null,
-      chainId?: null
-    ): HopInitializedEventFilter;
-    HopInitialized(
-      tokens?: null,
-      bridgeConfigs?: null,
-      chainId?: null
-    ): HopInitializedEventFilter;
+    "HopBridgeRegistered(address,address)"(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): HopBridgeRegisteredEventFilter;
+    HopBridgeRegistered(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): HopBridgeRegisteredEventFilter;
+
+    "HopInitialized(tuple[])"(configs?: null): HopInitializedEventFilter;
+    HopInitialized(configs?: null): HopInitializedEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: null
     ): LiFiTransferStartedEventFilter;
-    LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
-    ): LiFiTransferStartedEventFilter;
+    LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
   };
 
   estimateGas: {
     initHop(
-      _tokens: string[],
-      _bridgeConfigs: IHopBridge.BridgeConfigStruct[],
-      _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      configs: HopFacet.ConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    registerBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     initHop(
-      _tokens: string[],
-      _bridgeConfigs: IHopBridge.BridgeConfigStruct[],
-      _chainId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      configs: HopFacet.ConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    registerBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaHop(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _hopData: HopFacet.HopDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

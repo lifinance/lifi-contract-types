@@ -3,14 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../../common";
 import type { LibSwap, LibSwapInterface } from "../../../src/Libraries/LibSwap";
 
 const _abi = [
-  {
-    inputs: [],
-    name: "NoSwapFromZeroBalance",
-    type: "error",
-  },
   {
     anonymous: false,
     inputs: [
@@ -63,7 +59,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220dab25d36af8c475ce22dee5cf2b344131f9c0ec71d32ed92f4122478e1c81a0a64736f6c634300080d0033";
+  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b49aac97472103724f9f13ed1bd2d7b737020393835fce7862d5dd79bad1b02d64736f6c63430008110033";
 
 type LibSwapConstructorParams =
   | [signer?: Signer]
@@ -83,12 +79,12 @@ export class LibSwap__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<LibSwap> {
     return super.deploy(overrides || {}) as Promise<LibSwap>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

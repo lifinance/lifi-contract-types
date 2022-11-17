@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -25,21 +24,24 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace ILiFi {
-  export type LiFiDataStruct = {
-    transactionId: BytesLike;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumberish;
-    amount: BigNumberish;
+  export type BridgeDataStruct = {
+    transactionId: PromiseOrValue<BytesLike>;
+    bridge: PromiseOrValue<string>;
+    integrator: PromiseOrValue<string>;
+    referrer: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receiver: PromiseOrValue<string>;
+    minAmount: PromiseOrValue<BigNumberish>;
+    destinationChainId: PromiseOrValue<BigNumberish>;
+    hasSourceSwaps: PromiseOrValue<boolean>;
+    hasDestinationCall: PromiseOrValue<boolean>;
   };
 
-  export type LiFiDataStructOutput = [
+  export type BridgeDataStructOutput = [
     string,
     string,
     string,
@@ -47,48 +49,32 @@ export declare namespace ILiFi {
     string,
     string,
     BigNumber,
-    BigNumber
+    BigNumber,
+    boolean,
+    boolean
   ] & {
     transactionId: string;
+    bridge: string;
     integrator: string;
     referrer: string;
     sendingAssetId: string;
-    receivingAssetId: string;
     receiver: string;
+    minAmount: BigNumber;
     destinationChainId: BigNumber;
-    amount: BigNumber;
-  };
-}
-
-export declare namespace HyphenFacet {
-  export type HyphenDataStruct = {
-    token: string;
-    amount: BigNumberish;
-    recipient: string;
-    toChainId: BigNumberish;
-  };
-
-  export type HyphenDataStructOutput = [
-    string,
-    BigNumber,
-    string,
-    BigNumber
-  ] & {
-    token: string;
-    amount: BigNumber;
-    recipient: string;
-    toChainId: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 }
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: string;
-    approveTo: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    fromAmount: BigNumberish;
-    callData: BytesLike;
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
   };
 
   export type SwapDataStructOutput = [
@@ -97,7 +83,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -105,38 +92,31 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface HyphenFacetInterface extends utils.Interface {
   functions: {
-    "initHyphen(address)": FunctionFragment;
-    "startBridgeTokensViaHyphen((bytes32,string,address,address,address,address,uint256,uint256),(address,uint256,address,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaHyphen((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,uint256,address,uint256))": FunctionFragment;
+    "startBridgeTokensViaHyphen((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaHyphen((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "initHyphen"
       | "startBridgeTokensViaHyphen"
       | "swapAndStartBridgeTokensViaHyphen"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "initHyphen", values: [string]): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHyphen",
-    values: [ILiFi.LiFiDataStruct, HyphenFacet.HyphenDataStruct]
+    values: [ILiFi.BridgeDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaHyphen",
-    values: [
-      ILiFi.LiFiDataStruct,
-      LibSwap.SwapDataStruct[],
-      HyphenFacet.HyphenDataStruct
-    ]
+    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]
   ): string;
 
-  decodeFunctionResult(functionFragment: "initHyphen", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaHyphen",
     data: BytesLike
@@ -147,26 +127,13 @@ export interface HyphenFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "HyphenInitialized(address)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "HyphenInitialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface HyphenInitializedEventObject {
-  hyphenRouter: string;
-}
-export type HyphenInitializedEvent = TypedEvent<
-  [string],
-  HyphenInitializedEventObject
->;
-
-export type HyphenInitializedEventFilter =
-  TypedEventFilter<HyphenInitializedEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -184,34 +151,10 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
@@ -245,148 +188,87 @@ export interface HyphenFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    initHyphen(
-      _hyphenRouter: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     startBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  initHyphen(
-    _hyphenRouter: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   startBridgeTokensViaHyphen(
-    _lifiData: ILiFi.LiFiDataStruct,
-    _hyphenData: HyphenFacet.HyphenDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _bridgeData: ILiFi.BridgeDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaHyphen(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _hyphenData: HyphenFacet.HyphenDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    initHyphen(_hyphenRouter: string, overrides?: CallOverrides): Promise<void>;
-
     startBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _hyphenData: HyphenFacet.HyphenDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _hyphenData: HyphenFacet.HyphenDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "HyphenInitialized(address)"(
-      hyphenRouter?: null
-    ): HyphenInitializedEventFilter;
-    HyphenInitialized(hyphenRouter?: null): HyphenInitializedEventFilter;
-
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: null
     ): LiFiTransferStartedEventFilter;
-    LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
-    ): LiFiTransferStartedEventFilter;
+    LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
   };
 
   estimateGas: {
-    initHyphen(
-      _hyphenRouter: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     startBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    initHyphen(
-      _hyphenRouter: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     startBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaHyphen(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _hyphenData: HyphenFacet.HyphenDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

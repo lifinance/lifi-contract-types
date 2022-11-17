@@ -2,5 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ReentrancyGuard } from "./ReentrancyGuard";
-export type { Swapper } from "./Swapper";
 export type { SwapperV2 } from "./SwapperV2";
+export type { TransferrableOwnership } from "./TransferrableOwnership";

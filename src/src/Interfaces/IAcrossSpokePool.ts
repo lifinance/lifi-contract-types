@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IAcrossSpokePoolInterface extends utils.Interface {
@@ -32,12 +33,12 @@ export interface IAcrossSpokePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "deposit",
     values: [
-      string,
-      string,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
 
@@ -74,34 +75,34 @@ export interface IAcrossSpokePool extends BaseContract {
 
   functions: {
     deposit(
-      recipient: string,
-      originToken: string,
-      amount: BigNumberish,
-      destinationChainId: BigNumberish,
-      relayerFeePct: BigNumberish,
-      quoteTimestamp: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      recipient: PromiseOrValue<string>,
+      originToken: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      relayerFeePct: PromiseOrValue<BigNumberish>,
+      quoteTimestamp: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   deposit(
-    recipient: string,
-    originToken: string,
-    amount: BigNumberish,
-    destinationChainId: BigNumberish,
-    relayerFeePct: BigNumberish,
-    quoteTimestamp: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    recipient: PromiseOrValue<string>,
+    originToken: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    destinationChainId: PromiseOrValue<BigNumberish>,
+    relayerFeePct: PromiseOrValue<BigNumberish>,
+    quoteTimestamp: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     deposit(
-      recipient: string,
-      originToken: string,
-      amount: BigNumberish,
-      destinationChainId: BigNumberish,
-      relayerFeePct: BigNumberish,
-      quoteTimestamp: BigNumberish,
+      recipient: PromiseOrValue<string>,
+      originToken: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      relayerFeePct: PromiseOrValue<BigNumberish>,
+      quoteTimestamp: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -110,25 +111,25 @@ export interface IAcrossSpokePool extends BaseContract {
 
   estimateGas: {
     deposit(
-      recipient: string,
-      originToken: string,
-      amount: BigNumberish,
-      destinationChainId: BigNumberish,
-      relayerFeePct: BigNumberish,
-      quoteTimestamp: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      recipient: PromiseOrValue<string>,
+      originToken: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      relayerFeePct: PromiseOrValue<BigNumberish>,
+      quoteTimestamp: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     deposit(
-      recipient: string,
-      originToken: string,
-      amount: BigNumberish,
-      destinationChainId: BigNumberish,
-      relayerFeePct: BigNumberish,
-      quoteTimestamp: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      recipient: PromiseOrValue<string>,
+      originToken: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      relayerFeePct: PromiseOrValue<BigNumberish>,
+      quoteTimestamp: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

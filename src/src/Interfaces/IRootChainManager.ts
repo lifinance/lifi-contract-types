@@ -20,6 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IRootChainManagerInterface extends utils.Interface {
@@ -38,15 +39,19 @@ export interface IRootChainManagerInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "depositEtherFor",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "depositFor",
-    values: [string, string, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "rootToChildToken",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(
@@ -90,52 +95,55 @@ export interface IRootChainManager extends BaseContract {
 
   functions: {
     depositEtherFor(
-      user: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositFor(
-      user: string,
-      rootToken: string,
-      depositData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      rootToken: PromiseOrValue<string>,
+      depositData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     rootToChildToken(
-      rootToken: string,
+      rootToken: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string] & { childToken: string }>;
   };
 
   depositEtherFor(
-    user: string,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    user: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositFor(
-    user: string,
-    rootToken: string,
-    depositData: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    user: PromiseOrValue<string>,
+    rootToken: PromiseOrValue<string>,
+    depositData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   rootToChildToken(
-    rootToken: string,
+    rootToken: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   callStatic: {
-    depositEtherFor(user: string, overrides?: CallOverrides): Promise<void>;
+    depositEtherFor(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     depositFor(
-      user: string,
-      rootToken: string,
-      depositData: BytesLike,
+      user: PromiseOrValue<string>,
+      rootToken: PromiseOrValue<string>,
+      depositData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     rootToChildToken(
-      rootToken: string,
+      rootToken: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -144,38 +152,38 @@ export interface IRootChainManager extends BaseContract {
 
   estimateGas: {
     depositEtherFor(
-      user: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositFor(
-      user: string,
-      rootToken: string,
-      depositData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      rootToken: PromiseOrValue<string>,
+      depositData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     rootToChildToken(
-      rootToken: string,
+      rootToken: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositEtherFor(
-      user: string,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositFor(
-      user: string,
-      rootToken: string,
-      depositData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      user: PromiseOrValue<string>,
+      rootToken: PromiseOrValue<string>,
+      depositData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     rootToChildToken(
-      rootToken: string,
+      rootToken: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

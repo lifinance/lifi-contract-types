@@ -24,68 +24,56 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace ILiFi {
-  export type LiFiDataStruct = {
-    transactionId: BytesLike;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumberish;
-    amount: BigNumberish;
-  };
-
-  export type LiFiDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-  ] & {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    receiver: string;
-    destinationChainId: BigNumber;
-    amount: BigNumber;
-  };
-}
-
-export declare namespace ArbitrumBridgeFacet {
   export type BridgeDataStruct = {
-    assetId: string;
-    amount: BigNumberish;
-    receiver: string;
-    gatewayRouter: string;
-    tokenRouter: string;
-    maxSubmissionCost: BigNumberish;
-    maxGas: BigNumberish;
-    maxGasPrice: BigNumberish;
+    transactionId: PromiseOrValue<BytesLike>;
+    bridge: PromiseOrValue<string>;
+    integrator: PromiseOrValue<string>;
+    referrer: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receiver: PromiseOrValue<string>;
+    minAmount: PromiseOrValue<BigNumberish>;
+    destinationChainId: PromiseOrValue<BigNumberish>;
+    hasSourceSwaps: PromiseOrValue<boolean>;
+    hasDestinationCall: PromiseOrValue<boolean>;
   };
 
   export type BridgeDataStructOutput = [
     string,
-    BigNumber,
     string,
     string,
     string,
+    string,
+    string,
     BigNumber,
     BigNumber,
-    BigNumber
+    boolean,
+    boolean
   ] & {
-    assetId: string;
-    amount: BigNumber;
+    transactionId: string;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
     receiver: string;
-    gatewayRouter: string;
-    tokenRouter: string;
+    minAmount: BigNumber;
+    destinationChainId: BigNumber;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
+  };
+}
+
+export declare namespace ArbitrumBridgeFacet {
+  export type ArbitrumDataStruct = {
+    maxSubmissionCost: PromiseOrValue<BigNumberish>;
+    maxGas: PromiseOrValue<BigNumberish>;
+    maxGasPrice: PromiseOrValue<BigNumberish>;
+  };
+
+  export type ArbitrumDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
     maxSubmissionCost: BigNumber;
     maxGas: BigNumber;
     maxGasPrice: BigNumber;
@@ -94,12 +82,13 @@ export declare namespace ArbitrumBridgeFacet {
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: string;
-    approveTo: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    fromAmount: BigNumberish;
-    callData: BytesLike;
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
   };
 
   export type SwapDataStructOutput = [
@@ -108,7 +97,8 @@ export declare namespace LibSwap {
     string,
     string,
     BigNumber,
-    string
+    string,
+    boolean
   ] & {
     callTo: string;
     approveTo: string;
@@ -116,13 +106,14 @@ export declare namespace LibSwap {
     receivingAssetId: string;
     fromAmount: BigNumber;
     callData: string;
+    requiresDeposit: boolean;
   };
 }
 
 export interface ArbitrumBridgeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaArbitrumBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,uint256,address,address,address,uint256,uint256,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaArbitrumBridge((bytes32,string,address,address,address,address,uint256,uint256),(address,address,address,address,uint256,bytes)[],(address,uint256,address,address,address,uint256,uint256,uint256))": FunctionFragment;
+    "startBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256))": FunctionFragment;
   };
 
   getFunction(
@@ -133,14 +124,14 @@ export interface ArbitrumBridgeFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaArbitrumBridge",
-    values: [ILiFi.LiFiDataStruct, ArbitrumBridgeFacet.BridgeDataStruct]
+    values: [ILiFi.BridgeDataStruct, ArbitrumBridgeFacet.ArbitrumDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaArbitrumBridge",
     values: [
-      ILiFi.LiFiDataStruct,
+      ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      ArbitrumBridgeFacet.BridgeDataStruct
+      ArbitrumBridgeFacet.ArbitrumDataStruct
     ]
   ): string;
 
@@ -155,7 +146,7 @@ export interface ArbitrumBridgeFacetInterface extends utils.Interface {
 
   events: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)": EventFragment;
+    "LiFiTransferStarted(tuple)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -178,34 +169,10 @@ export type LiFiTransferCompletedEventFilter =
   TypedEventFilter<LiFiTransferCompletedEvent>;
 
 export interface LiFiTransferStartedEventObject {
-  transactionId: string;
-  bridge: string;
-  bridgeData: string;
-  integrator: string;
-  referrer: string;
-  sendingAssetId: string;
-  receivingAssetId: string;
-  receiver: string;
-  amount: BigNumber;
-  destinationChainId: BigNumber;
-  hasSourceSwap: boolean;
-  hasDestinationCall: boolean;
+  bridgeData: ILiFi.BridgeDataStructOutput;
 }
 export type LiFiTransferStartedEvent = TypedEvent<
-  [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    boolean,
-    boolean
-  ],
+  [ILiFi.BridgeDataStructOutput],
   LiFiTransferStartedEventObject
 >;
 
@@ -240,120 +207,96 @@ export interface ArbitrumBridgeFacet extends BaseContract {
 
   functions: {
     startBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   startBridgeTokensViaArbitrumBridge(
-    _lifiData: ILiFi.LiFiDataStruct,
-    _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaArbitrumBridge(
-    _lifiData: ILiFi.LiFiDataStruct,
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     startBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: BytesLike | null,
+      transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
 
-    "LiFiTransferStarted(bytes32,string,string,string,address,address,address,address,uint256,uint256,bool,bool)"(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
+    "LiFiTransferStarted(tuple)"(
+      bridgeData?: null
     ): LiFiTransferStartedEventFilter;
-    LiFiTransferStarted(
-      transactionId?: BytesLike | null,
-      bridge?: null,
-      bridgeData?: null,
-      integrator?: null,
-      referrer?: null,
-      sendingAssetId?: null,
-      receivingAssetId?: null,
-      receiver?: null,
-      amount?: null,
-      destinationChainId?: null,
-      hasSourceSwap?: null,
-      hasDestinationCall?: null
-    ): LiFiTransferStartedEventFilter;
+    LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
   };
 
   estimateGas: {
     startBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     startBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaArbitrumBridge(
-      _lifiData: ILiFi.LiFiDataStruct,
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _bridgeData: ArbitrumBridgeFacet.BridgeDataStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _arbitrumData: ArbitrumBridgeFacet.ArbitrumDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace IDiamondCut {
   export type FacetCutStruct = {
-    facetAddress: string;
-    action: BigNumberish;
-    functionSelectors: BytesLike[];
+    facetAddress: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    functionSelectors: PromiseOrValue<BytesLike>[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {
@@ -49,7 +50,11 @@ export interface DiamondCutFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "diamondCut",
-    values: [IDiamondCut.FacetCutStruct[], string, BytesLike]
+    values: [
+      IDiamondCut.FacetCutStruct[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
@@ -102,24 +107,24 @@ export interface DiamondCutFacet extends BaseContract {
   functions: {
     diamondCut(
       _diamondCut: IDiamondCut.FacetCutStruct[],
-      _init: string,
-      _calldata: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _init: PromiseOrValue<string>,
+      _calldata: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   diamondCut(
     _diamondCut: IDiamondCut.FacetCutStruct[],
-    _init: string,
-    _calldata: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _init: PromiseOrValue<string>,
+    _calldata: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     diamondCut(
       _diamondCut: IDiamondCut.FacetCutStruct[],
-      _init: string,
-      _calldata: BytesLike,
+      _init: PromiseOrValue<string>,
+      _calldata: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -140,18 +145,18 @@ export interface DiamondCutFacet extends BaseContract {
   estimateGas: {
     diamondCut(
       _diamondCut: IDiamondCut.FacetCutStruct[],
-      _init: string,
-      _calldata: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _init: PromiseOrValue<string>,
+      _calldata: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     diamondCut(
       _diamondCut: IDiamondCut.FacetCutStruct[],
-      _init: string,
-      _calldata: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _init: PromiseOrValue<string>,
+      _calldata: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

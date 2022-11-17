@@ -21,6 +21,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IL1StandardBridgeInterface extends utils.Interface {
@@ -36,15 +37,26 @@ export interface IL1StandardBridgeInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "depositERC20To",
-    values: [string, string, string, BigNumberish, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "depositETHTo",
-    values: [string, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "depositTo",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(
@@ -88,73 +100,73 @@ export interface IL1StandardBridge extends BaseContract {
 
   functions: {
     depositERC20To(
-      _l1Token: string,
-      _l2Token: string,
-      _to: string,
-      _amount: BigNumberish,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _l1Token: PromiseOrValue<string>,
+      _l2Token: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositETHTo(
-      _to: string,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     depositTo(
-      _to: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   depositERC20To(
-    _l1Token: string,
-    _l2Token: string,
-    _to: string,
-    _amount: BigNumberish,
-    _l2Gas: BigNumberish,
-    _data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _l1Token: PromiseOrValue<string>,
+    _l2Token: PromiseOrValue<string>,
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _l2Gas: PromiseOrValue<BigNumberish>,
+    _data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositETHTo(
-    _to: string,
-    _l2Gas: BigNumberish,
-    _data: BytesLike,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    _to: PromiseOrValue<string>,
+    _l2Gas: PromiseOrValue<BigNumberish>,
+    _data: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   depositTo(
-    _to: string,
-    _amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _to: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     depositERC20To(
-      _l1Token: string,
-      _l2Token: string,
-      _to: string,
-      _amount: BigNumberish,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
+      _l1Token: PromiseOrValue<string>,
+      _l2Token: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     depositETHTo(
-      _to: string,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
+      _to: PromiseOrValue<string>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     depositTo(
-      _to: string,
-      _amount: BigNumberish,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -163,51 +175,51 @@ export interface IL1StandardBridge extends BaseContract {
 
   estimateGas: {
     depositERC20To(
-      _l1Token: string,
-      _l2Token: string,
-      _to: string,
-      _amount: BigNumberish,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _l1Token: PromiseOrValue<string>,
+      _l2Token: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositETHTo(
-      _to: string,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     depositTo(
-      _to: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositERC20To(
-      _l1Token: string,
-      _l2Token: string,
-      _to: string,
-      _amount: BigNumberish,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _l1Token: PromiseOrValue<string>,
+      _l2Token: PromiseOrValue<string>,
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositETHTo(
-      _to: string,
-      _l2Gas: BigNumberish,
-      _data: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _l2Gas: PromiseOrValue<BigNumberish>,
+      _data: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     depositTo(
-      _to: string,
-      _amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _to: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

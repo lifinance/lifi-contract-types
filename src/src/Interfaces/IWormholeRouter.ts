@@ -9,6 +9,7 @@ import type {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -20,29 +21,46 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IWormholeRouterInterface extends utils.Interface {
   functions: {
     "transferTokens(address,uint256,uint16,bytes32,uint256,uint32)": FunctionFragment;
+    "wrapAndTransferETH(uint16,bytes32,uint256,uint32)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "transferTokens"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "transferTokens" | "wrapAndTransferETH"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "transferTokens",
     values: [
-      string,
-      BigNumberish,
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "wrapAndTransferETH",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
 
   decodeFunctionResult(
     functionFragment: "transferTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wrapAndTransferETH",
     data: BytesLike
   ): Result;
 
@@ -77,61 +95,101 @@ export interface IWormholeRouter extends BaseContract {
 
   functions: {
     transferTokens(
-      token: string,
-      amount: BigNumberish,
-      recipientChain: BigNumberish,
-      recipient: BytesLike,
-      arbiterFee: BigNumberish,
-      nonce: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    wrapAndTransferETH(
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   transferTokens(
-    token: string,
-    amount: BigNumberish,
-    recipientChain: BigNumberish,
-    recipient: BytesLike,
-    arbiterFee: BigNumberish,
-    nonce: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    recipientChain: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<BytesLike>,
+    arbiterFee: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  wrapAndTransferETH(
+    recipientChain: PromiseOrValue<BigNumberish>,
+    recipient: PromiseOrValue<BytesLike>,
+    arbiterFee: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     transferTokens(
-      token: string,
-      amount: BigNumberish,
-      recipientChain: BigNumberish,
-      recipient: BytesLike,
-      arbiterFee: BigNumberish,
-      nonce: BigNumberish,
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    wrapAndTransferETH(
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
     transferTokens(
-      token: string,
-      amount: BigNumberish,
-      recipientChain: BigNumberish,
-      recipient: BytesLike,
-      arbiterFee: BigNumberish,
-      nonce: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    wrapAndTransferETH(
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     transferTokens(
-      token: string,
-      amount: BigNumberish,
-      recipientChain: BigNumberish,
-      recipient: BytesLike,
-      arbiterFee: BigNumberish,
-      nonce: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    wrapAndTransferETH(
+      recipientChain: PromiseOrValue<BigNumberish>,
+      recipient: PromiseOrValue<BytesLike>,
+      arbiterFee: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

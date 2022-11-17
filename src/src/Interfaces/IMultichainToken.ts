@@ -19,9 +19,10 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
-export interface IAnyswapTokenInterface extends utils.Interface {
+export interface IMultichainTokenInterface extends utils.Interface {
   functions: {
     "underlying()": FunctionFragment;
   };
@@ -38,12 +39,12 @@ export interface IAnyswapTokenInterface extends utils.Interface {
   events: {};
 }
 
-export interface IAnyswapToken extends BaseContract {
+export interface IMultichainToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IAnyswapTokenInterface;
+  interface: IMultichainTokenInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,12 +67,12 @@ export interface IAnyswapToken extends BaseContract {
 
   functions: {
     underlying(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   underlying(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -82,13 +83,13 @@ export interface IAnyswapToken extends BaseContract {
 
   estimateGas: {
     underlying(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     underlying(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

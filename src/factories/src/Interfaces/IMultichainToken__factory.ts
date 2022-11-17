@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
 import type {
-  IAnyswapToken,
-  IAnyswapTokenInterface,
-} from "../../../src/Interfaces/IAnyswapToken";
+  IMultichainToken,
+  IMultichainTokenInterface,
+} from "../../../src/Interfaces/IMultichainToken";
 
 const _abi = [
   {
@@ -25,15 +25,15 @@ const _abi = [
   },
 ];
 
-export class IAnyswapToken__factory {
+export class IMultichainToken__factory {
   static readonly abi = _abi;
-  static createInterface(): IAnyswapTokenInterface {
-    return new utils.Interface(_abi) as IAnyswapTokenInterface;
+  static createInterface(): IMultichainTokenInterface {
+    return new utils.Interface(_abi) as IMultichainTokenInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IAnyswapToken {
-    return new Contract(address, _abi, signerOrProvider) as IAnyswapToken;
+  ): IMultichainToken {
+    return new Contract(address, _abi, signerOrProvider) as IMultichainToken;
   }
 }

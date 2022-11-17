@@ -12,13 +12,18 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface AccessManagerFacetInterface extends utils.Interface {
@@ -33,11 +38,15 @@ export interface AccessManagerFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "addressCanExecuteMethod",
-    values: [BytesLike, string]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setCanExecute",
-    values: [BytesLike, string, boolean]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -49,8 +58,37 @@ export interface AccessManagerFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "ExecutionAllowed(address,bytes4)": EventFragment;
+    "ExecutionDenied(address,bytes4)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "ExecutionAllowed"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ExecutionDenied"): EventFragment;
 }
+
+export interface ExecutionAllowedEventObject {
+  account: string;
+  method: string;
+}
+export type ExecutionAllowedEvent = TypedEvent<
+  [string, string],
+  ExecutionAllowedEventObject
+>;
+
+export type ExecutionAllowedEventFilter =
+  TypedEventFilter<ExecutionAllowedEvent>;
+
+export interface ExecutionDeniedEventObject {
+  account: string;
+  method: string;
+}
+export type ExecutionDeniedEvent = TypedEvent<
+  [string, string],
+  ExecutionDeniedEventObject
+>;
+
+export type ExecutionDeniedEventFilter = TypedEventFilter<ExecutionDeniedEvent>;
 
 export interface AccessManagerFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -80,76 +118,94 @@ export interface AccessManagerFacet extends BaseContract {
 
   functions: {
     addressCanExecuteMethod(
-      _selector: BytesLike,
-      _executor: string,
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     setCanExecute(
-      _selector: BytesLike,
-      _executor: string,
-      _canExecute: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
+      _canExecute: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   addressCanExecuteMethod(
-    _selector: BytesLike,
-    _executor: string,
+    _selector: PromiseOrValue<BytesLike>,
+    _executor: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   setCanExecute(
-    _selector: BytesLike,
-    _executor: string,
-    _canExecute: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    _selector: PromiseOrValue<BytesLike>,
+    _executor: PromiseOrValue<string>,
+    _canExecute: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     addressCanExecuteMethod(
-      _selector: BytesLike,
-      _executor: string,
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     setCanExecute(
-      _selector: BytesLike,
-      _executor: string,
-      _canExecute: boolean,
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
+      _canExecute: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "ExecutionAllowed(address,bytes4)"(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): ExecutionAllowedEventFilter;
+    ExecutionAllowed(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): ExecutionAllowedEventFilter;
+
+    "ExecutionDenied(address,bytes4)"(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): ExecutionDeniedEventFilter;
+    ExecutionDenied(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): ExecutionDeniedEventFilter;
+  };
 
   estimateGas: {
     addressCanExecuteMethod(
-      _selector: BytesLike,
-      _executor: string,
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setCanExecute(
-      _selector: BytesLike,
-      _executor: string,
-      _canExecute: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
+      _canExecute: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addressCanExecuteMethod(
-      _selector: BytesLike,
-      _executor: string,
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     setCanExecute(
-      _selector: BytesLike,
-      _executor: string,
-      _canExecute: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      _selector: PromiseOrValue<BytesLike>,
+      _executor: PromiseOrValue<string>,
+      _canExecute: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
