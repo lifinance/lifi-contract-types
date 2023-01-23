@@ -34,6 +34,7 @@ export type { GenericSwapFacet } from "./GenericSwapFacet";
 export type { GnosisBridgeFacet } from "./GnosisBridgeFacet";
 export type { GravityFacet } from "./GravityFacet";
 export type { HopFacet } from "./HopFacet";
+export type { HopFacetOptimized } from "./HopFacetOptimized";
 export type { HyphenFacet } from "./HyphenFacet";
 export type { IAcrossSpokePool } from "./IAcrossSpokePool";
 export type { IAxelarExecutable } from "./IAxelarExecutable";
@@ -126,6 +127,7 @@ export { GenericSwapFacet__factory } from "./factories/GenericSwapFacet__factory
 export { GnosisBridgeFacet__factory } from "./factories/GnosisBridgeFacet__factory";
 export { GravityFacet__factory } from "./factories/GravityFacet__factory";
 export { HopFacet__factory } from "./factories/HopFacet__factory";
+export { HopFacetOptimized__factory } from "./factories/HopFacetOptimized__factory";
 export { HyphenFacet__factory } from "./factories/HyphenFacet__factory";
 export { IAcrossSpokePool__factory } from "./factories/IAcrossSpokePool__factory";
 export { IAxelarExecutable__factory } from "./factories/IAxelarExecutable__factory";

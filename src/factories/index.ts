@@ -28,6 +28,7 @@ export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
 export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
 export { GravityFacet__factory } from "./GravityFacet__factory";
 export { HopFacet__factory } from "./HopFacet__factory";
+export { HopFacetOptimized__factory } from "./HopFacetOptimized__factory";
 export { HyphenFacet__factory } from "./HyphenFacet__factory";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
 export { IAxelarExecutable__factory } from "./IAxelarExecutable__factory";
