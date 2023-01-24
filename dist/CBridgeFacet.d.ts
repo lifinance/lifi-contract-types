@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
 export declare namespace ILiFi {
     type BridgeDataStruct = {
         transactionId: PromiseOrValue<BytesLike>;
@@ -43,25 +43,10 @@ export declare namespace CBridgeFacet {
     type CBridgeDataStruct = {
         maxSlippage: PromiseOrValue<BigNumberish>;
         nonce: PromiseOrValue<BigNumberish>;
-        callTo: PromiseOrValue<BytesLike>;
-        callData: PromiseOrValue<BytesLike>;
-        messageBusFee: PromiseOrValue<BigNumberish>;
-        bridgeType: PromiseOrValue<BigNumberish>;
     };
-    type CBridgeDataStructOutput = [
-        number,
-        BigNumber,
-        string,
-        string,
-        BigNumber,
-        number
-    ] & {
+    type CBridgeDataStructOutput = [number, BigNumber] & {
         maxSlippage: number;
         nonce: BigNumber;
-        callTo: string;
-        callData: string;
-        messageBusFee: BigNumber;
-        bridgeType: number;
     };
 }
 export declare namespace LibSwap {
@@ -94,8 +79,8 @@ export declare namespace LibSwap {
 }
 export interface CBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
-        "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
+        "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
+        "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaCBridge" | "swapAndStartBridgeTokensViaCBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaCBridge", values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]): string;

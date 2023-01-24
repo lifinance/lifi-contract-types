@@ -25,7 +25,7 @@ var _abi = [
                 type: "string",
             },
         ],
-        name: "ExceedMintLimit",
+        name: "ExceedDailyMintLimit",
         type: "error",
     },
     {
@@ -55,7 +55,7 @@ var _abi = [
     },
     {
         inputs: [],
-        name: "InvalidSetMintLimitsParams",
+        name: "InvalidSetDailyMintLimitsParams",
         type: "error",
     },
     {
@@ -366,12 +366,12 @@ var _abi = [
             },
             {
                 indexed: false,
-                internalType: "address",
-                name: "tokenAddresses",
-                type: "address",
+                internalType: "uint256",
+                name: "limit",
+                type: "uint256",
             },
         ],
-        name: "TokenDeployed",
+        name: "TokenDailyMintLimitUpdated",
         type: "event",
     },
     {
@@ -385,12 +385,12 @@ var _abi = [
             },
             {
                 indexed: false,
-                internalType: "uint256",
-                name: "limit",
-                type: "uint256",
+                internalType: "address",
+                name: "tokenAddresses",
+                type: "address",
             },
         ],
-        name: "TokenMintLimitUpdated",
+        name: "TokenDeployed",
         type: "event",
     },
     {
@@ -502,19 +502,6 @@ var _abi = [
                 internalType: "bool",
                 name: "",
                 type: "bool",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
-    },
-    {
-        inputs: [],
-        name: "authModule",
-        outputs: [
-            {
-                internalType: "address",
-                name: "",
-                type: "address",
             },
         ],
         stateMutability: "view",
@@ -750,7 +737,7 @@ var _abi = [
                 type: "uint256[]",
             },
         ],
-        name: "setTokenMintLimits",
+        name: "setTokenDailyMintLimits",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
@@ -788,13 +775,38 @@ var _abi = [
         type: "function",
     },
     {
-        inputs: [],
-        name: "tokenDeployer",
+        inputs: [
+            {
+                internalType: "string",
+                name: "symbol",
+                type: "string",
+            },
+        ],
+        name: "tokenDailyMintAmount",
         outputs: [
             {
-                internalType: "address",
+                internalType: "uint256",
                 name: "",
-                type: "address",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "string",
+                name: "symbol",
+                type: "string",
+            },
+        ],
+        name: "tokenDailyMintLimit",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
             },
         ],
         stateMutability: "view",
@@ -814,44 +826,6 @@ var _abi = [
                 internalType: "bool",
                 name: "",
                 type: "bool",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
-    },
-    {
-        inputs: [
-            {
-                internalType: "string",
-                name: "symbol",
-                type: "string",
-            },
-        ],
-        name: "tokenMintAmount",
-        outputs: [
-            {
-                internalType: "uint256",
-                name: "",
-                type: "uint256",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
-    },
-    {
-        inputs: [
-            {
-                internalType: "string",
-                name: "symbol",
-                type: "string",
-            },
-        ],
-        name: "tokenMintLimit",
-        outputs: [
-            {
-                internalType: "uint256",
-                name: "",
-                type: "uint256",
             },
         ],
         stateMutability: "view",

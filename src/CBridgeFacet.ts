@@ -25,7 +25,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "./common";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
@@ -70,26 +70,11 @@ export declare namespace CBridgeFacet {
   export type CBridgeDataStruct = {
     maxSlippage: PromiseOrValue<BigNumberish>;
     nonce: PromiseOrValue<BigNumberish>;
-    callTo: PromiseOrValue<BytesLike>;
-    callData: PromiseOrValue<BytesLike>;
-    messageBusFee: PromiseOrValue<BigNumberish>;
-    bridgeType: PromiseOrValue<BigNumberish>;
   };
 
-  export type CBridgeDataStructOutput = [
-    number,
-    BigNumber,
-    string,
-    string,
-    BigNumber,
-    number
-  ] & {
+  export type CBridgeDataStructOutput = [number, BigNumber] & {
     maxSlippage: number;
     nonce: BigNumber;
-    callTo: string;
-    callData: string;
-    messageBusFee: BigNumber;
-    bridgeType: number;
   };
 }
 
@@ -125,8 +110,8 @@ export declare namespace LibSwap {
 
 export interface CBridgeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
-    "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
+    "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
+    "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64))": FunctionFragment;
   };
 
   getFunction(

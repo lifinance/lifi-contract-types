@@ -59,7 +59,7 @@ const _abi = [
     stateMutability: "payable",
     type: "function",
   },
-] as const;
+];
 
 export class IConnextHandler__factory {
   static readonly abi = _abi;
