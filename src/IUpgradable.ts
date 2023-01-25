@@ -29,17 +29,27 @@ import type {
 export interface IUpgradableInterface extends utils.Interface {
   functions: {
     "contractId()": FunctionFragment;
+    "implementation()": FunctionFragment;
     "owner()": FunctionFragment;
     "setup(bytes)": FunctionFragment;
     "upgrade(address,bytes32,bytes)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "contractId" | "owner" | "setup" | "upgrade"
+    nameOrSignatureOrTopic:
+      | "contractId"
+      | "implementation"
+      | "owner"
+      | "setup"
+      | "upgrade"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "contractId",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "implementation",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -57,6 +67,10 @@ export interface IUpgradableInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "contractId", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "implementation",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setup", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "upgrade", data: BytesLike): Result;
@@ -117,6 +131,8 @@ export interface IUpgradable extends BaseContract {
   functions: {
     contractId(overrides?: CallOverrides): Promise<[string]>;
 
+    implementation(overrides?: CallOverrides): Promise<[string]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     setup(
@@ -134,6 +150,8 @@ export interface IUpgradable extends BaseContract {
 
   contractId(overrides?: CallOverrides): Promise<string>;
 
+  implementation(overrides?: CallOverrides): Promise<string>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   setup(
@@ -150,6 +168,8 @@ export interface IUpgradable extends BaseContract {
 
   callStatic: {
     contractId(overrides?: CallOverrides): Promise<string>;
+
+    implementation(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -185,6 +205,8 @@ export interface IUpgradable extends BaseContract {
   estimateGas: {
     contractId(overrides?: CallOverrides): Promise<BigNumber>;
 
+    implementation(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setup(
@@ -202,6 +224,8 @@ export interface IUpgradable extends BaseContract {
 
   populateTransaction: {
     contractId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    implementation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
