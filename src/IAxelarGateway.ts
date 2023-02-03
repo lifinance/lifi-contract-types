@@ -33,7 +33,6 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     "adminThreshold(uint256)": FunctionFragment;
     "admins(uint256)": FunctionFragment;
     "allTokensFrozen()": FunctionFragment;
-    "authModule()": FunctionFragment;
     "callContract(string,string,bytes)": FunctionFragment;
     "callContractWithToken(string,string,bytes,string,uint256)": FunctionFragment;
     "execute(bytes)": FunctionFragment;
@@ -42,13 +41,12 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     "isContractCallAndMintApproved(bytes32,string,string,address,bytes32,string,uint256)": FunctionFragment;
     "isContractCallApproved(bytes32,string,string,address,bytes32)": FunctionFragment;
     "sendToken(string,string,string,uint256)": FunctionFragment;
-    "setTokenMintLimits(string[],uint256[])": FunctionFragment;
+    "setTokenDailyMintLimits(string[],uint256[])": FunctionFragment;
     "setup(bytes)": FunctionFragment;
     "tokenAddresses(string)": FunctionFragment;
-    "tokenDeployer()": FunctionFragment;
+    "tokenDailyMintAmount(string)": FunctionFragment;
+    "tokenDailyMintLimit(string)": FunctionFragment;
     "tokenFrozen(string)": FunctionFragment;
-    "tokenMintAmount(string)": FunctionFragment;
-    "tokenMintLimit(string)": FunctionFragment;
     "upgrade(address,bytes32,bytes)": FunctionFragment;
     "validateContractCall(bytes32,string,string,bytes32)": FunctionFragment;
     "validateContractCallAndMint(bytes32,string,string,bytes32,string,uint256)": FunctionFragment;
@@ -60,7 +58,6 @@ export interface IAxelarGatewayInterface extends utils.Interface {
       | "adminThreshold"
       | "admins"
       | "allTokensFrozen"
-      | "authModule"
       | "callContract"
       | "callContractWithToken"
       | "execute"
@@ -69,13 +66,12 @@ export interface IAxelarGatewayInterface extends utils.Interface {
       | "isContractCallAndMintApproved"
       | "isContractCallApproved"
       | "sendToken"
-      | "setTokenMintLimits"
+      | "setTokenDailyMintLimits"
       | "setup"
       | "tokenAddresses"
-      | "tokenDeployer"
+      | "tokenDailyMintAmount"
+      | "tokenDailyMintLimit"
       | "tokenFrozen"
-      | "tokenMintAmount"
-      | "tokenMintLimit"
       | "upgrade"
       | "validateContractCall"
       | "validateContractCallAndMint"
@@ -95,10 +91,6 @@ export interface IAxelarGatewayInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "allTokensFrozen",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "authModule",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -163,7 +155,7 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTokenMintLimits",
+    functionFragment: "setTokenDailyMintLimits",
     values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
@@ -175,19 +167,15 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "tokenDeployer",
-    values?: undefined
+    functionFragment: "tokenDailyMintAmount",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenDailyMintLimit",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "tokenFrozen",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenMintAmount",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenMintLimit",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -229,7 +217,6 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     functionFragment: "allTokensFrozen",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "authModule", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "callContract",
     data: BytesLike
@@ -257,7 +244,7 @@ export interface IAxelarGatewayInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "sendToken", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setTokenMintLimits",
+    functionFragment: "setTokenDailyMintLimits",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setup", data: BytesLike): Result;
@@ -266,19 +253,15 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "tokenDeployer",
+    functionFragment: "tokenDailyMintAmount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenDailyMintLimit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "tokenFrozen",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenMintAmount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenMintLimit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "upgrade", data: BytesLike): Result;
@@ -298,8 +281,8 @@ export interface IAxelarGatewayInterface extends utils.Interface {
     "ContractCallWithToken(address,string,string,bytes32,bytes,string,uint256)": EventFragment;
     "Executed(bytes32)": EventFragment;
     "OperatorshipTransferred(bytes)": EventFragment;
+    "TokenDailyMintLimitUpdated(string,uint256)": EventFragment;
     "TokenDeployed(string,address)": EventFragment;
-    "TokenMintLimitUpdated(string,uint256)": EventFragment;
     "TokenSent(address,string,string,string,uint256)": EventFragment;
     "Upgraded(address)": EventFragment;
   };
@@ -312,8 +295,8 @@ export interface IAxelarGatewayInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ContractCallWithToken"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Executed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OperatorshipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokenDailyMintLimitUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokenDeployed"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TokenMintLimitUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokenSent"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
 }
@@ -413,6 +396,18 @@ export type OperatorshipTransferredEvent = TypedEvent<
 export type OperatorshipTransferredEventFilter =
   TypedEventFilter<OperatorshipTransferredEvent>;
 
+export interface TokenDailyMintLimitUpdatedEventObject {
+  symbol: string;
+  limit: BigNumber;
+}
+export type TokenDailyMintLimitUpdatedEvent = TypedEvent<
+  [string, BigNumber],
+  TokenDailyMintLimitUpdatedEventObject
+>;
+
+export type TokenDailyMintLimitUpdatedEventFilter =
+  TypedEventFilter<TokenDailyMintLimitUpdatedEvent>;
+
 export interface TokenDeployedEventObject {
   symbol: string;
   tokenAddresses: string;
@@ -423,18 +418,6 @@ export type TokenDeployedEvent = TypedEvent<
 >;
 
 export type TokenDeployedEventFilter = TypedEventFilter<TokenDeployedEvent>;
-
-export interface TokenMintLimitUpdatedEventObject {
-  symbol: string;
-  limit: BigNumber;
-}
-export type TokenMintLimitUpdatedEvent = TypedEvent<
-  [string, BigNumber],
-  TokenMintLimitUpdatedEventObject
->;
-
-export type TokenMintLimitUpdatedEventFilter =
-  TypedEventFilter<TokenMintLimitUpdatedEvent>;
 
 export interface TokenSentEventObject {
   sender: string;
@@ -498,8 +481,6 @@ export interface IAxelarGateway extends BaseContract {
 
     allTokensFrozen(overrides?: CallOverrides): Promise<[boolean]>;
 
-    authModule(overrides?: CallOverrides): Promise<[string]>;
-
     callContract(
       destinationChain: PromiseOrValue<string>,
       contractAddress: PromiseOrValue<string>,
@@ -556,7 +537,7 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setTokenMintLimits(
+    setTokenDailyMintLimits(
       symbols: PromiseOrValue<string>[],
       limits: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -572,22 +553,20 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    tokenDeployer(overrides?: CallOverrides): Promise<[string]>;
+    tokenDailyMintAmount(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    tokenDailyMintLimit(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     tokenFrozen(
       symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    tokenMintAmount(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    tokenMintLimit(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
 
     upgrade(
       newImplementation: PromiseOrValue<string>,
@@ -628,8 +607,6 @@ export interface IAxelarGateway extends BaseContract {
   ): Promise<string[]>;
 
   allTokensFrozen(overrides?: CallOverrides): Promise<boolean>;
-
-  authModule(overrides?: CallOverrides): Promise<string>;
 
   callContract(
     destinationChain: PromiseOrValue<string>,
@@ -687,7 +664,7 @@ export interface IAxelarGateway extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setTokenMintLimits(
+  setTokenDailyMintLimits(
     symbols: PromiseOrValue<string>[],
     limits: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -703,22 +680,20 @@ export interface IAxelarGateway extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  tokenDeployer(overrides?: CallOverrides): Promise<string>;
+  tokenDailyMintAmount(
+    symbol: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  tokenDailyMintLimit(
+    symbol: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   tokenFrozen(
     symbol: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  tokenMintAmount(
-    symbol: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  tokenMintLimit(
-    symbol: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
 
   upgrade(
     newImplementation: PromiseOrValue<string>,
@@ -759,8 +734,6 @@ export interface IAxelarGateway extends BaseContract {
     ): Promise<string[]>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<boolean>;
-
-    authModule(overrides?: CallOverrides): Promise<string>;
 
     callContract(
       destinationChain: PromiseOrValue<string>,
@@ -818,7 +791,7 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setTokenMintLimits(
+    setTokenDailyMintLimits(
       symbols: PromiseOrValue<string>[],
       limits: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
@@ -834,22 +807,20 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    tokenDeployer(overrides?: CallOverrides): Promise<string>;
+    tokenDailyMintAmount(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    tokenDailyMintLimit(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     tokenFrozen(
       symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    tokenMintAmount(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tokenMintLimit(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     upgrade(
       newImplementation: PromiseOrValue<string>,
@@ -966,6 +937,15 @@ export interface IAxelarGateway extends BaseContract {
       newOperatorsData?: null
     ): OperatorshipTransferredEventFilter;
 
+    "TokenDailyMintLimitUpdated(string,uint256)"(
+      symbol?: null,
+      limit?: null
+    ): TokenDailyMintLimitUpdatedEventFilter;
+    TokenDailyMintLimitUpdated(
+      symbol?: null,
+      limit?: null
+    ): TokenDailyMintLimitUpdatedEventFilter;
+
     "TokenDeployed(string,address)"(
       symbol?: null,
       tokenAddresses?: null
@@ -974,15 +954,6 @@ export interface IAxelarGateway extends BaseContract {
       symbol?: null,
       tokenAddresses?: null
     ): TokenDeployedEventFilter;
-
-    "TokenMintLimitUpdated(string,uint256)"(
-      symbol?: null,
-      limit?: null
-    ): TokenMintLimitUpdatedEventFilter;
-    TokenMintLimitUpdated(
-      symbol?: null,
-      limit?: null
-    ): TokenMintLimitUpdatedEventFilter;
 
     "TokenSent(address,string,string,string,uint256)"(
       sender?: PromiseOrValue<string> | null,
@@ -1021,8 +992,6 @@ export interface IAxelarGateway extends BaseContract {
     ): Promise<BigNumber>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<BigNumber>;
-
-    authModule(overrides?: CallOverrides): Promise<BigNumber>;
 
     callContract(
       destinationChain: PromiseOrValue<string>,
@@ -1080,7 +1049,7 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setTokenMintLimits(
+    setTokenDailyMintLimits(
       symbols: PromiseOrValue<string>[],
       limits: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1096,19 +1065,17 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    tokenDeployer(overrides?: CallOverrides): Promise<BigNumber>;
+    tokenDailyMintAmount(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    tokenDailyMintLimit(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     tokenFrozen(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tokenMintAmount(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    tokenMintLimit(
       symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1153,8 +1120,6 @@ export interface IAxelarGateway extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     allTokensFrozen(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    authModule(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     callContract(
       destinationChain: PromiseOrValue<string>,
@@ -1212,7 +1177,7 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setTokenMintLimits(
+    setTokenDailyMintLimits(
       symbols: PromiseOrValue<string>[],
       limits: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1228,19 +1193,17 @@ export interface IAxelarGateway extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    tokenDeployer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    tokenDailyMintAmount(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    tokenDailyMintLimit(
+      symbol: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     tokenFrozen(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tokenMintAmount(
-      symbol: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tokenMintLimit(
       symbol: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

@@ -32,10 +32,8 @@ export interface IAxelarGasServiceInterface extends utils.Interface {
   functions: {
     "addGas(bytes32,uint256,address,uint256,address)": FunctionFragment;
     "addNativeGas(bytes32,uint256,address)": FunctionFragment;
-    "collectFees(address,address[],uint256[])": FunctionFragment;
+    "collectFees(address,address[])": FunctionFragment;
     "contractId()": FunctionFragment;
-    "gasCollector()": FunctionFragment;
-    "implementation()": FunctionFragment;
     "owner()": FunctionFragment;
     "payGasForContractCall(address,string,string,bytes,address,uint256,address)": FunctionFragment;
     "payGasForContractCallWithToken(address,string,string,bytes,string,uint256,address,uint256,address)": FunctionFragment;
@@ -52,8 +50,6 @@ export interface IAxelarGasServiceInterface extends utils.Interface {
       | "addNativeGas"
       | "collectFees"
       | "contractId"
-      | "gasCollector"
-      | "implementation"
       | "owner"
       | "payGasForContractCall"
       | "payGasForContractCallWithToken"
@@ -84,22 +80,10 @@ export interface IAxelarGasServiceInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "collectFees",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "contractId",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "gasCollector",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "implementation",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -182,14 +166,6 @@ export interface IAxelarGasServiceInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "contractId", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "gasCollector",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "implementation",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "payGasForContractCall",
@@ -409,17 +385,10 @@ export interface IAxelarGasService extends BaseContract {
     collectFees(
       receiver: PromiseOrValue<string>,
       tokens: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     contractId(overrides?: CallOverrides): Promise<[string]>;
-
-    gasCollector(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    implementation(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -506,17 +475,10 @@ export interface IAxelarGasService extends BaseContract {
   collectFees(
     receiver: PromiseOrValue<string>,
     tokens: PromiseOrValue<string>[],
-    amounts: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   contractId(overrides?: CallOverrides): Promise<string>;
-
-  gasCollector(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  implementation(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -603,15 +565,10 @@ export interface IAxelarGasService extends BaseContract {
     collectFees(
       receiver: PromiseOrValue<string>,
       tokens: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     contractId(overrides?: CallOverrides): Promise<string>;
-
-    gasCollector(overrides?: CallOverrides): Promise<string>;
-
-    implementation(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -823,17 +780,10 @@ export interface IAxelarGasService extends BaseContract {
     collectFees(
       receiver: PromiseOrValue<string>,
       tokens: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     contractId(overrides?: CallOverrides): Promise<BigNumber>;
-
-    gasCollector(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    implementation(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -921,17 +871,10 @@ export interface IAxelarGasService extends BaseContract {
     collectFees(
       receiver: PromiseOrValue<string>,
       tokens: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     contractId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    gasCollector(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    implementation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

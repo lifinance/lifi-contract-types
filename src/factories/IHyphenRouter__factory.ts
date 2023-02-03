@@ -63,7 +63,7 @@ const _abi = [
     stateMutability: "payable",
     type: "function",
   },
-] as const;
+];
 
 export class IHyphenRouter__factory {
   static readonly abi = _abi;

@@ -12,16 +12,6 @@ import type {
 const _abi = [
   {
     inputs: [],
-    name: "InvalidAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidAmounts",
-    type: "error",
-  },
-  {
-    inputs: [],
     name: "InvalidCodeHash",
     type: "error",
   },
@@ -33,11 +23,6 @@ const _abi = [
   {
     inputs: [],
     name: "InvalidOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NotCollector",
     type: "error",
   },
   {
@@ -435,11 +420,6 @@ const _abi = [
         name: "tokens",
         type: "address[]",
       },
-      {
-        internalType: "uint256[]",
-        name: "amounts",
-        type: "uint256[]",
-      },
     ],
     name: "collectFees",
     outputs: [],
@@ -457,32 +437,6 @@ const _abi = [
       },
     ],
     stateMutability: "pure",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "gasCollector",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "implementation",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -729,7 +683,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class IAxelarGasService__factory {
   static readonly abi = _abi;
