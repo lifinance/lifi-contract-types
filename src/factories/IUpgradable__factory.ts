@@ -78,19 +78,6 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "implementation",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -138,7 +125,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class IUpgradable__factory {
   static readonly abi = _abi;
