@@ -329,6 +329,7 @@ export type { CelerToken } from "./CBridgeFacet.sol/CelerToken";
 export { CelerToken__factory } from "./factories/CBridgeFacet.sol/CelerToken__factory";
 export type { CBridgeFacetTest } from "./CBridgeFacet.t.sol/CBridgeFacetTest";
 export { CBridgeFacetTest__factory } from "./factories/CBridgeFacet.t.sol/CBridgeFacetTest__factory";
+export type { Ownable } from "./CBridgeFacet.t.sol/Ownable";
 export { Ownable__factory } from "./factories/CBridgeFacet.t.sol/Ownable__factory";
 export type { CBridgeRefundTestPolygon } from "./CBridgeRefund.t.sol/CBridgeRefundTestPolygon";
 export { CBridgeRefundTestPolygon__factory } from "./factories/CBridgeRefund.t.sol/CBridgeRefundTestPolygon__factory";
