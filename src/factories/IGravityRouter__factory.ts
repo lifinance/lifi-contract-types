@@ -33,7 +33,7 @@ const _abi = [
     stateMutability: "payable",
     type: "function",
   },
-];
+] as const;
 
 export class IGravityRouter__factory {
   static readonly abi = _abi;

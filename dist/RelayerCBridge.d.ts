@@ -39,8 +39,8 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace CBridgeFacet {
-    type CBridgeDataStruct = {
+export declare namespace CelerIMFacet {
+    type CelerIMDataStruct = {
         maxSlippage: PromiseOrValue<BigNumberish>;
         nonce: PromiseOrValue<BigNumberish>;
         callTo: PromiseOrValue<BytesLike>;
@@ -48,7 +48,7 @@ export declare namespace CBridgeFacet {
         messageBusFee: PromiseOrValue<BigNumberish>;
         bridgeType: PromiseOrValue<BigNumberish>;
     };
-    type CBridgeDataStructOutput = [
+    type CelerIMDataStructOutput = [
         number,
         BigNumber,
         string,
@@ -111,7 +111,7 @@ export interface RelayerCBridgeInterface extends utils.Interface {
     ]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
-    encodeFunctionData(functionFragment: "sendTokenTransfer", values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]): string;
+    encodeFunctionData(functionFragment: "sendTokenTransfer", values: [ILiFi.BridgeDataStruct, CelerIMFacet.CelerIMDataStruct]): string;
     encodeFunctionData(functionFragment: "setCBridgeMessageBus", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "setDiamondAddress", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "setExecutor", values: [PromiseOrValue<string>]): string;
@@ -259,7 +259,7 @@ export interface RelayerCBridge extends BaseContract {
         }): Promise<ContractTransaction>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CelerIMFacet.CelerIMDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         setCBridgeMessageBus(_messageBusAddress: PromiseOrValue<string>, overrides?: Overrides & {
@@ -295,7 +295,7 @@ export interface RelayerCBridge extends BaseContract {
     }): Promise<ContractTransaction>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
-    sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+    sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CelerIMFacet.CelerIMDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     setCBridgeMessageBus(_messageBusAddress: PromiseOrValue<string>, overrides?: Overrides & {
@@ -321,7 +321,7 @@ export interface RelayerCBridge extends BaseContract {
         forwardSendMessageWithTransfer(_receiver: PromiseOrValue<string>, _dstChainId: PromiseOrValue<BigNumberish>, _srcBridge: PromiseOrValue<string>, _srcTransferId: PromiseOrValue<BytesLike>, _message: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
-        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: CallOverrides): Promise<[
+        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CelerIMFacet.CelerIMDataStruct, overrides?: CallOverrides): Promise<[
             string,
             string
         ] & {
@@ -372,7 +372,7 @@ export interface RelayerCBridge extends BaseContract {
         }): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CelerIMFacet.CelerIMDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         setCBridgeMessageBus(_messageBusAddress: PromiseOrValue<string>, overrides?: Overrides & {
@@ -409,7 +409,7 @@ export interface RelayerCBridge extends BaseContract {
         }): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CBridgeFacet.CBridgeDataStruct, overrides?: PayableOverrides & {
+        sendTokenTransfer(_bridgeData: ILiFi.BridgeDataStruct, _cBridgeData: CelerIMFacet.CelerIMDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         setCBridgeMessageBus(_messageBusAddress: PromiseOrValue<string>, overrides?: Overrides & {

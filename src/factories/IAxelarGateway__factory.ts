@@ -29,7 +29,7 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "ExceedDailyMintLimit",
+    name: "ExceedMintLimit",
     type: "error",
   },
   {
@@ -59,7 +59,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "InvalidSetDailyMintLimitsParams",
+    name: "InvalidSetMintLimitsParams",
     type: "error",
   },
   {
@@ -370,12 +370,12 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "limit",
-        type: "uint256",
+        internalType: "address",
+        name: "tokenAddresses",
+        type: "address",
       },
     ],
-    name: "TokenDailyMintLimitUpdated",
+    name: "TokenDeployed",
     type: "event",
   },
   {
@@ -389,12 +389,12 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "address",
-        name: "tokenAddresses",
-        type: "address",
+        internalType: "uint256",
+        name: "limit",
+        type: "uint256",
       },
     ],
-    name: "TokenDeployed",
+    name: "TokenMintLimitUpdated",
     type: "event",
   },
   {
@@ -506,6 +506,19 @@ const _abi = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "authModule",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -741,7 +754,7 @@ const _abi = [
         type: "uint256[]",
       },
     ],
-    name: "setTokenDailyMintLimits",
+    name: "setTokenMintLimits",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -779,38 +792,13 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "string",
-        name: "symbol",
-        type: "string",
-      },
-    ],
-    name: "tokenDailyMintAmount",
+    inputs: [],
+    name: "tokenDeployer",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "address",
         name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "symbol",
-        type: "string",
-      },
-    ],
-    name: "tokenDailyMintLimit",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -830,6 +818,44 @@ const _abi = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "symbol",
+        type: "string",
+      },
+    ],
+    name: "tokenMintAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "symbol",
+        type: "string",
+      },
+    ],
+    name: "tokenMintLimit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -936,7 +962,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
+] as const;
 
 export class IAxelarGateway__factory {
   static readonly abi = _abi;

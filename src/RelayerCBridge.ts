@@ -67,8 +67,8 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace CBridgeFacet {
-  export type CBridgeDataStruct = {
+export declare namespace CelerIMFacet {
+  export type CelerIMDataStruct = {
     maxSlippage: PromiseOrValue<BigNumberish>;
     nonce: PromiseOrValue<BigNumberish>;
     callTo: PromiseOrValue<BytesLike>;
@@ -77,7 +77,7 @@ export declare namespace CBridgeFacet {
     bridgeType: PromiseOrValue<BigNumberish>;
   };
 
-  export type CBridgeDataStructOutput = [
+  export type CelerIMDataStructOutput = [
     number,
     BigNumber,
     string,
@@ -186,7 +186,7 @@ export interface RelayerCBridgeInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "sendTokenTransfer",
-    values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]
+    values: [ILiFi.BridgeDataStruct, CelerIMFacet.CelerIMDataStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setCBridgeMessageBus",
@@ -449,7 +449,7 @@ export interface RelayerCBridge extends BaseContract {
 
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      _cBridgeData: CelerIMFacet.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -521,7 +521,7 @@ export interface RelayerCBridge extends BaseContract {
 
   sendTokenTransfer(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+    _cBridgeData: CelerIMFacet.CelerIMDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -589,7 +589,7 @@ export interface RelayerCBridge extends BaseContract {
 
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      _cBridgeData: CelerIMFacet.CelerIMDataStruct,
       overrides?: CallOverrides
     ): Promise<
       [string, string] & { transferId: string; bridgeAddress: string }
@@ -740,7 +740,7 @@ export interface RelayerCBridge extends BaseContract {
 
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      _cBridgeData: CelerIMFacet.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -813,7 +813,7 @@ export interface RelayerCBridge extends BaseContract {
 
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      _cBridgeData: CelerIMFacet.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
