@@ -25,6 +25,7 @@ export { ERC20Proxy__factory } from "./ERC20Proxy__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
+export { GetGasFacet__factory } from "./GetGasFacet__factory";
 export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
 export { GravityFacet__factory } from "./GravityFacet__factory";
 export { HopFacet__factory } from "./HopFacet__factory";

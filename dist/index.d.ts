@@ -30,6 +30,7 @@ export type { ERC20Proxy } from "./ERC20Proxy";
 export type { Executor } from "./Executor";
 export type { FeeCollector } from "./FeeCollector";
 export type { GenericSwapFacet } from "./GenericSwapFacet";
+export type { GetGasFacet } from "./GetGasFacet";
 export type { GnosisBridgeFacet } from "./GnosisBridgeFacet";
 export type { GravityFacet } from "./GravityFacet";
 export type { HopFacet } from "./HopFacet";
@@ -127,6 +128,7 @@ export { IFusePool__factory } from "./factories/FusePoolZap.sol/IFusePool__facto
 export type { IFusePoolDirectory } from "./FusePoolZap.sol/IFusePoolDirectory";
 export { IFusePoolDirectory__factory } from "./factories/FusePoolZap.sol/IFusePoolDirectory__factory";
 export { GenericSwapFacet__factory } from "./factories/GenericSwapFacet__factory";
+export { GetGasFacet__factory } from "./factories/GetGasFacet__factory";
 export { GnosisBridgeFacet__factory } from "./factories/GnosisBridgeFacet__factory";
 export { GravityFacet__factory } from "./factories/GravityFacet__factory";
 export { HopFacet__factory } from "./factories/HopFacet__factory";
