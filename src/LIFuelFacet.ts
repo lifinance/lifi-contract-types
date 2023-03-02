@@ -96,33 +96,33 @@ export declare namespace LibSwap {
   };
 }
 
-export interface GetGasFacetInterface extends utils.Interface {
+export interface LIFuelFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaGetGas((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
-    "swapAndStartBridgeTokensViaGetGas((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "startBridgeTokensViaLIFuel((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaLIFuel((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaGetGas"
-      | "swapAndStartBridgeTokensViaGetGas"
+      | "startBridgeTokensViaLIFuel"
+      | "swapAndStartBridgeTokensViaLIFuel"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaGetGas",
+    functionFragment: "startBridgeTokensViaLIFuel",
     values: [ILiFi.BridgeDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaGetGas",
+    functionFragment: "swapAndStartBridgeTokensViaLIFuel",
     values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaGetGas",
+    functionFragment: "startBridgeTokensViaLIFuel",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaGetGas",
+    functionFragment: "swapAndStartBridgeTokensViaLIFuel",
     data: BytesLike
   ): Result;
 
@@ -178,12 +178,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface GetGasFacet extends BaseContract {
+export interface LIFuelFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: GetGasFacetInterface;
+  interface: LIFuelFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -205,36 +205,36 @@ export interface GetGasFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaGetGas(
+    startBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaGetGas(
+    swapAndStartBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaGetGas(
+  startBridgeTokensViaLIFuel(
     _bridgeData: ILiFi.BridgeDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaGetGas(
+  swapAndStartBridgeTokensViaLIFuel(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaGetGas(
+    startBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaGetGas(
+    swapAndStartBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: CallOverrides
@@ -279,12 +279,12 @@ export interface GetGasFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaGetGas(
+    startBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaGetGas(
+    swapAndStartBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -292,12 +292,12 @@ export interface GetGasFacet extends BaseContract {
   };
 
   populateTransaction: {
-    startBridgeTokensViaGetGas(
+    startBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaGetGas(
+    swapAndStartBridgeTokensViaLIFuel(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
