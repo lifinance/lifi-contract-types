@@ -1,9 +1,7 @@
-export * as allBridgeFacetSol from "./AllBridgeFacet.sol";
 export * as celerImFacetSol from "./CelerIMFacet.sol";
 export * as erc20 from "./ERC20";
 export * as fusePoolZapSol from "./FusePoolZap.sol";
 export * as interfacesSol from "./Interfaces.sol";
-export * as liFiDiamondImmutableSol from "./LiFiDiamondImmutable.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as draftIerc20PermitSol from "./draft-IERC20Permit.sol";
 export * as interfaces from "./interfaces";
@@ -80,7 +78,7 @@ export { PeripheryRegistryFacet__factory } from "./PeripheryRegistryFacet__facto
 export { PolygonBridgeFacet__factory } from "./PolygonBridgeFacet__factory";
 export { Receiver__factory } from "./Receiver__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
-export { RelayerCelerIM__factory } from "./RelayerCelerIM__factory";
+export { RelayerCBridge__factory } from "./RelayerCBridge__factory";
 export { ServiceFeeCollector__factory } from "./ServiceFeeCollector__factory";
 export { StargateFacet__factory } from "./StargateFacet__factory";
 export { SwapperV2__factory } from "./SwapperV2__factory";
