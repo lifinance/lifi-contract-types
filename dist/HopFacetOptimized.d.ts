@@ -226,13 +226,13 @@ export interface HopFacetOptimized extends BaseContract {
         startBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaHopL1Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
@@ -254,13 +254,13 @@ export interface HopFacetOptimized extends BaseContract {
     startBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+    swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaHopL1Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+    swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
@@ -303,13 +303,13 @@ export interface HopFacetOptimized extends BaseContract {
         startBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaHopL1Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
@@ -332,13 +332,13 @@ export interface HopFacetOptimized extends BaseContract {
         startBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL1ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaHopL1Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: Overrides & {
+        swapAndStartBridgeTokensViaHopL2ERC20(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaHopL2Native(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacetOptimized.HopDataStruct, overrides?: PayableOverrides & {

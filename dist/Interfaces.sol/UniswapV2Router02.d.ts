@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
@@ -7,14 +7,21 @@ export interface UniswapV2Router02Interface extends utils.Interface {
         "getAmountsIn(uint256,address[])": FunctionFragment;
         "getAmountsOut(uint256,address[])": FunctionFragment;
         "swapETHForExactTokens(uint256,address[],address,uint256)": FunctionFragment;
+        "swapExactETHForTokens(uint256,address[],address,uint256)": FunctionFragment;
         "swapExactTokensForETH(uint256,uint256,address[],address,uint256)": FunctionFragment;
         "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)": FunctionFragment;
         "swapTokensForExactETH(uint256,uint256,address[],address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "getAmountsIn" | "getAmountsOut" | "swapETHForExactTokens" | "swapExactTokensForETH" | "swapExactTokensForTokens" | "swapTokensForExactETH"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "getAmountsIn" | "getAmountsOut" | "swapETHForExactTokens" | "swapExactETHForTokens" | "swapExactTokensForETH" | "swapExactTokensForTokens" | "swapTokensForExactETH"): FunctionFragment;
     encodeFunctionData(functionFragment: "getAmountsIn", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "getAmountsOut", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "swapETHForExactTokens", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>[],
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "swapExactETHForTokens", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<string>[],
         PromiseOrValue<string>,
@@ -44,6 +51,7 @@ export interface UniswapV2Router02Interface extends utils.Interface {
     decodeFunctionResult(functionFragment: "getAmountsIn", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getAmountsOut", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapETHForExactTokens", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapExactETHForTokens", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapExactTokensForETH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapExactTokensForTokens", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapTokensForExactETH", data: BytesLike): Result;
@@ -73,6 +81,9 @@ export interface UniswapV2Router02 extends BaseContract {
         swapETHForExactTokens(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        swapExactETHForTokens(amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         swapExactTokensForETH(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -88,6 +99,9 @@ export interface UniswapV2Router02 extends BaseContract {
     swapETHForExactTokens(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    swapExactETHForTokens(amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     swapExactTokensForETH(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -101,6 +115,7 @@ export interface UniswapV2Router02 extends BaseContract {
         getAmountsIn(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<BigNumber[]>;
         getAmountsOut(amountIn: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<BigNumber[]>;
         swapETHForExactTokens(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        swapExactETHForTokens(amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber[]>;
         swapExactTokensForETH(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber[]>;
         swapExactTokensForTokens(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         swapTokensForExactETH(amountOut: PromiseOrValue<BigNumberish>, amountInMax: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber[]>;
@@ -110,6 +125,9 @@ export interface UniswapV2Router02 extends BaseContract {
         getAmountsIn(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<BigNumber>;
         getAmountsOut(amountIn: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<BigNumber>;
         swapETHForExactTokens(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        swapExactETHForTokens(amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapExactTokensForETH(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
@@ -126,6 +144,9 @@ export interface UniswapV2Router02 extends BaseContract {
         getAmountsIn(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getAmountsOut(amountIn: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
         swapETHForExactTokens(amountOut: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        swapExactETHForTokens(amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapExactTokensForETH(amountIn: PromiseOrValue<BigNumberish>, amountOutMin: PromiseOrValue<BigNumberish>, path: PromiseOrValue<string>[], to: PromiseOrValue<string>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
