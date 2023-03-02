@@ -8,6 +8,16 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         inputs: [],
+        name: "InvalidAddress",
+        type: "error",
+    },
+    {
+        inputs: [],
+        name: "InvalidAmounts",
+        type: "error",
+    },
+    {
+        inputs: [],
         name: "InvalidCodeHash",
         type: "error",
     },
@@ -19,6 +29,11 @@ var _abi = [
     {
         inputs: [],
         name: "InvalidOwner",
+        type: "error",
+    },
+    {
+        inputs: [],
+        name: "NotCollector",
         type: "error",
     },
     {
@@ -416,6 +431,11 @@ var _abi = [
                 name: "tokens",
                 type: "address[]",
             },
+            {
+                internalType: "uint256[]",
+                name: "amounts",
+                type: "uint256[]",
+            },
         ],
         name: "collectFees",
         outputs: [],
@@ -433,6 +453,32 @@ var _abi = [
             },
         ],
         stateMutability: "pure",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "gasCollector",
+        outputs: [
+            {
+                internalType: "address",
+                name: "",
+                type: "address",
+            },
+        ],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "implementation",
+        outputs: [
+            {
+                internalType: "address",
+                name: "",
+                type: "address",
+            },
+        ],
+        stateMutability: "view",
         type: "function",
     },
     {

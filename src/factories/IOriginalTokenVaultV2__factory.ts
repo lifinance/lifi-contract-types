@@ -136,7 +136,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class IOriginalTokenVaultV2__factory {
   static readonly abi = _abi;

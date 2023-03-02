@@ -102,7 +102,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class IMultichainRouter__factory {
   static readonly abi = _abi;

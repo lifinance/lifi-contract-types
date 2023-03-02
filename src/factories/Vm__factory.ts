@@ -1998,7 +1998,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class Vm__factory {
   static readonly abi = _abi;

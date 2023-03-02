@@ -418,7 +418,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-] as const;
+];
 
 export class IMessageBus__factory {
   static readonly abi = _abi;
