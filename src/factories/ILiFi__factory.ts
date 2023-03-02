@@ -146,7 +146,7 @@ const _abi = [
     name: "LiFiTransferStarted",
     type: "event",
   },
-];
+] as const;
 
 export class ILiFi__factory {
   static readonly abi = _abi;

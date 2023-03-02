@@ -35,7 +35,7 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
+] as const;
 
 export class IERC20Proxy__factory {
   static readonly abi = _abi;
