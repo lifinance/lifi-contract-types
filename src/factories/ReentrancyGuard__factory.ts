@@ -15,7 +15,7 @@ const _abi = [
     name: "ReentrancyError",
     type: "error",
   },
-];
+] as const;
 
 export class ReentrancyGuard__factory {
   static readonly abi = _abi;
