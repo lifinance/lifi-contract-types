@@ -72,7 +72,6 @@ export interface ExecutorInterface extends utils.Interface {
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
         "erc20Proxy()": FunctionFragment;
-        "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
         "setERC20Proxy(address)": FunctionFragment;
@@ -80,16 +79,10 @@ export interface ExecutorInterface extends utils.Interface {
         "swapAndExecute(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address,uint256)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "erc20Proxy" | "onERC721Received" | "owner" | "pendingOwner" | "setERC20Proxy" | "swapAndCompleteBridgeTokens" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "erc20Proxy" | "owner" | "pendingOwner" | "setERC20Proxy" | "swapAndCompleteBridgeTokens" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "erc20Proxy", values?: undefined): string;
-    encodeFunctionData(functionFragment: "onERC721Received", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
-    ]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
     encodeFunctionData(functionFragment: "setERC20Proxy", values: [PromiseOrValue<string>]): string;
@@ -110,7 +103,6 @@ export interface ExecutorInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "erc20Proxy", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setERC20Proxy", data: BytesLike): Result;
@@ -214,9 +206,6 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<[string]>;
-        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -239,9 +228,6 @@ export interface Executor extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     erc20Proxy(overrides?: CallOverrides): Promise<string>;
-    onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
     setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -260,7 +246,6 @@ export interface Executor extends BaseContract {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         erc20Proxy(overrides?: CallOverrides): Promise<string>;
-        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
@@ -290,9 +275,6 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         erc20Proxy(overrides?: CallOverrides): Promise<BigNumber>;
-        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -316,9 +298,6 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {

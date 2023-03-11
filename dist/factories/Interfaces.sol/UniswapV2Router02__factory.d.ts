@@ -63,6 +63,32 @@ export declare class UniswapV2Router02__factory {
     }, {
         readonly inputs: readonly [{
             readonly internalType: "uint256";
+            readonly name: "amountOutMin";
+            readonly type: "uint256";
+        }, {
+            readonly internalType: "address[]";
+            readonly name: "path";
+            readonly type: "address[]";
+        }, {
+            readonly internalType: "address";
+            readonly name: "to";
+            readonly type: "address";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "deadline";
+            readonly type: "uint256";
+        }];
+        readonly name: "swapExactETHForTokens";
+        readonly outputs: readonly [{
+            readonly internalType: "uint256[]";
+            readonly name: "amounts";
+            readonly type: "uint256[]";
+        }];
+        readonly stateMutability: "payable";
+        readonly type: "function";
+    }, {
+        readonly inputs: readonly [{
+            readonly internalType: "uint256";
             readonly name: "amountIn";
             readonly type: "uint256";
         }, {
