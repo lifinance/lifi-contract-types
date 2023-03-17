@@ -119,3 +119,6 @@ out
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# mac
+.DS_Store
