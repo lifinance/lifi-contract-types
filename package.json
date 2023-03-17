@@ -1,0 +1,33 @@
+{
+  "name": "lifi-contract-typings",
+  "version": "2.1.0-beta.0",
+  "description": "Typings from LiFi Solidity contracts",
+  "author": "Ed Zynda",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@ethersproject/abi": "^5.5.0",
+    "@ethersproject/bytes": "^5.5.0",
+    "@ethersproject/providers": "^5.5.1",
+    "ethers": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.7",
+    "copyfiles": "^2.4.1",
+    "typescript": "4.8.4"
+  },
+  "scripts": {
+    "build": "yarn compile && yarn copy-dts",
+    "compile": "tsc -p ./tsconfig.json",
+    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
+  }
+}
