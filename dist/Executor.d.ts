@@ -72,6 +72,7 @@ export interface ExecutorInterface extends utils.Interface {
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
         "erc20Proxy()": FunctionFragment;
+        "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
         "setERC20Proxy(address)": FunctionFragment;
@@ -79,10 +80,16 @@ export interface ExecutorInterface extends utils.Interface {
         "swapAndExecute(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address,uint256)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "erc20Proxy" | "owner" | "pendingOwner" | "setERC20Proxy" | "swapAndCompleteBridgeTokens" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "erc20Proxy" | "onERC721Received" | "owner" | "pendingOwner" | "setERC20Proxy" | "swapAndCompleteBridgeTokens" | "swapAndExecute" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "erc20Proxy", values?: undefined): string;
+    encodeFunctionData(functionFragment: "onERC721Received", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
     encodeFunctionData(functionFragment: "setERC20Proxy", values: [PromiseOrValue<string>]): string;
@@ -103,6 +110,7 @@ export interface ExecutorInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "erc20Proxy", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setERC20Proxy", data: BytesLike): Result;
@@ -111,6 +119,8 @@ export interface ExecutorInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     events: {
         "ERC20ProxySet(address)": EventFragment;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
@@ -118,6 +128,8 @@ export interface ExecutorInterface extends utils.Interface {
         "OwnershipTransferred(address,address)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "ERC20ProxySet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
@@ -129,6 +141,46 @@ export interface ERC20ProxySetEventObject {
 }
 export declare type ERC20ProxySetEvent = TypedEvent<[string], ERC20ProxySetEventObject>;
 export declare type ERC20ProxySetEventFilter = TypedEventFilter<ERC20ProxySetEvent>;
+export interface LiFiGenericSwapCompletedEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    receiver: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiGenericSwapCompletedEventObject>;
+export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export interface LiFiSwappedGenericEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiSwappedGenericEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiSwappedGenericEventObject>;
+export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -206,6 +258,9 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<[string]>;
+        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -228,6 +283,9 @@ export interface Executor extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     erc20Proxy(overrides?: CallOverrides): Promise<string>;
+    onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
     setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -246,6 +304,7 @@ export interface Executor extends BaseContract {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         erc20Proxy(overrides?: CallOverrides): Promise<string>;
+        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
@@ -256,6 +315,10 @@ export interface Executor extends BaseContract {
     filters: {
         "ERC20ProxySet(address)"(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
         ERC20ProxySet(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
@@ -275,6 +338,9 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         erc20Proxy(overrides?: CallOverrides): Promise<BigNumber>;
+        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
@@ -298,6 +364,9 @@ export interface Executor extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         erc20Proxy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        onERC721Received(operator: PromiseOrValue<string>, from: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, arg3: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         setERC20Proxy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {

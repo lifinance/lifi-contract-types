@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -46,19 +46,22 @@ export declare namespace AmarokFacet {
         relayerFee: PromiseOrValue<BigNumberish>;
         slippageTol: PromiseOrValue<BigNumberish>;
         delegate: PromiseOrValue<string>;
+        destChainDomainId: PromiseOrValue<BigNumberish>;
     };
     type AmarokDataStructOutput = [
         string,
         string,
         BigNumber,
         BigNumber,
-        string
+        string,
+        number
     ] & {
         callData: string;
         callTo: string;
         relayerFee: BigNumber;
         slippageTol: BigNumber;
         delegate: string;
+        destChainDomainId: number;
     };
 }
 export declare namespace LibSwap {
@@ -91,41 +94,71 @@ export declare namespace LibSwap {
 }
 export interface AmarokFacetInterface extends utils.Interface {
     functions: {
-        "setAmarokDomain(uint256,uint32)": FunctionFragment;
-        "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address))": FunctionFragment;
+        "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address,uint32))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "setAmarokDomain" | "startBridgeTokensViaAmarok" | "swapAndStartBridgeTokensViaAmarok"): FunctionFragment;
-    encodeFunctionData(functionFragment: "setAmarokDomain", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAmarok" | "swapAndStartBridgeTokensViaAmarok"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarok", values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAmarok", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         AmarokFacet.AmarokDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "setAmarokDomain", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAmarok", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaAmarok", data: BytesLike): Result;
     events: {
-        "AmarokDomainSet(uint256,uint32)": EventFragment;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "AmarokDomainSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface AmarokDomainSetEventObject {
-    chainId: BigNumber;
-    domain: number;
+export interface LiFiGenericSwapCompletedEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    receiver: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
 }
-export declare type AmarokDomainSetEvent = TypedEvent<[
+export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
     BigNumber,
-    number
-], AmarokDomainSetEventObject>;
-export declare type AmarokDomainSetEventFilter = TypedEventFilter<AmarokDomainSetEvent>;
+    BigNumber
+], LiFiGenericSwapCompletedEventObject>;
+export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export interface LiFiSwappedGenericEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiSwappedGenericEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiSwappedGenericEventObject>;
+export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -178,9 +211,6 @@ export interface AmarokFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        setAmarokDomain(_chainId: PromiseOrValue<BigNumberish>, _domain: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
         startBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _amarokData: AmarokFacet.AmarokDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -188,9 +218,6 @@ export interface AmarokFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    setAmarokDomain(_chainId: PromiseOrValue<BigNumberish>, _domain: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     startBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _amarokData: AmarokFacet.AmarokDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -198,13 +225,14 @@ export interface AmarokFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        setAmarokDomain(_chainId: PromiseOrValue<BigNumberish>, _domain: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _amarokData: AmarokFacet.AmarokDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _amarokData: AmarokFacet.AmarokDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "AmarokDomainSet(uint256,uint32)"(chainId?: PromiseOrValue<BigNumberish> | null, domain?: PromiseOrValue<BigNumberish> | null): AmarokDomainSetEventFilter;
-        AmarokDomainSet(chainId?: PromiseOrValue<BigNumberish> | null, domain?: PromiseOrValue<BigNumberish> | null): AmarokDomainSetEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
@@ -213,9 +241,6 @@ export interface AmarokFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        setAmarokDomain(_chainId: PromiseOrValue<BigNumberish>, _domain: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
         startBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _amarokData: AmarokFacet.AmarokDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -224,9 +249,6 @@ export interface AmarokFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        setAmarokDomain(_chainId: PromiseOrValue<BigNumberish>, _domain: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
         startBridgeTokensViaAmarok(_bridgeData: ILiFi.BridgeDataStruct, _amarokData: AmarokFacet.AmarokDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
