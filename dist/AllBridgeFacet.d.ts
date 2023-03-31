@@ -94,19 +94,16 @@ export declare namespace LibSwap {
 }
 export interface AllBridgeFacetInterface extends utils.Interface {
     functions: {
-        "allBridge()": FunctionFragment;
         "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint8,bytes32,uint256,uint8))": FunctionFragment;
         "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,uint8,bytes32,uint256,uint8))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "allBridge" | "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "allBridge", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAllBridge", values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAllBridge", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         AllBridgeFacet.AllBridgeDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "allBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAllBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaAllBridge", data: BytesLike): Result;
     events: {
@@ -170,7 +167,6 @@ export interface AllBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        allBridge(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -178,7 +174,6 @@ export interface AllBridgeFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    allBridge(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -186,7 +181,6 @@ export interface AllBridgeFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        allBridge(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -199,7 +193,6 @@ export interface AllBridgeFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        allBridge(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -208,7 +201,6 @@ export interface AllBridgeFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        allBridge(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
