@@ -1,0 +1,18 @@
+import { Signer } from "ethers";
+import type { Provider } from "@ethersproject/providers";
+import type { IXDaiBridgeL2, IXDaiBridgeL2Interface } from "../IXDaiBridgeL2";
+export declare class IXDaiBridgeL2__factory {
+    static readonly abi: readonly [{
+        readonly inputs: readonly [{
+            readonly internalType: "address";
+            readonly name: "receiver";
+            readonly type: "address";
+        }];
+        readonly name: "relayTokens";
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
+        readonly type: "function";
+    }];
+    static createInterface(): IXDaiBridgeL2Interface;
+    static connect(address: string, signerOrProvider: Signer | Provider): IXDaiBridgeL2;
+}
