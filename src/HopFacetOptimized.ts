@@ -241,29 +241,15 @@ export interface HopFacetOptimizedInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "HopBridgeRegistered(address,address)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface HopBridgeRegisteredEventObject {
-  assetId: string;
-  bridge: string;
-}
-export type HopBridgeRegisteredEvent = TypedEvent<
-  [string, string],
-  HopBridgeRegisteredEventObject
->;
-
-export type HopBridgeRegisteredEventFilter =
-  TypedEventFilter<HopBridgeRegisteredEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -511,15 +497,6 @@ export interface HopFacetOptimized extends BaseContract {
   };
 
   filters: {
-    "HopBridgeRegistered(address,address)"(
-      assetId?: PromiseOrValue<string> | null,
-      bridge?: null
-    ): HopBridgeRegisteredEventFilter;
-    HopBridgeRegistered(
-      assetId?: PromiseOrValue<string> | null,
-      bridge?: null
-    ): HopBridgeRegisteredEventFilter;
-
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
