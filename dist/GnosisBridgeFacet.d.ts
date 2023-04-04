@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -138,14 +138,14 @@ export interface GnosisBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+    startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
@@ -164,7 +164,7 @@ export interface GnosisBridgeFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
@@ -172,7 +172,7 @@ export interface GnosisBridgeFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaXDaiBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {

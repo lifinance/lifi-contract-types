@@ -87,7 +87,6 @@ export declare namespace DeBridgeFacet {
   };
 
   export type DeBridgeDataStruct = {
-    permit: PromiseOrValue<BytesLike>;
     nativeFee: PromiseOrValue<BigNumberish>;
     useAssetFee: PromiseOrValue<boolean>;
     referralCode: PromiseOrValue<BigNumberish>;
@@ -95,13 +94,11 @@ export declare namespace DeBridgeFacet {
   };
 
   export type DeBridgeDataStructOutput = [
-    string,
     BigNumber,
     boolean,
     number,
     DeBridgeFacet.SubmissionAutoParamsToStructOutput
   ] & {
-    permit: string;
     nativeFee: BigNumber;
     useAssetFee: boolean;
     referralCode: number;
@@ -141,8 +138,8 @@ export declare namespace LibSwap {
 
 export interface DeBridgeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
-    "swapAndStartBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
+    "startBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
+    "swapAndStartBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
   };
 
   getFunction(
