@@ -42,6 +42,7 @@ export declare namespace ILiFi {
 export declare namespace AmarokFacet {
     type AmarokDataStruct = {
         callData: PromiseOrValue<BytesLike>;
+        callTo: PromiseOrValue<string>;
         relayerFee: PromiseOrValue<BigNumberish>;
         slippageTol: PromiseOrValue<BigNumberish>;
         delegate: PromiseOrValue<string>;
@@ -49,12 +50,14 @@ export declare namespace AmarokFacet {
     };
     type AmarokDataStructOutput = [
         string,
+        string,
         BigNumber,
         BigNumber,
         string,
         number
     ] & {
         callData: string;
+        callTo: string;
         relayerFee: BigNumber;
         slippageTol: BigNumber;
         delegate: string;
@@ -91,8 +94,8 @@ export declare namespace LibSwap {
 }
 export interface AmarokFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint256,uint256,address,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint256,uint256,address,uint32))": FunctionFragment;
+        "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address,uint32))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAmarok" | "swapAndStartBridgeTokensViaAmarok"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarok", values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]): string;
