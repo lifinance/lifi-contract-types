@@ -109,10 +109,10 @@ export interface PackedEncoderDecoderFacetInterface extends utils.Interface {
     "decode_startBridgeTokensViaCBridgeNativePacked(bytes)": FunctionFragment;
     "decode_startBridgeTokensViaHopL2ERC20Packed(bytes)": FunctionFragment;
     "decode_startBridgeTokensViaHopL2NativePacked(bytes)": FunctionFragment;
-    "encode_startBridgeTokensViaCBridgeERC20Packed((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
-    "encode_startBridgeTokensViaCBridgeNativePacked((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
-    "encode_startBridgeTokensViaHopL2ERC20Packed((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address))": FunctionFragment;
-    "encode_startBridgeTokensViaHopL2NativePacked((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address))": FunctionFragment;
+    "encode_startBridgeTokensViaCBridgeERC20Packed(bytes32,string,address,uint64,address,uint256,uint64,uint32)": FunctionFragment;
+    "encode_startBridgeTokensViaCBridgeNativePacked(bytes32,string,address,uint64,uint64,uint32)": FunctionFragment;
+    "encode_startBridgeTokensViaHopL2ERC20Packed(bytes32,string,address,uint256,address,uint256,uint256,uint256,uint256,address)": FunctionFragment;
+    "encode_startBridgeTokensViaHopL2NativePacked(bytes32,string,address,uint256,uint256,uint256,uint256,address)": FunctionFragment;
   };
 
   getFunction(
@@ -145,19 +145,55 @@ export interface PackedEncoderDecoderFacetInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaCBridgeERC20Packed",
-    values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaCBridgeNativePacked",
-    values: [ILiFi.BridgeDataStruct, CBridgeFacet.CBridgeDataStruct]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL2ERC20Packed",
-    values: [ILiFi.BridgeDataStruct, HopFacetOptimized.HopDataStruct]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL2NativePacked",
-    values: [ILiFi.BridgeDataStruct, HopFacetOptimized.HopDataStruct]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -340,26 +376,50 @@ export interface PackedEncoderDecoderFacet extends BaseContract {
     >;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
   };
@@ -393,26 +453,50 @@ export interface PackedEncoderDecoderFacet extends BaseContract {
   >;
 
   encode_startBridgeTokensViaCBridgeERC20Packed(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+    transactionId: PromiseOrValue<BytesLike>,
+    integrator: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    destinationChainId: PromiseOrValue<BigNumberish>,
+    sendingAssetId: PromiseOrValue<string>,
+    minAmount: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
+    maxSlippage: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaCBridgeNativePacked(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+    transactionId: PromiseOrValue<BytesLike>,
+    integrator: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    destinationChainId: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BigNumberish>,
+    maxSlippage: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaHopL2ERC20Packed(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _hopData: HopFacetOptimized.HopDataStruct,
+    transactionId: PromiseOrValue<BytesLike>,
+    integrator: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    destinationChainId: PromiseOrValue<BigNumberish>,
+    sendingAssetId: PromiseOrValue<string>,
+    minAmount: PromiseOrValue<BigNumberish>,
+    bonderFee: PromiseOrValue<BigNumberish>,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+    hopBridge: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaHopL2NativePacked(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _hopData: HopFacetOptimized.HopDataStruct,
+    transactionId: PromiseOrValue<BytesLike>,
+    integrator: PromiseOrValue<string>,
+    receiver: PromiseOrValue<string>,
+    destinationChainId: PromiseOrValue<BigNumberish>,
+    bonderFee: PromiseOrValue<BigNumberish>,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+    hopBridge: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -446,26 +530,50 @@ export interface PackedEncoderDecoderFacet extends BaseContract {
     >;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -569,26 +677,50 @@ export interface PackedEncoderDecoderFacet extends BaseContract {
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -615,26 +747,50 @@ export interface PackedEncoderDecoderFacet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _cBridgeData: CBridgeFacet.CBridgeDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BigNumberish>,
+      maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      sendingAssetId: PromiseOrValue<string>,
+      minAmount: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _hopData: HopFacetOptimized.HopDataStruct,
+      transactionId: PromiseOrValue<BytesLike>,
+      integrator: PromiseOrValue<string>,
+      receiver: PromiseOrValue<string>,
+      destinationChainId: PromiseOrValue<BigNumberish>,
+      bonderFee: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
+      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
