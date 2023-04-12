@@ -58,17 +58,20 @@ export declare namespace DeBridgeFacet {
         data: string;
     };
     type DeBridgeDataStruct = {
+        permit: PromiseOrValue<BytesLike>;
         nativeFee: PromiseOrValue<BigNumberish>;
         useAssetFee: PromiseOrValue<boolean>;
         referralCode: PromiseOrValue<BigNumberish>;
         autoParams: DeBridgeFacet.SubmissionAutoParamsToStruct;
     };
     type DeBridgeDataStructOutput = [
+        string,
         BigNumber,
         boolean,
         number,
         DeBridgeFacet.SubmissionAutoParamsToStructOutput
     ] & {
+        permit: string;
         nativeFee: BigNumber;
         useAssetFee: boolean;
         referralCode: number;
@@ -105,8 +108,8 @@ export declare namespace LibSwap {
 }
 export interface DeBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
-        "swapAndStartBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
+        "startBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
+        "swapAndStartBridgeTokensViaDeBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint256,bool,uint32,(uint256,uint256,bytes,bytes)))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaDeBridge" | "swapAndStartBridgeTokensViaDeBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaDeBridge", values: [ILiFi.BridgeDataStruct, DeBridgeFacet.DeBridgeDataStruct]): string;
@@ -118,58 +121,14 @@ export interface DeBridgeFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "startBridgeTokensViaDeBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaDeBridge", data: BytesLike): Result;
     events: {
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface LiFiGenericSwapCompletedEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    receiver: string;
-    fromAssetId: string;
-    toAssetId: string;
-    fromAmount: BigNumber;
-    toAmount: BigNumber;
-}
-export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-], LiFiGenericSwapCompletedEventObject>;
-export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
-export interface LiFiSwappedGenericEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    fromAssetId: string;
-    toAssetId: string;
-    fromAmount: BigNumber;
-    toAmount: BigNumber;
-}
-export declare type LiFiSwappedGenericEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-], LiFiSwappedGenericEventObject>;
-export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -240,10 +199,6 @@ export interface DeBridgeFacet extends BaseContract {
         swapAndStartBridgeTokensViaDeBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeFacet.DeBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;

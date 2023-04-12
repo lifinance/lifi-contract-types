@@ -148,8 +148,6 @@ export interface ReceiverInterface extends utils.Interface {
     events: {
         "AmarokRouterSet(address)": EventFragment;
         "ExecutorSet(address)": EventFragment;
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
@@ -160,8 +158,6 @@ export interface ReceiverInterface extends utils.Interface {
     };
     getEvent(nameOrSignatureOrTopic: "AmarokRouterSet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ExecutorSet"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
@@ -182,46 +178,6 @@ export interface ExecutorSetEventObject {
 }
 export declare type ExecutorSetEvent = TypedEvent<[string], ExecutorSetEventObject>;
 export declare type ExecutorSetEventFilter = TypedEventFilter<ExecutorSetEvent>;
-export interface LiFiGenericSwapCompletedEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    receiver: string;
-    fromAssetId: string;
-    toAssetId: string;
-    fromAmount: BigNumber;
-    toAmount: BigNumber;
-}
-export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-], LiFiGenericSwapCompletedEventObject>;
-export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
-export interface LiFiSwappedGenericEventObject {
-    transactionId: string;
-    integrator: string;
-    referrer: string;
-    fromAssetId: string;
-    toAssetId: string;
-    fromAmount: BigNumber;
-    toAmount: BigNumber;
-}
-export declare type LiFiSwappedGenericEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-], LiFiSwappedGenericEventObject>;
-export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -409,10 +365,6 @@ export interface Receiver extends BaseContract {
         AmarokRouterSet(router?: PromiseOrValue<string> | null): AmarokRouterSetEventFilter;
         "ExecutorSet(address)"(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
         ExecutorSet(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;

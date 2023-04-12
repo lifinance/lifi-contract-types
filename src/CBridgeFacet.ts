@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -113,14 +112,12 @@ export interface CBridgeFacetInterface extends utils.Interface {
   functions: {
     "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": FunctionFragment;
     "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64))": FunctionFragment;
-    "triggerRefund(address,bytes,address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "startBridgeTokensViaCBridge"
       | "swapAndStartBridgeTokensViaCBridge"
-      | "triggerRefund"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -135,16 +132,6 @@ export interface CBridgeFacetInterface extends utils.Interface {
       CBridgeFacet.CBridgeDataStruct
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "triggerRefund",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaCBridge",
@@ -154,74 +141,17 @@ export interface CBridgeFacetInterface extends utils.Interface {
     functionFragment: "swapAndStartBridgeTokensViaCBridge",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "triggerRefund",
-    data: BytesLike
-  ): Result;
 
   events: {
-    "CBridgeRefund(address,address,uint256)": EventFragment;
-    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
-    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "CBridgeRefund"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface CBridgeRefundEventObject {
-  _assetAddress: string;
-  _to: string;
-  amount: BigNumber;
-}
-export type CBridgeRefundEvent = TypedEvent<
-  [string, string, BigNumber],
-  CBridgeRefundEventObject
->;
-
-export type CBridgeRefundEventFilter = TypedEventFilter<CBridgeRefundEvent>;
-
-export interface LiFiGenericSwapCompletedEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  receiver: string;
-  fromAssetId: string;
-  toAssetId: string;
-  fromAmount: BigNumber;
-  toAmount: BigNumber;
-}
-export type LiFiGenericSwapCompletedEvent = TypedEvent<
-  [string, string, string, string, string, string, BigNumber, BigNumber],
-  LiFiGenericSwapCompletedEventObject
->;
-
-export type LiFiGenericSwapCompletedEventFilter =
-  TypedEventFilter<LiFiGenericSwapCompletedEvent>;
-
-export interface LiFiSwappedGenericEventObject {
-  transactionId: string;
-  integrator: string;
-  referrer: string;
-  fromAssetId: string;
-  toAssetId: string;
-  fromAmount: BigNumber;
-  toAmount: BigNumber;
-}
-export type LiFiSwappedGenericEvent = TypedEvent<
-  [string, string, string, string, string, BigNumber, BigNumber],
-  LiFiSwappedGenericEventObject
->;
-
-export type LiFiSwappedGenericEventFilter =
-  TypedEventFilter<LiFiSwappedGenericEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -303,15 +233,6 @@ export interface CBridgeFacet extends BaseContract {
       _cBridgeData: CBridgeFacet.CBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
   };
 
   startBridgeTokensViaCBridge(
@@ -327,15 +248,6 @@ export interface CBridgeFacet extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  triggerRefund(
-    _callTo: PromiseOrValue<string>,
-    _callData: PromiseOrValue<BytesLike>,
-    _assetAddress: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     startBridgeTokensViaCBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -349,69 +261,9 @@ export interface CBridgeFacet extends BaseContract {
       _cBridgeData: CBridgeFacet.CBridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
-    "CBridgeRefund(address,address,uint256)"(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      amount?: null
-    ): CBridgeRefundEventFilter;
-    CBridgeRefund(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      amount?: null
-    ): CBridgeRefundEventFilter;
-
-    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      integrator?: null,
-      referrer?: null,
-      receiver?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null
-    ): LiFiGenericSwapCompletedEventFilter;
-    LiFiGenericSwapCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      integrator?: null,
-      referrer?: null,
-      receiver?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null
-    ): LiFiGenericSwapCompletedEventFilter;
-
-    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      integrator?: null,
-      referrer?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null
-    ): LiFiSwappedGenericEventFilter;
-    LiFiSwappedGeneric(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      integrator?: null,
-      referrer?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null
-    ): LiFiSwappedGenericEventFilter;
-
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
@@ -461,15 +313,6 @@ export interface CBridgeFacet extends BaseContract {
       _cBridgeData: CBridgeFacet.CBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -484,15 +327,6 @@ export interface CBridgeFacet extends BaseContract {
       _swapData: LibSwap.SwapDataStruct[],
       _cBridgeData: CBridgeFacet.CBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
