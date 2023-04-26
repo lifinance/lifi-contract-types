@@ -27,6 +27,14 @@ export declare class IAcrossSpokePool__factory {
             readonly internalType: "uint32";
             readonly name: "quoteTimestamp";
             readonly type: "uint32";
+        }, {
+            readonly internalType: "bytes";
+            readonly name: "message";
+            readonly type: "bytes";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "maxCount";
+            readonly type: "uint256";
         }];
         readonly name: "deposit";
         readonly outputs: readonly [];
