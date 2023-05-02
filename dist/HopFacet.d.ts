@@ -17,11 +17,17 @@ export declare namespace HopFacet {
         deadline: PromiseOrValue<BigNumberish>;
         destinationAmountOutMin: PromiseOrValue<BigNumberish>;
         destinationDeadline: PromiseOrValue<BigNumberish>;
+        relayer: PromiseOrValue<string>;
+        relayerFee: PromiseOrValue<BigNumberish>;
+        nativeFee: PromiseOrValue<BigNumberish>;
     };
     type HopDataStructOutput = [
         BigNumber,
         BigNumber,
         BigNumber,
+        BigNumber,
+        BigNumber,
+        string,
         BigNumber,
         BigNumber
     ] & {
@@ -30,6 +36,9 @@ export declare namespace HopFacet {
         deadline: BigNumber;
         destinationAmountOutMin: BigNumber;
         destinationDeadline: BigNumber;
+        relayer: string;
+        relayerFee: BigNumber;
+        nativeFee: BigNumber;
     };
 }
 export declare namespace ILiFi {
@@ -101,8 +110,8 @@ export interface HopFacetInterface extends utils.Interface {
     functions: {
         "initHop((address,address)[])": FunctionFragment;
         "registerBridge(address,address)": FunctionFragment;
-        "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+        "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": FunctionFragment;
+        "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "initHop" | "registerBridge" | "startBridgeTokensViaHop" | "swapAndStartBridgeTokensViaHop"): FunctionFragment;
     encodeFunctionData(functionFragment: "initHop", values: [HopFacet.ConfigStruct[]]): string;
@@ -120,12 +129,16 @@ export interface HopFacetInterface extends utils.Interface {
     events: {
         "HopBridgeRegistered(address,address)": EventFragment;
         "HopInitialized(tuple[])": EventFragment;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "HopInitialized"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
@@ -146,6 +159,46 @@ export declare type HopInitializedEvent = TypedEvent<[
     HopFacet.ConfigStructOutput[]
 ], HopInitializedEventObject>;
 export declare type HopInitializedEventFilter = TypedEventFilter<HopInitializedEvent>;
+export interface LiFiGenericSwapCompletedEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    receiver: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiGenericSwapCompletedEventObject>;
+export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export interface LiFiSwappedGenericEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiSwappedGenericEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiSwappedGenericEventObject>;
+export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -234,6 +287,10 @@ export interface HopFacet extends BaseContract {
         HopBridgeRegistered(assetId?: PromiseOrValue<string> | null, bridge?: null): HopBridgeRegisteredEventFilter;
         "HopInitialized(tuple[])"(configs?: null): HopInitializedEventFilter;
         HopInitialized(configs?: null): HopInitializedEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
