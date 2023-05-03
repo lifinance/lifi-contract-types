@@ -45,12 +45,18 @@ export declare namespace HopFacet {
     deadline: PromiseOrValue<BigNumberish>;
     destinationAmountOutMin: PromiseOrValue<BigNumberish>;
     destinationDeadline: PromiseOrValue<BigNumberish>;
+    relayer: PromiseOrValue<string>;
+    relayerFee: PromiseOrValue<BigNumberish>;
+    nativeFee: PromiseOrValue<BigNumberish>;
   };
 
   export type HopDataStructOutput = [
     BigNumber,
     BigNumber,
     BigNumber,
+    BigNumber,
+    BigNumber,
+    string,
     BigNumber,
     BigNumber
   ] & {
@@ -59,6 +65,9 @@ export declare namespace HopFacet {
     deadline: BigNumber;
     destinationAmountOutMin: BigNumber;
     destinationDeadline: BigNumber;
+    relayer: string;
+    relayerFee: BigNumber;
+    nativeFee: BigNumber;
   };
 }
 
@@ -135,8 +144,8 @@ export interface HopFacetInterface extends utils.Interface {
   functions: {
     "initHop((address,address)[])": FunctionFragment;
     "registerBridge(address,address)": FunctionFragment;
-    "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256))": FunctionFragment;
+    "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": FunctionFragment;
   };
 
   getFunction(
