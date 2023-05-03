@@ -42,6 +42,16 @@ const _abi = [
         name: "quoteTimestamp",
         type: "uint32",
       },
+      {
+        internalType: "bytes",
+        name: "message",
+        type: "bytes",
+      },
+      {
+        internalType: "uint256",
+        name: "maxCount",
+        type: "uint256",
+      },
     ],
     name: "deposit",
     outputs: [],
