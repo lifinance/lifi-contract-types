@@ -26,6 +26,44 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "bonderFee",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountOutMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "send",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "chainId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "recipient",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "amountOutMin",
         type: "uint256",
       },
