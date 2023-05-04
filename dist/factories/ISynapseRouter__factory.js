@@ -101,6 +101,37 @@ var _abi = [
     {
         inputs: [
             {
+                internalType: "address",
+                name: "tokenOut",
+                type: "address",
+            },
+        ],
+        name: "getConnectedBridgeTokens",
+        outputs: [
+            {
+                components: [
+                    {
+                        internalType: "string",
+                        name: "symbol",
+                        type: "string",
+                    },
+                    {
+                        internalType: "address",
+                        name: "token",
+                        type: "address",
+                    },
+                ],
+                internalType: "struct ISynapseRouter.BridgeToken[]",
+                name: "tokens",
+                type: "tuple[]",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
                 components: [
                     {
                         internalType: "string",
