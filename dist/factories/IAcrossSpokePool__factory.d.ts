@@ -20,13 +20,21 @@ export declare class IAcrossSpokePool__factory {
             readonly name: "destinationChainId";
             readonly type: "uint256";
         }, {
-            readonly internalType: "uint64";
+            readonly internalType: "int64";
             readonly name: "relayerFeePct";
-            readonly type: "uint64";
+            readonly type: "int64";
         }, {
             readonly internalType: "uint32";
             readonly name: "quoteTimestamp";
             readonly type: "uint32";
+        }, {
+            readonly internalType: "bytes";
+            readonly name: "message";
+            readonly type: "bytes";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "maxCount";
+            readonly type: "uint256";
         }];
         readonly name: "deposit";
         readonly outputs: readonly [];
