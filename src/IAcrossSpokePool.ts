@@ -25,7 +25,7 @@ import type {
 
 export interface IAcrossSpokePoolInterface extends utils.Interface {
   functions: {
-    "deposit(address,address,uint256,uint256,uint64,uint32)": FunctionFragment;
+    "deposit(address,address,uint256,uint256,int64,uint32,bytes,uint256)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "deposit"): FunctionFragment;
@@ -38,6 +38,8 @@ export interface IAcrossSpokePoolInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
@@ -81,6 +83,8 @@ export interface IAcrossSpokePool extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       relayerFeePct: PromiseOrValue<BigNumberish>,
       quoteTimestamp: PromiseOrValue<BigNumberish>,
+      message: PromiseOrValue<BytesLike>,
+      maxCount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -92,6 +96,8 @@ export interface IAcrossSpokePool extends BaseContract {
     destinationChainId: PromiseOrValue<BigNumberish>,
     relayerFeePct: PromiseOrValue<BigNumberish>,
     quoteTimestamp: PromiseOrValue<BigNumberish>,
+    message: PromiseOrValue<BytesLike>,
+    maxCount: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -103,6 +109,8 @@ export interface IAcrossSpokePool extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       relayerFeePct: PromiseOrValue<BigNumberish>,
       quoteTimestamp: PromiseOrValue<BigNumberish>,
+      message: PromiseOrValue<BytesLike>,
+      maxCount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -117,6 +125,8 @@ export interface IAcrossSpokePool extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       relayerFeePct: PromiseOrValue<BigNumberish>,
       quoteTimestamp: PromiseOrValue<BigNumberish>,
+      message: PromiseOrValue<BytesLike>,
+      maxCount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -129,6 +139,8 @@ export interface IAcrossSpokePool extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       relayerFeePct: PromiseOrValue<BigNumberish>,
       quoteTimestamp: PromiseOrValue<BigNumberish>,
+      message: PromiseOrValue<BytesLike>,
+      maxCount: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
