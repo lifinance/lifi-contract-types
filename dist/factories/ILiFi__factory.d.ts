@@ -11,6 +11,91 @@ export declare class ILiFi__factory {
             readonly type: "bytes32";
         }, {
             readonly indexed: false;
+            readonly internalType: "string";
+            readonly name: "integrator";
+            readonly type: "string";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "string";
+            readonly name: "referrer";
+            readonly type: "string";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "address";
+            readonly name: "receiver";
+            readonly type: "address";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "address";
+            readonly name: "fromAssetId";
+            readonly type: "address";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "address";
+            readonly name: "toAssetId";
+            readonly type: "address";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "uint256";
+            readonly name: "fromAmount";
+            readonly type: "uint256";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "uint256";
+            readonly name: "toAmount";
+            readonly type: "uint256";
+        }];
+        readonly name: "LiFiGenericSwapCompleted";
+        readonly type: "event";
+    }, {
+        readonly anonymous: false;
+        readonly inputs: readonly [{
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "string";
+            readonly name: "integrator";
+            readonly type: "string";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "string";
+            readonly name: "referrer";
+            readonly type: "string";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "address";
+            readonly name: "fromAssetId";
+            readonly type: "address";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "address";
+            readonly name: "toAssetId";
+            readonly type: "address";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "uint256";
+            readonly name: "fromAmount";
+            readonly type: "uint256";
+        }, {
+            readonly indexed: false;
+            readonly internalType: "uint256";
+            readonly name: "toAmount";
+            readonly type: "uint256";
+        }];
+        readonly name: "LiFiSwappedGeneric";
+        readonly type: "event";
+    }, {
+        readonly anonymous: false;
+        readonly inputs: readonly [{
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+        }, {
+            readonly indexed: false;
             readonly internalType: "address";
             readonly name: "receivingAssetId";
             readonly type: "address";

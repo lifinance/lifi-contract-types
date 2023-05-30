@@ -33,14 +33,24 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint64",
+        internalType: "int64",
         name: "relayerFeePct",
-        type: "uint64",
+        type: "int64",
       },
       {
         internalType: "uint32",
         name: "quoteTimestamp",
         type: "uint32",
+      },
+      {
+        internalType: "bytes",
+        name: "message",
+        type: "bytes",
+      },
+      {
+        internalType: "uint256",
+        name: "maxCount",
+        type: "uint256",
       },
     ],
     name: "deposit",
