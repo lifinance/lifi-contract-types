@@ -17,6 +17,36 @@ export declare class IHopBridge__factory {
             readonly type: "uint256";
         }, {
             readonly internalType: "uint256";
+            readonly name: "bonderFee";
+            readonly type: "uint256";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "amountOutMin";
+            readonly type: "uint256";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "deadline";
+            readonly type: "uint256";
+        }];
+        readonly name: "send";
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+        readonly type: "function";
+    }, {
+        readonly inputs: readonly [{
+            readonly internalType: "uint256";
+            readonly name: "chainId";
+            readonly type: "uint256";
+        }, {
+            readonly internalType: "address";
+            readonly name: "recipient";
+            readonly type: "address";
+        }, {
+            readonly internalType: "uint256";
+            readonly name: "amount";
+            readonly type: "uint256";
+        }, {
+            readonly internalType: "uint256";
             readonly name: "amountOutMin";
             readonly type: "uint256";
         }, {
