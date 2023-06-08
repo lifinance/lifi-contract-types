@@ -18,6 +18,110 @@ const _abi = [
       },
       {
         indexed: false,
+        internalType: "string",
+        name: "integrator",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "referrer",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "receiver",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "fromAssetId",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "toAssetId",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "fromAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "toAmount",
+        type: "uint256",
+      },
+    ],
+    name: "LiFiGenericSwapCompleted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "transactionId",
+        type: "bytes32",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "integrator",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "referrer",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "fromAssetId",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "toAssetId",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "fromAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "toAmount",
+        type: "uint256",
+      },
+    ],
+    name: "LiFiSwappedGeneric",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "transactionId",
+        type: "bytes32",
+      },
+      {
+        indexed: false,
         internalType: "address",
         name: "receivingAssetId",
         type: "address",
@@ -149,7 +253,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122074a3dc5183860d2a10b79575c36e110bb59e4caddace8e9d139e49b2049a996664736f6c63430008110033";
+  "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220b22f6f432a7cbc47406f6398cdb39460b06a946cc2932eb65764d825cc9cb9ad64736f6c63430008110033";
 
 type SwapperV2ConstructorParams =
   | [signer?: Signer]
