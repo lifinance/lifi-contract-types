@@ -9,10 +9,9 @@ export interface AxelarExecutorInterface extends utils.Interface {
         "gateway()": FunctionFragment;
         "owner()": FunctionFragment;
         "renounceOwnership()": FunctionFragment;
-        "setAxelarGateway(address)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "execute" | "executeWithToken" | "gateway" | "owner" | "renounceOwnership" | "setAxelarGateway" | "transferOwnership"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "execute" | "executeWithToken" | "gateway" | "owner" | "renounceOwnership" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "execute", values: [
         PromiseOrValue<BytesLike>,
         PromiseOrValue<string>,
@@ -30,14 +29,12 @@ export interface AxelarExecutorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "gateway", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setAxelarGateway", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "execute", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "executeWithToken", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "gateway", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setAxelarGateway", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     events: {
         "AxelarExecutionComplete(address,bytes4)": EventFragment;
@@ -112,9 +109,6 @@ export interface AxelarExecutor extends BaseContract {
         renounceOwnership(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setAxelarGateway(_gateway: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -130,9 +124,6 @@ export interface AxelarExecutor extends BaseContract {
     renounceOwnership(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setAxelarGateway(_gateway: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -142,7 +133,6 @@ export interface AxelarExecutor extends BaseContract {
         gateway(overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         renounceOwnership(overrides?: CallOverrides): Promise<void>;
-        setAxelarGateway(_gateway: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -167,9 +157,6 @@ export interface AxelarExecutor extends BaseContract {
         renounceOwnership(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setAxelarGateway(_gateway: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -184,9 +171,6 @@ export interface AxelarExecutor extends BaseContract {
         gateway(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         renounceOwnership(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        setAxelarGateway(_gateway: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
