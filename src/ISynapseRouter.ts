@@ -46,6 +46,16 @@ export declare namespace ISynapseRouter {
     rawParams: string;
   };
 
+  export type BridgeTokenStruct = {
+    symbol: PromiseOrValue<string>;
+    token: PromiseOrValue<string>;
+  };
+
+  export type BridgeTokenStructOutput = [string, string] & {
+    symbol: string;
+    token: string;
+  };
+
   export type DestRequestStruct = {
     symbol: PromiseOrValue<string>;
     amountIn: PromiseOrValue<BigNumberish>;
@@ -60,6 +70,7 @@ export declare namespace ISynapseRouter {
 export interface ISynapseRouterInterface extends utils.Interface {
   functions: {
     "bridge(address,uint256,address,uint256,(address,address,uint256,uint256,bytes),(address,address,uint256,uint256,bytes))": FunctionFragment;
+    "getConnectedBridgeTokens(address)": FunctionFragment;
     "getDestinationAmountOut((string,uint256)[],address)": FunctionFragment;
     "getOriginAmountOut(address,string[],uint256)": FunctionFragment;
   };
@@ -67,6 +78,7 @@ export interface ISynapseRouterInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "bridge"
+      | "getConnectedBridgeTokens"
       | "getDestinationAmountOut"
       | "getOriginAmountOut"
   ): FunctionFragment;
@@ -83,6 +95,10 @@ export interface ISynapseRouterInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "getConnectedBridgeTokens",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getDestinationAmountOut",
     values: [ISynapseRouter.DestRequestStruct[], PromiseOrValue<string>]
   ): string;
@@ -96,6 +112,10 @@ export interface ISynapseRouterInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "bridge", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getConnectedBridgeTokens",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getDestinationAmountOut",
     data: BytesLike
@@ -145,6 +165,15 @@ export interface ISynapseRouter extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getConnectedBridgeTokens(
+      tokenOut: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [ISynapseRouter.BridgeTokenStructOutput[]] & {
+        tokens: ISynapseRouter.BridgeTokenStructOutput[];
+      }
+    >;
+
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
       tokenOut: PromiseOrValue<string>,
@@ -177,6 +206,11 @@ export interface ISynapseRouter extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getConnectedBridgeTokens(
+    tokenOut: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<ISynapseRouter.BridgeTokenStructOutput[]>;
+
   getDestinationAmountOut(
     requests: ISynapseRouter.DestRequestStruct[],
     tokenOut: PromiseOrValue<string>,
@@ -200,6 +234,11 @@ export interface ISynapseRouter extends BaseContract {
       destQuery: ISynapseRouter.SwapQueryStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getConnectedBridgeTokens(
+      tokenOut: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<ISynapseRouter.BridgeTokenStructOutput[]>;
 
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
@@ -228,6 +267,11 @@ export interface ISynapseRouter extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getConnectedBridgeTokens(
+      tokenOut: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
       tokenOut: PromiseOrValue<string>,
@@ -251,6 +295,11 @@ export interface ISynapseRouter extends BaseContract {
       originQuery: ISynapseRouter.SwapQueryStruct,
       destQuery: ISynapseRouter.SwapQueryStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getConnectedBridgeTokens(
+      tokenOut: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getDestinationAmountOut(
