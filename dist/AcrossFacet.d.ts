@@ -43,10 +43,19 @@ export declare namespace AcrossFacet {
     type AcrossDataStruct = {
         relayerFeePct: PromiseOrValue<BigNumberish>;
         quoteTimestamp: PromiseOrValue<BigNumberish>;
+        message: PromiseOrValue<BytesLike>;
+        maxCount: PromiseOrValue<BigNumberish>;
     };
-    type AcrossDataStructOutput = [BigNumber, number] & {
+    type AcrossDataStructOutput = [
+        BigNumber,
+        number,
+        string,
+        BigNumber
+    ] & {
         relayerFeePct: BigNumber;
         quoteTimestamp: number;
+        message: string;
+        maxCount: BigNumber;
     };
 }
 export declare namespace LibSwap {
@@ -79,8 +88,8 @@ export declare namespace LibSwap {
 }
 export interface AcrossFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint64,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint64,uint32))": FunctionFragment;
+        "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(int64,uint32,bytes,uint256))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(int64,uint32,bytes,uint256))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAcross" | "swapAndStartBridgeTokensViaAcross"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAcross", values: [ILiFi.BridgeDataStruct, AcrossFacet.AcrossDataStruct]): string;
