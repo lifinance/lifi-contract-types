@@ -125,16 +125,19 @@ export declare namespace LibSwap {
 
 export interface CelerIMFacetInterface extends utils.Interface {
   functions: {
+    "relayer()": FunctionFragment;
     "startBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
     "swapAndStartBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "relayer"
       | "startBridgeTokensViaCelerIM"
       | "swapAndStartBridgeTokensViaCelerIM"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "relayer", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCelerIM",
     values: [ILiFi.BridgeDataStruct, CelerIMFacet.CelerIMDataStruct]
@@ -148,6 +151,7 @@ export interface CelerIMFacetInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "relayer", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaCelerIM",
     data: BytesLike
@@ -158,15 +162,54 @@ export interface CelerIMFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+
+export interface LiFiGenericSwapCompletedEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  receiver: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiGenericSwapCompletedEvent = TypedEvent<
+  [string, string, string, string, string, string, BigNumber, BigNumber],
+  LiFiGenericSwapCompletedEventObject
+>;
+
+export type LiFiGenericSwapCompletedEventFilter =
+  TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+
+export interface LiFiSwappedGenericEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiSwappedGenericEvent = TypedEvent<
+  [string, string, string, string, string, BigNumber, BigNumber],
+  LiFiSwappedGenericEventObject
+>;
+
+export type LiFiSwappedGenericEventFilter =
+  TypedEventFilter<LiFiSwappedGenericEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -236,6 +279,8 @@ export interface CelerIMFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    relayer(overrides?: CallOverrides): Promise<[string]>;
+
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIMFacet.CelerIMDataStruct,
@@ -249,6 +294,8 @@ export interface CelerIMFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  relayer(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaCelerIM(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -264,6 +311,8 @@ export interface CelerIMFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    relayer(overrides?: CallOverrides): Promise<string>;
+
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIMFacet.CelerIMDataStruct,
@@ -279,6 +328,46 @@ export interface CelerIMFacet extends BaseContract {
   };
 
   filters: {
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+    LiFiGenericSwapCompleted(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
+    LiFiSwappedGeneric(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
+
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       receivingAssetId?: null,
@@ -316,6 +405,8 @@ export interface CelerIMFacet extends BaseContract {
   };
 
   estimateGas: {
+    relayer(overrides?: CallOverrides): Promise<BigNumber>;
+
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIMFacet.CelerIMDataStruct,
@@ -331,6 +422,8 @@ export interface CelerIMFacet extends BaseContract {
   };
 
   populateTransaction: {
+    relayer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIMFacet.CelerIMDataStruct,
