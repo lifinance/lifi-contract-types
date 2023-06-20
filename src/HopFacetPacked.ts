@@ -75,6 +75,9 @@ export declare namespace HopFacetOptimized {
     destinationAmountOutMin: PromiseOrValue<BigNumberish>;
     destinationDeadline: PromiseOrValue<BigNumberish>;
     hopBridge: PromiseOrValue<string>;
+    relayer: PromiseOrValue<string>;
+    relayerFee: PromiseOrValue<BigNumberish>;
+    nativeFee: PromiseOrValue<BigNumberish>;
   };
 
   export type HopDataStructOutput = [
@@ -83,7 +86,10 @@ export declare namespace HopFacetOptimized {
     BigNumber,
     BigNumber,
     BigNumber,
-    string
+    string,
+    string,
+    BigNumber,
+    BigNumber
   ] & {
     bonderFee: BigNumber;
     amountOutMin: BigNumber;
@@ -91,6 +97,9 @@ export declare namespace HopFacetOptimized {
     destinationAmountOutMin: BigNumber;
     destinationDeadline: BigNumber;
     hopBridge: string;
+    relayer: string;
+    relayerFee: BigNumber;
+    nativeFee: BigNumber;
   };
 }
 
@@ -105,7 +114,11 @@ export interface HopFacetPackedInterface extends utils.Interface {
     "encode_startBridgeTokensViaHopL1ERC20Packed(bytes8,address,uint256,address,uint256,uint256,address,uint256,address)": FunctionFragment;
     "encode_startBridgeTokensViaHopL1NativePacked(bytes8,address,uint256,uint256,address,uint256,address)": FunctionFragment;
     "encode_startBridgeTokensViaHopL2ERC20Packed(bytes32,address,uint256,address,uint256,uint256,uint256,uint256,uint256,address)": FunctionFragment;
-    "encode_startBridgeTokensViaHopL2NativePacked(bytes8,address,uint256,uint256,uint256,uint256,uint256,address)": FunctionFragment;
+    "encode_startBridgeTokensViaHopL2NativePacked(bytes8,address,uint256,uint256,uint256)": FunctionFragment;
+    "nativeBridge()": FunctionFragment;
+    "nativeExchangeAddress()": FunctionFragment;
+    "nativeHToken()": FunctionFragment;
+    "nativeL2CanonicalToken()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "setApprovalForHopBridges(address[],address[])": FunctionFragment;
@@ -132,6 +145,10 @@ export interface HopFacetPackedInterface extends utils.Interface {
       | "encode_startBridgeTokensViaHopL1NativePacked"
       | "encode_startBridgeTokensViaHopL2ERC20Packed"
       | "encode_startBridgeTokensViaHopL2NativePacked"
+      | "nativeBridge"
+      | "nativeExchangeAddress"
+      | "nativeHToken"
+      | "nativeL2CanonicalToken"
       | "owner"
       | "pendingOwner"
       | "setApprovalForHopBridges"
@@ -218,11 +235,24 @@ export interface HopFacetPackedInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nativeBridge",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nativeExchangeAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nativeHToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nativeL2CanonicalToken",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -348,6 +378,22 @@ export interface HopFacetPackedInterface extends utils.Interface {
     functionFragment: "encode_startBridgeTokensViaHopL2NativePacked",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "nativeBridge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "nativeExchangeAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "nativeHToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "nativeL2CanonicalToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
@@ -395,7 +441,9 @@ export interface HopFacetPackedInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiHopTransfer(bytes8)": EventFragment;
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
@@ -403,13 +451,33 @@ export interface HopFacetPackedInterface extends utils.Interface {
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiHopTransfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export interface LiFiGenericSwapCompletedEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  receiver: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiGenericSwapCompletedEvent = TypedEvent<
+  [string, string, string, string, string, string, BigNumber, BigNumber],
+  LiFiGenericSwapCompletedEventObject
+>;
+
+export type LiFiGenericSwapCompletedEventFilter =
+  TypedEventFilter<LiFiGenericSwapCompletedEvent>;
 
 export interface LiFiHopTransferEventObject {
   _transactionId: string;
@@ -420,6 +488,23 @@ export type LiFiHopTransferEvent = TypedEvent<
 >;
 
 export type LiFiHopTransferEventFilter = TypedEventFilter<LiFiHopTransferEvent>;
+
+export interface LiFiSwappedGenericEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiSwappedGenericEvent = TypedEvent<
+  [string, string, string, string, string, BigNumber, BigNumber],
+  LiFiSwappedGenericEventObject
+>;
+
+export type LiFiSwappedGenericEventFilter =
+  TypedEventFilter<LiFiSwappedGenericEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -583,7 +668,7 @@ export interface HopFacetPacked extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       destinationAmountOutMin: PromiseOrValue<BigNumberish>,
       destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      wrapper: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -593,11 +678,16 @@ export interface HopFacetPacked extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       bonderFee: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    nativeBridge(overrides?: CallOverrides): Promise<[string]>;
+
+    nativeExchangeAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    nativeHToken(overrides?: CallOverrides): Promise<[string]>;
+
+    nativeL2CanonicalToken(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -751,7 +841,7 @@ export interface HopFacetPacked extends BaseContract {
     amountOutMin: PromiseOrValue<BigNumberish>,
     destinationAmountOutMin: PromiseOrValue<BigNumberish>,
     destinationDeadline: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
+    wrapper: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -761,11 +851,16 @@ export interface HopFacetPacked extends BaseContract {
     destinationChainId: PromiseOrValue<BigNumberish>,
     bonderFee: PromiseOrValue<BigNumberish>,
     amountOutMin: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    destinationDeadline: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  nativeBridge(overrides?: CallOverrides): Promise<string>;
+
+  nativeExchangeAddress(overrides?: CallOverrides): Promise<string>;
+
+  nativeHToken(overrides?: CallOverrides): Promise<string>;
+
+  nativeL2CanonicalToken(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -915,7 +1010,7 @@ export interface HopFacetPacked extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       destinationAmountOutMin: PromiseOrValue<BigNumberish>,
       destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      wrapper: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -925,11 +1020,16 @@ export interface HopFacetPacked extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       bonderFee: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    nativeBridge(overrides?: CallOverrides): Promise<string>;
+
+    nativeExchangeAddress(overrides?: CallOverrides): Promise<string>;
+
+    nativeHToken(overrides?: CallOverrides): Promise<string>;
+
+    nativeL2CanonicalToken(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -1014,10 +1114,50 @@ export interface HopFacetPacked extends BaseContract {
   };
 
   filters: {
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+    LiFiGenericSwapCompleted(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+
     "LiFiHopTransfer(bytes8)"(
       _transactionId?: null
     ): LiFiHopTransferEventFilter;
     LiFiHopTransfer(_transactionId?: null): LiFiHopTransferEventFilter;
+
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
+    LiFiSwappedGeneric(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -1136,7 +1276,7 @@ export interface HopFacetPacked extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       destinationAmountOutMin: PromiseOrValue<BigNumberish>,
       destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      wrapper: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1146,11 +1286,16 @@ export interface HopFacetPacked extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       bonderFee: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    nativeBridge(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nativeExchangeAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nativeHToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nativeL2CanonicalToken(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1297,7 +1442,7 @@ export interface HopFacetPacked extends BaseContract {
       amountOutMin: PromiseOrValue<BigNumberish>,
       destinationAmountOutMin: PromiseOrValue<BigNumberish>,
       destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      wrapper: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1307,9 +1452,18 @@ export interface HopFacetPacked extends BaseContract {
       destinationChainId: PromiseOrValue<BigNumberish>,
       bonderFee: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    nativeBridge(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    nativeExchangeAddress(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    nativeHToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    nativeL2CanonicalToken(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
