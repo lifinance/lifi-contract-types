@@ -47,21 +47,24 @@ export declare namespace AllBridgeFacet {
         receiveToken: PromiseOrValue<BytesLike>;
         nonce: PromiseOrValue<BigNumberish>;
         messenger: PromiseOrValue<BigNumberish>;
+        payFeeWithSendingAsset: PromiseOrValue<boolean>;
     };
     type AllBridgeDataStructOutput = [
         BigNumber,
         string,
-        number,
+        BigNumber,
         string,
         BigNumber,
-        number
+        number,
+        boolean
     ] & {
         fees: BigNumber;
         recipient: string;
-        destinationChainId: number;
+        destinationChainId: BigNumber;
         receiveToken: string;
         nonce: BigNumber;
         messenger: number;
+        payFeeWithSendingAsset: boolean;
     };
 }
 export declare namespace LibSwap {
@@ -94,8 +97,8 @@ export declare namespace LibSwap {
 }
 export interface AllBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint8,bytes32,uint256,uint8))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,uint8,bytes32,uint256,uint8))": FunctionFragment;
+        "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAllBridge", values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]): string;

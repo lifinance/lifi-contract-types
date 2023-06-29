@@ -9,6 +9,78 @@ var _abi = [
     {
         inputs: [
             {
+                internalType: "uint256",
+                name: "destinationChainId",
+                type: "uint256",
+            },
+            {
+                internalType: "enum IAllBridge.MessengerProtocol",
+                name: "messenger",
+                type: "uint8",
+            },
+            {
+                internalType: "address",
+                name: "tokenAddress",
+                type: "address",
+            },
+        ],
+        name: "getBridgingCostInTokens",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "chainId",
+                type: "uint256",
+            },
+            {
+                internalType: "enum IAllBridge.MessengerProtocol",
+                name: "protocol",
+                type: "uint8",
+            },
+        ],
+        name: "getMessageCost",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "chainId",
+                type: "uint256",
+            },
+        ],
+        name: "getTransactionCost",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
                 internalType: "bytes32",
                 name: "addr",
                 type: "bytes32",
@@ -43,9 +115,9 @@ var _abi = [
                 type: "bytes32",
             },
             {
-                internalType: "uint8",
+                internalType: "uint256",
                 name: "destinationChainId",
-                type: "uint8",
+                type: "uint256",
             },
             {
                 internalType: "bytes32",
@@ -61,6 +133,11 @@ var _abi = [
                 internalType: "enum IAllBridge.MessengerProtocol",
                 name: "messenger",
                 type: "uint8",
+            },
+            {
+                internalType: "uint256",
+                name: "feeTokenAmount",
+                type: "uint256",
             },
         ],
         name: "swapAndBridge",

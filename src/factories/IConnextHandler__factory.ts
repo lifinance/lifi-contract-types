@@ -59,60 +59,6 @@ const _abi = [
     stateMutability: "payable",
     type: "function",
   },
-  {
-    inputs: [
-      {
-        internalType: "uint32",
-        name: "destination",
-        type: "uint32",
-      },
-      {
-        internalType: "address",
-        name: "recipient",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "tokenAddress",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "delegate",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "slippage",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes",
-        name: "callData",
-        type: "bytes",
-      },
-      {
-        internalType: "uint256",
-        name: "_relayerFee",
-        type: "uint256",
-      },
-    ],
-    name: "xcall",
-    outputs: [
-      {
-        internalType: "bytes32",
-        name: "",
-        type: "bytes32",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
 ] as const;
 
 export class IConnextHandler__factory {
