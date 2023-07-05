@@ -76,6 +76,29 @@ export declare class ISynapseRouter__factory {
         readonly type: "function";
     }, {
         readonly inputs: readonly [{
+            readonly internalType: "address";
+            readonly name: "tokenOut";
+            readonly type: "address";
+        }];
+        readonly name: "getConnectedBridgeTokens";
+        readonly outputs: readonly [{
+            readonly components: readonly [{
+                readonly internalType: "string";
+                readonly name: "symbol";
+                readonly type: "string";
+            }, {
+                readonly internalType: "address";
+                readonly name: "token";
+                readonly type: "address";
+            }];
+            readonly internalType: "struct ISynapseRouter.BridgeToken[]";
+            readonly name: "tokens";
+            readonly type: "tuple[]";
+        }];
+        readonly stateMutability: "view";
+        readonly type: "function";
+    }, {
+        readonly inputs: readonly [{
             readonly components: readonly [{
                 readonly internalType: "string";
                 readonly name: "symbol";
