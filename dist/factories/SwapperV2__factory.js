@@ -32,6 +32,110 @@ var _abi = [
             },
             {
                 indexed: false,
+                internalType: "string",
+                name: "integrator",
+                type: "string",
+            },
+            {
+                indexed: false,
+                internalType: "string",
+                name: "referrer",
+                type: "string",
+            },
+            {
+                indexed: false,
+                internalType: "address",
+                name: "receiver",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "address",
+                name: "fromAssetId",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "address",
+                name: "toAssetId",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "fromAmount",
+                type: "uint256",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "toAmount",
+                type: "uint256",
+            },
+        ],
+        name: "LiFiGenericSwapCompleted",
+        type: "event",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "bytes32",
+                name: "transactionId",
+                type: "bytes32",
+            },
+            {
+                indexed: false,
+                internalType: "string",
+                name: "integrator",
+                type: "string",
+            },
+            {
+                indexed: false,
+                internalType: "string",
+                name: "referrer",
+                type: "string",
+            },
+            {
+                indexed: false,
+                internalType: "address",
+                name: "fromAssetId",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "address",
+                name: "toAssetId",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "fromAmount",
+                type: "uint256",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "toAmount",
+                type: "uint256",
+            },
+        ],
+        name: "LiFiSwappedGeneric",
+        type: "event",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "bytes32",
+                name: "transactionId",
+                type: "bytes32",
+            },
+            {
+                indexed: false,
                 internalType: "address",
                 name: "receivingAssetId",
                 type: "address",
@@ -161,7 +265,7 @@ var _abi = [
         type: "event",
     },
 ];
-var _bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212206d454d5ec0a4a326c821347667c7604ca4184cfa182a6be2d4bb621e29713ed164736f6c63430008110033";
+var _bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220d74486da699e303e771c508c96866f79386e21befc78b1af39bb27ca2280276d64736f6c63430008110033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var SwapperV2__factory = /** @class */ (function (_super) {
     __extends(SwapperV2__factory, _super);
