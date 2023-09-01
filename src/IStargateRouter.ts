@@ -35,6 +35,16 @@ export declare namespace IStargateRouter {
     dstNativeAmount: BigNumber;
     dstNativeAddr: string;
   };
+
+  export type SwapAmountStruct = {
+    amountLD: PromiseOrValue<BigNumberish>;
+    minAmountLD: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SwapAmountStructOutput = [BigNumber, BigNumber] & {
+    amountLD: BigNumber;
+    minAmountLD: BigNumber;
+  };
 }
 
 export interface IStargateRouterInterface extends utils.Interface {
@@ -42,10 +52,15 @@ export interface IStargateRouterInterface extends utils.Interface {
     "factory()": FunctionFragment;
     "quoteLayerZeroFee(uint16,uint8,bytes,bytes,(uint256,uint256,bytes))": FunctionFragment;
     "swap(uint16,uint256,uint256,address,uint256,uint256,(uint256,uint256,bytes),bytes,bytes)": FunctionFragment;
+    "swapETHAndCall(uint16,address,bytes,(uint256,uint256),(uint256,uint256,bytes),bytes)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "factory" | "quoteLayerZeroFee" | "swap"
+    nameOrSignatureOrTopic:
+      | "factory"
+      | "quoteLayerZeroFee"
+      | "swap"
+      | "swapETHAndCall"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
@@ -73,6 +88,17 @@ export interface IStargateRouterInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "swapETHAndCall",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      IStargateRouter.SwapAmountStruct,
+      IStargateRouter.LzTxObjStruct,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
 
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(
@@ -80,6 +106,10 @@ export interface IStargateRouterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "swapETHAndCall",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -136,6 +166,16 @@ export interface IStargateRouter extends BaseContract {
       payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    swapETHAndCall(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _refundAddress: PromiseOrValue<string>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _swapAmount: IStargateRouter.SwapAmountStruct,
+      _lzTxParams: IStargateRouter.LzTxObjStruct,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   factory(overrides?: CallOverrides): Promise<string>;
@@ -164,6 +204,16 @@ export interface IStargateRouter extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  swapETHAndCall(
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _refundAddress: PromiseOrValue<string>,
+    _toAddress: PromiseOrValue<BytesLike>,
+    _swapAmount: IStargateRouter.SwapAmountStruct,
+    _lzTxParams: IStargateRouter.LzTxObjStruct,
+    _payload: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     factory(overrides?: CallOverrides): Promise<string>;
 
@@ -188,6 +238,16 @@ export interface IStargateRouter extends BaseContract {
       lzTxParams: IStargateRouter.LzTxObjStruct,
       to: PromiseOrValue<BytesLike>,
       payload: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapETHAndCall(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _refundAddress: PromiseOrValue<string>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _swapAmount: IStargateRouter.SwapAmountStruct,
+      _lzTxParams: IStargateRouter.LzTxObjStruct,
+      _payload: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -218,6 +278,16 @@ export interface IStargateRouter extends BaseContract {
       payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    swapETHAndCall(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _refundAddress: PromiseOrValue<string>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _swapAmount: IStargateRouter.SwapAmountStruct,
+      _lzTxParams: IStargateRouter.LzTxObjStruct,
+      _payload: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -242,6 +312,16 @@ export interface IStargateRouter extends BaseContract {
       lzTxParams: IStargateRouter.LzTxObjStruct,
       to: PromiseOrValue<BytesLike>,
       payload: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapETHAndCall(
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _refundAddress: PromiseOrValue<string>,
+      _toAddress: PromiseOrValue<BytesLike>,
+      _swapAmount: IStargateRouter.SwapAmountStruct,
+      _lzTxParams: IStargateRouter.LzTxObjStruct,
+      _payload: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
