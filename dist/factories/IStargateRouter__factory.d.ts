@@ -114,6 +114,58 @@ export declare class IStargateRouter__factory {
         readonly outputs: readonly [];
         readonly stateMutability: "payable";
         readonly type: "function";
+    }, {
+        readonly inputs: readonly [{
+            readonly internalType: "uint16";
+            readonly name: "_dstChainId";
+            readonly type: "uint16";
+        }, {
+            readonly internalType: "address payable";
+            readonly name: "_refundAddress";
+            readonly type: "address";
+        }, {
+            readonly internalType: "bytes";
+            readonly name: "_toAddress";
+            readonly type: "bytes";
+        }, {
+            readonly components: readonly [{
+                readonly internalType: "uint256";
+                readonly name: "amountLD";
+                readonly type: "uint256";
+            }, {
+                readonly internalType: "uint256";
+                readonly name: "minAmountLD";
+                readonly type: "uint256";
+            }];
+            readonly internalType: "struct IStargateRouter.SwapAmount";
+            readonly name: "_swapAmount";
+            readonly type: "tuple";
+        }, {
+            readonly components: readonly [{
+                readonly internalType: "uint256";
+                readonly name: "dstGasForCall";
+                readonly type: "uint256";
+            }, {
+                readonly internalType: "uint256";
+                readonly name: "dstNativeAmount";
+                readonly type: "uint256";
+            }, {
+                readonly internalType: "bytes";
+                readonly name: "dstNativeAddr";
+                readonly type: "bytes";
+            }];
+            readonly internalType: "struct IStargateRouter.lzTxObj";
+            readonly name: "_lzTxParams";
+            readonly type: "tuple";
+        }, {
+            readonly internalType: "bytes";
+            readonly name: "_payload";
+            readonly type: "bytes";
+        }];
+        readonly name: "swapETHAndCall";
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
+        readonly type: "function";
     }];
     static createInterface(): IStargateRouterInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IStargateRouter;
