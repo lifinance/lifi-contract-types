@@ -68,16 +68,6 @@ export declare namespace ILiFi {
 }
 
 export declare namespace StargateFacet {
-  export type PoolIdConfigStruct = {
-    token: PromiseOrValue<string>;
-    poolId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type PoolIdConfigStructOutput = [string, number] & {
-    token: string;
-    poolId: number;
-  };
-
   export type ChainIdConfigStruct = {
     chainId: PromiseOrValue<BigNumberish>;
     layerZeroChainId: PromiseOrValue<BigNumberish>;
@@ -89,6 +79,7 @@ export declare namespace StargateFacet {
   };
 
   export type StargateDataStruct = {
+    srcPoolId: PromiseOrValue<BigNumberish>;
     dstPoolId: PromiseOrValue<BigNumberish>;
     minAmountLD: PromiseOrValue<BigNumberish>;
     dstGasForCall: PromiseOrValue<BigNumberish>;
@@ -103,10 +94,12 @@ export declare namespace StargateFacet {
     BigNumber,
     BigNumber,
     BigNumber,
+    BigNumber,
     string,
     string,
     string
   ] & {
+    srcPoolId: BigNumber;
     dstPoolId: BigNumber;
     minAmountLD: BigNumber;
     dstGasForCall: BigNumber;
@@ -149,12 +142,11 @@ export declare namespace LibSwap {
 
 export interface StargateFacetInterface extends utils.Interface {
   functions: {
-    "initStargate((address,uint16)[],(uint256,uint16)[])": FunctionFragment;
-    "quoteLayerZeroFee(uint256,(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
+    "initStargate((uint256,uint16)[])": FunctionFragment;
+    "quoteLayerZeroFee(uint256,(uint256,uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
     "setLayerZeroChainId(uint256,uint16)": FunctionFragment;
-    "setStargatePoolId(address,uint16)": FunctionFragment;
-    "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
+    "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,address,bytes,bytes))": FunctionFragment;
   };
 
   getFunction(
@@ -162,17 +154,13 @@ export interface StargateFacetInterface extends utils.Interface {
       | "initStargate"
       | "quoteLayerZeroFee"
       | "setLayerZeroChainId"
-      | "setStargatePoolId"
       | "startBridgeTokensViaStargate"
       | "swapAndStartBridgeTokensViaStargate"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "initStargate",
-    values: [
-      StargateFacet.PoolIdConfigStruct[],
-      StargateFacet.ChainIdConfigStruct[]
-    ]
+    values: [StargateFacet.ChainIdConfigStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "quoteLayerZeroFee",
@@ -181,10 +169,6 @@ export interface StargateFacetInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setLayerZeroChainId",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setStargatePoolId",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaStargate",
@@ -212,10 +196,6 @@ export interface StargateFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setStargatePoolId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "startBridgeTokensViaStargate",
     data: BytesLike
   ): Result;
@@ -226,19 +206,23 @@ export interface StargateFacetInterface extends utils.Interface {
 
   events: {
     "LayerZeroChainIdSet(uint256,uint16)": EventFragment;
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "StargateInitialized(tuple[],tuple[])": EventFragment;
-    "StargatePoolIdSet(address,uint256)": EventFragment;
+    "PartnerSwap(bytes2)": EventFragment;
+    "StargateInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LayerZeroChainIdSet"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PartnerSwap"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "StargateInitialized"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "StargatePoolIdSet"): EventFragment;
 }
 
 export interface LayerZeroChainIdSetEventObject {
@@ -252,6 +236,41 @@ export type LayerZeroChainIdSetEvent = TypedEvent<
 
 export type LayerZeroChainIdSetEventFilter =
   TypedEventFilter<LayerZeroChainIdSetEvent>;
+
+export interface LiFiGenericSwapCompletedEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  receiver: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiGenericSwapCompletedEvent = TypedEvent<
+  [string, string, string, string, string, string, BigNumber, BigNumber],
+  LiFiGenericSwapCompletedEventObject
+>;
+
+export type LiFiGenericSwapCompletedEventFilter =
+  TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+
+export interface LiFiSwappedGenericEventObject {
+  transactionId: string;
+  integrator: string;
+  referrer: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+}
+export type LiFiSwappedGenericEvent = TypedEvent<
+  [string, string, string, string, string, BigNumber, BigNumber],
+  LiFiSwappedGenericEventObject
+>;
+
+export type LiFiSwappedGenericEventFilter =
+  TypedEventFilter<LiFiSwappedGenericEvent>;
 
 export interface LiFiTransferCompletedEventObject {
   transactionId: string;
@@ -294,32 +313,23 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
+export interface PartnerSwapEventObject {
+  partnerId: string;
+}
+export type PartnerSwapEvent = TypedEvent<[string], PartnerSwapEventObject>;
+
+export type PartnerSwapEventFilter = TypedEventFilter<PartnerSwapEvent>;
+
 export interface StargateInitializedEventObject {
-  poolIdConfigs: StargateFacet.PoolIdConfigStructOutput[];
   chainIdConfigs: StargateFacet.ChainIdConfigStructOutput[];
 }
 export type StargateInitializedEvent = TypedEvent<
-  [
-    StargateFacet.PoolIdConfigStructOutput[],
-    StargateFacet.ChainIdConfigStructOutput[]
-  ],
+  [StargateFacet.ChainIdConfigStructOutput[]],
   StargateInitializedEventObject
 >;
 
 export type StargateInitializedEventFilter =
   TypedEventFilter<StargateInitializedEvent>;
-
-export interface StargatePoolIdSetEventObject {
-  token: string;
-  poolId: BigNumber;
-}
-export type StargatePoolIdSetEvent = TypedEvent<
-  [string, BigNumber],
-  StargatePoolIdSetEventObject
->;
-
-export type StargatePoolIdSetEventFilter =
-  TypedEventFilter<StargatePoolIdSetEvent>;
 
 export interface StargateFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -349,7 +359,6 @@ export interface StargateFacet extends BaseContract {
 
   functions: {
     initStargate(
-      poolIdConfigs: StargateFacet.PoolIdConfigStruct[],
       chainIdConfigs: StargateFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -363,12 +372,6 @@ export interface StargateFacet extends BaseContract {
     setLayerZeroChainId(
       _chainId: PromiseOrValue<BigNumberish>,
       _layerZeroChainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setStargatePoolId(
-      _token: PromiseOrValue<string>,
-      _poolId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -387,7 +390,6 @@ export interface StargateFacet extends BaseContract {
   };
 
   initStargate(
-    poolIdConfigs: StargateFacet.PoolIdConfigStruct[],
     chainIdConfigs: StargateFacet.ChainIdConfigStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -401,12 +403,6 @@ export interface StargateFacet extends BaseContract {
   setLayerZeroChainId(
     _chainId: PromiseOrValue<BigNumberish>,
     _layerZeroChainId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setStargatePoolId(
-    _token: PromiseOrValue<string>,
-    _poolId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -425,7 +421,6 @@ export interface StargateFacet extends BaseContract {
 
   callStatic: {
     initStargate(
-      poolIdConfigs: StargateFacet.PoolIdConfigStruct[],
       chainIdConfigs: StargateFacet.ChainIdConfigStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
@@ -439,12 +434,6 @@ export interface StargateFacet extends BaseContract {
     setLayerZeroChainId(
       _chainId: PromiseOrValue<BigNumberish>,
       _layerZeroChainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setStargatePoolId(
-      _token: PromiseOrValue<string>,
-      _poolId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -471,6 +460,46 @@ export interface StargateFacet extends BaseContract {
       chainId?: PromiseOrValue<BigNumberish> | null,
       layerZeroChainId?: null
     ): LayerZeroChainIdSetEventFilter;
+
+    "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+    LiFiGenericSwapCompleted(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      receiver?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiGenericSwapCompletedEventFilter;
+
+    "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
+    LiFiSwappedGeneric(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      integrator?: null,
+      referrer?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null
+    ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -507,28 +536,17 @@ export interface StargateFacet extends BaseContract {
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
-    "StargateInitialized(tuple[],tuple[])"(
-      poolIdConfigs?: null,
-      chainIdConfigs?: null
-    ): StargateInitializedEventFilter;
-    StargateInitialized(
-      poolIdConfigs?: null,
-      chainIdConfigs?: null
-    ): StargateInitializedEventFilter;
+    "PartnerSwap(bytes2)"(partnerId?: null): PartnerSwapEventFilter;
+    PartnerSwap(partnerId?: null): PartnerSwapEventFilter;
 
-    "StargatePoolIdSet(address,uint256)"(
-      token?: PromiseOrValue<string> | null,
-      poolId?: null
-    ): StargatePoolIdSetEventFilter;
-    StargatePoolIdSet(
-      token?: PromiseOrValue<string> | null,
-      poolId?: null
-    ): StargatePoolIdSetEventFilter;
+    "StargateInitialized(tuple[])"(
+      chainIdConfigs?: null
+    ): StargateInitializedEventFilter;
+    StargateInitialized(chainIdConfigs?: null): StargateInitializedEventFilter;
   };
 
   estimateGas: {
     initStargate(
-      poolIdConfigs: StargateFacet.PoolIdConfigStruct[],
       chainIdConfigs: StargateFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -542,12 +560,6 @@ export interface StargateFacet extends BaseContract {
     setLayerZeroChainId(
       _chainId: PromiseOrValue<BigNumberish>,
       _layerZeroChainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setStargatePoolId(
-      _token: PromiseOrValue<string>,
-      _poolId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -567,7 +579,6 @@ export interface StargateFacet extends BaseContract {
 
   populateTransaction: {
     initStargate(
-      poolIdConfigs: StargateFacet.PoolIdConfigStruct[],
       chainIdConfigs: StargateFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -581,12 +592,6 @@ export interface StargateFacet extends BaseContract {
     setLayerZeroChainId(
       _chainId: PromiseOrValue<BigNumberish>,
       _layerZeroChainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setStargatePoolId(
-      _token: PromiseOrValue<string>,
-      _poolId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
