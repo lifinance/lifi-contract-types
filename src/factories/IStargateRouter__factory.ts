@@ -154,6 +154,73 @@ const _abi = [
     stateMutability: "payable",
     type: "function",
   },
+  {
+    inputs: [
+      {
+        internalType: "uint16",
+        name: "_dstChainId",
+        type: "uint16",
+      },
+      {
+        internalType: "address payable",
+        name: "_refundAddress",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "_toAddress",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "amountLD",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "minAmountLD",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct IStargateRouter.SwapAmount",
+        name: "_swapAmount",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "dstGasForCall",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "dstNativeAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "bytes",
+            name: "dstNativeAddr",
+            type: "bytes",
+          },
+        ],
+        internalType: "struct IStargateRouter.lzTxObj",
+        name: "_lzTxParams",
+        type: "tuple",
+      },
+      {
+        internalType: "bytes",
+        name: "_payload",
+        type: "bytes",
+      },
+    ],
+    name: "swapETHAndCall",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
 ] as const;
 
 export class IStargateRouter__factory {
