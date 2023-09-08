@@ -77,17 +77,13 @@ export interface ReceiverInterface extends utils.Interface {
         "pendingOwner()": FunctionFragment;
         "pullToken(address,address,uint256)": FunctionFragment;
         "recoverGas()": FunctionFragment;
-        "setAmarokRouter(address)": FunctionFragment;
-        "setExecutor(address)": FunctionFragment;
-        "setRecoverGas(uint256)": FunctionFragment;
-        "setStargateRouter(address)": FunctionFragment;
         "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
         "sgRouter()": FunctionFragment;
         "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
         "xReceive(bytes32,uint256,address,address,uint32,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "amarokRouter" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executor" | "owner" | "pendingOwner" | "pullToken" | "recoverGas" | "setAmarokRouter" | "setExecutor" | "setRecoverGas" | "setStargateRouter" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "transferOwnership" | "xReceive"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "amarokRouter" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executor" | "owner" | "pendingOwner" | "pullToken" | "recoverGas" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "transferOwnership" | "xReceive"): FunctionFragment;
     encodeFunctionData(functionFragment: "amarokRouter", values?: undefined): string;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
@@ -100,10 +96,6 @@ export interface ReceiverInterface extends utils.Interface {
         PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "recoverGas", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setAmarokRouter", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "setExecutor", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "setRecoverGas", values: [PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "setStargateRouter", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "sgReceive", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>,
@@ -136,10 +128,6 @@ export interface ReceiverInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pullToken", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "recoverGas", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setAmarokRouter", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setExecutor", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setRecoverGas", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setStargateRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sgReceive", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sgRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndCompleteBridgeTokens", data: BytesLike): Result;
@@ -148,6 +136,8 @@ export interface ReceiverInterface extends utils.Interface {
     events: {
         "AmarokRouterSet(address)": EventFragment;
         "ExecutorSet(address)": EventFragment;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
@@ -158,6 +148,8 @@ export interface ReceiverInterface extends utils.Interface {
     };
     getEvent(nameOrSignatureOrTopic: "AmarokRouterSet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ExecutorSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
@@ -178,6 +170,46 @@ export interface ExecutorSetEventObject {
 }
 export declare type ExecutorSetEvent = TypedEvent<[string], ExecutorSetEventObject>;
 export declare type ExecutorSetEventFilter = TypedEventFilter<ExecutorSetEvent>;
+export interface LiFiGenericSwapCompletedEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    receiver: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiGenericSwapCompletedEventObject>;
+export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export interface LiFiSwappedGenericEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export declare type LiFiSwappedGenericEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiSwappedGenericEventObject>;
+export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -276,18 +308,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<[BigNumber]>;
-        setAmarokRouter(_amarokRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        setExecutor(_executor: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        setRecoverGas(_recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        setStargateRouter(_sgRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -316,18 +336,6 @@ export interface Receiver extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-    setAmarokRouter(_amarokRouter: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    setExecutor(_executor: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    setRecoverGas(_recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    setStargateRouter(_sgRouter: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -350,10 +358,6 @@ export interface Receiver extends BaseContract {
         pendingOwner(overrides?: CallOverrides): Promise<string>;
         pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-        setAmarokRouter(_amarokRouter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        setExecutor(_executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        setRecoverGas(_recoverGas: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        setStargateRouter(_sgRouter: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
         sgRouter(overrides?: CallOverrides): Promise<string>;
         swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
@@ -365,6 +369,10 @@ export interface Receiver extends BaseContract {
         AmarokRouterSet(router?: PromiseOrValue<string> | null): AmarokRouterSetEventFilter;
         "ExecutorSet(address)"(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
         ExecutorSet(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
@@ -395,18 +403,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-        setAmarokRouter(_amarokRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        setExecutor(_executor: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        setRecoverGas(_recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        setStargateRouter(_sgRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -436,18 +432,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setAmarokRouter(_amarokRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        setExecutor(_executor: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        setRecoverGas(_recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        setStargateRouter(_sgRouter: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
