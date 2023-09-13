@@ -83,6 +83,7 @@ export { LibDiamond__factory } from "./LibDiamond__factory";
 export { LibSwap__factory } from "./LibSwap__factory";
 export { MakerTeleportFacet__factory } from "./MakerTeleportFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
+export { OpBNBBridgeFacet__factory } from "./OpBNBBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";
 export { Ownable__factory } from "./Ownable__factory";
 export { OwnershipFacet__factory } from "./OwnershipFacet__factory";
