@@ -89,6 +89,7 @@ export type { LibDiamond } from "./LibDiamond";
 export type { LibSwap } from "./LibSwap";
 export type { MakerTeleportFacet } from "./MakerTeleportFacet";
 export type { OmniBridgeFacet } from "./OmniBridgeFacet";
+export type { OpBNBBridgeFacet } from "./OpBNBBridgeFacet";
 export type { OptimismBridgeFacet } from "./OptimismBridgeFacet";
 export type { Ownable } from "./Ownable";
 export type { OwnershipFacet } from "./OwnershipFacet";
@@ -199,6 +200,7 @@ export { IMultichainERC20__factory } from "./factories/MultichainFacet.sol/IMult
 export type { MultichainFacet } from "./MultichainFacet.sol/MultichainFacet";
 export { MultichainFacet__factory } from "./factories/MultichainFacet.sol/MultichainFacet__factory";
 export { OmniBridgeFacet__factory } from "./factories/OmniBridgeFacet__factory";
+export { OpBNBBridgeFacet__factory } from "./factories/OpBNBBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./factories/OptimismBridgeFacet__factory";
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { OwnershipFacet__factory } from "./factories/OwnershipFacet__factory";
