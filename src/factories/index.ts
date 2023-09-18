@@ -14,6 +14,7 @@ export { AmarokFacet__factory } from "./AmarokFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./ArbitrumBridgeFacet__factory";
 export { CBridgeFacet__factory } from "./CBridgeFacet__factory";
 export { CBridgeFacetPacked__factory } from "./CBridgeFacetPacked__factory";
+export { CCIPFacet__factory } from "./CCIPFacet__factory";
 export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet__factory";
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { CelerIMFacetImmutable__factory } from "./CelerIMFacetImmutable__factory";

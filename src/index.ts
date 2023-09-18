@@ -20,6 +20,7 @@ export type { AmarokFacet } from "./AmarokFacet";
 export type { ArbitrumBridgeFacet } from "./ArbitrumBridgeFacet";
 export type { CBridgeFacet } from "./CBridgeFacet";
 export type { CBridgeFacetPacked } from "./CBridgeFacetPacked";
+export type { CCIPFacet } from "./CCIPFacet";
 export type { CalldataVerificationFacet } from "./CalldataVerificationFacet";
 export type { CelerCircleBridgeFacet } from "./CelerCircleBridgeFacet";
 export type { CelerIMFacetImmutable } from "./CelerIMFacetImmutable";
@@ -119,6 +120,7 @@ export { ArbitrumBridgeFacet__factory } from "./factories/ArbitrumBridgeFacet__f
 export { CalldataVerificationFacet__factory } from "./factories/CalldataVerificationFacet__factory";
 export { CBridgeFacet__factory } from "./factories/CBridgeFacet__factory";
 export { CBridgeFacetPacked__factory } from "./factories/CBridgeFacetPacked__factory";
+export { CCIPFacet__factory } from "./factories/CCIPFacet__factory";
 export { CelerCircleBridgeFacet__factory } from "./factories/CelerCircleBridgeFacet__factory";
 export { CelerIMFacetImmutable__factory } from "./factories/CelerIMFacetImmutable__factory";
 export { CelerIMFacetMutable__factory } from "./factories/CelerIMFacetMutable__factory";
