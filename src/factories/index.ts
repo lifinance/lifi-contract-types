@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as iHopBridgeSol from "./IHopBridge.sol";
+export * as ioftSol from "./IOFT.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as vmSol from "./Vm.sol";
@@ -85,6 +86,7 @@ export { LibBytes__factory } from "./LibBytes__factory";
 export { LibDiamond__factory } from "./LibDiamond__factory";
 export { LibSwap__factory } from "./LibSwap__factory";
 export { MakerTeleportFacet__factory } from "./MakerTeleportFacet__factory";
+export { OFTWrapperFacet__factory } from "./OFTWrapperFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";
 export { Ownable__factory } from "./Ownable__factory";
