@@ -77,6 +77,7 @@ export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { LIFuelFacet__factory } from "./LIFuelFacet__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiDiamondImmutable__factory } from "./LiFiDiamondImmutable__factory";
+export { LiFuelFeeCollector__factory } from "./LiFuelFeeCollector__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
 export { LibDiamond__factory } from "./LibDiamond__factory";
