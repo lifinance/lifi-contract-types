@@ -1,3 +1,4 @@
+export * as erc20 from "./ERC20";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
@@ -48,6 +49,7 @@ export { IERC1155Receiver__factory } from "./IERC1155Receiver__factory";
 export { IERC165__factory } from "./IERC165__factory";
 export { IERC173__factory } from "./IERC173__factory";
 export { IERC20__factory } from "./IERC20__factory";
+export { IERC20Metadata__factory } from "./IERC20Metadata__factory";
 export { IERC20Permit__factory } from "./IERC20Permit__factory";
 export { IERC20Proxy__factory } from "./IERC20Proxy__factory";
 export { IERC721Receiver__factory } from "./IERC721Receiver__factory";
@@ -66,6 +68,7 @@ export { IOriginalTokenVaultV2__factory } from "./IOriginalTokenVaultV2__factory
 export { IPeggedTokenBridge__factory } from "./IPeggedTokenBridge__factory";
 export { IPeggedTokenBridgeV2__factory } from "./IPeggedTokenBridgeV2__factory";
 export { IRootChainManager__factory } from "./IRootChainManager__factory";
+export { ISquidRouter__factory } from "./ISquidRouter__factory";
 export { IStargateRouter__factory } from "./IStargateRouter__factory";
 export { ISynapseRouter__factory } from "./ISynapseRouter__factory";
 export { ITeleportGateway__factory } from "./ITeleportGateway__factory";
@@ -93,6 +96,7 @@ export { Receiver__factory } from "./Receiver__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
 export { RelayerCelerIM__factory } from "./RelayerCelerIM__factory";
 export { ServiceFeeCollector__factory } from "./ServiceFeeCollector__factory";
+export { SquidFacet__factory } from "./SquidFacet__factory";
 export { StandardizedCallFacet__factory } from "./StandardizedCallFacet__factory";
 export { StargateFacet__factory } from "./StargateFacet__factory";
 export { SwapperV2__factory } from "./SwapperV2__factory";
