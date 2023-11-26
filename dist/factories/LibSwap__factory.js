@@ -22,53 +22,53 @@ exports.LibSwap__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        anonymous: false,
+        type: "event",
+        name: "AssetSwapped",
         inputs: [
             {
-                indexed: false,
-                internalType: "bytes32",
                 name: "transactionId",
                 type: "bytes32",
+                indexed: false,
+                internalType: "bytes32",
             },
             {
-                indexed: false,
-                internalType: "address",
                 name: "dex",
                 type: "address",
-            },
-            {
                 indexed: false,
                 internalType: "address",
+            },
+            {
                 name: "fromAssetId",
                 type: "address",
-            },
-            {
                 indexed: false,
                 internalType: "address",
+            },
+            {
                 name: "toAssetId",
                 type: "address",
+                indexed: false,
+                internalType: "address",
             },
             {
-                indexed: false,
-                internalType: "uint256",
                 name: "fromAmount",
                 type: "uint256",
-            },
-            {
                 indexed: false,
                 internalType: "uint256",
+            },
+            {
                 name: "toAmount",
                 type: "uint256",
-            },
-            {
                 indexed: false,
                 internalType: "uint256",
+            },
+            {
                 name: "timestamp",
                 type: "uint256",
+                indexed: false,
+                internalType: "uint256",
             },
         ],
-        name: "AssetSwapped",
-        type: "event",
+        anonymous: false,
     },
 ];
 var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212201d9a0692f8ac7bf2985cfe0d465b0d69203fbbaf98fb1b50d179f65db011089264736f6c63430008110033";

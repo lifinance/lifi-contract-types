@@ -15,45 +15,45 @@ export declare class LibSwap__factory extends ContractFactory {
     connect(signer: Signer): LibSwap__factory;
     static readonly bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212201d9a0692f8ac7bf2985cfe0d465b0d69203fbbaf98fb1b50d179f65db011089264736f6c63430008110033";
     static readonly abi: readonly [{
-        readonly anonymous: false;
+        readonly type: "event";
+        readonly name: "AssetSwapped";
         readonly inputs: readonly [{
-            readonly indexed: false;
-            readonly internalType: "bytes32";
             readonly name: "transactionId";
             readonly type: "bytes32";
-        }, {
             readonly indexed: false;
-            readonly internalType: "address";
+            readonly internalType: "bytes32";
+        }, {
             readonly name: "dex";
             readonly type: "address";
-        }, {
             readonly indexed: false;
             readonly internalType: "address";
+        }, {
             readonly name: "fromAssetId";
             readonly type: "address";
-        }, {
             readonly indexed: false;
             readonly internalType: "address";
+        }, {
             readonly name: "toAssetId";
             readonly type: "address";
-        }, {
             readonly indexed: false;
-            readonly internalType: "uint256";
+            readonly internalType: "address";
+        }, {
             readonly name: "fromAmount";
             readonly type: "uint256";
-        }, {
             readonly indexed: false;
             readonly internalType: "uint256";
+        }, {
             readonly name: "toAmount";
             readonly type: "uint256";
-        }, {
             readonly indexed: false;
             readonly internalType: "uint256";
+        }, {
             readonly name: "timestamp";
             readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
         }];
-        readonly name: "AssetSwapped";
-        readonly type: "event";
+        readonly anonymous: false;
     }];
     static createInterface(): LibSwapInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): LibSwap;

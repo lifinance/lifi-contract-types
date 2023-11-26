@@ -7,27 +7,27 @@ exports.ITeleportGateway__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "initiateTeleport",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "targetDomain",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                internalType: "address",
                 name: "receiver",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint128",
                 name: "amount",
                 type: "uint128",
+                internalType: "uint128",
             },
         ],
-        name: "initiateTeleport",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var ITeleportGateway__factory = /** @class */ (function () {

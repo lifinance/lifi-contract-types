@@ -22,19 +22,19 @@ exports.LibBytes__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [],
+        type: "error",
         name: "AddressOutOfBounds",
-        type: "error",
+        inputs: [],
     },
     {
-        inputs: [],
+        type: "error",
         name: "SliceOutOfBounds",
-        type: "error",
+        inputs: [],
     },
     {
-        inputs: [],
-        name: "SliceOverflow",
         type: "error",
+        name: "SliceOverflow",
+        inputs: [],
     },
 ];
 var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212209d7bfcde9932396673062af4328b003eda3f50739670c81b1f17aacdaee9ddf964736f6c63430008110033";

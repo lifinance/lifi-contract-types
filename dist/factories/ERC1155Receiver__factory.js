@@ -7,101 +7,101 @@ exports.ERC1155Receiver__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "onERC1155BatchReceived",
         inputs: [
             {
-                internalType: "address",
                 name: "operator",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "from",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256[]",
                 name: "ids",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
             {
-                internalType: "uint256[]",
                 name: "values",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
             {
-                internalType: "bytes",
                 name: "data",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "onERC1155BatchReceived",
         outputs: [
             {
-                internalType: "bytes4",
                 name: "",
                 type: "bytes4",
+                internalType: "bytes4",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "onERC1155Received",
         inputs: [
             {
-                internalType: "address",
                 name: "operator",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "from",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "id",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "value",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "bytes",
                 name: "data",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "onERC1155Received",
         outputs: [
             {
-                internalType: "bytes4",
                 name: "",
                 type: "bytes4",
+                internalType: "bytes4",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "supportsInterface",
         inputs: [
             {
-                internalType: "bytes4",
                 name: "interfaceId",
                 type: "bytes4",
+                internalType: "bytes4",
             },
         ],
-        name: "supportsInterface",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
 ];
 var ERC1155Receiver__factory = /** @class */ (function () {
