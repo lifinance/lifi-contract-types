@@ -11,17 +11,17 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
+    type: "function",
     name: "underlying",
+    inputs: [],
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
   },
 ] as const;
 

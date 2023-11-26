@@ -11,140 +11,140 @@ import type {
 
 const _abi = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    type: "function",
     name: "calculateL2TokenAddress",
+    inputs: [
+      {
+        name: "_token",
+        type: "address",
+        internalType: "address",
+      },
+    ],
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-    ],
+    type: "function",
     name: "getGateway",
+    inputs: [
+      {
+        name: "_token",
+        type: "address",
+        internalType: "address",
+      },
+    ],
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "outboundTransfer",
     inputs: [
       {
-        internalType: "address",
         name: "_token",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "_to",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "_maxGas",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "_gasPriceBid",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bytes",
         name: "_data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "outboundTransfer",
     outputs: [
       {
-        internalType: "bytes",
         name: "",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "unsafeCreateRetryableTicket",
     inputs: [
       {
-        internalType: "address",
         name: "_destAddr",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_l2CallValue",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "_maxSubmissionCost",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "_excessFeeRefundAddress",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "_callValueRefundAddress",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_maxGas",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "_gasPriceBid",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bytes",
         name: "_data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "unsafeCreateRetryableTicket",
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 

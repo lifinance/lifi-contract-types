@@ -17,83 +17,83 @@ import type {
 
 const _abi = [
   {
+    type: "constructor",
     inputs: [
       {
-        internalType: "address",
         name: "_contractOwner",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "_diamondCutFacet",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "payable",
-    type: "constructor",
   },
   {
-    inputs: [],
-    name: "CalldataEmptyButInitNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetContainsNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionAlreadyExists",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionDoesNotExist",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "IncorrectFacetCutAction",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitReverted",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitZeroButCalldataNotEmpty",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoSelectorsInFace",
-    type: "error",
-  },
-  {
-    stateMutability: "payable",
     type: "fallback",
+    stateMutability: "payable",
   },
   {
-    stateMutability: "payable",
     type: "receive",
+    stateMutability: "payable",
+  },
+  {
+    type: "error",
+    name: "CalldataEmptyButInitNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetContainsNoCode",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionAlreadyExists",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionDoesNotExist",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionIsImmutable",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "IncorrectFacetCutAction",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitReverted",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitZeroButCalldataNotEmpty",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoSelectorsInFace",
+    inputs: [],
   },
 ] as const;
 

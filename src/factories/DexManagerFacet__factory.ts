@@ -11,184 +11,184 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "CannotAuthoriseSelf",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "UnAuthorized",
-    type: "error",
-  },
-  {
-    anonymous: false,
+    type: "function",
+    name: "addDex",
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "dexAddress",
-        type: "address",
-      },
-    ],
-    name: "DexAdded",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "dexAddress",
-        type: "address",
-      },
-    ],
-    name: "DexRemoved",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "bytes4",
-        name: "functionSignature",
-        type: "bytes4",
-      },
-      {
-        indexed: true,
-        internalType: "bool",
-        name: "approved",
-        type: "bool",
-      },
-    ],
-    name: "FunctionSignatureApprovalChanged",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "_dex",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "addDex",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "approvedDexs",
+    inputs: [],
     outputs: [
       {
-        internalType: "address[]",
         name: "addresses",
         type: "address[]",
+        internalType: "address[]",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address[]",
-        name: "_dexs",
-        type: "address[]",
-      },
-    ],
+    type: "function",
     name: "batchAddDex",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [
       {
-        internalType: "address[]",
         name: "_dexs",
         type: "address[]",
+        internalType: "address[]",
       },
     ],
-    name: "batchRemoveDex",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "batchRemoveDex",
     inputs: [
       {
-        internalType: "bytes4[]",
+        name: "_dexs",
+        type: "address[]",
+        internalType: "address[]",
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "batchSetFunctionApprovalBySignature",
+    inputs: [
+      {
         name: "_signatures",
         type: "bytes4[]",
+        internalType: "bytes4[]",
       },
       {
-        internalType: "bool",
         name: "_approval",
         type: "bool",
+        internalType: "bool",
       },
     ],
-    name: "batchSetFunctionApprovalBySignature",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "isFunctionApproved",
     inputs: [
       {
-        internalType: "bytes4",
         name: "_signature",
         type: "bytes4",
+        internalType: "bytes4",
       },
     ],
-    name: "isFunctionApproved",
     outputs: [
       {
-        internalType: "bool",
         name: "approved",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "removeDex",
     inputs: [
       {
-        internalType: "address",
         name: "_dex",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "removeDex",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "setFunctionApprovalBySignature",
     inputs: [
       {
-        internalType: "bytes4",
         name: "_signature",
         type: "bytes4",
+        internalType: "bytes4",
       },
       {
-        internalType: "bool",
         name: "_approval",
         type: "bool",
+        internalType: "bool",
       },
     ],
-    name: "setFunctionApprovalBySignature",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "DexAdded",
+    inputs: [
+      {
+        name: "dexAddress",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "DexRemoved",
+    inputs: [
+      {
+        name: "dexAddress",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "FunctionSignatureApprovalChanged",
+    inputs: [
+      {
+        name: "functionSignature",
+        type: "bytes4",
+        indexed: true,
+        internalType: "bytes4",
+      },
+      {
+        name: "approved",
+        type: "bool",
+        indexed: true,
+        internalType: "bool",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "CannotAuthoriseSelf",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InvalidContract",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "UnAuthorized",
+    inputs: [],
   },
 ] as const;
 

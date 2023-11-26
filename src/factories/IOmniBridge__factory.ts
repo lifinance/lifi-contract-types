@@ -8,40 +8,40 @@ import type { IOmniBridge, IOmniBridgeInterface } from "../IOmniBridge";
 
 const _abi = [
   {
+    type: "function",
+    name: "relayTokens",
     inputs: [
       {
-        internalType: "address",
         name: "token",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "relayTokens",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "wrapAndRelayTokens",
     inputs: [
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "wrapAndRelayTokens",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 
