@@ -7,32 +7,32 @@ exports.IERC20Proxy__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "transferFrom",
         inputs: [
             {
-                internalType: "address",
                 name: "tokenAddress",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "from",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "to",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "transferFrom",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IERC20Proxy__factory = /** @class */ (function () {

@@ -2,6 +2,26 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace WormholeFacet {
+    type ConfigStruct = {
+        chainId: PromiseOrValue<BigNumberish>;
+        wormholeChainId: PromiseOrValue<BigNumberish>;
+    };
+    type ConfigStructOutput = [BigNumber, number] & {
+        chainId: BigNumber;
+        wormholeChainId: number;
+    };
+    type WormholeDataStruct = {
+        receiver: PromiseOrValue<BytesLike>;
+        arbiterFee: PromiseOrValue<BigNumberish>;
+        nonce: PromiseOrValue<BigNumberish>;
+    };
+    type WormholeDataStructOutput = [string, BigNumber, number] & {
+        receiver: string;
+        arbiterFee: BigNumber;
+        nonce: number;
+    };
+}
 export declare namespace ILiFi {
     type BridgeDataStruct = {
         transactionId: PromiseOrValue<BytesLike>;
@@ -37,26 +57,6 @@ export declare namespace ILiFi {
         destinationChainId: BigNumber;
         hasSourceSwaps: boolean;
         hasDestinationCall: boolean;
-    };
-}
-export declare namespace WormholeFacet {
-    type ConfigStruct = {
-        chainId: PromiseOrValue<BigNumberish>;
-        wormholeChainId: PromiseOrValue<BigNumberish>;
-    };
-    type ConfigStructOutput = [BigNumber, number] & {
-        chainId: BigNumber;
-        wormholeChainId: number;
-    };
-    type WormholeDataStruct = {
-        receiver: PromiseOrValue<BytesLike>;
-        arbiterFee: PromiseOrValue<BigNumberish>;
-        nonce: PromiseOrValue<BigNumberish>;
-    };
-    type WormholeDataStructOutput = [string, BigNumber, number] & {
-        receiver: string;
-        arbiterFee: BigNumber;
-        nonce: number;
     };
 }
 export declare namespace LibSwap {
