@@ -11,27 +11,27 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "initiateTeleport",
     inputs: [
       {
-        internalType: "bytes32",
         name: "targetDomain",
         type: "bytes32",
+        internalType: "bytes32",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint128",
         name: "amount",
         type: "uint128",
+        internalType: "uint128",
       },
     ],
-    name: "initiateTeleport",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
 ] as const;
 

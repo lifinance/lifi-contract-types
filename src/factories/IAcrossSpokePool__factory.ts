@@ -11,52 +11,52 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "deposit",
     inputs: [
       {
-        internalType: "address",
         name: "recipient",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "originToken",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "destinationChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "int64",
         name: "relayerFeePct",
         type: "int64",
+        internalType: "int64",
       },
       {
-        internalType: "uint32",
         name: "quoteTimestamp",
         type: "uint32",
+        internalType: "uint32",
       },
       {
-        internalType: "bytes",
         name: "message",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "uint256",
         name: "maxCount",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "deposit",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 

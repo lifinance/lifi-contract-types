@@ -7,38 +7,38 @@ exports.IERC721Receiver__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "onERC721Received",
         inputs: [
             {
-                internalType: "address",
                 name: "operator",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "from",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "tokenId",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "bytes",
                 name: "data",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "onERC721Received",
         outputs: [
             {
-                internalType: "bytes4",
                 name: "",
                 type: "bytes4",
+                internalType: "bytes4",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IERC721Receiver__factory = /** @class */ (function () {

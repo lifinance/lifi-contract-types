@@ -8,60 +8,60 @@ import type { IHyphenRouter, IHyphenRouterInterface } from "../IHyphenRouter";
 
 const _abi = [
   {
+    type: "function",
+    name: "depositErc20",
     inputs: [
       {
-        internalType: "uint256",
         name: "toChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "tokenAddress",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "string",
         name: "tag",
         type: "string",
+        internalType: "string",
       },
     ],
-    name: "depositErc20",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "depositNative",
     inputs: [
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "toChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "string",
         name: "tag",
         type: "string",
+        internalType: "string",
       },
     ],
-    name: "depositNative",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 
