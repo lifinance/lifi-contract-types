@@ -11,65 +11,65 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "OnlyContractOwner",
-    type: "error",
-  },
-  {
-    anonymous: false,
+    type: "function",
+    name: "getPeripheryContract",
     inputs: [
       {
-        indexed: false,
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "contractAddress",
-        type: "address",
-      },
-    ],
-    name: "PeripheryContractRegistered",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
         name: "_name",
         type: "string",
+        internalType: "string",
       },
     ],
-    name: "getPeripheryContract",
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "registerPeripheryContract",
     inputs: [
       {
-        internalType: "string",
         name: "_name",
         type: "string",
+        internalType: "string",
       },
       {
-        internalType: "address",
         name: "_contractAddress",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "registerPeripheryContract",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "PeripheryContractRegistered",
+    inputs: [
+      {
+        name: "name",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "contractAddress",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "OnlyContractOwner",
+    inputs: [],
   },
 ] as const;
 

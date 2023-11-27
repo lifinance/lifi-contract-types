@@ -28,6 +28,30 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace WormholeFacet {
+  export type ConfigStruct = {
+    chainId: PromiseOrValue<BigNumberish>;
+    wormholeChainId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type ConfigStructOutput = [BigNumber, number] & {
+    chainId: BigNumber;
+    wormholeChainId: number;
+  };
+
+  export type WormholeDataStruct = {
+    receiver: PromiseOrValue<BytesLike>;
+    arbiterFee: PromiseOrValue<BigNumberish>;
+    nonce: PromiseOrValue<BigNumberish>;
+  };
+
+  export type WormholeDataStructOutput = [string, BigNumber, number] & {
+    receiver: string;
+    arbiterFee: BigNumber;
+    nonce: number;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -64,30 +88,6 @@ export declare namespace ILiFi {
     destinationChainId: BigNumber;
     hasSourceSwaps: boolean;
     hasDestinationCall: boolean;
-  };
-}
-
-export declare namespace WormholeFacet {
-  export type ConfigStruct = {
-    chainId: PromiseOrValue<BigNumberish>;
-    wormholeChainId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type ConfigStructOutput = [BigNumber, number] & {
-    chainId: BigNumber;
-    wormholeChainId: number;
-  };
-
-  export type WormholeDataStruct = {
-    receiver: PromiseOrValue<BytesLike>;
-    arbiterFee: PromiseOrValue<BigNumberish>;
-    nonce: PromiseOrValue<BigNumberish>;
-  };
-
-  export type WormholeDataStructOutput = [string, BigNumber, number] & {
-    receiver: string;
-    arbiterFee: BigNumber;
-    nonce: number;
   };
 }
 

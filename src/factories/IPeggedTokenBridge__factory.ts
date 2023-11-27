@@ -11,79 +11,79 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "burn",
     inputs: [
       {
-        internalType: "address",
         name: "_token",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "_withdrawAccount",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint64",
         name: "_nonce",
         type: "uint64",
+        internalType: "uint64",
       },
     ],
-    name: "burn",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "mint",
     inputs: [
       {
-        internalType: "bytes",
         name: "_request",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bytes[]",
         name: "_sigs",
         type: "bytes[]",
+        internalType: "bytes[]",
       },
       {
-        internalType: "address[]",
         name: "_signers",
         type: "address[]",
+        internalType: "address[]",
       },
       {
-        internalType: "uint256[]",
         name: "_powers",
         type: "uint256[]",
+        internalType: "uint256[]",
       },
     ],
-    name: "mint",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "records",
     inputs: [
       {
-        internalType: "bytes32",
         name: "recordId",
         type: "bytes32",
+        internalType: "bytes32",
       },
     ],
-    name: "records",
     outputs: [
       {
-        internalType: "bool",
         name: "",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
 ] as const;
 

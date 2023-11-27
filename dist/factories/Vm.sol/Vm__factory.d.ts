@@ -3,2895 +3,2895 @@ import type { Provider } from "@ethersproject/providers";
 import type { Vm, VmInterface } from "../../Vm.sol/Vm";
 export declare class Vm__factory {
     static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "accesses";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "target";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "accesses";
         readonly outputs: readonly [{
-            readonly internalType: "bytes32[]";
             readonly name: "readSlots";
             readonly type: "bytes32[]";
-        }, {
             readonly internalType: "bytes32[]";
+        }, {
             readonly name: "writeSlots";
             readonly type: "bytes32[]";
+            readonly internalType: "bytes32[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "activeFork";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "addr";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "addr";
         readonly outputs: readonly [{
-            readonly internalType: "address";
             readonly name: "keyAddr";
             readonly type: "address";
+            readonly internalType: "address";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "allowCheatcodes";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "allowCheatcodes";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "assume";
         readonly inputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "condition";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "assume";
         readonly outputs: readonly [];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "breakpoint";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "char";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "breakpoint";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "breakpoint";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "char";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool";
             readonly name: "value";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "breakpoint";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "broadcast";
+        readonly inputs: readonly [];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "broadcast";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "signer";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "broadcast";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "broadcast";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "broadcast";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "chainId";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "newChainId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "chainId";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "clearMockedCalls";
+        readonly inputs: readonly [];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "closeFile";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "closeFile";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "coinbase";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "newCoinbase";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "coinbase";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createDir";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool";
             readonly name: "recursive";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "createDir";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "createFork";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint256";
             readonly name: "blockNumber";
             readonly type: "uint256";
-        }];
-        readonly name: "createFork";
-        readonly outputs: readonly [{
             readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "txHash";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "createFork";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createSelectFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint256";
             readonly name: "blockNumber";
             readonly type: "uint256";
-        }];
-        readonly name: "createSelectFork";
-        readonly outputs: readonly [{
             readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createSelectFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "txHash";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "createSelectFork";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "createSelectFork";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "urlOrAlias";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "createSelectFork";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "deal";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "newBalance";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "deal";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "deriveKey";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "mnemonic";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint32";
             readonly name: "index";
             readonly type: "uint32";
+            readonly internalType: "uint32";
         }];
-        readonly name: "deriveKey";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "deriveKey";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "mnemonic";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "derivationPath";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint32";
             readonly name: "index";
             readonly type: "uint32";
+            readonly internalType: "uint32";
         }];
-        readonly name: "deriveKey";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "difficulty";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "newDifficulty";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "difficulty";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "envAddress";
-        readonly outputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "value";
-            readonly type: "address";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
         }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
         readonly name: "envAddress";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "address[]";
             readonly name: "value";
             readonly type: "address[]";
+            readonly internalType: "address[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBool";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBool";
         readonly outputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "value";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBool";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBool";
         readonly outputs: readonly [{
-            readonly internalType: "bool[]";
             readonly name: "value";
             readonly type: "bool[]";
+            readonly internalType: "bool[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBytes";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBytes";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "value";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBytes";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBytes";
         readonly outputs: readonly [{
-            readonly internalType: "bytes[]";
             readonly name: "value";
             readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBytes32";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBytes32";
         readonly outputs: readonly [{
-            readonly internalType: "bytes32[]";
             readonly name: "value";
             readonly type: "bytes32[]";
+            readonly internalType: "bytes32[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envBytes32";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envBytes32";
         readonly outputs: readonly [{
-            readonly internalType: "bytes32";
             readonly name: "value";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envInt";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envInt";
         readonly outputs: readonly [{
-            readonly internalType: "int256[]";
             readonly name: "value";
             readonly type: "int256[]";
+            readonly internalType: "int256[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envInt";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "envInt";
         readonly outputs: readonly [{
-            readonly internalType: "int256";
             readonly name: "value";
             readonly type: "int256";
+            readonly internalType: "int256";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envOr";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes32[]";
             readonly name: "defaultValue";
             readonly type: "bytes32[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
             readonly internalType: "bytes32[]";
+        }];
+        readonly outputs: readonly [{
             readonly name: "value";
             readonly type: "bytes32[]";
+            readonly internalType: "bytes32[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envOr";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "delim";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "int256[]";
             readonly name: "defaultValue";
             readonly type: "int256[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
             readonly internalType: "int256[]";
+        }];
+        readonly outputs: readonly [{
             readonly name: "value";
             readonly type: "int256[]";
+            readonly internalType: "int256[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envOr";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool";
             readonly name: "defaultValue";
             readonly type: "bool";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
             readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [{
             readonly name: "value";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "envOr";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "address";
             readonly name: "defaultValue";
             readonly type: "address";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
             readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
             readonly name: "value";
             readonly type: "address";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "uint256";
-            readonly name: "defaultValue";
-            readonly type: "uint256";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "uint256";
-            readonly name: "value";
-            readonly type: "uint256";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }, {
-            readonly internalType: "bytes[]";
-            readonly name: "defaultValue";
-            readonly type: "bytes[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "bytes[]";
-            readonly name: "value";
-            readonly type: "bytes[]";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }, {
-            readonly internalType: "uint256[]";
-            readonly name: "defaultValue";
-            readonly type: "uint256[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "uint256[]";
-            readonly name: "value";
-            readonly type: "uint256[]";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string[]";
-            readonly name: "defaultValue";
-            readonly type: "string[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "string[]";
-            readonly name: "value";
-            readonly type: "string[]";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "defaultValue";
-            readonly type: "bytes";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "bytes";
-            readonly name: "value";
-            readonly type: "bytes";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "bytes32";
-            readonly name: "defaultValue";
-            readonly type: "bytes32";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "bytes32";
-            readonly name: "value";
-            readonly type: "bytes32";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "int256";
-            readonly name: "defaultValue";
-            readonly type: "int256";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "int256";
-            readonly name: "value";
-            readonly type: "int256";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }, {
-            readonly internalType: "address[]";
-            readonly name: "defaultValue";
-            readonly type: "address[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "address[]";
-            readonly name: "value";
-            readonly type: "address[]";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "defaultValue";
-            readonly type: "string";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "value";
-            readonly type: "string";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }, {
-            readonly internalType: "bool[]";
-            readonly name: "defaultValue";
-            readonly type: "bool[]";
-        }];
-        readonly name: "envOr";
-        readonly outputs: readonly [{
-            readonly internalType: "bool[]";
-            readonly name: "value";
-            readonly type: "bool[]";
-        }];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }];
-        readonly name: "envString";
-        readonly outputs: readonly [{
-            readonly internalType: "string[]";
-            readonly name: "value";
-            readonly type: "string[]";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }];
-        readonly name: "envString";
-        readonly outputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "value";
-            readonly type: "string";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }];
-        readonly name: "envUint";
-        readonly outputs: readonly [{
-            readonly internalType: "uint256";
-            readonly name: "value";
-            readonly type: "uint256";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "name";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "delim";
-            readonly type: "string";
-        }];
-        readonly name: "envUint";
-        readonly outputs: readonly [{
-            readonly internalType: "uint256[]";
-            readonly name: "value";
-            readonly type: "uint256[]";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
             readonly internalType: "address";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "string[]";
+            readonly internalType: "string[]";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "string[]";
+            readonly internalType: "string[]";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envOr";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "defaultValue";
+            readonly type: "bool[]";
+            readonly internalType: "bool[]";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "bool[]";
+            readonly internalType: "bool[]";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "envString";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "string[]";
+            readonly internalType: "string[]";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "envString";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "envUint";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "envUint";
+        readonly inputs: readonly [{
+            readonly name: "name";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "delim";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "value";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "etch";
+        readonly inputs: readonly [{
             readonly name: "target";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "bytes";
             readonly name: "newRuntimeBytecode";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "etch";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCall";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "uint64";
             readonly name: "gas";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "expectCall";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCall";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "uint64";
             readonly name: "gas";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }, {
-            readonly internalType: "uint64";
             readonly name: "count";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "expectCall";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCall";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }, {
-            readonly internalType: "uint64";
             readonly name: "count";
             readonly type: "uint64";
-        }];
-        readonly name: "expectCall";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "callee";
-            readonly type: "address";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "data";
-            readonly type: "bytes";
-        }];
-        readonly name: "expectCall";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "callee";
-            readonly type: "address";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "data";
-            readonly type: "bytes";
-        }, {
             readonly internalType: "uint64";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "expectCall";
+        readonly inputs: readonly [{
+            readonly name: "callee";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "expectCall";
+        readonly inputs: readonly [{
+            readonly name: "callee";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
             readonly name: "count";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "expectCall";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCall";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "expectCall";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCallMinGas";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "uint64";
             readonly name: "minGas";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "expectCallMinGas";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectCallMinGas";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "uint64";
             readonly name: "minGas";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }, {
-            readonly internalType: "uint64";
             readonly name: "count";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "expectCallMinGas";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectEmit";
         readonly inputs: readonly [];
-        readonly name: "expectEmit";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectEmit";
         readonly inputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "checkTopic1";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkTopic2";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkTopic3";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkData";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "expectEmit";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectEmit";
         readonly inputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "checkTopic1";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkTopic2";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkTopic3";
             readonly type: "bool";
-        }, {
             readonly internalType: "bool";
+        }, {
             readonly name: "checkData";
             readonly type: "bool";
+            readonly internalType: "bool";
         }, {
-            readonly internalType: "address";
             readonly name: "emitter";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "expectEmit";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectEmit";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "emitter";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "expectEmit";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectRevert";
         readonly inputs: readonly [{
-            readonly internalType: "bytes4";
             readonly name: "revertData";
             readonly type: "bytes4";
+            readonly internalType: "bytes4";
         }];
-        readonly name: "expectRevert";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectRevert";
         readonly inputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "revertData";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "expectRevert";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectRevert";
         readonly inputs: readonly [];
-        readonly name: "expectRevert";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "uint64";
-            readonly name: "min";
-            readonly type: "uint64";
-        }, {
-            readonly internalType: "uint64";
-            readonly name: "max";
-            readonly type: "uint64";
-        }];
+        readonly type: "function";
         readonly name: "expectSafeMemory";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
         readonly inputs: readonly [{
-            readonly internalType: "uint64";
             readonly name: "min";
             readonly type: "uint64";
-        }, {
             readonly internalType: "uint64";
+        }, {
             readonly name: "max";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "expectSafeMemoryCall";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "expectSafeMemoryCall";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
+            readonly name: "min";
+            readonly type: "uint64";
+            readonly internalType: "uint64";
+        }, {
+            readonly name: "max";
+            readonly type: "uint64";
+            readonly internalType: "uint64";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "fee";
+        readonly inputs: readonly [{
             readonly name: "newBasefee";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "fee";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "ffi";
         readonly inputs: readonly [{
-            readonly internalType: "string[]";
             readonly name: "commandInput";
             readonly type: "string[]";
+            readonly internalType: "string[]";
         }];
-        readonly name: "ffi";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "result";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "fsMetadata";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "fsMetadata";
         readonly outputs: readonly [{
-            readonly components: readonly [{
-                readonly internalType: "bool";
-                readonly name: "isDir";
-                readonly type: "bool";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "isSymlink";
-                readonly type: "bool";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "length";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "readOnly";
-                readonly type: "bool";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "modified";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "accessed";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "created";
-                readonly type: "uint256";
-            }];
-            readonly internalType: "struct VmSafe.FsMetadata";
             readonly name: "metadata";
             readonly type: "tuple";
+            readonly internalType: "struct VmSafe.FsMetadata";
+            readonly components: readonly [{
+                readonly name: "isDir";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "isSymlink";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "length";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "readOnly";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "modified";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "accessed";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "created";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }];
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "getCode";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "artifactPath";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "getCode";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "creationBytecode";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "getDeployedCode";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "artifactPath";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "getDeployedCode";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "runtimeBytecode";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "getLabel";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "getLabel";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "label";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "getNonce";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "getNonce";
         readonly outputs: readonly [{
-            readonly internalType: "uint64";
             readonly name: "nonce";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "getRecordedLogs";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly components: readonly [{
-                readonly internalType: "bytes32[]";
-                readonly name: "topics";
-                readonly type: "bytes32[]";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "data";
-                readonly type: "bytes";
-            }, {
-                readonly internalType: "address";
-                readonly name: "emitter";
-                readonly type: "address";
-            }];
-            readonly internalType: "struct VmSafe.Log[]";
             readonly name: "logs";
             readonly type: "tuple[]";
+            readonly internalType: "struct VmSafe.Log[]";
+            readonly components: readonly [{
+                readonly name: "topics";
+                readonly type: "bytes32[]";
+                readonly internalType: "bytes32[]";
+            }, {
+                readonly name: "data";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }, {
+                readonly name: "emitter";
+                readonly type: "address";
+                readonly internalType: "address";
+            }];
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "isPersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "isPersistent";
         readonly outputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "persistent";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "label";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "string";
             readonly name: "newLabel";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "label";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "load";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "target";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "slot";
             readonly type: "bytes32";
-        }];
-        readonly name: "load";
-        readonly outputs: readonly [{
             readonly internalType: "bytes32";
+        }];
+        readonly outputs: readonly [{
             readonly name: "data";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "makePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address[]";
             readonly name: "accounts";
             readonly type: "address[]";
+            readonly internalType: "address[]";
         }];
-        readonly name: "makePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "makePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account0";
             readonly type: "address";
-        }, {
             readonly internalType: "address";
+        }, {
             readonly name: "account1";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "makePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "makePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "makePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "makePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account0";
             readonly type: "address";
-        }, {
             readonly internalType: "address";
+        }, {
             readonly name: "account1";
             readonly type: "address";
-        }, {
             readonly internalType: "address";
+        }, {
             readonly name: "account2";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "makePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "mockCall";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "msgValue";
             readonly type: "uint256";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "data";
-            readonly type: "bytes";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "returnData";
-            readonly type: "bytes";
-        }];
-        readonly name: "mockCall";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "callee";
-            readonly type: "address";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "data";
-            readonly type: "bytes";
-        }, {
-            readonly internalType: "bytes";
-            readonly name: "returnData";
-            readonly type: "bytes";
-        }];
-        readonly name: "mockCall";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "callee";
-            readonly type: "address";
-        }, {
             readonly internalType: "uint256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "mockCall";
+        readonly inputs: readonly [{
+            readonly name: "callee";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "mockCallRevert";
+        readonly inputs: readonly [{
+            readonly name: "callee";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
             readonly name: "msgValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
-        }, {
             readonly internalType: "bytes";
+        }, {
             readonly name: "revertData";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "mockCallRevert";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "mockCallRevert";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "callee";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
-        }, {
             readonly internalType: "bytes";
+        }, {
             readonly name: "revertData";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "mockCallRevert";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseAddress";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseAddress";
         readonly outputs: readonly [{
-            readonly internalType: "address";
             readonly name: "parsedValue";
             readonly type: "address";
+            readonly internalType: "address";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseBool";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseBool";
         readonly outputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "parsedValue";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseBytes";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseBytes";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "parsedValue";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseBytes32";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseBytes32";
         readonly outputs: readonly [{
-            readonly internalType: "bytes32";
             readonly name: "parsedValue";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseInt";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseInt";
         readonly outputs: readonly [{
-            readonly internalType: "int256";
             readonly name: "parsedValue";
             readonly type: "int256";
+            readonly internalType: "int256";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseJson";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseJson";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "abiEncodedData";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseJson";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "key";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseJson";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "abiEncodedData";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonAddress";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "address";
             readonly name: "";
             readonly type: "address";
+            readonly internalType: "address";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonAddressArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "address[]";
             readonly name: "";
             readonly type: "address[]";
+            readonly internalType: "address[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBool";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBoolArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bool[]";
             readonly name: "";
             readonly type: "bool[]";
+            readonly internalType: "bool[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBytes";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBytes32";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bytes32";
             readonly name: "";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBytes32Array";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bytes32[]";
             readonly name: "";
             readonly type: "bytes32[]";
+            readonly internalType: "bytes32[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonBytesArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "bytes[]";
             readonly name: "";
             readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonInt";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "int256";
             readonly name: "";
             readonly type: "int256";
+            readonly internalType: "int256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonIntArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "int256[]";
             readonly name: "";
             readonly type: "int256[]";
+            readonly internalType: "int256[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonString";
-        readonly outputs: readonly [{
-            readonly internalType: "string";
+        readonly inputs: readonly [{
             readonly name: "";
             readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonStringArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "string[]";
             readonly name: "";
             readonly type: "string[]";
+            readonly internalType: "string[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonUint";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
-            readonly name: "";
-            readonly type: "string";
-        }];
+        readonly type: "function";
         readonly name: "parseJsonUintArray";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "";
+            readonly type: "string";
+            readonly internalType: "string";
+        }];
         readonly outputs: readonly [{
-            readonly internalType: "uint256[]";
             readonly name: "";
             readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "parseUint";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "parseUint";
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "parsedValue";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "pauseGasMetering";
+        readonly inputs: readonly [];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "prank";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "msgSender";
             readonly type: "address";
-        }, {
             readonly internalType: "address";
+        }, {
             readonly name: "txOrigin";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "prank";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "prank";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "msgSender";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "prank";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "projectRoot";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readDir";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint64";
             readonly name: "maxDepth";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "readDir";
         readonly outputs: readonly [{
-            readonly components: readonly [{
-                readonly internalType: "string";
-                readonly name: "errorMessage";
-                readonly type: "string";
-            }, {
-                readonly internalType: "string";
-                readonly name: "path";
-                readonly type: "string";
-            }, {
-                readonly internalType: "uint64";
-                readonly name: "depth";
-                readonly type: "uint64";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "isDir";
-                readonly type: "bool";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "isSymlink";
-                readonly type: "bool";
-            }];
-            readonly internalType: "struct VmSafe.DirEntry[]";
             readonly name: "entries";
             readonly type: "tuple[]";
+            readonly internalType: "struct VmSafe.DirEntry[]";
+            readonly components: readonly [{
+                readonly name: "errorMessage";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "path";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "depth";
+                readonly type: "uint64";
+                readonly internalType: "uint64";
+            }, {
+                readonly name: "isDir";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "isSymlink";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readDir";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint64";
             readonly name: "maxDepth";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }, {
-            readonly internalType: "bool";
             readonly name: "followLinks";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "readDir";
         readonly outputs: readonly [{
-            readonly components: readonly [{
-                readonly internalType: "string";
-                readonly name: "errorMessage";
-                readonly type: "string";
-            }, {
-                readonly internalType: "string";
-                readonly name: "path";
-                readonly type: "string";
-            }, {
-                readonly internalType: "uint64";
-                readonly name: "depth";
-                readonly type: "uint64";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "isDir";
-                readonly type: "bool";
-            }, {
-                readonly internalType: "bool";
-                readonly name: "isSymlink";
-                readonly type: "bool";
-            }];
-            readonly internalType: "struct VmSafe.DirEntry[]";
             readonly name: "entries";
             readonly type: "tuple[]";
-        }];
-        readonly stateMutability: "view";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "path";
-            readonly type: "string";
-        }];
-        readonly name: "readDir";
-        readonly outputs: readonly [{
+            readonly internalType: "struct VmSafe.DirEntry[]";
             readonly components: readonly [{
-                readonly internalType: "string";
                 readonly name: "errorMessage";
                 readonly type: "string";
-            }, {
                 readonly internalType: "string";
+            }, {
                 readonly name: "path";
                 readonly type: "string";
+                readonly internalType: "string";
             }, {
-                readonly internalType: "uint64";
                 readonly name: "depth";
                 readonly type: "uint64";
+                readonly internalType: "uint64";
             }, {
-                readonly internalType: "bool";
                 readonly name: "isDir";
                 readonly type: "bool";
-            }, {
                 readonly internalType: "bool";
+            }, {
                 readonly name: "isSymlink";
                 readonly type: "bool";
+                readonly internalType: "bool";
             }];
-            readonly internalType: "struct VmSafe.DirEntry[]";
-            readonly name: "entries";
-            readonly type: "tuple[]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readDir";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
+        readonly outputs: readonly [{
+            readonly name: "entries";
+            readonly type: "tuple[]";
+            readonly internalType: "struct VmSafe.DirEntry[]";
+            readonly components: readonly [{
+                readonly name: "errorMessage";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "path";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "depth";
+                readonly type: "uint64";
+                readonly internalType: "uint64";
+            }, {
+                readonly name: "isDir";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "isSymlink";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
         readonly name: "readFile";
-        readonly outputs: readonly [{
+        readonly inputs: readonly [{
+            readonly name: "path";
+            readonly type: "string";
             readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
             readonly name: "data";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readFileBinary";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "readFileBinary";
         readonly outputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readLine";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
-        }];
-        readonly name: "readLine";
-        readonly outputs: readonly [{
             readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
             readonly name: "line";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "readLink";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "linkPath";
             readonly type: "string";
-        }];
-        readonly name: "readLink";
-        readonly outputs: readonly [{
             readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
             readonly name: "targetPath";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "record";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
         readonly inputs: readonly [];
-        readonly name: "recordLogs";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "recordLogs";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "rememberKey";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "rememberKey";
         readonly outputs: readonly [{
-            readonly internalType: "address";
             readonly name: "keyAddr";
             readonly type: "address";
+            readonly internalType: "address";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "removeDir";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool";
             readonly name: "recursive";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "removeDir";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "removeFile";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "removeFile";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "resumeGasMetering";
+        readonly inputs: readonly [];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "revertTo";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "snapshotId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "revertTo";
         readonly outputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "success";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "revokePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address[]";
             readonly name: "accounts";
             readonly type: "address[]";
+            readonly internalType: "address[]";
         }];
-        readonly name: "revokePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "revokePersistent";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "revokePersistent";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "roll";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "newHeight";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "roll";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "rollFork";
         readonly inputs: readonly [{
-            readonly internalType: "bytes32";
             readonly name: "txHash";
             readonly type: "bytes32";
-        }];
-        readonly name: "rollFork";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "uint256";
-            readonly name: "forkId";
-            readonly type: "uint256";
-        }, {
-            readonly internalType: "uint256";
-            readonly name: "blockNumber";
-            readonly type: "uint256";
-        }];
-        readonly name: "rollFork";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "uint256";
-            readonly name: "blockNumber";
-            readonly type: "uint256";
-        }];
-        readonly name: "rollFork";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "uint256";
-            readonly name: "forkId";
-            readonly type: "uint256";
-        }, {
             readonly internalType: "bytes32";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "rollFork";
+        readonly inputs: readonly [{
+            readonly name: "forkId";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "blockNumber";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "rollFork";
+        readonly inputs: readonly [{
+            readonly name: "blockNumber";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "rollFork";
+        readonly inputs: readonly [{
+            readonly name: "forkId";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
             readonly name: "txHash";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "rollFork";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "rpcUrl";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "rpcAlias";
             readonly type: "string";
-        }];
-        readonly name: "rpcUrl";
-        readonly outputs: readonly [{
             readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "rpcUrlStructs";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly components: readonly [{
-                readonly internalType: "string";
-                readonly name: "key";
-                readonly type: "string";
-            }, {
-                readonly internalType: "string";
-                readonly name: "url";
-                readonly type: "string";
-            }];
-            readonly internalType: "struct VmSafe.Rpc[]";
             readonly name: "urls";
             readonly type: "tuple[]";
+            readonly internalType: "struct VmSafe.Rpc[]";
+            readonly components: readonly [{
+                readonly name: "key";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "url";
+                readonly type: "string";
+                readonly internalType: "string";
+            }];
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "rpcUrls";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly internalType: "string[2][]";
             readonly name: "urls";
             readonly type: "string[2][]";
+            readonly internalType: "string[2][]";
         }];
         readonly stateMutability: "view";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "selectFork";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "selectFork";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeAddress";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "address[]";
             readonly name: "values";
             readonly type: "address[]";
+            readonly internalType: "address[]";
         }];
-        readonly name: "serializeAddress";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeAddress";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "address";
             readonly name: "value";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "serializeAddress";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBool";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool[]";
             readonly name: "values";
             readonly type: "bool[]";
+            readonly internalType: "bool[]";
         }];
-        readonly name: "serializeBool";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBool";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bool";
             readonly name: "value";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "serializeBool";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBytes";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes[]";
             readonly name: "values";
             readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
         }];
-        readonly name: "serializeBytes";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBytes";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes";
             readonly name: "value";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "serializeBytes";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBytes32";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes32[]";
             readonly name: "values";
             readonly type: "bytes32[]";
+            readonly internalType: "bytes32[]";
         }];
-        readonly name: "serializeBytes32";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeBytes32";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "value";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "serializeBytes32";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeInt";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "int256";
             readonly name: "value";
             readonly type: "int256";
+            readonly internalType: "int256";
         }];
-        readonly name: "serializeInt";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeInt";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "int256[]";
             readonly name: "values";
             readonly type: "int256[]";
+            readonly internalType: "int256[]";
         }];
-        readonly name: "serializeInt";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeString";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "string[]";
             readonly name: "values";
             readonly type: "string[]";
+            readonly internalType: "string[]";
         }];
-        readonly name: "serializeString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeString";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "value";
             readonly type: "string";
-        }];
-        readonly name: "serializeString";
-        readonly outputs: readonly [{
             readonly internalType: "string";
+        }];
+        readonly outputs: readonly [{
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeUint";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint256";
             readonly name: "value";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "serializeUint";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "serializeUint";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "objectKey";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "uint256[]";
             readonly name: "values";
             readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
         }];
-        readonly name: "serializeUint";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "setEnv";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "name";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "value";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "setEnv";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "setNonce";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "account";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint64";
             readonly name: "newNonce";
             readonly type: "uint64";
+            readonly internalType: "uint64";
         }];
-        readonly name: "setNonce";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "sign";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "digest";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "sign";
         readonly outputs: readonly [{
-            readonly internalType: "uint8";
             readonly name: "v";
             readonly type: "uint8";
+            readonly internalType: "uint8";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "r";
             readonly type: "bytes32";
-        }, {
             readonly internalType: "bytes32";
+        }, {
             readonly name: "s";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "snapshot";
+        readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "snapshotId";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [];
+        readonly type: "function";
         readonly name: "startBroadcast";
+        readonly inputs: readonly [];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "startBroadcast";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "signer";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "startBroadcast";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "startBroadcast";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "privateKey";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "startBroadcast";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "msgSender";
-            readonly type: "address";
-        }];
+        readonly type: "function";
         readonly name: "startPrank";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "msgSender";
             readonly type: "address";
-        }, {
             readonly internalType: "address";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "startPrank";
+        readonly inputs: readonly [{
+            readonly name: "msgSender";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
             readonly name: "txOrigin";
             readonly type: "address";
-        }];
-        readonly name: "startPrank";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [];
-        readonly name: "stopBroadcast";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [];
-        readonly name: "stopPrank";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
             readonly internalType: "address";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "stopBroadcast";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "stopPrank";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "store";
+        readonly inputs: readonly [{
             readonly name: "target";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "bytes32";
             readonly name: "slot";
             readonly type: "bytes32";
-        }, {
             readonly internalType: "bytes32";
+        }, {
             readonly name: "value";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "store";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "value";
             readonly type: "address";
+            readonly internalType: "address";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "value";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "bytes";
             readonly name: "value";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "bool";
             readonly name: "value";
             readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "int256";
             readonly name: "value";
             readonly type: "int256";
+            readonly internalType: "int256";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "toString";
         readonly inputs: readonly [{
-            readonly internalType: "bytes32";
             readonly name: "value";
             readonly type: "bytes32";
+            readonly internalType: "bytes32";
         }];
-        readonly name: "toString";
         readonly outputs: readonly [{
-            readonly internalType: "string";
             readonly name: "stringifiedValue";
             readonly type: "string";
+            readonly internalType: "string";
         }];
         readonly stateMutability: "pure";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "transact";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "forkId";
             readonly type: "uint256";
-        }, {
-            readonly internalType: "bytes32";
-            readonly name: "txHash";
-            readonly type: "bytes32";
-        }];
-        readonly name: "transact";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "bytes32";
-            readonly name: "txHash";
-            readonly type: "bytes32";
-        }];
-        readonly name: "transact";
-        readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
             readonly internalType: "uint256";
+        }, {
+            readonly name: "txHash";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "transact";
+        readonly inputs: readonly [{
+            readonly name: "txHash";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "txGasPrice";
+        readonly inputs: readonly [{
             readonly name: "newGasPrice";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "txGasPrice";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "warp";
         readonly inputs: readonly [{
-            readonly internalType: "uint256";
             readonly name: "newTimestamp";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }];
-        readonly name: "warp";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "writeFile";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "data";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "writeFile";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "writeFileBinary";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly internalType: "bytes";
             readonly name: "data";
             readonly type: "bytes";
+            readonly internalType: "bytes";
         }];
-        readonly name: "writeFileBinary";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "writeJson";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "path";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "valueKey";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "writeJson";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "writeJson";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "json";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "path";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "writeJson";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "writeLine";
         readonly inputs: readonly [{
-            readonly internalType: "string";
             readonly name: "path";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "data";
             readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "writeLine";
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-        readonly type: "function";
     }];
     static createInterface(): VmInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Vm;

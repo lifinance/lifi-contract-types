@@ -8,101 +8,101 @@ import type { IDeBridgeGate, IDeBridgeGateInterface } from "../IDeBridgeGate";
 
 const _abi = [
   {
+    type: "function",
+    name: "getChainToConfig",
     inputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "getChainToConfig",
     outputs: [
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "fixedNativeFee",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "isSupported",
-            type: "bool",
-          },
-          {
-            internalType: "uint16",
-            name: "transferFeeBps",
-            type: "uint16",
-          },
-        ],
-        internalType: "struct IDeBridgeGate.ChainSupportInfo",
         name: "",
         type: "tuple",
+        internalType: "struct IDeBridgeGate.ChainSupportInfo",
+        components: [
+          {
+            name: "fixedNativeFee",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "isSupported",
+            type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "transferFeeBps",
+            type: "uint16",
+            internalType: "uint16",
+          },
+        ],
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "globalFixedNativeFee",
+    inputs: [],
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "send",
     inputs: [
       {
-        internalType: "address",
         name: "_tokenAddress",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "_chainIdTo",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bytes",
         name: "_receiver",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bytes",
         name: "_permit",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bool",
         name: "_useAssetFee",
         type: "bool",
+        internalType: "bool",
       },
       {
-        internalType: "uint32",
         name: "_referralCode",
         type: "uint32",
+        internalType: "uint32",
       },
       {
-        internalType: "bytes",
         name: "_autoParams",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "send",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 
