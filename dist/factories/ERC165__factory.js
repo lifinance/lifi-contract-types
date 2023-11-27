@@ -7,23 +7,23 @@ exports.ERC165__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "supportsInterface",
         inputs: [
             {
-                internalType: "bytes4",
                 name: "interfaceId",
                 type: "bytes4",
+                internalType: "bytes4",
             },
         ],
-        name: "supportsInterface",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
 ];
 var ERC165__factory = /** @class */ (function () {

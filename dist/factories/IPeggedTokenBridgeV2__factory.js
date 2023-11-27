@@ -7,135 +7,135 @@ exports.IPeggedTokenBridgeV2__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [
-            {
-                internalType: "address",
-                name: "_token",
-                type: "address",
-            },
-            {
-                internalType: "uint256",
-                name: "_amount",
-                type: "uint256",
-            },
-            {
-                internalType: "uint64",
-                name: "_toChainId",
-                type: "uint64",
-            },
-            {
-                internalType: "address",
-                name: "_toAccount",
-                type: "address",
-            },
-            {
-                internalType: "uint64",
-                name: "_nonce",
-                type: "uint64",
-            },
-        ],
+        type: "function",
         name: "burn",
-        outputs: [
-            {
-                internalType: "bytes32",
-                name: "",
-                type: "bytes32",
-            },
-        ],
-        stateMutability: "nonpayable",
-        type: "function",
-    },
-    {
         inputs: [
             {
-                internalType: "address",
                 name: "_token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint64",
                 name: "_toChainId",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "address",
                 name: "_toAccount",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint64",
                 name: "_nonce",
                 type: "uint64",
+                internalType: "uint64",
             },
         ],
-        name: "burnFrom",
         outputs: [
             {
-                internalType: "bytes32",
                 name: "",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "burnFrom",
         inputs: [
             {
-                internalType: "bytes",
+                name: "_token",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "_toChainId",
+                type: "uint64",
+                internalType: "uint64",
+            },
+            {
+                name: "_toAccount",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_nonce",
+                type: "uint64",
+                internalType: "uint64",
+            },
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+        ],
+        stateMutability: "nonpayable",
+    },
+    {
+        type: "function",
+        name: "mint",
+        inputs: [
+            {
                 name: "_request",
                 type: "bytes",
+                internalType: "bytes",
             },
             {
-                internalType: "bytes[]",
                 name: "_sigs",
                 type: "bytes[]",
+                internalType: "bytes[]",
             },
             {
-                internalType: "address[]",
                 name: "_signers",
                 type: "address[]",
+                internalType: "address[]",
             },
             {
-                internalType: "uint256[]",
                 name: "_powers",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
         ],
-        name: "mint",
         outputs: [
             {
-                internalType: "bytes32",
                 name: "",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "records",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "recordId",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
-        name: "records",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
 ];
 var IPeggedTokenBridgeV2__factory = /** @class */ (function () {

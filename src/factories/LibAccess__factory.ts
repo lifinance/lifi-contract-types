@@ -8,42 +8,42 @@ import type { LibAccess, LibAccessInterface } from "../LibAccess";
 
 const _abi = [
   {
-    anonymous: false,
+    type: "event",
+    name: "AccessGranted",
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
         name: "account",
         type: "address",
+        indexed: true,
+        internalType: "address",
       },
       {
-        indexed: true,
-        internalType: "bytes4",
         name: "method",
         type: "bytes4",
+        indexed: true,
+        internalType: "bytes4",
       },
     ],
-    name: "AccessGranted",
-    type: "event",
+    anonymous: false,
   },
   {
-    anonymous: false,
+    type: "event",
+    name: "AccessRevoked",
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
         name: "account",
         type: "address",
+        indexed: true,
+        internalType: "address",
       },
       {
-        indexed: true,
-        internalType: "bytes4",
         name: "method",
         type: "bytes4",
+        indexed: true,
+        internalType: "bytes4",
       },
     ],
-    name: "AccessRevoked",
-    type: "event",
+    anonymous: false,
   },
 ] as const;
 

@@ -11,9 +11,9 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "ReentrancyError",
     type: "error",
+    name: "ReentrancyError",
+    inputs: [],
   },
 ] as const;
 

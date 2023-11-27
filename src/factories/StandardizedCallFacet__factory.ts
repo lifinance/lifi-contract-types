@@ -11,22 +11,22 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "FunctionDoesNotExist",
-    type: "error",
-  },
-  {
+    type: "function",
+    name: "standardizedCall",
     inputs: [
       {
-        internalType: "bytes",
         name: "callData",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "standardizedCall",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
+  },
+  {
+    type: "error",
+    name: "FunctionDoesNotExist",
+    inputs: [],
   },
 ] as const;
 

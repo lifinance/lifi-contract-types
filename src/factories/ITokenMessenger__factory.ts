@@ -11,38 +11,38 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "depositForBurn",
     inputs: [
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint32",
         name: "destinationDomain",
         type: "uint32",
+        internalType: "uint32",
       },
       {
-        internalType: "bytes32",
         name: "mintRecipient",
         type: "bytes32",
+        internalType: "bytes32",
       },
       {
-        internalType: "address",
         name: "burnToken",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "depositForBurn",
     outputs: [
       {
-        internalType: "uint64",
         name: "nonce",
         type: "uint64",
+        internalType: "uint64",
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
   },
 ] as const;
 

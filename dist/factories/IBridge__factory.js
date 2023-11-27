@@ -7,197 +7,197 @@ exports.IBridge__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "relay",
         inputs: [
             {
-                internalType: "bytes",
                 name: "_relayRequest",
                 type: "bytes",
+                internalType: "bytes",
             },
             {
-                internalType: "bytes[]",
                 name: "_sigs",
                 type: "bytes[]",
+                internalType: "bytes[]",
             },
             {
-                internalType: "address[]",
                 name: "_signers",
                 type: "address[]",
+                internalType: "address[]",
             },
             {
-                internalType: "uint256[]",
                 name: "_powers",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
         ],
-        name: "relay",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "send",
         inputs: [
             {
-                internalType: "address",
                 name: "_receiver",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "_token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint64",
                 name: "_dstChainId",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint64",
                 name: "_nonce",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint32",
                 name: "_maxSlippage",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "send",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "sendNative",
         inputs: [
             {
-                internalType: "address",
                 name: "_receiver",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint64",
                 name: "_dstChainId",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint64",
                 name: "_nonce",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint32",
                 name: "_maxSlippage",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "sendNative",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "transfers",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "transferId",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
-        name: "transfers",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
     {
+        type: "function",
+        name: "verifySigs",
         inputs: [
             {
-                internalType: "bytes",
                 name: "_msg",
                 type: "bytes",
+                internalType: "bytes",
             },
             {
-                internalType: "bytes[]",
                 name: "_sigs",
                 type: "bytes[]",
+                internalType: "bytes[]",
             },
             {
-                internalType: "address[]",
                 name: "_signers",
                 type: "address[]",
+                internalType: "address[]",
             },
             {
-                internalType: "uint256[]",
                 name: "_powers",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
         ],
-        name: "verifySigs",
         outputs: [],
         stateMutability: "view",
-        type: "function",
     },
     {
+        type: "function",
+        name: "withdraw",
         inputs: [
             {
-                internalType: "bytes",
                 name: "_wdmsg",
                 type: "bytes",
+                internalType: "bytes",
             },
             {
-                internalType: "bytes[]",
                 name: "_sigs",
                 type: "bytes[]",
+                internalType: "bytes[]",
             },
             {
-                internalType: "address[]",
                 name: "_signers",
                 type: "address[]",
+                internalType: "address[]",
             },
             {
-                internalType: "uint256[]",
                 name: "_powers",
                 type: "uint256[]",
+                internalType: "uint256[]",
             },
         ],
-        name: "withdraw",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "withdraws",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "withdrawId",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
-        name: "withdraws",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
 ];
 var IBridge__factory = /** @class */ (function () {
