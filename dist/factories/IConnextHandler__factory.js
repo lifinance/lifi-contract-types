@@ -7,107 +7,107 @@ exports.IConnextHandler__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "xcall",
         inputs: [
             {
-                internalType: "uint32",
                 name: "destination",
                 type: "uint32",
+                internalType: "uint32",
             },
             {
-                internalType: "address",
                 name: "recipient",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "tokenAddress",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "delegate",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "slippage",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "bytes",
                 name: "callData",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "xcall",
         outputs: [
             {
-                internalType: "bytes32",
                 name: "",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "xcall",
         inputs: [
             {
-                internalType: "uint32",
                 name: "destination",
                 type: "uint32",
+                internalType: "uint32",
             },
             {
-                internalType: "address",
                 name: "recipient",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "tokenAddress",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "delegate",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "slippage",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "bytes",
                 name: "callData",
                 type: "bytes",
+                internalType: "bytes",
             },
             {
-                internalType: "uint256",
                 name: "_relayerFee",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "xcall",
         outputs: [
             {
-                internalType: "bytes32",
                 name: "",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IConnextHandler__factory = /** @class */ (function () {

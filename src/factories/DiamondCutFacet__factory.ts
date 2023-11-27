@@ -11,146 +11,146 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "CalldataEmptyButInitNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetContainsNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionAlreadyExists",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionDoesNotExist",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "IncorrectFacetCutAction",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitReverted",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitZeroButCalldataNotEmpty",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoSelectorsInFace",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "OnlyContractOwner",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "facetAddress",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCut.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "functionSelectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCut.FacetCut[]",
-        name: "_diamondCut",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_init",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bytes",
-        name: "_calldata",
-        type: "bytes",
-      },
-    ],
-    name: "DiamondCut",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "facetAddress",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCut.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "functionSelectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondCut.FacetCut[]",
-        name: "_diamondCut",
-        type: "tuple[]",
-      },
-      {
-        internalType: "address",
-        name: "_init",
-        type: "address",
-      },
-      {
-        internalType: "bytes",
-        name: "_calldata",
-        type: "bytes",
-      },
-    ],
+    type: "function",
     name: "diamondCut",
+    inputs: [
+      {
+        name: "_diamondCut",
+        type: "tuple[]",
+        internalType: "struct IDiamondCut.FacetCut[]",
+        components: [
+          {
+            name: "facetAddress",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "action",
+            type: "uint8",
+            internalType: "enum IDiamondCut.FacetCutAction",
+          },
+          {
+            name: "functionSelectors",
+            type: "bytes4[]",
+            internalType: "bytes4[]",
+          },
+        ],
+      },
+      {
+        name: "_init",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "_calldata",
+        type: "bytes",
+        internalType: "bytes",
+      },
+    ],
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "DiamondCut",
+    inputs: [
+      {
+        name: "_diamondCut",
+        type: "tuple[]",
+        indexed: false,
+        internalType: "struct IDiamondCut.FacetCut[]",
+        components: [
+          {
+            name: "facetAddress",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "action",
+            type: "uint8",
+            internalType: "enum IDiamondCut.FacetCutAction",
+          },
+          {
+            name: "functionSelectors",
+            type: "bytes4[]",
+            internalType: "bytes4[]",
+          },
+        ],
+      },
+      {
+        name: "_init",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "_calldata",
+        type: "bytes",
+        indexed: false,
+        internalType: "bytes",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "CalldataEmptyButInitNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetContainsNoCode",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionAlreadyExists",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionDoesNotExist",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionIsImmutable",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "IncorrectFacetCutAction",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitReverted",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitZeroButCalldataNotEmpty",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoSelectorsInFace",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "OnlyContractOwner",
+    inputs: [],
   },
 ] as const;
 

@@ -7,28 +7,28 @@ exports.IMultichainERC20__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "Swapout",
         inputs: [
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "address",
                 name: "bindaddr",
                 type: "address",
+                internalType: "address",
             },
         ],
-        name: "Swapout",
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IMultichainERC20__factory = /** @class */ (function () {
