@@ -8,53 +8,53 @@ import type { LibSwap, LibSwapInterface } from "../LibSwap";
 
 const _abi = [
   {
-    anonymous: false,
+    type: "event",
+    name: "AssetSwapped",
     inputs: [
       {
-        indexed: false,
-        internalType: "bytes32",
         name: "transactionId",
         type: "bytes32",
+        indexed: false,
+        internalType: "bytes32",
       },
       {
-        indexed: false,
-        internalType: "address",
         name: "dex",
         type: "address",
-      },
-      {
         indexed: false,
         internalType: "address",
+      },
+      {
         name: "fromAssetId",
         type: "address",
-      },
-      {
         indexed: false,
         internalType: "address",
+      },
+      {
         name: "toAssetId",
         type: "address",
+        indexed: false,
+        internalType: "address",
       },
       {
-        indexed: false,
-        internalType: "uint256",
         name: "fromAmount",
         type: "uint256",
-      },
-      {
         indexed: false,
         internalType: "uint256",
+      },
+      {
         name: "toAmount",
         type: "uint256",
-      },
-      {
         indexed: false,
         internalType: "uint256",
+      },
+      {
         name: "timestamp",
         type: "uint256",
+        indexed: false,
+        internalType: "uint256",
       },
     ],
-    name: "AssetSwapped",
-    type: "event",
+    anonymous: false,
   },
 ] as const;
 

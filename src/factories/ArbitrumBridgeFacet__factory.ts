@@ -11,586 +11,586 @@ import type {
 
 const _abi = [
   {
+    type: "constructor",
     inputs: [
       {
-        internalType: "contract IGatewayRouter",
         name: "_gatewayRouter",
         type: "address",
+        internalType: "contract IGatewayRouter",
       },
       {
-        internalType: "contract IGatewayRouter",
         name: "_inbox",
         type: "address",
+        internalType: "contract IGatewayRouter",
       },
     ],
     stateMutability: "nonpayable",
-    type: "constructor",
   },
   {
-    inputs: [],
-    name: "CannotBridgeToSameNetwork",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "ContractCallNotAllowed",
-    type: "error",
-  },
-  {
+    type: "function",
+    name: "startBridgeTokensViaArbitrumBridge",
     inputs: [
       {
-        internalType: "uint256",
-        name: "minAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "receivedAmount",
-        type: "uint256",
-      },
-    ],
-    name: "CumulativeSlippageTooHigh",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InformationMismatch",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "required",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "balance",
-        type: "uint256",
-      },
-    ],
-    name: "InsufficientBalance",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidAmount",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidReceiver",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NativeAssetTransferFailed",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoSwapDataProvided",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoSwapFromZeroBalance",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoTransferToNullAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NullAddrIsNotAValidSpender",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NullAddrIsNotAnERC20Token",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "ReentrancyError",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "SliceOutOfBounds",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "SliceOverflow",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "transactionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "integrator",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "referrer",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "fromAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "toAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "fromAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "toAmount",
-        type: "uint256",
-      },
-    ],
-    name: "LiFiGenericSwapCompleted",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "transactionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "integrator",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "referrer",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "fromAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "toAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "fromAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "toAmount",
-        type: "uint256",
-      },
-    ],
-    name: "LiFiSwappedGeneric",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "transactionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receivingAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256",
-      },
-    ],
-    name: "LiFiTransferCompleted",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "bytes32",
-        name: "transactionId",
-        type: "bytes32",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receivingAssetId",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "timestamp",
-        type: "uint256",
-      },
-    ],
-    name: "LiFiTransferRecovered",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "transactionId",
-            type: "bytes32",
-          },
-          {
-            internalType: "string",
-            name: "bridge",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "integrator",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "destinationChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "hasSourceSwaps",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "hasDestinationCall",
-            type: "bool",
-          },
-        ],
-        indexed: false,
-        internalType: "struct ILiFi.BridgeData",
-        name: "bridgeData",
-        type: "tuple",
-      },
-    ],
-    name: "LiFiTransferStarted",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "transactionId",
-            type: "bytes32",
-          },
-          {
-            internalType: "string",
-            name: "bridge",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "integrator",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "destinationChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "hasSourceSwaps",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "hasDestinationCall",
-            type: "bool",
-          },
-        ],
-        internalType: "struct ILiFi.BridgeData",
         name: "_bridgeData",
         type: "tuple",
-      },
-      {
+        internalType: "struct ILiFi.BridgeData",
         components: [
           {
-            internalType: "uint256",
-            name: "maxSubmissionCost",
-            type: "uint256",
+            name: "transactionId",
+            type: "bytes32",
+            internalType: "bytes32",
           },
           {
-            internalType: "uint256",
-            name: "maxGas",
-            type: "uint256",
+            name: "bridge",
+            type: "string",
+            internalType: "string",
           },
           {
-            internalType: "uint256",
-            name: "maxGasPrice",
+            name: "integrator",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "referrer",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receiver",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmount",
             type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "destinationChainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "hasSourceSwaps",
+            type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "hasDestinationCall",
+            type: "bool",
+            internalType: "bool",
           },
         ],
-        internalType: "struct ArbitrumBridgeFacet.ArbitrumData",
+      },
+      {
         name: "_arbitrumData",
         type: "tuple",
+        internalType: "struct ArbitrumBridgeFacet.ArbitrumData",
+        components: [
+          {
+            name: "maxSubmissionCost",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxGas",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxGasPrice",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
       },
     ],
-    name: "startBridgeTokensViaArbitrumBridge",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "swapAndStartBridgeTokensViaArbitrumBridge",
     inputs: [
       {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "transactionId",
-            type: "bytes32",
-          },
-          {
-            internalType: "string",
-            name: "bridge",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "integrator",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "destinationChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "hasSourceSwaps",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "hasDestinationCall",
-            type: "bool",
-          },
-        ],
-        internalType: "struct ILiFi.BridgeData",
         name: "_bridgeData",
         type: "tuple",
-      },
-      {
+        internalType: "struct ILiFi.BridgeData",
         components: [
           {
-            internalType: "address",
-            name: "callTo",
-            type: "address",
+            name: "transactionId",
+            type: "bytes32",
+            internalType: "bytes32",
           },
           {
-            internalType: "address",
-            name: "approveTo",
-            type: "address",
+            name: "bridge",
+            type: "string",
+            internalType: "string",
           },
           {
+            name: "integrator",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "referrer",
+            type: "address",
             internalType: "address",
+          },
+          {
             name: "sendingAssetId",
             type: "address",
-          },
-          {
             internalType: "address",
-            name: "receivingAssetId",
+          },
+          {
+            name: "receiver",
             type: "address",
+            internalType: "address",
           },
           {
-            internalType: "uint256",
-            name: "fromAmount",
+            name: "minAmount",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "bytes",
-            name: "callData",
-            type: "bytes",
+            name: "destinationChainId",
+            type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "bool",
-            name: "requiresDeposit",
+            name: "hasSourceSwaps",
             type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "hasDestinationCall",
+            type: "bool",
+            internalType: "bool",
           },
         ],
-        internalType: "struct LibSwap.SwapData[]",
+      },
+      {
         name: "_swapData",
         type: "tuple[]",
-      },
-      {
+        internalType: "struct LibSwap.SwapData[]",
         components: [
           {
-            internalType: "uint256",
-            name: "maxSubmissionCost",
-            type: "uint256",
+            name: "callTo",
+            type: "address",
+            internalType: "address",
           },
           {
-            internalType: "uint256",
-            name: "maxGas",
-            type: "uint256",
+            name: "approveTo",
+            type: "address",
+            internalType: "address",
           },
           {
-            internalType: "uint256",
-            name: "maxGasPrice",
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receivingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "fromAmount",
             type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "callData",
+            type: "bytes",
+            internalType: "bytes",
+          },
+          {
+            name: "requiresDeposit",
+            type: "bool",
+            internalType: "bool",
           },
         ],
-        internalType: "struct ArbitrumBridgeFacet.ArbitrumData",
+      },
+      {
         name: "_arbitrumData",
         type: "tuple",
+        internalType: "struct ArbitrumBridgeFacet.ArbitrumData",
+        components: [
+          {
+            name: "maxSubmissionCost",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxGas",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxGasPrice",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
       },
     ],
-    name: "swapAndStartBridgeTokensViaArbitrumBridge",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "LiFiGenericSwapCompleted",
+    inputs: [
+      {
+        name: "transactionId",
+        type: "bytes32",
+        indexed: true,
+        internalType: "bytes32",
+      },
+      {
+        name: "integrator",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "referrer",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "receiver",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "fromAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "toAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "fromAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "toAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "LiFiSwappedGeneric",
+    inputs: [
+      {
+        name: "transactionId",
+        type: "bytes32",
+        indexed: true,
+        internalType: "bytes32",
+      },
+      {
+        name: "integrator",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "referrer",
+        type: "string",
+        indexed: false,
+        internalType: "string",
+      },
+      {
+        name: "fromAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "toAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "fromAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "toAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "LiFiTransferCompleted",
+    inputs: [
+      {
+        name: "transactionId",
+        type: "bytes32",
+        indexed: true,
+        internalType: "bytes32",
+      },
+      {
+        name: "receivingAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "receiver",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "timestamp",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "LiFiTransferRecovered",
+    inputs: [
+      {
+        name: "transactionId",
+        type: "bytes32",
+        indexed: true,
+        internalType: "bytes32",
+      },
+      {
+        name: "receivingAssetId",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "receiver",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "timestamp",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "LiFiTransferStarted",
+    inputs: [
+      {
+        name: "bridgeData",
+        type: "tuple",
+        indexed: false,
+        internalType: "struct ILiFi.BridgeData",
+        components: [
+          {
+            name: "transactionId",
+            type: "bytes32",
+            internalType: "bytes32",
+          },
+          {
+            name: "bridge",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "integrator",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "referrer",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receiver",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "destinationChainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "hasSourceSwaps",
+            type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "hasDestinationCall",
+            type: "bool",
+            internalType: "bool",
+          },
+        ],
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "CannotBridgeToSameNetwork",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "ContractCallNotAllowed",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "CumulativeSlippageTooHigh",
+    inputs: [
+      {
+        name: "minAmount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "receivedAmount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+  },
+  {
+    type: "error",
+    name: "InformationMismatch",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InsufficientBalance",
+    inputs: [
+      {
+        name: "required",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "balance",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+  },
+  {
+    type: "error",
+    name: "InvalidAmount",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InvalidContract",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InvalidReceiver",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NativeAssetTransferFailed",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoSwapDataProvided",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoSwapFromZeroBalance",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoTransferToNullAddress",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NullAddrIsNotAValidSpender",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NullAddrIsNotAnERC20Token",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "ReentrancyError",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "SliceOutOfBounds",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "SliceOverflow",
+    inputs: [],
   },
 ] as const;
 

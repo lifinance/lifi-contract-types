@@ -8,19 +8,19 @@ import type { LibBytes, LibBytesInterface } from "../LibBytes";
 
 const _abi = [
   {
-    inputs: [],
+    type: "error",
     name: "AddressOutOfBounds",
-    type: "error",
+    inputs: [],
   },
   {
-    inputs: [],
+    type: "error",
     name: "SliceOutOfBounds",
-    type: "error",
+    inputs: [],
   },
   {
-    inputs: [],
-    name: "SliceOverflow",
     type: "error",
+    name: "SliceOverflow",
+    inputs: [],
   },
 ] as const;
 

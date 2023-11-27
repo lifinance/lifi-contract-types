@@ -8,43 +8,43 @@ import type { ISwap, ISwapInterface } from "../../IHopBridge.sol/ISwap";
 
 const _abi = [
   {
+    type: "function",
+    name: "swap",
     inputs: [
       {
-        internalType: "uint8",
         name: "tokenIndexFrom",
         type: "uint8",
+        internalType: "uint8",
       },
       {
-        internalType: "uint8",
         name: "tokenIndexTo",
         type: "uint8",
+        internalType: "uint8",
       },
       {
-        internalType: "uint256",
         name: "dx",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "minDy",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "deadline",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "swap",
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
   },
 ] as const;
 

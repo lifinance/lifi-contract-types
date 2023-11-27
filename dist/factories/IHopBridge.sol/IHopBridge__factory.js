@@ -7,133 +7,133 @@ exports.IHopBridge__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "send",
         inputs: [
             {
-                internalType: "uint256",
                 name: "chainId",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "address",
                 name: "recipient",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "bonderFee",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "amountOutMin",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "deadline",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "send",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "sendToL2",
         inputs: [
             {
-                internalType: "uint256",
                 name: "chainId",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "address",
                 name: "recipient",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "amountOutMin",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "deadline",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "address",
                 name: "relayer",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "relayerFee",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "sendToL2",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "swapAndSend",
         inputs: [
             {
-                internalType: "uint256",
                 name: "chainId",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "address",
                 name: "recipient",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "bonderFee",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "amountOutMin",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "deadline",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "destinationAmountOutMin",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "destinationDeadline",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "swapAndSend",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IHopBridge__factory = /** @class */ (function () {

@@ -4,20 +4,20 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IOmniBridge, IOmniBridgeInterface } from "../IOmniBridge";
+import type { IThorSwap, IThorSwapInterface } from "../IThorSwap";
 
 const _abi = [
   {
     type: "function",
-    name: "relayTokens",
+    name: "depositWithExpiry",
     inputs: [
       {
-        name: "token",
+        name: "vault",
         type: "address",
         internalType: "address",
       },
       {
-        name: "receiver",
+        name: "asset",
         type: "address",
         internalType: "address",
       },
@@ -26,18 +26,15 @@ const _abi = [
         type: "uint256",
         internalType: "uint256",
       },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "wrapAndRelayTokens",
-    inputs: [
       {
-        name: "receiver",
-        type: "address",
-        internalType: "address",
+        name: "memo",
+        type: "string",
+        internalType: "string",
+      },
+      {
+        name: "expiration",
+        type: "uint256",
+        internalType: "uint256",
       },
     ],
     outputs: [],
@@ -45,15 +42,15 @@ const _abi = [
   },
 ] as const;
 
-export class IOmniBridge__factory {
+export class IThorSwap__factory {
   static readonly abi = _abi;
-  static createInterface(): IOmniBridgeInterface {
-    return new utils.Interface(_abi) as IOmniBridgeInterface;
+  static createInterface(): IThorSwapInterface {
+    return new utils.Interface(_abi) as IThorSwapInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IOmniBridge {
-    return new Contract(address, _abi, signerOrProvider) as IOmniBridge;
+  ): IThorSwap {
+    return new Contract(address, _abi, signerOrProvider) as IThorSwap;
   }
 }
