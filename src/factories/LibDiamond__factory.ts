@@ -8,120 +8,120 @@ import type { LibDiamond, LibDiamondInterface } from "../LibDiamond";
 
 const _abi = [
   {
-    inputs: [],
-    name: "CalldataEmptyButInitNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsNotZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetAddressIsZero",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FacetContainsNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionAlreadyExists",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionDoesNotExist",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "FunctionIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "IncorrectFacetCutAction",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitReverted",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InitZeroButCalldataNotEmpty",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoSelectorsInFace",
-    type: "error",
-  },
-  {
-    anonymous: false,
+    type: "event",
+    name: "DiamondCut",
     inputs: [
       {
-        components: [
-          {
-            internalType: "address",
-            name: "facetAddress",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCut.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "functionSelectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCut.FacetCut[]",
         name: "_diamondCut",
         type: "tuple[]",
+        indexed: false,
+        internalType: "struct IDiamondCut.FacetCut[]",
+        components: [
+          {
+            name: "facetAddress",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "action",
+            type: "uint8",
+            internalType: "enum IDiamondCut.FacetCutAction",
+          },
+          {
+            name: "functionSelectors",
+            type: "bytes4[]",
+            internalType: "bytes4[]",
+          },
+        ],
       },
       {
-        indexed: false,
-        internalType: "address",
         name: "_init",
         type: "address",
+        indexed: false,
+        internalType: "address",
       },
       {
-        indexed: false,
-        internalType: "bytes",
         name: "_calldata",
         type: "bytes",
+        indexed: false,
+        internalType: "bytes",
       },
     ],
-    name: "DiamondCut",
-    type: "event",
+    anonymous: false,
   },
   {
-    anonymous: false,
+    type: "event",
+    name: "OwnershipTransferred",
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
         name: "previousOwner",
         type: "address",
-      },
-      {
         indexed: true,
         internalType: "address",
+      },
+      {
         name: "newOwner",
         type: "address",
+        indexed: true,
+        internalType: "address",
       },
     ],
-    name: "OwnershipTransferred",
-    type: "event",
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "CalldataEmptyButInitNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsNotZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetAddressIsZero",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FacetContainsNoCode",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionAlreadyExists",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionDoesNotExist",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "FunctionIsImmutable",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "IncorrectFacetCutAction",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitReverted",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InitZeroButCalldataNotEmpty",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoSelectorsInFace",
+    inputs: [],
   },
 ] as const;
 

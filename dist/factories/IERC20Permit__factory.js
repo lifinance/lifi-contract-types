@@ -7,79 +7,79 @@ exports.IERC20Permit__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [],
+        type: "function",
         name: "DOMAIN_SEPARATOR",
+        inputs: [],
         outputs: [
             {
-                internalType: "bytes32",
                 name: "",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
     {
+        type: "function",
+        name: "nonces",
         inputs: [
             {
-                internalType: "address",
                 name: "owner",
                 type: "address",
+                internalType: "address",
             },
         ],
-        name: "nonces",
         outputs: [
             {
-                internalType: "uint256",
                 name: "",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
     {
+        type: "function",
+        name: "permit",
         inputs: [
             {
-                internalType: "address",
                 name: "owner",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "spender",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "value",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint256",
                 name: "deadline",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint8",
                 name: "v",
                 type: "uint8",
+                internalType: "uint8",
             },
             {
-                internalType: "bytes32",
                 name: "r",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                internalType: "bytes32",
                 name: "s",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
-        name: "permit",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IERC20Permit__factory = /** @class */ (function () {

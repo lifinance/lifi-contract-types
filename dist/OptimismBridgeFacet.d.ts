@@ -2,6 +2,26 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace OptimismBridgeFacet {
+    type ConfigStruct = {
+        assetId: PromiseOrValue<string>;
+        bridge: PromiseOrValue<string>;
+    };
+    type ConfigStructOutput = [string, string] & {
+        assetId: string;
+        bridge: string;
+    };
+    type OptimismDataStruct = {
+        assetIdOnL2: PromiseOrValue<string>;
+        l2Gas: PromiseOrValue<BigNumberish>;
+        isSynthetix: PromiseOrValue<boolean>;
+    };
+    type OptimismDataStructOutput = [string, number, boolean] & {
+        assetIdOnL2: string;
+        l2Gas: number;
+        isSynthetix: boolean;
+    };
+}
 export declare namespace ILiFi {
     type BridgeDataStruct = {
         transactionId: PromiseOrValue<BytesLike>;
@@ -37,26 +57,6 @@ export declare namespace ILiFi {
         destinationChainId: BigNumber;
         hasSourceSwaps: boolean;
         hasDestinationCall: boolean;
-    };
-}
-export declare namespace OptimismBridgeFacet {
-    type ConfigStruct = {
-        assetId: PromiseOrValue<string>;
-        bridge: PromiseOrValue<string>;
-    };
-    type ConfigStructOutput = [string, string] & {
-        assetId: string;
-        bridge: string;
-    };
-    type OptimismDataStruct = {
-        assetIdOnL2: PromiseOrValue<string>;
-        l2Gas: PromiseOrValue<BigNumberish>;
-        isSynthetix: PromiseOrValue<boolean>;
-    };
-    type OptimismDataStructOutput = [string, number, boolean] & {
-        assetIdOnL2: string;
-        l2Gas: number;
-        isSynthetix: boolean;
     };
 }
 export declare namespace LibSwap {

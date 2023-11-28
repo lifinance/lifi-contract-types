@@ -2,6 +2,34 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace LibSwap {
+    type SwapDataStruct = {
+        callTo: PromiseOrValue<string>;
+        approveTo: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receivingAssetId: PromiseOrValue<string>;
+        fromAmount: PromiseOrValue<BigNumberish>;
+        callData: PromiseOrValue<BytesLike>;
+        requiresDeposit: PromiseOrValue<boolean>;
+    };
+    type SwapDataStructOutput = [
+        string,
+        string,
+        string,
+        string,
+        BigNumber,
+        string,
+        boolean
+    ] & {
+        callTo: string;
+        approveTo: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        fromAmount: BigNumber;
+        callData: string;
+        requiresDeposit: boolean;
+    };
+}
 export declare namespace ILiFi {
     type BridgeDataStruct = {
         transactionId: PromiseOrValue<BytesLike>;
@@ -37,34 +65,6 @@ export declare namespace ILiFi {
         destinationChainId: BigNumber;
         hasSourceSwaps: boolean;
         hasDestinationCall: boolean;
-    };
-}
-export declare namespace LibSwap {
-    type SwapDataStruct = {
-        callTo: PromiseOrValue<string>;
-        approveTo: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receivingAssetId: PromiseOrValue<string>;
-        fromAmount: PromiseOrValue<BigNumberish>;
-        callData: PromiseOrValue<BytesLike>;
-        requiresDeposit: PromiseOrValue<boolean>;
-    };
-    type SwapDataStructOutput = [
-        string,
-        string,
-        string,
-        string,
-        BigNumber,
-        string,
-        boolean
-    ] & {
-        callTo: string;
-        approveTo: string;
-        sendingAssetId: string;
-        receivingAssetId: string;
-        fromAmount: BigNumber;
-        callData: string;
-        requiresDeposit: boolean;
     };
 }
 export interface ReceiverInterface extends utils.Interface {

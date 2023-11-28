@@ -8,80 +8,80 @@ import type { IDiamondLoupe, IDiamondLoupeInterface } from "../IDiamondLoupe";
 
 const _abi = [
   {
+    type: "function",
+    name: "facetAddress",
     inputs: [
       {
-        internalType: "bytes4",
         name: "_functionSelector",
         type: "bytes4",
+        internalType: "bytes4",
       },
     ],
-    name: "facetAddress",
     outputs: [
       {
-        internalType: "address",
         name: "facetAddress_",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "facetAddresses",
+    inputs: [],
     outputs: [
       {
-        internalType: "address[]",
         name: "facetAddresses_",
         type: "address[]",
+        internalType: "address[]",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "facetFunctionSelectors",
     inputs: [
       {
-        internalType: "address",
         name: "_facet",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "facetFunctionSelectors",
     outputs: [
       {
-        internalType: "bytes4[]",
         name: "facetFunctionSelectors_",
         type: "bytes4[]",
+        internalType: "bytes4[]",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "facets",
+    inputs: [],
     outputs: [
       {
-        components: [
-          {
-            internalType: "address",
-            name: "facetAddress",
-            type: "address",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "functionSelectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondLoupe.Facet[]",
         name: "facets_",
         type: "tuple[]",
+        internalType: "struct IDiamondLoupe.Facet[]",
+        components: [
+          {
+            name: "facetAddress",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "functionSelectors",
+            type: "bytes4[]",
+            internalType: "bytes4[]",
+          },
+        ],
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
 ] as const;
 

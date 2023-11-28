@@ -7,76 +7,76 @@ exports.IWormholeRouter__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "transferTokens",
         inputs: [
             {
-                internalType: "address",
                 name: "token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint16",
                 name: "recipientChain",
                 type: "uint16",
+                internalType: "uint16",
             },
             {
-                internalType: "bytes32",
                 name: "recipient",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                internalType: "uint256",
                 name: "arbiterFee",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint32",
                 name: "nonce",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "transferTokens",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "wrapAndTransferETH",
         inputs: [
             {
-                internalType: "uint16",
                 name: "recipientChain",
                 type: "uint16",
+                internalType: "uint16",
             },
             {
-                internalType: "bytes32",
                 name: "recipient",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                internalType: "uint256",
                 name: "arbiterFee",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint32",
                 name: "nonce",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "wrapAndTransferETH",
         outputs: [
             {
-                internalType: "uint64",
                 name: "sequence",
                 type: "uint64",
+                internalType: "uint64",
             },
         ],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IWormholeRouter__factory = /** @class */ (function () {

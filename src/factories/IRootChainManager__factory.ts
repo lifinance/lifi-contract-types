@@ -11,59 +11,59 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "depositEtherFor",
     inputs: [
       {
-        internalType: "address",
         name: "user",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "depositEtherFor",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "depositFor",
     inputs: [
       {
-        internalType: "address",
         name: "user",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "rootToken",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "bytes",
         name: "depositData",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "depositFor",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "rootToChildToken",
     inputs: [
       {
-        internalType: "address",
         name: "rootToken",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "rootToChildToken",
     outputs: [
       {
-        internalType: "address",
         name: "childToken",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
 ] as const;
 
