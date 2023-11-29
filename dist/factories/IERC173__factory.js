@@ -7,49 +7,49 @@ exports.IERC173__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: true,
-                internalType: "address",
-                name: "previousOwner",
-                type: "address",
-            },
-            {
-                indexed: true,
-                internalType: "address",
-                name: "newOwner",
-                type: "address",
-            },
-        ],
-        name: "OwnershipTransferred",
-        type: "event",
-    },
-    {
-        inputs: [],
+        type: "function",
         name: "owner",
+        inputs: [],
         outputs: [
             {
-                internalType: "address",
                 name: "owner_",
                 type: "address",
+                internalType: "address",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
     {
+        type: "function",
+        name: "transferOwnership",
         inputs: [
             {
-                internalType: "address",
                 name: "_newOwner",
                 type: "address",
+                internalType: "address",
             },
         ],
-        name: "transferOwnership",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
+    },
+    {
+        type: "event",
+        name: "OwnershipTransferred",
+        inputs: [
+            {
+                name: "previousOwner",
+                type: "address",
+                indexed: true,
+                internalType: "address",
+            },
+            {
+                name: "newOwner",
+                type: "address",
+                indexed: true,
+                internalType: "address",
+            },
+        ],
+        anonymous: false,
     },
 ];
 var IERC173__factory = /** @class */ (function () {

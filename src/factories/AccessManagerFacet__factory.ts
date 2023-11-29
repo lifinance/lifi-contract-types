@@ -11,99 +11,99 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "CannotAuthoriseSelf",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "OnlyContractOwner",
-    type: "error",
-  },
-  {
-    anonymous: false,
+    type: "function",
+    name: "addressCanExecuteMethod",
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "bytes4",
-        name: "method",
-        type: "bytes4",
-      },
-    ],
-    name: "ExecutionAllowed",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "bytes4",
-        name: "method",
-        type: "bytes4",
-      },
-    ],
-    name: "ExecutionDenied",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes4",
         name: "_selector",
         type: "bytes4",
+        internalType: "bytes4",
       },
       {
-        internalType: "address",
         name: "_executor",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "addressCanExecuteMethod",
     outputs: [
       {
-        internalType: "bool",
         name: "",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "setCanExecute",
     inputs: [
       {
-        internalType: "bytes4",
         name: "_selector",
         type: "bytes4",
+        internalType: "bytes4",
       },
       {
-        internalType: "address",
         name: "_executor",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "bool",
         name: "_canExecute",
         type: "bool",
+        internalType: "bool",
       },
     ],
-    name: "setCanExecute",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "ExecutionAllowed",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "method",
+        type: "bytes4",
+        indexed: true,
+        internalType: "bytes4",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "ExecutionDenied",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "method",
+        type: "bytes4",
+        indexed: true,
+        internalType: "bytes4",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "CannotAuthoriseSelf",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "OnlyContractOwner",
+    inputs: [],
   },
 ] as const;
 

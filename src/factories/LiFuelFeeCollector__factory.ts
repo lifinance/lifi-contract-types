@@ -11,305 +11,305 @@ import type {
 
 const _abi = [
   {
+    type: "constructor",
     inputs: [
       {
-        internalType: "address",
         name: "_owner",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "nonpayable",
-    type: "constructor",
   },
   {
+    type: "function",
+    name: "batchWithdrawFees",
     inputs: [
       {
-        internalType: "uint256",
-        name: "required",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "balance",
-        type: "uint256",
-      },
-    ],
-    name: "InsufficientBalance",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "InvalidAmount",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NativeAssetTransferFailed",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NewOwnerMustNotBeSelf",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoNullOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoPendingOwnershipTransfer",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoTransferToNullAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NotEnoughNativeForFees",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NotPendingOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NullAddrIsNotAnERC20Token",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "TransferFailure",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "UnAuthorized",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "FeesWithdrawn",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "chainId",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "feeAmount",
-        type: "uint256",
-      },
-    ],
-    name: "GasFeesCollected",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferRequested",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address[]",
         name: "tokenAddresses",
         type: "address[]",
+        internalType: "address[]",
       },
     ],
-    name: "batchWithdrawFees",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "cancelOwnershipTransfer",
+    inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "collectNativeGasFees",
     inputs: [
       {
-        internalType: "uint256",
         name: "chainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "collectNativeGasFees",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "collectTokenGasFees",
     inputs: [
       {
-        internalType: "address",
         name: "tokenAddress",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "feeAmount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "chainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "collectTokenGasFees",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "confirmOwnershipTransfer",
+    inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "pendingOwner",
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "pendingOwner",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "transferOwnership",
     inputs: [
       {
-        internalType: "address",
         name: "_newOwner",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "withdrawFees",
     inputs: [
       {
-        internalType: "address",
         name: "tokenAddress",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "withdrawFees",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "FeesWithdrawn",
+    inputs: [
+      {
+        name: "token",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "to",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "GasFeesCollected",
+    inputs: [
+      {
+        name: "token",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "chainId",
+        type: "uint256",
+        indexed: true,
+        internalType: "uint256",
+      },
+      {
+        name: "receiver",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "feeAmount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferRequested",
+    inputs: [
+      {
+        name: "_from",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "_to",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "InsufficientBalance",
+    inputs: [
+      {
+        name: "required",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "balance",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+  },
+  {
+    type: "error",
+    name: "InvalidAmount",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NativeAssetTransferFailed",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NewOwnerMustNotBeSelf",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoNullOwner",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoPendingOwnershipTransfer",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoTransferToNullAddress",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NotEnoughNativeForFees",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NotPendingOwner",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NullAddrIsNotAnERC20Token",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "TransferFailure",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "UnAuthorized",
+    inputs: [],
   },
 ] as const;
 

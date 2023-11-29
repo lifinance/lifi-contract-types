@@ -28,22 +28,6 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export declare namespace MultichainFacet {
-  export type AnyMappingStruct = {
-    tokenAddress: PromiseOrValue<string>;
-    anyTokenAddress: PromiseOrValue<string>;
-  };
-
-  export type AnyMappingStructOutput = [string, string] & {
-    tokenAddress: string;
-    anyTokenAddress: string;
-  };
-
-  export type MultichainDataStruct = { router: PromiseOrValue<string> };
-
-  export type MultichainDataStructOutput = [string] & { router: string };
-}
-
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -80,6 +64,22 @@ export declare namespace ILiFi {
     destinationChainId: BigNumber;
     hasSourceSwaps: boolean;
     hasDestinationCall: boolean;
+  };
+}
+
+export declare namespace MultichainFacet {
+  export type MultichainDataStruct = { router: PromiseOrValue<string> };
+
+  export type MultichainDataStructOutput = [string] & { router: string };
+
+  export type AnyMappingStruct = {
+    tokenAddress: PromiseOrValue<string>;
+    anyTokenAddress: PromiseOrValue<string>;
+  };
+
+  export type AnyMappingStructOutput = [string, string] & {
+    tokenAddress: string;
+    anyTokenAddress: string;
   };
 }
 
