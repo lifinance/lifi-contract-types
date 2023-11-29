@@ -2,43 +2,6 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
-export declare namespace ILiFi {
-    type BridgeDataStruct = {
-        transactionId: PromiseOrValue<BytesLike>;
-        bridge: PromiseOrValue<string>;
-        integrator: PromiseOrValue<string>;
-        referrer: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receiver: PromiseOrValue<string>;
-        minAmount: PromiseOrValue<BigNumberish>;
-        destinationChainId: PromiseOrValue<BigNumberish>;
-        hasSourceSwaps: PromiseOrValue<boolean>;
-        hasDestinationCall: PromiseOrValue<boolean>;
-    };
-    type BridgeDataStructOutput = [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        BigNumber,
-        BigNumber,
-        boolean,
-        boolean
-    ] & {
-        transactionId: string;
-        bridge: string;
-        integrator: string;
-        referrer: string;
-        sendingAssetId: string;
-        receiver: string;
-        minAmount: BigNumber;
-        destinationChainId: BigNumber;
-        hasSourceSwaps: boolean;
-        hasDestinationCall: boolean;
-    };
-}
 export declare namespace StargateFacet {
     type ChainIdConfigStruct = {
         chainId: PromiseOrValue<BigNumberish>;
@@ -76,6 +39,43 @@ export declare namespace StargateFacet {
         refundAddress: string;
         callTo: string;
         callData: string;
+    };
+}
+export declare namespace ILiFi {
+    type BridgeDataStruct = {
+        transactionId: PromiseOrValue<BytesLike>;
+        bridge: PromiseOrValue<string>;
+        integrator: PromiseOrValue<string>;
+        referrer: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receiver: PromiseOrValue<string>;
+        minAmount: PromiseOrValue<BigNumberish>;
+        destinationChainId: PromiseOrValue<BigNumberish>;
+        hasSourceSwaps: PromiseOrValue<boolean>;
+        hasDestinationCall: PromiseOrValue<boolean>;
+    };
+    type BridgeDataStructOutput = [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        boolean,
+        boolean
+    ] & {
+        transactionId: string;
+        bridge: string;
+        integrator: string;
+        referrer: string;
+        sendingAssetId: string;
+        receiver: string;
+        minAmount: BigNumber;
+        destinationChainId: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
 }
 export declare namespace LibSwap {

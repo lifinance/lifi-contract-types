@@ -11,246 +11,246 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "bridge",
     inputs: [
       {
-        internalType: "address",
         name: "to",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "chainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "token",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        components: [
-          {
-            internalType: "address",
-            name: "swapAdapter",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "tokenOut",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmountOut",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "deadline",
-            type: "uint256",
-          },
-          {
-            internalType: "bytes",
-            name: "rawParams",
-            type: "bytes",
-          },
-        ],
-        internalType: "struct ISynapseRouter.SwapQuery",
         name: "originQuery",
         type: "tuple",
-      },
-      {
+        internalType: "struct ISynapseRouter.SwapQuery",
         components: [
           {
-            internalType: "address",
             name: "swapAdapter",
             type: "address",
+            internalType: "address",
           },
           {
-            internalType: "address",
             name: "tokenOut",
             type: "address",
+            internalType: "address",
           },
           {
-            internalType: "uint256",
             name: "minAmountOut",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "uint256",
             name: "deadline",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "bytes",
             name: "rawParams",
             type: "bytes",
+            internalType: "bytes",
           },
         ],
-        internalType: "struct ISynapseRouter.SwapQuery",
+      },
+      {
         name: "destQuery",
         type: "tuple",
+        internalType: "struct ISynapseRouter.SwapQuery",
+        components: [
+          {
+            name: "swapAdapter",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "tokenOut",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmountOut",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "deadline",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "rawParams",
+            type: "bytes",
+            internalType: "bytes",
+          },
+        ],
       },
     ],
-    name: "bridge",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "getConnectedBridgeTokens",
     inputs: [
       {
-        internalType: "address",
         name: "tokenOut",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "getConnectedBridgeTokens",
     outputs: [
       {
-        components: [
-          {
-            internalType: "string",
-            name: "symbol",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "token",
-            type: "address",
-          },
-        ],
-        internalType: "struct ISynapseRouter.BridgeToken[]",
         name: "tokens",
         type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
+        internalType: "struct ISynapseRouter.BridgeToken[]",
         components: [
           {
-            internalType: "string",
             name: "symbol",
             type: "string",
+            internalType: "string",
           },
           {
-            internalType: "uint256",
-            name: "amountIn",
-            type: "uint256",
+            name: "token",
+            type: "address",
+            internalType: "address",
           },
         ],
-        internalType: "struct ISynapseRouter.DestRequest[]",
-        name: "requests",
-        type: "tuple[]",
-      },
-      {
-        internalType: "address",
-        name: "tokenOut",
-        type: "address",
-      },
-    ],
-    name: "getDestinationAmountOut",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "swapAdapter",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "tokenOut",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmountOut",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "deadline",
-            type: "uint256",
-          },
-          {
-            internalType: "bytes",
-            name: "rawParams",
-            type: "bytes",
-          },
-        ],
-        internalType: "struct ISynapseRouter.SwapQuery[]",
-        name: "destQueries",
-        type: "tuple[]",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "getDestinationAmountOut",
     inputs: [
       {
-        internalType: "address",
-        name: "tokenIn",
-        type: "address",
-      },
-      {
-        internalType: "string[]",
-        name: "tokenSymbols",
-        type: "string[]",
-      },
-      {
-        internalType: "uint256",
-        name: "amountIn",
-        type: "uint256",
-      },
-    ],
-    name: "getOriginAmountOut",
-    outputs: [
-      {
+        name: "requests",
+        type: "tuple[]",
+        internalType: "struct ISynapseRouter.DestRequest[]",
         components: [
           {
-            internalType: "address",
-            name: "swapAdapter",
-            type: "address",
+            name: "symbol",
+            type: "string",
+            internalType: "string",
           },
           {
-            internalType: "address",
-            name: "tokenOut",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmountOut",
+            name: "amountIn",
             type: "uint256",
-          },
-          {
             internalType: "uint256",
-            name: "deadline",
-            type: "uint256",
-          },
-          {
-            internalType: "bytes",
-            name: "rawParams",
-            type: "bytes",
           },
         ],
-        internalType: "struct ISynapseRouter.SwapQuery[]",
-        name: "originQueries",
+      },
+      {
+        name: "tokenOut",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    outputs: [
+      {
+        name: "destQueries",
         type: "tuple[]",
+        internalType: "struct ISynapseRouter.SwapQuery[]",
+        components: [
+          {
+            name: "swapAdapter",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "tokenOut",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmountOut",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "deadline",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "rawParams",
+            type: "bytes",
+            internalType: "bytes",
+          },
+        ],
       },
     ],
     stateMutability: "view",
+  },
+  {
     type: "function",
+    name: "getOriginAmountOut",
+    inputs: [
+      {
+        name: "tokenIn",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "tokenSymbols",
+        type: "string[]",
+        internalType: "string[]",
+      },
+      {
+        name: "amountIn",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "originQueries",
+        type: "tuple[]",
+        internalType: "struct ISynapseRouter.SwapQuery[]",
+        components: [
+          {
+            name: "swapAdapter",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "tokenOut",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmountOut",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "deadline",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "rawParams",
+            type: "bytes",
+            internalType: "bytes",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
   },
 ] as const;
 

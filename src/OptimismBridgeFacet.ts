@@ -28,6 +28,30 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace OptimismBridgeFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
+  export type OptimismDataStruct = {
+    assetIdOnL2: PromiseOrValue<string>;
+    l2Gas: PromiseOrValue<BigNumberish>;
+    isSynthetix: PromiseOrValue<boolean>;
+  };
+
+  export type OptimismDataStructOutput = [string, number, boolean] & {
+    assetIdOnL2: string;
+    l2Gas: number;
+    isSynthetix: boolean;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -64,30 +88,6 @@ export declare namespace ILiFi {
     destinationChainId: BigNumber;
     hasSourceSwaps: boolean;
     hasDestinationCall: boolean;
-  };
-}
-
-export declare namespace OptimismBridgeFacet {
-  export type ConfigStruct = {
-    assetId: PromiseOrValue<string>;
-    bridge: PromiseOrValue<string>;
-  };
-
-  export type ConfigStructOutput = [string, string] & {
-    assetId: string;
-    bridge: string;
-  };
-
-  export type OptimismDataStruct = {
-    assetIdOnL2: PromiseOrValue<string>;
-    l2Gas: PromiseOrValue<BigNumberish>;
-    isSynthetix: PromiseOrValue<boolean>;
-  };
-
-  export type OptimismDataStructOutput = [string, number, boolean] & {
-    assetIdOnL2: string;
-    l2Gas: number;
-    isSynthetix: boolean;
   };
 }
 

@@ -7,75 +7,75 @@ exports.ICBridge__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "send",
         inputs: [
             {
-                internalType: "address",
                 name: "_receiver",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "_token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint64",
                 name: "_dstChainId",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint64",
                 name: "_nonce",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint32",
                 name: "_maxSlippage",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "send",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "sendNative",
         inputs: [
             {
-                internalType: "address",
                 name: "_receiver",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint64",
                 name: "_dstChainId",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint64",
                 name: "_nonce",
                 type: "uint64",
+                internalType: "uint64",
             },
             {
-                internalType: "uint32",
                 name: "_maxSlippage",
                 type: "uint32",
+                internalType: "uint32",
             },
         ],
-        name: "sendNative",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var ICBridge__factory = /** @class */ (function () {

@@ -8,17 +8,17 @@ import type { IXDaiBridgeL2, IXDaiBridgeL2Interface } from "../IXDaiBridgeL2";
 
 const _abi = [
   {
+    type: "function",
+    name: "relayTokens",
     inputs: [
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "relayTokens",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 

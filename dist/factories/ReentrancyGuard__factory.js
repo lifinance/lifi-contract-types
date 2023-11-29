@@ -7,9 +7,9 @@ exports.ReentrancyGuard__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [],
-        name: "ReentrancyError",
         type: "error",
+        name: "ReentrancyError",
+        inputs: [],
     },
 ];
 var ReentrancyGuard__factory = /** @class */ (function () {

@@ -7,83 +7,83 @@ exports.IL1StandardBridge__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "depositERC20To",
         inputs: [
             {
-                internalType: "address",
                 name: "_l1Token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "_l2Token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "_to",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "uint32",
                 name: "_l2Gas",
                 type: "uint32",
+                internalType: "uint32",
             },
             {
-                internalType: "bytes",
                 name: "_data",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "depositERC20To",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "depositETHTo",
         inputs: [
             {
-                internalType: "address",
                 name: "_to",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint32",
                 name: "_l2Gas",
                 type: "uint32",
+                internalType: "uint32",
             },
             {
-                internalType: "bytes",
                 name: "_data",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "depositETHTo",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "depositTo",
         inputs: [
             {
-                internalType: "address",
                 name: "_to",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "depositTo",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
     },
 ];
 var IL1StandardBridge__factory = /** @class */ (function () {
