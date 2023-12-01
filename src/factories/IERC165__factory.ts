@@ -8,23 +8,23 @@ import type { IERC165, IERC165Interface } from "../IERC165";
 
 const _abi = [
   {
+    type: "function",
+    name: "supportsInterface",
     inputs: [
       {
-        internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4",
+        internalType: "bytes4",
       },
     ],
-    name: "supportsInterface",
     outputs: [
       {
-        internalType: "bool",
         name: "",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
 ] as const;
 

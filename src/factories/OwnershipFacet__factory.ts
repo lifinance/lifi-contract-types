@@ -11,107 +11,107 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "NewOwnerMustNotBeSelf",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoNullOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NoPendingOwnershipTransfer",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "NotPendingOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "OnlyContractOwner",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferRequested",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    inputs: [],
+    type: "function",
     name: "cancelOwnershipTransfer",
+    inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "confirmOwnershipTransfer",
+    inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
-    inputs: [],
+    type: "function",
     name: "owner",
+    inputs: [],
     outputs: [
       {
-        internalType: "address",
         name: "owner_",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "transferOwnership",
     inputs: [
       {
-        internalType: "address",
         name: "_newOwner",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferRequested",
+    inputs: [
+      {
+        name: "_from",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "_to",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "NewOwnerMustNotBeSelf",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoNullOwner",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NoPendingOwnershipTransfer",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "NotPendingOwner",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "OnlyContractOwner",
+    inputs: [],
   },
 ] as const;
 

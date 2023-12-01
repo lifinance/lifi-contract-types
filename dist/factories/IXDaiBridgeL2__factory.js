@@ -7,17 +7,17 @@ exports.IXDaiBridgeL2__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "relayTokens",
         inputs: [
             {
-                internalType: "address",
                 name: "receiver",
                 type: "address",
+                internalType: "address",
             },
         ],
-        name: "relayTokens",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IXDaiBridgeL2__factory = /** @class */ (function () {

@@ -11,425 +11,425 @@ import type {
 
 const _abi = [
   {
-    inputs: [],
-    name: "SliceOutOfBounds",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "SliceOverflow",
-    type: "error",
-  },
-  {
+    type: "function",
+    name: "extractBridgeData",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "extractBridgeData",
     outputs: [
       {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "transactionId",
-            type: "bytes32",
-          },
-          {
-            internalType: "string",
-            name: "bridge",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "integrator",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "destinationChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "hasSourceSwaps",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "hasDestinationCall",
-            type: "bool",
-          },
-        ],
-        internalType: "struct ILiFi.BridgeData",
         name: "bridgeData",
         type: "tuple",
+        internalType: "struct ILiFi.BridgeData",
+        components: [
+          {
+            name: "transactionId",
+            type: "bytes32",
+            internalType: "bytes32",
+          },
+          {
+            name: "bridge",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "integrator",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "referrer",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receiver",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "minAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "destinationChainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "hasSourceSwaps",
+            type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "hasDestinationCall",
+            type: "bool",
+            internalType: "bool",
+          },
+        ],
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "extractData",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "extractData",
     outputs: [
       {
-        components: [
-          {
-            internalType: "bytes32",
-            name: "transactionId",
-            type: "bytes32",
-          },
-          {
-            internalType: "string",
-            name: "bridge",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "integrator",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "referrer",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receiver",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "minAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "destinationChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "hasSourceSwaps",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "hasDestinationCall",
-            type: "bool",
-          },
-        ],
-        internalType: "struct ILiFi.BridgeData",
         name: "bridgeData",
         type: "tuple",
-      },
-      {
+        internalType: "struct ILiFi.BridgeData",
         components: [
           {
-            internalType: "address",
-            name: "callTo",
-            type: "address",
+            name: "transactionId",
+            type: "bytes32",
+            internalType: "bytes32",
           },
           {
-            internalType: "address",
-            name: "approveTo",
-            type: "address",
+            name: "bridge",
+            type: "string",
+            internalType: "string",
           },
           {
+            name: "integrator",
+            type: "string",
+            internalType: "string",
+          },
+          {
+            name: "referrer",
+            type: "address",
             internalType: "address",
+          },
+          {
             name: "sendingAssetId",
             type: "address",
-          },
-          {
             internalType: "address",
-            name: "receivingAssetId",
+          },
+          {
+            name: "receiver",
             type: "address",
+            internalType: "address",
           },
           {
-            internalType: "uint256",
-            name: "fromAmount",
+            name: "minAmount",
             type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "bytes",
-            name: "callData",
-            type: "bytes",
+            name: "destinationChainId",
+            type: "uint256",
+            internalType: "uint256",
           },
           {
-            internalType: "bool",
-            name: "requiresDeposit",
+            name: "hasSourceSwaps",
             type: "bool",
+            internalType: "bool",
+          },
+          {
+            name: "hasDestinationCall",
+            type: "bool",
+            internalType: "bool",
           },
         ],
-        internalType: "struct LibSwap.SwapData[]",
+      },
+      {
         name: "swapData",
         type: "tuple[]",
+        internalType: "struct LibSwap.SwapData[]",
+        components: [
+          {
+            name: "callTo",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "approveTo",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receivingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "fromAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "callData",
+            type: "bytes",
+            internalType: "bytes",
+          },
+          {
+            name: "requiresDeposit",
+            type: "bool",
+            internalType: "bool",
+          },
+        ],
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "extractGenericSwapParameters",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "extractGenericSwapParameters",
     outputs: [
       {
-        internalType: "address",
         name: "sendingAssetId",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "receivingAssetId",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "receivingAmount",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "extractMainParameters",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "extractMainParameters",
     outputs: [
       {
-        internalType: "string",
         name: "bridge",
         type: "string",
+        internalType: "string",
       },
       {
-        internalType: "address",
         name: "sendingAssetId",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "destinationChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bool",
         name: "hasSourceSwaps",
         type: "bool",
+        internalType: "bool",
       },
       {
-        internalType: "bool",
         name: "hasDestinationCall",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "extractSwapData",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "extractSwapData",
     outputs: [
       {
-        components: [
-          {
-            internalType: "address",
-            name: "callTo",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "approveTo",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "sendingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "receivingAssetId",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "fromAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "bytes",
-            name: "callData",
-            type: "bytes",
-          },
-          {
-            internalType: "bool",
-            name: "requiresDeposit",
-            type: "bool",
-          },
-        ],
-        internalType: "struct LibSwap.SwapData[]",
         name: "swapData",
         type: "tuple[]",
+        internalType: "struct LibSwap.SwapData[]",
+        components: [
+          {
+            name: "callTo",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "approveTo",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "sendingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "receivingAssetId",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "fromAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "callData",
+            type: "bytes",
+            internalType: "bytes",
+          },
+          {
+            name: "requiresDeposit",
+            type: "bool",
+            internalType: "bool",
+          },
+        ],
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "validateCalldata",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "string",
         name: "bridge",
         type: "string",
+        internalType: "string",
       },
       {
-        internalType: "address",
         name: "sendingAssetId",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "address",
         name: "receiver",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint256",
         name: "destinationChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bool",
         name: "hasSourceSwaps",
         type: "bool",
+        internalType: "bool",
       },
       {
-        internalType: "bool",
         name: "hasDestinationCall",
         type: "bool",
+        internalType: "bool",
       },
     ],
-    name: "validateCalldata",
     outputs: [
       {
-        internalType: "bool",
         name: "isValid",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "pure",
-    type: "function",
   },
   {
+    type: "function",
+    name: "validateDestinationCalldata",
     inputs: [
       {
-        internalType: "bytes",
         name: "data",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bytes",
         name: "callTo",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bytes",
         name: "dstCalldata",
         type: "bytes",
+        internalType: "bytes",
       },
     ],
-    name: "validateDestinationCalldata",
     outputs: [
       {
-        internalType: "bool",
         name: "isValid",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "pure",
-    type: "function",
+  },
+  {
+    type: "error",
+    name: "SliceOutOfBounds",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "SliceOverflow",
+    inputs: [],
   },
 ] as const;
 

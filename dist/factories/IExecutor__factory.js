@@ -7,69 +7,69 @@ exports.IExecutor__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "swapAndCompleteBridgeTokens",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "_transactionId",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                components: [
-                    {
-                        internalType: "address",
-                        name: "callTo",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "approveTo",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "sendingAssetId",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "receivingAssetId",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "fromAmount",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "callData",
-                        type: "bytes",
-                    },
-                    {
-                        internalType: "bool",
-                        name: "requiresDeposit",
-                        type: "bool",
-                    },
-                ],
-                internalType: "struct LibSwap.SwapData[]",
                 name: "_swapData",
                 type: "tuple[]",
+                internalType: "struct LibSwap.SwapData[]",
+                components: [
+                    {
+                        name: "callTo",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "approveTo",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "sendingAssetId",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "receivingAssetId",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "fromAmount",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "callData",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                    {
+                        name: "requiresDeposit",
+                        type: "bool",
+                        internalType: "bool",
+                    },
+                ],
             },
             {
-                internalType: "address",
                 name: "transferredAssetId",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address payable",
                 name: "receiver",
                 type: "address",
+                internalType: "address payable",
             },
         ],
-        name: "swapAndCompleteBridgeTokens",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IExecutor__factory = /** @class */ (function () {

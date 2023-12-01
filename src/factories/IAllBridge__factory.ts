@@ -8,143 +8,143 @@ import type { IAllBridge, IAllBridgeInterface } from "../IAllBridge";
 
 const _abi = [
   {
+    type: "function",
+    name: "getBridgingCostInTokens",
     inputs: [
       {
-        internalType: "uint256",
         name: "destinationChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "enum IAllBridge.MessengerProtocol",
         name: "messenger",
         type: "uint8",
+        internalType: "enum IAllBridge.MessengerProtocol",
       },
       {
-        internalType: "address",
         name: "tokenAddress",
         type: "address",
+        internalType: "address",
       },
     ],
-    name: "getBridgingCostInTokens",
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "getMessageCost",
     inputs: [
       {
-        internalType: "uint256",
         name: "chainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "enum IAllBridge.MessengerProtocol",
         name: "protocol",
         type: "uint8",
+        internalType: "enum IAllBridge.MessengerProtocol",
       },
     ],
-    name: "getMessageCost",
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "getTransactionCost",
     inputs: [
       {
-        internalType: "uint256",
         name: "chainId",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "getTransactionCost",
     outputs: [
       {
-        internalType: "uint256",
         name: "",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "pools",
     inputs: [
       {
-        internalType: "bytes32",
         name: "addr",
         type: "bytes32",
+        internalType: "bytes32",
       },
     ],
-    name: "pools",
     outputs: [
       {
-        internalType: "address",
         name: "",
         type: "address",
+        internalType: "address",
       },
     ],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "swapAndBridge",
     inputs: [
       {
-        internalType: "bytes32",
         name: "token",
         type: "bytes32",
+        internalType: "bytes32",
       },
       {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bytes32",
         name: "recipient",
         type: "bytes32",
+        internalType: "bytes32",
       },
       {
-        internalType: "uint256",
         name: "destinationChainId",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "bytes32",
         name: "receiveToken",
         type: "bytes32",
+        internalType: "bytes32",
       },
       {
-        internalType: "uint256",
         name: "nonce",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "enum IAllBridge.MessengerProtocol",
         name: "messenger",
         type: "uint8",
+        internalType: "enum IAllBridge.MessengerProtocol",
       },
       {
-        internalType: "uint256",
         name: "feeTokenAmount",
         type: "uint256",
+        internalType: "uint256",
       },
     ],
-    name: "swapAndBridge",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
 ] as const;
 

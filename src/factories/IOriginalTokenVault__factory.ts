@@ -11,112 +11,112 @@ import type {
 
 const _abi = [
   {
+    type: "function",
+    name: "deposit",
     inputs: [
       {
-        internalType: "address",
         name: "_token",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint256",
         name: "_amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint64",
         name: "_mintChainId",
         type: "uint64",
+        internalType: "uint64",
       },
       {
-        internalType: "address",
         name: "_mintAccount",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint64",
         name: "_nonce",
         type: "uint64",
+        internalType: "uint64",
       },
     ],
-    name: "deposit",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "depositNative",
     inputs: [
       {
-        internalType: "uint256",
         name: "_amount",
         type: "uint256",
+        internalType: "uint256",
       },
       {
-        internalType: "uint64",
         name: "_mintChainId",
         type: "uint64",
+        internalType: "uint64",
       },
       {
-        internalType: "address",
         name: "_mintAccount",
         type: "address",
+        internalType: "address",
       },
       {
-        internalType: "uint64",
         name: "_nonce",
         type: "uint64",
+        internalType: "uint64",
       },
     ],
-    name: "depositNative",
     outputs: [],
     stateMutability: "payable",
-    type: "function",
   },
   {
+    type: "function",
+    name: "records",
     inputs: [
       {
-        internalType: "bytes32",
         name: "recordId",
         type: "bytes32",
+        internalType: "bytes32",
       },
     ],
-    name: "records",
     outputs: [
       {
-        internalType: "bool",
         name: "",
         type: "bool",
+        internalType: "bool",
       },
     ],
     stateMutability: "view",
-    type: "function",
   },
   {
+    type: "function",
+    name: "withdraw",
     inputs: [
       {
-        internalType: "bytes",
         name: "_request",
         type: "bytes",
+        internalType: "bytes",
       },
       {
-        internalType: "bytes[]",
         name: "_sigs",
         type: "bytes[]",
+        internalType: "bytes[]",
       },
       {
-        internalType: "address[]",
         name: "_signers",
         type: "address[]",
+        internalType: "address[]",
       },
       {
-        internalType: "uint256[]",
         name: "_powers",
         type: "uint256[]",
+        internalType: "uint256[]",
       },
     ],
-    name: "withdraw",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
   },
 ] as const;
 

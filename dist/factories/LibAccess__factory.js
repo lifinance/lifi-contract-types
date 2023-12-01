@@ -22,42 +22,42 @@ exports.LibAccess__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        anonymous: false,
+        type: "event",
+        name: "AccessGranted",
         inputs: [
             {
-                indexed: true,
-                internalType: "address",
                 name: "account",
                 type: "address",
+                indexed: true,
+                internalType: "address",
             },
             {
-                indexed: true,
-                internalType: "bytes4",
                 name: "method",
                 type: "bytes4",
+                indexed: true,
+                internalType: "bytes4",
             },
         ],
-        name: "AccessGranted",
-        type: "event",
+        anonymous: false,
     },
     {
-        anonymous: false,
+        type: "event",
+        name: "AccessRevoked",
         inputs: [
             {
-                indexed: true,
-                internalType: "address",
                 name: "account",
                 type: "address",
+                indexed: true,
+                internalType: "address",
             },
             {
-                indexed: true,
-                internalType: "bytes4",
                 name: "method",
                 type: "bytes4",
+                indexed: true,
+                internalType: "bytes4",
             },
         ],
-        name: "AccessRevoked",
-        type: "event",
+        anonymous: false,
     },
 ];
 var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220455571df52110d9dc7923fdbeeed92100980d815d63d6bc00ca26b5327eaf43364736f6c63430008110033";
