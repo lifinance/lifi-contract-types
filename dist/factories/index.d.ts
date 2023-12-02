@@ -1,6 +1,8 @@
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
+export * as receiverV2Sol from "./ReceiverV2.sol";
+export * as relayerCelerImv2Sol from "./RelayerCelerIMV2.sol";
 export * as vmSol from "./Vm.sol";
 export * as introspection from "./introspection";
 export * as testSol from "./test.sol";
@@ -74,6 +76,7 @@ export { ITransactionManager__factory } from "./ITransactionManager__factory";
 export { IWormholeRouter__factory } from "./IWormholeRouter__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
+export { IntentReceiver__factory } from "./IntentReceiver__factory";
 export { LIFuelFacet__factory } from "./LIFuelFacet__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiDiamondImmutable__factory } from "./LiFiDiamondImmutable__factory";
