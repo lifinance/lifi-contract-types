@@ -28,6 +28,55 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace IntentReceiver {
+  export type IntentExecutionStruct = {
+    callTo: PromiseOrValue<string>;
+    callData: PromiseOrValue<BytesLike>;
+    value: PromiseOrValue<BigNumberish>;
+    feeAmount: PromiseOrValue<BigNumberish>;
+  };
+
+  export type IntentExecutionStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber
+  ] & {
+    callTo: string;
+    callData: string;
+    value: BigNumber;
+    feeAmount: BigNumber;
+  };
+
+  export type SwapIntentStruct = {
+    id: PromiseOrValue<BytesLike>;
+    fromAsset: PromiseOrValue<string>;
+    toAsset: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    minAmountOut: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    receiver: PromiseOrValue<string>;
+  };
+
+  export type SwapIntentStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string
+  ] & {
+    id: string;
+    fromAsset: string;
+    toAsset: string;
+    fromAmount: BigNumber;
+    minAmountOut: BigNumber;
+    deadline: BigNumber;
+    receiver: string;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -97,15 +146,20 @@ export declare namespace CelerIM {
 export interface RelayerCelerIMInterface extends utils.Interface {
   functions: {
     "cBridgeMessageBus()": FunctionFragment;
+    "cancelIntent(bytes32,address)": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "diamondAddress()": FunctionFragment;
+    "executeIntent(bytes32,(address,bytes,uint256,uint256))": FunctionFragment;
     "executeMessageWithTransfer(address,address,uint256,uint64,bytes,address)": FunctionFragment;
     "executeMessageWithTransferRefund(address,uint256,bytes,address)": FunctionFragment;
+    "feeCollector()": FunctionFragment;
     "forwardSendMessageWithTransfer(address,uint256,address,bytes32,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "refundExpiredIntent(bytes32,uint256)": FunctionFragment;
     "sendTokenTransfer((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
+    "swapIntents(bytes32)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "triggerRefund(address,bytes,address,address,uint256)": FunctionFragment;
     "withdraw(address,address,uint256)": FunctionFragment;
@@ -114,15 +168,20 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "cBridgeMessageBus"
+      | "cancelIntent"
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "diamondAddress"
+      | "executeIntent"
       | "executeMessageWithTransfer"
       | "executeMessageWithTransferRefund"
+      | "feeCollector"
       | "forwardSendMessageWithTransfer"
       | "owner"
       | "pendingOwner"
+      | "refundExpiredIntent"
       | "sendTokenTransfer"
+      | "swapIntents"
       | "transferOwnership"
       | "triggerRefund"
       | "withdraw"
@@ -131,6 +190,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "cBridgeMessageBus",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelIntent",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "cancelOwnershipTransfer",
@@ -143,6 +206,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "diamondAddress",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeIntent",
+    values: [PromiseOrValue<BytesLike>, IntentReceiver.IntentExecutionStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "executeMessageWithTransfer",
@@ -165,6 +232,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "feeCollector",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "forwardSendMessageWithTransfer",
     values: [
       PromiseOrValue<string>,
@@ -180,8 +251,16 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "refundExpiredIntent",
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "sendTokenTransfer",
     values: [ILiFi.BridgeDataStruct, CelerIM.CelerIMDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapIntents",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -211,6 +290,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "cancelIntent",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "cancelOwnershipTransfer",
     data: BytesLike
   ): Result;
@@ -223,11 +306,19 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "executeIntent",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "executeMessageWithTransfer",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "executeMessageWithTransferRefund",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "feeCollector",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -240,7 +331,15 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "refundExpiredIntent",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "sendTokenTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapIntents",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -254,6 +353,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
+    "ExpiredIntentRefunded(tuple)": EventFragment;
+    "IntentAdded(tuple)": EventFragment;
+    "IntentCancelled(tuple,address)": EventFragment;
+    "IntentExecuted(tuple)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -264,6 +367,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ExpiredIntentRefunded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "IntentAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "IntentCancelled"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "IntentExecuted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -273,6 +380,48 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export interface ExpiredIntentRefundedEventObject {
+  details: IntentReceiver.SwapIntentStructOutput;
+}
+export type ExpiredIntentRefundedEvent = TypedEvent<
+  [IntentReceiver.SwapIntentStructOutput],
+  ExpiredIntentRefundedEventObject
+>;
+
+export type ExpiredIntentRefundedEventFilter =
+  TypedEventFilter<ExpiredIntentRefundedEvent>;
+
+export interface IntentAddedEventObject {
+  details: IntentReceiver.SwapIntentStructOutput;
+}
+export type IntentAddedEvent = TypedEvent<
+  [IntentReceiver.SwapIntentStructOutput],
+  IntentAddedEventObject
+>;
+
+export type IntentAddedEventFilter = TypedEventFilter<IntentAddedEvent>;
+
+export interface IntentCancelledEventObject {
+  details: IntentReceiver.SwapIntentStructOutput;
+  refundedTo: string;
+}
+export type IntentCancelledEvent = TypedEvent<
+  [IntentReceiver.SwapIntentStructOutput, string],
+  IntentCancelledEventObject
+>;
+
+export type IntentCancelledEventFilter = TypedEventFilter<IntentCancelledEvent>;
+
+export interface IntentExecutedEventObject {
+  details: IntentReceiver.SwapIntentStructOutput;
+}
+export type IntentExecutedEvent = TypedEvent<
+  [IntentReceiver.SwapIntentStructOutput],
+  IntentExecutedEventObject
+>;
+
+export type IntentExecutedEventFilter = TypedEventFilter<IntentExecutedEvent>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -415,6 +564,12 @@ export interface RelayerCelerIM extends BaseContract {
   functions: {
     cBridgeMessageBus(overrides?: CallOverrides): Promise<[string]>;
 
+    cancelIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      refundTo: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -424,6 +579,12 @@ export interface RelayerCelerIM extends BaseContract {
     ): Promise<ContractTransaction>;
 
     diamondAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    executeIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      exec: IntentReceiver.IntentExecutionStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     executeMessageWithTransfer(
       arg0: PromiseOrValue<string>,
@@ -443,6 +604,8 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    feeCollector(overrides?: CallOverrides): Promise<[string]>;
+
     forwardSendMessageWithTransfer(
       _receiver: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -456,11 +619,32 @@ export interface RelayerCelerIM extends BaseContract {
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
+    refundExpiredIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      feeAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    swapIntents(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+        id: string;
+        fromAsset: string;
+        toAsset: string;
+        fromAmount: BigNumber;
+        minAmountOut: BigNumber;
+        deadline: BigNumber;
+        receiver: string;
+      }
+    >;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
@@ -486,6 +670,12 @@ export interface RelayerCelerIM extends BaseContract {
 
   cBridgeMessageBus(overrides?: CallOverrides): Promise<string>;
 
+  cancelIntent(
+    intentId: PromiseOrValue<BytesLike>,
+    refundTo: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   cancelOwnershipTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -495,6 +685,12 @@ export interface RelayerCelerIM extends BaseContract {
   ): Promise<ContractTransaction>;
 
   diamondAddress(overrides?: CallOverrides): Promise<string>;
+
+  executeIntent(
+    intentId: PromiseOrValue<BytesLike>,
+    exec: IntentReceiver.IntentExecutionStruct,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   executeMessageWithTransfer(
     arg0: PromiseOrValue<string>,
@@ -514,6 +710,8 @@ export interface RelayerCelerIM extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  feeCollector(overrides?: CallOverrides): Promise<string>;
+
   forwardSendMessageWithTransfer(
     _receiver: PromiseOrValue<string>,
     _dstChainId: PromiseOrValue<BigNumberish>,
@@ -527,11 +725,32 @@ export interface RelayerCelerIM extends BaseContract {
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+  refundExpiredIntent(
+    intentId: PromiseOrValue<BytesLike>,
+    feeAmount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendTokenTransfer(
     _bridgeData: ILiFi.BridgeDataStruct,
     _celerIMData: CelerIM.CelerIMDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  swapIntents(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+      id: string;
+      fromAsset: string;
+      toAsset: string;
+      fromAmount: BigNumber;
+      minAmountOut: BigNumber;
+      deadline: BigNumber;
+      receiver: string;
+    }
+  >;
 
   transferOwnership(
     _newOwner: PromiseOrValue<string>,
@@ -557,11 +776,23 @@ export interface RelayerCelerIM extends BaseContract {
   callStatic: {
     cBridgeMessageBus(overrides?: CallOverrides): Promise<string>;
 
+    cancelIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      refundTo: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     diamondAddress(overrides?: CallOverrides): Promise<string>;
+
+    executeIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      exec: IntentReceiver.IntentExecutionStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     executeMessageWithTransfer(
       arg0: PromiseOrValue<string>,
@@ -581,6 +812,8 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: CallOverrides
     ): Promise<number>;
 
+    feeCollector(overrides?: CallOverrides): Promise<string>;
+
     forwardSendMessageWithTransfer(
       _receiver: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -594,12 +827,33 @@ export interface RelayerCelerIM extends BaseContract {
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
+    refundExpiredIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      feeAmount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: CallOverrides
     ): Promise<
       [string, string] & { transferId: string; bridgeAddress: string }
+    >;
+
+    swapIntents(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+        id: string;
+        fromAsset: string;
+        toAsset: string;
+        fromAmount: BigNumber;
+        minAmountOut: BigNumber;
+        deadline: BigNumber;
+        receiver: string;
+      }
     >;
 
     transferOwnership(
@@ -625,6 +879,26 @@ export interface RelayerCelerIM extends BaseContract {
   };
 
   filters: {
+    "ExpiredIntentRefunded(tuple)"(
+      details?: null
+    ): ExpiredIntentRefundedEventFilter;
+    ExpiredIntentRefunded(details?: null): ExpiredIntentRefundedEventFilter;
+
+    "IntentAdded(tuple)"(details?: null): IntentAddedEventFilter;
+    IntentAdded(details?: null): IntentAddedEventFilter;
+
+    "IntentCancelled(tuple,address)"(
+      details?: null,
+      refundedTo?: null
+    ): IntentCancelledEventFilter;
+    IntentCancelled(
+      details?: null,
+      refundedTo?: null
+    ): IntentCancelledEventFilter;
+
+    "IntentExecuted(tuple)"(details?: null): IntentExecutedEventFilter;
+    IntentExecuted(details?: null): IntentExecutedEventFilter;
+
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       integrator?: null,
@@ -733,6 +1007,12 @@ export interface RelayerCelerIM extends BaseContract {
   estimateGas: {
     cBridgeMessageBus(overrides?: CallOverrides): Promise<BigNumber>;
 
+    cancelIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      refundTo: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -742,6 +1022,12 @@ export interface RelayerCelerIM extends BaseContract {
     ): Promise<BigNumber>;
 
     diamondAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    executeIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      exec: IntentReceiver.IntentExecutionStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     executeMessageWithTransfer(
       arg0: PromiseOrValue<string>,
@@ -761,6 +1047,8 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    feeCollector(overrides?: CallOverrides): Promise<BigNumber>;
+
     forwardSendMessageWithTransfer(
       _receiver: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -774,10 +1062,21 @@ export interface RelayerCelerIM extends BaseContract {
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    refundExpiredIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      feeAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapIntents(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferOwnership(
@@ -805,6 +1104,12 @@ export interface RelayerCelerIM extends BaseContract {
   populateTransaction: {
     cBridgeMessageBus(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    cancelIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      refundTo: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -814,6 +1119,12 @@ export interface RelayerCelerIM extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     diamondAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    executeIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      exec: IntentReceiver.IntentExecutionStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     executeMessageWithTransfer(
       arg0: PromiseOrValue<string>,
@@ -833,6 +1144,8 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    feeCollector(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     forwardSendMessageWithTransfer(
       _receiver: PromiseOrValue<string>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -846,10 +1159,21 @@ export interface RelayerCelerIM extends BaseContract {
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    refundExpiredIntent(
+      intentId: PromiseOrValue<BytesLike>,
+      feeAmount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     sendTokenTransfer(
       _bridgeData: ILiFi.BridgeDataStruct,
       _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapIntents(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(

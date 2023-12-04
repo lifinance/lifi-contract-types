@@ -74,6 +74,7 @@ export { ITransactionManager__factory } from "./ITransactionManager__factory";
 export { IWormholeRouter__factory } from "./IWormholeRouter__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
+export { IntentReceiver__factory } from "./IntentReceiver__factory";
 export { LIFuelFacet__factory } from "./LIFuelFacet__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiDiamondImmutable__factory } from "./LiFiDiamondImmutable__factory";
