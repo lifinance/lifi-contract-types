@@ -47,9 +47,8 @@ export declare namespace IntentReceiver {
         receiver: string;
     };
 }
-export interface ReceiverInterface extends utils.Interface {
+export interface IntentReceiverInterface extends utils.Interface {
     functions: {
-        "amarokRouter()": FunctionFragment;
         "cancelIntent(bytes32,address)": FunctionFragment;
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
@@ -58,14 +57,10 @@ export interface ReceiverInterface extends utils.Interface {
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
         "refundExpiredIntent(bytes32,uint256)": FunctionFragment;
-        "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
-        "sgRouter()": FunctionFragment;
         "swapIntents(bytes32)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
-        "xReceive(bytes32,uint256,address,address,uint32,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "amarokRouter" | "cancelIntent" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executeIntent" | "feeCollector" | "owner" | "pendingOwner" | "refundExpiredIntent" | "sgReceive" | "sgRouter" | "swapIntents" | "transferOwnership" | "xReceive"): FunctionFragment;
-    encodeFunctionData(functionFragment: "amarokRouter", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "cancelIntent" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executeIntent" | "feeCollector" | "owner" | "pendingOwner" | "refundExpiredIntent" | "swapIntents" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelIntent", values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
@@ -74,26 +69,8 @@ export interface ReceiverInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
     encodeFunctionData(functionFragment: "refundExpiredIntent", values: [PromiseOrValue<BytesLike>, PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "sgReceive", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
-    ]): string;
-    encodeFunctionData(functionFragment: "sgRouter", values?: undefined): string;
     encodeFunctionData(functionFragment: "swapIntents", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "xReceive", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
-    ]): string;
-    decodeFunctionResult(functionFragment: "amarokRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelIntent", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
@@ -102,11 +79,8 @@ export interface ReceiverInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "refundExpiredIntent", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "sgReceive", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "sgRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapIntents", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "xReceive", data: BytesLike): Result;
     events: {
         "ExpiredIntentRefunded(tuple)": EventFragment;
         "IntentAdded(tuple)": EventFragment;
@@ -170,11 +144,11 @@ export declare type OwnershipTransferredEvent = TypedEvent<[
     string
 ], OwnershipTransferredEventObject>;
 export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
-export interface Receiver extends BaseContract {
+export interface IntentReceiver extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: ReceiverInterface;
+    interface: IntentReceiverInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -185,7 +159,6 @@ export interface Receiver extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        amarokRouter(overrides?: CallOverrides): Promise<[string]>;
         cancelIntent(intentId: PromiseOrValue<BytesLike>, refundTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -204,10 +177,6 @@ export interface Receiver extends BaseContract {
         refundExpiredIntent(intentId: PromiseOrValue<BytesLike>, feeAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        sgRouter(overrides?: CallOverrides): Promise<[string]>;
         swapIntents(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             string,
             string,
@@ -228,11 +197,7 @@ export interface Receiver extends BaseContract {
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        xReceive(arg0: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
     };
-    amarokRouter(overrides?: CallOverrides): Promise<string>;
     cancelIntent(intentId: PromiseOrValue<BytesLike>, refundTo: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -251,10 +216,6 @@ export interface Receiver extends BaseContract {
     refundExpiredIntent(intentId: PromiseOrValue<BytesLike>, feeAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    sgRouter(overrides?: CallOverrides): Promise<string>;
     swapIntents(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
         string,
         string,
@@ -275,11 +236,7 @@ export interface Receiver extends BaseContract {
     transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    xReceive(arg0: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     callStatic: {
-        amarokRouter(overrides?: CallOverrides): Promise<string>;
         cancelIntent(intentId: PromiseOrValue<BytesLike>, refundTo: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
@@ -288,8 +245,6 @@ export interface Receiver extends BaseContract {
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
         refundExpiredIntent(intentId: PromiseOrValue<BytesLike>, feeAmount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
-        sgRouter(overrides?: CallOverrides): Promise<string>;
         swapIntents(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             string,
             string,
@@ -308,7 +263,6 @@ export interface Receiver extends BaseContract {
             receiver: string;
         }>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        xReceive(arg0: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "ExpiredIntentRefunded(tuple)"(details?: null): ExpiredIntentRefundedEventFilter;
@@ -325,7 +279,6 @@ export interface Receiver extends BaseContract {
         OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
-        amarokRouter(overrides?: CallOverrides): Promise<BigNumber>;
         cancelIntent(intentId: PromiseOrValue<BytesLike>, refundTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -344,20 +297,12 @@ export interface Receiver extends BaseContract {
         refundExpiredIntent(intentId: PromiseOrValue<BytesLike>, feeAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        sgRouter(overrides?: CallOverrides): Promise<BigNumber>;
         swapIntents(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        xReceive(arg0: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
     };
     populateTransaction: {
-        amarokRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         cancelIntent(intentId: PromiseOrValue<BytesLike>, refundTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
@@ -376,15 +321,8 @@ export interface Receiver extends BaseContract {
         refundExpiredIntent(intentId: PromiseOrValue<BytesLike>, feeAmount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        sgRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         swapIntents(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        xReceive(arg0: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
