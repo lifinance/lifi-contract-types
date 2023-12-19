@@ -7,236 +7,192 @@ exports.ISquidRouter__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "bridgeCall",
         inputs: [
             {
-                internalType: "string",
-                name: "destinationChain",
-                type: "string",
-            },
-            {
-                internalType: "string",
                 name: "bridgedTokenSymbol",
                 type: "string",
-            },
-            {
-                internalType: "uint256",
-                name: "amount",
-                type: "uint256",
-            },
-            {
-                components: [
-                    {
-                        internalType: "enum ISquidMulticall.CallType",
-                        name: "callType",
-                        type: "uint8",
-                    },
-                    {
-                        internalType: "address",
-                        name: "target",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "value",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "callData",
-                        type: "bytes",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "payload",
-                        type: "bytes",
-                    },
-                ],
-                internalType: "struct ISquidMulticall.Call[]",
-                name: "calls",
-                type: "tuple[]",
-            },
-            {
-                internalType: "address",
-                name: "refundRecipient",
-                type: "address",
-            },
-            {
-                internalType: "bool",
-                name: "forecallEnabled",
-                type: "bool",
-            },
-        ],
-        name: "bridgeCall",
-        outputs: [],
-        stateMutability: "payable",
-        type: "function",
-    },
-    {
-        inputs: [
-            {
-                internalType: "address",
-                name: "token",
-                type: "address",
-            },
-            {
-                internalType: "uint256",
-                name: "amount",
-                type: "uint256",
-            },
-            {
                 internalType: "string",
+            },
+            {
+                name: "amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
                 name: "destinationChain",
                 type: "string",
+                internalType: "string",
             },
             {
-                internalType: "string",
                 name: "destinationAddress",
                 type: "string",
-            },
-            {
                 internalType: "string",
-                name: "bridgedTokenSymbol",
-                type: "string",
             },
             {
-                components: [
-                    {
-                        internalType: "enum ISquidMulticall.CallType",
-                        name: "callType",
-                        type: "uint8",
-                    },
-                    {
-                        internalType: "address",
-                        name: "target",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "value",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "callData",
-                        type: "bytes",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "payload",
-                        type: "bytes",
-                    },
-                ],
-                internalType: "struct ISquidMulticall.Call[]",
-                name: "calls",
-                type: "tuple[]",
+                name: "payload",
+                type: "bytes",
+                internalType: "bytes",
+            },
+            {
+                name: "gasRefundRecipient",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "enableExpress",
+                type: "bool",
+                internalType: "bool",
             },
         ],
-        name: "callBridge",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "callBridge",
         inputs: [
             {
-                internalType: "address",
                 name: "token",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "string",
-                name: "destinationChain",
-                type: "string",
+                name: "calls",
+                type: "tuple[]",
+                internalType: "struct ISquidMulticall.Call[]",
+                components: [
+                    {
+                        name: "callType",
+                        type: "uint8",
+                        internalType: "enum ISquidMulticall.CallType",
+                    },
+                    {
+                        name: "target",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "value",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "callData",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                    {
+                        name: "payload",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                ],
             },
             {
-                internalType: "string",
                 name: "bridgedTokenSymbol",
                 type: "string",
+                internalType: "string",
             },
             {
-                components: [
-                    {
-                        internalType: "enum ISquidMulticall.CallType",
-                        name: "callType",
-                        type: "uint8",
-                    },
-                    {
-                        internalType: "address",
-                        name: "target",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "value",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "callData",
-                        type: "bytes",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "payload",
-                        type: "bytes",
-                    },
-                ],
-                internalType: "struct ISquidMulticall.Call[]",
-                name: "sourceCalls",
-                type: "tuple[]",
+                name: "destinationChain",
+                type: "string",
+                internalType: "string",
             },
             {
-                components: [
-                    {
-                        internalType: "enum ISquidMulticall.CallType",
-                        name: "callType",
-                        type: "uint8",
-                    },
-                    {
-                        internalType: "address",
-                        name: "target",
-                        type: "address",
-                    },
-                    {
-                        internalType: "uint256",
-                        name: "value",
-                        type: "uint256",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "callData",
-                        type: "bytes",
-                    },
-                    {
-                        internalType: "bytes",
-                        name: "payload",
-                        type: "bytes",
-                    },
-                ],
-                internalType: "struct ISquidMulticall.Call[]",
-                name: "destinationCalls",
-                type: "tuple[]",
-            },
-            {
-                internalType: "address",
-                name: "refundRecipient",
-                type: "address",
-            },
-            {
-                internalType: "bool",
-                name: "forecallEnabled",
-                type: "bool",
+                name: "destinationAddress",
+                type: "string",
+                internalType: "string",
             },
         ],
-        name: "callBridgeCall",
         outputs: [],
         stateMutability: "payable",
+    },
+    {
         type: "function",
+        name: "callBridgeCall",
+        inputs: [
+            {
+                name: "token",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "calls",
+                type: "tuple[]",
+                internalType: "struct ISquidMulticall.Call[]",
+                components: [
+                    {
+                        name: "callType",
+                        type: "uint8",
+                        internalType: "enum ISquidMulticall.CallType",
+                    },
+                    {
+                        name: "target",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "value",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "callData",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                    {
+                        name: "payload",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                ],
+            },
+            {
+                name: "bridgedTokenSymbol",
+                type: "string",
+                internalType: "string",
+            },
+            {
+                name: "destinationChain",
+                type: "string",
+                internalType: "string",
+            },
+            {
+                name: "destinationAddress",
+                type: "string",
+                internalType: "string",
+            },
+            {
+                name: "payload",
+                type: "bytes",
+                internalType: "bytes",
+            },
+            {
+                name: "gasRefundRecipient",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "enableExpress",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        outputs: [],
+        stateMutability: "payable",
     },
 ];
 var ISquidRouter__factory = /** @class */ (function () {

@@ -3,187 +3,153 @@ import type { Provider } from "@ethersproject/providers";
 import type { ISquidRouter, ISquidRouterInterface } from "../ISquidRouter";
 export declare class ISquidRouter__factory {
     static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "bridgeCall";
         readonly inputs: readonly [{
-            readonly internalType: "string";
-            readonly name: "destinationChain";
-            readonly type: "string";
-        }, {
-            readonly internalType: "string";
             readonly name: "bridgedTokenSymbol";
             readonly type: "string";
-        }, {
-            readonly internalType: "uint256";
-            readonly name: "amount";
-            readonly type: "uint256";
-        }, {
-            readonly components: readonly [{
-                readonly internalType: "enum ISquidMulticall.CallType";
-                readonly name: "callType";
-                readonly type: "uint8";
-            }, {
-                readonly internalType: "address";
-                readonly name: "target";
-                readonly type: "address";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "value";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "callData";
-                readonly type: "bytes";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "payload";
-                readonly type: "bytes";
-            }];
-            readonly internalType: "struct ISquidMulticall.Call[]";
-            readonly name: "calls";
-            readonly type: "tuple[]";
-        }, {
-            readonly internalType: "address";
-            readonly name: "refundRecipient";
-            readonly type: "address";
-        }, {
-            readonly internalType: "bool";
-            readonly name: "forecallEnabled";
-            readonly type: "bool";
-        }];
-        readonly name: "bridgeCall";
-        readonly outputs: readonly [];
-        readonly stateMutability: "payable";
-        readonly type: "function";
-    }, {
-        readonly inputs: readonly [{
-            readonly internalType: "address";
-            readonly name: "token";
-            readonly type: "address";
-        }, {
-            readonly internalType: "uint256";
-            readonly name: "amount";
-            readonly type: "uint256";
-        }, {
             readonly internalType: "string";
+        }, {
+            readonly name: "amount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
             readonly name: "destinationChain";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
+        }, {
             readonly name: "destinationAddress";
             readonly type: "string";
-        }, {
             readonly internalType: "string";
-            readonly name: "bridgedTokenSymbol";
-            readonly type: "string";
         }, {
-            readonly components: readonly [{
-                readonly internalType: "enum ISquidMulticall.CallType";
-                readonly name: "callType";
-                readonly type: "uint8";
-            }, {
-                readonly internalType: "address";
-                readonly name: "target";
-                readonly type: "address";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "value";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "callData";
-                readonly type: "bytes";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "payload";
-                readonly type: "bytes";
-            }];
-            readonly internalType: "struct ISquidMulticall.Call[]";
-            readonly name: "calls";
-            readonly type: "tuple[]";
+            readonly name: "payload";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "gasRefundRecipient";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "enableExpress";
+            readonly type: "bool";
+            readonly internalType: "bool";
         }];
-        readonly name: "callBridge";
         readonly outputs: readonly [];
         readonly stateMutability: "payable";
-        readonly type: "function";
     }, {
+        readonly type: "function";
+        readonly name: "callBridge";
         readonly inputs: readonly [{
-            readonly internalType: "address";
             readonly name: "token";
             readonly type: "address";
+            readonly internalType: "address";
         }, {
-            readonly internalType: "uint256";
             readonly name: "amount";
             readonly type: "uint256";
+            readonly internalType: "uint256";
         }, {
-            readonly internalType: "string";
-            readonly name: "destinationChain";
-            readonly type: "string";
+            readonly name: "calls";
+            readonly type: "tuple[]";
+            readonly internalType: "struct ISquidMulticall.Call[]";
+            readonly components: readonly [{
+                readonly name: "callType";
+                readonly type: "uint8";
+                readonly internalType: "enum ISquidMulticall.CallType";
+            }, {
+                readonly name: "target";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "value";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "callData";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }, {
+                readonly name: "payload";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }];
         }, {
-            readonly internalType: "string";
             readonly name: "bridgedTokenSymbol";
             readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly components: readonly [{
-                readonly internalType: "enum ISquidMulticall.CallType";
-                readonly name: "callType";
-                readonly type: "uint8";
-            }, {
-                readonly internalType: "address";
-                readonly name: "target";
-                readonly type: "address";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "value";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "callData";
-                readonly type: "bytes";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "payload";
-                readonly type: "bytes";
-            }];
-            readonly internalType: "struct ISquidMulticall.Call[]";
-            readonly name: "sourceCalls";
-            readonly type: "tuple[]";
+            readonly name: "destinationChain";
+            readonly type: "string";
+            readonly internalType: "string";
         }, {
-            readonly components: readonly [{
-                readonly internalType: "enum ISquidMulticall.CallType";
-                readonly name: "callType";
-                readonly type: "uint8";
-            }, {
-                readonly internalType: "address";
-                readonly name: "target";
-                readonly type: "address";
-            }, {
-                readonly internalType: "uint256";
-                readonly name: "value";
-                readonly type: "uint256";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "callData";
-                readonly type: "bytes";
-            }, {
-                readonly internalType: "bytes";
-                readonly name: "payload";
-                readonly type: "bytes";
-            }];
-            readonly internalType: "struct ISquidMulticall.Call[]";
-            readonly name: "destinationCalls";
-            readonly type: "tuple[]";
-        }, {
-            readonly internalType: "address";
-            readonly name: "refundRecipient";
-            readonly type: "address";
-        }, {
-            readonly internalType: "bool";
-            readonly name: "forecallEnabled";
-            readonly type: "bool";
+            readonly name: "destinationAddress";
+            readonly type: "string";
+            readonly internalType: "string";
         }];
-        readonly name: "callBridgeCall";
         readonly outputs: readonly [];
         readonly stateMutability: "payable";
+    }, {
         readonly type: "function";
+        readonly name: "callBridgeCall";
+        readonly inputs: readonly [{
+            readonly name: "token";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "amount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "calls";
+            readonly type: "tuple[]";
+            readonly internalType: "struct ISquidMulticall.Call[]";
+            readonly components: readonly [{
+                readonly name: "callType";
+                readonly type: "uint8";
+                readonly internalType: "enum ISquidMulticall.CallType";
+            }, {
+                readonly name: "target";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "value";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "callData";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }, {
+                readonly name: "payload";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }];
+        }, {
+            readonly name: "bridgedTokenSymbol";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "destinationChain";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "destinationAddress";
+            readonly type: "string";
+            readonly internalType: "string";
+        }, {
+            readonly name: "payload";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "gasRefundRecipient";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "enableExpress";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
     }];
     static createInterface(): ISquidRouterInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ISquidRouter;
