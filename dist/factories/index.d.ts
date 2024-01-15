@@ -1,6 +1,7 @@
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
+export * as permit2ProxySol from "./Permit2Proxy.sol";
 export * as vmSol from "./Vm.sol";
 export * as introspection from "./introspection";
 export * as testSol from "./test.sol";
@@ -44,6 +45,7 @@ export { IConnextHandler__factory } from "./IConnextHandler__factory";
 export { IDeBridgeGate__factory } from "./IDeBridgeGate__factory";
 export { IDiamondCut__factory } from "./IDiamondCut__factory";
 export { IDiamondLoupe__factory } from "./IDiamondLoupe__factory";
+export { IEIP712__factory } from "./IEIP712__factory";
 export { IERC1155Receiver__factory } from "./IERC1155Receiver__factory";
 export { IERC165__factory } from "./IERC165__factory";
 export { IERC173__factory } from "./IERC173__factory";
@@ -66,6 +68,7 @@ export { IOriginalTokenVaultV2__factory } from "./IOriginalTokenVaultV2__factory
 export { IPeggedTokenBridge__factory } from "./IPeggedTokenBridge__factory";
 export { IPeggedTokenBridgeV2__factory } from "./IPeggedTokenBridgeV2__factory";
 export { IRootChainManager__factory } from "./IRootChainManager__factory";
+export { ISignatureTransfer__factory } from "./ISignatureTransfer__factory";
 export { IStargateRouter__factory } from "./IStargateRouter__factory";
 export { ISynapseRouter__factory } from "./ISynapseRouter__factory";
 export { ITeleportGateway__factory } from "./ITeleportGateway__factory";
