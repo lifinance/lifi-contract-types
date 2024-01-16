@@ -231,6 +231,45 @@ const _abi = [
     ],
     stateMutability: "nonpayable",
   },
+  {
+    type: "function",
+    name: "swapTokensForExactTokens",
+    inputs: [
+      {
+        name: "amountOut",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "amountInMax",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "path",
+        type: "address[]",
+        internalType: "address[]",
+      },
+      {
+        name: "to",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "deadline",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "amounts",
+        type: "uint256[]",
+        internalType: "uint256[]",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
 ] as const;
 
 export class UniswapV2Router02__factory {
