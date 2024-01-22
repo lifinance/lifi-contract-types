@@ -5,13 +5,10 @@ import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./com
 export interface ScriptInterface extends utils.Interface {
     functions: {
         "IS_SCRIPT()": FunctionFragment;
-        "vm()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "IS_SCRIPT" | "vm"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "IS_SCRIPT"): FunctionFragment;
     encodeFunctionData(functionFragment: "IS_SCRIPT", values?: undefined): string;
-    encodeFunctionData(functionFragment: "vm", values?: undefined): string;
     decodeFunctionResult(functionFragment: "IS_SCRIPT", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "vm", data: BytesLike): Result;
     events: {};
 }
 export interface Script extends BaseContract {
@@ -30,21 +27,16 @@ export interface Script extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         IS_SCRIPT(overrides?: CallOverrides): Promise<[boolean]>;
-        vm(overrides?: CallOverrides): Promise<[string]>;
     };
     IS_SCRIPT(overrides?: CallOverrides): Promise<boolean>;
-    vm(overrides?: CallOverrides): Promise<string>;
     callStatic: {
         IS_SCRIPT(overrides?: CallOverrides): Promise<boolean>;
-        vm(overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
         IS_SCRIPT(overrides?: CallOverrides): Promise<BigNumber>;
-        vm(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         IS_SCRIPT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        vm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

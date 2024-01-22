@@ -7,30 +7,17 @@ exports.Script__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        inputs: [],
+        type: "function",
         name: "IS_SCRIPT",
+        inputs: [],
         outputs: [
             {
-                internalType: "bool",
                 name: "",
                 type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
-        type: "function",
-    },
-    {
-        inputs: [],
-        name: "vm",
-        outputs: [
-            {
-                internalType: "contract Vm",
-                name: "",
-                type: "address",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
     },
 ];
 var Script__factory = /** @class */ (function () {
