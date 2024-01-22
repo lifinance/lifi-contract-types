@@ -7,52 +7,52 @@ exports.ICREATE3Factory__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "deploy",
         inputs: [
             {
-                internalType: "bytes32",
                 name: "salt",
                 type: "bytes32",
+                internalType: "bytes32",
             },
             {
-                internalType: "bytes",
                 name: "creationCode",
                 type: "bytes",
+                internalType: "bytes",
             },
         ],
-        name: "deploy",
         outputs: [
             {
-                internalType: "address",
                 name: "deployed",
                 type: "address",
+                internalType: "address",
             },
         ],
         stateMutability: "payable",
-        type: "function",
     },
     {
+        type: "function",
+        name: "getDeployed",
         inputs: [
             {
-                internalType: "address",
                 name: "deployer",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "bytes32",
                 name: "salt",
                 type: "bytes32",
+                internalType: "bytes32",
             },
         ],
-        name: "getDeployed",
         outputs: [
             {
-                internalType: "address",
                 name: "deployed",
                 type: "address",
+                internalType: "address",
             },
         ],
         stateMutability: "view",
-        type: "function",
     },
 ];
 var ICREATE3Factory__factory = /** @class */ (function () {
