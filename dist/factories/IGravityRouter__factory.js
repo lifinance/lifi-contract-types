@@ -7,27 +7,27 @@ exports.IGravityRouter__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "sendToCosmos",
         inputs: [
             {
-                internalType: "address",
                 name: "_tokenContract",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "string",
                 name: "_destination",
                 type: "string",
+                internalType: "string",
             },
             {
-                internalType: "uint256",
                 name: "_amount",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "sendToCosmos",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IGravityRouter__factory = /** @class */ (function () {
