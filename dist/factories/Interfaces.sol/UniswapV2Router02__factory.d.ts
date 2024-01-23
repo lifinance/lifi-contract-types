@@ -172,6 +172,36 @@ export declare class UniswapV2Router02__factory {
             readonly internalType: "uint256[]";
         }];
         readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "swapTokensForExactTokens";
+        readonly inputs: readonly [{
+            readonly name: "amountOut";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "amountInMax";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "path";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "to";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "deadline";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "amounts";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }];
+        readonly stateMutability: "nonpayable";
     }];
     static createInterface(): UniswapV2Router02Interface;
     static connect(address: string, signerOrProvider: Signer | Provider): UniswapV2Router02;
