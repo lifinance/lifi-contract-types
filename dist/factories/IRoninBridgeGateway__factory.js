@@ -7,51 +7,51 @@ exports.IRoninBridgeGateway__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "requestDepositFor",
         inputs: [
             {
-                components: [
-                    {
-                        internalType: "address",
-                        name: "recipientAddr",
-                        type: "address",
-                    },
-                    {
-                        internalType: "address",
-                        name: "tokenAddr",
-                        type: "address",
-                    },
-                    {
-                        components: [
-                            {
-                                internalType: "enum IRoninBridgeGateway.Standard",
-                                name: "erc",
-                                type: "uint8",
-                            },
-                            {
-                                internalType: "uint256",
-                                name: "id",
-                                type: "uint256",
-                            },
-                            {
-                                internalType: "uint256",
-                                name: "quantity",
-                                type: "uint256",
-                            },
-                        ],
-                        internalType: "struct IRoninBridgeGateway.Info",
-                        name: "info",
-                        type: "tuple",
-                    },
-                ],
-                internalType: "struct IRoninBridgeGateway.Request",
                 name: "_request",
                 type: "tuple",
+                internalType: "struct IRoninBridgeGateway.Request",
+                components: [
+                    {
+                        name: "recipientAddr",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "tokenAddr",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "info",
+                        type: "tuple",
+                        internalType: "struct IRoninBridgeGateway.Info",
+                        components: [
+                            {
+                                name: "erc",
+                                type: "uint8",
+                                internalType: "enum IRoninBridgeGateway.Standard",
+                            },
+                            {
+                                name: "id",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                            {
+                                name: "quantity",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                        ],
+                    },
+                ],
             },
         ],
-        name: "requestDepositFor",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IRoninBridgeGateway__factory = /** @class */ (function () {
