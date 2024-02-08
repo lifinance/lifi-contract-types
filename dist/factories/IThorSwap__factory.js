@@ -7,37 +7,37 @@ exports.IThorSwap__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
+        type: "function",
+        name: "depositWithExpiry",
         inputs: [
             {
-                internalType: "address",
                 name: "vault",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "address",
                 name: "asset",
                 type: "address",
+                internalType: "address",
             },
             {
-                internalType: "uint256",
                 name: "amount",
                 type: "uint256",
+                internalType: "uint256",
             },
             {
-                internalType: "string",
                 name: "memo",
                 type: "string",
+                internalType: "string",
             },
             {
-                internalType: "uint256",
                 name: "expiration",
                 type: "uint256",
+                internalType: "uint256",
             },
         ],
-        name: "depositWithExpiry",
         outputs: [],
         stateMutability: "payable",
-        type: "function",
     },
 ];
 var IThorSwap__factory = /** @class */ (function () {
