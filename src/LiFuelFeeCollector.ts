@@ -32,7 +32,7 @@ export interface LiFuelFeeCollectorInterface extends utils.Interface {
   functions: {
     "batchWithdrawFees(address[])": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
-    "collectNativeGasFees(uint256,uint256,address)": FunctionFragment;
+    "collectNativeGasFees(uint256,address)": FunctionFragment;
     "collectTokenGasFees(address,uint256,uint256,address)": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -64,11 +64,7 @@ export interface LiFuelFeeCollectorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "collectNativeGasFees",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "collectTokenGasFees",
@@ -231,7 +227,6 @@ export interface LiFuelFeeCollector extends BaseContract {
     ): Promise<ContractTransaction>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
       chainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -274,7 +269,6 @@ export interface LiFuelFeeCollector extends BaseContract {
   ): Promise<ContractTransaction>;
 
   collectNativeGasFees(
-    feeAmount: PromiseOrValue<BigNumberish>,
     chainId: PromiseOrValue<BigNumberish>,
     receiver: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -315,7 +309,6 @@ export interface LiFuelFeeCollector extends BaseContract {
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
       chainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -401,7 +394,6 @@ export interface LiFuelFeeCollector extends BaseContract {
     ): Promise<BigNumber>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
       chainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -445,7 +437,6 @@ export interface LiFuelFeeCollector extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
       chainId: PromiseOrValue<BigNumberish>,
       receiver: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
