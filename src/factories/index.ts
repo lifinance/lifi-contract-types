@@ -75,7 +75,6 @@ export { IRootChainManager__factory } from "./IRootChainManager__factory";
 export { IStargateRouter__factory } from "./IStargateRouter__factory";
 export { ISynapseRouter__factory } from "./ISynapseRouter__factory";
 export { ITeleportGateway__factory } from "./ITeleportGateway__factory";
-export { IThorSwap__factory } from "./IThorSwap__factory";
 export { ITokenMessenger__factory } from "./ITokenMessenger__factory";
 export { ITransactionManager__factory } from "./ITransactionManager__factory";
 export { IWormholeRouter__factory } from "./IWormholeRouter__factory";
@@ -106,7 +105,6 @@ export { StandardizedCallFacet__factory } from "./StandardizedCallFacet__factory
 export { StargateFacet__factory } from "./StargateFacet__factory";
 export { SwapperV2__factory } from "./SwapperV2__factory";
 export { SynapseBridgeFacet__factory } from "./SynapseBridgeFacet__factory";
-export { ThorSwapFacet__factory } from "./ThorSwapFacet__factory";
 export { TransferrableOwnership__factory } from "./TransferrableOwnership__factory";
 export { Utilities__factory } from "./Utilities__factory";
 export { WETH__factory } from "./WETH__factory";
