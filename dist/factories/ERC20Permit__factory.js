@@ -3,9 +3,22 @@
 /* tslint:disable */
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IERC20Metadata__factory = void 0;
+exports.ERC20Permit__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
+    {
+        type: "function",
+        name: "DOMAIN_SEPARATOR",
+        inputs: [],
+        outputs: [
+            {
+                name: "",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+        ],
+        stateMutability: "view",
+    },
     {
         type: "function",
         name: "allowance",
@@ -88,6 +101,97 @@ var _abi = [
     },
     {
         type: "function",
+        name: "decreaseAllowance",
+        inputs: [
+            {
+                name: "spender",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "subtractedValue",
+                type: "uint256",
+                internalType: "uint256",
+            },
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "nonpayable",
+    },
+    {
+        type: "function",
+        name: "eip712Domain",
+        inputs: [],
+        outputs: [
+            {
+                name: "fields",
+                type: "bytes1",
+                internalType: "bytes1",
+            },
+            {
+                name: "name",
+                type: "string",
+                internalType: "string",
+            },
+            {
+                name: "version",
+                type: "string",
+                internalType: "string",
+            },
+            {
+                name: "chainId",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "verifyingContract",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "salt",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "extensions",
+                type: "uint256[]",
+                internalType: "uint256[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "increaseAllowance",
+        inputs: [
+            {
+                name: "spender",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "addedValue",
+                type: "uint256",
+                internalType: "uint256",
+            },
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "nonpayable",
+    },
+    {
+        type: "function",
         name: "name",
         inputs: [],
         outputs: [
@@ -98,6 +202,68 @@ var _abi = [
             },
         ],
         stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "nonces",
+        inputs: [
+            {
+                name: "owner",
+                type: "address",
+                internalType: "address",
+            },
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "uint256",
+                internalType: "uint256",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "permit",
+        inputs: [
+            {
+                name: "owner",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "spender",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "value",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "deadline",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "v",
+                type: "uint8",
+                internalType: "uint8",
+            },
+            {
+                name: "r",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "s",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+        ],
+        outputs: [],
+        stateMutability: "nonpayable",
     },
     {
         type: "function",
@@ -205,6 +371,12 @@ var _abi = [
     },
     {
         type: "event",
+        name: "EIP712DomainChanged",
+        inputs: [],
+        anonymous: false,
+    },
+    {
+        type: "event",
         name: "Transfer",
         inputs: [
             {
@@ -228,17 +400,33 @@ var _abi = [
         ],
         anonymous: false,
     },
+    {
+        type: "error",
+        name: "InvalidShortString",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "StringTooLong",
+        inputs: [
+            {
+                name: "str",
+                type: "string",
+                internalType: "string",
+            },
+        ],
+    },
 ];
-var IERC20Metadata__factory = /** @class */ (function () {
-    function IERC20Metadata__factory() {
+var ERC20Permit__factory = /** @class */ (function () {
+    function ERC20Permit__factory() {
     }
-    IERC20Metadata__factory.createInterface = function () {
+    ERC20Permit__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
     };
-    IERC20Metadata__factory.connect = function (address, signerOrProvider) {
+    ERC20Permit__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
     };
-    IERC20Metadata__factory.abi = _abi;
-    return IERC20Metadata__factory;
+    ERC20Permit__factory.abi = _abi;
+    return ERC20Permit__factory;
 }());
-exports.IERC20Metadata__factory = IERC20Metadata__factory;
+exports.ERC20Permit__factory = ERC20Permit__factory;
