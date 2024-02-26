@@ -23,6 +23,7 @@ export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__facto
 export { CelerIMFacetImmutable__factory } from "./CelerIMFacetImmutable__factory";
 export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
 export { CircleBridgeFacet__factory } from "./CircleBridgeFacet__factory";
+export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DeBridgeFacet__factory } from "./DeBridgeFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
@@ -51,6 +52,7 @@ export { IConnextHandler__factory } from "./IConnextHandler__factory";
 export { IDeBridgeGate__factory } from "./IDeBridgeGate__factory";
 export { IDiamondCut__factory } from "./IDiamondCut__factory";
 export { IDiamondLoupe__factory } from "./IDiamondLoupe__factory";
+export { IDlnSource__factory } from "./IDlnSource__factory";
 export { IERC1155Receiver__factory } from "./IERC1155Receiver__factory";
 export { IERC165__factory } from "./IERC165__factory";
 export { IERC173__factory } from "./IERC173__factory";
