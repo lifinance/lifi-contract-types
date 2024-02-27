@@ -92,6 +92,7 @@ export { LibBytes__factory } from "./LibBytes__factory";
 export { LibDiamond__factory } from "./LibDiamond__factory";
 export { LibSwap__factory } from "./LibSwap__factory";
 export { MakerTeleportFacet__factory } from "./MakerTeleportFacet__factory";
+export { MayanBridgeFacet__factory } from "./MayanBridgeFacet__factory";
 export { NonStandardSelectorsRegistryFacet__factory } from "./NonStandardSelectorsRegistryFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";

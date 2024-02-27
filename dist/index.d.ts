@@ -100,6 +100,7 @@ export type { LibBytes } from "./LibBytes";
 export type { LibDiamond } from "./LibDiamond";
 export type { LibSwap } from "./LibSwap";
 export type { MakerTeleportFacet } from "./MakerTeleportFacet";
+export type { MayanBridgeFacet } from "./MayanBridgeFacet";
 export type { NonStandardSelectorsRegistryFacet } from "./NonStandardSelectorsRegistryFacet";
 export type { OmniBridgeFacet } from "./OmniBridgeFacet";
 export type { OptimismBridgeFacet } from "./OptimismBridgeFacet";
@@ -218,6 +219,7 @@ export { LiFiDiamondImmutable__factory } from "./factories/LiFiDiamondImmutable_
 export { LIFuelFacet__factory } from "./factories/LIFuelFacet__factory";
 export { LiFuelFeeCollector__factory } from "./factories/LiFuelFeeCollector__factory";
 export { MakerTeleportFacet__factory } from "./factories/MakerTeleportFacet__factory";
+export { MayanBridgeFacet__factory } from "./factories/MayanBridgeFacet__factory";
 export type { IMultichainERC20 } from "./MultichainFacet.sol/IMultichainERC20";
 export { IMultichainERC20__factory } from "./factories/MultichainFacet.sol/IMultichainERC20__factory";
 export type { MultichainFacet } from "./MultichainFacet.sol/MultichainFacet";
