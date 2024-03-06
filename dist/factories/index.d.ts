@@ -2,6 +2,7 @@ export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as stdStorageSol from "./StdStorage.sol";
+export * as tokenWrapperSol from "./TokenWrapper.sol";
 export * as updateNonStandardSelectorsRegistryFacetSol from "./UpdateNonStandardSelectorsRegistryFacet.sol";
 export * as vmSol from "./Vm.sol";
 export * as introspection from "./introspection";
