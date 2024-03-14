@@ -118,4 +118,3 @@ export { TransferrableOwnership__factory } from "./TransferrableOwnership__facto
 export { Utilities__factory } from "./Utilities__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
-export { WormholeFacet__factory } from "./WormholeFacet__factory";
