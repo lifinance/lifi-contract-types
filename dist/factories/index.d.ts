@@ -34,6 +34,7 @@ export { ERC20Proxy__factory } from "./ERC20Proxy__factory";
 export { ERC721Holder__factory } from "./ERC721Holder__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
+export { GasRebateDistributor__factory } from "./GasRebateDistributor__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
 export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
 export { GnosisBridgeL2Facet__factory } from "./GnosisBridgeL2Facet__factory";
