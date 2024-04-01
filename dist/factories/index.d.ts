@@ -82,7 +82,6 @@ export { ITeleportGateway__factory } from "./ITeleportGateway__factory";
 export { IThorSwap__factory } from "./IThorSwap__factory";
 export { ITokenMessenger__factory } from "./ITokenMessenger__factory";
 export { ITransactionManager__factory } from "./ITransactionManager__factory";
-export { IWormholeRouter__factory } from "./IWormholeRouter__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { LIFuelFacet__factory } from "./LIFuelFacet__factory";
@@ -117,4 +116,3 @@ export { TransferrableOwnership__factory } from "./TransferrableOwnership__facto
 export { Utilities__factory } from "./Utilities__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
-export { WormholeFacet__factory } from "./WormholeFacet__factory";
