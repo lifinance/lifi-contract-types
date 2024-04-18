@@ -6,7 +6,9 @@ export interface ServiceFeeCollectorInterface extends utils.Interface {
     functions: {
         "batchWithdrawFees(address[])": FunctionFragment;
         "cancelOwnershipTransfer()": FunctionFragment;
+        "collectNativeGasFees(uint256,address)": FunctionFragment;
         "collectNativeInsuranceFees(address)": FunctionFragment;
+        "collectTokenGasFees(address,uint256,uint256,address)": FunctionFragment;
         "collectTokenInsuranceFees(address,uint256,address)": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
         "owner()": FunctionFragment;
@@ -14,10 +16,17 @@ export interface ServiceFeeCollectorInterface extends utils.Interface {
         "transferOwnership(address)": FunctionFragment;
         "withdrawFees(address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "batchWithdrawFees" | "cancelOwnershipTransfer" | "collectNativeInsuranceFees" | "collectTokenInsuranceFees" | "confirmOwnershipTransfer" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawFees"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "batchWithdrawFees" | "cancelOwnershipTransfer" | "collectNativeGasFees" | "collectNativeInsuranceFees" | "collectTokenGasFees" | "collectTokenInsuranceFees" | "confirmOwnershipTransfer" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawFees"): FunctionFragment;
     encodeFunctionData(functionFragment: "batchWithdrawFees", values: [PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "collectNativeGasFees", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "collectNativeInsuranceFees", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "collectTokenGasFees", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>
+    ]): string;
     encodeFunctionData(functionFragment: "collectTokenInsuranceFees", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>,
@@ -30,7 +39,9 @@ export interface ServiceFeeCollectorInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "withdrawFees", values: [PromiseOrValue<string>]): string;
     decodeFunctionResult(functionFragment: "batchWithdrawFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "collectNativeGasFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectNativeInsuranceFees", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "collectTokenGasFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "collectTokenInsuranceFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -124,7 +135,13 @@ export interface ServiceFeeCollector extends BaseContract {
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        collectNativeGasFees(chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         collectNativeInsuranceFees(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        collectTokenGasFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         collectTokenInsuranceFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
@@ -148,7 +165,13 @@ export interface ServiceFeeCollector extends BaseContract {
     cancelOwnershipTransfer(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    collectNativeGasFees(chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     collectNativeInsuranceFees(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    collectTokenGasFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     collectTokenInsuranceFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
@@ -168,7 +191,9 @@ export interface ServiceFeeCollector extends BaseContract {
     callStatic: {
         batchWithdrawFees(tokenAddresses: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        collectNativeGasFees(chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         collectNativeInsuranceFees(receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        collectTokenGasFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         collectTokenInsuranceFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         owner(overrides?: CallOverrides): Promise<string>;
@@ -195,7 +220,13 @@ export interface ServiceFeeCollector extends BaseContract {
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        collectNativeGasFees(chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         collectNativeInsuranceFees(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        collectTokenGasFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         collectTokenInsuranceFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
@@ -220,7 +251,13 @@ export interface ServiceFeeCollector extends BaseContract {
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
+        collectNativeGasFees(chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         collectNativeInsuranceFees(receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        collectTokenGasFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, chainId: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         collectTokenInsuranceFees(tokenAddress: PromiseOrValue<string>, feeAmount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<string>, overrides?: Overrides & {

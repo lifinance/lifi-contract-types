@@ -70,8 +70,11 @@ export declare namespace ILiFi {
 export interface GenericSwapFacetInterface extends utils.Interface {
     functions: {
         "swapTokensGeneric(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+        "swapTokensSingleERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
+        "swapTokensSingleERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
+        "swapTokensSingleNativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "swapTokensGeneric"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "swapTokensGeneric" | "swapTokensSingleERC20ToERC20" | "swapTokensSingleERC20ToNative" | "swapTokensSingleNativeToERC20"): FunctionFragment;
     encodeFunctionData(functionFragment: "swapTokensGeneric", values: [
         PromiseOrValue<BytesLike>,
         PromiseOrValue<string>,
@@ -80,20 +83,68 @@ export interface GenericSwapFacetInterface extends utils.Interface {
         PromiseOrValue<BigNumberish>,
         LibSwap.SwapDataStruct[]
     ]): string;
+    encodeFunctionData(functionFragment: "swapTokensSingleERC20ToERC20", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        LibSwap.SwapDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "swapTokensSingleERC20ToNative", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        LibSwap.SwapDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "swapTokensSingleNativeToERC20", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        LibSwap.SwapDataStruct
+    ]): string;
     decodeFunctionResult(functionFragment: "swapTokensGeneric", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapTokensSingleERC20ToERC20", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapTokensSingleERC20ToNative", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapTokensSingleNativeToERC20", data: BytesLike): Result;
     events: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+export interface AssetSwappedEventObject {
+    transactionId: string;
+    dex: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+    timestamp: BigNumber;
+}
+export declare type AssetSwappedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+], AssetSwappedEventObject>;
+export declare type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -186,17 +237,40 @@ export interface GenericSwapFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmount: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        swapTokensSingleERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        swapTokensSingleERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        swapTokensSingleNativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmount: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+    swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    swapTokensSingleERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    swapTokensSingleERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    swapTokensSingleNativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmount: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
+        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
+        swapTokensSingleERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: CallOverrides): Promise<BigNumber>;
+        swapTokensSingleERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapTokensSingleNativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
+        AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
@@ -209,12 +283,30 @@ export interface GenericSwapFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmount: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        swapTokensSingleERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        swapTokensSingleERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        swapTokensSingleNativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmount: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapTokensGeneric(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        swapTokensSingleERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        swapTokensSingleERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        swapTokensSingleNativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
