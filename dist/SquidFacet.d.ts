@@ -59,28 +59,34 @@ export declare namespace SquidFacet {
     type SquidDataStruct = {
         routeType: PromiseOrValue<BigNumberish>;
         destinationChain: PromiseOrValue<string>;
+        destinationAddress: PromiseOrValue<string>;
         bridgedTokenSymbol: PromiseOrValue<string>;
+        depositAssetId: PromiseOrValue<string>;
         sourceCalls: ISquidMulticall.CallStruct[];
-        destinationCalls: ISquidMulticall.CallStruct[];
+        payload: PromiseOrValue<BytesLike>;
         fee: PromiseOrValue<BigNumberish>;
-        forecallEnabled: PromiseOrValue<boolean>;
+        enableExpress: PromiseOrValue<boolean>;
     };
     type SquidDataStructOutput = [
         number,
         string,
         string,
+        string,
+        string,
         ISquidMulticall.CallStructOutput[],
-        ISquidMulticall.CallStructOutput[],
+        string,
         BigNumber,
         boolean
     ] & {
         routeType: number;
         destinationChain: string;
+        destinationAddress: string;
         bridgedTokenSymbol: string;
+        depositAssetId: string;
         sourceCalls: ISquidMulticall.CallStructOutput[];
-        destinationCalls: ISquidMulticall.CallStructOutput[];
+        payload: string;
         fee: BigNumber;
-        forecallEnabled: boolean;
+        enableExpress: boolean;
     };
 }
 export declare namespace LibSwap {
@@ -113,8 +119,8 @@ export declare namespace LibSwap {
 }
 export interface SquidFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint8,string,string,(uint8,address,uint256,bytes,bytes)[],(uint8,address,uint256,bytes,bytes)[],uint256,bool))": FunctionFragment;
-        "swapAndStartBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint8,string,string,(uint8,address,uint256,bytes,bytes)[],(uint8,address,uint256,bytes,bytes)[],uint256,bool))": FunctionFragment;
+        "startBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint8,string,string,string,address,(uint8,address,uint256,bytes,bytes)[],bytes,uint256,bool))": FunctionFragment;
+        "swapAndStartBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint8,string,string,string,address,(uint8,address,uint256,bytes,bytes)[],bytes,uint256,bool))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaSquid" | "swapAndStartBridgeTokensViaSquid"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaSquid", values: [ILiFi.BridgeDataStruct, SquidFacet.SquidDataStruct]): string;
