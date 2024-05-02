@@ -1,4 +1,5 @@
 export * as erc20 from "./ERC20";
+export * as gasZipSol from "./GasZip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
