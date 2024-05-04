@@ -196,7 +196,11 @@ export declare class UniswapV2Router02__factory {
             readonly type: "uint256";
             readonly internalType: "uint256";
         }];
-        readonly outputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "amounts";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }];
         readonly stateMutability: "nonpayable";
     }];
     static createInterface(): UniswapV2Router02Interface;

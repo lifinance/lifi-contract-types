@@ -370,7 +370,7 @@ export interface UniswapV2Router02 extends BaseContract {
       to: PromiseOrValue<string>,
       deadline: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber[]>;
   };
 
   filters: {};

@@ -261,7 +261,13 @@ const _abi = [
         internalType: "uint256",
       },
     ],
-    outputs: [],
+    outputs: [
+      {
+        name: "amounts",
+        type: "uint256[]",
+        internalType: "uint256[]",
+      },
+    ],
     stateMutability: "nonpayable",
   },
 ] as const;
