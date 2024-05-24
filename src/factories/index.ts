@@ -4,7 +4,9 @@
 export * as erc20 from "./ERC20";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as interfacesSol from "./Interfaces.sol";
+export * as libUtilSol from "./LibUtil.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
+export * as stdErrorSol from "./StdError.sol";
 export * as stdStorageSol from "./StdStorage.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
 export * as updateNonStandardSelectorsRegistryFacetSol from "./UpdateNonStandardSelectorsRegistryFacet.sol";
@@ -117,6 +119,8 @@ export { ServiceFeeCollector__factory } from "./ServiceFeeCollector__factory";
 export { SquidFacet__factory } from "./SquidFacet__factory";
 export { StandardizedCallFacet__factory } from "./StandardizedCallFacet__factory";
 export { StargateFacet__factory } from "./StargateFacet__factory";
+export { StdAssertions__factory } from "./StdAssertions__factory";
+export { StdInvariant__factory } from "./StdInvariant__factory";
 export { SwapperV2__factory } from "./SwapperV2__factory";
 export { SymbiosisFacet__factory } from "./SymbiosisFacet__factory";
 export { SynapseBridgeFacet__factory } from "./SynapseBridgeFacet__factory";
