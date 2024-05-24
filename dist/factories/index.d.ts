@@ -98,6 +98,7 @@ export { LibDiamond__factory } from "./LibDiamond__factory";
 export { LibSwap__factory } from "./LibSwap__factory";
 export { MakerTeleportFacet__factory } from "./MakerTeleportFacet__factory";
 export { MayanFacet__factory } from "./MayanFacet__factory";
+export { MockUniswapDEX__factory } from "./MockUniswapDEX__factory";
 export { NonStandardSelectorsRegistryFacet__factory } from "./NonStandardSelectorsRegistryFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";
