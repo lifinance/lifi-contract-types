@@ -3,90 +3,43 @@ import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
 export declare namespace IMayan {
-    type RelayerFeesStruct = {
-        swapFee: PromiseOrValue<BigNumberish>;
-        redeemFee: PromiseOrValue<BigNumberish>;
-        refundFee: PromiseOrValue<BigNumberish>;
+    type PermitParamsStruct = {
+        value: PromiseOrValue<BigNumberish>;
+        deadline: PromiseOrValue<BigNumberish>;
+        v: PromiseOrValue<BigNumberish>;
+        r: PromiseOrValue<BytesLike>;
+        s: PromiseOrValue<BytesLike>;
     };
-    type RelayerFeesStructOutput = [BigNumber, BigNumber, BigNumber] & {
-        swapFee: BigNumber;
-        redeemFee: BigNumber;
-        refundFee: BigNumber;
-    };
-    type RecepientStruct = {
-        mayanAddr: PromiseOrValue<BytesLike>;
-        mayanChainId: PromiseOrValue<BigNumberish>;
-        auctionAddr: PromiseOrValue<BytesLike>;
-        destAddr: PromiseOrValue<BytesLike>;
-        destChainId: PromiseOrValue<BigNumberish>;
-        referrer: PromiseOrValue<BytesLike>;
-        refundAddr: PromiseOrValue<BytesLike>;
-    };
-    type RecepientStructOutput = [
-        string,
-        number,
-        string,
-        string,
+    type PermitParamsStructOutput = [
+        BigNumber,
+        BigNumber,
         number,
         string,
         string
     ] & {
-        mayanAddr: string;
-        mayanChainId: number;
-        auctionAddr: string;
-        destAddr: string;
-        destChainId: number;
-        referrer: string;
-        refundAddr: string;
-    };
-    type CriteriaStruct = {
-        transferDeadline: PromiseOrValue<BigNumberish>;
-        swapDeadline: PromiseOrValue<BigNumberish>;
-        amountOutMin: PromiseOrValue<BigNumberish>;
-        unwrap: PromiseOrValue<boolean>;
-        gasDrop: PromiseOrValue<BigNumberish>;
-        customPayload: PromiseOrValue<BytesLike>;
-    };
-    type CriteriaStructOutput = [
-        BigNumber,
-        BigNumber,
-        BigNumber,
-        boolean,
-        BigNumber,
-        string
-    ] & {
-        transferDeadline: BigNumber;
-        swapDeadline: BigNumber;
-        amountOutMin: BigNumber;
-        unwrap: boolean;
-        gasDrop: BigNumber;
-        customPayload: string;
+        value: BigNumber;
+        deadline: BigNumber;
+        v: number;
+        r: string;
+        s: string;
     };
 }
 export interface IMayanInterface extends utils.Interface {
     functions: {
-        "swap((uint64,uint64,uint64),(bytes32,uint16,bytes32,bytes32,uint16,bytes32,bytes32),bytes32,uint16,(uint256,uint64,uint64,bool,uint64,bytes),address,uint256)": FunctionFragment;
-        "wrapAndSwapETH((uint64,uint64,uint64),(bytes32,uint16,bytes32,bytes32,uint16,bytes32,bytes32),bytes32,uint16,(uint256,uint64,uint64,bool,uint64,bytes))": FunctionFragment;
+        "forwardERC20(address,uint256,(uint256,uint256,uint8,bytes32,bytes32),address,bytes)": FunctionFragment;
+        "forwardEth(address,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "swap" | "wrapAndSwapETH"): FunctionFragment;
-    encodeFunctionData(functionFragment: "swap", values: [
-        IMayan.RelayerFeesStruct,
-        IMayan.RecepientStruct,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        IMayan.CriteriaStruct,
+    getFunction(nameOrSignatureOrTopic: "forwardERC20" | "forwardEth"): FunctionFragment;
+    encodeFunctionData(functionFragment: "forwardERC20", values: [
         PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
-    encodeFunctionData(functionFragment: "wrapAndSwapETH", values: [
-        IMayan.RelayerFeesStruct,
-        IMayan.RecepientStruct,
-        PromiseOrValue<BytesLike>,
         PromiseOrValue<BigNumberish>,
-        IMayan.CriteriaStruct
+        IMayan.PermitParamsStruct,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
     ]): string;
-    decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "wrapAndSwapETH", data: BytesLike): Result;
+    encodeFunctionData(functionFragment: "forwardEth", values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]): string;
+    decodeFunctionResult(functionFragment: "forwardERC20", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "forwardEth", data: BytesLike): Result;
     events: {};
 }
 export interface IMayan extends BaseContract {
@@ -104,37 +57,37 @@ export interface IMayan extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swap(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        wrapAndSwapETH(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, overrides?: PayableOverrides & {
+        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    swap(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+    forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    wrapAndSwapETH(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, overrides?: PayableOverrides & {
+    forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swap(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        wrapAndSwapETH(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, overrides?: CallOverrides): Promise<BigNumber>;
+        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        swap(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        wrapAndSwapETH(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, overrides?: PayableOverrides & {
+        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swap(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
+        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        wrapAndSwapETH(relayerFees: IMayan.RelayerFeesStruct, recipient: IMayan.RecepientStruct, tokenOutAddr: PromiseOrValue<BytesLike>, tokenOutChainId: PromiseOrValue<BigNumberish>, criteria: IMayan.CriteriaStruct, overrides?: PayableOverrides & {
+        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
