@@ -8,119 +8,8 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
-        name: "swap",
+        name: "forwardERC20",
         inputs: [
-            {
-                name: "relayerFees",
-                type: "tuple",
-                internalType: "struct IMayan.RelayerFees",
-                components: [
-                    {
-                        name: "swapFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "redeemFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "refundFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                ],
-            },
-            {
-                name: "recipient",
-                type: "tuple",
-                internalType: "struct IMayan.Recepient",
-                components: [
-                    {
-                        name: "mayanAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "mayanChainId",
-                        type: "uint16",
-                        internalType: "uint16",
-                    },
-                    {
-                        name: "auctionAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "destAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "destChainId",
-                        type: "uint16",
-                        internalType: "uint16",
-                    },
-                    {
-                        name: "referrer",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "refundAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                ],
-            },
-            {
-                name: "tokenOutAddr",
-                type: "bytes32",
-                internalType: "bytes32",
-            },
-            {
-                name: "tokenOutChainId",
-                type: "uint16",
-                internalType: "uint16",
-            },
-            {
-                name: "criteria",
-                type: "tuple",
-                internalType: "struct IMayan.Criteria",
-                components: [
-                    {
-                        name: "transferDeadline",
-                        type: "uint256",
-                        internalType: "uint256",
-                    },
-                    {
-                        name: "swapDeadline",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "amountOutMin",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "unwrap",
-                        type: "bool",
-                        internalType: "bool",
-                    },
-                    {
-                        name: "gasDrop",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "customPayload",
-                        type: "bytes",
-                        internalType: "bytes",
-                    },
-                ],
-            },
             {
                 name: "tokenIn",
                 type: "address",
@@ -131,139 +20,68 @@ var _abi = [
                 type: "uint256",
                 internalType: "uint256",
             },
-        ],
-        outputs: [
             {
-                name: "sequence",
-                type: "uint64",
-                internalType: "uint64",
-            },
-        ],
-        stateMutability: "payable",
-    },
-    {
-        type: "function",
-        name: "wrapAndSwapETH",
-        inputs: [
-            {
-                name: "relayerFees",
+                name: "permitParams",
                 type: "tuple",
-                internalType: "struct IMayan.RelayerFees",
+                internalType: "struct IMayan.PermitParams",
                 components: [
                     {
-                        name: "swapFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "redeemFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "refundFee",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                ],
-            },
-            {
-                name: "recipient",
-                type: "tuple",
-                internalType: "struct IMayan.Recepient",
-                components: [
-                    {
-                        name: "mayanAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "mayanChainId",
-                        type: "uint16",
-                        internalType: "uint16",
-                    },
-                    {
-                        name: "auctionAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "destAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "destChainId",
-                        type: "uint16",
-                        internalType: "uint16",
-                    },
-                    {
-                        name: "referrer",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                    {
-                        name: "refundAddr",
-                        type: "bytes32",
-                        internalType: "bytes32",
-                    },
-                ],
-            },
-            {
-                name: "tokenOutAddr",
-                type: "bytes32",
-                internalType: "bytes32",
-            },
-            {
-                name: "tokenOutChainId",
-                type: "uint16",
-                internalType: "uint16",
-            },
-            {
-                name: "criteria",
-                type: "tuple",
-                internalType: "struct IMayan.Criteria",
-                components: [
-                    {
-                        name: "transferDeadline",
+                        name: "value",
                         type: "uint256",
                         internalType: "uint256",
                     },
                     {
-                        name: "swapDeadline",
-                        type: "uint64",
-                        internalType: "uint64",
+                        name: "deadline",
+                        type: "uint256",
+                        internalType: "uint256",
                     },
                     {
-                        name: "amountOutMin",
-                        type: "uint64",
-                        internalType: "uint64",
+                        name: "v",
+                        type: "uint8",
+                        internalType: "uint8",
                     },
                     {
-                        name: "unwrap",
-                        type: "bool",
-                        internalType: "bool",
+                        name: "r",
+                        type: "bytes32",
+                        internalType: "bytes32",
                     },
                     {
-                        name: "gasDrop",
-                        type: "uint64",
-                        internalType: "uint64",
-                    },
-                    {
-                        name: "customPayload",
-                        type: "bytes",
-                        internalType: "bytes",
+                        name: "s",
+                        type: "bytes32",
+                        internalType: "bytes32",
                     },
                 ],
             },
-        ],
-        outputs: [
             {
-                name: "sequence",
-                type: "uint64",
-                internalType: "uint64",
+                name: "mayanProtocol",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "protocolData",
+                type: "bytes",
+                internalType: "bytes",
             },
         ],
+        outputs: [],
+        stateMutability: "payable",
+    },
+    {
+        type: "function",
+        name: "forwardEth",
+        inputs: [
+            {
+                name: "mayanProtocol",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "protocolData",
+                type: "bytes",
+                internalType: "bytes",
+            },
+        ],
+        outputs: [],
         stateMutability: "payable",
     },
 ];
