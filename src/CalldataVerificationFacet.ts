@@ -96,6 +96,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
     "extractData(bytes)": FunctionFragment;
     "extractGenericSwapParameters(bytes)": FunctionFragment;
     "extractMainParameters(bytes)": FunctionFragment;
+    "extractNonEVMAddress(bytes)": FunctionFragment;
     "extractSwapData(bytes)": FunctionFragment;
     "validateCalldata(bytes,string,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "validateDestinationCalldata(bytes,bytes,bytes)": FunctionFragment;
@@ -107,6 +108,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
       | "extractData"
       | "extractGenericSwapParameters"
       | "extractMainParameters"
+      | "extractNonEVMAddress"
       | "extractSwapData"
       | "validateCalldata"
       | "validateDestinationCalldata"
@@ -126,6 +128,10 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "extractMainParameters",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "extractNonEVMAddress",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
@@ -168,6 +174,10 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "extractMainParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "extractNonEVMAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -260,6 +270,11 @@ export interface CalldataVerificationFacet extends BaseContract {
       }
     >;
 
+    extractNonEVMAddress(
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { nonEVMAddress: string }>;
+
     extractSwapData(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -332,6 +347,11 @@ export interface CalldataVerificationFacet extends BaseContract {
     }
   >;
 
+  extractNonEVMAddress(
+    data: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   extractSwapData(
     data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -400,6 +420,11 @@ export interface CalldataVerificationFacet extends BaseContract {
       }
     >;
 
+    extractNonEVMAddress(
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     extractSwapData(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -448,6 +473,11 @@ export interface CalldataVerificationFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    extractNonEVMAddress(
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     extractSwapData(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -490,6 +520,11 @@ export interface CalldataVerificationFacet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     extractMainParameters(
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    extractNonEVMAddress(
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
