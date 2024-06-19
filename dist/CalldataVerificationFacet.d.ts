@@ -73,15 +73,17 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
         "extractData(bytes)": FunctionFragment;
         "extractGenericSwapParameters(bytes)": FunctionFragment;
         "extractMainParameters(bytes)": FunctionFragment;
+        "extractNonEVMAddress(bytes)": FunctionFragment;
         "extractSwapData(bytes)": FunctionFragment;
         "validateCalldata(bytes,string,address,address,uint256,uint256,bool,bool)": FunctionFragment;
         "validateDestinationCalldata(bytes,bytes,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "extractBridgeData" | "extractData" | "extractGenericSwapParameters" | "extractMainParameters" | "extractSwapData" | "validateCalldata" | "validateDestinationCalldata"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "extractBridgeData" | "extractData" | "extractGenericSwapParameters" | "extractMainParameters" | "extractNonEVMAddress" | "extractSwapData" | "validateCalldata" | "validateDestinationCalldata"): FunctionFragment;
     encodeFunctionData(functionFragment: "extractBridgeData", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "extractData", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "extractGenericSwapParameters", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "extractMainParameters", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "extractNonEVMAddress", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "extractSwapData", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "validateCalldata", values: [
         PromiseOrValue<BytesLike>,
@@ -102,6 +104,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "extractData", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "extractGenericSwapParameters", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "extractMainParameters", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "extractNonEVMAddress", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "extractSwapData", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "validateCalldata", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "validateDestinationCalldata", data: BytesLike): Result;
@@ -164,6 +167,9 @@ export interface CalldataVerificationFacet extends BaseContract {
             hasSourceSwaps: boolean;
             hasDestinationCall: boolean;
         }>;
+        extractNonEVMAddress(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[string] & {
+            nonEVMAddress: string;
+        }>;
         extractSwapData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
             LibSwap.SwapDataStructOutput[]
         ] & {
@@ -214,6 +220,7 @@ export interface CalldataVerificationFacet extends BaseContract {
         hasSourceSwaps: boolean;
         hasDestinationCall: boolean;
     }>;
+    extractNonEVMAddress(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
     extractSwapData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<LibSwap.SwapDataStructOutput[]>;
     validateCalldata(data: PromiseOrValue<BytesLike>, bridge: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, hasSourceSwaps: PromiseOrValue<boolean>, hasDestinationCall: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<boolean>;
     validateDestinationCalldata(data: PromiseOrValue<BytesLike>, callTo: PromiseOrValue<BytesLike>, dstCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
@@ -256,6 +263,7 @@ export interface CalldataVerificationFacet extends BaseContract {
             hasSourceSwaps: boolean;
             hasDestinationCall: boolean;
         }>;
+        extractNonEVMAddress(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         extractSwapData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<LibSwap.SwapDataStructOutput[]>;
         validateCalldata(data: PromiseOrValue<BytesLike>, bridge: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, hasSourceSwaps: PromiseOrValue<boolean>, hasDestinationCall: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<boolean>;
         validateDestinationCalldata(data: PromiseOrValue<BytesLike>, callTo: PromiseOrValue<BytesLike>, dstCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
@@ -266,6 +274,7 @@ export interface CalldataVerificationFacet extends BaseContract {
         extractData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         extractGenericSwapParameters(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         extractMainParameters(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        extractNonEVMAddress(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         extractSwapData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         validateCalldata(data: PromiseOrValue<BytesLike>, bridge: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, hasSourceSwaps: PromiseOrValue<boolean>, hasDestinationCall: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<BigNumber>;
         validateDestinationCalldata(data: PromiseOrValue<BytesLike>, callTo: PromiseOrValue<BytesLike>, dstCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
@@ -275,6 +284,7 @@ export interface CalldataVerificationFacet extends BaseContract {
         extractData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         extractGenericSwapParameters(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         extractMainParameters(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        extractNonEVMAddress(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         extractSwapData(data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         validateCalldata(data: PromiseOrValue<BytesLike>, bridge: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChainId: PromiseOrValue<BigNumberish>, hasSourceSwaps: PromiseOrValue<boolean>, hasDestinationCall: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         validateDestinationCalldata(data: PromiseOrValue<BytesLike>, callTo: PromiseOrValue<BytesLike>, dstCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
