@@ -69,8 +69,8 @@ export declare namespace ILiFi {
 
 export declare namespace AmarokFacet {
   export type AmarokDataStruct = {
-    callData: PromiseOrValue<BytesLike>;
     callTo: PromiseOrValue<string>;
+    callData: PromiseOrValue<BytesLike>;
     relayerFee: PromiseOrValue<BigNumberish>;
     slippageTol: PromiseOrValue<BigNumberish>;
     delegate: PromiseOrValue<string>;
@@ -87,8 +87,8 @@ export declare namespace AmarokFacet {
     number,
     boolean
   ] & {
-    callData: string;
     callTo: string;
+    callData: string;
     relayerFee: BigNumber;
     slippageTol: BigNumber;
     delegate: string;
