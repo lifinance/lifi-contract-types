@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export type { celerImFacetBaseSol };
+import type * as gasZipSol from "./GasZip.sol";
+export type { gasZipSol };
 import type * as iHopBridgeSol from "./IHopBridge.sol";
 export type { iHopBridgeSol };
 import type * as multichainFacetSol from "./MultichainFacet.sol";
@@ -154,6 +156,10 @@ export { ERC721Holder__factory } from "./factories/ERC721Holder__factory";
 export { Executor__factory } from "./factories/Executor__factory";
 export { FeeCollector__factory } from "./factories/FeeCollector__factory";
 export { GasRebateDistributor__factory } from "./factories/GasRebateDistributor__factory";
+export type { GasZip } from "./GasZip.sol/GasZip";
+export { GasZip__factory } from "./factories/GasZip.sol/GasZip__factory";
+export type { IGasZip } from "./GasZip.sol/IGasZip";
+export { IGasZip__factory } from "./factories/GasZip.sol/IGasZip__factory";
 export { GenericSwapFacet__factory } from "./factories/GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./factories/GenericSwapFacetV3__factory";
 export { GnosisBridgeFacet__factory } from "./factories/GnosisBridgeFacet__factory";
