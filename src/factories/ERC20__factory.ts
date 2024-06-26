@@ -13,7 +13,7 @@ const _abi = [
     inputs: [],
     outputs: [
       {
-        name: "",
+        name: "result",
         type: "bytes32",
         internalType: "bytes32",
       },
@@ -25,19 +25,19 @@ const _abi = [
     name: "allowance",
     inputs: [
       {
-        name: "",
+        name: "owner",
         type: "address",
         internalType: "address",
       },
       {
-        name: "",
+        name: "spender",
         type: "address",
         internalType: "address",
       },
     ],
     outputs: [
       {
-        name: "",
+        name: "result",
         type: "uint256",
         internalType: "uint256",
       },
@@ -73,14 +73,14 @@ const _abi = [
     name: "balanceOf",
     inputs: [
       {
-        name: "",
+        name: "owner",
         type: "address",
         internalType: "address",
       },
     ],
     outputs: [
       {
-        name: "",
+        name: "result",
         type: "uint256",
         internalType: "uint256",
       },
@@ -118,14 +118,14 @@ const _abi = [
     name: "nonces",
     inputs: [
       {
-        name: "",
+        name: "owner",
         type: "address",
         internalType: "address",
       },
     ],
     outputs: [
       {
-        name: "",
+        name: "result",
         type: "uint256",
         internalType: "uint256",
       },
@@ -194,7 +194,7 @@ const _abi = [
     inputs: [],
     outputs: [
       {
-        name: "",
+        name: "result",
         type: "uint256",
         internalType: "uint256",
       },
@@ -303,6 +303,41 @@ const _abi = [
       },
     ],
     anonymous: false,
+  },
+  {
+    type: "error",
+    name: "AllowanceOverflow",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "AllowanceUnderflow",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InsufficientAllowance",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InsufficientBalance",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "InvalidPermit",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "PermitExpired",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "TotalSupplyOverflow",
+    inputs: [],
   },
 ] as const;
 

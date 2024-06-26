@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as gasZipSol from "./GasZip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
@@ -106,6 +107,7 @@ export { PolygonBridgeFacet__factory } from "./PolygonBridgeFacet__factory";
 export { Receiver__factory } from "./Receiver__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
 export { RelayerCelerIM__factory } from "./RelayerCelerIM__factory";
+export { SafeTransferLib__factory } from "./SafeTransferLib__factory";
 export { ServiceFeeCollector__factory } from "./ServiceFeeCollector__factory";
 export { SquidFacet__factory } from "./SquidFacet__factory";
 export { StandardizedCallFacet__factory } from "./StandardizedCallFacet__factory";
