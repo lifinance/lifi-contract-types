@@ -22,32 +22,37 @@ exports.SafeTransferLib__factory = void 0;
 var ethers_1 = require("ethers");
 var _abi = [
     {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: "bool",
-                name: "one",
-                type: "bool",
-            },
-            {
-                indexed: false,
-                internalType: "bool",
-                name: "two",
-                type: "bool",
-            },
-            {
-                indexed: false,
-                internalType: "uint256",
-                name: "retsize",
-                type: "uint256",
-            },
-        ],
-        name: "Debug",
-        type: "event",
+        type: "error",
+        name: "ApproveFailed",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "ETHTransferFailed",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "Permit2AmountOverflow",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "Permit2Failed",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "TransferFailed",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "TransferFromFailed",
+        inputs: [],
     },
 ];
-var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207523ce54f8c54cb1de69030ee0b0d6f02597d94e0de7712a5d7d5a3e2f29b28b64736f6c63430008110033";
+var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122092ec241ea66e0f209b951f6f12b02a640b57fb033f71ec39b2bfc85fe8ff043d64736f6c63430008110033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var SafeTransferLib__factory = /** @class */ (function (_super) {
     __extends(SafeTransferLib__factory, _super);

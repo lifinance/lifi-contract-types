@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export type { celerImFacetBaseSol };
+import type * as gasZipFacetSol from "./GasZipFacet.sol";
+export type { gasZipFacetSol };
 import type * as iHopBridgeSol from "./IHopBridge.sol";
 export type { iHopBridgeSol };
 import type * as multichainFacetSol from "./MultichainFacet.sol";
@@ -110,6 +112,7 @@ export type { PolygonBridgeFacet } from "./PolygonBridgeFacet";
 export type { Receiver } from "./Receiver";
 export type { ReentrancyGuard } from "./ReentrancyGuard";
 export type { RelayerCelerIM } from "./RelayerCelerIM";
+export type { SafeTransferLib } from "./SafeTransferLib";
 export type { ServiceFeeCollector } from "./ServiceFeeCollector";
 export type { SquidFacet } from "./SquidFacet";
 export type { StandardizedCallFacet } from "./StandardizedCallFacet";
@@ -154,6 +157,10 @@ export { ERC721Holder__factory } from "./factories/ERC721Holder__factory";
 export { Executor__factory } from "./factories/Executor__factory";
 export { FeeCollector__factory } from "./factories/FeeCollector__factory";
 export { GasRebateDistributor__factory } from "./factories/GasRebateDistributor__factory";
+export type { GasZipFacet } from "./GasZipFacet.sol/GasZipFacet";
+export { GasZipFacet__factory } from "./factories/GasZipFacet.sol/GasZipFacet__factory";
+export type { IGasZip } from "./GasZipFacet.sol/IGasZip";
+export { IGasZip__factory } from "./factories/GasZipFacet.sol/IGasZip__factory";
 export { GenericSwapFacet__factory } from "./factories/GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./factories/GenericSwapFacetV3__factory";
 export { GnosisBridgeFacet__factory } from "./factories/GnosisBridgeFacet__factory";
@@ -237,6 +244,7 @@ export { PolygonBridgeFacet__factory } from "./factories/PolygonBridgeFacet__fac
 export { Receiver__factory } from "./factories/Receiver__factory";
 export { ReentrancyGuard__factory } from "./factories/ReentrancyGuard__factory";
 export { RelayerCelerIM__factory } from "./factories/RelayerCelerIM__factory";
+export { SafeTransferLib__factory } from "./factories/SafeTransferLib__factory";
 export { ServiceFeeCollector__factory } from "./factories/ServiceFeeCollector__factory";
 export { SquidFacet__factory } from "./factories/SquidFacet__factory";
 export { StandardizedCallFacet__factory } from "./factories/StandardizedCallFacet__factory";
