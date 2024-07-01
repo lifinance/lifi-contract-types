@@ -7,7 +7,7 @@ export declare class ERC20__factory {
         readonly name: "DOMAIN_SEPARATOR";
         readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly name: "";
+            readonly name: "result";
             readonly type: "bytes32";
             readonly internalType: "bytes32";
         }];
@@ -16,16 +16,16 @@ export declare class ERC20__factory {
         readonly type: "function";
         readonly name: "allowance";
         readonly inputs: readonly [{
-            readonly name: "";
+            readonly name: "owner";
             readonly type: "address";
             readonly internalType: "address";
         }, {
-            readonly name: "";
+            readonly name: "spender";
             readonly type: "address";
             readonly internalType: "address";
         }];
         readonly outputs: readonly [{
-            readonly name: "";
+            readonly name: "result";
             readonly type: "uint256";
             readonly internalType: "uint256";
         }];
@@ -52,12 +52,12 @@ export declare class ERC20__factory {
         readonly type: "function";
         readonly name: "balanceOf";
         readonly inputs: readonly [{
-            readonly name: "";
+            readonly name: "owner";
             readonly type: "address";
             readonly internalType: "address";
         }];
         readonly outputs: readonly [{
-            readonly name: "";
+            readonly name: "result";
             readonly type: "uint256";
             readonly internalType: "uint256";
         }];
@@ -86,12 +86,12 @@ export declare class ERC20__factory {
         readonly type: "function";
         readonly name: "nonces";
         readonly inputs: readonly [{
-            readonly name: "";
+            readonly name: "owner";
             readonly type: "address";
             readonly internalType: "address";
         }];
         readonly outputs: readonly [{
-            readonly name: "";
+            readonly name: "result";
             readonly type: "uint256";
             readonly internalType: "uint256";
         }];
@@ -145,7 +145,7 @@ export declare class ERC20__factory {
         readonly name: "totalSupply";
         readonly inputs: readonly [];
         readonly outputs: readonly [{
-            readonly name: "";
+            readonly name: "result";
             readonly type: "uint256";
             readonly internalType: "uint256";
         }];
@@ -230,6 +230,34 @@ export declare class ERC20__factory {
             readonly internalType: "uint256";
         }];
         readonly anonymous: false;
+    }, {
+        readonly type: "error";
+        readonly name: "AllowanceOverflow";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "AllowanceUnderflow";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InsufficientAllowance";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InsufficientBalance";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidPermit";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "PermitExpired";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "TotalSupplyOverflow";
+        readonly inputs: readonly [];
     }];
     static createInterface(): ERC20Interface;
     static connect(address: string, signerOrProvider: Signer | Provider): ERC20;
