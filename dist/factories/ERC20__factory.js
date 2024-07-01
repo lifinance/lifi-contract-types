@@ -12,7 +12,7 @@ var _abi = [
         inputs: [],
         outputs: [
             {
-                name: "",
+                name: "result",
                 type: "bytes32",
                 internalType: "bytes32",
             },
@@ -24,19 +24,19 @@ var _abi = [
         name: "allowance",
         inputs: [
             {
-                name: "",
+                name: "owner",
                 type: "address",
                 internalType: "address",
             },
             {
-                name: "",
+                name: "spender",
                 type: "address",
                 internalType: "address",
             },
         ],
         outputs: [
             {
-                name: "",
+                name: "result",
                 type: "uint256",
                 internalType: "uint256",
             },
@@ -72,14 +72,14 @@ var _abi = [
         name: "balanceOf",
         inputs: [
             {
-                name: "",
+                name: "owner",
                 type: "address",
                 internalType: "address",
             },
         ],
         outputs: [
             {
-                name: "",
+                name: "result",
                 type: "uint256",
                 internalType: "uint256",
             },
@@ -117,14 +117,14 @@ var _abi = [
         name: "nonces",
         inputs: [
             {
-                name: "",
+                name: "owner",
                 type: "address",
                 internalType: "address",
             },
         ],
         outputs: [
             {
-                name: "",
+                name: "result",
                 type: "uint256",
                 internalType: "uint256",
             },
@@ -193,7 +193,7 @@ var _abi = [
         inputs: [],
         outputs: [
             {
-                name: "",
+                name: "result",
                 type: "uint256",
                 internalType: "uint256",
             },
@@ -302,6 +302,41 @@ var _abi = [
             },
         ],
         anonymous: false,
+    },
+    {
+        type: "error",
+        name: "AllowanceOverflow",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "AllowanceUnderflow",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "InsufficientAllowance",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "InsufficientBalance",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "InvalidPermit",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "PermitExpired",
+        inputs: [],
+    },
+    {
+        type: "error",
+        name: "TotalSupplyOverflow",
+        inputs: [],
     },
 ];
 var ERC20__factory = /** @class */ (function () {
