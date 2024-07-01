@@ -13,27 +13,31 @@ export declare class SafeTransferLib__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SafeTransferLib;
     connect(signer: Signer): SafeTransferLib__factory;
-    static readonly bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207523ce54f8c54cb1de69030ee0b0d6f02597d94e0de7712a5d7d5a3e2f29b28b64736f6c63430008110033";
+    static readonly bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122092ec241ea66e0f209b951f6f12b02a640b57fb033f71ec39b2bfc85fe8ff043d64736f6c63430008110033";
     static readonly abi: readonly [{
-        readonly anonymous: false;
-        readonly inputs: readonly [{
-            readonly indexed: false;
-            readonly internalType: "bool";
-            readonly name: "one";
-            readonly type: "bool";
-        }, {
-            readonly indexed: false;
-            readonly internalType: "bool";
-            readonly name: "two";
-            readonly type: "bool";
-        }, {
-            readonly indexed: false;
-            readonly internalType: "uint256";
-            readonly name: "retsize";
-            readonly type: "uint256";
-        }];
-        readonly name: "Debug";
-        readonly type: "event";
+        readonly type: "error";
+        readonly name: "ApproveFailed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "ETHTransferFailed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "Permit2AmountOverflow";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "Permit2Failed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "TransferFailed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "TransferFromFailed";
+        readonly inputs: readonly [];
     }];
     static createInterface(): SafeTransferLibInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): SafeTransferLib;
