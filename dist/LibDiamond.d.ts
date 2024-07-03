@@ -2,7 +2,7 @@ import type { BaseContract, BigNumberish, BytesLike, Signer, utils } from "ether
 import type { EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
-export declare namespace IDiamondCut {
+export declare namespace LibDiamond {
     type FacetCutStruct = {
         facetAddress: PromiseOrValue<string>;
         action: PromiseOrValue<BigNumberish>;
@@ -24,12 +24,12 @@ export interface LibDiamondInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
 export interface DiamondCutEventObject {
-    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _diamondCut: LibDiamond.FacetCutStructOutput[];
     _init: string;
     _calldata: string;
 }
 export declare type DiamondCutEvent = TypedEvent<[
-    IDiamondCut.FacetCutStructOutput[],
+    LibDiamond.FacetCutStructOutput[],
     string,
     string
 ], DiamondCutEventObject>;
