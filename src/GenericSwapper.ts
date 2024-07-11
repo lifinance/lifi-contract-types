@@ -97,22 +97,26 @@ export declare namespace ILiFi {
   };
 }
 
-export interface GenericSwapFacetV3Interface extends utils.Interface {
+export interface GenericSwapperInterface extends utils.Interface {
   functions: {
-    "NATIVE_ADDRESS()": FunctionFragment;
-    "swapTokensMultipleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
-    "swapTokensMultipleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
-    "swapTokensMultipleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
-    "swapTokensSingleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
-    "swapTokensSingleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
-    "swapTokensSingleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
+    "dexAggregatorAddress()": FunctionFragment;
+    "feeCollectorAddress()": FunctionFragment;
+    "setApprovalForTokens(address[])": FunctionFragment;
+    "setApprovalForTokensAndSwap(address[],bytes)": FunctionFragment;
+    "swapTokensMultipleV3ERC20ToAny(address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "swapTokensMultipleV3NativeToERC20(address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "swapTokensSingleV3ERC20ToERC20(address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
+    "swapTokensSingleV3ERC20ToNative(address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
+    "swapTokensSingleV3NativeToERC20(address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "NATIVE_ADDRESS"
-      | "swapTokensMultipleV3ERC20ToERC20"
-      | "swapTokensMultipleV3ERC20ToNative"
+      | "dexAggregatorAddress"
+      | "feeCollectorAddress"
+      | "setApprovalForTokens"
+      | "setApprovalForTokensAndSwap"
+      | "swapTokensMultipleV3ERC20ToAny"
       | "swapTokensMultipleV3NativeToERC20"
       | "swapTokensSingleV3ERC20ToERC20"
       | "swapTokensSingleV3ERC20ToNative"
@@ -120,26 +124,24 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "NATIVE_ADDRESS",
+    functionFragment: "dexAggregatorAddress",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "swapTokensMultipleV3ERC20ToERC20",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      LibSwap.SwapDataStruct[]
-    ]
+    functionFragment: "feeCollectorAddress",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "swapTokensMultipleV3ERC20ToNative",
+    functionFragment: "setApprovalForTokens",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setApprovalForTokensAndSwap",
+    values: [PromiseOrValue<string>[], PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapTokensMultipleV3ERC20ToAny",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       LibSwap.SwapDataStruct[]
@@ -148,9 +150,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swapTokensMultipleV3NativeToERC20",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       LibSwap.SwapDataStruct[]
@@ -159,9 +158,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swapTokensSingleV3ERC20ToERC20",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       LibSwap.SwapDataStruct
@@ -170,9 +166,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swapTokensSingleV3ERC20ToNative",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       LibSwap.SwapDataStruct
@@ -181,9 +174,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "swapTokensSingleV3NativeToERC20",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       LibSwap.SwapDataStruct
@@ -191,15 +181,23 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "NATIVE_ADDRESS",
+    functionFragment: "dexAggregatorAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapTokensMultipleV3ERC20ToERC20",
+    functionFragment: "feeCollectorAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapTokensMultipleV3ERC20ToNative",
+    functionFragment: "setApprovalForTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setApprovalForTokensAndSwap",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapTokensMultipleV3ERC20ToAny",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -310,12 +308,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface GenericSwapFacetV3 extends BaseContract {
+export interface GenericSwapper extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: GenericSwapFacetV3Interface;
+  interface: GenericSwapperInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -337,22 +335,22 @@ export interface GenericSwapFacetV3 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
+    dexAggregatorAddress(overrides?: CallOverrides): Promise<[string]>;
 
-    swapTokensMultipleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmountOut: PromiseOrValue<BigNumberish>,
-      _swapData: LibSwap.SwapDataStruct[],
+    feeCollectorAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    setApprovalForTokens(
+      _tokensToBeApproved: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapTokensMultipleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
+    setApprovalForTokensAndSwap(
+      _tokensToBeApproved: PromiseOrValue<string>[],
+      _swapCallData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    swapTokensMultipleV3ERC20ToAny(
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -360,9 +358,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swapTokensMultipleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -370,9 +365,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swapTokensSingleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -380,9 +372,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swapTokensSingleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -390,9 +379,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     swapTokensSingleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -400,22 +386,22 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
+  dexAggregatorAddress(overrides?: CallOverrides): Promise<string>;
 
-  swapTokensMultipleV3ERC20ToERC20(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
-    _receiver: PromiseOrValue<string>,
-    _minAmountOut: PromiseOrValue<BigNumberish>,
-    _swapData: LibSwap.SwapDataStruct[],
+  feeCollectorAddress(overrides?: CallOverrides): Promise<string>;
+
+  setApprovalForTokens(
+    _tokensToBeApproved: PromiseOrValue<string>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapTokensMultipleV3ERC20ToNative(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
+  setApprovalForTokensAndSwap(
+    _tokensToBeApproved: PromiseOrValue<string>[],
+    _swapCallData: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  swapTokensMultipleV3ERC20ToAny(
     _receiver: PromiseOrValue<string>,
     _minAmountOut: PromiseOrValue<BigNumberish>,
     _swapData: LibSwap.SwapDataStruct[],
@@ -423,9 +409,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swapTokensMultipleV3NativeToERC20(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
     _receiver: PromiseOrValue<string>,
     _minAmountOut: PromiseOrValue<BigNumberish>,
     _swapData: LibSwap.SwapDataStruct[],
@@ -433,9 +416,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swapTokensSingleV3ERC20ToERC20(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
     _receiver: PromiseOrValue<string>,
     _minAmountOut: PromiseOrValue<BigNumberish>,
     _swapData: LibSwap.SwapDataStruct,
@@ -443,9 +423,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swapTokensSingleV3ERC20ToNative(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
     _receiver: PromiseOrValue<string>,
     _minAmountOut: PromiseOrValue<BigNumberish>,
     _swapData: LibSwap.SwapDataStruct,
@@ -453,9 +430,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   swapTokensSingleV3NativeToERC20(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
     _receiver: PromiseOrValue<string>,
     _minAmountOut: PromiseOrValue<BigNumberish>,
     _swapData: LibSwap.SwapDataStruct,
@@ -463,22 +437,22 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
+    dexAggregatorAddress(overrides?: CallOverrides): Promise<string>;
 
-    swapTokensMultipleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmountOut: PromiseOrValue<BigNumberish>,
-      _swapData: LibSwap.SwapDataStruct[],
+    feeCollectorAddress(overrides?: CallOverrides): Promise<string>;
+
+    setApprovalForTokens(
+      _tokensToBeApproved: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapTokensMultipleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
+    setApprovalForTokensAndSwap(
+      _tokensToBeApproved: PromiseOrValue<string>[],
+      _swapCallData: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapTokensMultipleV3ERC20ToAny(
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -486,9 +460,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<void>;
 
     swapTokensMultipleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -496,9 +467,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<void>;
 
     swapTokensSingleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -506,9 +474,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<void>;
 
     swapTokensSingleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -516,9 +481,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<void>;
 
     swapTokensSingleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -604,22 +566,22 @@ export interface GenericSwapFacetV3 extends BaseContract {
   };
 
   estimateGas: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
+    dexAggregatorAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
-    swapTokensMultipleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmountOut: PromiseOrValue<BigNumberish>,
-      _swapData: LibSwap.SwapDataStruct[],
+    feeCollectorAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setApprovalForTokens(
+      _tokensToBeApproved: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapTokensMultipleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
+    setApprovalForTokensAndSwap(
+      _tokensToBeApproved: PromiseOrValue<string>[],
+      _swapCallData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapTokensMultipleV3ERC20ToAny(
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -627,9 +589,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<BigNumber>;
 
     swapTokensMultipleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -637,9 +596,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<BigNumber>;
 
     swapTokensSingleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -647,9 +603,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<BigNumber>;
 
     swapTokensSingleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -657,9 +610,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<BigNumber>;
 
     swapTokensSingleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -668,22 +618,26 @@ export interface GenericSwapFacetV3 extends BaseContract {
   };
 
   populateTransaction: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    dexAggregatorAddress(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    swapTokensMultipleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmountOut: PromiseOrValue<BigNumberish>,
-      _swapData: LibSwap.SwapDataStruct[],
+    feeCollectorAddress(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    setApprovalForTokens(
+      _tokensToBeApproved: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapTokensMultipleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
+    setApprovalForTokensAndSwap(
+      _tokensToBeApproved: PromiseOrValue<string>[],
+      _swapCallData: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapTokensMultipleV3ERC20ToAny(
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -691,9 +645,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapTokensMultipleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct[],
@@ -701,9 +652,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapTokensSingleV3ERC20ToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -711,9 +659,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapTokensSingleV3ERC20ToNative(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,
@@ -721,9 +666,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     swapTokensSingleV3NativeToERC20(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
       _receiver: PromiseOrValue<string>,
       _minAmountOut: PromiseOrValue<BigNumberish>,
       _swapData: LibSwap.SwapDataStruct,

@@ -1,6 +1,7 @@
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
+export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
@@ -34,6 +35,7 @@ export { FeeCollector__factory } from "./FeeCollector__factory";
 export { GasRebateDistributor__factory } from "./GasRebateDistributor__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./GenericSwapFacetV3__factory";
+export { GenericSwapper__factory } from "./GenericSwapper__factory";
 export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
 export { GnosisBridgeL2Facet__factory } from "./GnosisBridgeL2Facet__factory";
 export { HopFacet__factory } from "./HopFacet__factory";
