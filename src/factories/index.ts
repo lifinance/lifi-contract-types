@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as gasZipFacetSol from "./GasZipFacet.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
