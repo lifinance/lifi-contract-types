@@ -69,6 +69,7 @@ export declare namespace ILiFi {
 }
 export interface GenericSwapFacetV3Interface extends utils.Interface {
     functions: {
+        "NATIVE_ADDRESS()": FunctionFragment;
         "swapTokensMultipleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
         "swapTokensMultipleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
         "swapTokensMultipleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
@@ -76,7 +77,8 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
         "swapTokensSingleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
         "swapTokensSingleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "swapTokensMultipleV3ERC20ToERC20" | "swapTokensMultipleV3ERC20ToNative" | "swapTokensMultipleV3NativeToERC20" | "swapTokensSingleV3ERC20ToERC20" | "swapTokensSingleV3ERC20ToNative" | "swapTokensSingleV3NativeToERC20"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "NATIVE_ADDRESS" | "swapTokensMultipleV3ERC20ToERC20" | "swapTokensMultipleV3ERC20ToNative" | "swapTokensMultipleV3NativeToERC20" | "swapTokensSingleV3ERC20ToERC20" | "swapTokensSingleV3ERC20ToNative" | "swapTokensSingleV3NativeToERC20"): FunctionFragment;
+    encodeFunctionData(functionFragment: "NATIVE_ADDRESS", values?: undefined): string;
     encodeFunctionData(functionFragment: "swapTokensMultipleV3ERC20ToERC20", values: [
         PromiseOrValue<BytesLike>,
         PromiseOrValue<string>,
@@ -125,6 +127,7 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
         PromiseOrValue<BigNumberish>,
         LibSwap.SwapDataStruct
     ]): string;
+    decodeFunctionResult(functionFragment: "NATIVE_ADDRESS", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapTokensMultipleV3ERC20ToERC20", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapTokensMultipleV3ERC20ToNative", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapTokensMultipleV3NativeToERC20", data: BytesLike): Result;
@@ -236,6 +239,7 @@ export interface GenericSwapFacetV3 extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        NATIVE_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
         swapTokensMultipleV3ERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -255,6 +259,7 @@ export interface GenericSwapFacetV3 extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
+    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
     swapTokensMultipleV3ERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -274,6 +279,7 @@ export interface GenericSwapFacetV3 extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
+        NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
         swapTokensMultipleV3ERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
         swapTokensMultipleV3ERC20ToNative(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
         swapTokensMultipleV3NativeToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
@@ -294,6 +300,7 @@ export interface GenericSwapFacetV3 extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
+        NATIVE_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
         swapTokensMultipleV3ERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -314,6 +321,7 @@ export interface GenericSwapFacetV3 extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
+        NATIVE_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         swapTokensMultipleV3ERC20ToERC20(_transactionId: PromiseOrValue<BytesLike>, _integrator: PromiseOrValue<string>, _referrer: PromiseOrValue<string>, _receiver: PromiseOrValue<string>, _minAmountOut: PromiseOrValue<BigNumberish>, _swapData: LibSwap.SwapDataStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
