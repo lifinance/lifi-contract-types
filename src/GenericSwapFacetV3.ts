@@ -99,7 +99,6 @@ export declare namespace ILiFi {
 
 export interface GenericSwapFacetV3Interface extends utils.Interface {
   functions: {
-    "NATIVE_ADDRESS()": FunctionFragment;
     "swapTokensMultipleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
     "swapTokensMultipleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
     "swapTokensMultipleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
@@ -110,7 +109,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "NATIVE_ADDRESS"
       | "swapTokensMultipleV3ERC20ToERC20"
       | "swapTokensMultipleV3ERC20ToNative"
       | "swapTokensMultipleV3NativeToERC20"
@@ -119,10 +117,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
       | "swapTokensSingleV3NativeToERC20"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "NATIVE_ADDRESS",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "swapTokensMultipleV3ERC20ToERC20",
     values: [
@@ -190,10 +184,6 @@ export interface GenericSwapFacetV3Interface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "NATIVE_ADDRESS",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "swapTokensMultipleV3ERC20ToERC20",
     data: BytesLike
@@ -337,8 +327,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
-
     swapTokensMultipleV3ERC20ToERC20(
       _transactionId: PromiseOrValue<BytesLike>,
       _integrator: PromiseOrValue<string>,
@@ -399,8 +387,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
-
-  NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
 
   swapTokensMultipleV3ERC20ToERC20(
     _transactionId: PromiseOrValue<BytesLike>,
@@ -463,8 +449,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<string>;
-
     swapTokensMultipleV3ERC20ToERC20(
       _transactionId: PromiseOrValue<BytesLike>,
       _integrator: PromiseOrValue<string>,
@@ -604,8 +588,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   };
 
   estimateGas: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
-
     swapTokensMultipleV3ERC20ToERC20(
       _transactionId: PromiseOrValue<BytesLike>,
       _integrator: PromiseOrValue<string>,
@@ -668,8 +650,6 @@ export interface GenericSwapFacetV3 extends BaseContract {
   };
 
   populateTransaction: {
-    NATIVE_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     swapTokensMultipleV3ERC20ToERC20(
       _transactionId: PromiseOrValue<BytesLike>,
       _integrator: PromiseOrValue<string>,
