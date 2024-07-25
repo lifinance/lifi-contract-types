@@ -126,18 +126,21 @@ export interface StargateFacetV2Interface extends utils.Interface {
     functions: {
         "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": FunctionFragment;
         "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": FunctionFragment;
+        "testFunction((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": FunctionFragment;
         "tokenMessaging()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate" | "tokenMessaging"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate" | "testFunction" | "tokenMessaging"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaStargate", values: [ILiFi.BridgeDataStruct, StargateFacetV2.StargateDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaStargate", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         StargateFacetV2.StargateDataStruct
     ]): string;
+    encodeFunctionData(functionFragment: "testFunction", values: [ILiFi.BridgeDataStruct, StargateFacetV2.StargateDataStruct]): string;
     encodeFunctionData(functionFragment: "tokenMessaging", values?: undefined): string;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaStargate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaStargate", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "testFunction", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "tokenMessaging", data: BytesLike): Result;
     events: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -250,6 +253,9 @@ export interface StargateFacetV2 extends BaseContract {
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        testFunction(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         tokenMessaging(overrides?: CallOverrides): Promise<[string]>;
     };
     startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
@@ -258,10 +264,14 @@ export interface StargateFacetV2 extends BaseContract {
     swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    testFunction(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     tokenMessaging(overrides?: CallOverrides): Promise<string>;
     callStatic: {
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
+        testFunction(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
         tokenMessaging(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
@@ -283,6 +293,9 @@ export interface StargateFacetV2 extends BaseContract {
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        testFunction(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         tokenMessaging(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
@@ -290,6 +303,9 @@ export interface StargateFacetV2 extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        testFunction(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         tokenMessaging(overrides?: CallOverrides): Promise<PopulatedTransaction>;
