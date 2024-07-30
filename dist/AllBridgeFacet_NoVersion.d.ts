@@ -39,7 +39,7 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace AllBridgeFacet {
+export declare namespace AllBridgeFacet_NoVersion {
     type AllBridgeDataStruct = {
         fees: PromiseOrValue<BigNumberish>;
         recipient: PromiseOrValue<BytesLike>;
@@ -95,7 +95,7 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface AllBridgeFacetInterface extends utils.Interface {
+export interface AllBridgeFacet_NoVersionInterface extends utils.Interface {
     functions: {
         "bla()": FunctionFragment;
         "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
@@ -103,11 +103,14 @@ export interface AllBridgeFacetInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "bla" | "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge"): FunctionFragment;
     encodeFunctionData(functionFragment: "bla", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaAllBridge", values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaAllBridge", values: [
+        ILiFi.BridgeDataStruct,
+        AllBridgeFacet_NoVersion.AllBridgeDataStruct
+    ]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAllBridge", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
-        AllBridgeFacet.AllBridgeDataStruct
+        AllBridgeFacet_NoVersion.AllBridgeDataStruct
     ]): string;
     decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAllBridge", data: BytesLike): Result;
@@ -202,11 +205,11 @@ export declare type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface AllBridgeFacet extends BaseContract {
+export interface AllBridgeFacet_NoVersion extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: AllBridgeFacetInterface;
+    interface: AllBridgeFacet_NoVersionInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -218,24 +221,24 @@ export interface AllBridgeFacet extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         bla(overrides?: CallOverrides): Promise<[void]>;
-        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     bla(overrides?: CallOverrides): Promise<void>;
-    startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+    startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         bla(overrides?: CallOverrides): Promise<void>;
-        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
@@ -251,19 +254,19 @@ export interface AllBridgeFacet extends BaseContract {
     };
     estimateGas: {
         bla(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         bla(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };

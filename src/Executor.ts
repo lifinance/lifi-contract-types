@@ -99,6 +99,7 @@ export declare namespace ILiFi {
 
 export interface ExecutorInterface extends utils.Interface {
   functions: {
+    "bla()": FunctionFragment;
     "erc20Proxy()": FunctionFragment;
     "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
@@ -110,6 +111,7 @@ export interface ExecutorInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "bla"
       | "erc20Proxy"
       | "onERC1155BatchReceived"
       | "onERC1155Received"
@@ -119,6 +121,7 @@ export interface ExecutorInterface extends utils.Interface {
       | "swapAndExecute"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "bla", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "erc20Proxy",
     values?: undefined
@@ -176,6 +179,7 @@ export interface ExecutorInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "erc20Proxy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "onERC1155BatchReceived",
@@ -329,6 +333,8 @@ export interface Executor extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    bla(overrides?: CallOverrides): Promise<[void]>;
+
     erc20Proxy(overrides?: CallOverrides): Promise<[string]>;
 
     onERC1155BatchReceived(
@@ -379,6 +385,8 @@ export interface Executor extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  bla(overrides?: CallOverrides): Promise<void>;
 
   erc20Proxy(overrides?: CallOverrides): Promise<string>;
 
@@ -431,6 +439,8 @@ export interface Executor extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    bla(overrides?: CallOverrides): Promise<void>;
+
     erc20Proxy(overrides?: CallOverrides): Promise<string>;
 
     onERC1155BatchReceived(
@@ -567,6 +577,8 @@ export interface Executor extends BaseContract {
   };
 
   estimateGas: {
+    bla(overrides?: CallOverrides): Promise<BigNumber>;
+
     erc20Proxy(overrides?: CallOverrides): Promise<BigNumber>;
 
     onERC1155BatchReceived(
@@ -619,6 +631,8 @@ export interface Executor extends BaseContract {
   };
 
   populateTransaction: {
+    bla(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     erc20Proxy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     onERC1155BatchReceived(

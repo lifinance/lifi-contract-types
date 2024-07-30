@@ -66,7 +66,7 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace AllBridgeFacet {
+export declare namespace AllBridgeFacet_NoVersion {
   export type AllBridgeDataStruct = {
     fees: PromiseOrValue<BigNumberish>;
     recipient: PromiseOrValue<BytesLike>;
@@ -126,7 +126,7 @@ export declare namespace LibSwap {
   };
 }
 
-export interface AllBridgeFacetInterface extends utils.Interface {
+export interface AllBridgeFacet_NoVersionInterface extends utils.Interface {
   functions: {
     "bla()": FunctionFragment;
     "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
@@ -143,14 +143,17 @@ export interface AllBridgeFacetInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "bla", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAllBridge",
-    values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]
+    values: [
+      ILiFi.BridgeDataStruct,
+      AllBridgeFacet_NoVersion.AllBridgeDataStruct
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaAllBridge",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      AllBridgeFacet.AllBridgeDataStruct
+      AllBridgeFacet_NoVersion.AllBridgeDataStruct
     ]
   ): string;
 
@@ -255,12 +258,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface AllBridgeFacet extends BaseContract {
+export interface AllBridgeFacet_NoVersion extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: AllBridgeFacetInterface;
+  interface: AllBridgeFacet_NoVersionInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -286,14 +289,14 @@ export interface AllBridgeFacet extends BaseContract {
 
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -302,14 +305,14 @@ export interface AllBridgeFacet extends BaseContract {
 
   startBridgeTokensViaAllBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+    _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaAllBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+    _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -318,14 +321,14 @@ export interface AllBridgeFacet extends BaseContract {
 
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -412,14 +415,14 @@ export interface AllBridgeFacet extends BaseContract {
 
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -429,14 +432,14 @@ export interface AllBridgeFacet extends BaseContract {
 
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
+      _allBridgeData: AllBridgeFacet_NoVersion.AllBridgeDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
