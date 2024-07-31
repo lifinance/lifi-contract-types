@@ -13,7 +13,7 @@ var _abi = [
             {
                 name: "_diamondCut",
                 type: "tuple[]",
-                internalType: "struct IDiamondCut.FacetCut[]",
+                internalType: "struct LibDiamond.FacetCut[]",
                 components: [
                     {
                         name: "facetAddress",
@@ -23,7 +23,7 @@ var _abi = [
                     {
                         name: "action",
                         type: "uint8",
-                        internalType: "enum IDiamondCut.FacetCutAction",
+                        internalType: "enum LibDiamond.FacetCutAction",
                     },
                     {
                         name: "functionSelectors",
@@ -54,7 +54,7 @@ var _abi = [
                 name: "_diamondCut",
                 type: "tuple[]",
                 indexed: false,
-                internalType: "struct IDiamondCut.FacetCut[]",
+                internalType: "struct LibDiamond.FacetCut[]",
                 components: [
                     {
                         name: "facetAddress",
@@ -64,7 +64,7 @@ var _abi = [
                     {
                         name: "action",
                         type: "uint8",
-                        internalType: "enum IDiamondCut.FacetCutAction",
+                        internalType: "enum LibDiamond.FacetCutAction",
                     },
                     {
                         name: "functionSelectors",
