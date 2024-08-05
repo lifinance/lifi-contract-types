@@ -128,16 +128,19 @@ export declare namespace LibSwap {
 
 export interface AllBridgeFacetInterface extends utils.Interface {
   functions: {
+    "bla()": FunctionFragment;
     "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
     "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "bla"
       | "startBridgeTokensViaAllBridge"
       | "swapAndStartBridgeTokensViaAllBridge"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "bla", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAllBridge",
     values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]
@@ -151,6 +154,7 @@ export interface AllBridgeFacetInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaAllBridge",
     data: BytesLike
@@ -278,6 +282,8 @@ export interface AllBridgeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    bla(overrides?: CallOverrides): Promise<[void]>;
+
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
@@ -291,6 +297,8 @@ export interface AllBridgeFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  bla(overrides?: CallOverrides): Promise<void>;
 
   startBridgeTokensViaAllBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -306,6 +314,8 @@ export interface AllBridgeFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    bla(overrides?: CallOverrides): Promise<void>;
+
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
@@ -398,6 +408,8 @@ export interface AllBridgeFacet extends BaseContract {
   };
 
   estimateGas: {
+    bla(overrides?: CallOverrides): Promise<BigNumber>;
+
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
@@ -413,6 +425,8 @@ export interface AllBridgeFacet extends BaseContract {
   };
 
   populateTransaction: {
+    bla(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaAllBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _allBridgeData: AllBridgeFacet.AllBridgeDataStruct,
