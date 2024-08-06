@@ -4,6 +4,7 @@
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
+export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as multichainFacetSol from "./MultichainFacet.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
