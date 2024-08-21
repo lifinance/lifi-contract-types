@@ -111,6 +111,7 @@ export { StargateFacetV2__factory } from "./StargateFacetV2__factory";
 export { SwapperV2__factory } from "./SwapperV2__factory";
 export { SymbiosisFacet__factory } from "./SymbiosisFacet__factory";
 export { ThorSwapFacet__factory } from "./ThorSwapFacet__factory";
+export { TransferEventEmitter__factory } from "./TransferEventEmitter__factory";
 export { TransferrableOwnership__factory } from "./TransferrableOwnership__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
