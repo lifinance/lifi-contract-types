@@ -18,6 +18,7 @@ export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__facto
 export { CelerIMFacetImmutable__factory } from "./CelerIMFacetImmutable__factory";
 export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
 export { CircleBridgeFacet__factory } from "./CircleBridgeFacet__factory";
+export { ContractOneAudit__factory } from "./ContractOneAudit__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./DiamondLoupeFacet__factory";
