@@ -13,7 +13,7 @@ export declare class LibDiamond__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): LibDiamond;
     connect(signer: Signer): LibDiamond__factory;
-    static readonly bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220fd589eb959d422e8a7f354ec14d4128494fc6153803c16fa6dfc591072496efe64736f6c63430008110033";
+    static readonly bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207f241bece74d53ee3d2864b1e10b8bb33fabaf4869a60637ad164a02b4b2b3d764736f6c63430008110033";
     static readonly abi: readonly [{
         readonly type: "event";
         readonly name: "DiamondCut";
@@ -21,7 +21,7 @@ export declare class LibDiamond__factory extends ContractFactory {
             readonly name: "_diamondCut";
             readonly type: "tuple[]";
             readonly indexed: false;
-            readonly internalType: "struct IDiamondCut.FacetCut[]";
+            readonly internalType: "struct LibDiamond.FacetCut[]";
             readonly components: readonly [{
                 readonly name: "facetAddress";
                 readonly type: "address";
@@ -29,7 +29,7 @@ export declare class LibDiamond__factory extends ContractFactory {
             }, {
                 readonly name: "action";
                 readonly type: "uint8";
-                readonly internalType: "enum IDiamondCut.FacetCutAction";
+                readonly internalType: "enum LibDiamond.FacetCutAction";
             }, {
                 readonly name: "functionSelectors";
                 readonly type: "bytes4[]";
