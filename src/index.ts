@@ -93,7 +93,6 @@ export type { IXDaiBridge } from "./IXDaiBridge";
 export type { IXDaiBridgeL2 } from "./IXDaiBridgeL2";
 export type { LIFuelFacet } from "./LIFuelFacet";
 export type { LiFiDiamond } from "./LiFiDiamond";
-export type { LiFiDiamondImmutable } from "./LiFiDiamondImmutable";
 export type { LiFuelFeeCollector } from "./LiFuelFeeCollector";
 export type { LibAccess } from "./LibAccess";
 export type { LibBytes } from "./LibBytes";
@@ -239,7 +238,6 @@ export { IWETH__factory } from "./factories/LiFiDEXAggregator.sol/IWETH__factory
 export type { LiFiDEXAggregator } from "./LiFiDEXAggregator.sol/LiFiDEXAggregator";
 export { LiFiDEXAggregator__factory } from "./factories/LiFiDEXAggregator.sol/LiFiDEXAggregator__factory";
 export { LiFiDiamond__factory } from "./factories/LiFiDiamond__factory";
-export { LiFiDiamondImmutable__factory } from "./factories/LiFiDiamondImmutable__factory";
 export { LIFuelFacet__factory } from "./factories/LIFuelFacet__factory";
 export { LiFuelFeeCollector__factory } from "./factories/LiFuelFeeCollector__factory";
 export { MayanFacet__factory } from "./factories/MayanFacet__factory";
