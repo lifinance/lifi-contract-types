@@ -29,7 +29,7 @@ var _abi = [
                 name: "_diamondCut",
                 type: "tuple[]",
                 indexed: false,
-                internalType: "struct IDiamondCut.FacetCut[]",
+                internalType: "struct LibDiamond.FacetCut[]",
                 components: [
                     {
                         name: "facetAddress",
@@ -39,7 +39,7 @@ var _abi = [
                     {
                         name: "action",
                         type: "uint8",
-                        internalType: "enum IDiamondCut.FacetCutAction",
+                        internalType: "enum LibDiamond.FacetCutAction",
                     },
                     {
                         name: "functionSelectors",
@@ -138,7 +138,7 @@ var _abi = [
         inputs: [],
     },
 ];
-var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220fd589eb959d422e8a7f354ec14d4128494fc6153803c16fa6dfc591072496efe64736f6c63430008110033";
+var _bytecode = "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212207f241bece74d53ee3d2864b1e10b8bb33fabaf4869a60637ad164a02b4b2b3d764736f6c63430008110033";
 var isSuperArgs = function (xs) { return xs.length > 1; };
 var LibDiamond__factory = /** @class */ (function (_super) {
     __extends(LibDiamond__factory, _super);
