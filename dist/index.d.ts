@@ -33,7 +33,6 @@ export type { ERC165 } from "./ERC165";
 export type { ERC20 } from "./ERC20";
 export type { ERC20Proxy } from "./ERC20Proxy";
 export type { ERC721Holder } from "./ERC721Holder";
-export type { EmergencyPauseFacet } from "./EmergencyPauseFacet";
 export type { Executor } from "./Executor";
 export type { FeeCollector } from "./FeeCollector";
 export type { GasRebateDistributor } from "./GasRebateDistributor";
@@ -142,7 +141,6 @@ export { CircleBridgeFacet__factory } from "./factories/CircleBridgeFacet__facto
 export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./factories/DiamondLoupeFacet__factory";
-export { EmergencyPauseFacet__factory } from "./factories/EmergencyPauseFacet__factory";
 export { ERC1155Holder__factory } from "./factories/ERC1155Holder__factory";
 export { ERC1155Receiver__factory } from "./factories/ERC1155Receiver__factory";
 export { ERC165__factory } from "./factories/ERC165__factory";
