@@ -297,14 +297,14 @@ export interface DeBridgeDlnFacet extends BaseContract {
 
     startBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -313,14 +313,14 @@ export interface DeBridgeDlnFacet extends BaseContract {
 
   startBridgeTokensViaDeBridgeDln(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+    _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaDeBridgeDln(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+    _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -329,14 +329,14 @@ export interface DeBridgeDlnFacet extends BaseContract {
 
     startBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -441,14 +441,14 @@ export interface DeBridgeDlnFacet extends BaseContract {
 
     startBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -458,14 +458,14 @@ export interface DeBridgeDlnFacet extends BaseContract {
 
     startBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaDeBridgeDln(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
+      _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

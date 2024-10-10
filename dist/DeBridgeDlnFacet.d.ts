@@ -224,24 +224,24 @@ export interface DeBridgeDlnFacet extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         dlnSource(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
     dlnSource(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+    startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
         dlnSource(overrides?: CallOverrides): Promise<string>;
-        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
@@ -261,19 +261,19 @@ export interface DeBridgeDlnFacet extends BaseContract {
     };
     estimateGas: {
         dlnSource(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         dlnSource(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        startBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeDlnData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaDeBridgeDln(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _deBridgeData: DeBridgeDlnFacet.DeBridgeDlnDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
