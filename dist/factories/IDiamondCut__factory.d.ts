@@ -8,7 +8,7 @@ export declare class IDiamondCut__factory {
         readonly inputs: readonly [{
             readonly name: "_diamondCut";
             readonly type: "tuple[]";
-            readonly internalType: "struct IDiamondCut.FacetCut[]";
+            readonly internalType: "struct LibDiamond.FacetCut[]";
             readonly components: readonly [{
                 readonly name: "facetAddress";
                 readonly type: "address";
@@ -16,7 +16,7 @@ export declare class IDiamondCut__factory {
             }, {
                 readonly name: "action";
                 readonly type: "uint8";
-                readonly internalType: "enum IDiamondCut.FacetCutAction";
+                readonly internalType: "enum LibDiamond.FacetCutAction";
             }, {
                 readonly name: "functionSelectors";
                 readonly type: "bytes4[]";
@@ -40,7 +40,7 @@ export declare class IDiamondCut__factory {
             readonly name: "_diamondCut";
             readonly type: "tuple[]";
             readonly indexed: false;
-            readonly internalType: "struct IDiamondCut.FacetCut[]";
+            readonly internalType: "struct LibDiamond.FacetCut[]";
             readonly components: readonly [{
                 readonly name: "facetAddress";
                 readonly type: "address";
@@ -48,7 +48,7 @@ export declare class IDiamondCut__factory {
             }, {
                 readonly name: "action";
                 readonly type: "uint8";
-                readonly internalType: "enum IDiamondCut.FacetCutAction";
+                readonly internalType: "enum LibDiamond.FacetCutAction";
             }, {
                 readonly name: "functionSelectors";
                 readonly type: "bytes4[]";
