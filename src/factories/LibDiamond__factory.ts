@@ -15,7 +15,7 @@ const _abi = [
         name: "_diamondCut",
         type: "tuple[]",
         indexed: false,
-        internalType: "struct IDiamondCut.FacetCut[]",
+        internalType: "struct LibDiamond.FacetCut[]",
         components: [
           {
             name: "facetAddress",
@@ -25,7 +25,7 @@ const _abi = [
           {
             name: "action",
             type: "uint8",
-            internalType: "enum IDiamondCut.FacetCutAction",
+            internalType: "enum LibDiamond.FacetCutAction",
           },
           {
             name: "functionSelectors",
@@ -126,7 +126,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f543adc17a8110448a9ea6dde6937563a03ae52625507a3085f57405fed4d5fb64736f6c63430008110033";
+  "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202da0c1cdb35c047c5fb734df73c703836fd6eb24a04a283a5bcde60a07ed98f364736f6c63430008110033";
 
 type LibDiamondConstructorParams =
   | [signer?: Signer]
