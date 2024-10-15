@@ -21,6 +21,7 @@ export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__facto
 export { CelerIMFacetImmutable__factory } from "./CelerIMFacetImmutable__factory";
 export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
 export { CircleBridgeFacet__factory } from "./CircleBridgeFacet__factory";
+export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./DiamondLoupeFacet__factory";
@@ -117,4 +118,3 @@ export { ThorSwapFacet__factory } from "./ThorSwapFacet__factory";
 export { TransferrableOwnership__factory } from "./TransferrableOwnership__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
-export { WithdrawablePeriphery__factory } from "./WithdrawablePeriphery__factory";
