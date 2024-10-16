@@ -37,6 +37,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "pause()": FunctionFragment;
     "priviledgedUsers(address)": FunctionFragment;
     "processRoute(address,uint256,address,uint256,address,bytes)": FunctionFragment;
+    "ramsesV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "resume()": FunctionFragment;
     "setPriviledge(address,bool)": FunctionFragment;
@@ -54,6 +55,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "pause"
       | "priviledgedUsers"
       | "processRoute"
+      | "ramsesV2SwapCallback"
       | "renounceOwnership"
       | "resume"
       | "setPriviledge"
@@ -93,6 +95,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ramsesV2SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -148,6 +158,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "processRoute",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ramsesV2SwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -273,6 +287,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -349,6 +370,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  ramsesV2SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   renounceOwnership(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -422,6 +450,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       route: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -526,6 +561,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -601,6 +643,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       to: PromiseOrValue<string>,
       route: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(

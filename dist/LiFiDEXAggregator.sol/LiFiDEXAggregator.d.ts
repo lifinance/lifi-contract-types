@@ -11,6 +11,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
         "pause()": FunctionFragment;
         "priviledgedUsers(address)": FunctionFragment;
         "processRoute(address,uint256,address,uint256,address,bytes)": FunctionFragment;
+        "ramsesV2SwapCallback(int256,int256,bytes)": FunctionFragment;
         "renounceOwnership()": FunctionFragment;
         "resume()": FunctionFragment;
         "setPriviledge(address,bool)": FunctionFragment;
@@ -18,7 +19,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
         "transferValueAndprocessRoute(address,uint256,address,uint256,address,uint256,address,bytes)": FunctionFragment;
         "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "algebraSwapCallback" | "bentoBox" | "owner" | "pancakeV3SwapCallback" | "pause" | "priviledgedUsers" | "processRoute" | "renounceOwnership" | "resume" | "setPriviledge" | "transferOwnership" | "transferValueAndprocessRoute" | "uniswapV3SwapCallback"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "algebraSwapCallback" | "bentoBox" | "owner" | "pancakeV3SwapCallback" | "pause" | "priviledgedUsers" | "processRoute" | "ramsesV2SwapCallback" | "renounceOwnership" | "resume" | "setPriviledge" | "transferOwnership" | "transferValueAndprocessRoute" | "uniswapV3SwapCallback"): FunctionFragment;
     encodeFunctionData(functionFragment: "algebraSwapCallback", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
@@ -39,6 +40,11 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "ramsesV2SwapCallback", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>
     ]): string;
     encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
@@ -67,6 +73,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "priviledgedUsers", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "processRoute", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "ramsesV2SwapCallback", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "resume", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setPriviledge", data: BytesLike): Result;
@@ -138,6 +145,9 @@ export interface LiFiDEXAggregator extends BaseContract {
         processRoute(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, tokenOut: PromiseOrValue<string>, amountOutMin: PromiseOrValue<BigNumberish>, to: PromiseOrValue<string>, route: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        ramsesV2SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         renounceOwnership(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -172,6 +182,9 @@ export interface LiFiDEXAggregator extends BaseContract {
     processRoute(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, tokenOut: PromiseOrValue<string>, amountOutMin: PromiseOrValue<BigNumberish>, to: PromiseOrValue<string>, route: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    ramsesV2SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     renounceOwnership(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -198,6 +211,7 @@ export interface LiFiDEXAggregator extends BaseContract {
         pause(overrides?: CallOverrides): Promise<void>;
         priviledgedUsers(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         processRoute(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, tokenOut: PromiseOrValue<string>, amountOutMin: PromiseOrValue<BigNumberish>, to: PromiseOrValue<string>, route: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        ramsesV2SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
         renounceOwnership(overrides?: CallOverrides): Promise<void>;
         resume(overrides?: CallOverrides): Promise<void>;
         setPriviledge(user: PromiseOrValue<string>, priviledge: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
@@ -225,6 +239,9 @@ export interface LiFiDEXAggregator extends BaseContract {
         }): Promise<BigNumber>;
         priviledgedUsers(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         processRoute(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, tokenOut: PromiseOrValue<string>, amountOutMin: PromiseOrValue<BigNumberish>, to: PromiseOrValue<string>, route: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        ramsesV2SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         renounceOwnership(overrides?: Overrides & {
@@ -260,6 +277,9 @@ export interface LiFiDEXAggregator extends BaseContract {
         }): Promise<PopulatedTransaction>;
         priviledgedUsers(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         processRoute(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, tokenOut: PromiseOrValue<string>, amountOutMin: PromiseOrValue<BigNumberish>, to: PromiseOrValue<string>, route: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        ramsesV2SwapCallback(amount0Delta: PromiseOrValue<BigNumberish>, amount1Delta: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         renounceOwnership(overrides?: Overrides & {
