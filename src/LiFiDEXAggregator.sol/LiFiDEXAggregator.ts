@@ -32,34 +32,40 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   functions: {
     "algebraSwapCallback(int256,int256,bytes)": FunctionFragment;
     "bentoBox()": FunctionFragment;
+    "dragonswapV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pancakeV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "pause()": FunctionFragment;
     "priviledgedUsers(address)": FunctionFragment;
     "processRoute(address,uint256,address,uint256,address,bytes)": FunctionFragment;
+    "ramsesV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "resume()": FunctionFragment;
     "setPriviledge(address,bool)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "transferValueAndprocessRoute(address,uint256,address,uint256,address,uint256,address,bytes)": FunctionFragment;
     "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "xeiV3SwapCallback(int256,int256,bytes)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "algebraSwapCallback"
       | "bentoBox"
+      | "dragonswapV2SwapCallback"
       | "owner"
       | "pancakeV3SwapCallback"
       | "pause"
       | "priviledgedUsers"
       | "processRoute"
+      | "ramsesV2SwapCallback"
       | "renounceOwnership"
       | "resume"
       | "setPriviledge"
       | "transferOwnership"
       | "transferValueAndprocessRoute"
       | "uniswapV3SwapCallback"
+      | "xeiV3SwapCallback"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -71,6 +77,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(functionFragment: "bentoBox", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "dragonswapV2SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pancakeV3SwapCallback",
@@ -93,6 +107,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ramsesV2SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
   ): string;
@@ -130,12 +152,24 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "xeiV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "algebraSwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "bentoBox", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "dragonswapV2SwapCallback",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pancakeV3SwapCallback",
@@ -148,6 +182,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "processRoute",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ramsesV2SwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -169,6 +207,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "uniswapV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "xeiV3SwapCallback",
     data: BytesLike
   ): Result;
 
@@ -245,6 +287,13 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     bentoBox(overrides?: CallOverrides): Promise<[string]>;
 
+    dragonswapV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pancakeV3SwapCallback(
@@ -271,6 +320,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       to: PromiseOrValue<string>,
       route: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     renounceOwnership(
@@ -310,6 +366,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    xeiV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   algebraSwapCallback(
@@ -320,6 +383,13 @@ export interface LiFiDEXAggregator extends BaseContract {
   ): Promise<ContractTransaction>;
 
   bentoBox(overrides?: CallOverrides): Promise<string>;
+
+  dragonswapV2SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -347,6 +417,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     to: PromiseOrValue<string>,
     route: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  ramsesV2SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   renounceOwnership(
@@ -387,6 +464,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  xeiV3SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     algebraSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
@@ -396,6 +480,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<void>;
 
     bentoBox(overrides?: CallOverrides): Promise<string>;
+
+    dragonswapV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -422,6 +513,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       route: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -451,6 +549,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    xeiV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
@@ -498,6 +603,13 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     bentoBox(overrides?: CallOverrides): Promise<BigNumber>;
 
+    dragonswapV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pancakeV3SwapCallback(
@@ -524,6 +636,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       to: PromiseOrValue<string>,
       route: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     renounceOwnership(
@@ -563,6 +682,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    xeiV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -574,6 +700,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     bentoBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    dragonswapV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -603,6 +736,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    ramsesV2SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -635,6 +775,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    xeiV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
