@@ -101,6 +101,7 @@ export { PolygonBridgeFacet__factory } from "./PolygonBridgeFacet__factory";
 export { Receiver__factory } from "./Receiver__factory";
 export { ReceiverAcrossV3__factory } from "./ReceiverAcrossV3__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
+export { RelayFacet__factory } from "./RelayFacet__factory";
 export { RelayerCelerIM__factory } from "./RelayerCelerIM__factory";
 export { SafeTransferLib__factory } from "./SafeTransferLib__factory";
 export { SquidFacet__factory } from "./SquidFacet__factory";

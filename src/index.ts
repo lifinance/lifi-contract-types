@@ -107,6 +107,7 @@ export type { PolygonBridgeFacet } from "./PolygonBridgeFacet";
 export type { Receiver } from "./Receiver";
 export type { ReceiverAcrossV3 } from "./ReceiverAcrossV3";
 export type { ReentrancyGuard } from "./ReentrancyGuard";
+export type { RelayFacet } from "./RelayFacet";
 export type { RelayerCelerIM } from "./RelayerCelerIM";
 export type { SafeTransferLib } from "./SafeTransferLib";
 export type { SquidFacet } from "./SquidFacet";
@@ -252,6 +253,7 @@ export type { ReceiverStargateV2 } from "./ReceiverStargateV2.sol/ReceiverStarga
 export { ReceiverStargateV2__factory } from "./factories/ReceiverStargateV2.sol/ReceiverStargateV2__factory";
 export { ReentrancyGuard__factory } from "./factories/ReentrancyGuard__factory";
 export { RelayerCelerIM__factory } from "./factories/RelayerCelerIM__factory";
+export { RelayFacet__factory } from "./factories/RelayFacet__factory";
 export { SafeTransferLib__factory } from "./factories/SafeTransferLib__factory";
 export { SquidFacet__factory } from "./factories/SquidFacet__factory";
 export { StandardizedCallFacet__factory } from "./factories/StandardizedCallFacet__factory";
