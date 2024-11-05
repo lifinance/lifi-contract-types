@@ -118,7 +118,7 @@ export interface AccessManagerFacet extends BaseContract {
 
   functions: {
     addressCanExecuteMethod(
-      _selector: PromiseOrValue<BytesLike>,
+      _selectors: PromiseOrValue<BytesLike>,
       _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
@@ -132,7 +132,7 @@ export interface AccessManagerFacet extends BaseContract {
   };
 
   addressCanExecuteMethod(
-    _selector: PromiseOrValue<BytesLike>,
+    _selectors: PromiseOrValue<BytesLike>,
     _executor: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
@@ -146,7 +146,7 @@ export interface AccessManagerFacet extends BaseContract {
 
   callStatic: {
     addressCanExecuteMethod(
-      _selector: PromiseOrValue<BytesLike>,
+      _selectors: PromiseOrValue<BytesLike>,
       _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -181,7 +181,7 @@ export interface AccessManagerFacet extends BaseContract {
 
   estimateGas: {
     addressCanExecuteMethod(
-      _selector: PromiseOrValue<BytesLike>,
+      _selectors: PromiseOrValue<BytesLike>,
       _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -196,7 +196,7 @@ export interface AccessManagerFacet extends BaseContract {
 
   populateTransaction: {
     addressCanExecuteMethod(
-      _selector: PromiseOrValue<BytesLike>,
+      _selectors: PromiseOrValue<BytesLike>,
       _executor: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
