@@ -7,6 +7,7 @@ export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
+export { AANewFacet__factory } from "./AANewFacet__factory";
 export { AccessManagerFacet__factory } from "./AccessManagerFacet__factory";
 export { AcrossFacet__factory } from "./AcrossFacet__factory";
 export { AcrossFacetPacked__factory } from "./AcrossFacetPacked__factory";
