@@ -56,17 +56,17 @@ export interface AccessManagerFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        addressCanExecuteMethod(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        addressCanExecuteMethod(_selectors: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
         setCanExecute(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, _canExecute: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    addressCanExecuteMethod(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    addressCanExecuteMethod(_selectors: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
     setCanExecute(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, _canExecute: PromiseOrValue<boolean>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        addressCanExecuteMethod(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        addressCanExecuteMethod(_selectors: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         setCanExecute(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, _canExecute: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -76,13 +76,13 @@ export interface AccessManagerFacet extends BaseContract {
         ExecutionDenied(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): ExecutionDeniedEventFilter;
     };
     estimateGas: {
-        addressCanExecuteMethod(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        addressCanExecuteMethod(_selectors: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         setCanExecute(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, _canExecute: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        addressCanExecuteMethod(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        addressCanExecuteMethod(_selectors: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         setCanExecute(_selector: PromiseOrValue<BytesLike>, _executor: PromiseOrValue<string>, _canExecute: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
