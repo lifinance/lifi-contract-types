@@ -18,7 +18,7 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export declare namespace LibDiamond {
+export declare namespace IDiamondCut {
   export type FacetCutStruct = {
     facetAddress: PromiseOrValue<string>;
     action: PromiseOrValue<BigNumberish>;
@@ -45,12 +45,12 @@ export interface LibDiamondInterface extends utils.Interface {
 }
 
 export interface DiamondCutEventObject {
-  _diamondCut: LibDiamond.FacetCutStructOutput[];
+  _diamondCut: IDiamondCut.FacetCutStructOutput[];
   _init: string;
   _calldata: string;
 }
 export type DiamondCutEvent = TypedEvent<
-  [LibDiamond.FacetCutStructOutput[], string, string],
+  [IDiamondCut.FacetCutStructOutput[], string, string],
   DiamondCutEventObject
 >;
 
