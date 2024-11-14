@@ -43,6 +43,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "transferValueAndprocessRoute(address,uint256,address,uint256,address,uint256,address,bytes)": FunctionFragment;
     "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "vvsV3SwapCallback(int256,int256,bytes)": FunctionFragment;
   };
 
   getFunction(
@@ -60,6 +61,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "transferOwnership"
       | "transferValueAndprocessRoute"
       | "uniswapV3SwapCallback"
+      | "vvsV3SwapCallback"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -130,6 +132,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "vvsV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "algebraSwapCallback",
@@ -169,6 +179,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "uniswapV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "vvsV3SwapCallback",
     data: BytesLike
   ): Result;
 
@@ -310,6 +324,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    vvsV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   algebraSwapCallback(
@@ -387,6 +408,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  vvsV3SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     algebraSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
@@ -451,6 +479,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    vvsV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
@@ -563,6 +598,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    vvsV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -635,6 +677,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    vvsV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
