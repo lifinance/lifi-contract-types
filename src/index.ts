@@ -45,7 +45,6 @@ export type { GnosisBridgeFacet } from "./GnosisBridgeFacet";
 export type { HopFacet } from "./HopFacet";
 export type { HopFacetOptimized } from "./HopFacetOptimized";
 export type { HopFacetPacked } from "./HopFacetPacked";
-export type { HyphenFacet } from "./HyphenFacet";
 export type { IAcrossSpokePool } from "./IAcrossSpokePool";
 export type { IAllBridge } from "./IAllBridge";
 export type { IBridge } from "./IBridge";
@@ -157,7 +156,6 @@ export { GnosisBridgeFacet__factory } from "./factories/GnosisBridgeFacet__facto
 export { HopFacet__factory } from "./factories/HopFacet__factory";
 export { HopFacetOptimized__factory } from "./factories/HopFacetOptimized__factory";
 export { HopFacetPacked__factory } from "./factories/HopFacetPacked__factory";
-export { HyphenFacet__factory } from "./factories/HyphenFacet__factory";
 export { IAcrossSpokePool__factory } from "./factories/IAcrossSpokePool__factory";
 export { IAllBridge__factory } from "./factories/IAllBridge__factory";
 export { IBridge__factory } from "./factories/IBridge__factory";
