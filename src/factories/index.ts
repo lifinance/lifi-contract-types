@@ -39,6 +39,7 @@ export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
 export { HopFacet__factory } from "./HopFacet__factory";
 export { HopFacetOptimized__factory } from "./HopFacetOptimized__factory";
 export { HopFacetPacked__factory } from "./HopFacetPacked__factory";
+export { HyphenFacet__factory } from "./HyphenFacet__factory";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
 export { IAllBridge__factory } from "./IAllBridge__factory";
 export { IBridge__factory } from "./IBridge__factory";
