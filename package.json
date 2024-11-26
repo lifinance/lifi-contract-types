@@ -4,30 +4,41 @@
   "description": "Typings from LiFi Solidity contracts",
   "author": "Ed Zynda",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.js"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@ethersproject/abi": "^5.5.0",
-    "@ethersproject/bytes": "^5.5.0",
-    "@ethersproject/providers": "^5.5.1",
-    "ethers": "^5.5.2"
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/bytes": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "ethers": "^5.7.2"
   },
   "devDependencies": {
-    "@types/node": "^17.0.7",
+    "@types/node": "^22.10.0",
     "copyfiles": "^2.4.1",
-    "typescript": "4.8.4"
+    "typescript": "^5.7.2"
   },
   "scripts": {
-    "build": "yarn compile && yarn copy-dts",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:types && yarn copy-dts",
     "compile": "tsc -p ./tsconfig.json",
+    "build:cjs": "tsc --project ./tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && printf '{\"type\":\"commonjs\"}' > ./dist/cjs/package.json",
+    "build:esm": "tsc --project ./tsconfig.build.json --module es2015 --outDir ./dist/esm && printf '{\"type\": \"module\",\"sideEffects\":false}' > ./dist/esm/package.json",
+    "build:types": "tsc --project ./tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
-  }
+  },
+  "packageManager": "yarn@3.6.4+sha512.e70835d4d6d62c07be76b3c1529cb640c7443f0fe434ef4b6478a5a399218cbaf1511b396b3c56eb03bc86424cff2320f6167ad2fde273aa0df6e60b7754029f"
 }
