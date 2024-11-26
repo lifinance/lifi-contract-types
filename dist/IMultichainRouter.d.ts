@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface IMultichainRouterInterface extends utils.Interface {
     functions: {
         "anySwapOut(address,address,uint256,uint256)": FunctionFragment;
@@ -10,23 +10,9 @@ export interface IMultichainRouterInterface extends utils.Interface {
         "wNATIVE()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "anySwapOut" | "anySwapOutNative" | "anySwapOutUnderlying" | "wNATIVE"): FunctionFragment;
-    encodeFunctionData(functionFragment: "anySwapOut", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
-    encodeFunctionData(functionFragment: "anySwapOutNative", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
-    encodeFunctionData(functionFragment: "anySwapOutUnderlying", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
+    encodeFunctionData(functionFragment: "anySwapOut", values: [string, string, BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "anySwapOutNative", values: [string, string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "anySwapOutUnderlying", values: [string, string, BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "wNATIVE", values?: undefined): string;
     decodeFunctionResult(functionFragment: "anySwapOut", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "anySwapOutNative", data: BytesLike): Result;
@@ -49,64 +35,64 @@ export interface IMultichainRouter extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        anySwapOut(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOut(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        anySwapOutNative(token: PromiseOrValue<string>, to: PromiseOrValue<string>, toChainID: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutNative(token: string, to: string, toChainID: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        anySwapOutUnderlying(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutUnderlying(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         wNATIVE(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    anySwapOut(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    anySwapOut(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    anySwapOutNative(token: PromiseOrValue<string>, to: PromiseOrValue<string>, toChainID: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    anySwapOutNative(token: string, to: string, toChainID: BigNumberish, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    anySwapOutUnderlying(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    anySwapOutUnderlying(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     wNATIVE(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        anySwapOut(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        anySwapOutNative(token: PromiseOrValue<string>, to: PromiseOrValue<string>, toChainID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        anySwapOutUnderlying(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        anySwapOut(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        anySwapOutNative(token: string, to: string, toChainID: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        anySwapOutUnderlying(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: CallOverrides): Promise<void>;
         wNATIVE(overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        anySwapOut(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOut(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        anySwapOutNative(token: PromiseOrValue<string>, to: PromiseOrValue<string>, toChainID: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutNative(token: string, to: string, toChainID: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        anySwapOutUnderlying(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutUnderlying(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
         wNATIVE(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        anySwapOut(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOut(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        anySwapOutNative(token: PromiseOrValue<string>, to: PromiseOrValue<string>, toChainID: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutNative(token: string, to: string, toChainID: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        anySwapOutUnderlying(token: PromiseOrValue<string>, to: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, toChainID: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        anySwapOutUnderlying(token: string, to: string, amount: BigNumberish, toChainID: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         wNATIVE(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

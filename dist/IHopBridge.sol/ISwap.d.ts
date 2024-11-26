@@ -1,18 +1,18 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../common.js";
 export interface ISwapInterface extends utils.Interface {
     functions: {
         "swap(uint8,uint8,uint256,uint256,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "swap"): FunctionFragment;
     encodeFunctionData(functionFragment: "swap", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
     decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
     events: {};
@@ -32,25 +32,25 @@ export interface ISwap extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swap(tokenIndexFrom: PromiseOrValue<BigNumberish>, tokenIndexTo: PromiseOrValue<BigNumberish>, dx: PromiseOrValue<BigNumberish>, minDy: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(tokenIndexFrom: BigNumberish, tokenIndexTo: BigNumberish, dx: BigNumberish, minDy: BigNumberish, deadline: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    swap(tokenIndexFrom: PromiseOrValue<BigNumberish>, tokenIndexTo: PromiseOrValue<BigNumberish>, dx: PromiseOrValue<BigNumberish>, minDy: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    swap(tokenIndexFrom: BigNumberish, tokenIndexTo: BigNumberish, dx: BigNumberish, minDy: BigNumberish, deadline: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swap(tokenIndexFrom: PromiseOrValue<BigNumberish>, tokenIndexTo: PromiseOrValue<BigNumberish>, dx: PromiseOrValue<BigNumberish>, minDy: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        swap(tokenIndexFrom: BigNumberish, tokenIndexTo: BigNumberish, dx: BigNumberish, minDy: BigNumberish, deadline: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        swap(tokenIndexFrom: PromiseOrValue<BigNumberish>, tokenIndexTo: PromiseOrValue<BigNumberish>, dx: PromiseOrValue<BigNumberish>, minDy: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(tokenIndexFrom: BigNumberish, tokenIndexTo: BigNumberish, dx: BigNumberish, minDy: BigNumberish, deadline: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swap(tokenIndexFrom: PromiseOrValue<BigNumberish>, tokenIndexTo: PromiseOrValue<BigNumberish>, dx: PromiseOrValue<BigNumberish>, minDy: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(tokenIndexFrom: BigNumberish, tokenIndexTo: BigNumberish, dx: BigNumberish, minDy: BigNumberish, deadline: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

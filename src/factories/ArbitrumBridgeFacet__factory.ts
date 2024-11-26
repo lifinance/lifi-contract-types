@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   ArbitrumBridgeFacet,
   ArbitrumBridgeFacetInterface,
-} from "../ArbitrumBridgeFacet";
+} from "../ArbitrumBridgeFacet.js";
 
 const _abi = [
   {
@@ -605,9 +604,9 @@ export class ArbitrumBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _gatewayRouter: PromiseOrValue<string>,
-    _inbox: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _gatewayRouter: string,
+    _inbox: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ArbitrumBridgeFacet> {
     return super.deploy(
       _gatewayRouter,
@@ -616,9 +615,9 @@ export class ArbitrumBridgeFacet__factory extends ContractFactory {
     ) as Promise<ArbitrumBridgeFacet>;
   }
   override getDeployTransaction(
-    _gatewayRouter: PromiseOrValue<string>,
-    _inbox: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _gatewayRouter: string,
+    _inbox: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_gatewayRouter, _inbox, overrides || {});
   }

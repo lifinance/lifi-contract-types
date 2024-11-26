@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, BigNumberish, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../../common";
-import type { ReceiverStargateV2, ReceiverStargateV2Interface } from "../../ReceiverStargateV2.sol/ReceiverStargateV2";
+import type { ReceiverStargateV2, ReceiverStargateV2Interface } from "../../ReceiverStargateV2.sol/ReceiverStargateV2.js";
 declare type ReceiverStargateV2ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ReceiverStargateV2__factory extends ContractFactory {
     constructor(...args: ReceiverStargateV2ConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _tokenMessaging: PromiseOrValue<string>, _endpointV2: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, _executor: string, _tokenMessaging: string, _endpointV2: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ReceiverStargateV2>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _tokenMessaging: PromiseOrValue<string>, _endpointV2: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, _executor: string, _tokenMessaging: string, _endpointV2: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): ReceiverStargateV2;
     connect(signer: Signer): ReceiverStargateV2__factory;

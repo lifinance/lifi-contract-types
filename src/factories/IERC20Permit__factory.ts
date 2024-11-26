@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC20Permit, IERC20PermitInterface } from "../IERC20Permit";
+import type { IERC20Permit, IERC20PermitInterface } from "../IERC20Permit.js";
 
 const _abi = [
   {

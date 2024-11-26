@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDeBridgeGate, IDeBridgeGateInterface } from "../IDeBridgeGate";
+import type { IDeBridgeGate, IDeBridgeGateInterface } from "../IDeBridgeGate.js";
 export declare class IDeBridgeGate__factory {
     static readonly abi: readonly [{
         readonly type: "function";

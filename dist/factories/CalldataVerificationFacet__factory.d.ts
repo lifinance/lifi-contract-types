@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { CalldataVerificationFacet, CalldataVerificationFacetInterface } from "../CalldataVerificationFacet";
+import type { CalldataVerificationFacet, CalldataVerificationFacetInterface } from "../CalldataVerificationFacet.js";
 declare type CalldataVerificationFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CalldataVerificationFacet__factory extends ContractFactory {
     constructor(...args: CalldataVerificationFacetConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<CalldataVerificationFacet>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): CalldataVerificationFacet;
     connect(signer: Signer): CalldataVerificationFacet__factory;

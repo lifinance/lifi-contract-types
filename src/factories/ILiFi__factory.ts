@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ILiFi, ILiFiInterface } from "../ILiFi";
+import type { ILiFi, ILiFiInterface } from "../ILiFi.js";
 
 const _abi = [
   {

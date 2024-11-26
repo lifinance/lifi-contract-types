@@ -1,11 +1,11 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace IDiamondLoupe {
     type FacetStruct = {
-        facetAddress: PromiseOrValue<string>;
-        functionSelectors: PromiseOrValue<BytesLike>[];
+        facetAddress: string;
+        functionSelectors: BytesLike[];
     };
     type FacetStructOutput = [string, string[]] & {
         facetAddress: string;
@@ -21,11 +21,11 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
         "supportsInterface(bytes4)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "facetAddress" | "facetAddresses" | "facetFunctionSelectors" | "facets" | "supportsInterface"): FunctionFragment;
-    encodeFunctionData(functionFragment: "facetAddress", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "facetAddress", values: [BytesLike]): string;
     encodeFunctionData(functionFragment: "facetAddresses", values?: undefined): string;
-    encodeFunctionData(functionFragment: "facetFunctionSelectors", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "facetFunctionSelectors", values: [string]): string;
     encodeFunctionData(functionFragment: "facets", values?: undefined): string;
-    encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
     decodeFunctionResult(functionFragment: "facetAddress", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "facetAddresses", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "facetFunctionSelectors", data: BytesLike): Result;
@@ -48,13 +48,13 @@ export interface DiamondLoupeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[string] & {
+        facetAddress(_functionSelector: BytesLike, overrides?: CallOverrides): Promise<[string] & {
             facetAddress_: string;
         }>;
         facetAddresses(overrides?: CallOverrides): Promise<[string[]] & {
             facetAddresses_: string[];
         }>;
-        facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string[]] & {
+        facetFunctionSelectors(_facet: string, overrides?: CallOverrides): Promise<[string[]] & {
             facetFunctionSelectors_: string[];
         }>;
         facets(overrides?: CallOverrides): Promise<[
@@ -62,33 +62,33 @@ export interface DiamondLoupeFacet extends BaseContract {
         ] & {
             facets_: IDiamondLoupe.FacetStructOutput[];
         }>;
-        supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+        supportsInterface(_interfaceId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
     };
-    facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+    facetAddress(_functionSelector: BytesLike, overrides?: CallOverrides): Promise<string>;
     facetAddresses(overrides?: CallOverrides): Promise<string[]>;
-    facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
+    facetFunctionSelectors(_facet: string, overrides?: CallOverrides): Promise<string[]>;
     facets(overrides?: CallOverrides): Promise<IDiamondLoupe.FacetStructOutput[]>;
-    supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    supportsInterface(_interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
-        facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+        facetAddress(_functionSelector: BytesLike, overrides?: CallOverrides): Promise<string>;
         facetAddresses(overrides?: CallOverrides): Promise<string[]>;
-        facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
+        facetFunctionSelectors(_facet: string, overrides?: CallOverrides): Promise<string[]>;
         facets(overrides?: CallOverrides): Promise<IDiamondLoupe.FacetStructOutput[]>;
-        supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        supportsInterface(_interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {};
     estimateGas: {
-        facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        facetAddress(_functionSelector: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
         facetAddresses(overrides?: CallOverrides): Promise<BigNumber>;
-        facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        facetFunctionSelectors(_facet: string, overrides?: CallOverrides): Promise<BigNumber>;
         facets(overrides?: CallOverrides): Promise<BigNumber>;
-        supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        supportsInterface(_interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        facetAddress(_functionSelector: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         facetAddresses(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        facetFunctionSelectors(_facet: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         facets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        supportsInterface(_interfaceId: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

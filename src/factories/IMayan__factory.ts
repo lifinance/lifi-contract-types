@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IMayan, IMayanInterface } from "../IMayan";
+import type { IMayan, IMayanInterface } from "../IMayan.js";
 
 const _abi = [
   {

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ISymbiosisMetaRouter, ISymbiosisMetaRouterInterface } from "../ISymbiosisMetaRouter";
+import type { ISymbiosisMetaRouter, ISymbiosisMetaRouterInterface } from "../ISymbiosisMetaRouter.js";
 export declare class ISymbiosisMetaRouter__factory {
     static readonly abi: readonly [{
         readonly type: "function";

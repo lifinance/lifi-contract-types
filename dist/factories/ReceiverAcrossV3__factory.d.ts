@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, BigNumberish, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { ReceiverAcrossV3, ReceiverAcrossV3Interface } from "../ReceiverAcrossV3";
+import type { ReceiverAcrossV3, ReceiverAcrossV3Interface } from "../ReceiverAcrossV3.js";
 declare type ReceiverAcrossV3ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ReceiverAcrossV3__factory extends ContractFactory {
     constructor(...args: ReceiverAcrossV3ConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _spokepool: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, _executor: string, _spokepool: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ReceiverAcrossV3>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _spokepool: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, _executor: string, _spokepool: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): ReceiverAcrossV3;
     connect(signer: Signer): ReceiverAcrossV3__factory;

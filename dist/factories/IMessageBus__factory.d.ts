@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IMessageBus, IMessageBusInterface } from "../IMessageBus";
+import type { IMessageBus, IMessageBusInterface } from "../IMessageBus.js";
 export declare class IMessageBus__factory {
     static readonly abi: readonly [{
         readonly type: "function";

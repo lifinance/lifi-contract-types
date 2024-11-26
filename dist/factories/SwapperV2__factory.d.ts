@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { SwapperV2, SwapperV2Interface } from "../SwapperV2";
+import type { SwapperV2, SwapperV2Interface } from "../SwapperV2.js";
 declare type SwapperV2ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SwapperV2__factory extends ContractFactory {
     constructor(...args: SwapperV2ConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<SwapperV2>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;

@@ -21,8 +21,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IOriginalTokenVaultInterface extends utils.Interface {
   functions: {
@@ -38,35 +37,16 @@ export interface IOriginalTokenVaultInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "deposit",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, BigNumberish, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "depositNative",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BigNumberish, BigNumberish, string, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "records",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "records", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "withdraw",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
 
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
@@ -108,94 +88,85 @@ export interface IOriginalTokenVault extends BaseContract {
 
   functions: {
     deposit(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     depositNative(
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
 
     withdraw(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   deposit(
-    _token: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _mintChainId: PromiseOrValue<BigNumberish>,
-    _mintAccount: PromiseOrValue<string>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _token: string,
+    _amount: BigNumberish,
+    _mintChainId: BigNumberish,
+    _mintAccount: string,
+    _nonce: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   depositNative(
-    _amount: PromiseOrValue<BigNumberish>,
-    _mintChainId: PromiseOrValue<BigNumberish>,
-    _mintAccount: PromiseOrValue<string>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _amount: BigNumberish,
+    _mintChainId: BigNumberish,
+    _mintAccount: string,
+    _nonce: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  records(
-    recordId: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  records(recordId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   withdraw(
-    _request: PromiseOrValue<BytesLike>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _request: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     deposit(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
+      _token: string,
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     depositNative(
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
     withdraw(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -204,65 +175,62 @@ export interface IOriginalTokenVault extends BaseContract {
 
   estimateGas: {
     deposit(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     depositNative(
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     withdraw(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     deposit(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     depositNative(
-      _amount: PromiseOrValue<BigNumberish>,
-      _mintChainId: PromiseOrValue<BigNumberish>,
-      _mintAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _mintChainId: BigNumberish,
+      _mintAccount: string,
+      _nonce: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     records(
-      recordId: PromiseOrValue<BytesLike>,
+      recordId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

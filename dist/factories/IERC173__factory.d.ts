@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC173, IERC173Interface } from "../IERC173";
+import type { IERC173, IERC173Interface } from "../IERC173.js";
 export declare class IERC173__factory {
     static readonly abi: readonly [{
         readonly type: "function";

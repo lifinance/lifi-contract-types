@@ -9,8 +9,7 @@ import {
   PayableOverrides,
 } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LiFiDiamond, LiFiDiamondInterface } from "../LiFiDiamond";
+import type { LiFiDiamond, LiFiDiamondInterface } from "../LiFiDiamond.js";
 
 const _abi = [
   {
@@ -115,9 +114,9 @@ export class LiFiDiamond__factory extends ContractFactory {
   }
 
   override deploy(
-    _contractOwner: PromiseOrValue<string>,
-    _diamondCutFacet: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _contractOwner: string,
+    _diamondCutFacet: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<LiFiDiamond> {
     return super.deploy(
       _contractOwner,
@@ -126,9 +125,9 @@ export class LiFiDiamond__factory extends ContractFactory {
     ) as Promise<LiFiDiamond>;
   }
   override getDeployTransaction(
-    _contractOwner: PromiseOrValue<string>,
-    _diamondCutFacet: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _contractOwner: string,
+    _diamondCutFacet: string,
+    overrides?: PayableOverrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _contractOwner,

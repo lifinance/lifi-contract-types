@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface OwnableInterface extends utils.Interface {
     functions: {
         "owner()": FunctionFragment;
@@ -11,7 +11,7 @@ export interface OwnableInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "owner" | "renounceOwnership" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
@@ -46,44 +46,44 @@ export interface Ownable extends BaseContract {
     functions: {
         owner(overrides?: CallOverrides): Promise<[string]>;
         renounceOwnership(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     owner(overrides?: CallOverrides): Promise<string>;
     renounceOwnership(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    transferOwnership(newOwner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         owner(overrides?: CallOverrides): Promise<string>;
         renounceOwnership(overrides?: CallOverrides): Promise<void>;
-        transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         renounceOwnership(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         renounceOwnership(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

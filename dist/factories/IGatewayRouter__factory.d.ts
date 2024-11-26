@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IGatewayRouter, IGatewayRouterInterface } from "../IGatewayRouter";
+import type { IGatewayRouter, IGatewayRouterInterface } from "../IGatewayRouter.js";
 export declare class IGatewayRouter__factory {
     static readonly abi: readonly [{
         readonly type: "function";

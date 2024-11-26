@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ISymbiosisMetaRouter,
   ISymbiosisMetaRouterInterface,
-} from "../ISymbiosisMetaRouter";
+} from "../ISymbiosisMetaRouter.js";
 
 const _abi = [
   {

@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   AcrossFacetPackedV3,
   AcrossFacetPackedV3Interface,
-} from "../AcrossFacetPackedV3";
+} from "../AcrossFacetPackedV3.js";
 
 const _abi = [
   {
@@ -1097,10 +1096,10 @@ export class AcrossFacetPackedV3__factory extends ContractFactory {
   }
 
   override deploy(
-    _spokePool: PromiseOrValue<string>,
-    _wrappedNative: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _spokePool: string,
+    _wrappedNative: string,
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<AcrossFacetPackedV3> {
     return super.deploy(
       _spokePool,
@@ -1110,10 +1109,10 @@ export class AcrossFacetPackedV3__factory extends ContractFactory {
     ) as Promise<AcrossFacetPackedV3>;
   }
   override getDeployTransaction(
-    _spokePool: PromiseOrValue<string>,
-    _wrappedNative: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _spokePool: string,
+    _wrappedNative: string,
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _spokePool,

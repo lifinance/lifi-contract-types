@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IUniswapV2Pair, IUniswapV2PairInterface } from "../../LiFiDEXAggregator.sol/IUniswapV2Pair";
+import type { IUniswapV2Pair, IUniswapV2PairInterface } from "../../LiFiDEXAggregator.sol/IUniswapV2Pair.js";
 export declare class IUniswapV2Pair__factory {
     static readonly abi: readonly [{
         readonly type: "function";

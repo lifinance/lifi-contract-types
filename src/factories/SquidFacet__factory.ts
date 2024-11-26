@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { SquidFacet, SquidFacetInterface } from "../SquidFacet";
+import type { SquidFacet, SquidFacetInterface } from "../SquidFacet.js";
 
 const _abi = [
   {
@@ -716,14 +715,14 @@ export class SquidFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _squidRouter: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _squidRouter: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<SquidFacet> {
     return super.deploy(_squidRouter, overrides || {}) as Promise<SquidFacet>;
   }
   override getDeployTransaction(
-    _squidRouter: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _squidRouter: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_squidRouter, overrides || {});
   }

@@ -9,7 +9,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-} from "./common";
+} from "./common.js";
 
 export interface ReentrancyGuardInterface extends utils.Interface {
   functions: {};

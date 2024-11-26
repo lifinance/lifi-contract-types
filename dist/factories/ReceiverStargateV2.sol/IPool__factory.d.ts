@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IPool, IPoolInterface } from "../../ReceiverStargateV2.sol/IPool";
+import type { IPool, IPoolInterface } from "../../ReceiverStargateV2.sol/IPool.js";
 export declare class IPool__factory {
     static readonly abi: readonly [{
         readonly type: "function";

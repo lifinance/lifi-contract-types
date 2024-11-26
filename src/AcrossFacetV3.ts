@@ -24,21 +24,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    bridge: PromiseOrValue<string>;
-    integrator: PromiseOrValue<string>;
-    referrer: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    minAmount: PromiseOrValue<BigNumberish>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    hasSourceSwaps: PromiseOrValue<boolean>;
-    hasDestinationCall: PromiseOrValue<boolean>;
+    transactionId: BytesLike;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumberish;
+    destinationChainId: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
   export type BridgeDataStructOutput = [
@@ -68,15 +67,15 @@ export declare namespace ILiFi {
 
 export declare namespace AcrossFacetV3 {
   export type AcrossV3DataStruct = {
-    receiverAddress: PromiseOrValue<string>;
-    refundAddress: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    outputAmount: PromiseOrValue<BigNumberish>;
-    exclusiveRelayer: PromiseOrValue<string>;
-    quoteTimestamp: PromiseOrValue<BigNumberish>;
-    fillDeadline: PromiseOrValue<BigNumberish>;
-    exclusivityDeadline: PromiseOrValue<BigNumberish>;
-    message: PromiseOrValue<BytesLike>;
+    receiverAddress: string;
+    refundAddress: string;
+    receivingAssetId: string;
+    outputAmount: BigNumberish;
+    exclusiveRelayer: string;
+    quoteTimestamp: BigNumberish;
+    fillDeadline: BigNumberish;
+    exclusivityDeadline: BigNumberish;
+    message: BytesLike;
   };
 
   export type AcrossV3DataStructOutput = [
@@ -104,13 +103,13 @@ export declare namespace AcrossFacetV3 {
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: PromiseOrValue<string>;
-    approveTo: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    fromAmount: PromiseOrValue<BigNumberish>;
-    callData: PromiseOrValue<BytesLike>;
-    requiresDeposit: PromiseOrValue<boolean>;
+    callTo: string;
+    approveTo: string;
+    sendingAssetId: string;
+    receivingAssetId: string;
+    fromAmount: BigNumberish;
+    callData: BytesLike;
+    requiresDeposit: boolean;
   };
 
   export type SwapDataStructOutput = [
@@ -185,7 +184,7 @@ export interface AcrossFacetV3Interface extends utils.Interface {
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(tuple)": EventFragment;
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -303,14 +302,14 @@ export interface AcrossFacetV3 extends BaseContract {
     startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     wrappedNative(overrides?: CallOverrides): Promise<[string]>;
@@ -321,14 +320,14 @@ export interface AcrossFacetV3 extends BaseContract {
   startBridgeTokensViaAcrossV3(
     _bridgeData: ILiFi.BridgeDataStruct,
     _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaAcrossV3(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
     _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   wrappedNative(overrides?: CallOverrides): Promise<string>;
@@ -354,7 +353,7 @@ export interface AcrossFacetV3 extends BaseContract {
 
   filters: {
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -364,7 +363,7 @@ export interface AcrossFacetV3 extends BaseContract {
       toAmount?: null
     ): LiFiGenericSwapCompletedEventFilter;
     LiFiGenericSwapCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -375,7 +374,7 @@ export interface AcrossFacetV3 extends BaseContract {
     ): LiFiGenericSwapCompletedEventFilter;
 
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -384,7 +383,7 @@ export interface AcrossFacetV3 extends BaseContract {
       toAmount?: null
     ): LiFiSwappedGenericEventFilter;
     LiFiSwappedGeneric(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -394,14 +393,14 @@ export interface AcrossFacetV3 extends BaseContract {
     ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
@@ -409,21 +408,21 @@ export interface AcrossFacetV3 extends BaseContract {
     ): LiFiTransferCompletedEventFilter;
 
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
     LiFiTransferRecovered(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
 
-    "LiFiTransferStarted(tuple)"(
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
@@ -435,14 +434,14 @@ export interface AcrossFacetV3 extends BaseContract {
     startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
@@ -454,14 +453,14 @@ export interface AcrossFacetV3 extends BaseContract {
     startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       _acrossData: AcrossFacetV3.AcrossV3DataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     wrappedNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;

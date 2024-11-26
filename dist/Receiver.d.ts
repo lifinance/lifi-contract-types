@@ -1,16 +1,16 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace LibSwap {
     type SwapDataStruct = {
-        callTo: PromiseOrValue<string>;
-        approveTo: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receivingAssetId: PromiseOrValue<string>;
-        fromAmount: PromiseOrValue<BigNumberish>;
-        callData: PromiseOrValue<BytesLike>;
-        requiresDeposit: PromiseOrValue<boolean>;
+        callTo: string;
+        approveTo: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        fromAmount: BigNumberish;
+        callData: BytesLike;
+        requiresDeposit: boolean;
     };
     type SwapDataStructOutput = [
         string,
@@ -32,16 +32,16 @@ export declare namespace LibSwap {
 }
 export declare namespace ILiFi {
     type BridgeDataStruct = {
-        transactionId: PromiseOrValue<BytesLike>;
-        bridge: PromiseOrValue<string>;
-        integrator: PromiseOrValue<string>;
-        referrer: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receiver: PromiseOrValue<string>;
-        minAmount: PromiseOrValue<BigNumberish>;
-        destinationChainId: PromiseOrValue<BigNumberish>;
-        hasSourceSwaps: PromiseOrValue<boolean>;
-        hasDestinationCall: PromiseOrValue<boolean>;
+        transactionId: BytesLike;
+        bridge: string;
+        integrator: string;
+        referrer: string;
+        sendingAssetId: string;
+        receiver: string;
+        minAmount: BigNumberish;
+        destinationChainId: BigNumberish;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
     type BridgeDataStructOutput = [
         string,
@@ -90,36 +90,20 @@ export interface ReceiverInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "executor", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
-    encodeFunctionData(functionFragment: "pullToken", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
+    encodeFunctionData(functionFragment: "pullToken", values: [string, string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "recoverGas", values?: undefined): string;
     encodeFunctionData(functionFragment: "sgReceive", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
+        BigNumberish,
+        BytesLike,
+        BigNumberish,
+        string,
+        BigNumberish,
+        BytesLike
     ]): string;
     encodeFunctionData(functionFragment: "sgRouter", values?: undefined): string;
-    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [
-        PromiseOrValue<BytesLike>,
-        LibSwap.SwapDataStruct[],
-        PromiseOrValue<string>,
-        PromiseOrValue<string>
-    ]): string;
-    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "xReceive", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
-    ]): string;
+    encodeFunctionData(functionFragment: "swapAndCompleteBridgeTokens", values: [BytesLike, LibSwap.SwapDataStruct[], string, string]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
+    encodeFunctionData(functionFragment: "xReceive", values: [BytesLike, BigNumberish, string, string, BigNumberish, BytesLike]): string;
     decodeFunctionResult(functionFragment: "amarokRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
@@ -140,7 +124,7 @@ export interface ReceiverInterface extends utils.Interface {
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(tuple)": EventFragment;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
         "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
         "RecoverGasSet(uint256)": EventFragment;
@@ -296,58 +280,58 @@ export interface Receiver extends BaseContract {
     functions: {
         amarokRouter(overrides?: CallOverrides): Promise<[string]>;
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         executor(overrides?: CallOverrides): Promise<[string]>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        pullToken(assetId: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<[BigNumber]>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         sgRouter(overrides?: CallOverrides): Promise<[string]>;
-        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        xReceive(_transferId: BytesLike, _amount: BigNumberish, _asset: string, arg3: string, arg4: BigNumberish, _callData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     amarokRouter(overrides?: CallOverrides): Promise<string>;
     cancelOwnershipTransfer(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     confirmOwnershipTransfer(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     executor(overrides?: CallOverrides): Promise<string>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
-    pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    pullToken(assetId: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-    sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     sgRouter(overrides?: CallOverrides): Promise<string>;
-    swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    transferOwnership(_newOwner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    xReceive(_transferId: BytesLike, _amount: BigNumberish, _asset: string, arg3: string, arg4: BigNumberish, _callData: BytesLike, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         amarokRouter(overrides?: CallOverrides): Promise<string>;
@@ -356,94 +340,94 @@ export interface Receiver extends BaseContract {
         executor(overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
-        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        pullToken(assetId: string, receiver: string, amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: CallOverrides): Promise<void>;
         sgRouter(overrides?: CallOverrides): Promise<string>;
-        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(_newOwner: string, overrides?: CallOverrides): Promise<void>;
+        xReceive(_transferId: BytesLike, _amount: BigNumberish, _asset: string, arg3: string, arg4: BigNumberish, _callData: BytesLike, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "AmarokRouterSet(address)"(router?: PromiseOrValue<string> | null): AmarokRouterSetEventFilter;
-        AmarokRouterSet(router?: PromiseOrValue<string> | null): AmarokRouterSetEventFilter;
-        "ExecutorSet(address)"(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
-        ExecutorSet(executor?: PromiseOrValue<string> | null): ExecutorSetEventFilter;
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        LiFiTransferRecovered(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        "AmarokRouterSet(address)"(router?: string | null): AmarokRouterSetEventFilter;
+        AmarokRouterSet(router?: string | null): AmarokRouterSetEventFilter;
+        "ExecutorSet(address)"(executor?: string | null): ExecutorSetEventFilter;
+        ExecutorSet(executor?: string | null): ExecutorSetEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        LiFiTransferRecovered(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(bridgeData?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-        "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
-        OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
-        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
-        "RecoverGasSet(uint256)"(recoverGas?: PromiseOrValue<BigNumberish> | null): RecoverGasSetEventFilter;
-        RecoverGasSet(recoverGas?: PromiseOrValue<BigNumberish> | null): RecoverGasSetEventFilter;
-        "StargateRouterSet(address)"(router?: PromiseOrValue<string> | null): StargateRouterSetEventFilter;
-        StargateRouterSet(router?: PromiseOrValue<string> | null): StargateRouterSetEventFilter;
+        "OwnershipTransferRequested(address,address)"(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
+        OwnershipTransferRequested(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        "RecoverGasSet(uint256)"(recoverGas?: BigNumberish | null): RecoverGasSetEventFilter;
+        RecoverGasSet(recoverGas?: BigNumberish | null): RecoverGasSetEventFilter;
+        "StargateRouterSet(address)"(router?: string | null): StargateRouterSetEventFilter;
+        StargateRouterSet(router?: string | null): StargateRouterSetEventFilter;
     };
     estimateGas: {
         amarokRouter(overrides?: CallOverrides): Promise<BigNumber>;
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         executor(overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        pullToken(assetId: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
         sgRouter(overrides?: CallOverrides): Promise<BigNumber>;
-        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        xReceive(_transferId: BytesLike, _amount: BigNumberish, _asset: string, arg3: string, arg4: BigNumberish, _callData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         amarokRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         executor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        pullToken(assetId: string, receiver: string, amount: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        sgReceive(arg0: BigNumberish, arg1: BytesLike, arg2: BigNumberish, _token: string, _amountLD: BigNumberish, _payload: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         sgRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndCompleteBridgeTokens(_transactionId: BytesLike, _swapData: LibSwap.SwapDataStruct[], assetId: string, receiver: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        xReceive(_transferId: BytesLike, _amount: BigNumberish, _asset: string, arg3: string, arg4: BigNumberish, _callData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

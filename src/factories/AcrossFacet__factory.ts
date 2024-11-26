@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { AcrossFacet, AcrossFacetInterface } from "../AcrossFacet";
+import type { AcrossFacet, AcrossFacetInterface } from "../AcrossFacet.js";
 
 const _abi = [
   {
@@ -612,9 +611,9 @@ export class AcrossFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _spokePool: PromiseOrValue<string>,
-    _wrappedNative: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _spokePool: string,
+    _wrappedNative: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<AcrossFacet> {
     return super.deploy(
       _spokePool,
@@ -623,9 +622,9 @@ export class AcrossFacet__factory extends ContractFactory {
     ) as Promise<AcrossFacet>;
   }
   override getDeployTransaction(
-    _spokePool: PromiseOrValue<string>,
-    _wrappedNative: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _spokePool: string,
+    _wrappedNative: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _spokePool,

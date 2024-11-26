@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDiamondLoupe, IDiamondLoupeInterface } from "../IDiamondLoupe";
+import type { IDiamondLoupe, IDiamondLoupeInterface } from "../IDiamondLoupe.js";
 export declare class IDiamondLoupe__factory {
     static readonly abi: readonly [{
         readonly type: "function";

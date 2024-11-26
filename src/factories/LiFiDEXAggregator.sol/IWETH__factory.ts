@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IWETH, IWETHInterface } from "../../LiFiDEXAggregator.sol/IWETH";
+import type {
+  IWETH,
+  IWETHInterface,
+} from "../../LiFiDEXAggregator.sol/IWETH.js";
 
 const _abi = [
   {

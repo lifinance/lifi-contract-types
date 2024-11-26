@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface ICircleBridgeProxyInterface extends utils.Interface {
   functions: {
@@ -32,12 +31,7 @@ export interface ICircleBridgeProxyInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "depositForBurn",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>
-    ]
+    values: [BigNumberish, BigNumberish, BytesLike, string]
   ): string;
 
   decodeFunctionResult(
@@ -76,28 +70,28 @@ export interface ICircleBridgeProxy extends BaseContract {
 
   functions: {
     depositForBurn(
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChid: PromiseOrValue<BigNumberish>,
-      _mintRecipient: PromiseOrValue<BytesLike>,
-      _burnToken: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _dstChid: BigNumberish,
+      _mintRecipient: BytesLike,
+      _burnToken: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   depositForBurn(
-    _amount: PromiseOrValue<BigNumberish>,
-    _dstChid: PromiseOrValue<BigNumberish>,
-    _mintRecipient: PromiseOrValue<BytesLike>,
-    _burnToken: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _amount: BigNumberish,
+    _dstChid: BigNumberish,
+    _mintRecipient: BytesLike,
+    _burnToken: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     depositForBurn(
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChid: PromiseOrValue<BigNumberish>,
-      _mintRecipient: PromiseOrValue<BytesLike>,
-      _burnToken: PromiseOrValue<string>,
+      _amount: BigNumberish,
+      _dstChid: BigNumberish,
+      _mintRecipient: BytesLike,
+      _burnToken: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -106,21 +100,21 @@ export interface ICircleBridgeProxy extends BaseContract {
 
   estimateGas: {
     depositForBurn(
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChid: PromiseOrValue<BigNumberish>,
-      _mintRecipient: PromiseOrValue<BytesLike>,
-      _burnToken: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _dstChid: BigNumberish,
+      _mintRecipient: BytesLike,
+      _burnToken: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositForBurn(
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChid: PromiseOrValue<BigNumberish>,
-      _mintRecipient: PromiseOrValue<BytesLike>,
-      _burnToken: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _amount: BigNumberish,
+      _dstChid: BigNumberish,
+      _mintRecipient: BytesLike,
+      _burnToken: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

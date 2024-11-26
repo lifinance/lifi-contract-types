@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface IConnextHandlerInterface extends utils.Interface {
     functions: {
         "xcall(uint32,address,address,address,uint256,uint256,bytes)": FunctionFragment;
@@ -9,23 +9,23 @@ export interface IConnextHandlerInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "xcall(uint32,address,address,address,uint256,uint256,bytes)" | "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"): FunctionFragment;
     encodeFunctionData(functionFragment: "xcall(uint32,address,address,address,uint256,uint256,bytes)", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>
+        BigNumberish,
+        string,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BytesLike
     ]): string;
     encodeFunctionData(functionFragment: "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>
+        BigNumberish,
+        string,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BytesLike,
+        BigNumberish
     ]): string;
     decodeFunctionResult(functionFragment: "xcall(uint32,address,address,address,uint256,uint256,bytes)", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)", data: BytesLike): Result;
@@ -46,38 +46,38 @@ export interface IConnextHandler extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, _relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, _relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, _relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, _relayerFee: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
-        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, _relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, overrides?: CallOverrides): Promise<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, _relayerFee: BigNumberish, overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, _relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, _relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<string>, tokenAddress: PromiseOrValue<string>, delegate: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, slippage: PromiseOrValue<BigNumberish>, callData: PromiseOrValue<BytesLike>, _relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        "xcall(uint32,address,address,address,uint256,uint256,bytes,uint256)"(destination: BigNumberish, recipient: string, tokenAddress: string, delegate: string, amount: BigNumberish, slippage: BigNumberish, callData: BytesLike, _relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IStargate, IStargateInterface } from "../../IStargate.sol/IStargate";
+import type { IStargate, IStargateInterface } from "../../IStargate.sol/IStargate.js";
 export declare class IStargate__factory {
     static readonly abi: readonly [{
         readonly type: "function";

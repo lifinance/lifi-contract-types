@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LIFuelFacet, LIFuelFacetInterface } from "../LIFuelFacet";
+import type { LIFuelFacet, LIFuelFacetInterface } from "../LIFuelFacet.js";
 declare type LIFuelFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LIFuelFacet__factory extends ContractFactory {
     constructor(...args: LIFuelFacetConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<LIFuelFacet>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LIFuelFacet;
     connect(signer: Signer): LIFuelFacet__factory;

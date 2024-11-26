@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   RelayerCelerIM,
   RelayerCelerIMInterface,
-} from "../RelayerCelerIM";
+} from "../RelayerCelerIM.js";
 
 const _abi = [
   {
@@ -804,10 +803,10 @@ export class RelayerCelerIM__factory extends ContractFactory {
   }
 
   override deploy(
-    _cBridgeMessageBusAddress: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    _diamondAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _cBridgeMessageBusAddress: string,
+    _owner: string,
+    _diamondAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<RelayerCelerIM> {
     return super.deploy(
       _cBridgeMessageBusAddress,
@@ -817,10 +816,10 @@ export class RelayerCelerIM__factory extends ContractFactory {
     ) as Promise<RelayerCelerIM>;
   }
   override getDeployTransaction(
-    _cBridgeMessageBusAddress: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    _diamondAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _cBridgeMessageBusAddress: string,
+    _owner: string,
+    _diamondAddress: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _cBridgeMessageBusAddress,

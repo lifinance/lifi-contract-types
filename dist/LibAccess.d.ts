@@ -1,7 +1,7 @@
 import type { BaseContract, BytesLike, Signer, utils } from "ethers";
 import type { EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface LibAccessInterface extends utils.Interface {
     functions: {};
     events: {
@@ -46,10 +46,10 @@ export interface LibAccess extends BaseContract {
     functions: {};
     callStatic: {};
     filters: {
-        "AccessGranted(address,bytes4)"(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
-        AccessGranted(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
-        "AccessRevoked(address,bytes4)"(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessRevokedEventFilter;
-        AccessRevoked(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessRevokedEventFilter;
+        "AccessGranted(address,bytes4)"(account?: string | null, method?: BytesLike | null): AccessGrantedEventFilter;
+        AccessGranted(account?: string | null, method?: BytesLike | null): AccessGrantedEventFilter;
+        "AccessRevoked(address,bytes4)"(account?: string | null, method?: BytesLike | null): AccessRevokedEventFilter;
+        AccessRevoked(account?: string | null, method?: BytesLike | null): AccessRevokedEventFilter;
     };
     estimateGas: {};
     populateTransaction: {};

@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { RelayerCelerIM, RelayerCelerIMInterface } from "../RelayerCelerIM";
+import type { RelayerCelerIM, RelayerCelerIMInterface } from "../RelayerCelerIM.js";
 declare type RelayerCelerIMConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class RelayerCelerIM__factory extends ContractFactory {
     constructor(...args: RelayerCelerIMConstructorParams);
-    deploy(_cBridgeMessageBusAddress: PromiseOrValue<string>, _owner: PromiseOrValue<string>, _diamondAddress: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_cBridgeMessageBusAddress: string, _owner: string, _diamondAddress: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<RelayerCelerIM>;
-    getDeployTransaction(_cBridgeMessageBusAddress: PromiseOrValue<string>, _owner: PromiseOrValue<string>, _diamondAddress: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_cBridgeMessageBusAddress: string, _owner: string, _diamondAddress: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): RelayerCelerIM;
     connect(signer: Signer): RelayerCelerIM__factory;

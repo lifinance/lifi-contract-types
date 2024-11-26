@@ -1,19 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface IThorSwapInterface extends utils.Interface {
     functions: {
         "depositWithExpiry(address,address,uint256,string,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "depositWithExpiry"): FunctionFragment;
-    encodeFunctionData(functionFragment: "depositWithExpiry", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
+    encodeFunctionData(functionFragment: "depositWithExpiry", values: [string, string, BigNumberish, string, BigNumberish]): string;
     decodeFunctionResult(functionFragment: "depositWithExpiry", data: BytesLike): Result;
     events: {};
 }
@@ -32,25 +26,25 @@ export interface IThorSwap extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        depositWithExpiry(vault: PromiseOrValue<string>, asset: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, memo: PromiseOrValue<string>, expiration: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositWithExpiry(vault: string, asset: string, amount: BigNumberish, memo: string, expiration: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    depositWithExpiry(vault: PromiseOrValue<string>, asset: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, memo: PromiseOrValue<string>, expiration: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    depositWithExpiry(vault: string, asset: string, amount: BigNumberish, memo: string, expiration: BigNumberish, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        depositWithExpiry(vault: PromiseOrValue<string>, asset: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, memo: PromiseOrValue<string>, expiration: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        depositWithExpiry(vault: string, asset: string, amount: BigNumberish, memo: string, expiration: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        depositWithExpiry(vault: PromiseOrValue<string>, asset: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, memo: PromiseOrValue<string>, expiration: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositWithExpiry(vault: string, asset: string, amount: BigNumberish, memo: string, expiration: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        depositWithExpiry(vault: PromiseOrValue<string>, asset: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, memo: PromiseOrValue<string>, expiration: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositWithExpiry(vault: string, asset: string, amount: BigNumberish, memo: string, expiration: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

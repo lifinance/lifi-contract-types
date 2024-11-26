@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   WithdrawablePeriphery,
   WithdrawablePeripheryInterface,
-} from "../WithdrawablePeriphery";
+} from "../WithdrawablePeriphery.js";
 
 const _abi = [
   {

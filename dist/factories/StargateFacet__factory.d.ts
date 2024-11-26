@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { StargateFacet, StargateFacetInterface } from "../StargateFacet";
+import type { StargateFacet, StargateFacetInterface } from "../StargateFacet.js";
 declare type StargateFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class StargateFacet__factory extends ContractFactory {
     constructor(...args: StargateFacetConstructorParams);
-    deploy(_composer: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_composer: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<StargateFacet>;
-    getDeployTransaction(_composer: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_composer: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): StargateFacet;
     connect(signer: Signer): StargateFacet__factory;

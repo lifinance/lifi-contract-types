@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IMultichainRouter,
   IMultichainRouterInterface,
-} from "../IMultichainRouter";
+} from "../IMultichainRouter.js";
 
 const _abi = [
   {

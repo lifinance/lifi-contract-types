@@ -9,8 +9,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface LibAccessInterface extends utils.Interface {
   functions: {};
@@ -78,21 +77,21 @@ export interface LibAccess extends BaseContract {
 
   filters: {
     "AccessGranted(address,bytes4)"(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
+      account?: string | null,
+      method?: BytesLike | null
     ): AccessGrantedEventFilter;
     AccessGranted(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
+      account?: string | null,
+      method?: BytesLike | null
     ): AccessGrantedEventFilter;
 
     "AccessRevoked(address,bytes4)"(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
+      account?: string | null,
+      method?: BytesLike | null
     ): AccessRevokedEventFilter;
     AccessRevoked(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
+      account?: string | null,
+      method?: BytesLike | null
     ): AccessRevokedEventFilter;
   };
 

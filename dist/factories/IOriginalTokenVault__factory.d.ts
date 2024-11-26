@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IOriginalTokenVault, IOriginalTokenVaultInterface } from "../IOriginalTokenVault";
+import type { IOriginalTokenVault, IOriginalTokenVaultInterface } from "../IOriginalTokenVault.js";
 export declare class IOriginalTokenVault__factory {
     static readonly abi: readonly [{
         readonly type: "function";

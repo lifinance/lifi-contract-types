@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   TransferrableOwnership,
   TransferrableOwnershipInterface,
-} from "../TransferrableOwnership";
+} from "../TransferrableOwnership.js";
 
 const _abi = [
   {
@@ -160,8 +159,8 @@ export class TransferrableOwnership__factory extends ContractFactory {
   }
 
   override deploy(
-    initialOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    initialOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<TransferrableOwnership> {
     return super.deploy(
       initialOwner,
@@ -169,8 +168,8 @@ export class TransferrableOwnership__factory extends ContractFactory {
     ) as Promise<TransferrableOwnership>;
   }
   override getDeployTransaction(
-    initialOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    initialOwner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(initialOwner, overrides || {});
   }

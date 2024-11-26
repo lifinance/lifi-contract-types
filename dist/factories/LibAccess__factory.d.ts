@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LibAccess, LibAccessInterface } from "../LibAccess";
+import type { LibAccess, LibAccessInterface } from "../LibAccess.js";
 declare type LibAccessConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibAccess__factory extends ContractFactory {
     constructor(...args: LibAccessConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<LibAccess>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LibAccess;
     connect(signer: Signer): LibAccess__factory;

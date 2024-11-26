@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, BigNumberish, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { Receiver, ReceiverInterface } from "../Receiver";
+import type { Receiver, ReceiverInterface } from "../Receiver.js";
 declare type ReceiverConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Receiver__factory extends ContractFactory {
     constructor(...args: ReceiverConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, _sgRouter: PromiseOrValue<string>, _amarokRouter: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, _sgRouter: string, _amarokRouter: string, _executor: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<Receiver>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, _sgRouter: PromiseOrValue<string>, _amarokRouter: PromiseOrValue<string>, _executor: PromiseOrValue<string>, _recoverGas: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, _sgRouter: string, _amarokRouter: string, _executor: string, _recoverGas: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): Receiver;
     connect(signer: Signer): Receiver__factory;

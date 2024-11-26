@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ERC1155Receiver, ERC1155ReceiverInterface } from "../ERC1155Receiver";
+import type { ERC1155Receiver, ERC1155ReceiverInterface } from "../ERC1155Receiver.js";
 export declare class ERC1155Receiver__factory {
     static readonly abi: readonly [{
         readonly type: "function";

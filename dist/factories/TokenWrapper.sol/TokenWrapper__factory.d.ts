@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../../common";
-import type { TokenWrapper, TokenWrapperInterface } from "../../TokenWrapper.sol/TokenWrapper";
+import type { TokenWrapper, TokenWrapperInterface } from "../../TokenWrapper.sol/TokenWrapper.js";
 declare type TokenWrapperConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TokenWrapper__factory extends ContractFactory {
     constructor(...args: TokenWrapperConstructorParams);
-    deploy(_wrappedToken: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_wrappedToken: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<TokenWrapper>;
-    getDeployTransaction(_wrappedToken: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_wrappedToken: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): TokenWrapper;
     connect(signer: Signer): TokenWrapper__factory;

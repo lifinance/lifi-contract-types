@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IBridge, IBridgeInterface } from "../IBridge";
+import type { IBridge, IBridgeInterface } from "../IBridge.js";
 
 const _abi = [
   {

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IMultichainRouter, IMultichainRouterInterface } from "../IMultichainRouter";
+import type { IMultichainRouter, IMultichainRouterInterface } from "../IMultichainRouter.js";
 export declare class IMultichainRouter__factory {
     static readonly abi: readonly [{
         readonly type: "function";

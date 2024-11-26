@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IPool, IPoolInterface } from "../../LiFiDEXAggregator.sol/IPool";
+import type {
+  IPool,
+  IPoolInterface,
+} from "../../LiFiDEXAggregator.sol/IPool.js";
 
 const _abi = [
   {

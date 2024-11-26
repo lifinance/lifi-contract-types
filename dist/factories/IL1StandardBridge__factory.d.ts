@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IL1StandardBridge, IL1StandardBridgeInterface } from "../IL1StandardBridge";
+import type { IL1StandardBridge, IL1StandardBridgeInterface } from "../IL1StandardBridge.js";
 export declare class IL1StandardBridge__factory {
     static readonly abi: readonly [{
         readonly type: "function";

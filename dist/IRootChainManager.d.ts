@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface IRootChainManagerInterface extends utils.Interface {
     functions: {
         "depositEtherFor(address)": FunctionFragment;
@@ -9,13 +9,9 @@ export interface IRootChainManagerInterface extends utils.Interface {
         "rootToChildToken(address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "depositEtherFor" | "depositFor" | "rootToChildToken"): FunctionFragment;
-    encodeFunctionData(functionFragment: "depositEtherFor", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "depositFor", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BytesLike>
-    ]): string;
-    encodeFunctionData(functionFragment: "rootToChildToken", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "depositEtherFor", values: [string]): string;
+    encodeFunctionData(functionFragment: "depositFor", values: [string, string, BytesLike]): string;
+    encodeFunctionData(functionFragment: "rootToChildToken", values: [string]): string;
     decodeFunctionResult(functionFragment: "depositEtherFor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "depositFor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "rootToChildToken", data: BytesLike): Result;
@@ -36,45 +32,45 @@ export interface IRootChainManager extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        depositEtherFor(user: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositEtherFor(user: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        depositFor(user: PromiseOrValue<string>, rootToken: PromiseOrValue<string>, depositData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositFor(user: string, rootToken: string, depositData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        rootToChildToken(rootToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string] & {
+        rootToChildToken(rootToken: string, overrides?: CallOverrides): Promise<[string] & {
             childToken: string;
         }>;
     };
-    depositEtherFor(user: PromiseOrValue<string>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    depositEtherFor(user: string, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    depositFor(user: PromiseOrValue<string>, rootToken: PromiseOrValue<string>, depositData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    depositFor(user: string, rootToken: string, depositData: BytesLike, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    rootToChildToken(rootToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+    rootToChildToken(rootToken: string, overrides?: CallOverrides): Promise<string>;
     callStatic: {
-        depositEtherFor(user: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        depositFor(user: PromiseOrValue<string>, rootToken: PromiseOrValue<string>, depositData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
-        rootToChildToken(rootToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+        depositEtherFor(user: string, overrides?: CallOverrides): Promise<void>;
+        depositFor(user: string, rootToken: string, depositData: BytesLike, overrides?: CallOverrides): Promise<void>;
+        rootToChildToken(rootToken: string, overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        depositEtherFor(user: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositEtherFor(user: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        depositFor(user: PromiseOrValue<string>, rootToken: PromiseOrValue<string>, depositData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositFor(user: string, rootToken: string, depositData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        rootToChildToken(rootToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        rootToChildToken(rootToken: string, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        depositEtherFor(user: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        depositEtherFor(user: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        depositFor(user: PromiseOrValue<string>, rootToken: PromiseOrValue<string>, depositData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositFor(user: string, rootToken: string, depositData: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        rootToChildToken(rootToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        rootToChildToken(rootToken: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

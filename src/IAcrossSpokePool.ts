@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IAcrossSpokePoolInterface extends utils.Interface {
   functions: {
@@ -36,31 +35,31 @@ export interface IAcrossSpokePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "deposit",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BigNumberish
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "depositV3",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      string,
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
     ]
   ): string;
 
@@ -98,88 +97,88 @@ export interface IAcrossSpokePool extends BaseContract {
 
   functions: {
     deposit(
-      recipient: PromiseOrValue<string>,
-      originToken: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      relayerFeePct: PromiseOrValue<BigNumberish>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      maxCount: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      recipient: string,
+      originToken: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      relayerFeePct: BigNumberish,
+      quoteTimestamp: BigNumberish,
+      message: BytesLike,
+      maxCount: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     depositV3(
-      depositor: PromiseOrValue<string>,
-      recipient: PromiseOrValue<string>,
-      inputToken: PromiseOrValue<string>,
-      outputToken: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      outputAmount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      exclusiveRelayer: PromiseOrValue<string>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      fillDeadline: PromiseOrValue<BigNumberish>,
-      exclusivityDeadline: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      depositor: string,
+      recipient: string,
+      inputToken: string,
+      outputToken: string,
+      inputAmount: BigNumberish,
+      outputAmount: BigNumberish,
+      destinationChainId: BigNumberish,
+      exclusiveRelayer: string,
+      quoteTimestamp: BigNumberish,
+      fillDeadline: BigNumberish,
+      exclusivityDeadline: BigNumberish,
+      message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   deposit(
-    recipient: PromiseOrValue<string>,
-    originToken: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    relayerFeePct: PromiseOrValue<BigNumberish>,
-    quoteTimestamp: PromiseOrValue<BigNumberish>,
-    message: PromiseOrValue<BytesLike>,
-    maxCount: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    recipient: string,
+    originToken: string,
+    amount: BigNumberish,
+    destinationChainId: BigNumberish,
+    relayerFeePct: BigNumberish,
+    quoteTimestamp: BigNumberish,
+    message: BytesLike,
+    maxCount: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   depositV3(
-    depositor: PromiseOrValue<string>,
-    recipient: PromiseOrValue<string>,
-    inputToken: PromiseOrValue<string>,
-    outputToken: PromiseOrValue<string>,
-    inputAmount: PromiseOrValue<BigNumberish>,
-    outputAmount: PromiseOrValue<BigNumberish>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    exclusiveRelayer: PromiseOrValue<string>,
-    quoteTimestamp: PromiseOrValue<BigNumberish>,
-    fillDeadline: PromiseOrValue<BigNumberish>,
-    exclusivityDeadline: PromiseOrValue<BigNumberish>,
-    message: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    depositor: string,
+    recipient: string,
+    inputToken: string,
+    outputToken: string,
+    inputAmount: BigNumberish,
+    outputAmount: BigNumberish,
+    destinationChainId: BigNumberish,
+    exclusiveRelayer: string,
+    quoteTimestamp: BigNumberish,
+    fillDeadline: BigNumberish,
+    exclusivityDeadline: BigNumberish,
+    message: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     deposit(
-      recipient: PromiseOrValue<string>,
-      originToken: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      relayerFeePct: PromiseOrValue<BigNumberish>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      maxCount: PromiseOrValue<BigNumberish>,
+      recipient: string,
+      originToken: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      relayerFeePct: BigNumberish,
+      quoteTimestamp: BigNumberish,
+      message: BytesLike,
+      maxCount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     depositV3(
-      depositor: PromiseOrValue<string>,
-      recipient: PromiseOrValue<string>,
-      inputToken: PromiseOrValue<string>,
-      outputToken: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      outputAmount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      exclusiveRelayer: PromiseOrValue<string>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      fillDeadline: PromiseOrValue<BigNumberish>,
-      exclusivityDeadline: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
+      depositor: string,
+      recipient: string,
+      inputToken: string,
+      outputToken: string,
+      inputAmount: BigNumberish,
+      outputAmount: BigNumberish,
+      destinationChainId: BigNumberish,
+      exclusiveRelayer: string,
+      quoteTimestamp: BigNumberish,
+      fillDeadline: BigNumberish,
+      exclusivityDeadline: BigNumberish,
+      message: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -188,61 +187,61 @@ export interface IAcrossSpokePool extends BaseContract {
 
   estimateGas: {
     deposit(
-      recipient: PromiseOrValue<string>,
-      originToken: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      relayerFeePct: PromiseOrValue<BigNumberish>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      maxCount: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      recipient: string,
+      originToken: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      relayerFeePct: BigNumberish,
+      quoteTimestamp: BigNumberish,
+      message: BytesLike,
+      maxCount: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     depositV3(
-      depositor: PromiseOrValue<string>,
-      recipient: PromiseOrValue<string>,
-      inputToken: PromiseOrValue<string>,
-      outputToken: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      outputAmount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      exclusiveRelayer: PromiseOrValue<string>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      fillDeadline: PromiseOrValue<BigNumberish>,
-      exclusivityDeadline: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      depositor: string,
+      recipient: string,
+      inputToken: string,
+      outputToken: string,
+      inputAmount: BigNumberish,
+      outputAmount: BigNumberish,
+      destinationChainId: BigNumberish,
+      exclusiveRelayer: string,
+      quoteTimestamp: BigNumberish,
+      fillDeadline: BigNumberish,
+      exclusivityDeadline: BigNumberish,
+      message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     deposit(
-      recipient: PromiseOrValue<string>,
-      originToken: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      relayerFeePct: PromiseOrValue<BigNumberish>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      maxCount: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      recipient: string,
+      originToken: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      relayerFeePct: BigNumberish,
+      quoteTimestamp: BigNumberish,
+      message: BytesLike,
+      maxCount: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     depositV3(
-      depositor: PromiseOrValue<string>,
-      recipient: PromiseOrValue<string>,
-      inputToken: PromiseOrValue<string>,
-      outputToken: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      outputAmount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      exclusiveRelayer: PromiseOrValue<string>,
-      quoteTimestamp: PromiseOrValue<BigNumberish>,
-      fillDeadline: PromiseOrValue<BigNumberish>,
-      exclusivityDeadline: PromiseOrValue<BigNumberish>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      depositor: string,
+      recipient: string,
+      inputToken: string,
+      outputToken: string,
+      inputAmount: BigNumberish,
+      outputAmount: BigNumberish,
+      destinationChainId: BigNumberish,
+      exclusiveRelayer: string,
+      quoteTimestamp: BigNumberish,
+      fillDeadline: BigNumberish,
+      exclusivityDeadline: BigNumberish,
+      message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

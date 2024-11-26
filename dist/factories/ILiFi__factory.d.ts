@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ILiFi, ILiFiInterface } from "../ILiFi";
+import type { ILiFi, ILiFiInterface } from "../ILiFi.js";
 export declare class ILiFi__factory {
     static readonly abi: readonly [{
         readonly type: "event";

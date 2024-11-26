@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { GenericSwapFacetV3, GenericSwapFacetV3Interface } from "../GenericSwapFacetV3";
+import type { GenericSwapFacetV3, GenericSwapFacetV3Interface } from "../GenericSwapFacetV3.js";
 declare type GenericSwapFacetV3ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class GenericSwapFacetV3__factory extends ContractFactory {
     constructor(...args: GenericSwapFacetV3ConstructorParams);
-    deploy(_nativeAddress: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_nativeAddress: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<GenericSwapFacetV3>;
-    getDeployTransaction(_nativeAddress: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_nativeAddress: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): GenericSwapFacetV3;
     connect(signer: Signer): GenericSwapFacetV3__factory;

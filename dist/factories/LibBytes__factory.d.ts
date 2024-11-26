@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LibBytes, LibBytesInterface } from "../LibBytes";
+import type { LibBytes, LibBytesInterface } from "../LibBytes.js";
 declare type LibBytesConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibBytes__factory extends ContractFactory {
     constructor(...args: LibBytesConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<LibBytes>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LibBytes;
     connect(signer: Signer): LibBytes__factory;

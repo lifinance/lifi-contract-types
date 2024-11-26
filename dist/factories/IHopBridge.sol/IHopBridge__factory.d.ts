@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IHopBridge, IHopBridgeInterface } from "../../IHopBridge.sol/IHopBridge";
+import type { IHopBridge, IHopBridgeInterface } from "../../IHopBridge.sol/IHopBridge.js";
 export declare class IHopBridge__factory {
     static readonly abi: readonly [{
         readonly type: "function";

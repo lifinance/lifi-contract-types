@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { HopFacetPacked, HopFacetPackedInterface } from "../HopFacetPacked";
+import type { HopFacetPacked, HopFacetPackedInterface } from "../HopFacetPacked.js";
 declare type HopFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class HopFacetPacked__factory extends ContractFactory {
     constructor(...args: HopFacetPackedConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, _wrapper: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, _wrapper: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<HopFacetPacked>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, _wrapper: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, _wrapper: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): HopFacetPacked;
     connect(signer: Signer): HopFacetPacked__factory;

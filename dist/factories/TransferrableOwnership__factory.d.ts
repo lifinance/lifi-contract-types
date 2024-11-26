@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { TransferrableOwnership, TransferrableOwnershipInterface } from "../TransferrableOwnership";
+import type { TransferrableOwnership, TransferrableOwnershipInterface } from "../TransferrableOwnership.js";
 declare type TransferrableOwnershipConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TransferrableOwnership__factory extends ContractFactory {
     constructor(...args: TransferrableOwnershipConstructorParams);
-    deploy(initialOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(initialOwner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<TransferrableOwnership>;
-    getDeployTransaction(initialOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(initialOwner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): TransferrableOwnership;
     connect(signer: Signer): TransferrableOwnership__factory;

@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IAcrossSpokePool,
   IAcrossSpokePoolInterface,
-} from "../IAcrossSpokePool";
+} from "../IAcrossSpokePool.js";
 
 const _abi = [
   {

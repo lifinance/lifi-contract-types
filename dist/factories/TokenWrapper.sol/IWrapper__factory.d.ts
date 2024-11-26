@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IWrapper, IWrapperInterface } from "../../TokenWrapper.sol/IWrapper";
+import type { IWrapper, IWrapperInterface } from "../../TokenWrapper.sol/IWrapper.js";
 export declare class IWrapper__factory {
     static readonly abi: readonly [{
         readonly type: "function";

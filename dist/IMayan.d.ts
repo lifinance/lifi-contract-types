@@ -1,14 +1,14 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace IMayan {
     type PermitParamsStruct = {
-        value: PromiseOrValue<BigNumberish>;
-        deadline: PromiseOrValue<BigNumberish>;
-        v: PromiseOrValue<BigNumberish>;
-        r: PromiseOrValue<BytesLike>;
-        s: PromiseOrValue<BytesLike>;
+        value: BigNumberish;
+        deadline: BigNumberish;
+        v: BigNumberish;
+        r: BytesLike;
+        s: BytesLike;
     };
     type PermitParamsStructOutput = [
         BigNumber,
@@ -30,14 +30,8 @@ export interface IMayanInterface extends utils.Interface {
         "forwardEth(address,bytes)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "forwardERC20" | "forwardEth"): FunctionFragment;
-    encodeFunctionData(functionFragment: "forwardERC20", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        IMayan.PermitParamsStruct,
-        PromiseOrValue<string>,
-        PromiseOrValue<BytesLike>
-    ]): string;
-    encodeFunctionData(functionFragment: "forwardEth", values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "forwardERC20", values: [string, BigNumberish, IMayan.PermitParamsStruct, string, BytesLike]): string;
+    encodeFunctionData(functionFragment: "forwardEth", values: [string, BytesLike]): string;
     decodeFunctionResult(functionFragment: "forwardERC20", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "forwardEth", data: BytesLike): Result;
     events: {};
@@ -57,38 +51,38 @@ export interface IMayan extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardERC20(tokenIn: string, amountIn: BigNumberish, permitParams: IMayan.PermitParamsStruct, mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardEth(mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    forwardERC20(tokenIn: string, amountIn: BigNumberish, permitParams: IMayan.PermitParamsStruct, mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    forwardEth(mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
-        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+        forwardERC20(tokenIn: string, amountIn: BigNumberish, permitParams: IMayan.PermitParamsStruct, mayanProtocol: string, protocolData: BytesLike, overrides?: CallOverrides): Promise<void>;
+        forwardEth(mayanProtocol: string, protocolData: BytesLike, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardERC20(tokenIn: string, amountIn: BigNumberish, permitParams: IMayan.PermitParamsStruct, mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardEth(mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        forwardERC20(tokenIn: PromiseOrValue<string>, amountIn: PromiseOrValue<BigNumberish>, permitParams: IMayan.PermitParamsStruct, mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardERC20(tokenIn: string, amountIn: BigNumberish, permitParams: IMayan.PermitParamsStruct, mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        forwardEth(mayanProtocol: PromiseOrValue<string>, protocolData: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        forwardEth(mayanProtocol: string, protocolData: BytesLike, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

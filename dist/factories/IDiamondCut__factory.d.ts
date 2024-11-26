@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDiamondCut, IDiamondCutInterface } from "../IDiamondCut";
+import type { IDiamondCut, IDiamondCutInterface } from "../IDiamondCut.js";
 export declare class IDiamondCut__factory {
     static readonly abi: readonly [{
         readonly type: "function";

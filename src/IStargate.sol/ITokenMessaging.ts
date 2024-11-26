@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export interface ITokenMessagingInterface extends utils.Interface {
   functions: {
@@ -33,13 +32,10 @@ export interface ITokenMessagingInterface extends utils.Interface {
     nameOrSignatureOrTopic: "assetIds" | "stargateImpls"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "assetIds",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "assetIds", values: [string]): string;
   encodeFunctionData(
     functionFragment: "stargateImpls",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "assetIds", data: BytesLike): Result;
@@ -79,34 +75,31 @@ export interface ITokenMessaging extends BaseContract {
 
   functions: {
     assetIds(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     stargateImpls(
-      assetId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      assetId: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   assetIds(
-    tokenAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokenAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   stargateImpls(
-    assetId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    assetId: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    assetIds(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<number>;
+    assetIds(tokenAddress: string, overrides?: CallOverrides): Promise<number>;
 
     stargateImpls(
-      assetId: PromiseOrValue<BigNumberish>,
+      assetId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -115,25 +108,25 @@ export interface ITokenMessaging extends BaseContract {
 
   estimateGas: {
     assetIds(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     stargateImpls(
-      assetId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      assetId: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     assetIds(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     stargateImpls(
-      assetId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      assetId: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

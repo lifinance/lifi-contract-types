@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IMultichainToken, IMultichainTokenInterface } from "../IMultichainToken";
+import type { IMultichainToken, IMultichainTokenInterface } from "../IMultichainToken.js";
 export declare class IMultichainToken__factory {
     static readonly abi: readonly [{
         readonly type: "function";

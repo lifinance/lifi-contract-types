@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IExecutor, IExecutorInterface } from "../IExecutor";
+import type { IExecutor, IExecutorInterface } from "../IExecutor.js";
 export declare class IExecutor__factory {
     static readonly abi: readonly [{
         readonly type: "function";

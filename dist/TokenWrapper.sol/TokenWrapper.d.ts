@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../common.js";
 export interface TokenWrapperInterface extends utils.Interface {
     functions: {
         "deposit()": FunctionFragment;
@@ -33,18 +33,18 @@ export interface TokenWrapper extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         withdraw(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         wrappedToken(overrides?: CallOverrides): Promise<[string]>;
     };
     deposit(overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     withdraw(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     wrappedToken(overrides?: CallOverrides): Promise<string>;
     callStatic: {
@@ -55,19 +55,19 @@ export interface TokenWrapper extends BaseContract {
     filters: {};
     estimateGas: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         withdraw(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         wrappedToken(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         withdraw(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         wrappedToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };

@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { WithdrawFacet, WithdrawFacetInterface } from "../WithdrawFacet";
+import type { WithdrawFacet, WithdrawFacetInterface } from "../WithdrawFacet.js";
 declare type WithdrawFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WithdrawFacet__factory extends ContractFactory {
     constructor(...args: WithdrawFacetConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<WithdrawFacet>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): WithdrawFacet;
     connect(signer: Signer): WithdrawFacet__factory;

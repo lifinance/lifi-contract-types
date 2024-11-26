@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ITokenMessaging, ITokenMessagingInterface } from "../../IStargate.sol/ITokenMessaging";
+import type { ITokenMessaging, ITokenMessagingInterface } from "../../IStargate.sol/ITokenMessaging.js";
 export declare class ITokenMessaging__factory {
     static readonly abi: readonly [{
         readonly type: "function";

@@ -1,22 +1,22 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace ITransactionManager {
     type InvariantTransactionDataStruct = {
-        receivingChainTxManagerAddress: PromiseOrValue<string>;
-        user: PromiseOrValue<string>;
-        router: PromiseOrValue<string>;
-        initiator: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receivingAssetId: PromiseOrValue<string>;
-        sendingChainFallback: PromiseOrValue<string>;
-        receivingAddress: PromiseOrValue<string>;
-        callTo: PromiseOrValue<string>;
-        sendingChainId: PromiseOrValue<BigNumberish>;
-        receivingChainId: PromiseOrValue<BigNumberish>;
-        callDataHash: PromiseOrValue<BytesLike>;
-        transactionId: PromiseOrValue<BytesLike>;
+        receivingChainTxManagerAddress: string;
+        user: string;
+        router: string;
+        initiator: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        sendingChainFallback: string;
+        receivingAddress: string;
+        callTo: string;
+        sendingChainId: BigNumberish;
+        receivingChainId: BigNumberish;
+        callDataHash: BytesLike;
+        transactionId: BytesLike;
     };
     type InvariantTransactionDataStructOutput = [
         string,
@@ -49,12 +49,12 @@ export declare namespace ITransactionManager {
     };
     type PrepareArgsStruct = {
         invariantData: ITransactionManager.InvariantTransactionDataStruct;
-        amount: PromiseOrValue<BigNumberish>;
-        expiry: PromiseOrValue<BigNumberish>;
-        encryptedCallData: PromiseOrValue<BytesLike>;
-        encodedBid: PromiseOrValue<BytesLike>;
-        bidSignature: PromiseOrValue<BytesLike>;
-        encodedMeta: PromiseOrValue<BytesLike>;
+        amount: BigNumberish;
+        expiry: BigNumberish;
+        encryptedCallData: BytesLike;
+        encodedBid: BytesLike;
+        bidSignature: BytesLike;
+        encodedMeta: BytesLike;
     };
     type PrepareArgsStructOutput = [
         ITransactionManager.InvariantTransactionDataStructOutput,
@@ -74,22 +74,22 @@ export declare namespace ITransactionManager {
         encodedMeta: string;
     };
     type TransactionDataStruct = {
-        receivingChainTxManagerAddress: PromiseOrValue<string>;
-        user: PromiseOrValue<string>;
-        router: PromiseOrValue<string>;
-        initiator: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receivingAssetId: PromiseOrValue<string>;
-        sendingChainFallback: PromiseOrValue<string>;
-        receivingAddress: PromiseOrValue<string>;
-        callTo: PromiseOrValue<string>;
-        callDataHash: PromiseOrValue<BytesLike>;
-        transactionId: PromiseOrValue<BytesLike>;
-        sendingChainId: PromiseOrValue<BigNumberish>;
-        receivingChainId: PromiseOrValue<BigNumberish>;
-        amount: PromiseOrValue<BigNumberish>;
-        expiry: PromiseOrValue<BigNumberish>;
-        preparedBlockNumber: PromiseOrValue<BigNumberish>;
+        receivingChainTxManagerAddress: string;
+        user: string;
+        router: string;
+        initiator: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        sendingChainFallback: string;
+        receivingAddress: string;
+        callTo: string;
+        callDataHash: BytesLike;
+        transactionId: BytesLike;
+        sendingChainId: BigNumberish;
+        receivingChainId: BigNumberish;
+        amount: BigNumberish;
+        expiry: BigNumberish;
+        preparedBlockNumber: BigNumberish;
     };
     type TransactionDataStructOutput = [
         string,
@@ -152,11 +152,11 @@ export interface ITransactionManager extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         prepare(args: ITransactionManager.PrepareArgsStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     prepare(args: ITransactionManager.PrepareArgsStruct, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         prepare(args: ITransactionManager.PrepareArgsStruct, overrides?: CallOverrides): Promise<ITransactionManager.TransactionDataStructOutput>;
@@ -164,12 +164,12 @@ export interface ITransactionManager extends BaseContract {
     filters: {};
     estimateGas: {
         prepare(args: ITransactionManager.PrepareArgsStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         prepare(args: ITransactionManager.PrepareArgsStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

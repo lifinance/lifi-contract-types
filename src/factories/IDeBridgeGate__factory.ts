@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDeBridgeGate, IDeBridgeGateInterface } from "../IDeBridgeGate";
+import type {
+  IDeBridgeGate,
+  IDeBridgeGateInterface,
+} from "../IDeBridgeGate.js";
 
 const _abi = [
   {

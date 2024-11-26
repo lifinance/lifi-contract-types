@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { GnosisBridgeFacet, GnosisBridgeFacetInterface } from "../GnosisBridgeFacet";
+import type { GnosisBridgeFacet, GnosisBridgeFacetInterface } from "../GnosisBridgeFacet.js";
 declare type GnosisBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class GnosisBridgeFacet__factory extends ContractFactory {
     constructor(...args: GnosisBridgeFacetConstructorParams);
-    deploy(_xDaiBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_xDaiBridge: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<GnosisBridgeFacet>;
-    getDeployTransaction(_xDaiBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_xDaiBridge: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): GnosisBridgeFacet;
     connect(signer: Signer): GnosisBridgeFacet__factory;

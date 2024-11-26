@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, PayableOverrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LiFiDiamond, LiFiDiamondInterface } from "../LiFiDiamond";
+import type { LiFiDiamond, LiFiDiamondInterface } from "../LiFiDiamond.js";
 declare type LiFiDiamondConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LiFiDiamond__factory extends ContractFactory {
     constructor(...args: LiFiDiamondConstructorParams);
-    deploy(_contractOwner: PromiseOrValue<string>, _diamondCutFacet: PromiseOrValue<string>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_contractOwner: string, _diamondCutFacet: string, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<LiFiDiamond>;
-    getDeployTransaction(_contractOwner: PromiseOrValue<string>, _diamondCutFacet: PromiseOrValue<string>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_contractOwner: string, _diamondCutFacet: string, overrides?: PayableOverrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LiFiDiamond;
     connect(signer: Signer): LiFiDiamond__factory;

@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IERC721Receiver,
   IERC721ReceiverInterface,
-} from "../IERC721Receiver";
+} from "../IERC721Receiver.js";
 
 const _abi = [
   {

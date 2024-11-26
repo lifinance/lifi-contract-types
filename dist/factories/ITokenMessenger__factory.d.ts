@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ITokenMessenger, ITokenMessengerInterface } from "../ITokenMessenger";
+import type { ITokenMessenger, ITokenMessengerInterface } from "../ITokenMessenger.js";
 export declare class ITokenMessenger__factory {
     static readonly abi: readonly [{
         readonly type: "function";

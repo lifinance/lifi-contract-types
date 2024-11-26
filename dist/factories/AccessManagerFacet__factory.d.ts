@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { AccessManagerFacet, AccessManagerFacetInterface } from "../AccessManagerFacet";
+import type { AccessManagerFacet, AccessManagerFacetInterface } from "../AccessManagerFacet.js";
 declare type AccessManagerFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AccessManagerFacet__factory extends ContractFactory {
     constructor(...args: AccessManagerFacetConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<AccessManagerFacet>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): AccessManagerFacet;
     connect(signer: Signer): AccessManagerFacet__factory;

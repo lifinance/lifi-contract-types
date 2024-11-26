@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ICircleBridgeProxy,
   ICircleBridgeProxyInterface,
-} from "../ICircleBridgeProxy";
+} from "../ICircleBridgeProxy.js";
 
 const _abi = [
   {

@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   StandardizedCallFacet,
   StandardizedCallFacetInterface,
-} from "../StandardizedCallFacet";
+} from "../StandardizedCallFacet.js";
 
 const _abi = [
   {
@@ -90,12 +89,12 @@ export class StandardizedCallFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<StandardizedCallFacet> {
     return super.deploy(overrides || {}) as Promise<StandardizedCallFacet>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

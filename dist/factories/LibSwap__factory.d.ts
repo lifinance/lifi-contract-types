@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LibSwap, LibSwapInterface } from "../LibSwap";
+import type { LibSwap, LibSwapInterface } from "../LibSwap.js";
 declare type LibSwapConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibSwap__factory extends ContractFactory {
     constructor(...args: LibSwapConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<LibSwap>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LibSwap;
     connect(signer: Signer): LibSwap__factory;

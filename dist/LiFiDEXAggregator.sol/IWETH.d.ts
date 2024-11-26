@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../common.js";
 export interface IWETHInterface extends utils.Interface {
     functions: {
         "deposit()": FunctionFragment;
@@ -10,8 +10,8 @@ export interface IWETHInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "deposit" | "transfer" | "withdraw"): FunctionFragment;
     encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transfer", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "withdraw", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "transfer", values: [string, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "withdraw", values: [BigNumberish]): string;
     decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -33,50 +33,50 @@ export interface IWETH extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        transfer(to: PromiseOrValue<string>, value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transfer(to: string, value: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        withdraw(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(arg0: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     deposit(overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    transfer(to: PromiseOrValue<string>, value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    transfer(to: string, value: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    withdraw(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    withdraw(arg0: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         deposit(overrides?: CallOverrides): Promise<void>;
-        transfer(to: PromiseOrValue<string>, value: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<boolean>;
-        withdraw(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        transfer(to: string, value: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+        withdraw(arg0: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        transfer(to: PromiseOrValue<string>, value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transfer(to: string, value: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        withdraw(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(arg0: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        transfer(to: PromiseOrValue<string>, value: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transfer(to: string, value: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        withdraw(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(arg0: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

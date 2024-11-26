@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { CelerIMFacetMutable, CelerIMFacetMutableInterface } from "../CelerIMFacetMutable";
+import type { CelerIMFacetMutable, CelerIMFacetMutableInterface } from "../CelerIMFacetMutable.js";
 declare type CelerIMFacetMutableConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CelerIMFacetMutable__factory extends ContractFactory {
     constructor(...args: CelerIMFacetMutableConstructorParams);
-    deploy(_messageBus: PromiseOrValue<string>, _relayerOwner: PromiseOrValue<string>, _diamondAddress: PromiseOrValue<string>, _cfUSDC: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_messageBus: string, _relayerOwner: string, _diamondAddress: string, _cfUSDC: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<CelerIMFacetMutable>;
-    getDeployTransaction(_messageBus: PromiseOrValue<string>, _relayerOwner: PromiseOrValue<string>, _diamondAddress: PromiseOrValue<string>, _cfUSDC: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_messageBus: string, _relayerOwner: string, _diamondAddress: string, _cfUSDC: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): CelerIMFacetMutable;
     connect(signer: Signer): CelerIMFacetMutable__factory;

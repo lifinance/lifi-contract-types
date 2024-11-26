@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../../common";
-import type { LiFiDEXAggregator, LiFiDEXAggregatorInterface } from "../../LiFiDEXAggregator.sol/LiFiDEXAggregator";
+import type { LiFiDEXAggregator, LiFiDEXAggregatorInterface } from "../../LiFiDEXAggregator.sol/LiFiDEXAggregator.js";
 declare type LiFiDEXAggregatorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LiFiDEXAggregator__factory extends ContractFactory {
     constructor(...args: LiFiDEXAggregatorConstructorParams);
-    deploy(_bentoBox: PromiseOrValue<string>, priviledgedUserList: PromiseOrValue<string>[], overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_bentoBox: string, priviledgedUserList: string[], overrides?: Overrides & {
+        from?: string;
     }): Promise<LiFiDEXAggregator>;
-    getDeployTransaction(_bentoBox: PromiseOrValue<string>, priviledgedUserList: PromiseOrValue<string>[], overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_bentoBox: string, priviledgedUserList: string[], overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LiFiDEXAggregator;
     connect(signer: Signer): LiFiDEXAggregator__factory;

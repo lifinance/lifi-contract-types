@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../common.js";
 export interface ITridentCLPoolInterface extends utils.Interface {
     functions: {
         "swap(address,bool,int256,uint160,bool,bytes)": FunctionFragment;
@@ -9,14 +9,7 @@ export interface ITridentCLPoolInterface extends utils.Interface {
         "token1()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "swap" | "token0" | "token1"): FunctionFragment;
-    encodeFunctionData(functionFragment: "swap", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<boolean>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<boolean>,
-        PromiseOrValue<BytesLike>
-    ]): string;
+    encodeFunctionData(functionFragment: "swap", values: [string, boolean, BigNumberish, BigNumberish, boolean, BytesLike]): string;
     encodeFunctionData(functionFragment: "token0", values?: undefined): string;
     encodeFunctionData(functionFragment: "token1", values?: undefined): string;
     decodeFunctionResult(functionFragment: "swap", data: BytesLike): Result;
@@ -39,27 +32,27 @@ export interface ITridentCLPool extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, unwrapBento: PromiseOrValue<boolean>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, unwrapBento: boolean, data: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         token0(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         token1(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, unwrapBento: PromiseOrValue<boolean>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, unwrapBento: boolean, data: BytesLike, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     token0(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     token1(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, unwrapBento: PromiseOrValue<boolean>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, unwrapBento: boolean, data: BytesLike, overrides?: CallOverrides): Promise<[
             BigNumber,
             BigNumber
         ] & {
@@ -71,25 +64,25 @@ export interface ITridentCLPool extends BaseContract {
     };
     filters: {};
     estimateGas: {
-        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, unwrapBento: PromiseOrValue<boolean>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, unwrapBento: boolean, data: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
         token0(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         token1(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        swap(recipient: PromiseOrValue<string>, zeroForOne: PromiseOrValue<boolean>, amountSpecified: PromiseOrValue<BigNumberish>, sqrtPriceLimitX96: PromiseOrValue<BigNumberish>, unwrapBento: PromiseOrValue<boolean>, data: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        swap(recipient: string, zeroForOne: boolean, amountSpecified: BigNumberish, sqrtPriceLimitX96: BigNumberish, unwrapBento: boolean, data: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         token0(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         token1(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

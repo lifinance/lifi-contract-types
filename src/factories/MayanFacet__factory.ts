@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { MayanFacet, MayanFacetInterface } from "../MayanFacet";
+import type { MayanFacet, MayanFacetInterface } from "../MayanFacet.js";
 
 const _abi = [
   {
@@ -667,14 +666,14 @@ export class MayanFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _mayan: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _mayan: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<MayanFacet> {
     return super.deploy(_mayan, overrides || {}) as Promise<MayanFacet>;
   }
   override getDeployTransaction(
-    _mayan: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _mayan: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_mayan, overrides || {});
   }

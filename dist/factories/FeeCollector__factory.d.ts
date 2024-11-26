@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { FeeCollector, FeeCollectorInterface } from "../FeeCollector";
+import type { FeeCollector, FeeCollectorInterface } from "../FeeCollector.js";
 declare type FeeCollectorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class FeeCollector__factory extends ContractFactory {
     constructor(...args: FeeCollectorConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<FeeCollector>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): FeeCollector;
     connect(signer: Signer): FeeCollector__factory;

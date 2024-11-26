@@ -1,2 +1,2 @@
-export type { CelerIMFacetBase } from "./CelerIMFacetBase";
-export type { CelerToken } from "./CelerToken";
+export type { CelerIMFacetBase } from "./CelerIMFacetBase.js";
+export type { CelerToken } from "./CelerToken.js";

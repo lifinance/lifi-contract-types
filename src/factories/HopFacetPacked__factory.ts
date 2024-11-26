@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   HopFacetPacked,
   HopFacetPackedInterface,
-} from "../HopFacetPacked";
+} from "../HopFacetPacked.js";
 
 const _abi = [
   {
@@ -1434,9 +1433,9 @@ export class HopFacetPacked__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    _wrapper: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _wrapper: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<HopFacetPacked> {
     return super.deploy(
       _owner,
@@ -1445,9 +1444,9 @@ export class HopFacetPacked__factory extends ContractFactory {
     ) as Promise<HopFacetPacked>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    _wrapper: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _wrapper: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_owner, _wrapper, overrides || {});
   }

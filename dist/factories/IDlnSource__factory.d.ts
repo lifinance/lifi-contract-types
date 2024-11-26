@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDlnSource, IDlnSourceInterface } from "../IDlnSource";
+import type { IDlnSource, IDlnSourceInterface } from "../IDlnSource.js";
 export declare class IDlnSource__factory {
     static readonly abi: readonly [{
         readonly type: "function";

@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { SymbiosisFacet, SymbiosisFacetInterface } from "../SymbiosisFacet";
+import type { SymbiosisFacet, SymbiosisFacetInterface } from "../SymbiosisFacet.js";
 declare type SymbiosisFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SymbiosisFacet__factory extends ContractFactory {
     constructor(...args: SymbiosisFacetConstructorParams);
-    deploy(_symbiosisMetaRouter: PromiseOrValue<string>, _symbiosisGateway: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_symbiosisMetaRouter: string, _symbiosisGateway: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<SymbiosisFacet>;
-    getDeployTransaction(_symbiosisMetaRouter: PromiseOrValue<string>, _symbiosisGateway: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_symbiosisMetaRouter: string, _symbiosisGateway: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): SymbiosisFacet;
     connect(signer: Signer): SymbiosisFacet__factory;

@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { ERC721Holder, ERC721HolderInterface } from "../ERC721Holder";
+import type { ERC721Holder, ERC721HolderInterface } from "../ERC721Holder.js";
 
 const _abi = [
   {
@@ -64,12 +63,12 @@ export class ERC721Holder__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ERC721Holder> {
     return super.deploy(overrides || {}) as Promise<ERC721Holder>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IXDaiBridge, IXDaiBridgeInterface } from "../IXDaiBridge";
+import type { IXDaiBridge, IXDaiBridgeInterface } from "../IXDaiBridge.js";
 export declare class IXDaiBridge__factory {
     static readonly abi: readonly [{
         readonly type: "function";

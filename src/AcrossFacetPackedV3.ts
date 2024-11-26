@@ -25,21 +25,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    bridge: PromiseOrValue<string>;
-    integrator: PromiseOrValue<string>;
-    referrer: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    minAmount: PromiseOrValue<BigNumberish>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    hasSourceSwaps: PromiseOrValue<boolean>;
-    hasDestinationCall: PromiseOrValue<boolean>;
+    transactionId: BytesLike;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumberish;
+    destinationChainId: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
   export type BridgeDataStructOutput = [
@@ -69,15 +68,15 @@ export declare namespace ILiFi {
 
 export declare namespace AcrossFacetV3 {
   export type AcrossV3DataStruct = {
-    receiverAddress: PromiseOrValue<string>;
-    refundAddress: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    outputAmount: PromiseOrValue<BigNumberish>;
-    exclusiveRelayer: PromiseOrValue<string>;
-    quoteTimestamp: PromiseOrValue<BigNumberish>;
-    fillDeadline: PromiseOrValue<BigNumberish>;
-    exclusivityDeadline: PromiseOrValue<BigNumberish>;
-    message: PromiseOrValue<BytesLike>;
+    receiverAddress: string;
+    refundAddress: string;
+    receivingAssetId: string;
+    outputAmount: BigNumberish;
+    exclusiveRelayer: string;
+    quoteTimestamp: BigNumberish;
+    fillDeadline: BigNumberish;
+    exclusivityDeadline: BigNumberish;
+    message: BytesLike;
   };
 
   export type AcrossV3DataStructOutput = [
@@ -105,16 +104,16 @@ export declare namespace AcrossFacetV3 {
 
 export declare namespace AcrossFacetPackedV3 {
   export type PackedParametersStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    receiver: PromiseOrValue<string>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    receivingAssetId: PromiseOrValue<string>;
-    outputAmount: PromiseOrValue<BigNumberish>;
-    exclusiveRelayer: PromiseOrValue<string>;
-    quoteTimestamp: PromiseOrValue<BigNumberish>;
-    fillDeadline: PromiseOrValue<BigNumberish>;
-    exclusivityDeadline: PromiseOrValue<BigNumberish>;
-    message: PromiseOrValue<BytesLike>;
+    transactionId: BytesLike;
+    receiver: string;
+    destinationChainId: BigNumberish;
+    receivingAssetId: string;
+    outputAmount: BigNumberish;
+    exclusiveRelayer: string;
+    quoteTimestamp: BigNumberish;
+    fillDeadline: BigNumberish;
+    exclusivityDeadline: BigNumberish;
+    message: BytesLike;
   };
 
   export type PackedParametersStructOutput = [
@@ -194,19 +193,15 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaAcrossV3ERC20Packed",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaAcrossV3NativePacked",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaAcrossV3ERC20Packed",
-    values: [
-      AcrossFacetPackedV3.PackedParametersStruct,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [AcrossFacetPackedV3.PackedParametersStruct, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaAcrossV3NativePacked",
@@ -214,13 +209,7 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "executeCallAndWithdraw",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, BytesLike, string, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -229,16 +218,12 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForBridge",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
   encodeFunctionData(functionFragment: "spokePool", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAcrossV3ERC20Min",
-    values: [
-      AcrossFacetPackedV3.PackedParametersStruct,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [AcrossFacetPackedV3.PackedParametersStruct, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAcrossV3ERC20Packed",
@@ -254,7 +239,7 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "wrappedNative",
@@ -331,7 +316,7 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(tuple)": EventFragment;
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
     "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
@@ -497,15 +482,15 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
   functions: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     decode_startBridgeTokensViaAcrossV3ERC20Packed(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -515,7 +500,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     >;
 
     decode_startBridgeTokensViaAcrossV3NativePacked(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -526,8 +511,8 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
     encode_startBridgeTokensViaAcrossV3ERC20Packed(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -537,12 +522,12 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): Promise<[string]>;
 
     executeCallAndWithdraw(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -550,50 +535,50 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     spokePool(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaAcrossV3ERC20Min(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaAcrossV3ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaAcrossV3NativeMin(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaAcrossV3NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     wrappedNative(overrides?: CallOverrides): Promise<[string]>;
   };
 
   cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   decode_startBridgeTokensViaAcrossV3ERC20Packed(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -603,7 +588,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
   >;
 
   decode_startBridgeTokensViaAcrossV3NativePacked(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -614,8 +599,8 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
   encode_startBridgeTokensViaAcrossV3ERC20Packed(
     _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-    sendingAssetId: PromiseOrValue<string>,
-    inputAmount: PromiseOrValue<BigNumberish>,
+    sendingAssetId: string,
+    inputAmount: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -625,12 +610,12 @@ export interface AcrossFacetPackedV3 extends BaseContract {
   ): Promise<string>;
 
   executeCallAndWithdraw(
-    _callTo: PromiseOrValue<string>,
-    _callData: PromiseOrValue<BytesLike>,
-    _assetAddress: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _callTo: string,
+    _callData: BytesLike,
+    _assetAddress: string,
+    _to: string,
+    _amount: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -638,35 +623,35 @@ export interface AcrossFacetPackedV3 extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   setApprovalForBridge(
-    tokensToApprove: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokensToApprove: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   spokePool(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaAcrossV3ERC20Min(
     _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-    sendingAssetId: PromiseOrValue<string>,
-    inputAmount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    sendingAssetId: string,
+    inputAmount: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaAcrossV3ERC20Packed(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaAcrossV3NativeMin(
     _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaAcrossV3NativePacked(
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _newOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   wrappedNative(overrides?: CallOverrides): Promise<string>;
@@ -677,7 +662,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     decode_startBridgeTokensViaAcrossV3ERC20Packed(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -687,7 +672,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     >;
 
     decode_startBridgeTokensViaAcrossV3NativePacked(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, AcrossFacetV3.AcrossV3DataStructOutput] & {
@@ -698,8 +683,8 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
     encode_startBridgeTokensViaAcrossV3ERC20Packed(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -709,11 +694,11 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): Promise<string>;
 
     executeCallAndWithdraw(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -722,7 +707,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
+      tokensToApprove: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -730,8 +715,8 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
     startBridgeTokensViaAcrossV3ERC20Min(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -749,7 +734,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      _newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -766,7 +751,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     LiFiAcrossTransfer(_transactionId?: null): LiFiAcrossTransferEventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -776,7 +761,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
       toAmount?: null
     ): LiFiGenericSwapCompletedEventFilter;
     LiFiGenericSwapCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -787,7 +772,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): LiFiGenericSwapCompletedEventFilter;
 
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -796,7 +781,7 @@ export interface AcrossFacetPackedV3 extends BaseContract {
       toAmount?: null
     ): LiFiSwappedGenericEventFilter;
     LiFiSwappedGeneric(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -806,14 +791,14 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
@@ -821,67 +806,67 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): LiFiTransferCompletedEventFilter;
 
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
     LiFiTransferRecovered(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
 
-    "LiFiTransferStarted(tuple)"(
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
     "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
     OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
   };
 
   estimateGas: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaAcrossV3ERC20Packed(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaAcrossV3NativePacked(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaAcrossV3ERC20Packed(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -891,12 +876,12 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): Promise<BigNumber>;
 
     executeCallAndWithdraw(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -904,35 +889,35 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     spokePool(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaAcrossV3ERC20Min(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaAcrossV3ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaAcrossV3NativeMin(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaAcrossV3NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
@@ -940,27 +925,27 @@ export interface AcrossFacetPackedV3 extends BaseContract {
 
   populateTransaction: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaAcrossV3ERC20Packed(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaAcrossV3NativePacked(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaAcrossV3ERC20Packed(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -970,12 +955,12 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     executeCallAndWithdraw(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -983,35 +968,35 @@ export interface AcrossFacetPackedV3 extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     spokePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaAcrossV3ERC20Min(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      sendingAssetId: PromiseOrValue<string>,
-      inputAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      sendingAssetId: string,
+      inputAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaAcrossV3ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaAcrossV3NativeMin(
       _parameters: AcrossFacetPackedV3.PackedParametersStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaAcrossV3NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     wrappedNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;

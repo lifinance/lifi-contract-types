@@ -1,12 +1,12 @@
 import type { BaseContract, BigNumberish, BytesLike, Signer, utils } from "ethers";
 import type { EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace LibDiamond {
     type FacetCutStruct = {
-        facetAddress: PromiseOrValue<string>;
-        action: PromiseOrValue<BigNumberish>;
-        functionSelectors: PromiseOrValue<BytesLike>[];
+        facetAddress: string;
+        action: BigNumberish;
+        functionSelectors: BytesLike[];
     };
     type FacetCutStructOutput = [string, number, string[]] & {
         facetAddress: string;
@@ -17,7 +17,7 @@ export declare namespace LibDiamond {
 export interface LibDiamondInterface extends utils.Interface {
     functions: {};
     events: {
-        "DiamondCut(tuple[],address,bytes)": EventFragment;
+        "DiamondCut((address,uint8,bytes4[])[],address,bytes)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "DiamondCut"): EventFragment;
@@ -60,10 +60,10 @@ export interface LibDiamond extends BaseContract {
     functions: {};
     callStatic: {};
     filters: {
-        "DiamondCut(tuple[],address,bytes)"(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
+        "DiamondCut((address,uint8,bytes4[])[],address,bytes)"(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
         DiamondCut(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
-        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {};
     populateTransaction: {};

@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   AmarokFacetPacked,
   AmarokFacetPackedInterface,
-} from "../AmarokFacetPacked";
+} from "../AmarokFacetPacked.js";
 
 const _abi = [
   {
@@ -872,9 +871,9 @@ export class AmarokFacetPacked__factory extends ContractFactory {
   }
 
   override deploy(
-    _connextHandler: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _connextHandler: string,
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<AmarokFacetPacked> {
     return super.deploy(
       _connextHandler,
@@ -883,9 +882,9 @@ export class AmarokFacetPacked__factory extends ContractFactory {
     ) as Promise<AmarokFacetPacked>;
   }
   override getDeployTransaction(
-    _connextHandler: PromiseOrValue<string>,
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _connextHandler: string,
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_connextHandler, _owner, overrides || {});
   }

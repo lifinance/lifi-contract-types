@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "../common.js";
 export interface IWrapperInterface extends utils.Interface {
     functions: {
         "deposit()": FunctionFragment;
@@ -9,7 +9,7 @@ export interface IWrapperInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "deposit" | "withdraw"): FunctionFragment;
     encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
-    encodeFunctionData(functionFragment: "withdraw", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "withdraw", values: [BigNumberish]): string;
     decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
     events: {};
@@ -30,37 +30,37 @@ export interface IWrapper extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        withdraw(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     deposit(overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    withdraw(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    withdraw(wad: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         deposit(overrides?: CallOverrides): Promise<void>;
-        withdraw(wad: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        withdraw(wad: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        withdraw(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         deposit(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        withdraw(wad: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        withdraw(wad: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

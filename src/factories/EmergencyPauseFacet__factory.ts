@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   EmergencyPauseFacet,
   EmergencyPauseFacetInterface,
-} from "../EmergencyPauseFacet";
+} from "../EmergencyPauseFacet.js";
 
 const _abi = [
   {
@@ -228,8 +227,8 @@ export class EmergencyPauseFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _pauserWallet: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _pauserWallet: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<EmergencyPauseFacet> {
     return super.deploy(
       _pauserWallet,
@@ -237,8 +236,8 @@ export class EmergencyPauseFacet__factory extends ContractFactory {
     ) as Promise<EmergencyPauseFacet>;
   }
   override getDeployTransaction(
-    _pauserWallet: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _pauserWallet: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_pauserWallet, overrides || {});
   }

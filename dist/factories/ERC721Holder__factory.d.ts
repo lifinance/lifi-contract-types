@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { ERC721Holder, ERC721HolderInterface } from "../ERC721Holder";
+import type { ERC721Holder, ERC721HolderInterface } from "../ERC721Holder.js";
 declare type ERC721HolderConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ERC721Holder__factory extends ContractFactory {
     constructor(...args: ERC721HolderConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ERC721Holder>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): ERC721Holder;
     connect(signer: Signer): ERC721Holder__factory;

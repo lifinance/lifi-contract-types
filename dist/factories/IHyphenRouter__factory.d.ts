@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IHyphenRouter, IHyphenRouterInterface } from "../IHyphenRouter";
+import type { IHyphenRouter, IHyphenRouterInterface } from "../IHyphenRouter.js";
 export declare class IHyphenRouter__factory {
     static readonly abi: readonly [{
         readonly type: "function";

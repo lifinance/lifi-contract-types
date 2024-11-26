@@ -1,25 +1,25 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace StargateFacet {
     type ChainIdConfigStruct = {
-        chainId: PromiseOrValue<BigNumberish>;
-        layerZeroChainId: PromiseOrValue<BigNumberish>;
+        chainId: BigNumberish;
+        layerZeroChainId: BigNumberish;
     };
     type ChainIdConfigStructOutput = [BigNumber, number] & {
         chainId: BigNumber;
         layerZeroChainId: number;
     };
     type StargateDataStruct = {
-        srcPoolId: PromiseOrValue<BigNumberish>;
-        dstPoolId: PromiseOrValue<BigNumberish>;
-        minAmountLD: PromiseOrValue<BigNumberish>;
-        dstGasForCall: PromiseOrValue<BigNumberish>;
-        lzFee: PromiseOrValue<BigNumberish>;
-        refundAddress: PromiseOrValue<string>;
-        callTo: PromiseOrValue<BytesLike>;
-        callData: PromiseOrValue<BytesLike>;
+        srcPoolId: BigNumberish;
+        dstPoolId: BigNumberish;
+        minAmountLD: BigNumberish;
+        dstGasForCall: BigNumberish;
+        lzFee: BigNumberish;
+        refundAddress: string;
+        callTo: BytesLike;
+        callData: BytesLike;
     };
     type StargateDataStructOutput = [
         BigNumber,
@@ -43,16 +43,16 @@ export declare namespace StargateFacet {
 }
 export declare namespace ILiFi {
     type BridgeDataStruct = {
-        transactionId: PromiseOrValue<BytesLike>;
-        bridge: PromiseOrValue<string>;
-        integrator: PromiseOrValue<string>;
-        referrer: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receiver: PromiseOrValue<string>;
-        minAmount: PromiseOrValue<BigNumberish>;
-        destinationChainId: PromiseOrValue<BigNumberish>;
-        hasSourceSwaps: PromiseOrValue<boolean>;
-        hasDestinationCall: PromiseOrValue<boolean>;
+        transactionId: BytesLike;
+        bridge: string;
+        integrator: string;
+        referrer: string;
+        sendingAssetId: string;
+        receiver: string;
+        minAmount: BigNumberish;
+        destinationChainId: BigNumberish;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
     type BridgeDataStructOutput = [
         string,
@@ -80,13 +80,13 @@ export declare namespace ILiFi {
 }
 export declare namespace LibSwap {
     type SwapDataStruct = {
-        callTo: PromiseOrValue<string>;
-        approveTo: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receivingAssetId: PromiseOrValue<string>;
-        fromAmount: PromiseOrValue<BigNumberish>;
-        callData: PromiseOrValue<BytesLike>;
-        requiresDeposit: PromiseOrValue<boolean>;
+        callTo: string;
+        approveTo: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        fromAmount: BigNumberish;
+        callData: BytesLike;
+        requiresDeposit: boolean;
     };
     type SwapDataStructOutput = [
         string,
@@ -116,8 +116,8 @@ export interface StargateFacetInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "initStargate" | "quoteLayerZeroFee" | "setLayerZeroChainId" | "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate"): FunctionFragment;
     encodeFunctionData(functionFragment: "initStargate", values: [StargateFacet.ChainIdConfigStruct[]]): string;
-    encodeFunctionData(functionFragment: "quoteLayerZeroFee", values: [PromiseOrValue<BigNumberish>, StargateFacet.StargateDataStruct]): string;
-    encodeFunctionData(functionFragment: "setLayerZeroChainId", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "quoteLayerZeroFee", values: [BigNumberish, StargateFacet.StargateDataStruct]): string;
+    encodeFunctionData(functionFragment: "setLayerZeroChainId", values: [BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaStargate", values: [ILiFi.BridgeDataStruct, StargateFacet.StargateDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaStargate", values: [
         ILiFi.BridgeDataStruct,
@@ -135,9 +135,9 @@ export interface StargateFacetInterface extends utils.Interface {
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(tuple)": EventFragment;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
         "PartnerSwap(bytes2)": EventFragment;
-        "StargateInitialized(tuple[])": EventFragment;
+        "StargateInitialized((uint256,uint16)[])": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "LayerZeroChainIdSet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -262,85 +262,85 @@ export interface StargateFacet extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         initStargate(chainIdConfigs: StargateFacet.ChainIdConfigStruct[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        quoteLayerZeroFee(_destinationChainId: PromiseOrValue<BigNumberish>, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-        setLayerZeroChainId(_chainId: PromiseOrValue<BigNumberish>, _layerZeroChainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        quoteLayerZeroFee(_destinationChainId: BigNumberish, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+        setLayerZeroChainId(_chainId: BigNumberish, _layerZeroChainId: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     initStargate(chainIdConfigs: StargateFacet.ChainIdConfigStruct[], overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    quoteLayerZeroFee(_destinationChainId: PromiseOrValue<BigNumberish>, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-    setLayerZeroChainId(_chainId: PromiseOrValue<BigNumberish>, _layerZeroChainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    quoteLayerZeroFee(_destinationChainId: BigNumberish, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+    setLayerZeroChainId(_chainId: BigNumberish, _layerZeroChainId: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         initStargate(chainIdConfigs: StargateFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
-        quoteLayerZeroFee(_destinationChainId: PromiseOrValue<BigNumberish>, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
-        setLayerZeroChainId(_chainId: PromiseOrValue<BigNumberish>, _layerZeroChainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        quoteLayerZeroFee(_destinationChainId: BigNumberish, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<[BigNumber, BigNumber]>;
+        setLayerZeroChainId(_chainId: BigNumberish, _layerZeroChainId: BigNumberish, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "LayerZeroChainIdSet(uint256,uint16)"(chainId?: PromiseOrValue<BigNumberish> | null, layerZeroChainId?: null): LayerZeroChainIdSetEventFilter;
-        LayerZeroChainIdSet(chainId?: PromiseOrValue<BigNumberish> | null, layerZeroChainId?: null): LayerZeroChainIdSetEventFilter;
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        LiFiTransferRecovered(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        "LayerZeroChainIdSet(uint256,uint16)"(chainId?: BigNumberish | null, layerZeroChainId?: null): LayerZeroChainIdSetEventFilter;
+        LayerZeroChainIdSet(chainId?: BigNumberish | null, layerZeroChainId?: null): LayerZeroChainIdSetEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        LiFiTransferRecovered(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(bridgeData?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
         "PartnerSwap(bytes2)"(partnerId?: null): PartnerSwapEventFilter;
         PartnerSwap(partnerId?: null): PartnerSwapEventFilter;
-        "StargateInitialized(tuple[])"(chainIdConfigs?: null): StargateInitializedEventFilter;
+        "StargateInitialized((uint256,uint16)[])"(chainIdConfigs?: null): StargateInitializedEventFilter;
         StargateInitialized(chainIdConfigs?: null): StargateInitializedEventFilter;
     };
     estimateGas: {
         initStargate(chainIdConfigs: StargateFacet.ChainIdConfigStruct[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        quoteLayerZeroFee(_destinationChainId: PromiseOrValue<BigNumberish>, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<BigNumber>;
-        setLayerZeroChainId(_chainId: PromiseOrValue<BigNumberish>, _layerZeroChainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        quoteLayerZeroFee(_destinationChainId: BigNumberish, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<BigNumber>;
+        setLayerZeroChainId(_chainId: BigNumberish, _layerZeroChainId: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         initStargate(chainIdConfigs: StargateFacet.ChainIdConfigStruct[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        quoteLayerZeroFee(_destinationChainId: PromiseOrValue<BigNumberish>, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setLayerZeroChainId(_chainId: PromiseOrValue<BigNumberish>, _layerZeroChainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        quoteLayerZeroFee(_destinationChainId: BigNumberish, _stargateData: StargateFacet.StargateDataStruct, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setLayerZeroChainId(_chainId: BigNumberish, _layerZeroChainId: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacet.StargateDataStruct, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

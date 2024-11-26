@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDiamondCut, IDiamondCutInterface } from "../IDiamondCut";
+import type { IDiamondCut, IDiamondCutInterface } from "../IDiamondCut.js";
 
 const _abi = [
   {

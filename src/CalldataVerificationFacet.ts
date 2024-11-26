@@ -18,21 +18,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    bridge: PromiseOrValue<string>;
-    integrator: PromiseOrValue<string>;
-    referrer: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    minAmount: PromiseOrValue<BigNumberish>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    hasSourceSwaps: PromiseOrValue<boolean>;
-    hasDestinationCall: PromiseOrValue<boolean>;
+    transactionId: BytesLike;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumberish;
+    destinationChainId: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
   export type BridgeDataStructOutput = [
@@ -62,13 +61,13 @@ export declare namespace ILiFi {
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: PromiseOrValue<string>;
-    approveTo: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    fromAmount: PromiseOrValue<BigNumberish>;
-    callData: PromiseOrValue<BytesLike>;
-    requiresDeposit: PromiseOrValue<boolean>;
+    callTo: string;
+    approveTo: string;
+    sendingAssetId: string;
+    receivingAssetId: string;
+    fromAmount: BigNumberish;
+    callData: BytesLike;
+    requiresDeposit: boolean;
   };
 
   export type SwapDataStructOutput = [
@@ -116,48 +115,44 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "extractBridgeData",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "extractData",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "extractGenericSwapParameters",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "extractMainParameters",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "extractNonEVMAddress",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "extractSwapData",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "validateCalldata",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<boolean>
+      BytesLike,
+      string,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      boolean,
+      boolean
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "validateDestinationCalldata",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [BytesLike, BytesLike, BytesLike]
   ): string;
 
   decodeFunctionResult(
@@ -224,7 +219,7 @@ export interface CalldataVerificationFacet extends BaseContract {
 
   functions: {
     extractBridgeData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput] & {
@@ -233,7 +228,7 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, LibSwap.SwapDataStructOutput[]] & {
@@ -243,7 +238,7 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractGenericSwapParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [string, BigNumber, string, string, BigNumber] & {
@@ -256,7 +251,7 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractMainParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [string, string, string, BigNumber, BigNumber, boolean, boolean] & {
@@ -271,12 +266,12 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractNonEVMAddress(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<[string] & { nonEVMAddress: string }>;
 
     extractSwapData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [LibSwap.SwapDataStructOutput[]] & {
@@ -285,32 +280,32 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     validateCalldata(
-      data: PromiseOrValue<BytesLike>,
-      bridge: PromiseOrValue<string>,
-      sendingAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      hasSourceSwaps: PromiseOrValue<boolean>,
-      hasDestinationCall: PromiseOrValue<boolean>,
+      data: BytesLike,
+      bridge: string,
+      sendingAssetId: string,
+      receiver: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      hasSourceSwaps: boolean,
+      hasDestinationCall: boolean,
       overrides?: CallOverrides
     ): Promise<[boolean] & { isValid: boolean }>;
 
     validateDestinationCalldata(
-      data: PromiseOrValue<BytesLike>,
-      callTo: PromiseOrValue<BytesLike>,
-      dstCalldata: PromiseOrValue<BytesLike>,
+      data: BytesLike,
+      callTo: BytesLike,
+      dstCalldata: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean] & { isValid: boolean }>;
   };
 
   extractBridgeData(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<ILiFi.BridgeDataStructOutput>;
 
   extractData(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, LibSwap.SwapDataStructOutput[]] & {
@@ -320,7 +315,7 @@ export interface CalldataVerificationFacet extends BaseContract {
   >;
 
   extractGenericSwapParameters(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [string, BigNumber, string, string, BigNumber] & {
@@ -333,7 +328,7 @@ export interface CalldataVerificationFacet extends BaseContract {
   >;
 
   extractMainParameters(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [string, string, string, BigNumber, BigNumber, boolean, boolean] & {
@@ -348,42 +343,42 @@ export interface CalldataVerificationFacet extends BaseContract {
   >;
 
   extractNonEVMAddress(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<string>;
 
   extractSwapData(
-    data: PromiseOrValue<BytesLike>,
+    data: BytesLike,
     overrides?: CallOverrides
   ): Promise<LibSwap.SwapDataStructOutput[]>;
 
   validateCalldata(
-    data: PromiseOrValue<BytesLike>,
-    bridge: PromiseOrValue<string>,
-    sendingAssetId: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    hasSourceSwaps: PromiseOrValue<boolean>,
-    hasDestinationCall: PromiseOrValue<boolean>,
+    data: BytesLike,
+    bridge: string,
+    sendingAssetId: string,
+    receiver: string,
+    amount: BigNumberish,
+    destinationChainId: BigNumberish,
+    hasSourceSwaps: boolean,
+    hasDestinationCall: boolean,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   validateDestinationCalldata(
-    data: PromiseOrValue<BytesLike>,
-    callTo: PromiseOrValue<BytesLike>,
-    dstCalldata: PromiseOrValue<BytesLike>,
+    data: BytesLike,
+    callTo: BytesLike,
+    dstCalldata: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   callStatic: {
     extractBridgeData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<ILiFi.BridgeDataStructOutput>;
 
     extractData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, LibSwap.SwapDataStructOutput[]] & {
@@ -393,7 +388,7 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractGenericSwapParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [string, BigNumber, string, string, BigNumber] & {
@@ -406,7 +401,7 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractMainParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [string, string, string, BigNumber, BigNumber, boolean, boolean] & {
@@ -421,31 +416,31 @@ export interface CalldataVerificationFacet extends BaseContract {
     >;
 
     extractNonEVMAddress(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
     extractSwapData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<LibSwap.SwapDataStructOutput[]>;
 
     validateCalldata(
-      data: PromiseOrValue<BytesLike>,
-      bridge: PromiseOrValue<string>,
-      sendingAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      hasSourceSwaps: PromiseOrValue<boolean>,
-      hasDestinationCall: PromiseOrValue<boolean>,
+      data: BytesLike,
+      bridge: string,
+      sendingAssetId: string,
+      receiver: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      hasSourceSwaps: boolean,
+      hasDestinationCall: boolean,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     validateDestinationCalldata(
-      data: PromiseOrValue<BytesLike>,
-      callTo: PromiseOrValue<BytesLike>,
-      dstCalldata: PromiseOrValue<BytesLike>,
+      data: BytesLike,
+      callTo: BytesLike,
+      dstCalldata: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -454,102 +449,99 @@ export interface CalldataVerificationFacet extends BaseContract {
 
   estimateGas: {
     extractBridgeData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    extractData(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    extractData(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     extractGenericSwapParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     extractMainParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     extractNonEVMAddress(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     extractSwapData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     validateCalldata(
-      data: PromiseOrValue<BytesLike>,
-      bridge: PromiseOrValue<string>,
-      sendingAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      hasSourceSwaps: PromiseOrValue<boolean>,
-      hasDestinationCall: PromiseOrValue<boolean>,
+      data: BytesLike,
+      bridge: string,
+      sendingAssetId: string,
+      receiver: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      hasSourceSwaps: boolean,
+      hasDestinationCall: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     validateDestinationCalldata(
-      data: PromiseOrValue<BytesLike>,
-      callTo: PromiseOrValue<BytesLike>,
-      dstCalldata: PromiseOrValue<BytesLike>,
+      data: BytesLike,
+      callTo: BytesLike,
+      dstCalldata: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     extractBridgeData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     extractData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     extractGenericSwapParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     extractMainParameters(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     extractNonEVMAddress(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     extractSwapData(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     validateCalldata(
-      data: PromiseOrValue<BytesLike>,
-      bridge: PromiseOrValue<string>,
-      sendingAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      hasSourceSwaps: PromiseOrValue<boolean>,
-      hasDestinationCall: PromiseOrValue<boolean>,
+      data: BytesLike,
+      bridge: string,
+      sendingAssetId: string,
+      receiver: string,
+      amount: BigNumberish,
+      destinationChainId: BigNumberish,
+      hasSourceSwaps: boolean,
+      hasDestinationCall: boolean,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     validateDestinationCalldata(
-      data: PromiseOrValue<BytesLike>,
-      callTo: PromiseOrValue<BytesLike>,
-      dstCalldata: PromiseOrValue<BytesLike>,
+      data: BytesLike,
+      callTo: BytesLike,
+      dstCalldata: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

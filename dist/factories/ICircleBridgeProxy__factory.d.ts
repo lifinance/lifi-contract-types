@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ICircleBridgeProxy, ICircleBridgeProxyInterface } from "../ICircleBridgeProxy";
+import type { ICircleBridgeProxy, ICircleBridgeProxyInterface } from "../ICircleBridgeProxy.js";
 export declare class ICircleBridgeProxy__factory {
     static readonly abi: readonly [{
         readonly type: "function";

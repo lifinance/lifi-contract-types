@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IBentoBoxMinimal, IBentoBoxMinimalInterface } from "../../LiFiDEXAggregator.sol/IBentoBoxMinimal";
+import type { IBentoBoxMinimal, IBentoBoxMinimalInterface } from "../../LiFiDEXAggregator.sol/IBentoBoxMinimal.js";
 export declare class IBentoBoxMinimal__factory {
     static readonly abi: readonly [{
         readonly type: "function";

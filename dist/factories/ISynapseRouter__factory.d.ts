@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ISynapseRouter, ISynapseRouterInterface } from "../ISynapseRouter";
+import type { ISynapseRouter, ISynapseRouterInterface } from "../ISynapseRouter.js";
 export declare class ISynapseRouter__factory {
     static readonly abi: readonly [{
         readonly type: "function";

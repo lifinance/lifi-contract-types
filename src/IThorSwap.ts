@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IThorSwapInterface extends utils.Interface {
   functions: {
@@ -32,13 +31,7 @@ export interface IThorSwapInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "depositWithExpiry",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, string, BigNumberish, string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -77,31 +70,31 @@ export interface IThorSwap extends BaseContract {
 
   functions: {
     depositWithExpiry(
-      vault: PromiseOrValue<string>,
-      asset: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      memo: PromiseOrValue<string>,
-      expiration: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      vault: string,
+      asset: string,
+      amount: BigNumberish,
+      memo: string,
+      expiration: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   depositWithExpiry(
-    vault: PromiseOrValue<string>,
-    asset: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    memo: PromiseOrValue<string>,
-    expiration: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    vault: string,
+    asset: string,
+    amount: BigNumberish,
+    memo: string,
+    expiration: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     depositWithExpiry(
-      vault: PromiseOrValue<string>,
-      asset: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      memo: PromiseOrValue<string>,
-      expiration: PromiseOrValue<BigNumberish>,
+      vault: string,
+      asset: string,
+      amount: BigNumberish,
+      memo: string,
+      expiration: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -110,23 +103,23 @@ export interface IThorSwap extends BaseContract {
 
   estimateGas: {
     depositWithExpiry(
-      vault: PromiseOrValue<string>,
-      asset: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      memo: PromiseOrValue<string>,
-      expiration: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      vault: string,
+      asset: string,
+      amount: BigNumberish,
+      memo: string,
+      expiration: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositWithExpiry(
-      vault: PromiseOrValue<string>,
-      asset: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      memo: PromiseOrValue<string>,
-      expiration: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      vault: string,
+      asset: string,
+      amount: BigNumberish,
+      memo: string,
+      expiration: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

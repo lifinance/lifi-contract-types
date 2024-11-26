@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { WETH, WETHInterface } from "../WETH";
+import type { WETH, WETHInterface } from "../WETH.js";
 declare type WETHConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WETH__factory extends ContractFactory {
     constructor(...args: WETHConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<WETH>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): WETH;
     connect(signer: Signer): WETH__factory;

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ITransactionManager, ITransactionManagerInterface } from "../ITransactionManager";
+import type { ITransactionManager, ITransactionManagerInterface } from "../ITransactionManager.js";
 export declare class ITransactionManager__factory {
     static readonly abi: readonly [{
         readonly type: "function";

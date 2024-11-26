@@ -19,8 +19,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IXDaiBridgeL2Interface extends utils.Interface {
   functions: {
@@ -29,10 +28,7 @@ export interface IXDaiBridgeL2Interface extends utils.Interface {
 
   getFunction(nameOrSignatureOrTopic: "relayTokens"): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "relayTokens",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "relayTokens", values: [string]): string;
 
   decodeFunctionResult(
     functionFragment: "relayTokens",
@@ -70,36 +66,33 @@ export interface IXDaiBridgeL2 extends BaseContract {
 
   functions: {
     relayTokens(
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   relayTokens(
-    receiver: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    receiver: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    relayTokens(
-      receiver: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    relayTokens(receiver: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
     relayTokens(
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     relayTokens(
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

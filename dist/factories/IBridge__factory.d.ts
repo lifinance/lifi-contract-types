@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IBridge, IBridgeInterface } from "../IBridge";
+import type { IBridge, IBridgeInterface } from "../IBridge.js";
 export declare class IBridge__factory {
     static readonly abi: readonly [{
         readonly type: "function";

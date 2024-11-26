@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IMayan, IMayanInterface } from "../IMayan";
+import type { IMayan, IMayanInterface } from "../IMayan.js";
 export declare class IMayan__factory {
     static readonly abi: readonly [{
         readonly type: "function";

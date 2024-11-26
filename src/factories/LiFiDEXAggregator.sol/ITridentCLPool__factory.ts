@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ITridentCLPool,
   ITridentCLPoolInterface,
-} from "../../LiFiDEXAggregator.sol/ITridentCLPool";
+} from "../../LiFiDEXAggregator.sol/ITridentCLPool.js";
 
 const _abi = [
   {

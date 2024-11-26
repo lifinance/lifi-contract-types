@@ -21,15 +21,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace MsgDataTypes {
   export type RouteInfoStruct = {
-    sender: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    srcChainId: PromiseOrValue<BigNumberish>;
-    srcTxHash: PromiseOrValue<BytesLike>;
+    sender: string;
+    receiver: string;
+    srcChainId: BigNumberish;
+    srcTxHash: BytesLike;
   };
 
   export type RouteInfoStructOutput = [string, string, BigNumber, string] & {
@@ -40,15 +39,15 @@ export declare namespace MsgDataTypes {
   };
 
   export type TransferInfoStruct = {
-    t: PromiseOrValue<BigNumberish>;
-    sender: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    token: PromiseOrValue<string>;
-    amount: PromiseOrValue<BigNumberish>;
-    wdseq: PromiseOrValue<BigNumberish>;
-    srcChainId: PromiseOrValue<BigNumberish>;
-    refId: PromiseOrValue<BytesLike>;
-    srcTxHash: PromiseOrValue<BytesLike>;
+    t: BigNumberish;
+    sender: string;
+    receiver: string;
+    token: string;
+    amount: BigNumberish;
+    wdseq: BigNumberish;
+    srcChainId: BigNumberish;
+    refId: BytesLike;
+    srcTxHash: BytesLike;
   };
 
   export type TransferInfoStructOutput = [
@@ -108,38 +107,35 @@ export interface IMessageBusInterface extends utils.Interface {
       | "withdrawFee"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "calcFee",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "calcFee", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "executeMessage",
     values: [
-      PromiseOrValue<BytesLike>,
+      BytesLike,
       MsgDataTypes.RouteInfoStruct,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
+      BytesLike[],
+      string[],
+      BigNumberish[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "executeMessageWithTransfer",
     values: [
-      PromiseOrValue<BytesLike>,
+      BytesLike,
       MsgDataTypes.TransferInfoStruct,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
+      BytesLike[],
+      string[],
+      BigNumberish[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "executeMessageWithTransferRefund",
     values: [
-      PromiseOrValue<BytesLike>,
+      BytesLike,
       MsgDataTypes.TransferInfoStruct,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
+      BytesLike[],
+      string[],
+      BigNumberish[]
     ]
   ): string;
   encodeFunctionData(
@@ -158,39 +154,19 @@ export interface IMessageBusInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "sendMessage(bytes,uint256,bytes)",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [BytesLike, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "sendMessage(address,uint256,bytes)",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [string, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "sendMessageWithTransfer",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [string, BigNumberish, string, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "withdrawFee",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [string, BigNumberish, BytesLike[], string[], BigNumberish[]]
   ): string;
 
   decodeFunctionResult(functionFragment: "calcFee", data: BytesLike): Result;
@@ -265,35 +241,35 @@ export interface IMessageBus extends BaseContract {
 
   functions: {
     calcFee(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     executeMessage(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _route: MsgDataTypes.RouteInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     executeMessageWithTransfer(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     executeMessageWithTransferRefund(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     liquidityBridge(overrides?: CallOverrides): Promise<[string]>;
@@ -307,68 +283,65 @@ export interface IMessageBus extends BaseContract {
     pegVaultV2(overrides?: CallOverrides): Promise<[string]>;
 
     "sendMessage(bytes,uint256,bytes)"(
-      _receiver: PromiseOrValue<BytesLike>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: BytesLike,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     "sendMessage(address,uint256,bytes)"(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     sendMessageWithTransfer(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcBridge: PromiseOrValue<string>,
-      _srcTransferId: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _srcBridge: string,
+      _srcTransferId: BytesLike,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     withdrawFee(
-      _account: PromiseOrValue<string>,
-      _cumulativeFee: PromiseOrValue<BigNumberish>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _account: string,
+      _cumulativeFee: BigNumberish,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
-  calcFee(
-    _message: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  calcFee(_message: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
   executeMessage(
-    _message: PromiseOrValue<BytesLike>,
+    _message: BytesLike,
     _route: MsgDataTypes.RouteInfoStruct,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   executeMessageWithTransfer(
-    _message: PromiseOrValue<BytesLike>,
+    _message: BytesLike,
     _transfer: MsgDataTypes.TransferInfoStruct,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   executeMessageWithTransferRefund(
-    _message: PromiseOrValue<BytesLike>,
+    _message: BytesLike,
     _transfer: MsgDataTypes.TransferInfoStruct,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   liquidityBridge(overrides?: CallOverrides): Promise<string>;
@@ -382,67 +355,64 @@ export interface IMessageBus extends BaseContract {
   pegVaultV2(overrides?: CallOverrides): Promise<string>;
 
   "sendMessage(bytes,uint256,bytes)"(
-    _receiver: PromiseOrValue<BytesLike>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _message: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _receiver: BytesLike,
+    _dstChainId: BigNumberish,
+    _message: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   "sendMessage(address,uint256,bytes)"(
-    _receiver: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _message: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _receiver: string,
+    _dstChainId: BigNumberish,
+    _message: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   sendMessageWithTransfer(
-    _receiver: PromiseOrValue<string>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _srcBridge: PromiseOrValue<string>,
-    _srcTransferId: PromiseOrValue<BytesLike>,
-    _message: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _receiver: string,
+    _dstChainId: BigNumberish,
+    _srcBridge: string,
+    _srcTransferId: BytesLike,
+    _message: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   withdrawFee(
-    _account: PromiseOrValue<string>,
-    _cumulativeFee: PromiseOrValue<BigNumberish>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _account: string,
+    _cumulativeFee: BigNumberish,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    calcFee(
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    calcFee(_message: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     executeMessage(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _route: MsgDataTypes.RouteInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     executeMessageWithTransfer(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     executeMessageWithTransferRefund(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -457,34 +427,34 @@ export interface IMessageBus extends BaseContract {
     pegVaultV2(overrides?: CallOverrides): Promise<string>;
 
     "sendMessage(bytes,uint256,bytes)"(
-      _receiver: PromiseOrValue<BytesLike>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
+      _receiver: BytesLike,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "sendMessage(address,uint256,bytes)"(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     sendMessageWithTransfer(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcBridge: PromiseOrValue<string>,
-      _srcTransferId: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _srcBridge: string,
+      _srcTransferId: BytesLike,
+      _message: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     withdrawFee(
-      _account: PromiseOrValue<string>,
-      _cumulativeFee: PromiseOrValue<BigNumberish>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _account: string,
+      _cumulativeFee: BigNumberish,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -492,36 +462,33 @@ export interface IMessageBus extends BaseContract {
   filters: {};
 
   estimateGas: {
-    calcFee(
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    calcFee(_message: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     executeMessage(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _route: MsgDataTypes.RouteInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     executeMessageWithTransfer(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     executeMessageWithTransferRefund(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     liquidityBridge(overrides?: CallOverrides): Promise<BigNumber>;
@@ -535,69 +502,69 @@ export interface IMessageBus extends BaseContract {
     pegVaultV2(overrides?: CallOverrides): Promise<BigNumber>;
 
     "sendMessage(bytes,uint256,bytes)"(
-      _receiver: PromiseOrValue<BytesLike>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: BytesLike,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     "sendMessage(address,uint256,bytes)"(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     sendMessageWithTransfer(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcBridge: PromiseOrValue<string>,
-      _srcTransferId: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _srcBridge: string,
+      _srcTransferId: BytesLike,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     withdrawFee(
-      _account: PromiseOrValue<string>,
-      _cumulativeFee: PromiseOrValue<BigNumberish>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _account: string,
+      _cumulativeFee: BigNumberish,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     calcFee(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     executeMessage(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _route: MsgDataTypes.RouteInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     executeMessageWithTransfer(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     executeMessageWithTransferRefund(
-      _message: PromiseOrValue<BytesLike>,
+      _message: BytesLike,
       _transfer: MsgDataTypes.TransferInfoStruct,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     liquidityBridge(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -611,35 +578,35 @@ export interface IMessageBus extends BaseContract {
     pegVaultV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "sendMessage(bytes,uint256,bytes)"(
-      _receiver: PromiseOrValue<BytesLike>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: BytesLike,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     "sendMessage(address,uint256,bytes)"(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     sendMessageWithTransfer(
-      _receiver: PromiseOrValue<string>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _srcBridge: PromiseOrValue<string>,
-      _srcTransferId: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _dstChainId: BigNumberish,
+      _srcBridge: string,
+      _srcTransferId: BytesLike,
+      _message: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     withdrawFee(
-      _account: PromiseOrValue<string>,
-      _cumulativeFee: PromiseOrValue<BigNumberish>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _account: string,
+      _cumulativeFee: BigNumberish,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

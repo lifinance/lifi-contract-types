@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IWETH, IWETHInterface } from "../../LiFiDEXAggregator.sol/IWETH";
+import type { IWETH, IWETHInterface } from "../../LiFiDEXAggregator.sol/IWETH.js";
 export declare class IWETH__factory {
     static readonly abi: readonly [{
         readonly type: "function";

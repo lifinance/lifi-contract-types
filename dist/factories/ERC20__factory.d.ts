@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ERC20, ERC20Interface } from "../ERC20";
+import type { ERC20, ERC20Interface } from "../ERC20.js";
 export declare class ERC20__factory {
     static readonly abi: readonly [{
         readonly type: "function";

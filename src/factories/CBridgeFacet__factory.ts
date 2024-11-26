@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { CBridgeFacet, CBridgeFacetInterface } from "../CBridgeFacet";
+import type { CBridgeFacet, CBridgeFacetInterface } from "../CBridgeFacet.js";
 
 const _abi = [
   {
@@ -655,14 +654,14 @@ export class CBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _cBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _cBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<CBridgeFacet> {
     return super.deploy(_cBridge, overrides || {}) as Promise<CBridgeFacet>;
   }
   override getDeployTransaction(
-    _cBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _cBridge: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_cBridge, overrides || {});
   }

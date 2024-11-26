@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ReentrancyGuard,
   ReentrancyGuardInterface,
-} from "../ReentrancyGuard";
+} from "../ReentrancyGuard.js";
 
 const _abi = [
   {

@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface IAllBridgeInterface extends utils.Interface {
     functions: {
         "getBridgingCostInTokens(uint256,uint8,address)": FunctionFragment;
@@ -11,23 +11,19 @@ export interface IAllBridgeInterface extends utils.Interface {
         "swapAndBridge(bytes32,uint256,bytes32,uint256,bytes32,uint256,uint8,uint256)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "getBridgingCostInTokens" | "getMessageCost" | "getTransactionCost" | "pools" | "swapAndBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "getBridgingCostInTokens", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>
-    ]): string;
-    encodeFunctionData(functionFragment: "getMessageCost", values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "getTransactionCost", values: [PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "pools", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "getBridgingCostInTokens", values: [BigNumberish, BigNumberish, string]): string;
+    encodeFunctionData(functionFragment: "getMessageCost", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "getTransactionCost", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "pools", values: [BytesLike]): string;
     encodeFunctionData(functionFragment: "swapAndBridge", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BytesLike,
+        BigNumberish,
+        BytesLike,
+        BigNumberish,
+        BytesLike,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
     decodeFunctionResult(functionFragment: "getBridgingCostInTokens", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getMessageCost", data: BytesLike): Result;
@@ -51,53 +47,53 @@ export interface IAllBridge extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        getBridgingCostInTokens(destinationChainId: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getMessageCost(chainId: PromiseOrValue<BigNumberish>, protocol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
-        getTransactionCost(chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
-        pools(addr: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        getBridgingCostInTokens(destinationChainId: BigNumberish, messenger: BigNumberish, tokenAddress: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getMessageCost(chainId: BigNumberish, protocol: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        getTransactionCost(chainId: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        pools(addr: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        swapAndBridge(token: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, receiveToken: PromiseOrValue<BytesLike>, nonce: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, feeTokenAmount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndBridge(token: BytesLike, amount: BigNumberish, recipient: BytesLike, destinationChainId: BigNumberish, receiveToken: BytesLike, nonce: BigNumberish, messenger: BigNumberish, feeTokenAmount: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    getBridgingCostInTokens(destinationChainId: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-    getMessageCost(chainId: PromiseOrValue<BigNumberish>, protocol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-    getTransactionCost(chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-    pools(addr: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getBridgingCostInTokens(destinationChainId: BigNumberish, messenger: BigNumberish, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+    getMessageCost(chainId: BigNumberish, protocol: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    getTransactionCost(chainId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    pools(addr: BytesLike, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    swapAndBridge(token: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, receiveToken: PromiseOrValue<BytesLike>, nonce: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, feeTokenAmount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    swapAndBridge(token: BytesLike, amount: BigNumberish, recipient: BytesLike, destinationChainId: BigNumberish, receiveToken: BytesLike, nonce: BigNumberish, messenger: BigNumberish, feeTokenAmount: BigNumberish, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        getBridgingCostInTokens(destinationChainId: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        getMessageCost(chainId: PromiseOrValue<BigNumberish>, protocol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        getTransactionCost(chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        pools(addr: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
-        swapAndBridge(token: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, receiveToken: PromiseOrValue<BytesLike>, nonce: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, feeTokenAmount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        getBridgingCostInTokens(destinationChainId: BigNumberish, messenger: BigNumberish, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getMessageCost(chainId: BigNumberish, protocol: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getTransactionCost(chainId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        pools(addr: BytesLike, overrides?: CallOverrides): Promise<string>;
+        swapAndBridge(token: BytesLike, amount: BigNumberish, recipient: BytesLike, destinationChainId: BigNumberish, receiveToken: BytesLike, nonce: BigNumberish, messenger: BigNumberish, feeTokenAmount: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        getBridgingCostInTokens(destinationChainId: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        getMessageCost(chainId: PromiseOrValue<BigNumberish>, protocol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        getTransactionCost(chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        pools(addr: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        getBridgingCostInTokens(destinationChainId: BigNumberish, messenger: BigNumberish, tokenAddress: string, overrides?: CallOverrides): Promise<BigNumber>;
+        getMessageCost(chainId: BigNumberish, protocol: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getTransactionCost(chainId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        pools(addr: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        swapAndBridge(token: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, receiveToken: PromiseOrValue<BytesLike>, nonce: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, feeTokenAmount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndBridge(token: BytesLike, amount: BigNumberish, recipient: BytesLike, destinationChainId: BigNumberish, receiveToken: BytesLike, nonce: BigNumberish, messenger: BigNumberish, feeTokenAmount: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        getBridgingCostInTokens(destinationChainId: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getMessageCost(chainId: PromiseOrValue<BigNumberish>, protocol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTransactionCost(chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        pools(addr: PromiseOrValue<BytesLike>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        getBridgingCostInTokens(destinationChainId: BigNumberish, messenger: BigNumberish, tokenAddress: string, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getMessageCost(chainId: BigNumberish, protocol: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getTransactionCost(chainId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        pools(addr: BytesLike, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        swapAndBridge(token: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, receiveToken: PromiseOrValue<BytesLike>, nonce: PromiseOrValue<BigNumberish>, messenger: PromiseOrValue<BigNumberish>, feeTokenAmount: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        swapAndBridge(token: BytesLike, amount: BigNumberish, recipient: BytesLike, destinationChainId: BigNumberish, receiveToken: BytesLike, nonce: BigNumberish, messenger: BigNumberish, feeTokenAmount: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

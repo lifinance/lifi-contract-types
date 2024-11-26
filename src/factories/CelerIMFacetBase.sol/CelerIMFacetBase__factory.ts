@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   CelerIMFacetBase,
   CelerIMFacetBaseInterface,
-} from "../../CelerIMFacetBase.sol/CelerIMFacetBase";
+} from "../../CelerIMFacetBase.sol/CelerIMFacetBase.js";
 
 const _abi = [
   {

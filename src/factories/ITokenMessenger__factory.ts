@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ITokenMessenger,
   ITokenMessengerInterface,
-} from "../ITokenMessenger";
+} from "../ITokenMessenger.js";
 
 const _abi = [
   {

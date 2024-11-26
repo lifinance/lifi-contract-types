@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IAcrossSpokePool, IAcrossSpokePoolInterface } from "../IAcrossSpokePool";
+import type { IAcrossSpokePool, IAcrossSpokePoolInterface } from "../IAcrossSpokePool.js";
 export declare class IAcrossSpokePool__factory {
     static readonly abi: readonly [{
         readonly type: "function";

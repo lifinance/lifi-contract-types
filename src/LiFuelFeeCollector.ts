@@ -25,8 +25,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface LiFuelFeeCollectorInterface extends utils.Interface {
   functions: {
@@ -56,7 +55,7 @@ export interface LiFuelFeeCollectorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "batchWithdrawFees",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "cancelOwnershipTransfer",
@@ -64,20 +63,11 @@ export interface LiFuelFeeCollectorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "collectNativeGasFees",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
+    values: [BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "collectTokenGasFees",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
+    values: [string, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "confirmOwnershipTransfer",
@@ -90,11 +80,11 @@ export interface LiFuelFeeCollectorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "withdrawFees",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
 
   decodeFunctionResult(
@@ -222,31 +212,31 @@ export interface LiFuelFeeCollector extends BaseContract {
 
   functions: {
     batchWithdrawFees(
-      tokenAddresses: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddresses: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     collectTokenGasFees(
-      tokenAddress: PromiseOrValue<string>,
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -254,42 +244,42 @@ export interface LiFuelFeeCollector extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     withdrawFees(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   batchWithdrawFees(
-    tokenAddresses: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokenAddresses: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   collectNativeGasFees(
-    feeAmount: PromiseOrValue<BigNumberish>,
-    chainId: PromiseOrValue<BigNumberish>,
-    receiver: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    feeAmount: BigNumberish,
+    chainId: BigNumberish,
+    receiver: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   collectTokenGasFees(
-    tokenAddress: PromiseOrValue<string>,
-    feeAmount: PromiseOrValue<BigNumberish>,
-    chainId: PromiseOrValue<BigNumberish>,
-    receiver: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokenAddress: string,
+    feeAmount: BigNumberish,
+    chainId: BigNumberish,
+    receiver: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -297,35 +287,35 @@ export interface LiFuelFeeCollector extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _newOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   withdrawFees(
-    tokenAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokenAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     batchWithdrawFees(
-      tokenAddresses: PromiseOrValue<string>[],
+      tokenAddresses: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     collectTokenGasFees(
-      tokenAddress: PromiseOrValue<string>,
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
+      tokenAddress: string,
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -336,87 +326,87 @@ export interface LiFuelFeeCollector extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      _newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     withdrawFees(
-      tokenAddress: PromiseOrValue<string>,
+      tokenAddress: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "FeesWithdrawn(address,address,uint256)"(
-      token?: PromiseOrValue<string> | null,
-      to?: PromiseOrValue<string> | null,
+      token?: string | null,
+      to?: string | null,
       amount?: null
     ): FeesWithdrawnEventFilter;
     FeesWithdrawn(
-      token?: PromiseOrValue<string> | null,
-      to?: PromiseOrValue<string> | null,
+      token?: string | null,
+      to?: string | null,
       amount?: null
     ): FeesWithdrawnEventFilter;
 
     "GasFeesCollected(address,uint256,address,uint256)"(
-      token?: PromiseOrValue<string> | null,
-      chainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: PromiseOrValue<string> | null,
+      token?: string | null,
+      chainId?: BigNumberish | null,
+      receiver?: string | null,
       feeAmount?: null
     ): GasFeesCollectedEventFilter;
     GasFeesCollected(
-      token?: PromiseOrValue<string> | null,
-      chainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: PromiseOrValue<string> | null,
+      token?: string | null,
+      chainId?: BigNumberish | null,
+      receiver?: string | null,
       feeAmount?: null
     ): GasFeesCollectedEventFilter;
 
     "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
     OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
   };
 
   estimateGas: {
     batchWithdrawFees(
-      tokenAddresses: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddresses: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     collectTokenGasFees(
-      tokenAddress: PromiseOrValue<string>,
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -424,43 +414,43 @@ export interface LiFuelFeeCollector extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     withdrawFees(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     batchWithdrawFees(
-      tokenAddresses: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddresses: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     collectNativeGasFees(
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     collectTokenGasFees(
-      tokenAddress: PromiseOrValue<string>,
-      feeAmount: PromiseOrValue<BigNumberish>,
-      chainId: PromiseOrValue<BigNumberish>,
-      receiver: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      feeAmount: BigNumberish,
+      chainId: BigNumberish,
+      receiver: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -468,13 +458,13 @@ export interface LiFuelFeeCollector extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     withdrawFees(
-      tokenAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokenAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

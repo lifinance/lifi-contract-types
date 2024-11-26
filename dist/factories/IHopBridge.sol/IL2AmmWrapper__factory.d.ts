@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IL2AmmWrapper, IL2AmmWrapperInterface } from "../../IHopBridge.sol/IL2AmmWrapper";
+import type { IL2AmmWrapper, IL2AmmWrapperInterface } from "../../IHopBridge.sol/IL2AmmWrapper.js";
 export declare class IL2AmmWrapper__factory {
     static readonly abi: readonly [{
         readonly type: "function";

@@ -1,2 +1,2 @@
-export { IWrapper__factory } from "./IWrapper__factory";
-export { TokenWrapper__factory } from "./TokenWrapper__factory";
+export { IWrapper__factory } from "./IWrapper__factory.js";
+export { TokenWrapper__factory } from "./TokenWrapper__factory.js";

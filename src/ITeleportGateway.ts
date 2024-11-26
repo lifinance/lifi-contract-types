@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface ITeleportGatewayInterface extends utils.Interface {
   functions: {
@@ -32,11 +31,7 @@ export interface ITeleportGatewayInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "initiateTeleport",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BytesLike, string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -75,25 +70,25 @@ export interface ITeleportGateway extends BaseContract {
 
   functions: {
     initiateTeleport(
-      targetDomain: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      targetDomain: BytesLike,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   initiateTeleport(
-    targetDomain: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    targetDomain: BytesLike,
+    receiver: string,
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     initiateTeleport(
-      targetDomain: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+      targetDomain: BytesLike,
+      receiver: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -102,19 +97,19 @@ export interface ITeleportGateway extends BaseContract {
 
   estimateGas: {
     initiateTeleport(
-      targetDomain: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      targetDomain: BytesLike,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     initiateTeleport(
-      targetDomain: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      targetDomain: BytesLike,
+      receiver: string,
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

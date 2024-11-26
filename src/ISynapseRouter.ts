@@ -20,16 +20,15 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ISynapseRouter {
   export type SwapQueryStruct = {
-    swapAdapter: PromiseOrValue<string>;
-    tokenOut: PromiseOrValue<string>;
-    minAmountOut: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    rawParams: PromiseOrValue<BytesLike>;
+    swapAdapter: string;
+    tokenOut: string;
+    minAmountOut: BigNumberish;
+    deadline: BigNumberish;
+    rawParams: BytesLike;
   };
 
   export type SwapQueryStructOutput = [
@@ -46,20 +45,14 @@ export declare namespace ISynapseRouter {
     rawParams: string;
   };
 
-  export type BridgeTokenStruct = {
-    symbol: PromiseOrValue<string>;
-    token: PromiseOrValue<string>;
-  };
+  export type BridgeTokenStruct = { symbol: string; token: string };
 
   export type BridgeTokenStructOutput = [string, string] & {
     symbol: string;
     token: string;
   };
 
-  export type DestRequestStruct = {
-    symbol: PromiseOrValue<string>;
-    amountIn: PromiseOrValue<BigNumberish>;
-  };
+  export type DestRequestStruct = { symbol: string; amountIn: BigNumberish };
 
   export type DestRequestStructOutput = [string, BigNumber] & {
     symbol: string;
@@ -86,29 +79,25 @@ export interface ISynapseRouterInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "bridge",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
       ISynapseRouter.SwapQueryStruct,
       ISynapseRouter.SwapQueryStruct
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "getConnectedBridgeTokens",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getDestinationAmountOut",
-    values: [ISynapseRouter.DestRequestStruct[], PromiseOrValue<string>]
+    values: [ISynapseRouter.DestRequestStruct[], string]
   ): string;
   encodeFunctionData(
     functionFragment: "getOriginAmountOut",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, string[], BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "bridge", data: BytesLike): Result;
@@ -156,17 +145,17 @@ export interface ISynapseRouter extends BaseContract {
 
   functions: {
     bridge(
-      to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+      to: string,
+      chainId: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       originQuery: ISynapseRouter.SwapQueryStruct,
       destQuery: ISynapseRouter.SwapQueryStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     getConnectedBridgeTokens(
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<
       [ISynapseRouter.BridgeTokenStructOutput[]] & {
@@ -176,7 +165,7 @@ export interface ISynapseRouter extends BaseContract {
 
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<
       [ISynapseRouter.SwapQueryStructOutput[]] & {
@@ -185,9 +174,9 @@ export interface ISynapseRouter extends BaseContract {
     >;
 
     getOriginAmountOut(
-      tokenIn: PromiseOrValue<string>,
-      tokenSymbols: PromiseOrValue<string>[],
-      amountIn: PromiseOrValue<BigNumberish>,
+      tokenIn: string,
+      tokenSymbols: string[],
+      amountIn: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [ISynapseRouter.SwapQueryStructOutput[]] & {
@@ -197,59 +186,59 @@ export interface ISynapseRouter extends BaseContract {
   };
 
   bridge(
-    to: PromiseOrValue<string>,
-    chainId: PromiseOrValue<BigNumberish>,
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
+    to: string,
+    chainId: BigNumberish,
+    token: string,
+    amount: BigNumberish,
     originQuery: ISynapseRouter.SwapQueryStruct,
     destQuery: ISynapseRouter.SwapQueryStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   getConnectedBridgeTokens(
-    tokenOut: PromiseOrValue<string>,
+    tokenOut: string,
     overrides?: CallOverrides
   ): Promise<ISynapseRouter.BridgeTokenStructOutput[]>;
 
   getDestinationAmountOut(
     requests: ISynapseRouter.DestRequestStruct[],
-    tokenOut: PromiseOrValue<string>,
+    tokenOut: string,
     overrides?: CallOverrides
   ): Promise<ISynapseRouter.SwapQueryStructOutput[]>;
 
   getOriginAmountOut(
-    tokenIn: PromiseOrValue<string>,
-    tokenSymbols: PromiseOrValue<string>[],
-    amountIn: PromiseOrValue<BigNumberish>,
+    tokenIn: string,
+    tokenSymbols: string[],
+    amountIn: BigNumberish,
     overrides?: CallOverrides
   ): Promise<ISynapseRouter.SwapQueryStructOutput[]>;
 
   callStatic: {
     bridge(
-      to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+      to: string,
+      chainId: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       originQuery: ISynapseRouter.SwapQueryStruct,
       destQuery: ISynapseRouter.SwapQueryStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     getConnectedBridgeTokens(
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<ISynapseRouter.BridgeTokenStructOutput[]>;
 
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<ISynapseRouter.SwapQueryStructOutput[]>;
 
     getOriginAmountOut(
-      tokenIn: PromiseOrValue<string>,
-      tokenSymbols: PromiseOrValue<string>[],
-      amountIn: PromiseOrValue<BigNumberish>,
+      tokenIn: string,
+      tokenSymbols: string[],
+      amountIn: BigNumberish,
       overrides?: CallOverrides
     ): Promise<ISynapseRouter.SwapQueryStructOutput[]>;
   };
@@ -258,60 +247,60 @@ export interface ISynapseRouter extends BaseContract {
 
   estimateGas: {
     bridge(
-      to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+      to: string,
+      chainId: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       originQuery: ISynapseRouter.SwapQueryStruct,
       destQuery: ISynapseRouter.SwapQueryStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     getConnectedBridgeTokens(
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getOriginAmountOut(
-      tokenIn: PromiseOrValue<string>,
-      tokenSymbols: PromiseOrValue<string>[],
-      amountIn: PromiseOrValue<BigNumberish>,
+      tokenIn: string,
+      tokenSymbols: string[],
+      amountIn: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     bridge(
-      to: PromiseOrValue<string>,
-      chainId: PromiseOrValue<BigNumberish>,
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+      to: string,
+      chainId: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       originQuery: ISynapseRouter.SwapQueryStruct,
       destQuery: ISynapseRouter.SwapQueryStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     getConnectedBridgeTokens(
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getDestinationAmountOut(
       requests: ISynapseRouter.DestRequestStruct[],
-      tokenOut: PromiseOrValue<string>,
+      tokenOut: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getOriginAmountOut(
-      tokenIn: PromiseOrValue<string>,
-      tokenSymbols: PromiseOrValue<string>[],
-      amountIn: PromiseOrValue<BigNumberish>,
+      tokenIn: string,
+      tokenSymbols: string[],
+      amountIn: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -1,18 +1,13 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface ITokenMessengerInterface extends utils.Interface {
     functions: {
         "depositForBurn(uint256,uint32,bytes32,address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
-    encodeFunctionData(functionFragment: "depositForBurn", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>
-    ]): string;
+    encodeFunctionData(functionFragment: "depositForBurn", values: [BigNumberish, BigNumberish, BytesLike, string]): string;
     decodeFunctionResult(functionFragment: "depositForBurn", data: BytesLike): Result;
     events: {};
 }
@@ -31,25 +26,25 @@ export interface ITokenMessenger extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositForBurn(amount: BigNumberish, destinationDomain: BigNumberish, mintRecipient: BytesLike, burnToken: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    depositForBurn(amount: BigNumberish, destinationDomain: BigNumberish, mintRecipient: BytesLike, burnToken: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        depositForBurn(amount: BigNumberish, destinationDomain: BigNumberish, mintRecipient: BytesLike, burnToken: string, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositForBurn(amount: BigNumberish, destinationDomain: BigNumberish, mintRecipient: BytesLike, burnToken: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        depositForBurn(amount: BigNumberish, destinationDomain: BigNumberish, mintRecipient: BytesLike, burnToken: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

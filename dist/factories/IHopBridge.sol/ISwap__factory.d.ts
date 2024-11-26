@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ISwap, ISwapInterface } from "../../IHopBridge.sol/ISwap";
+import type { ISwap, ISwapInterface } from "../../IHopBridge.sol/ISwap.js";
 export declare class ISwap__factory {
     static readonly abi: readonly [{
         readonly type: "function";

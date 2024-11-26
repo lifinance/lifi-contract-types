@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IStargateRouter,
   IStargateRouterInterface,
-} from "../IStargateRouter";
+} from "../IStargateRouter.js";
 
 const _abi = [
   {

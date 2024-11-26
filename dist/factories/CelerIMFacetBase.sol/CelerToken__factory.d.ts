@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { CelerToken, CelerTokenInterface } from "../../CelerIMFacetBase.sol/CelerToken";
+import type { CelerToken, CelerTokenInterface } from "../../CelerIMFacetBase.sol/CelerToken.js";
 export declare class CelerToken__factory {
     static readonly abi: readonly [{
         readonly type: "function";

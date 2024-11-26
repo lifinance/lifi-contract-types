@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { CBridgeFacetPacked, CBridgeFacetPackedInterface } from "../CBridgeFacetPacked";
+import type { CBridgeFacetPacked, CBridgeFacetPackedInterface } from "../CBridgeFacetPacked.js";
 declare type CBridgeFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CBridgeFacetPacked__factory extends ContractFactory {
     constructor(...args: CBridgeFacetPackedConstructorParams);
-    deploy(_cBridge: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_cBridge: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<CBridgeFacetPacked>;
-    getDeployTransaction(_cBridge: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_cBridge: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): CBridgeFacetPacked;
     connect(signer: Signer): CBridgeFacetPacked__factory;

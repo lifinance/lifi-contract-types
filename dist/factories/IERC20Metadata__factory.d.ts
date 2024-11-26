@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC20Metadata, IERC20MetadataInterface } from "../IERC20Metadata";
+import type { IERC20Metadata, IERC20MetadataInterface } from "../IERC20Metadata.js";
 export declare class IERC20Metadata__factory {
     static readonly abi: readonly [{
         readonly type: "function";

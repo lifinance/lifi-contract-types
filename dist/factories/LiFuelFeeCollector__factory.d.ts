@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { LiFuelFeeCollector, LiFuelFeeCollectorInterface } from "../LiFuelFeeCollector";
+import type { LiFuelFeeCollector, LiFuelFeeCollectorInterface } from "../LiFuelFeeCollector.js";
 declare type LiFuelFeeCollectorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LiFuelFeeCollector__factory extends ContractFactory {
     constructor(...args: LiFuelFeeCollectorConstructorParams);
-    deploy(_owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_owner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<LiFuelFeeCollector>;
-    getDeployTransaction(_owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_owner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): LiFuelFeeCollector;
     connect(signer: Signer): LiFuelFeeCollector__factory;

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { WithdrawablePeriphery, WithdrawablePeripheryInterface } from "../WithdrawablePeriphery";
+import type { WithdrawablePeriphery, WithdrawablePeripheryInterface } from "../WithdrawablePeriphery.js";
 export declare class WithdrawablePeriphery__factory {
     static readonly abi: readonly [{
         readonly type: "function";

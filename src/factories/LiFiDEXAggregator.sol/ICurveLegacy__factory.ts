@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ICurveLegacy,
   ICurveLegacyInterface,
-} from "../../LiFiDEXAggregator.sol/ICurveLegacy";
+} from "../../LiFiDEXAggregator.sol/ICurveLegacy.js";
 
 const _abi = [
   {

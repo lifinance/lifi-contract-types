@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IXDaiBridgeL2, IXDaiBridgeL2Interface } from "../IXDaiBridgeL2";
+import type {
+  IXDaiBridgeL2,
+  IXDaiBridgeL2Interface,
+} from "../IXDaiBridgeL2.js";
 
 const _abi = [
   {

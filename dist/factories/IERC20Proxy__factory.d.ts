@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IERC20Proxy, IERC20ProxyInterface } from "../IERC20Proxy";
+import type { IERC20Proxy, IERC20ProxyInterface } from "../IERC20Proxy.js";
 export declare class IERC20Proxy__factory {
     static readonly abi: readonly [{
         readonly type: "function";

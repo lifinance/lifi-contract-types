@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { DiamondCutFacet, DiamondCutFacetInterface } from "../DiamondCutFacet";
+import type { DiamondCutFacet, DiamondCutFacetInterface } from "../DiamondCutFacet.js";
 declare type DiamondCutFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class DiamondCutFacet__factory extends ContractFactory {
     constructor(...args: DiamondCutFacetConstructorParams);
     deploy(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<DiamondCutFacet>;
     getDeployTransaction(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): TransactionRequest;
     attach(address: string): DiamondCutFacet;
     connect(signer: Signer): DiamondCutFacet__factory;

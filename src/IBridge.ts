@@ -21,8 +21,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IBridgeInterface extends utils.Interface {
   functions: {
@@ -48,59 +47,38 @@ export interface IBridgeInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "relay",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "send",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "sendNative",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "transfers",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "verifySigs",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraws",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
 
   decodeFunctionResult(functionFragment: "relay", data: BytesLike): Result;
@@ -142,163 +120,157 @@ export interface IBridge extends BaseContract {
 
   functions: {
     relay(
-      _relayRequest: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     send(
-      _receiver: PromiseOrValue<string>,
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _token: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     sendNative(
-      _receiver: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transfers(
-      transferId: PromiseOrValue<BytesLike>,
+      transferId: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     verifySigs(
-      _msg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _msg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     withdraw(
-      _wdmsg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _wdmsg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     withdraws(
-      withdrawId: PromiseOrValue<BytesLike>,
+      withdrawId: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
   };
 
   relay(
-    _relayRequest: PromiseOrValue<BytesLike>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _relayRequest: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   send(
-    _receiver: PromiseOrValue<string>,
-    _token: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _maxSlippage: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _receiver: string,
+    _token: string,
+    _amount: BigNumberish,
+    _dstChainId: BigNumberish,
+    _nonce: BigNumberish,
+    _maxSlippage: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   sendNative(
-    _receiver: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _dstChainId: PromiseOrValue<BigNumberish>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    _maxSlippage: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _receiver: string,
+    _amount: BigNumberish,
+    _dstChainId: BigNumberish,
+    _nonce: BigNumberish,
+    _maxSlippage: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  transfers(
-    transferId: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  transfers(transferId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   verifySigs(
-    _msg: PromiseOrValue<BytesLike>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
+    _msg: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
     overrides?: CallOverrides
   ): Promise<void>;
 
   withdraw(
-    _wdmsg: PromiseOrValue<BytesLike>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _wdmsg: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  withdraws(
-    withdrawId: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  withdraws(withdrawId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
     relay(
-      _relayRequest: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     send(
-      _receiver: PromiseOrValue<string>,
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
+      _receiver: string,
+      _token: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     sendNative(
-      _receiver: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     transfers(
-      transferId: PromiseOrValue<BytesLike>,
+      transferId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     verifySigs(
-      _msg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _msg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     withdraw(
-      _wdmsg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _wdmsg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     withdraws(
-      withdrawId: PromiseOrValue<BytesLike>,
+      withdrawId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -307,110 +279,110 @@ export interface IBridge extends BaseContract {
 
   estimateGas: {
     relay(
-      _relayRequest: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     send(
-      _receiver: PromiseOrValue<string>,
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _token: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     sendNative(
-      _receiver: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     transfers(
-      transferId: PromiseOrValue<BytesLike>,
+      transferId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     verifySigs(
-      _msg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _msg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     withdraw(
-      _wdmsg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _wdmsg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     withdraws(
-      withdrawId: PromiseOrValue<BytesLike>,
+      withdrawId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     relay(
-      _relayRequest: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _relayRequest: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     send(
-      _receiver: PromiseOrValue<string>,
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _token: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     sendNative(
-      _receiver: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _dstChainId: PromiseOrValue<BigNumberish>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      _maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _receiver: string,
+      _amount: BigNumberish,
+      _dstChainId: BigNumberish,
+      _nonce: BigNumberish,
+      _maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transfers(
-      transferId: PromiseOrValue<BytesLike>,
+      transferId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     verifySigs(
-      _msg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _msg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(
-      _wdmsg: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _wdmsg: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     withdraws(
-      withdrawId: PromiseOrValue<BytesLike>,
+      withdrawId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

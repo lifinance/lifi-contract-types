@@ -1,19 +1,19 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace ILiFi {
     type BridgeDataStruct = {
-        transactionId: PromiseOrValue<BytesLike>;
-        bridge: PromiseOrValue<string>;
-        integrator: PromiseOrValue<string>;
-        referrer: PromiseOrValue<string>;
-        sendingAssetId: PromiseOrValue<string>;
-        receiver: PromiseOrValue<string>;
-        minAmount: PromiseOrValue<BigNumberish>;
-        destinationChainId: PromiseOrValue<BigNumberish>;
-        hasSourceSwaps: PromiseOrValue<boolean>;
-        hasDestinationCall: PromiseOrValue<boolean>;
+        transactionId: BytesLike;
+        bridge: string;
+        integrator: string;
+        referrer: string;
+        sendingAssetId: string;
+        receiver: string;
+        minAmount: BigNumberish;
+        destinationChainId: BigNumberish;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
     };
     type BridgeDataStructOutput = [
         string,
@@ -41,13 +41,13 @@ export declare namespace ILiFi {
 }
 export declare namespace AmarokFacet {
     type AmarokDataStruct = {
-        callData: PromiseOrValue<BytesLike>;
-        callTo: PromiseOrValue<string>;
-        relayerFee: PromiseOrValue<BigNumberish>;
-        slippageTol: PromiseOrValue<BigNumberish>;
-        delegate: PromiseOrValue<string>;
-        destChainDomainId: PromiseOrValue<BigNumberish>;
-        payFeeWithSendingAsset: PromiseOrValue<boolean>;
+        callData: BytesLike;
+        callTo: string;
+        relayerFee: BigNumberish;
+        slippageTol: BigNumberish;
+        delegate: string;
+        destChainDomainId: BigNumberish;
+        payFeeWithSendingAsset: boolean;
     };
     type AmarokDataStructOutput = [
         string,
@@ -88,49 +88,49 @@ export interface AmarokFacetPackedInterface extends utils.Interface {
     getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset" | "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative" | "encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset" | "encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative" | "getChainIdForDomain" | "owner" | "pendingOwner" | "setApprovalForBridge" | "startBridgeTokensViaAmarokERC20MinPayFeeWithAsset" | "startBridgeTokensViaAmarokERC20MinPayFeeWithNative" | "startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset" | "startBridgeTokensViaAmarokERC20PackedPayFeeWithNative" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
-    encodeFunctionData(functionFragment: "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset", values: [PromiseOrValue<BytesLike>]): string;
-    encodeFunctionData(functionFragment: "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset", values: [BytesLike]): string;
+    encodeFunctionData(functionFragment: "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative", values: [BytesLike]): string;
     encodeFunctionData(functionFragment: "encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BytesLike,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
     encodeFunctionData(functionFragment: "encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BytesLike,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
-    encodeFunctionData(functionFragment: "getChainIdForDomain", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "getChainIdForDomain", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
-    encodeFunctionData(functionFragment: "setApprovalForBridge", values: [PromiseOrValue<string>[]]): string;
+    encodeFunctionData(functionFragment: "setApprovalForBridge", values: [string[]]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarokERC20MinPayFeeWithAsset", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BytesLike,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarokERC20MinPayFeeWithNative", values: [
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        BytesLike,
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAmarokERC20PackedPayFeeWithNative", values?: undefined): string;
-    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [string]): string;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset", data: BytesLike): Result;
@@ -152,7 +152,7 @@ export interface AmarokFacetPackedInterface extends utils.Interface {
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-        "LiFiTransferStarted(tuple)": EventFragment;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
         "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
     };
@@ -283,187 +283,187 @@ export interface AmarokFacetPacked extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: BytesLike, overrides?: CallOverrides): Promise<[
             ILiFi.BridgeDataStructOutput,
             AmarokFacet.AmarokDataStructOutput
         ]>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: BytesLike, overrides?: CallOverrides): Promise<[
             ILiFi.BridgeDataStructOutput,
             AmarokFacet.AmarokDataStructOutput
         ]>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
-        getChainIdForDomain(domainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number] & {
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+        getChainIdForDomain(domainId: BigNumberish, overrides?: CallOverrides): Promise<[number] & {
             chainId: number;
         }>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-        setApprovalForBridge(tokensToApprove: PromiseOrValue<string>[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        setApprovalForBridge(tokensToApprove: string[], overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<ContractTransaction>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
     cancelOwnershipTransfer(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     confirmOwnershipTransfer(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+    decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: BytesLike, overrides?: CallOverrides): Promise<[
         ILiFi.BridgeDataStructOutput,
         AmarokFacet.AmarokDataStructOutput
     ]>;
-    decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+    decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: BytesLike, overrides?: CallOverrides): Promise<[
         ILiFi.BridgeDataStructOutput,
         AmarokFacet.AmarokDataStructOutput
     ]>;
-    encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-    encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-    getChainIdForDomain(domainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
+    encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    getChainIdForDomain(domainId: BigNumberish, overrides?: CallOverrides): Promise<number>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
-    setApprovalForBridge(tokensToApprove: PromiseOrValue<string>[], overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    setApprovalForBridge(tokensToApprove: string[], overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
     startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+        from?: string;
     }): Promise<ContractTransaction>;
-    transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    transferOwnership(_newOwner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: BytesLike, overrides?: CallOverrides): Promise<[
             ILiFi.BridgeDataStructOutput,
             AmarokFacet.AmarokDataStructOutput
         ]>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: BytesLike, overrides?: CallOverrides): Promise<[
             ILiFi.BridgeDataStructOutput,
             AmarokFacet.AmarokDataStructOutput
         ]>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-        getChainIdForDomain(domainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        getChainIdForDomain(domainId: BigNumberish, overrides?: CallOverrides): Promise<number>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
-        setApprovalForBridge(tokensToApprove: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setApprovalForBridge(tokensToApprove: string[], overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(overrides?: CallOverrides): Promise<void>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(_newOwner: string, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "LiFiAmarokTransfer(bytes8)"(_transactionId?: null): LiFiAmarokTransferEventFilter;
         LiFiAmarokTransfer(_transactionId?: null): LiFiAmarokTransferEventFilter;
-        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
-        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
-        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
-        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        LiFiTransferRecovered(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
-        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: BytesLike | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: BytesLike | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        LiFiTransferRecovered(transactionId?: BytesLike | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(bridgeData?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-        "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
-        OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
-        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
-        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        "OwnershipTransferRequested(address,address)"(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
+        OwnershipTransferRequested(_from?: string | null, _to?: string | null): OwnershipTransferRequestedEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        getChainIdForDomain(domainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        getChainIdForDomain(domainId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-        setApprovalForBridge(tokensToApprove: PromiseOrValue<string>[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        setApprovalForBridge(tokensToApprove: string[], overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<BigNumber>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
         cancelOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         confirmOwnershipTransfer(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getChainIdForDomain(domainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(_data: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        decode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(_data: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        encode_startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getChainIdForDomain(domainId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        setApprovalForBridge(tokensToApprove: PromiseOrValue<string>[], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        setApprovalForBridge(tokensToApprove: string[], overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, relayerFee: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithAsset(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, relayerFee: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: PromiseOrValue<BytesLike>, receiver: PromiseOrValue<string>, sendingAssetId: PromiseOrValue<string>, minAmount: PromiseOrValue<BigNumberish>, destChainDomainId: PromiseOrValue<BigNumberish>, slippageTol: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        startBridgeTokensViaAmarokERC20MinPayFeeWithNative(transactionId: BytesLike, receiver: string, sendingAssetId: string, minAmount: BigNumberish, destChainDomainId: BigNumberish, slippageTol: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithAsset(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
         startBridgeTokensViaAmarokERC20PackedPayFeeWithNative(overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        transferOwnership(_newOwner: string, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { Executor, ExecutorInterface } from "../Executor";
+import type { Executor, ExecutorInterface } from "../Executor.js";
 declare type ExecutorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Executor__factory extends ContractFactory {
     constructor(...args: ExecutorConstructorParams);
-    deploy(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_erc20Proxy: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<Executor>;
-    getDeployTransaction(_erc20Proxy: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_erc20Proxy: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): Executor;
     connect(signer: Signer): Executor__factory;

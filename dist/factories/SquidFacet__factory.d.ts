@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { SquidFacet, SquidFacetInterface } from "../SquidFacet";
+import type { SquidFacet, SquidFacetInterface } from "../SquidFacet.js";
 declare type SquidFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SquidFacet__factory extends ContractFactory {
     constructor(...args: SquidFacetConstructorParams);
-    deploy(_squidRouter: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_squidRouter: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<SquidFacet>;
-    getDeployTransaction(_squidRouter: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_squidRouter: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): SquidFacet;
     connect(signer: Signer): SquidFacet__factory;

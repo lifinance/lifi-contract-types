@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IPeggedTokenBridgeV2, IPeggedTokenBridgeV2Interface } from "../IPeggedTokenBridgeV2";
+import type { IPeggedTokenBridgeV2, IPeggedTokenBridgeV2Interface } from "../IPeggedTokenBridgeV2.js";
 export declare class IPeggedTokenBridgeV2__factory {
     static readonly abi: readonly [{
         readonly type: "function";

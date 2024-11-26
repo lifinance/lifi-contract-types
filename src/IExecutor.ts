@@ -20,18 +20,17 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace LibSwap {
   export type SwapDataStruct = {
-    callTo: PromiseOrValue<string>;
-    approveTo: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    fromAmount: PromiseOrValue<BigNumberish>;
-    callData: PromiseOrValue<BytesLike>;
-    requiresDeposit: PromiseOrValue<boolean>;
+    callTo: string;
+    approveTo: string;
+    sendingAssetId: string;
+    receivingAssetId: string;
+    fromAmount: BigNumberish;
+    callData: BytesLike;
+    requiresDeposit: boolean;
   };
 
   export type SwapDataStructOutput = [
@@ -64,12 +63,7 @@ export interface IExecutorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "swapAndCompleteBridgeTokens",
-    values: [
-      PromiseOrValue<BytesLike>,
-      LibSwap.SwapDataStruct[],
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
+    values: [BytesLike, LibSwap.SwapDataStruct[], string, string]
   ): string;
 
   decodeFunctionResult(
@@ -108,28 +102,28 @@ export interface IExecutor extends BaseContract {
 
   functions: {
     swapAndCompleteBridgeTokens(
-      _transactionId: PromiseOrValue<BytesLike>,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferredAssetId: string,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   swapAndCompleteBridgeTokens(
-    _transactionId: PromiseOrValue<BytesLike>,
+    _transactionId: BytesLike,
     _swapData: LibSwap.SwapDataStruct[],
-    transferredAssetId: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    transferredAssetId: string,
+    receiver: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     swapAndCompleteBridgeTokens(
-      _transactionId: PromiseOrValue<BytesLike>,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
+      transferredAssetId: string,
+      receiver: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -138,21 +132,21 @@ export interface IExecutor extends BaseContract {
 
   estimateGas: {
     swapAndCompleteBridgeTokens(
-      _transactionId: PromiseOrValue<BytesLike>,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferredAssetId: string,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     swapAndCompleteBridgeTokens(
-      _transactionId: PromiseOrValue<BytesLike>,
+      _transactionId: BytesLike,
       _swapData: LibSwap.SwapDataStruct[],
-      transferredAssetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferredAssetId: string,
+      receiver: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

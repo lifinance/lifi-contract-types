@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IThorSwap, IThorSwapInterface } from "../IThorSwap";
+import type { IThorSwap, IThorSwapInterface } from "../IThorSwap.js";
 export declare class IThorSwap__factory {
     static readonly abi: readonly [{
         readonly type: "function";

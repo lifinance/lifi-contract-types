@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { CelerCircleBridgeFacet, CelerCircleBridgeFacetInterface } from "../CelerCircleBridgeFacet";
+import type { CelerCircleBridgeFacet, CelerCircleBridgeFacetInterface } from "../CelerCircleBridgeFacet.js";
 declare type CelerCircleBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CelerCircleBridgeFacet__factory extends ContractFactory {
     constructor(...args: CelerCircleBridgeFacetConstructorParams);
-    deploy(_circleBridgeProxy: PromiseOrValue<string>, _usdc: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_circleBridgeProxy: string, _usdc: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<CelerCircleBridgeFacet>;
-    getDeployTransaction(_circleBridgeProxy: PromiseOrValue<string>, _usdc: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_circleBridgeProxy: string, _usdc: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): CelerCircleBridgeFacet;
     connect(signer: Signer): CelerCircleBridgeFacet__factory;

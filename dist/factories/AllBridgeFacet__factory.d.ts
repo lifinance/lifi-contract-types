@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { AllBridgeFacet, AllBridgeFacetInterface } from "../AllBridgeFacet";
+import type { AllBridgeFacet, AllBridgeFacetInterface } from "../AllBridgeFacet.js";
 declare type AllBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AllBridgeFacet__factory extends ContractFactory {
     constructor(...args: AllBridgeFacetConstructorParams);
-    deploy(_allBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_allBridge: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<AllBridgeFacet>;
-    getDeployTransaction(_allBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_allBridge: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): AllBridgeFacet;
     connect(signer: Signer): AllBridgeFacet__factory;

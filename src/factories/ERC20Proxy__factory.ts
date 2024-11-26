@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { ERC20Proxy, ERC20ProxyInterface } from "../ERC20Proxy";
+import type { ERC20Proxy, ERC20ProxyInterface } from "../ERC20Proxy.js";
 
 const _abi = [
   {
@@ -197,14 +196,14 @@ export class ERC20Proxy__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ERC20Proxy> {
     return super.deploy(_owner, overrides || {}) as Promise<ERC20Proxy>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_owner, overrides || {});
   }

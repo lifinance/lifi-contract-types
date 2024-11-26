@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   AllBridgeFacet,
   AllBridgeFacetInterface,
-} from "../AllBridgeFacet";
+} from "../AllBridgeFacet.js";
 
 const _abi = [
   {
@@ -640,14 +639,14 @@ export class AllBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _allBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _allBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<AllBridgeFacet> {
     return super.deploy(_allBridge, overrides || {}) as Promise<AllBridgeFacet>;
   }
   override getDeployTransaction(
-    _allBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _allBridge: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_allBridge, overrides || {});
   }

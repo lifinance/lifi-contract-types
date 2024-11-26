@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IConnextHandler, IConnextHandlerInterface } from "../IConnextHandler";
+import type { IConnextHandler, IConnextHandlerInterface } from "../IConnextHandler.js";
 export declare class IConnextHandler__factory {
     static readonly abi: readonly [{
         readonly type: "function";

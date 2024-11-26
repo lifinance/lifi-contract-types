@@ -1,14 +1,14 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export declare namespace ISquidMulticall {
     type CallStruct = {
-        callType: PromiseOrValue<BigNumberish>;
-        target: PromiseOrValue<string>;
-        value: PromiseOrValue<BigNumberish>;
-        callData: PromiseOrValue<BytesLike>;
-        payload: PromiseOrValue<BytesLike>;
+        callType: BigNumberish;
+        target: string;
+        value: BigNumberish;
+        callData: BytesLike;
+        payload: BytesLike;
     };
     type CallStructOutput = [number, string, BigNumber, string, string] & {
         callType: number;
@@ -25,33 +25,25 @@ export interface ISquidRouterInterface extends utils.Interface {
         "callBridgeCall(address,uint256,(uint8,address,uint256,bytes,bytes)[],string,string,string,bytes,address,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "bridgeCall" | "callBridge" | "callBridgeCall"): FunctionFragment;
-    encodeFunctionData(functionFragment: "bridgeCall", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<boolean>
-    ]): string;
+    encodeFunctionData(functionFragment: "bridgeCall", values: [string, BigNumberish, string, string, BytesLike, string, boolean]): string;
     encodeFunctionData(functionFragment: "callBridge", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
+        string,
+        BigNumberish,
         ISquidMulticall.CallStruct[],
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>
+        string,
+        string,
+        string
     ]): string;
     encodeFunctionData(functionFragment: "callBridgeCall", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
+        string,
+        BigNumberish,
         ISquidMulticall.CallStruct[],
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<boolean>
+        string,
+        string,
+        string,
+        BytesLike,
+        string,
+        boolean
     ]): string;
     decodeFunctionResult(functionFragment: "bridgeCall", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "callBridge", data: BytesLike): Result;
@@ -73,51 +65,51 @@ export interface ISquidRouter extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        bridgeCall(bridgedTokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        bridgeCall(bridgedTokenSymbol: string, amount: BigNumberish, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        callBridge(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridge(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        callBridgeCall(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridgeCall(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    bridgeCall(bridgedTokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    bridgeCall(bridgedTokenSymbol: string, amount: BigNumberish, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    callBridge(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    callBridge(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    callBridgeCall(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    callBridgeCall(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        bridgeCall(bridgedTokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
-        callBridge(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        callBridgeCall(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        bridgeCall(bridgedTokenSymbol: string, amount: BigNumberish, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: CallOverrides): Promise<void>;
+        callBridge(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, overrides?: CallOverrides): Promise<void>;
+        callBridgeCall(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        bridgeCall(bridgedTokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        bridgeCall(bridgedTokenSymbol: string, amount: BigNumberish, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        callBridge(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridge(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        callBridgeCall(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridgeCall(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        bridgeCall(bridgedTokenSymbol: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        bridgeCall(bridgedTokenSymbol: string, amount: BigNumberish, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        callBridge(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridge(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        callBridgeCall(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: PromiseOrValue<string>, destinationChain: PromiseOrValue<string>, destinationAddress: PromiseOrValue<string>, payload: PromiseOrValue<BytesLike>, gasRefundRecipient: PromiseOrValue<string>, enableExpress: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        callBridgeCall(token: string, amount: BigNumberish, calls: ISquidMulticall.CallStruct[], bridgedTokenSymbol: string, destinationChain: string, destinationAddress: string, payload: BytesLike, gasRefundRecipient: string, enableExpress: boolean, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

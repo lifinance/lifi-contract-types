@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ITridentCLPool, ITridentCLPoolInterface } from "../../LiFiDEXAggregator.sol/ITridentCLPool";
+import type { ITridentCLPool, ITridentCLPoolInterface } from "../../LiFiDEXAggregator.sol/ITridentCLPool.js";
 export declare class ITridentCLPool__factory {
     static readonly abi: readonly [{
         readonly type: "function";

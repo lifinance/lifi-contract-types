@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ReentrancyGuard, ReentrancyGuardInterface } from "../ReentrancyGuard";
+import type { ReentrancyGuard, ReentrancyGuardInterface } from "../ReentrancyGuard.js";
 export declare class ReentrancyGuard__factory {
     static readonly abi: readonly [{
         readonly type: "error";

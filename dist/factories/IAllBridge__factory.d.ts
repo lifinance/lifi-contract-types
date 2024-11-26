@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IAllBridge, IAllBridgeInterface } from "../IAllBridge";
+import type { IAllBridge, IAllBridgeInterface } from "../IAllBridge.js";
 export declare class IAllBridge__factory {
     static readonly abi: readonly [{
         readonly type: "function";

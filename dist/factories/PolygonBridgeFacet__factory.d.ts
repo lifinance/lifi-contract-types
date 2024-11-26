@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { PolygonBridgeFacet, PolygonBridgeFacetInterface } from "../PolygonBridgeFacet";
+import type { PolygonBridgeFacet, PolygonBridgeFacetInterface } from "../PolygonBridgeFacet.js";
 declare type PolygonBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PolygonBridgeFacet__factory extends ContractFactory {
     constructor(...args: PolygonBridgeFacetConstructorParams);
-    deploy(_rootChainManager: PromiseOrValue<string>, _erc20Predicate: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_rootChainManager: string, _erc20Predicate: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<PolygonBridgeFacet>;
-    getDeployTransaction(_rootChainManager: PromiseOrValue<string>, _erc20Predicate: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_rootChainManager: string, _erc20Predicate: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): PolygonBridgeFacet;
     connect(signer: Signer): PolygonBridgeFacet__factory;

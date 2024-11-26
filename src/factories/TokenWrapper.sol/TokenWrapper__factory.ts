@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../../common";
 import type {
   TokenWrapper,
   TokenWrapperInterface,
-} from "../../TokenWrapper.sol/TokenWrapper";
+} from "../../TokenWrapper.sol/TokenWrapper.js";
 
 const _abi = [
   {
@@ -80,8 +79,8 @@ export class TokenWrapper__factory extends ContractFactory {
   }
 
   override deploy(
-    _wrappedToken: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _wrappedToken: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<TokenWrapper> {
     return super.deploy(
       _wrappedToken,
@@ -89,8 +88,8 @@ export class TokenWrapper__factory extends ContractFactory {
     ) as Promise<TokenWrapper>;
   }
   override getDeployTransaction(
-    _wrappedToken: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _wrappedToken: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_wrappedToken, overrides || {});
   }

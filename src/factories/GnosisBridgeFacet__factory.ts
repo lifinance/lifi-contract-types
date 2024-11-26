@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   GnosisBridgeFacet,
   GnosisBridgeFacetInterface,
-} from "../GnosisBridgeFacet";
+} from "../GnosisBridgeFacet.js";
 
 const _abi = [
   {
@@ -566,8 +565,8 @@ export class GnosisBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _xDaiBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _xDaiBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<GnosisBridgeFacet> {
     return super.deploy(
       _xDaiBridge,
@@ -575,8 +574,8 @@ export class GnosisBridgeFacet__factory extends ContractFactory {
     ) as Promise<GnosisBridgeFacet>;
   }
   override getDeployTransaction(
-    _xDaiBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _xDaiBridge: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_xDaiBridge, overrides || {});
   }

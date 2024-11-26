@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { AmarokFacetPacked, AmarokFacetPackedInterface } from "../AmarokFacetPacked";
+import type { AmarokFacetPacked, AmarokFacetPackedInterface } from "../AmarokFacetPacked.js";
 declare type AmarokFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AmarokFacetPacked__factory extends ContractFactory {
     constructor(...args: AmarokFacetPackedConstructorParams);
-    deploy(_connextHandler: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_connextHandler: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<AmarokFacetPacked>;
-    getDeployTransaction(_connextHandler: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_connextHandler: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): AmarokFacetPacked;
     connect(signer: Signer): AmarokFacetPacked__factory;

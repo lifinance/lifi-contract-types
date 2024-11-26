@@ -1,7 +1,7 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common.js";
 export interface ICBridgeInterface extends utils.Interface {
     functions: {
         "send(address,address,uint256,uint64,uint64,uint32)": FunctionFragment;
@@ -9,20 +9,14 @@ export interface ICBridgeInterface extends utils.Interface {
     };
     getFunction(nameOrSignatureOrTopic: "send" | "sendNative"): FunctionFragment;
     encodeFunctionData(functionFragment: "send", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        string,
+        string,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish,
+        BigNumberish
     ]): string;
-    encodeFunctionData(functionFragment: "sendNative", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
+    encodeFunctionData(functionFragment: "sendNative", values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]): string;
     decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sendNative", data: BytesLike): Result;
     events: {};
@@ -42,38 +36,38 @@ export interface ICBridge extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        send(_receiver: PromiseOrValue<string>, _token: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        send(_receiver: string, _token: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
-        sendNative(_receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<ContractTransaction>;
     };
-    send(_receiver: PromiseOrValue<string>, _token: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    send(_receiver: string, _token: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
-    sendNative(_receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
+    sendNative(_receiver: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
+        from?: string;
     }): Promise<ContractTransaction>;
     callStatic: {
-        send(_receiver: PromiseOrValue<string>, _token: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        sendNative(_receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        send(_receiver: string, _token: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        send(_receiver: PromiseOrValue<string>, _token: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        send(_receiver: string, _token: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<BigNumber>;
-        sendNative(_receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        send(_receiver: PromiseOrValue<string>, _token: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
+        send(_receiver: string, _token: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: Overrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
-        sendNative(_receiver: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, _dstChainId: PromiseOrValue<BigNumberish>, _nonce: PromiseOrValue<BigNumberish>, _maxSlippage: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
+        sendNative(_receiver: string, _amount: BigNumberish, _dstChainId: BigNumberish, _nonce: BigNumberish, _maxSlippage: BigNumberish, overrides?: PayableOverrides & {
+            from?: string;
         }): Promise<PopulatedTransaction>;
     };
 }

@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { AcrossFacetPacked, AcrossFacetPackedInterface } from "../AcrossFacetPacked";
+import type { AcrossFacetPacked, AcrossFacetPackedInterface } from "../AcrossFacetPacked.js";
 declare type AcrossFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AcrossFacetPacked__factory extends ContractFactory {
     constructor(...args: AcrossFacetPackedConstructorParams);
-    deploy(_spokePool: PromiseOrValue<string>, _wrappedNative: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_spokePool: string, _wrappedNative: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<AcrossFacetPacked>;
-    getDeployTransaction(_spokePool: PromiseOrValue<string>, _wrappedNative: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_spokePool: string, _wrappedNative: string, _owner: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): AcrossFacetPacked;
     connect(signer: Signer): AcrossFacetPacked__factory;

@@ -20,20 +20,19 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ISymbiosisMetaRouter {
   export type MetaRouteTransactionStruct = {
-    firstSwapCalldata: PromiseOrValue<BytesLike>;
-    secondSwapCalldata: PromiseOrValue<BytesLike>;
-    approvedTokens: PromiseOrValue<string>[];
-    firstDexRouter: PromiseOrValue<string>;
-    secondDexRouter: PromiseOrValue<string>;
-    amount: PromiseOrValue<BigNumberish>;
-    nativeIn: PromiseOrValue<boolean>;
-    relayRecipient: PromiseOrValue<string>;
-    otherSideCalldata: PromiseOrValue<BytesLike>;
+    firstSwapCalldata: BytesLike;
+    secondSwapCalldata: BytesLike;
+    approvedTokens: string[];
+    firstDexRouter: string;
+    secondDexRouter: string;
+    amount: BigNumberish;
+    nativeIn: boolean;
+    relayRecipient: string;
+    otherSideCalldata: BytesLike;
   };
 
   export type MetaRouteTransactionStructOutput = [
@@ -105,13 +104,13 @@ export interface ISymbiosisMetaRouter extends BaseContract {
   functions: {
     metaRoute(
       _metarouteTransaction: ISymbiosisMetaRouter.MetaRouteTransactionStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   metaRoute(
     _metarouteTransaction: ISymbiosisMetaRouter.MetaRouteTransactionStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -126,14 +125,14 @@ export interface ISymbiosisMetaRouter extends BaseContract {
   estimateGas: {
     metaRoute(
       _metarouteTransaction: ISymbiosisMetaRouter.MetaRouteTransactionStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     metaRoute(
       _metarouteTransaction: ISymbiosisMetaRouter.MetaRouteTransactionStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

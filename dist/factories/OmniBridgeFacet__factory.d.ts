@@ -1,15 +1,14 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { OmniBridgeFacet, OmniBridgeFacetInterface } from "../OmniBridgeFacet";
+import type { OmniBridgeFacet, OmniBridgeFacetInterface } from "../OmniBridgeFacet.js";
 declare type OmniBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class OmniBridgeFacet__factory extends ContractFactory {
     constructor(...args: OmniBridgeFacetConstructorParams);
-    deploy(_foreignOmniBridge: PromiseOrValue<string>, _wethOmniBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    deploy(_foreignOmniBridge: string, _wethOmniBridge: string, overrides?: Overrides & {
+        from?: string;
     }): Promise<OmniBridgeFacet>;
-    getDeployTransaction(_foreignOmniBridge: PromiseOrValue<string>, _wethOmniBridge: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
+    getDeployTransaction(_foreignOmniBridge: string, _wethOmniBridge: string, overrides?: Overrides & {
+        from?: string;
     }): TransactionRequest;
     attach(address: string): OmniBridgeFacet;
     connect(signer: Signer): OmniBridgeFacet__factory;

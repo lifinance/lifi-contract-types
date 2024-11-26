@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IRootChainManager,
   IRootChainManagerInterface,
-} from "../IRootChainManager";
+} from "../IRootChainManager.js";
 
 const _abi = [
   {

@@ -1,6 +1,6 @@
 import { Signer } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { Ownable, OwnableInterface } from "../Ownable";
+import type { Ownable, OwnableInterface } from "../Ownable.js";
 export declare class Ownable__factory {
     static readonly abi: readonly [{
         readonly type: "function";
