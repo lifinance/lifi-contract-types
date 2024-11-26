@@ -16,11 +16,6 @@
       "import": "./dist/esm/GenericSwapFacet.js",
       "default": "./dist/cjs/GenericSwapFacet.js"
     },
-    "./GenericSwapFacetV3": {
-      "types": "./dist/types/GenericSwapFacetV3.d.ts",
-      "import": "./dist/esm/GenericSwapFacetV3.js",
-      "default": "./dist/cjs/GenericSwapFacetV3.js"
-    },
     "./LiFuelFeeCollector": {
       "types": "./dist/types/LiFuelFeeCollector.d.ts",
       "import": "./dist/esm/LiFuelFeeCollector.js",
