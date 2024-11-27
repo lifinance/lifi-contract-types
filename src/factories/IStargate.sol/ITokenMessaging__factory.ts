@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ITokenMessaging,
   ITokenMessagingInterface,
-} from "../../IStargate.sol/ITokenMessaging";
+} from "../../IStargate.sol/ITokenMessaging.js";
 
 const _abi = [
   {

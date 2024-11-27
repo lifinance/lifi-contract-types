@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IUniswapV2Pair,
   IUniswapV2PairInterface,
-} from "../../LiFiDEXAggregator.sol/IUniswapV2Pair";
+} from "../../LiFiDEXAggregator.sol/IUniswapV2Pair.js";
 
 const _abi = [
   {

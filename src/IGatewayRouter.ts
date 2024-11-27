@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IGatewayRouterInterface extends utils.Interface {
   functions: {
@@ -41,34 +40,31 @@ export interface IGatewayRouterInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "calculateL2TokenAddress",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getGateway",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "getGateway", values: [string]): string;
   encodeFunctionData(
     functionFragment: "outboundTransfer",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "unsafeCreateRetryableTicket",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      string,
+      BigNumberish,
+      BigNumberish,
+      string,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike
     ]
   ): string;
 
@@ -117,100 +113,91 @@ export interface IGatewayRouter extends BaseContract {
 
   functions: {
     calculateL2TokenAddress(
-      _token: PromiseOrValue<string>,
+      _token: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getGateway(
-      _token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    getGateway(_token: string, overrides?: CallOverrides): Promise<[string]>;
 
     outboundTransfer(
-      _token: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _to: string,
+      _amount: BigNumberish,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     unsafeCreateRetryableTicket(
-      _destAddr: PromiseOrValue<string>,
-      _l2CallValue: PromiseOrValue<BigNumberish>,
-      _maxSubmissionCost: PromiseOrValue<BigNumberish>,
-      _excessFeeRefundAddress: PromiseOrValue<string>,
-      _callValueRefundAddress: PromiseOrValue<string>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _destAddr: string,
+      _l2CallValue: BigNumberish,
+      _maxSubmissionCost: BigNumberish,
+      _excessFeeRefundAddress: string,
+      _callValueRefundAddress: string,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   calculateL2TokenAddress(
-    _token: PromiseOrValue<string>,
+    _token: string,
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getGateway(
-    _token: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  getGateway(_token: string, overrides?: CallOverrides): Promise<string>;
 
   outboundTransfer(
-    _token: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _maxGas: PromiseOrValue<BigNumberish>,
-    _gasPriceBid: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _token: string,
+    _to: string,
+    _amount: BigNumberish,
+    _maxGas: BigNumberish,
+    _gasPriceBid: BigNumberish,
+    _data: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   unsafeCreateRetryableTicket(
-    _destAddr: PromiseOrValue<string>,
-    _l2CallValue: PromiseOrValue<BigNumberish>,
-    _maxSubmissionCost: PromiseOrValue<BigNumberish>,
-    _excessFeeRefundAddress: PromiseOrValue<string>,
-    _callValueRefundAddress: PromiseOrValue<string>,
-    _maxGas: PromiseOrValue<BigNumberish>,
-    _gasPriceBid: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _destAddr: string,
+    _l2CallValue: BigNumberish,
+    _maxSubmissionCost: BigNumberish,
+    _excessFeeRefundAddress: string,
+    _callValueRefundAddress: string,
+    _maxGas: BigNumberish,
+    _gasPriceBid: BigNumberish,
+    _data: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     calculateL2TokenAddress(
-      _token: PromiseOrValue<string>,
+      _token: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    getGateway(
-      _token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    getGateway(_token: string, overrides?: CallOverrides): Promise<string>;
 
     outboundTransfer(
-      _token: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      _token: string,
+      _to: string,
+      _amount: BigNumberish,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
     unsafeCreateRetryableTicket(
-      _destAddr: PromiseOrValue<string>,
-      _l2CallValue: PromiseOrValue<BigNumberish>,
-      _maxSubmissionCost: PromiseOrValue<BigNumberish>,
-      _excessFeeRefundAddress: PromiseOrValue<string>,
-      _callValueRefundAddress: PromiseOrValue<string>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      _destAddr: string,
+      _l2CallValue: BigNumberish,
+      _maxSubmissionCost: BigNumberish,
+      _excessFeeRefundAddress: string,
+      _callValueRefundAddress: string,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -219,69 +206,66 @@ export interface IGatewayRouter extends BaseContract {
 
   estimateGas: {
     calculateL2TokenAddress(
-      _token: PromiseOrValue<string>,
+      _token: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getGateway(
-      _token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getGateway(_token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     outboundTransfer(
-      _token: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _to: string,
+      _amount: BigNumberish,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     unsafeCreateRetryableTicket(
-      _destAddr: PromiseOrValue<string>,
-      _l2CallValue: PromiseOrValue<BigNumberish>,
-      _maxSubmissionCost: PromiseOrValue<BigNumberish>,
-      _excessFeeRefundAddress: PromiseOrValue<string>,
-      _callValueRefundAddress: PromiseOrValue<string>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _destAddr: string,
+      _l2CallValue: BigNumberish,
+      _maxSubmissionCost: BigNumberish,
+      _excessFeeRefundAddress: string,
+      _callValueRefundAddress: string,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     calculateL2TokenAddress(
-      _token: PromiseOrValue<string>,
+      _token: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getGateway(
-      _token: PromiseOrValue<string>,
+      _token: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     outboundTransfer(
-      _token: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _to: string,
+      _amount: BigNumberish,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     unsafeCreateRetryableTicket(
-      _destAddr: PromiseOrValue<string>,
-      _l2CallValue: PromiseOrValue<BigNumberish>,
-      _maxSubmissionCost: PromiseOrValue<BigNumberish>,
-      _excessFeeRefundAddress: PromiseOrValue<string>,
-      _callValueRefundAddress: PromiseOrValue<string>,
-      _maxGas: PromiseOrValue<BigNumberish>,
-      _gasPriceBid: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _destAddr: string,
+      _l2CallValue: BigNumberish,
+      _maxSubmissionCost: BigNumberish,
+      _excessFeeRefundAddress: string,
+      _callValueRefundAddress: string,
+      _maxGas: BigNumberish,
+      _gasPriceBid: BigNumberish,
+      _data: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

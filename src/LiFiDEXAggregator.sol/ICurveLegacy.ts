@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export interface ICurveLegacyInterface extends utils.Interface {
   functions: {
@@ -32,12 +31,7 @@ export interface ICurveLegacyInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "exchange",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "exchange", data: BytesLike): Result;
@@ -73,28 +67,28 @@ export interface ICurveLegacy extends BaseContract {
 
   functions: {
     exchange(
-      i: PromiseOrValue<BigNumberish>,
-      j: PromiseOrValue<BigNumberish>,
-      dx: PromiseOrValue<BigNumberish>,
-      min_dy: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      i: BigNumberish,
+      j: BigNumberish,
+      dx: BigNumberish,
+      min_dy: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   exchange(
-    i: PromiseOrValue<BigNumberish>,
-    j: PromiseOrValue<BigNumberish>,
-    dx: PromiseOrValue<BigNumberish>,
-    min_dy: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    i: BigNumberish,
+    j: BigNumberish,
+    dx: BigNumberish,
+    min_dy: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     exchange(
-      i: PromiseOrValue<BigNumberish>,
-      j: PromiseOrValue<BigNumberish>,
-      dx: PromiseOrValue<BigNumberish>,
-      min_dy: PromiseOrValue<BigNumberish>,
+      i: BigNumberish,
+      j: BigNumberish,
+      dx: BigNumberish,
+      min_dy: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -103,21 +97,21 @@ export interface ICurveLegacy extends BaseContract {
 
   estimateGas: {
     exchange(
-      i: PromiseOrValue<BigNumberish>,
-      j: PromiseOrValue<BigNumberish>,
-      dx: PromiseOrValue<BigNumberish>,
-      min_dy: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      i: BigNumberish,
+      j: BigNumberish,
+      dx: BigNumberish,
+      min_dy: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     exchange(
-      i: PromiseOrValue<BigNumberish>,
-      j: PromiseOrValue<BigNumberish>,
-      dx: PromiseOrValue<BigNumberish>,
-      min_dy: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      i: BigNumberish,
+      j: BigNumberish,
+      dx: BigNumberish,
+      min_dy: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

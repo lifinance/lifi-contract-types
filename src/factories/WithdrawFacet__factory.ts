@@ -3,8 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { WithdrawFacet, WithdrawFacetInterface } from "../WithdrawFacet";
+import type {
+  WithdrawFacet,
+  WithdrawFacetInterface,
+} from "../WithdrawFacet.js";
 
 const _abi = [
   {
@@ -157,12 +159,12 @@ export class WithdrawFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<WithdrawFacet> {
     return super.deploy(overrides || {}) as Promise<WithdrawFacet>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

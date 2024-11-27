@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ITeleportGateway,
   ITeleportGatewayInterface,
-} from "../ITeleportGateway";
+} from "../ITeleportGateway.js";
 
 const _abi = [
   {

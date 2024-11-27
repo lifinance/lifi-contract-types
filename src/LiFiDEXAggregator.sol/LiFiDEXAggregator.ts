@@ -25,8 +25,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export interface LiFiDEXAggregatorInterface extends utils.Interface {
   functions: {
@@ -64,37 +63,22 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "algebraSwapCallback",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "bentoBox", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pancakeV3SwapCallback",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "priviledgedUsers",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "processRoute",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [string, BigNumberish, string, BigNumberish, string, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -103,32 +87,28 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "resume", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setPriviledge",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+    values: [string, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "transferValueAndprocessRoute",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string,
+      BytesLike
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "uniswapV3SwapCallback",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [BigNumberish, BigNumberish, BytesLike]
   ): string;
 
   decodeFunctionResult(
@@ -237,10 +217,10 @@ export interface LiFiDEXAggregator extends BaseContract {
 
   functions: {
     algebraSwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     bentoBox(overrides?: CallOverrides): Promise<[string]>;
@@ -248,75 +228,75 @@ export interface LiFiDEXAggregator extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pancakeV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     pause(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     priviledgedUsers(
-      arg0: PromiseOrValue<string>,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     processRoute(
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     resume(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     setPriviledge(
-      user: PromiseOrValue<string>,
-      priviledge: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      priviledge: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transferValueAndprocessRoute(
-      transferValueTo: PromiseOrValue<string>,
-      amountValueTransfer: PromiseOrValue<BigNumberish>,
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferValueTo: string,
+      amountValueTransfer: BigNumberish,
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     uniswapV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   algebraSwapCallback(
-    amount0Delta: PromiseOrValue<BigNumberish>,
-    amount1Delta: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    amount0Delta: BigNumberish,
+    amount1Delta: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   bentoBox(overrides?: CallOverrides): Promise<string>;
@@ -324,74 +304,71 @@ export interface LiFiDEXAggregator extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   pancakeV3SwapCallback(
-    amount0Delta: PromiseOrValue<BigNumberish>,
-    amount1Delta: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    amount0Delta: BigNumberish,
+    amount1Delta: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   pause(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  priviledgedUsers(
-    arg0: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  priviledgedUsers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   processRoute(
-    tokenIn: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    tokenOut: PromiseOrValue<string>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
-    route: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    tokenIn: string,
+    amountIn: BigNumberish,
+    tokenOut: string,
+    amountOutMin: BigNumberish,
+    to: string,
+    route: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   resume(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   setPriviledge(
-    user: PromiseOrValue<string>,
-    priviledge: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    user: string,
+    priviledge: boolean,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    newOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   transferValueAndprocessRoute(
-    transferValueTo: PromiseOrValue<string>,
-    amountValueTransfer: PromiseOrValue<BigNumberish>,
-    tokenIn: PromiseOrValue<string>,
-    amountIn: PromiseOrValue<BigNumberish>,
-    tokenOut: PromiseOrValue<string>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    to: PromiseOrValue<string>,
-    route: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    transferValueTo: string,
+    amountValueTransfer: BigNumberish,
+    tokenIn: string,
+    amountIn: BigNumberish,
+    tokenOut: string,
+    amountOutMin: BigNumberish,
+    to: string,
+    route: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   uniswapV3SwapCallback(
-    amount0Delta: PromiseOrValue<BigNumberish>,
-    amount1Delta: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    amount0Delta: BigNumberish,
+    amount1Delta: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     algebraSwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -400,26 +377,23 @@ export interface LiFiDEXAggregator extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     pancakeV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     pause(overrides?: CallOverrides): Promise<void>;
 
-    priviledgedUsers(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    priviledgedUsers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     processRoute(
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -428,60 +402,60 @@ export interface LiFiDEXAggregator extends BaseContract {
     resume(overrides?: CallOverrides): Promise<void>;
 
     setPriviledge(
-      user: PromiseOrValue<string>,
-      priviledge: PromiseOrValue<boolean>,
+      user: string,
+      priviledge: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
+      newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     transferValueAndprocessRoute(
-      transferValueTo: PromiseOrValue<string>,
-      amountValueTransfer: PromiseOrValue<BigNumberish>,
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
+      transferValueTo: string,
+      amountValueTransfer: BigNumberish,
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
 
     "Route(address,address,address,address,uint256,uint256,uint256)"(
-      from?: PromiseOrValue<string> | null,
+      from?: string | null,
       to?: null,
-      tokenIn?: PromiseOrValue<string> | null,
-      tokenOut?: PromiseOrValue<string> | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
       amountIn?: null,
       amountOutMin?: null,
       amountOut?: null
     ): RouteEventFilter;
     Route(
-      from?: PromiseOrValue<string> | null,
+      from?: string | null,
       to?: null,
-      tokenIn?: PromiseOrValue<string> | null,
-      tokenOut?: PromiseOrValue<string> | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
       amountIn?: null,
       amountOutMin?: null,
       amountOut?: null
@@ -490,10 +464,10 @@ export interface LiFiDEXAggregator extends BaseContract {
 
   estimateGas: {
     algebraSwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     bentoBox(overrides?: CallOverrides): Promise<BigNumber>;
@@ -501,76 +475,72 @@ export interface LiFiDEXAggregator extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pancakeV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
-    pause(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    pause(overrides?: Overrides & { from?: string }): Promise<BigNumber>;
 
     priviledgedUsers(
-      arg0: PromiseOrValue<string>,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     processRoute(
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
-    resume(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    resume(overrides?: Overrides & { from?: string }): Promise<BigNumber>;
 
     setPriviledge(
-      user: PromiseOrValue<string>,
-      priviledge: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      priviledge: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     transferValueAndprocessRoute(
-      transferValueTo: PromiseOrValue<string>,
-      amountValueTransfer: PromiseOrValue<BigNumberish>,
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferValueTo: string,
+      amountValueTransfer: BigNumberish,
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     uniswapV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     algebraSwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     bentoBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -578,67 +548,67 @@ export interface LiFiDEXAggregator extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pancakeV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     pause(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     priviledgedUsers(
-      arg0: PromiseOrValue<string>,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     processRoute(
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     resume(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     setPriviledge(
-      user: PromiseOrValue<string>,
-      priviledge: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      priviledge: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transferValueAndprocessRoute(
-      transferValueTo: PromiseOrValue<string>,
-      amountValueTransfer: PromiseOrValue<BigNumberish>,
-      tokenIn: PromiseOrValue<string>,
-      amountIn: PromiseOrValue<BigNumberish>,
-      tokenOut: PromiseOrValue<string>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      to: PromiseOrValue<string>,
-      route: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transferValueTo: string,
+      amountValueTransfer: BigNumberish,
+      tokenIn: string,
+      amountIn: BigNumberish,
+      tokenOut: string,
+      amountOutMin: BigNumberish,
+      to: string,
+      route: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     uniswapV3SwapCallback(
-      amount0Delta: PromiseOrValue<BigNumberish>,
-      amount1Delta: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      amount0Delta: BigNumberish,
+      amount1Delta: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -20,14 +20,13 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace IDeBridgeGate {
   export type ChainSupportInfoStruct = {
-    fixedNativeFee: PromiseOrValue<BigNumberish>;
-    isSupported: PromiseOrValue<boolean>;
-    transferFeeBps: PromiseOrValue<BigNumberish>;
+    fixedNativeFee: BigNumberish;
+    isSupported: boolean;
+    transferFeeBps: BigNumberish;
   };
 
   export type ChainSupportInfoStructOutput = [BigNumber, boolean, number] & {
@@ -50,7 +49,7 @@ export interface IDeBridgeGateInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getChainToConfig",
-    values: [PromiseOrValue<BigNumberish>]
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "globalFixedNativeFee",
@@ -59,14 +58,14 @@ export interface IDeBridgeGateInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "send",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      string,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      boolean,
+      BigNumberish,
+      BytesLike
     ]
   ): string;
 
@@ -111,61 +110,61 @@ export interface IDeBridgeGate extends BaseContract {
 
   functions: {
     getChainToConfig(
-      arg0: PromiseOrValue<BigNumberish>,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[IDeBridgeGate.ChainSupportInfoStructOutput]>;
 
     globalFixedNativeFee(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     send(
-      _tokenAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _chainIdTo: PromiseOrValue<BigNumberish>,
-      _receiver: PromiseOrValue<BytesLike>,
-      _permit: PromiseOrValue<BytesLike>,
-      _useAssetFee: PromiseOrValue<boolean>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _autoParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _tokenAddress: string,
+      _amount: BigNumberish,
+      _chainIdTo: BigNumberish,
+      _receiver: BytesLike,
+      _permit: BytesLike,
+      _useAssetFee: boolean,
+      _referralCode: BigNumberish,
+      _autoParams: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   getChainToConfig(
-    arg0: PromiseOrValue<BigNumberish>,
+    arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<IDeBridgeGate.ChainSupportInfoStructOutput>;
 
   globalFixedNativeFee(overrides?: CallOverrides): Promise<BigNumber>;
 
   send(
-    _tokenAddress: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _chainIdTo: PromiseOrValue<BigNumberish>,
-    _receiver: PromiseOrValue<BytesLike>,
-    _permit: PromiseOrValue<BytesLike>,
-    _useAssetFee: PromiseOrValue<boolean>,
-    _referralCode: PromiseOrValue<BigNumberish>,
-    _autoParams: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _tokenAddress: string,
+    _amount: BigNumberish,
+    _chainIdTo: BigNumberish,
+    _receiver: BytesLike,
+    _permit: BytesLike,
+    _useAssetFee: boolean,
+    _referralCode: BigNumberish,
+    _autoParams: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     getChainToConfig(
-      arg0: PromiseOrValue<BigNumberish>,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<IDeBridgeGate.ChainSupportInfoStructOutput>;
 
     globalFixedNativeFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     send(
-      _tokenAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _chainIdTo: PromiseOrValue<BigNumberish>,
-      _receiver: PromiseOrValue<BytesLike>,
-      _permit: PromiseOrValue<BytesLike>,
-      _useAssetFee: PromiseOrValue<boolean>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _autoParams: PromiseOrValue<BytesLike>,
+      _tokenAddress: string,
+      _amount: BigNumberish,
+      _chainIdTo: BigNumberish,
+      _receiver: BytesLike,
+      _permit: BytesLike,
+      _useAssetFee: boolean,
+      _referralCode: BigNumberish,
+      _autoParams: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -174,28 +173,28 @@ export interface IDeBridgeGate extends BaseContract {
 
   estimateGas: {
     getChainToConfig(
-      arg0: PromiseOrValue<BigNumberish>,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     globalFixedNativeFee(overrides?: CallOverrides): Promise<BigNumber>;
 
     send(
-      _tokenAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _chainIdTo: PromiseOrValue<BigNumberish>,
-      _receiver: PromiseOrValue<BytesLike>,
-      _permit: PromiseOrValue<BytesLike>,
-      _useAssetFee: PromiseOrValue<boolean>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _autoParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _tokenAddress: string,
+      _amount: BigNumberish,
+      _chainIdTo: BigNumberish,
+      _receiver: BytesLike,
+      _permit: BytesLike,
+      _useAssetFee: boolean,
+      _referralCode: BigNumberish,
+      _autoParams: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getChainToConfig(
-      arg0: PromiseOrValue<BigNumberish>,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -204,15 +203,15 @@ export interface IDeBridgeGate extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     send(
-      _tokenAddress: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _chainIdTo: PromiseOrValue<BigNumberish>,
-      _receiver: PromiseOrValue<BytesLike>,
-      _permit: PromiseOrValue<BytesLike>,
-      _useAssetFee: PromiseOrValue<boolean>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _autoParams: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _tokenAddress: string,
+      _amount: BigNumberish,
+      _chainIdTo: BigNumberish,
+      _receiver: BytesLike,
+      _permit: BytesLike,
+      _useAssetFee: boolean,
+      _referralCode: BigNumberish,
+      _autoParams: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

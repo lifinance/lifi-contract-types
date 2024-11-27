@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDiamondLoupe, IDiamondLoupeInterface } from "../IDiamondLoupe";
+import type {
+  IDiamondLoupe,
+  IDiamondLoupeInterface,
+} from "../IDiamondLoupe.js";
 
 const _abi = [
   {

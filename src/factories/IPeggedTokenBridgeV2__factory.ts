@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IPeggedTokenBridgeV2,
   IPeggedTokenBridgeV2Interface,
-} from "../IPeggedTokenBridgeV2";
+} from "../IPeggedTokenBridgeV2.js";
 
 const _abi = [
   {

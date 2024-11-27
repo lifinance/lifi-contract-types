@@ -21,13 +21,12 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export type StrategyDataStruct = {
-  strategyStartDate: PromiseOrValue<BigNumberish>;
-  targetPercentage: PromiseOrValue<BigNumberish>;
-  balance: PromiseOrValue<BigNumberish>;
+  strategyStartDate: BigNumberish;
+  targetPercentage: BigNumberish;
+  balance: BigNumberish;
 };
 
 export type StrategyDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
@@ -36,10 +35,7 @@ export type StrategyDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
   balance: BigNumber;
 };
 
-export type RebaseStruct = {
-  elastic: PromiseOrValue<BigNumberish>;
-  base: PromiseOrValue<BigNumberish>;
-};
+export type RebaseStruct = { elastic: BigNumberish; base: BigNumberish };
 
 export type RebaseStructOutput = [BigNumber, BigNumber] & {
   elastic: BigNumber;
@@ -78,25 +74,15 @@ export interface IBentoBoxMinimalInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "balanceOf",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    values: [string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "deposit",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, string, string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "harvest",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, boolean, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "registerProtocol",
@@ -104,57 +90,28 @@ export interface IBentoBoxMinimalInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setMasterContractApproval",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<boolean>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [string, string, boolean, BigNumberish, BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "strategyData",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "toAmount",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>
-    ]
+    values: [string, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "toShare",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<boolean>
-    ]
+    values: [string, BigNumberish, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "totals",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "totals", values: [string]): string;
   encodeFunctionData(
     functionFragment: "transfer",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, string, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, string, string, BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -209,237 +166,234 @@ export interface IBentoBoxMinimal extends BaseContract {
 
   functions: {
     balanceOf(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     deposit(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     harvest(
-      token: PromiseOrValue<string>,
-      balance: PromiseOrValue<boolean>,
-      maxChangeAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      balance: boolean,
+      maxChangeAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     registerProtocol(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     setMasterContractApproval(
-      user: PromiseOrValue<string>,
-      masterContract: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      masterContract: string,
+      approved: boolean,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     strategyData(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<
       [StrategyDataStructOutput] & { total: StrategyDataStructOutput }
     >;
 
     toAmount(
-      token: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      share: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { amount: BigNumber }>;
 
     toShare(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      amount: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { share: BigNumber }>;
 
     totals(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<[RebaseStructOutput] & { total: RebaseStructOutput }>;
 
     transfer(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     withdraw(
-      token_: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token_: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   balanceOf(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<string>,
+    arg0: string,
+    arg1: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   deposit(
-    token: PromiseOrValue<string>,
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    token: string,
+    from: string,
+    to: string,
+    amount: BigNumberish,
+    share: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   harvest(
-    token: PromiseOrValue<string>,
-    balance: PromiseOrValue<boolean>,
-    maxChangeAmount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    token: string,
+    balance: boolean,
+    maxChangeAmount: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   registerProtocol(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   setMasterContractApproval(
-    user: PromiseOrValue<string>,
-    masterContract: PromiseOrValue<string>,
-    approved: PromiseOrValue<boolean>,
-    v: PromiseOrValue<BigNumberish>,
-    r: PromiseOrValue<BytesLike>,
-    s: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    user: string,
+    masterContract: string,
+    approved: boolean,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   strategyData(
-    token: PromiseOrValue<string>,
+    token: string,
     overrides?: CallOverrides
   ): Promise<StrategyDataStructOutput>;
 
   toAmount(
-    token: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    roundUp: PromiseOrValue<boolean>,
+    token: string,
+    share: BigNumberish,
+    roundUp: boolean,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   toShare(
-    token: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    roundUp: PromiseOrValue<boolean>,
+    token: string,
+    amount: BigNumberish,
+    roundUp: boolean,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  totals(
-    token: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<RebaseStructOutput>;
+  totals(token: string, overrides?: CallOverrides): Promise<RebaseStructOutput>;
 
   transfer(
-    token: PromiseOrValue<string>,
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    token: string,
+    from: string,
+    to: string,
+    share: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   withdraw(
-    token_: PromiseOrValue<string>,
-    from: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    share: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    token_: string,
+    from: string,
+    to: string,
+    amount: BigNumberish,
+    share: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     balanceOf(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     deposit(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
+      token: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
     >;
 
     harvest(
-      token: PromiseOrValue<string>,
-      balance: PromiseOrValue<boolean>,
-      maxChangeAmount: PromiseOrValue<BigNumberish>,
+      token: string,
+      balance: boolean,
+      maxChangeAmount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     registerProtocol(overrides?: CallOverrides): Promise<void>;
 
     setMasterContractApproval(
-      user: PromiseOrValue<string>,
-      masterContract: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
+      user: string,
+      masterContract: string,
+      approved: boolean,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
     strategyData(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<StrategyDataStructOutput>;
 
     toAmount(
-      token: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      share: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     toShare(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      amount: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     totals(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<RebaseStructOutput>;
 
     transfer(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
+      token: string,
+      from: string,
+      to: string,
+      share: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     withdraw(
-      token_: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
+      token_: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amountOut: BigNumber; shareOut: BigNumber }
@@ -450,159 +404,153 @@ export interface IBentoBoxMinimal extends BaseContract {
 
   estimateGas: {
     balanceOf(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     deposit(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     harvest(
-      token: PromiseOrValue<string>,
-      balance: PromiseOrValue<boolean>,
-      maxChangeAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      balance: boolean,
+      maxChangeAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     registerProtocol(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     setMasterContractApproval(
-      user: PromiseOrValue<string>,
-      masterContract: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      masterContract: string,
+      approved: boolean,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
-    strategyData(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    strategyData(token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     toAmount(
-      token: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      share: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     toShare(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      amount: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    totals(
-      token: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    totals(token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     transfer(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     withdraw(
-      token_: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token_: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     balanceOf(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<string>,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     deposit(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     harvest(
-      token: PromiseOrValue<string>,
-      balance: PromiseOrValue<boolean>,
-      maxChangeAmount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      balance: boolean,
+      maxChangeAmount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     registerProtocol(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     setMasterContractApproval(
-      user: PromiseOrValue<string>,
-      masterContract: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
-      v: PromiseOrValue<BigNumberish>,
-      r: PromiseOrValue<BytesLike>,
-      s: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      user: string,
+      masterContract: string,
+      approved: boolean,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     strategyData(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     toAmount(
-      token: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      share: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     toShare(
-      token: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      roundUp: PromiseOrValue<boolean>,
+      token: string,
+      amount: BigNumberish,
+      roundUp: boolean,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     totals(
-      token: PromiseOrValue<string>,
+      token: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     transfer(
-      token: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token: string,
+      from: string,
+      to: string,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     withdraw(
-      token_: PromiseOrValue<string>,
-      from: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      share: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      token_: string,
+      from: string,
+      to: string,
+      amount: BigNumberish,
+      share: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

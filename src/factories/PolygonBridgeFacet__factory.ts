@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   PolygonBridgeFacet,
   PolygonBridgeFacetInterface,
-} from "../PolygonBridgeFacet";
+} from "../PolygonBridgeFacet.js";
 
 const _abi = [
   {
@@ -561,9 +560,9 @@ export class PolygonBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _rootChainManager: PromiseOrValue<string>,
-    _erc20Predicate: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _rootChainManager: string,
+    _erc20Predicate: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<PolygonBridgeFacet> {
     return super.deploy(
       _rootChainManager,
@@ -572,9 +571,9 @@ export class PolygonBridgeFacet__factory extends ContractFactory {
     ) as Promise<PolygonBridgeFacet>;
   }
   override getDeployTransaction(
-    _rootChainManager: PromiseOrValue<string>,
-    _erc20Predicate: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _rootChainManager: string,
+    _erc20Predicate: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _rootChainManager,

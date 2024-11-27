@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { FeeCollector, FeeCollectorInterface } from "../FeeCollector";
+import type { FeeCollector, FeeCollectorInterface } from "../FeeCollector.js";
 
 const _abi = [
   {
@@ -430,14 +429,14 @@ export class FeeCollector__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<FeeCollector> {
     return super.deploy(_owner, overrides || {}) as Promise<FeeCollector>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_owner, overrides || {});
   }

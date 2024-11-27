@@ -20,12 +20,11 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export type TicketStruct = {
-  ticketId: PromiseOrValue<BigNumberish>;
-  passengerBytes: PromiseOrValue<BytesLike>;
+  ticketId: BigNumberish;
+  passengerBytes: BytesLike;
 };
 
 export type TicketStructOutput = [BigNumber, string] & {
@@ -35,13 +34,13 @@ export type TicketStructOutput = [BigNumber, string] & {
 
 export declare namespace IStargate {
   export type SendParamStruct = {
-    dstEid: PromiseOrValue<BigNumberish>;
-    to: PromiseOrValue<BytesLike>;
-    amountLD: PromiseOrValue<BigNumberish>;
-    minAmountLD: PromiseOrValue<BigNumberish>;
-    extraOptions: PromiseOrValue<BytesLike>;
-    composeMsg: PromiseOrValue<BytesLike>;
-    oftCmd: PromiseOrValue<BytesLike>;
+    dstEid: BigNumberish;
+    to: BytesLike;
+    amountLD: BigNumberish;
+    minAmountLD: BigNumberish;
+    extraOptions: BytesLike;
+    composeMsg: BytesLike;
+    oftCmd: BytesLike;
   };
 
   export type SendParamStructOutput = [
@@ -63,8 +62,8 @@ export declare namespace IStargate {
   };
 
   export type OFTLimitStruct = {
-    minAmountLD: PromiseOrValue<BigNumberish>;
-    maxAmountLD: PromiseOrValue<BigNumberish>;
+    minAmountLD: BigNumberish;
+    maxAmountLD: BigNumberish;
   };
 
   export type OFTLimitStructOutput = [BigNumber, BigNumber] & {
@@ -73,8 +72,8 @@ export declare namespace IStargate {
   };
 
   export type OFTFeeDetailStruct = {
-    feeAmountLD: PromiseOrValue<BigNumberish>;
-    description: PromiseOrValue<string>;
+    feeAmountLD: BigNumberish;
+    description: string;
   };
 
   export type OFTFeeDetailStructOutput = [BigNumber, string] & {
@@ -83,8 +82,8 @@ export declare namespace IStargate {
   };
 
   export type OFTReceiptStruct = {
-    amountSentLD: PromiseOrValue<BigNumberish>;
-    amountReceivedLD: PromiseOrValue<BigNumberish>;
+    amountSentLD: BigNumberish;
+    amountReceivedLD: BigNumberish;
   };
 
   export type OFTReceiptStructOutput = [BigNumber, BigNumber] & {
@@ -93,8 +92,8 @@ export declare namespace IStargate {
   };
 
   export type MessagingFeeStruct = {
-    nativeFee: PromiseOrValue<BigNumberish>;
-    lzTokenFee: PromiseOrValue<BigNumberish>;
+    nativeFee: BigNumberish;
+    lzTokenFee: BigNumberish;
   };
 
   export type MessagingFeeStructOutput = [BigNumber, BigNumber] & {
@@ -103,8 +102,8 @@ export declare namespace IStargate {
   };
 
   export type MessagingReceiptStruct = {
-    guid: PromiseOrValue<BytesLike>;
-    nonce: PromiseOrValue<BigNumberish>;
+    guid: BytesLike;
+    nonce: BigNumberish;
     fee: IStargate.MessagingFeeStruct;
   };
 
@@ -136,15 +135,11 @@ export interface IStargateInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "quoteSend",
-    values: [IStargate.SendParamStruct, PromiseOrValue<boolean>]
+    values: [IStargate.SendParamStruct, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "sendToken",
-    values: [
-      IStargate.SendParamStruct,
-      IStargate.MessagingFeeStruct,
-      PromiseOrValue<string>
-    ]
+    values: [IStargate.SendParamStruct, IStargate.MessagingFeeStruct, string]
   ): string;
 
   decodeFunctionResult(functionFragment: "quoteOFT", data: BytesLike): Result;
@@ -194,15 +189,15 @@ export interface IStargate extends BaseContract {
 
     quoteSend(
       _sendParam: IStargate.SendParamStruct,
-      _payInLzToken: PromiseOrValue<boolean>,
+      _payInLzToken: boolean,
       overrides?: CallOverrides
     ): Promise<[IStargate.MessagingFeeStructOutput]>;
 
     sendToken(
       _sendParam: IStargate.SendParamStruct,
       _fee: IStargate.MessagingFeeStruct,
-      _refundAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _refundAddress: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
@@ -219,15 +214,15 @@ export interface IStargate extends BaseContract {
 
   quoteSend(
     _sendParam: IStargate.SendParamStruct,
-    _payInLzToken: PromiseOrValue<boolean>,
+    _payInLzToken: boolean,
     overrides?: CallOverrides
   ): Promise<IStargate.MessagingFeeStructOutput>;
 
   sendToken(
     _sendParam: IStargate.SendParamStruct,
     _fee: IStargate.MessagingFeeStruct,
-    _refundAddress: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _refundAddress: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -244,14 +239,14 @@ export interface IStargate extends BaseContract {
 
     quoteSend(
       _sendParam: IStargate.SendParamStruct,
-      _payInLzToken: PromiseOrValue<boolean>,
+      _payInLzToken: boolean,
       overrides?: CallOverrides
     ): Promise<IStargate.MessagingFeeStructOutput>;
 
     sendToken(
       _sendParam: IStargate.SendParamStruct,
       _fee: IStargate.MessagingFeeStruct,
-      _refundAddress: PromiseOrValue<string>,
+      _refundAddress: string,
       overrides?: CallOverrides
     ): Promise<
       [
@@ -276,15 +271,15 @@ export interface IStargate extends BaseContract {
 
     quoteSend(
       _sendParam: IStargate.SendParamStruct,
-      _payInLzToken: PromiseOrValue<boolean>,
+      _payInLzToken: boolean,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     sendToken(
       _sendParam: IStargate.SendParamStruct,
       _fee: IStargate.MessagingFeeStruct,
-      _refundAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _refundAddress: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
@@ -296,15 +291,15 @@ export interface IStargate extends BaseContract {
 
     quoteSend(
       _sendParam: IStargate.SendParamStruct,
-      _payInLzToken: PromiseOrValue<boolean>,
+      _payInLzToken: boolean,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     sendToken(
       _sendParam: IStargate.SendParamStruct,
       _fee: IStargate.MessagingFeeStruct,
-      _refundAddress: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _refundAddress: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

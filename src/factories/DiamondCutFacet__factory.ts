@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   DiamondCutFacet,
   DiamondCutFacetInterface,
-} from "../DiamondCutFacet";
+} from "../DiamondCutFacet.js";
 
 const _abi = [
   {
@@ -175,12 +174,12 @@ export class DiamondCutFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<DiamondCutFacet> {
     return super.deploy(overrides || {}) as Promise<DiamondCutFacet>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

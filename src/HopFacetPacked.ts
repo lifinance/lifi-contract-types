@@ -25,21 +25,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    bridge: PromiseOrValue<string>;
-    integrator: PromiseOrValue<string>;
-    referrer: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    minAmount: PromiseOrValue<BigNumberish>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    hasSourceSwaps: PromiseOrValue<boolean>;
-    hasDestinationCall: PromiseOrValue<boolean>;
+    transactionId: BytesLike;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumberish;
+    destinationChainId: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
   export type BridgeDataStructOutput = [
@@ -69,15 +68,15 @@ export declare namespace ILiFi {
 
 export declare namespace HopFacetOptimized {
   export type HopDataStruct = {
-    bonderFee: PromiseOrValue<BigNumberish>;
-    amountOutMin: PromiseOrValue<BigNumberish>;
-    deadline: PromiseOrValue<BigNumberish>;
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>;
-    destinationDeadline: PromiseOrValue<BigNumberish>;
-    hopBridge: PromiseOrValue<string>;
-    relayer: PromiseOrValue<string>;
-    relayerFee: PromiseOrValue<BigNumberish>;
-    nativeFee: PromiseOrValue<BigNumberish>;
+    bonderFee: BigNumberish;
+    amountOutMin: BigNumberish;
+    deadline: BigNumberish;
+    destinationAmountOutMin: BigNumberish;
+    destinationDeadline: BigNumberish;
+    hopBridge: string;
+    relayer: string;
+    relayerFee: BigNumberish;
+    nativeFee: BigNumberish;
   };
 
   export type HopDataStructOutput = [
@@ -173,70 +172,64 @@ export interface HopFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaHopL1ERC20Packed",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaHopL1NativePacked",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaHopL2ERC20Packed",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaHopL2NativePacked",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL1ERC20Packed",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL1NativePacked",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL2ERC20Packed",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaHopL2NativePacked",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BytesLike, string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "nativeBridge",
@@ -261,20 +254,20 @@ export interface HopFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForHopBridges",
-    values: [PromiseOrValue<string>[], PromiseOrValue<string>[]]
+    values: [string[], string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHopL1ERC20Min",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
@@ -284,13 +277,13 @@ export interface HopFacetPackedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHopL1NativeMin",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      BigNumberish,
+      string,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
@@ -300,16 +293,16 @@ export interface HopFacetPackedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHopL2ERC20Min",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
@@ -319,14 +312,14 @@ export interface HopFacetPackedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaHopL2NativeMin",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      BytesLike,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      string
     ]
   ): string;
   encodeFunctionData(
@@ -335,7 +328,7 @@ export interface HopFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
 
   decodeFunctionResult(
@@ -446,7 +439,7 @@ export interface HopFacetPackedInterface extends utils.Interface {
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(tuple)": EventFragment;
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
     "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
@@ -599,85 +592,85 @@ export interface HopFacetPacked extends BaseContract {
 
   functions: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     decode_startBridgeTokensViaHopL1ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL1NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL2ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL2NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     encode_startBridgeTokensViaHopL1ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaHopL1NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      wrapper: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      wrapper: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -694,163 +687,163 @@ export interface HopFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     setApprovalForHopBridges(
-      bridges: PromiseOrValue<string>[],
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      bridges: string[],
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL1ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL1ERC20Packed(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL1NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL1NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL2ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL2ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL2NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaHopL2NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   decode_startBridgeTokensViaHopL1ERC20Packed(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
   >;
 
   decode_startBridgeTokensViaHopL1NativePacked(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
   >;
 
   decode_startBridgeTokensViaHopL2ERC20Packed(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
   >;
 
   decode_startBridgeTokensViaHopL2NativePacked(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
   >;
 
   encode_startBridgeTokensViaHopL1ERC20Packed(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    minAmount: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    relayer: PromiseOrValue<string>,
-    relayerFee: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    minAmount: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    relayer: string,
+    relayerFee: BigNumberish,
+    hopBridge: string,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaHopL1NativePacked(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    relayer: PromiseOrValue<string>,
-    relayerFee: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    relayer: string,
+    relayerFee: BigNumberish,
+    hopBridge: string,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaHopL2ERC20Packed(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    minAmount: PromiseOrValue<BigNumberish>,
-    bonderFee: PromiseOrValue<BigNumberish>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    destinationDeadline: PromiseOrValue<BigNumberish>,
-    wrapper: PromiseOrValue<string>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    minAmount: BigNumberish,
+    bonderFee: BigNumberish,
+    amountOutMin: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    destinationDeadline: BigNumberish,
+    wrapper: string,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaHopL2NativePacked(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    bonderFee: PromiseOrValue<BigNumberish>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    bonderFee: BigNumberish,
+    amountOutMin: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -867,80 +860,80 @@ export interface HopFacetPacked extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   setApprovalForHopBridges(
-    bridges: PromiseOrValue<string>[],
-    tokensToApprove: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    bridges: string[],
+    tokensToApprove: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL1ERC20Min(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    minAmount: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    relayer: PromiseOrValue<string>,
-    relayerFee: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    minAmount: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    relayer: string,
+    relayerFee: BigNumberish,
+    hopBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL1ERC20Packed(
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL1NativeMin(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    relayer: PromiseOrValue<string>,
-    relayerFee: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    relayer: string,
+    relayerFee: BigNumberish,
+    hopBridge: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL1NativePacked(
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL2ERC20Min(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    minAmount: PromiseOrValue<BigNumberish>,
-    bonderFee: PromiseOrValue<BigNumberish>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    destinationDeadline: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    minAmount: BigNumberish,
+    bonderFee: BigNumberish,
+    amountOutMin: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    destinationDeadline: BigNumberish,
+    hopBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL2ERC20Packed(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL2NativeMin(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    bonderFee: PromiseOrValue<BigNumberish>,
-    amountOutMin: PromiseOrValue<BigNumberish>,
-    destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-    destinationDeadline: PromiseOrValue<BigNumberish>,
-    hopBridge: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    bonderFee: BigNumberish,
+    amountOutMin: BigNumberish,
+    destinationAmountOutMin: BigNumberish,
+    destinationDeadline: BigNumberish,
+    hopBridge: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaHopL2NativePacked(
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _newOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -949,77 +942,77 @@ export interface HopFacetPacked extends BaseContract {
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     decode_startBridgeTokensViaHopL1ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL1NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL2ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     decode_startBridgeTokensViaHopL2NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, HopFacetOptimized.HopDataStructOutput]
     >;
 
     encode_startBridgeTokensViaHopL1ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaHopL1NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      wrapper: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      wrapper: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -1036,21 +1029,21 @@ export interface HopFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     setApprovalForHopBridges(
-      bridges: PromiseOrValue<string>[],
-      tokensToApprove: PromiseOrValue<string>[],
+      bridges: string[],
+      tokensToApprove: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     startBridgeTokensViaHopL1ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1059,13 +1052,13 @@ export interface HopFacetPacked extends BaseContract {
     ): Promise<void>;
 
     startBridgeTokensViaHopL1NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1074,16 +1067,16 @@ export interface HopFacetPacked extends BaseContract {
     ): Promise<void>;
 
     startBridgeTokensViaHopL2ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1092,14 +1085,14 @@ export interface HopFacetPacked extends BaseContract {
     ): Promise<void>;
 
     startBridgeTokensViaHopL2NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1108,14 +1101,14 @@ export interface HopFacetPacked extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      _newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -1125,7 +1118,7 @@ export interface HopFacetPacked extends BaseContract {
       toAmount?: null
     ): LiFiGenericSwapCompletedEventFilter;
     LiFiGenericSwapCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -1141,7 +1134,7 @@ export interface HopFacetPacked extends BaseContract {
     LiFiHopTransfer(_transactionId?: null): LiFiHopTransferEventFilter;
 
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -1150,7 +1143,7 @@ export interface HopFacetPacked extends BaseContract {
       toAmount?: null
     ): LiFiSwappedGenericEventFilter;
     LiFiSwappedGeneric(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -1160,14 +1153,14 @@ export interface HopFacetPacked extends BaseContract {
     ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
@@ -1175,117 +1168,117 @@ export interface HopFacetPacked extends BaseContract {
     ): LiFiTransferCompletedEventFilter;
 
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
     LiFiTransferRecovered(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
 
-    "LiFiTransferStarted(tuple)"(
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
     "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
     OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
   };
 
   estimateGas: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaHopL1ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaHopL1NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaHopL2ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaHopL2NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL1ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL1NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      wrapper: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      wrapper: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1302,156 +1295,156 @@ export interface HopFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setApprovalForHopBridges(
-      bridges: PromiseOrValue<string>[],
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      bridges: string[],
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL1ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL1ERC20Packed(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL1NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL1NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL2ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL2ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL2NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaHopL2NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaHopL1ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaHopL1NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaHopL2ERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaHopL2NativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL1ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL1NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL2ERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      wrapper: PromiseOrValue<string>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      wrapper: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaHopL2NativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1472,80 +1465,80 @@ export interface HopFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setApprovalForHopBridges(
-      bridges: PromiseOrValue<string>[],
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      bridges: string[],
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL1ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL1ERC20Packed(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL1NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      relayer: PromiseOrValue<string>,
-      relayerFee: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      relayer: string,
+      relayerFee: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL1NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL2ERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL2ERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL2NativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      bonderFee: PromiseOrValue<BigNumberish>,
-      amountOutMin: PromiseOrValue<BigNumberish>,
-      destinationAmountOutMin: PromiseOrValue<BigNumberish>,
-      destinationDeadline: PromiseOrValue<BigNumberish>,
-      hopBridge: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      bonderFee: BigNumberish,
+      amountOutMin: BigNumberish,
+      destinationAmountOutMin: BigNumberish,
+      destinationDeadline: BigNumberish,
+      hopBridge: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaHopL2NativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -20,8 +20,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IPeggedTokenBridgeInterface extends utils.Interface {
   functions: {
@@ -36,26 +35,13 @@ export interface IPeggedTokenBridgeInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "burn",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<string>[],
-      PromiseOrValue<BigNumberish>[]
-    ]
+    values: [BytesLike, BytesLike[], string[], BigNumberish[]]
   ): string;
-  encodeFunctionData(
-    functionFragment: "records",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "records", values: [BytesLike]): string;
 
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
@@ -92,115 +78,103 @@ export interface IPeggedTokenBridge extends BaseContract {
 
   functions: {
     burn(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _withdrawAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _withdrawAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     mint(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
   };
 
   burn(
-    _token: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    _withdrawAccount: PromiseOrValue<string>,
-    _nonce: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _token: string,
+    _amount: BigNumberish,
+    _withdrawAccount: string,
+    _nonce: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   mint(
-    _request: PromiseOrValue<BytesLike>,
-    _sigs: PromiseOrValue<BytesLike>[],
-    _signers: PromiseOrValue<string>[],
-    _powers: PromiseOrValue<BigNumberish>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _request: BytesLike,
+    _sigs: BytesLike[],
+    _signers: string[],
+    _powers: BigNumberish[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  records(
-    recordId: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
+  records(recordId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
 
   callStatic: {
     burn(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _withdrawAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
+      _token: string,
+      _amount: BigNumberish,
+      _withdrawAccount: string,
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     mint(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
     burn(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _withdrawAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _withdrawAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     mint(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
-    records(
-      recordId: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    records(recordId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     burn(
-      _token: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      _withdrawAccount: PromiseOrValue<string>,
-      _nonce: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _token: string,
+      _amount: BigNumberish,
+      _withdrawAccount: string,
+      _nonce: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     mint(
-      _request: PromiseOrValue<BytesLike>,
-      _sigs: PromiseOrValue<BytesLike>[],
-      _signers: PromiseOrValue<string>[],
-      _powers: PromiseOrValue<BigNumberish>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _request: BytesLike,
+      _sigs: BytesLike[],
+      _signers: string[],
+      _powers: BigNumberish[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     records(
-      recordId: PromiseOrValue<BytesLike>,
+      recordId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

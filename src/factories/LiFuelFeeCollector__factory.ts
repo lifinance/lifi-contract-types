@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   LiFuelFeeCollector,
   LiFuelFeeCollectorInterface,
-} from "../LiFuelFeeCollector";
+} from "../LiFuelFeeCollector.js";
 
 const _abi = [
   {
@@ -339,14 +338,14 @@ export class LiFuelFeeCollector__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<LiFuelFeeCollector> {
     return super.deploy(_owner, overrides || {}) as Promise<LiFuelFeeCollector>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_owner, overrides || {});
   }

@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IMultichainToken,
   IMultichainTokenInterface,
-} from "../IMultichainToken";
+} from "../IMultichainToken.js";
 
 const _abi = [
   {

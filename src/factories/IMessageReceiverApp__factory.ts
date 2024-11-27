@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IMessageReceiverApp,
   IMessageReceiverAppInterface,
-} from "../IMessageReceiverApp";
+} from "../IMessageReceiverApp.js";
 
 const _abi = [
   {

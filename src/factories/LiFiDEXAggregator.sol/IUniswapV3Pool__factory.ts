@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IUniswapV3Pool,
   IUniswapV3PoolInterface,
-} from "../../LiFiDEXAggregator.sol/IUniswapV3Pool";
+} from "../../LiFiDEXAggregator.sol/IUniswapV3Pool.js";
 
 const _abi = [
   {

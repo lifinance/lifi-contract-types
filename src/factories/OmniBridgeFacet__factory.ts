@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   OmniBridgeFacet,
   OmniBridgeFacetInterface,
-} from "../OmniBridgeFacet";
+} from "../OmniBridgeFacet.js";
 
 const _abi = [
   {
@@ -561,9 +560,9 @@ export class OmniBridgeFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _foreignOmniBridge: PromiseOrValue<string>,
-    _wethOmniBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _foreignOmniBridge: string,
+    _wethOmniBridge: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<OmniBridgeFacet> {
     return super.deploy(
       _foreignOmniBridge,
@@ -572,9 +571,9 @@ export class OmniBridgeFacet__factory extends ContractFactory {
     ) as Promise<OmniBridgeFacet>;
   }
   override getDeployTransaction(
-    _foreignOmniBridge: PromiseOrValue<string>,
-    _wethOmniBridge: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _foreignOmniBridge: string,
+    _wethOmniBridge: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _foreignOmniBridge,

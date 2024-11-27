@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ITransactionManager,
   ITransactionManagerInterface,
-} from "../ITransactionManager";
+} from "../ITransactionManager.js";
 
 const _abi = [
   {

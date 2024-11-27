@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IL1StandardBridge,
   IL1StandardBridgeInterface,
-} from "../IL1StandardBridge";
+} from "../IL1StandardBridge.js";
 
 const _abi = [
   {

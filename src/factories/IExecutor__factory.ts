@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IExecutor, IExecutorInterface } from "../IExecutor";
+import type { IExecutor, IExecutorInterface } from "../IExecutor.js";
 
 const _abi = [
   {

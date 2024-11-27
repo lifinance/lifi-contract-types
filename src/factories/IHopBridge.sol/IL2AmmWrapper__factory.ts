@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IL2AmmWrapper,
   IL2AmmWrapperInterface,
-} from "../../IHopBridge.sol/IL2AmmWrapper";
+} from "../../IHopBridge.sol/IL2AmmWrapper.js";
 
 const _abi = [
   {

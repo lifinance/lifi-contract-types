@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { Ownable, OwnableInterface } from "../Ownable";
+import type { Ownable, OwnableInterface } from "../Ownable.js";
 
 const _abi = [
   {

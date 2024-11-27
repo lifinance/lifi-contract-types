@@ -4,7 +4,10 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IHyphenRouter, IHyphenRouterInterface } from "../IHyphenRouter";
+import type {
+  IHyphenRouter,
+  IHyphenRouterInterface,
+} from "../IHyphenRouter.js";
 
 const _abi = [
   {

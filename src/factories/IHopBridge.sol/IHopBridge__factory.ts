@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IHopBridge,
   IHopBridgeInterface,
-} from "../../IHopBridge.sol/IHopBridge";
+} from "../../IHopBridge.sol/IHopBridge.js";
 
 const _abi = [
   {

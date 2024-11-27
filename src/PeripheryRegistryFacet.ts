@@ -23,8 +23,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface PeripheryRegistryFacetInterface extends utils.Interface {
   functions: {
@@ -38,11 +37,11 @@ export interface PeripheryRegistryFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "getPeripheryContract",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "registerPeripheryContract",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    values: [string, string]
   ): string;
 
   decodeFunctionResult(
@@ -103,37 +102,37 @@ export interface PeripheryRegistryFacet extends BaseContract {
 
   functions: {
     getPeripheryContract(
-      _name: PromiseOrValue<string>,
+      _name: string,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     registerPeripheryContract(
-      _name: PromiseOrValue<string>,
-      _contractAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _name: string,
+      _contractAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   getPeripheryContract(
-    _name: PromiseOrValue<string>,
+    _name: string,
     overrides?: CallOverrides
   ): Promise<string>;
 
   registerPeripheryContract(
-    _name: PromiseOrValue<string>,
-    _contractAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _name: string,
+    _contractAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     getPeripheryContract(
-      _name: PromiseOrValue<string>,
+      _name: string,
       overrides?: CallOverrides
     ): Promise<string>;
 
     registerPeripheryContract(
-      _name: PromiseOrValue<string>,
-      _contractAddress: PromiseOrValue<string>,
+      _name: string,
+      _contractAddress: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -151,27 +150,27 @@ export interface PeripheryRegistryFacet extends BaseContract {
 
   estimateGas: {
     getPeripheryContract(
-      _name: PromiseOrValue<string>,
+      _name: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     registerPeripheryContract(
-      _name: PromiseOrValue<string>,
-      _contractAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _name: string,
+      _contractAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getPeripheryContract(
-      _name: PromiseOrValue<string>,
+      _name: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     registerPeripheryContract(
-      _name: PromiseOrValue<string>,
-      _contractAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _name: string,
+      _contractAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

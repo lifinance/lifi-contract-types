@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   CelerIMFacetMutable,
   CelerIMFacetMutableInterface,
-} from "../CelerIMFacetMutable";
+} from "../CelerIMFacetMutable.js";
 
 const _abi = [
   {
@@ -658,11 +657,11 @@ export class CelerIMFacetMutable__factory extends ContractFactory {
   }
 
   override deploy(
-    _messageBus: PromiseOrValue<string>,
-    _relayerOwner: PromiseOrValue<string>,
-    _diamondAddress: PromiseOrValue<string>,
-    _cfUSDC: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _messageBus: string,
+    _relayerOwner: string,
+    _diamondAddress: string,
+    _cfUSDC: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<CelerIMFacetMutable> {
     return super.deploy(
       _messageBus,
@@ -673,11 +672,11 @@ export class CelerIMFacetMutable__factory extends ContractFactory {
     ) as Promise<CelerIMFacetMutable>;
   }
   override getDeployTransaction(
-    _messageBus: PromiseOrValue<string>,
-    _relayerOwner: PromiseOrValue<string>,
-    _diamondAddress: PromiseOrValue<string>,
-    _cfUSDC: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _messageBus: string,
+    _relayerOwner: string,
+    _diamondAddress: string,
+    _cfUSDC: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _messageBus,

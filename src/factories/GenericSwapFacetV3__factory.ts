@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   GenericSwapFacetV3,
   GenericSwapFacetV3Interface,
-} from "../GenericSwapFacetV3";
+} from "../GenericSwapFacetV3.js";
 
 const _abi = [
   {
@@ -776,8 +775,8 @@ export class GenericSwapFacetV3__factory extends ContractFactory {
   }
 
   override deploy(
-    _nativeAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _nativeAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<GenericSwapFacetV3> {
     return super.deploy(
       _nativeAddress,
@@ -785,8 +784,8 @@ export class GenericSwapFacetV3__factory extends ContractFactory {
     ) as Promise<GenericSwapFacetV3>;
   }
   override getDeployTransaction(
-    _nativeAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _nativeAddress: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(_nativeAddress, overrides || {});
   }

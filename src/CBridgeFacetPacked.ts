@@ -25,21 +25,20 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
-    transactionId: PromiseOrValue<BytesLike>;
-    bridge: PromiseOrValue<string>;
-    integrator: PromiseOrValue<string>;
-    referrer: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receiver: PromiseOrValue<string>;
-    minAmount: PromiseOrValue<BigNumberish>;
-    destinationChainId: PromiseOrValue<BigNumberish>;
-    hasSourceSwaps: PromiseOrValue<boolean>;
-    hasDestinationCall: PromiseOrValue<boolean>;
+    transactionId: BytesLike;
+    bridge: string;
+    integrator: string;
+    referrer: string;
+    sendingAssetId: string;
+    receiver: string;
+    minAmount: BigNumberish;
+    destinationChainId: BigNumberish;
+    hasSourceSwaps: boolean;
+    hasDestinationCall: boolean;
   };
 
   export type BridgeDataStructOutput = [
@@ -69,8 +68,8 @@ export declare namespace ILiFi {
 
 export declare namespace CBridgeFacet {
   export type CBridgeDataStruct = {
-    maxSlippage: PromiseOrValue<BigNumberish>;
-    nonce: PromiseOrValue<BigNumberish>;
+    maxSlippage: BigNumberish;
+    nonce: BigNumberish;
   };
 
   export type CBridgeDataStructOutput = [number, BigNumber] & {
@@ -127,33 +126,27 @@ export interface CBridgeFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaCBridgeERC20Packed",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "decode_startBridgeTokensViaCBridgeNativePacked",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaCBridgeERC20Packed",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "encode_startBridgeTokensViaCBridgeNativePacked",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BytesLike, string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -162,18 +155,18 @@ export interface CBridgeFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForBridge",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCBridgeERC20Min",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
+      BytesLike,
+      string,
+      BigNumberish,
+      string,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
     ]
   ): string;
   encodeFunctionData(
@@ -182,13 +175,7 @@ export interface CBridgeFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCBridgeNativeMin",
-    values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [BytesLike, string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCBridgeNativePacked",
@@ -196,17 +183,11 @@ export interface CBridgeFacetPackedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "triggerRefund",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [string, BytesLike, string, string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -274,7 +255,7 @@ export interface CBridgeFacetPackedInterface extends utils.Interface {
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
-    "LiFiTransferStarted(tuple)": EventFragment;
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": EventFragment;
     "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
@@ -441,44 +422,44 @@ export interface CBridgeFacetPacked extends BaseContract {
 
   functions: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     decode_startBridgeTokensViaCBridgeERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
     >;
 
     decode_startBridgeTokensViaCBridgeNativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
     >;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -487,92 +468,92 @@ export interface CBridgeFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaCBridgeERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      amount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaCBridgeERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaCBridgeNativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     startBridgeTokensViaCBridgeNativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   decode_startBridgeTokensViaCBridgeERC20Packed(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
   >;
 
   decode_startBridgeTokensViaCBridgeNativePacked(
-    _data: PromiseOrValue<BytesLike>,
+    _data: BytesLike,
     overrides?: CallOverrides
   ): Promise<
     [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
   >;
 
   encode_startBridgeTokensViaCBridgeERC20Packed(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    minAmount: PromiseOrValue<BigNumberish>,
-    nonce: PromiseOrValue<BigNumberish>,
-    maxSlippage: PromiseOrValue<BigNumberish>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    minAmount: BigNumberish,
+    nonce: BigNumberish,
+    maxSlippage: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   encode_startBridgeTokensViaCBridgeNativePacked(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    nonce: PromiseOrValue<BigNumberish>,
-    maxSlippage: PromiseOrValue<BigNumberish>,
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    nonce: BigNumberish,
+    maxSlippage: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -581,50 +562,50 @@ export interface CBridgeFacetPacked extends BaseContract {
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   setApprovalForBridge(
-    tokensToApprove: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    tokensToApprove: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaCBridgeERC20Min(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    sendingAssetId: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    nonce: PromiseOrValue<BigNumberish>,
-    maxSlippage: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    sendingAssetId: string,
+    amount: BigNumberish,
+    nonce: BigNumberish,
+    maxSlippage: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaCBridgeERC20Packed(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaCBridgeNativeMin(
-    transactionId: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
-    destinationChainId: PromiseOrValue<BigNumberish>,
-    nonce: PromiseOrValue<BigNumberish>,
-    maxSlippage: PromiseOrValue<BigNumberish>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    transactionId: BytesLike,
+    receiver: string,
+    destinationChainId: BigNumberish,
+    nonce: BigNumberish,
+    maxSlippage: BigNumberish,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   startBridgeTokensViaCBridgeNativePacked(
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _newOwner: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   triggerRefund(
-    _callTo: PromiseOrValue<string>,
-    _callData: PromiseOrValue<BytesLike>,
-    _assetAddress: PromiseOrValue<string>,
-    _to: PromiseOrValue<string>,
-    _amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _callTo: string,
+    _callData: BytesLike,
+    _assetAddress: string,
+    _to: string,
+    _amount: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -633,36 +614,36 @@ export interface CBridgeFacetPacked extends BaseContract {
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     decode_startBridgeTokensViaCBridgeERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
     >;
 
     decode_startBridgeTokensViaCBridgeNativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<
       [ILiFi.BridgeDataStructOutput, CBridgeFacet.CBridgeDataStructOutput]
     >;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -671,18 +652,18 @@ export interface CBridgeFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
+      tokensToApprove: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     startBridgeTokensViaCBridgeERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      amount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -691,11 +672,11 @@ export interface CBridgeFacetPacked extends BaseContract {
     ): Promise<void>;
 
     startBridgeTokensViaCBridgeNativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -704,29 +685,29 @@ export interface CBridgeFacetPacked extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      _newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "CBridgeRefund(address,address,uint256)"(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
+      _assetAddress?: string | null,
+      _to?: string | null,
       amount?: null
     ): CBridgeRefundEventFilter;
     CBridgeRefund(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
+      _assetAddress?: string | null,
+      _to?: string | null,
       amount?: null
     ): CBridgeRefundEventFilter;
 
@@ -736,7 +717,7 @@ export interface CBridgeFacetPacked extends BaseContract {
     LiFiCBridgeTransfer(_transactionId?: null): LiFiCBridgeTransferEventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -746,7 +727,7 @@ export interface CBridgeFacetPacked extends BaseContract {
       toAmount?: null
     ): LiFiGenericSwapCompletedEventFilter;
     LiFiGenericSwapCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       receiver?: null,
@@ -757,7 +738,7 @@ export interface CBridgeFacetPacked extends BaseContract {
     ): LiFiGenericSwapCompletedEventFilter;
 
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -766,7 +747,7 @@ export interface CBridgeFacetPacked extends BaseContract {
       toAmount?: null
     ): LiFiSwappedGenericEventFilter;
     LiFiSwappedGeneric(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       integrator?: null,
       referrer?: null,
       fromAssetId?: null,
@@ -776,14 +757,14 @@ export interface CBridgeFacetPacked extends BaseContract {
     ): LiFiSwappedGenericEventFilter;
 
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferCompletedEventFilter;
     LiFiTransferCompleted(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
@@ -791,80 +772,80 @@ export interface CBridgeFacetPacked extends BaseContract {
     ): LiFiTransferCompletedEventFilter;
 
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
     LiFiTransferRecovered(
-      transactionId?: PromiseOrValue<BytesLike> | null,
+      transactionId?: BytesLike | null,
       receivingAssetId?: null,
       receiver?: null,
       amount?: null,
       timestamp?: null
     ): LiFiTransferRecoveredEventFilter;
 
-    "LiFiTransferStarted(tuple)"(
+    "LiFiTransferStarted((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))"(
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
     "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
     OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
+      _from?: string | null,
+      _to?: string | null
     ): OwnershipTransferRequestedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
   };
 
   estimateGas: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaCBridgeERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     decode_startBridgeTokensViaCBridgeNativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -873,89 +854,89 @@ export interface CBridgeFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaCBridgeERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      amount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaCBridgeERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaCBridgeNativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     startBridgeTokensViaCBridgeNativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaCBridgeERC20Packed(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     decode_startBridgeTokensViaCBridgeNativePacked(
-      _data: PromiseOrValue<BytesLike>,
+      _data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaCBridgeERC20Packed(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      minAmount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      minAmount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     encode_startBridgeTokensViaCBridgeNativePacked(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -964,50 +945,50 @@ export interface CBridgeFacetPacked extends BaseContract {
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setApprovalForBridge(
-      tokensToApprove: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      tokensToApprove: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaCBridgeERC20Min(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      sendingAssetId: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      sendingAssetId: string,
+      amount: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaCBridgeERC20Packed(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaCBridgeNativeMin(
-      transactionId: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
-      destinationChainId: PromiseOrValue<BigNumberish>,
-      nonce: PromiseOrValue<BigNumberish>,
-      maxSlippage: PromiseOrValue<BigNumberish>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      transactionId: BytesLike,
+      receiver: string,
+      destinationChainId: BigNumberish,
+      nonce: BigNumberish,
+      maxSlippage: BigNumberish,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaCBridgeNativePacked(
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     triggerRefund(
-      _callTo: PromiseOrValue<string>,
-      _callData: PromiseOrValue<BytesLike>,
-      _assetAddress: PromiseOrValue<string>,
-      _to: PromiseOrValue<string>,
-      _amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _callTo: string,
+      _callData: BytesLike,
+      _assetAddress: string,
+      _to: string,
+      _amount: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

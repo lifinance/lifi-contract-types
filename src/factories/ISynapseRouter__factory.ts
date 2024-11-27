@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ISynapseRouter,
   ISynapseRouterInterface,
-} from "../ISynapseRouter";
+} from "../ISynapseRouter.js";
 
 const _abi = [
   {

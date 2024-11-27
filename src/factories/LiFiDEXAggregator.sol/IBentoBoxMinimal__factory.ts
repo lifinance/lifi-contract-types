@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IBentoBoxMinimal,
   IBentoBoxMinimalInterface,
-} from "../../LiFiDEXAggregator.sol/IBentoBoxMinimal";
+} from "../../LiFiDEXAggregator.sol/IBentoBoxMinimal.js";
 
 const _abi = [
   {

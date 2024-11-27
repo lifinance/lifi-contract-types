@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ISwap, ISwapInterface } from "../../IHopBridge.sol/ISwap";
+import type { ISwap, ISwapInterface } from "../../IHopBridge.sol/ISwap.js";
 
 const _abi = [
   {

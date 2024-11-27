@@ -23,8 +23,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface DexManagerFacetInterface extends utils.Interface {
   functions: {
@@ -50,37 +49,31 @@ export interface DexManagerFacetInterface extends utils.Interface {
       | "setFunctionApprovalBySignature"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "addDex",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "addDex", values: [string]): string;
   encodeFunctionData(
     functionFragment: "approvedDexs",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "batchAddDex",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "batchRemoveDex",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "batchSetFunctionApprovalBySignature",
-    values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+    values: [BytesLike[], boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "isFunctionApproved",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "removeDex",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "removeDex", values: [string]): string;
   encodeFunctionData(
     functionFragment: "setFunctionApprovalBySignature",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<boolean>]
+    values: [BytesLike, boolean]
   ): string;
 
   decodeFunctionResult(functionFragment: "addDex", data: BytesLike): Result;
@@ -177,8 +170,8 @@ export interface DexManagerFacet extends BaseContract {
 
   functions: {
     addDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     approvedDexs(
@@ -186,220 +179,202 @@ export interface DexManagerFacet extends BaseContract {
     ): Promise<[string[]] & { addresses: string[] }>;
 
     batchAddDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     batchSetFunctionApprovalBySignature(
-      _signatures: PromiseOrValue<BytesLike>[],
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signatures: BytesLike[],
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     isFunctionApproved(
-      _signature: PromiseOrValue<BytesLike>,
+      _signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean] & { approved: boolean }>;
 
     removeDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     setFunctionApprovalBySignature(
-      _signature: PromiseOrValue<BytesLike>,
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signature: BytesLike,
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   addDex(
-    _dex: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _dex: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   approvedDexs(overrides?: CallOverrides): Promise<string[]>;
 
   batchAddDex(
-    _dexs: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _dexs: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   batchRemoveDex(
-    _dexs: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _dexs: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   batchSetFunctionApprovalBySignature(
-    _signatures: PromiseOrValue<BytesLike>[],
-    _approval: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _signatures: BytesLike[],
+    _approval: boolean,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   isFunctionApproved(
-    _signature: PromiseOrValue<BytesLike>,
+    _signature: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   removeDex(
-    _dex: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _dex: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   setFunctionApprovalBySignature(
-    _signature: PromiseOrValue<BytesLike>,
-    _approval: PromiseOrValue<boolean>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _signature: BytesLike,
+    _approval: boolean,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    addDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    addDex(_dex: string, overrides?: CallOverrides): Promise<void>;
 
     approvedDexs(overrides?: CallOverrides): Promise<string[]>;
 
-    batchAddDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: CallOverrides
-    ): Promise<void>;
+    batchAddDex(_dexs: string[], overrides?: CallOverrides): Promise<void>;
 
-    batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: CallOverrides
-    ): Promise<void>;
+    batchRemoveDex(_dexs: string[], overrides?: CallOverrides): Promise<void>;
 
     batchSetFunctionApprovalBySignature(
-      _signatures: PromiseOrValue<BytesLike>[],
-      _approval: PromiseOrValue<boolean>,
+      _signatures: BytesLike[],
+      _approval: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
     isFunctionApproved(
-      _signature: PromiseOrValue<BytesLike>,
+      _signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    removeDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    removeDex(_dex: string, overrides?: CallOverrides): Promise<void>;
 
     setFunctionApprovalBySignature(
-      _signature: PromiseOrValue<BytesLike>,
-      _approval: PromiseOrValue<boolean>,
+      _signature: BytesLike,
+      _approval: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "DexAdded(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexAddedEventFilter;
-    DexAdded(dexAddress?: PromiseOrValue<string> | null): DexAddedEventFilter;
+    "DexAdded(address)"(dexAddress?: string | null): DexAddedEventFilter;
+    DexAdded(dexAddress?: string | null): DexAddedEventFilter;
 
-    "DexRemoved(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
-    DexRemoved(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
+    "DexRemoved(address)"(dexAddress?: string | null): DexRemovedEventFilter;
+    DexRemoved(dexAddress?: string | null): DexRemovedEventFilter;
 
     "FunctionSignatureApprovalChanged(bytes4,bool)"(
-      functionSignature?: PromiseOrValue<BytesLike> | null,
-      approved?: PromiseOrValue<boolean> | null
+      functionSignature?: BytesLike | null,
+      approved?: boolean | null
     ): FunctionSignatureApprovalChangedEventFilter;
     FunctionSignatureApprovalChanged(
-      functionSignature?: PromiseOrValue<BytesLike> | null,
-      approved?: PromiseOrValue<boolean> | null
+      functionSignature?: BytesLike | null,
+      approved?: boolean | null
     ): FunctionSignatureApprovalChangedEventFilter;
   };
 
   estimateGas: {
     addDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     approvedDexs(overrides?: CallOverrides): Promise<BigNumber>;
 
     batchAddDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     batchSetFunctionApprovalBySignature(
-      _signatures: PromiseOrValue<BytesLike>[],
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signatures: BytesLike[],
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     isFunctionApproved(
-      _signature: PromiseOrValue<BytesLike>,
+      _signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     setFunctionApprovalBySignature(
-      _signature: PromiseOrValue<BytesLike>,
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signature: BytesLike,
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     approvedDexs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     batchAddDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dexs: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     batchSetFunctionApprovalBySignature(
-      _signatures: PromiseOrValue<BytesLike>[],
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signatures: BytesLike[],
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     isFunctionApproved(
-      _signature: PromiseOrValue<BytesLike>,
+      _signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removeDex(
-      _dex: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _dex: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     setFunctionApprovalBySignature(
-      _signature: PromiseOrValue<BytesLike>,
-      _approval: PromiseOrValue<boolean>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _signature: BytesLike,
+      _approval: boolean,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

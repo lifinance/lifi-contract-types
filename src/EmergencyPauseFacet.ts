@@ -23,8 +23,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface EmergencyPauseFacetInterface extends utils.Interface {
   functions: {
@@ -50,13 +49,10 @@ export interface EmergencyPauseFacetInterface extends utils.Interface {
     functionFragment: "pauserWallet",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "removeFacet",
-    values: [PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "removeFacet", values: [string]): string;
   encodeFunctionData(
     functionFragment: "unpauseDiamond",
-    values: [PromiseOrValue<string>[]]
+    values: [string[]]
   ): string;
 
   decodeFunctionResult(
@@ -148,36 +144,36 @@ export interface EmergencyPauseFacet extends BaseContract {
 
   functions: {
     pauseDiamond(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     pauserWallet(overrides?: CallOverrides): Promise<[string]>;
 
     removeFacet(
-      _facetAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _facetAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     unpauseDiamond(
-      _blacklist: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _blacklist: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   pauseDiamond(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   pauserWallet(overrides?: CallOverrides): Promise<string>;
 
   removeFacet(
-    _facetAddress: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _facetAddress: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   unpauseDiamond(
-    _blacklist: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _blacklist: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -186,74 +182,68 @@ export interface EmergencyPauseFacet extends BaseContract {
     pauserWallet(overrides?: CallOverrides): Promise<string>;
 
     removeFacet(
-      _facetAddress: PromiseOrValue<string>,
+      _facetAddress: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     unpauseDiamond(
-      _blacklist: PromiseOrValue<string>[],
+      _blacklist: string[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "EmergencyFacetRemoved(address,address)"(
-      facetAddress?: PromiseOrValue<string> | null,
-      msgSender?: PromiseOrValue<string> | null
+      facetAddress?: string | null,
+      msgSender?: string | null
     ): EmergencyFacetRemovedEventFilter;
     EmergencyFacetRemoved(
-      facetAddress?: PromiseOrValue<string> | null,
-      msgSender?: PromiseOrValue<string> | null
+      facetAddress?: string | null,
+      msgSender?: string | null
     ): EmergencyFacetRemovedEventFilter;
 
     "EmergencyPaused(address)"(
-      msgSender?: PromiseOrValue<string> | null
+      msgSender?: string | null
     ): EmergencyPausedEventFilter;
-    EmergencyPaused(
-      msgSender?: PromiseOrValue<string> | null
-    ): EmergencyPausedEventFilter;
+    EmergencyPaused(msgSender?: string | null): EmergencyPausedEventFilter;
 
     "EmergencyUnpaused(address)"(
-      msgSender?: PromiseOrValue<string> | null
+      msgSender?: string | null
     ): EmergencyUnpausedEventFilter;
-    EmergencyUnpaused(
-      msgSender?: PromiseOrValue<string> | null
-    ): EmergencyUnpausedEventFilter;
+    EmergencyUnpaused(msgSender?: string | null): EmergencyUnpausedEventFilter;
   };
 
   estimateGas: {
-    pauseDiamond(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
+    pauseDiamond(overrides?: Overrides & { from?: string }): Promise<BigNumber>;
 
     pauserWallet(overrides?: CallOverrides): Promise<BigNumber>;
 
     removeFacet(
-      _facetAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _facetAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     unpauseDiamond(
-      _blacklist: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _blacklist: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     pauseDiamond(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     pauserWallet(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     removeFacet(
-      _facetAddress: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _facetAddress: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     unpauseDiamond(
-      _blacklist: PromiseOrValue<string>[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _blacklist: string[],
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

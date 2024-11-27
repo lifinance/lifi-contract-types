@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { ISquidRouter, ISquidRouterInterface } from "../ISquidRouter";
+import type { ISquidRouter, ISquidRouterInterface } from "../ISquidRouter.js";
 
 const _abi = [
   {

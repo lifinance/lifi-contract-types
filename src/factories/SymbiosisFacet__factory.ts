@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   SymbiosisFacet,
   SymbiosisFacetInterface,
-} from "../SymbiosisFacet";
+} from "../SymbiosisFacet.js";
 
 const _abi = [
   {
@@ -655,9 +654,9 @@ export class SymbiosisFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    _symbiosisMetaRouter: PromiseOrValue<string>,
-    _symbiosisGateway: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _symbiosisMetaRouter: string,
+    _symbiosisGateway: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<SymbiosisFacet> {
     return super.deploy(
       _symbiosisMetaRouter,
@@ -666,9 +665,9 @@ export class SymbiosisFacet__factory extends ContractFactory {
     ) as Promise<SymbiosisFacet>;
   }
   override getDeployTransaction(
-    _symbiosisMetaRouter: PromiseOrValue<string>,
-    _symbiosisGateway: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _symbiosisMetaRouter: string,
+    _symbiosisGateway: string,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _symbiosisMetaRouter,

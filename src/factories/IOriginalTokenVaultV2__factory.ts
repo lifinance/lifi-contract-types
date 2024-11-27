@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IOriginalTokenVaultV2,
   IOriginalTokenVaultV2Interface,
-} from "../IOriginalTokenVaultV2";
+} from "../IOriginalTokenVaultV2.js";
 
 const _abi = [
   {

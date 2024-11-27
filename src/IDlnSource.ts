@@ -21,22 +21,21 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace IDlnSource {
   export type OrderCreationStruct = {
-    giveTokenAddress: PromiseOrValue<string>;
-    giveAmount: PromiseOrValue<BigNumberish>;
-    takeTokenAddress: PromiseOrValue<BytesLike>;
-    takeAmount: PromiseOrValue<BigNumberish>;
-    takeChainId: PromiseOrValue<BigNumberish>;
-    receiverDst: PromiseOrValue<BytesLike>;
-    givePatchAuthoritySrc: PromiseOrValue<string>;
-    orderAuthorityAddressDst: PromiseOrValue<BytesLike>;
-    allowedTakerDst: PromiseOrValue<BytesLike>;
-    externalCall: PromiseOrValue<BytesLike>;
-    allowedCancelBeneficiarySrc: PromiseOrValue<BytesLike>;
+    giveTokenAddress: string;
+    giveAmount: BigNumberish;
+    takeTokenAddress: BytesLike;
+    takeAmount: BigNumberish;
+    takeChainId: BigNumberish;
+    receiverDst: BytesLike;
+    givePatchAuthoritySrc: string;
+    orderAuthorityAddressDst: BytesLike;
+    allowedTakerDst: BytesLike;
+    externalCall: BytesLike;
+    allowedCancelBeneficiarySrc: BytesLike;
   };
 
   export type OrderCreationStructOutput = [
@@ -78,12 +77,7 @@ export interface IDlnSourceInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "createOrder",
-    values: [
-      IDlnSource.OrderCreationStruct,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [IDlnSource.OrderCreationStruct, BytesLike, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "globalFixedNativeFee",
@@ -131,35 +125,35 @@ export interface IDlnSource extends BaseContract {
   functions: {
     createOrder(
       _orderCreation: IDlnSource.OrderCreationStruct,
-      _affiliateFee: PromiseOrValue<BytesLike>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _permitEnvelope: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _affiliateFee: BytesLike,
+      _referralCode: BigNumberish,
+      _permitEnvelope: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     globalFixedNativeFee(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   createOrder(
     _orderCreation: IDlnSource.OrderCreationStruct,
-    _affiliateFee: PromiseOrValue<BytesLike>,
-    _referralCode: PromiseOrValue<BigNumberish>,
-    _permitEnvelope: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _affiliateFee: BytesLike,
+    _referralCode: BigNumberish,
+    _permitEnvelope: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   globalFixedNativeFee(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     createOrder(
       _orderCreation: IDlnSource.OrderCreationStruct,
-      _affiliateFee: PromiseOrValue<BytesLike>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _permitEnvelope: PromiseOrValue<BytesLike>,
+      _affiliateFee: BytesLike,
+      _referralCode: BigNumberish,
+      _permitEnvelope: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -171,28 +165,28 @@ export interface IDlnSource extends BaseContract {
   estimateGas: {
     createOrder(
       _orderCreation: IDlnSource.OrderCreationStruct,
-      _affiliateFee: PromiseOrValue<BytesLike>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _permitEnvelope: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _affiliateFee: BytesLike,
+      _referralCode: BigNumberish,
+      _permitEnvelope: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     globalFixedNativeFee(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     createOrder(
       _orderCreation: IDlnSource.OrderCreationStruct,
-      _affiliateFee: PromiseOrValue<BytesLike>,
-      _referralCode: PromiseOrValue<BigNumberish>,
-      _permitEnvelope: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _affiliateFee: BytesLike,
+      _referralCode: BigNumberish,
+      _permitEnvelope: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     globalFixedNativeFee(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

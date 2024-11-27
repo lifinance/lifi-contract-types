@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../../common";
 import type {
   LiFiDEXAggregator,
   LiFiDEXAggregatorInterface,
-} from "../../LiFiDEXAggregator.sol/LiFiDEXAggregator";
+} from "../../LiFiDEXAggregator.sol/LiFiDEXAggregator.js";
 
 const _abi = [
   {
@@ -396,9 +395,9 @@ export class LiFiDEXAggregator__factory extends ContractFactory {
   }
 
   override deploy(
-    _bentoBox: PromiseOrValue<string>,
-    priviledgedUserList: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _bentoBox: string,
+    priviledgedUserList: string[],
+    overrides?: Overrides & { from?: string }
   ): Promise<LiFiDEXAggregator> {
     return super.deploy(
       _bentoBox,
@@ -407,9 +406,9 @@ export class LiFiDEXAggregator__factory extends ContractFactory {
     ) as Promise<LiFiDEXAggregator>;
   }
   override getDeployTransaction(
-    _bentoBox: PromiseOrValue<string>,
-    priviledgedUserList: PromiseOrValue<string>[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _bentoBox: string,
+    priviledgedUserList: string[],
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _bentoBox,

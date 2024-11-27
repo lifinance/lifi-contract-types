@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IDlnSource, IDlnSourceInterface } from "../IDlnSource";
+import type { IDlnSource, IDlnSourceInterface } from "../IDlnSource.js";
 
 const _abi = [
   {

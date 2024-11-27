@@ -10,11 +10,10 @@ import {
   Overrides,
 } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   ReceiverAcrossV3,
   ReceiverAcrossV3Interface,
-} from "../ReceiverAcrossV3";
+} from "../ReceiverAcrossV3.js";
 
 const _abi = [
   {
@@ -529,11 +528,11 @@ export class ReceiverAcrossV3__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    _executor: PromiseOrValue<string>,
-    _spokepool: PromiseOrValue<string>,
-    _recoverGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _executor: string,
+    _spokepool: string,
+    _recoverGas: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ReceiverAcrossV3> {
     return super.deploy(
       _owner,
@@ -544,11 +543,11 @@ export class ReceiverAcrossV3__factory extends ContractFactory {
     ) as Promise<ReceiverAcrossV3>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    _executor: PromiseOrValue<string>,
-    _spokepool: PromiseOrValue<string>,
-    _recoverGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _executor: string,
+    _spokepool: string,
+    _recoverGas: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _owner,

@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IWrapper,
   IWrapperInterface,
-} from "../../TokenWrapper.sol/IWrapper";
+} from "../../TokenWrapper.sol/IWrapper.js";
 
 const _abi = [
   {

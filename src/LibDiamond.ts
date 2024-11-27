@@ -15,14 +15,13 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export declare namespace LibDiamond {
   export type FacetCutStruct = {
-    facetAddress: PromiseOrValue<string>;
-    action: PromiseOrValue<BigNumberish>;
-    functionSelectors: PromiseOrValue<BytesLike>[];
+    facetAddress: string;
+    action: BigNumberish;
+    functionSelectors: BytesLike[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {
@@ -36,7 +35,7 @@ export interface LibDiamondInterface extends utils.Interface {
   functions: {};
 
   events: {
-    "DiamondCut(tuple[],address,bytes)": EventFragment;
+    "DiamondCut((address,uint8,bytes4[])[],address,bytes)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
@@ -99,7 +98,7 @@ export interface LibDiamond extends BaseContract {
   callStatic: {};
 
   filters: {
-    "DiamondCut(tuple[],address,bytes)"(
+    "DiamondCut((address,uint8,bytes4[])[],address,bytes)"(
       _diamondCut?: null,
       _init?: null,
       _calldata?: null
@@ -111,12 +110,12 @@ export interface LibDiamond extends BaseContract {
     ): DiamondCutEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
+      previousOwner?: string | null,
+      newOwner?: string | null
     ): OwnershipTransferredEventFilter;
   };
 

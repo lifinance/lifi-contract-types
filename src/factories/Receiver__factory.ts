@@ -10,8 +10,7 @@ import {
   Overrides,
 } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { Receiver, ReceiverInterface } from "../Receiver";
+import type { Receiver, ReceiverInterface } from "../Receiver.js";
 
 const _abi = [
   {
@@ -740,12 +739,12 @@ export class Receiver__factory extends ContractFactory {
   }
 
   override deploy(
-    _owner: PromiseOrValue<string>,
-    _sgRouter: PromiseOrValue<string>,
-    _amarokRouter: PromiseOrValue<string>,
-    _executor: PromiseOrValue<string>,
-    _recoverGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _sgRouter: string,
+    _amarokRouter: string,
+    _executor: string,
+    _recoverGas: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<Receiver> {
     return super.deploy(
       _owner,
@@ -757,12 +756,12 @@ export class Receiver__factory extends ContractFactory {
     ) as Promise<Receiver>;
   }
   override getDeployTransaction(
-    _owner: PromiseOrValue<string>,
-    _sgRouter: PromiseOrValue<string>,
-    _amarokRouter: PromiseOrValue<string>,
-    _executor: PromiseOrValue<string>,
-    _recoverGas: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _owner: string,
+    _sgRouter: string,
+    _amarokRouter: string,
+    _executor: string,
+    _recoverGas: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(
       _owner,

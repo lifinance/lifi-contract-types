@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ILayerZeroComposer,
   ILayerZeroComposerInterface,
-} from "../../ReceiverStargateV2.sol/ILayerZeroComposer";
+} from "../../ReceiverStargateV2.sol/ILayerZeroComposer.js";
 
 const _abi = [
   {

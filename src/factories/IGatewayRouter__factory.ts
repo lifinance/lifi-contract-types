@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IGatewayRouter,
   IGatewayRouterInterface,
-} from "../IGatewayRouter";
+} from "../IGatewayRouter.js";
 
 const _abi = [
   {

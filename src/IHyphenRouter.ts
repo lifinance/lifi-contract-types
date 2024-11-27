@@ -21,8 +21,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "./common.js";
 
 export interface IHyphenRouterInterface extends utils.Interface {
   functions: {
@@ -36,21 +35,11 @@ export interface IHyphenRouterInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "depositErc20",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
+    values: [BigNumberish, string, string, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "depositNative",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
-    ]
+    values: [string, BigNumberish, string]
   ): string;
 
   decodeFunctionResult(
@@ -93,52 +82,52 @@ export interface IHyphenRouter extends BaseContract {
 
   functions: {
     depositErc20(
-      toChainId: PromiseOrValue<BigNumberish>,
-      tokenAddress: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      toChainId: BigNumberish,
+      tokenAddress: string,
+      receiver: string,
+      amount: BigNumberish,
+      tag: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     depositNative(
-      receiver: PromiseOrValue<string>,
-      toChainId: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      toChainId: BigNumberish,
+      tag: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   depositErc20(
-    toChainId: PromiseOrValue<BigNumberish>,
-    tokenAddress: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    tag: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    toChainId: BigNumberish,
+    tokenAddress: string,
+    receiver: string,
+    amount: BigNumberish,
+    tag: string,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   depositNative(
-    receiver: PromiseOrValue<string>,
-    toChainId: PromiseOrValue<BigNumberish>,
-    tag: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    receiver: string,
+    toChainId: BigNumberish,
+    tag: string,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     depositErc20(
-      toChainId: PromiseOrValue<BigNumberish>,
-      tokenAddress: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
+      toChainId: BigNumberish,
+      tokenAddress: string,
+      receiver: string,
+      amount: BigNumberish,
+      tag: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     depositNative(
-      receiver: PromiseOrValue<string>,
-      toChainId: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
+      receiver: string,
+      toChainId: BigNumberish,
+      tag: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -147,37 +136,37 @@ export interface IHyphenRouter extends BaseContract {
 
   estimateGas: {
     depositErc20(
-      toChainId: PromiseOrValue<BigNumberish>,
-      tokenAddress: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      toChainId: BigNumberish,
+      tokenAddress: string,
+      receiver: string,
+      amount: BigNumberish,
+      tag: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     depositNative(
-      receiver: PromiseOrValue<string>,
-      toChainId: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      toChainId: BigNumberish,
+      tag: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     depositErc20(
-      toChainId: PromiseOrValue<BigNumberish>,
-      tokenAddress: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      toChainId: BigNumberish,
+      tokenAddress: string,
+      receiver: string,
+      amount: BigNumberish,
+      tag: string,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     depositNative(
-      receiver: PromiseOrValue<string>,
-      toChainId: PromiseOrValue<BigNumberish>,
-      tag: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      receiver: string,
+      toChainId: BigNumberish,
+      tag: string,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   IConnextHandler,
   IConnextHandlerInterface,
-} from "../IConnextHandler";
+} from "../IConnextHandler.js";
 
 const _abi = [
   {

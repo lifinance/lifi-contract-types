@@ -3,11 +3,10 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
 import type {
   DexManagerFacet,
   DexManagerFacetInterface,
-} from "../DexManagerFacet";
+} from "../DexManagerFacet.js";
 
 const _abi = [
   {
@@ -213,12 +212,12 @@ export class DexManagerFacet__factory extends ContractFactory {
   }
 
   override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): Promise<DexManagerFacet> {
     return super.deploy(overrides || {}) as Promise<DexManagerFacet>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

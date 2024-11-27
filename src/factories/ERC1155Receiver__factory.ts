@@ -7,7 +7,7 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   ERC1155Receiver,
   ERC1155ReceiverInterface,
-} from "../ERC1155Receiver";
+} from "../ERC1155Receiver.js";
 
 const _abi = [
   {

@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { IOmniBridge, IOmniBridgeInterface } from "../IOmniBridge";
+import type { IOmniBridge, IOmniBridgeInterface } from "../IOmniBridge.js";
 
 const _abi = [
   {

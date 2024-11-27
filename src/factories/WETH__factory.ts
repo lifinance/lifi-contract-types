@@ -3,8 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { PromiseOrValue } from "../common";
-import type { WETH, WETHInterface } from "../WETH";
+import type { WETH, WETHInterface } from "../WETH.js";
 
 const _abi = [
   {
@@ -388,13 +387,11 @@ export class WETH__factory extends ContractFactory {
     }
   }
 
-  override deploy(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<WETH> {
+  override deploy(overrides?: Overrides & { from?: string }): Promise<WETH> {
     return super.deploy(overrides || {}) as Promise<WETH>;
   }
   override getDeployTransaction(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: Overrides & { from?: string }
   ): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }

@@ -1,9 +1,0 @@
-export type { IBentoBoxMinimal } from "./IBentoBoxMinimal";
-export type { ICurve } from "./ICurve";
-export type { ICurveLegacy } from "./ICurveLegacy";
-export type { IPool } from "./IPool";
-export type { ITridentCLPool } from "./ITridentCLPool";
-export type { IUniswapV2Pair } from "./IUniswapV2Pair";
-export type { IUniswapV3Pool } from "./IUniswapV3Pool";
-export type { IWETH } from "./IWETH";
-export type { LiFiDEXAggregator } from "./LiFiDEXAggregator";

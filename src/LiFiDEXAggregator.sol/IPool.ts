@@ -24,14 +24,10 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export declare namespace IPool {
-  export type TokenAmountStruct = {
-    token: PromiseOrValue<string>;
-    amount: PromiseOrValue<BigNumberish>;
-  };
+  export type TokenAmountStruct = { token: string; amount: BigNumberish };
 
   export type TokenAmountStructOutput = [string, BigNumber] & {
     token: string;
@@ -65,39 +61,30 @@ export interface IPoolInterface extends utils.Interface {
       | "swap"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "burn",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "burn", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "burnSingle",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "flashSwap",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "getAmountIn",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "getAmountOut",
-    values: [PromiseOrValue<BytesLike>]
+    values: [BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "getAssets", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "mint",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "mint", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "poolIdentifier",
     values?: undefined
   ): string;
-  encodeFunctionData(
-    functionFragment: "swap",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
+  encodeFunctionData(functionFragment: "swap", values: [BytesLike]): string;
 
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burnSingle", data: BytesLike): Result;
@@ -167,137 +154,116 @@ export interface IPool extends BaseContract {
 
   functions: {
     burn(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     burnSingle(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     flashSwap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     getAmountIn(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { finalAmountIn: BigNumber }>;
 
     getAmountOut(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { finalAmountOut: BigNumber }>;
 
     getAssets(overrides?: CallOverrides): Promise<[string[]]>;
 
     mint(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     poolIdentifier(overrides?: CallOverrides): Promise<[string]>;
 
     swap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   burn(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   burnSingle(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   flashSwap(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
-  getAmountIn(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  getAmountIn(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-  getAmountOut(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  getAmountOut(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
   getAssets(overrides?: CallOverrides): Promise<string[]>;
 
   mint(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   poolIdentifier(overrides?: CallOverrides): Promise<string>;
 
   swap(
-    data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    data: BytesLike,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     burn(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<IPool.TokenAmountStructOutput[]>;
 
-    burnSingle(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    burnSingle(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-    flashSwap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    flashSwap(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
-    getAmountIn(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getAmountIn(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     getAmountOut(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getAssets(overrides?: CallOverrides): Promise<string[]>;
 
-    mint(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    mint(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     poolIdentifier(overrides?: CallOverrides): Promise<string>;
 
-    swap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    swap(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {
     "Swap(address,address,address,uint256,uint256)"(
-      recipient?: PromiseOrValue<string> | null,
-      tokenIn?: PromiseOrValue<string> | null,
-      tokenOut?: PromiseOrValue<string> | null,
+      recipient?: string | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
       amountIn?: null,
       amountOut?: null
     ): SwapEventFilter;
     Swap(
-      recipient?: PromiseOrValue<string> | null,
-      tokenIn?: PromiseOrValue<string> | null,
-      tokenOut?: PromiseOrValue<string> | null,
+      recipient?: string | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
       amountIn?: null,
       amountOut?: null
     ): SwapEventFilter;
@@ -305,83 +271,80 @@ export interface IPool extends BaseContract {
 
   estimateGas: {
     burn(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     burnSingle(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     flashSwap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
-    getAmountIn(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    getAmountIn(data: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
 
     getAmountOut(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getAssets(overrides?: CallOverrides): Promise<BigNumber>;
 
     mint(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
     poolIdentifier(overrides?: CallOverrides): Promise<BigNumber>;
 
     swap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     burn(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     burnSingle(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     flashSwap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     getAmountIn(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getAmountOut(
-      data: PromiseOrValue<BytesLike>,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getAssets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     mint(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     poolIdentifier(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     swap(
-      data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      data: BytesLike,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

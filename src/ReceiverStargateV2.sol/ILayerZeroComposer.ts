@@ -19,8 +19,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "../common";
+} from "../common.js";
 
 export interface ILayerZeroComposerInterface extends utils.Interface {
   functions: {
@@ -31,13 +30,7 @@ export interface ILayerZeroComposerInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "lzCompose",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
+    values: [string, BytesLike, BytesLike, string, BytesLike]
   ): string;
 
   decodeFunctionResult(functionFragment: "lzCompose", data: BytesLike): Result;
@@ -73,31 +66,31 @@ export interface ILayerZeroComposer extends BaseContract {
 
   functions: {
     lzCompose(
-      _from: PromiseOrValue<string>,
-      _guid: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      _executor: PromiseOrValue<string>,
-      _extraData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _from: string,
+      _guid: BytesLike,
+      _message: BytesLike,
+      _executor: string,
+      _extraData: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   lzCompose(
-    _from: PromiseOrValue<string>,
-    _guid: PromiseOrValue<BytesLike>,
-    _message: PromiseOrValue<BytesLike>,
-    _executor: PromiseOrValue<string>,
-    _extraData: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _from: string,
+    _guid: BytesLike,
+    _message: BytesLike,
+    _executor: string,
+    _extraData: BytesLike,
+    overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     lzCompose(
-      _from: PromiseOrValue<string>,
-      _guid: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      _executor: PromiseOrValue<string>,
-      _extraData: PromiseOrValue<BytesLike>,
+      _from: string,
+      _guid: BytesLike,
+      _message: BytesLike,
+      _executor: string,
+      _extraData: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -106,23 +99,23 @@ export interface ILayerZeroComposer extends BaseContract {
 
   estimateGas: {
     lzCompose(
-      _from: PromiseOrValue<string>,
-      _guid: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      _executor: PromiseOrValue<string>,
-      _extraData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _from: string,
+      _guid: BytesLike,
+      _message: BytesLike,
+      _executor: string,
+      _extraData: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     lzCompose(
-      _from: PromiseOrValue<string>,
-      _guid: PromiseOrValue<BytesLike>,
-      _message: PromiseOrValue<BytesLike>,
-      _executor: PromiseOrValue<string>,
-      _extraData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _from: string,
+      _guid: BytesLike,
+      _message: BytesLike,
+      _executor: string,
+      _extraData: BytesLike,
+      overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }
