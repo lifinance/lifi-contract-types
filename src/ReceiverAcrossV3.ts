@@ -75,7 +75,6 @@ export interface ReceiverAcrossV3Interface extends utils.Interface {
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "pullToken(address,address,uint256)": FunctionFragment;
-    "recoverGas()": FunctionFragment;
     "spokepool()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -89,7 +88,6 @@ export interface ReceiverAcrossV3Interface extends utils.Interface {
       | "owner"
       | "pendingOwner"
       | "pullToken"
-      | "recoverGas"
       | "spokepool"
       | "transferOwnership"
   ): FunctionFragment;
@@ -125,10 +123,6 @@ export interface ReceiverAcrossV3Interface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "recoverGas",
-    values?: undefined
-  ): string;
   encodeFunctionData(functionFragment: "spokepool", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -154,7 +148,6 @@ export interface ReceiverAcrossV3Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "pullToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "recoverGas", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "spokepool", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -336,8 +329,6 @@ export interface ReceiverAcrossV3 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    recoverGas(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     spokepool(overrides?: CallOverrides): Promise<[string]>;
 
     transferOwnership(
@@ -375,8 +366,6 @@ export interface ReceiverAcrossV3 extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-
   spokepool(overrides?: CallOverrides): Promise<string>;
 
   transferOwnership(
@@ -409,8 +398,6 @@ export interface ReceiverAcrossV3 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
 
     spokepool(overrides?: CallOverrides): Promise<string>;
 
@@ -545,8 +532,6 @@ export interface ReceiverAcrossV3 extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
-
     spokepool(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
@@ -584,8 +569,6 @@ export interface ReceiverAcrossV3 extends BaseContract {
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    recoverGas(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     spokepool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
