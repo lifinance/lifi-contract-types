@@ -110,7 +110,7 @@ export declare namespace LibSwap {
 
 export interface GasZipFacetInterface extends utils.Interface {
   functions: {
-    "NON_EVM_RECEIVER_IDENTIFIER()": FunctionFragment;
+    "NON_EVM_ADDRESS()": FunctionFragment;
     "gasZipRouter()": FunctionFragment;
     "getDestinationChainsValue(uint8[])": FunctionFragment;
     "startBridgeTokensViaGasZip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256))": FunctionFragment;
@@ -119,7 +119,7 @@ export interface GasZipFacetInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "NON_EVM_RECEIVER_IDENTIFIER"
+      | "NON_EVM_ADDRESS"
       | "gasZipRouter"
       | "getDestinationChainsValue"
       | "startBridgeTokensViaGasZip"
@@ -127,7 +127,7 @@ export interface GasZipFacetInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "NON_EVM_RECEIVER_IDENTIFIER",
+    functionFragment: "NON_EVM_ADDRESS",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -152,7 +152,7 @@ export interface GasZipFacetInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "NON_EVM_RECEIVER_IDENTIFIER",
+    functionFragment: "NON_EVM_ADDRESS",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -290,7 +290,7 @@ export interface GasZipFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<[string]>;
+    NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
 
     gasZipRouter(overrides?: CallOverrides): Promise<[string]>;
 
@@ -313,7 +313,7 @@ export interface GasZipFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<string>;
+  NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<string>;
 
   gasZipRouter(overrides?: CallOverrides): Promise<string>;
 
@@ -336,7 +336,7 @@ export interface GasZipFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<string>;
+    NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<string>;
 
     gasZipRouter(overrides?: CallOverrides): Promise<string>;
 
@@ -437,7 +437,7 @@ export interface GasZipFacet extends BaseContract {
   };
 
   estimateGas: {
-    NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<BigNumber>;
+    NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
 
     gasZipRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -461,9 +461,7 @@ export interface GasZipFacet extends BaseContract {
   };
 
   populateTransaction: {
-    NON_EVM_RECEIVER_IDENTIFIER(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     gasZipRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
