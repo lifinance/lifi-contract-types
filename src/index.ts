@@ -109,7 +109,6 @@ export type { LibSwap } from "./LibSwap";
 export type { MayanFacet } from "./MayanFacet";
 export type { OmniBridgeFacet } from "./OmniBridgeFacet";
 export type { OptimismBridgeFacet } from "./OptimismBridgeFacet";
-export type { Ownable } from "./Ownable";
 export type { OwnershipFacet } from "./OwnershipFacet";
 export type { PeripheryRegistryFacet } from "./PeripheryRegistryFacet";
 export type { Permit2Proxy } from "./Permit2Proxy";
@@ -262,7 +261,6 @@ export { LiFuelFeeCollector__factory } from "./factories/LiFuelFeeCollector__fac
 export { MayanFacet__factory } from "./factories/MayanFacet__factory";
 export { OmniBridgeFacet__factory } from "./factories/OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./factories/OptimismBridgeFacet__factory";
-export { Ownable__factory } from "./factories/Ownable__factory";
 export { OwnershipFacet__factory } from "./factories/OwnershipFacet__factory";
 export { PeripheryRegistryFacet__factory } from "./factories/PeripheryRegistryFacet__factory";
 export { Permit2Proxy__factory } from "./factories/Permit2Proxy__factory";
