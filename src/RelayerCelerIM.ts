@@ -108,7 +108,7 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     "sendTokenTransfer((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "triggerRefund(address,bytes,address,address,uint256)": FunctionFragment;
-    "withdraw(address,address,uint256)": FunctionFragment;
+    "withdrawToken(address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -125,7 +125,7 @@ export interface RelayerCelerIMInterface extends utils.Interface {
       | "sendTokenTransfer"
       | "transferOwnership"
       | "triggerRefund"
-      | "withdraw"
+      | "withdrawToken"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -198,7 +198,7 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdraw",
+    functionFragment: "withdrawToken",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -251,7 +251,10 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     functionFragment: "triggerRefund",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawToken",
+    data: BytesLike
+  ): Result;
 
   events: {
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -259,9 +262,9 @@ export interface RelayerCelerIMInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "LogWithdraw(address,address,uint256)": EventFragment;
     "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -269,9 +272,9 @@ export interface RelayerCelerIMInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "LogWithdraw"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
 
 export interface LiFiGenericSwapCompletedEventObject {
@@ -350,18 +353,6 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface LogWithdrawEventObject {
-  _assetAddress: string;
-  _to: string;
-  amount: BigNumber;
-}
-export type LogWithdrawEvent = TypedEvent<
-  [string, string, BigNumber],
-  LogWithdrawEventObject
->;
-
-export type LogWithdrawEventFilter = TypedEventFilter<LogWithdrawEvent>;
-
 export interface OwnershipTransferRequestedEventObject {
   _from: string;
   _to: string;
@@ -385,6 +376,18 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface TokensWithdrawnEventObject {
+  assetId: string;
+  receiver: string;
+  amount: BigNumber;
+}
+export type TokensWithdrawnEvent = TypedEvent<
+  [string, string, BigNumber],
+  TokensWithdrawnEventObject
+>;
+
+export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 
 export interface RelayerCelerIM extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -476,7 +479,7 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    withdraw(
+    withdrawToken(
       assetId: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -547,7 +550,7 @@ export interface RelayerCelerIM extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  withdraw(
+  withdrawToken(
     assetId: PromiseOrValue<string>,
     receiver: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
@@ -616,7 +619,7 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    withdraw(
+    withdrawToken(
       assetId: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -700,17 +703,6 @@ export interface RelayerCelerIM extends BaseContract {
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
-    "LogWithdraw(address,address,uint256)"(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      amount?: null
-    ): LogWithdrawEventFilter;
-    LogWithdraw(
-      _assetAddress?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null,
-      amount?: null
-    ): LogWithdrawEventFilter;
-
     "OwnershipTransferRequested(address,address)"(
       _from?: PromiseOrValue<string> | null,
       _to?: PromiseOrValue<string> | null
@@ -728,6 +720,17 @@ export interface RelayerCelerIM extends BaseContract {
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
+
+    "TokensWithdrawn(address,address,uint256)"(
+      assetId?: null,
+      receiver?: null,
+      amount?: null
+    ): TokensWithdrawnEventFilter;
+    TokensWithdrawn(
+      assetId?: null,
+      receiver?: null,
+      amount?: null
+    ): TokensWithdrawnEventFilter;
   };
 
   estimateGas: {
@@ -794,7 +797,7 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    withdraw(
+    withdrawToken(
       assetId: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -866,7 +869,7 @@ export interface RelayerCelerIM extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    withdraw(
+    withdrawToken(
       assetId: PromiseOrValue<string>,
       receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
