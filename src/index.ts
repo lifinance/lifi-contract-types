@@ -27,6 +27,7 @@ export type { CBridgeFacetPacked } from "./CBridgeFacetPacked";
 export type { CalldataVerificationFacet } from "./CalldataVerificationFacet";
 export type { CelerCircleBridgeFacet } from "./CelerCircleBridgeFacet";
 export type { CelerIMFacetMutable } from "./CelerIMFacetMutable";
+export type { DeBridgeDlnFacet } from "./DeBridgeDlnFacet";
 export type { DexManagerFacet } from "./DexManagerFacet";
 export type { DiamondCutFacet } from "./DiamondCutFacet";
 export type { DiamondLoupeFacet } from "./DiamondLoupeFacet";
@@ -152,6 +153,7 @@ export { CelerIMFacetBase__factory } from "./factories/CelerIMFacetBase.sol/Cele
 export type { CelerToken } from "./CelerIMFacetBase.sol/CelerToken";
 export { CelerToken__factory } from "./factories/CelerIMFacetBase.sol/CelerToken__factory";
 export { CelerIMFacetMutable__factory } from "./factories/CelerIMFacetMutable__factory";
+export { DeBridgeDlnFacet__factory } from "./factories/DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./factories/DiamondLoupeFacet__factory";
