@@ -45,7 +45,6 @@ export declare namespace AcrossFacetV3 {
         refundAddress: PromiseOrValue<string>;
         receivingAssetId: PromiseOrValue<string>;
         outputAmount: PromiseOrValue<BigNumberish>;
-        outputAmountPercent: PromiseOrValue<BigNumberish>;
         exclusiveRelayer: PromiseOrValue<string>;
         quoteTimestamp: PromiseOrValue<BigNumberish>;
         fillDeadline: PromiseOrValue<BigNumberish>;
@@ -57,7 +56,6 @@ export declare namespace AcrossFacetV3 {
         string,
         string,
         BigNumber,
-        BigNumber,
         string,
         number,
         number,
@@ -68,7 +66,6 @@ export declare namespace AcrossFacetV3 {
         refundAddress: string;
         receivingAssetId: string;
         outputAmount: BigNumber;
-        outputAmountPercent: BigNumber;
         exclusiveRelayer: string;
         quoteTimestamp: number;
         fillDeadline: number;
