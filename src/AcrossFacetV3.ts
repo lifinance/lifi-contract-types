@@ -72,7 +72,6 @@ export declare namespace AcrossFacetV3 {
     refundAddress: PromiseOrValue<string>;
     receivingAssetId: PromiseOrValue<string>;
     outputAmount: PromiseOrValue<BigNumberish>;
-    outputAmountPercent: PromiseOrValue<BigNumberish>;
     exclusiveRelayer: PromiseOrValue<string>;
     quoteTimestamp: PromiseOrValue<BigNumberish>;
     fillDeadline: PromiseOrValue<BigNumberish>;
@@ -85,7 +84,6 @@ export declare namespace AcrossFacetV3 {
     string,
     string,
     BigNumber,
-    BigNumber,
     string,
     number,
     number,
@@ -96,7 +94,6 @@ export declare namespace AcrossFacetV3 {
     refundAddress: string;
     receivingAssetId: string;
     outputAmount: BigNumber;
-    outputAmountPercent: BigNumber;
     exclusiveRelayer: string;
     quoteTimestamp: number;
     fillDeadline: number;
@@ -138,8 +135,8 @@ export declare namespace LibSwap {
 export interface AcrossFacetV3Interface extends utils.Interface {
   functions: {
     "spokePool()": FunctionFragment;
-    "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
     "wrappedNative()": FunctionFragment;
   };
 
