@@ -52,8 +52,9 @@ export interface ReceiverStargateV2Interface extends utils.Interface {
         "recoverGas()": FunctionFragment;
         "tokenMessaging()": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
+        "withdrawToken(address,address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "endpointV2" | "executor" | "lzCompose" | "owner" | "pendingOwner" | "pullToken" | "recoverGas" | "tokenMessaging" | "transferOwnership"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "endpointV2" | "executor" | "lzCompose" | "owner" | "pendingOwner" | "pullToken" | "recoverGas" | "tokenMessaging" | "transferOwnership" | "withdrawToken"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "endpointV2", values?: undefined): string;
@@ -75,6 +76,11 @@ export interface ReceiverStargateV2Interface extends utils.Interface {
     encodeFunctionData(functionFragment: "recoverGas", values?: undefined): string;
     encodeFunctionData(functionFragment: "tokenMessaging", values?: undefined): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "withdrawToken", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "endpointV2", data: BytesLike): Result;
@@ -86,6 +92,7 @@ export interface ReceiverStargateV2Interface extends utils.Interface {
     decodeFunctionResult(functionFragment: "recoverGas", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "tokenMessaging", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "withdrawToken", data: BytesLike): Result;
     events: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -94,6 +101,7 @@ export interface ReceiverStargateV2Interface extends utils.Interface {
         "LiFiTransferStarted(tuple)": EventFragment;
         "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
+        "TokensWithdrawn(address,address,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
@@ -102,6 +110,7 @@ export interface ReceiverStargateV2Interface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
@@ -198,6 +207,17 @@ export declare type OwnershipTransferredEvent = TypedEvent<[
     string
 ], OwnershipTransferredEventObject>;
 export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export interface TokensWithdrawnEventObject {
+    assetId: string;
+    receiver: string;
+    amount: BigNumber;
+}
+export declare type TokensWithdrawnEvent = TypedEvent<[
+    string,
+    string,
+    BigNumber
+], TokensWithdrawnEventObject>;
+export declare type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 export interface ReceiverStargateV2 extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -234,6 +254,9 @@ export interface ReceiverStargateV2 extends BaseContract {
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
     };
     cancelOwnershipTransfer(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
@@ -256,6 +279,9 @@ export interface ReceiverStargateV2 extends BaseContract {
     transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     callStatic: {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
@@ -268,6 +294,7 @@ export interface ReceiverStargateV2 extends BaseContract {
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
         tokenMessaging(overrides?: CallOverrides): Promise<string>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
@@ -284,6 +311,8 @@ export interface ReceiverStargateV2 extends BaseContract {
         OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
         "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
         OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        "TokensWithdrawn(address,address,uint256)"(assetId?: null, receiver?: null, amount?: null): TokensWithdrawnEventFilter;
+        TokensWithdrawn(assetId?: null, receiver?: null, amount?: null): TokensWithdrawnEventFilter;
     };
     estimateGas: {
         cancelOwnershipTransfer(overrides?: Overrides & {
@@ -307,6 +336,9 @@ export interface ReceiverStargateV2 extends BaseContract {
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
     };
     populateTransaction: {
         cancelOwnershipTransfer(overrides?: Overrides & {
@@ -328,6 +360,9 @@ export interface ReceiverStargateV2 extends BaseContract {
         recoverGas(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tokenMessaging(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
