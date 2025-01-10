@@ -79,14 +79,14 @@ export declare namespace LibSwap {
 }
 export interface GasZipFacetInterface extends utils.Interface {
     functions: {
-        "NON_EVM_ADDRESS()": FunctionFragment;
+        "NON_EVM_RECEIVER_IDENTIFIER()": FunctionFragment;
         "gasZipRouter()": FunctionFragment;
         "getDestinationChainsValue(uint8[])": FunctionFragment;
         "startBridgeTokensViaGasZip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256))": FunctionFragment;
         "swapAndStartBridgeTokensViaGasZip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "NON_EVM_ADDRESS" | "gasZipRouter" | "getDestinationChainsValue" | "startBridgeTokensViaGasZip" | "swapAndStartBridgeTokensViaGasZip"): FunctionFragment;
-    encodeFunctionData(functionFragment: "NON_EVM_ADDRESS", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "NON_EVM_RECEIVER_IDENTIFIER" | "gasZipRouter" | "getDestinationChainsValue" | "startBridgeTokensViaGasZip" | "swapAndStartBridgeTokensViaGasZip"): FunctionFragment;
+    encodeFunctionData(functionFragment: "NON_EVM_RECEIVER_IDENTIFIER", values?: undefined): string;
     encodeFunctionData(functionFragment: "gasZipRouter", values?: undefined): string;
     encodeFunctionData(functionFragment: "getDestinationChainsValue", values: [PromiseOrValue<BigNumberish>[]]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaGasZip", values: [ILiFi.BridgeDataStruct, IGasZip.GasZipDataStruct]): string;
@@ -95,7 +95,7 @@ export interface GasZipFacetInterface extends utils.Interface {
         LibSwap.SwapDataStruct[],
         IGasZip.GasZipDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "NON_EVM_ADDRESS", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "NON_EVM_RECEIVER_IDENTIFIER", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "gasZipRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getDestinationChainsValue", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaGasZip", data: BytesLike): Result;
@@ -205,7 +205,7 @@ export interface GasZipFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
+        NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<[string]>;
         gasZipRouter(overrides?: CallOverrides): Promise<[string]>;
         getDestinationChainsValue(_chainIds: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<[BigNumber] & {
             destinationChains: BigNumber;
@@ -217,7 +217,7 @@ export interface GasZipFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<string>;
+    NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<string>;
     gasZipRouter(overrides?: CallOverrides): Promise<string>;
     getDestinationChainsValue(_chainIds: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
     startBridgeTokensViaGasZip(_bridgeData: ILiFi.BridgeDataStruct, _gasZipData: IGasZip.GasZipDataStruct, overrides?: PayableOverrides & {
@@ -227,7 +227,7 @@ export interface GasZipFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<string>;
+        NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<string>;
         gasZipRouter(overrides?: CallOverrides): Promise<string>;
         getDestinationChainsValue(_chainIds: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaGasZip(_bridgeData: ILiFi.BridgeDataStruct, _gasZipData: IGasZip.GasZipDataStruct, overrides?: CallOverrides): Promise<void>;
@@ -246,7 +246,7 @@ export interface GasZipFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
+        NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<BigNumber>;
         gasZipRouter(overrides?: CallOverrides): Promise<BigNumber>;
         getDestinationChainsValue(_chainIds: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaGasZip(_bridgeData: ILiFi.BridgeDataStruct, _gasZipData: IGasZip.GasZipDataStruct, overrides?: PayableOverrides & {
@@ -257,7 +257,7 @@ export interface GasZipFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        NON_EVM_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        NON_EVM_RECEIVER_IDENTIFIER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         gasZipRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getDestinationChainsValue(_chainIds: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaGasZip(_bridgeData: ILiFi.BridgeDataStruct, _gasZipData: IGasZip.GasZipDataStruct, overrides?: PayableOverrides & {
