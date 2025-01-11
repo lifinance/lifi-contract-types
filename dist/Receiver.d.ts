@@ -75,21 +75,26 @@ export interface ReceiverInterface extends utils.Interface {
         "executor()": FunctionFragment;
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
+        "pullToken(address,address,uint256)": FunctionFragment;
         "recoverGas()": FunctionFragment;
         "sgReceive(uint16,bytes,uint256,address,uint256,bytes)": FunctionFragment;
         "sgRouter()": FunctionFragment;
         "swapAndCompleteBridgeTokens(bytes32,(address,address,address,address,uint256,bytes,bool)[],address,address)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
-        "withdrawToken(address,address,uint256)": FunctionFragment;
         "xReceive(bytes32,uint256,address,address,uint32,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "amarokRouter" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executor" | "owner" | "pendingOwner" | "recoverGas" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "transferOwnership" | "withdrawToken" | "xReceive"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "amarokRouter" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "executor" | "owner" | "pendingOwner" | "pullToken" | "recoverGas" | "sgReceive" | "sgRouter" | "swapAndCompleteBridgeTokens" | "transferOwnership" | "xReceive"): FunctionFragment;
     encodeFunctionData(functionFragment: "amarokRouter", values?: undefined): string;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "executor", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+    encodeFunctionData(functionFragment: "pullToken", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
     encodeFunctionData(functionFragment: "recoverGas", values?: undefined): string;
     encodeFunctionData(functionFragment: "sgReceive", values: [
         PromiseOrValue<BigNumberish>,
@@ -107,11 +112,6 @@ export interface ReceiverInterface extends utils.Interface {
         PromiseOrValue<string>
     ]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "withdrawToken", values: [
-        PromiseOrValue<string>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
     encodeFunctionData(functionFragment: "xReceive", values: [
         PromiseOrValue<BytesLike>,
         PromiseOrValue<BigNumberish>,
@@ -126,12 +126,12 @@ export interface ReceiverInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "executor", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "pullToken", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "recoverGas", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sgReceive", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "sgRouter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndCompleteBridgeTokens", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "withdrawToken", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "xReceive", data: BytesLike): Result;
     events: {
         "AmarokRouterSet(address)": EventFragment;
@@ -145,7 +145,6 @@ export interface ReceiverInterface extends utils.Interface {
         "OwnershipTransferred(address,address)": EventFragment;
         "RecoverGasSet(uint256)": EventFragment;
         "StargateRouterSet(address)": EventFragment;
-        "TokensWithdrawn(address,address,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "AmarokRouterSet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ExecutorSet"): EventFragment;
@@ -158,7 +157,6 @@ export interface ReceiverInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "RecoverGasSet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "StargateRouterSet"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
 export interface AmarokRouterSetEventObject {
     router: string;
@@ -281,17 +279,6 @@ export declare type StargateRouterSetEvent = TypedEvent<[
     string
 ], StargateRouterSetEventObject>;
 export declare type StargateRouterSetEventFilter = TypedEventFilter<StargateRouterSetEvent>;
-export interface TokensWithdrawnEventObject {
-    assetId: string;
-    receiver: string;
-    amount: BigNumber;
-}
-export declare type TokensWithdrawnEvent = TypedEvent<[
-    string,
-    string,
-    BigNumber
-], TokensWithdrawnEventObject>;
-export declare type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 export interface Receiver extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -317,6 +304,9 @@ export interface Receiver extends BaseContract {
         executor(overrides?: CallOverrides): Promise<[string]>;
         owner(overrides?: CallOverrides): Promise<[string]>;
         pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<[BigNumber]>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
@@ -326,9 +316,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
@@ -345,6 +332,9 @@ export interface Receiver extends BaseContract {
     executor(overrides?: CallOverrides): Promise<string>;
     owner(overrides?: CallOverrides): Promise<string>;
     pendingOwner(overrides?: CallOverrides): Promise<string>;
+    pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
     sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
@@ -354,9 +344,6 @@ export interface Receiver extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
@@ -369,12 +356,12 @@ export interface Receiver extends BaseContract {
         executor(overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
+        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
         sgRouter(overrides?: CallOverrides): Promise<string>;
         swapAndCompleteBridgeTokens(_transactionId: PromiseOrValue<BytesLike>, _swapData: LibSwap.SwapDataStruct[], assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -400,8 +387,6 @@ export interface Receiver extends BaseContract {
         RecoverGasSet(recoverGas?: PromiseOrValue<BigNumberish> | null): RecoverGasSetEventFilter;
         "StargateRouterSet(address)"(router?: PromiseOrValue<string> | null): StargateRouterSetEventFilter;
         StargateRouterSet(router?: PromiseOrValue<string> | null): StargateRouterSetEventFilter;
-        "TokensWithdrawn(address,address,uint256)"(assetId?: null, receiver?: null, amount?: null): TokensWithdrawnEventFilter;
-        TokensWithdrawn(assetId?: null, receiver?: null, amount?: null): TokensWithdrawnEventFilter;
     };
     estimateGas: {
         amarokRouter(overrides?: CallOverrides): Promise<BigNumber>;
@@ -414,6 +399,9 @@ export interface Receiver extends BaseContract {
         executor(overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<BigNumber>;
         pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         recoverGas(overrides?: CallOverrides): Promise<BigNumber>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
@@ -423,9 +411,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
@@ -443,6 +428,9 @@ export interface Receiver extends BaseContract {
         executor(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        pullToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         recoverGas(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         sgReceive(arg0: PromiseOrValue<BigNumberish>, arg1: PromiseOrValue<BytesLike>, arg2: PromiseOrValue<BigNumberish>, _token: PromiseOrValue<string>, _amountLD: PromiseOrValue<BigNumberish>, _payload: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
@@ -452,9 +440,6 @@ export interface Receiver extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         xReceive(_transferId: PromiseOrValue<BytesLike>, _amount: PromiseOrValue<BigNumberish>, _asset: PromiseOrValue<string>, arg3: PromiseOrValue<string>, arg4: PromiseOrValue<BigNumberish>, _callData: PromiseOrValue<BytesLike>, overrides?: Overrides & {

@@ -33,17 +33,15 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "agniSwapCallback(int256,int256,bytes)": FunctionFragment;
     "algebraSwapCallback(int256,int256,bytes)": FunctionFragment;
     "bentoBox()": FunctionFragment;
-    "cancelOwnershipTransfer()": FunctionFragment;
-    "confirmOwnershipTransfer()": FunctionFragment;
     "dragonswapV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "fusionXV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pancakeV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "pause()": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
     "priviledgedUsers(address)": FunctionFragment;
     "processRoute(address,uint256,address,uint256,address,bytes)": FunctionFragment;
     "ramsesV2SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "resume()": FunctionFragment;
     "setPriviledge(address,bool)": FunctionFragment;
     "supV3SwapCallback(int256,int256,bytes)": FunctionFragment;
@@ -51,7 +49,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "transferValueAndprocessRoute(address,uint256,address,uint256,address,uint256,address,bytes)": FunctionFragment;
     "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "vvsV3SwapCallback(int256,int256,bytes)": FunctionFragment;
-    "withdrawToken(address,address,uint256)": FunctionFragment;
     "xeiV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "zebraV3SwapCallback(int256,int256,bytes)": FunctionFragment;
   };
@@ -61,17 +58,15 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "agniSwapCallback"
       | "algebraSwapCallback"
       | "bentoBox"
-      | "cancelOwnershipTransfer"
-      | "confirmOwnershipTransfer"
       | "dragonswapV2SwapCallback"
       | "fusionXV3SwapCallback"
       | "owner"
       | "pancakeV3SwapCallback"
       | "pause"
-      | "pendingOwner"
       | "priviledgedUsers"
       | "processRoute"
       | "ramsesV2SwapCallback"
+      | "renounceOwnership"
       | "resume"
       | "setPriviledge"
       | "supV3SwapCallback"
@@ -79,7 +74,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "transferValueAndprocessRoute"
       | "uniswapV3SwapCallback"
       | "vvsV3SwapCallback"
-      | "withdrawToken"
       | "xeiV3SwapCallback"
       | "zebraV3SwapCallback"
   ): FunctionFragment;
@@ -101,14 +95,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(functionFragment: "bentoBox", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "cancelOwnershipTransfer",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "confirmOwnershipTransfer",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "dragonswapV2SwapCallback",
     values: [
@@ -136,10 +122,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "pendingOwner",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "priviledgedUsers",
     values: [PromiseOrValue<string>]
   ): string;
@@ -161,6 +143,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "resume", values?: undefined): string;
   encodeFunctionData(
@@ -209,14 +195,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "withdrawToken",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
-    ]
-  ): string;
-  encodeFunctionData(
     functionFragment: "xeiV3SwapCallback",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -243,14 +221,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "bentoBox", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "cancelOwnershipTransfer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "confirmOwnershipTransfer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "dragonswapV2SwapCallback",
     data: BytesLike
   ): Result;
@@ -265,10 +235,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "priviledgedUsers",
     data: BytesLike
   ): Result;
@@ -278,6 +244,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "ramsesV2SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "resume", data: BytesLike): Result;
@@ -306,10 +276,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "withdrawToken",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "xeiV3SwapCallback",
     data: BytesLike
   ): Result;
@@ -319,29 +285,13 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Route(address,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Route"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
-
-export interface OwnershipTransferRequestedEventObject {
-  _from: string;
-  _to: string;
-}
-export type OwnershipTransferRequestedEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferRequestedEventObject
->;
-
-export type OwnershipTransferRequestedEventFilter =
-  TypedEventFilter<OwnershipTransferRequestedEvent>;
 
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
@@ -370,18 +320,6 @@ export type RouteEvent = TypedEvent<
 >;
 
 export type RouteEventFilter = TypedEventFilter<RouteEvent>;
-
-export interface TokensWithdrawnEventObject {
-  assetId: string;
-  receiver: string;
-  amount: BigNumber;
-}
-export type TokensWithdrawnEvent = TypedEvent<
-  [string, string, BigNumber],
-  TokensWithdrawnEventObject
->;
-
-export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 
 export interface LiFiDEXAggregator extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -426,14 +364,6 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     bentoBox(overrides?: CallOverrides): Promise<[string]>;
 
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     dragonswapV2SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -461,8 +391,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
     priviledgedUsers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -485,6 +413,10 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     resume(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -503,7 +435,7 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -530,13 +462,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -571,14 +496,6 @@ export interface LiFiDEXAggregator extends BaseContract {
 
   bentoBox(overrides?: CallOverrides): Promise<string>;
 
-  cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   dragonswapV2SwapCallback(
     amount0Delta: PromiseOrValue<BigNumberish>,
     amount1Delta: PromiseOrValue<BigNumberish>,
@@ -606,8 +523,6 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
   priviledgedUsers(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -630,6 +545,10 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   resume(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -648,7 +567,7 @@ export interface LiFiDEXAggregator extends BaseContract {
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    _newOwner: PromiseOrValue<string>,
+    newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -675,13 +594,6 @@ export interface LiFiDEXAggregator extends BaseContract {
     amount0Delta: PromiseOrValue<BigNumberish>,
     amount1Delta: PromiseOrValue<BigNumberish>,
     data: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  withdrawToken(
-    assetId: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -716,10 +628,6 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     bentoBox(overrides?: CallOverrides): Promise<string>;
 
-    cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-
-    confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-
     dragonswapV2SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -745,8 +653,6 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     pause(overrides?: CallOverrides): Promise<void>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
-
     priviledgedUsers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -769,6 +675,8 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
     resume(overrides?: CallOverrides): Promise<void>;
 
     setPriviledge(
@@ -785,7 +693,7 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -815,13 +723,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     xeiV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -838,15 +739,6 @@ export interface LiFiDEXAggregator extends BaseContract {
   };
 
   filters: {
-    "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
-    ): OwnershipTransferRequestedEventFilter;
-    OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
-    ): OwnershipTransferRequestedEventFilter;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: PromiseOrValue<string> | null,
       newOwner?: PromiseOrValue<string> | null
@@ -874,17 +766,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       amountOutMin?: null,
       amountOut?: null
     ): RouteEventFilter;
-
-    "TokensWithdrawn(address,address,uint256)"(
-      assetId?: null,
-      receiver?: null,
-      amount?: null
-    ): TokensWithdrawnEventFilter;
-    TokensWithdrawn(
-      assetId?: null,
-      receiver?: null,
-      amount?: null
-    ): TokensWithdrawnEventFilter;
   };
 
   estimateGas: {
@@ -903,14 +784,6 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<BigNumber>;
 
     bentoBox(overrides?: CallOverrides): Promise<BigNumber>;
-
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
 
     dragonswapV2SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
@@ -939,8 +812,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
     priviledgedUsers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -963,6 +834,10 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     resume(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -981,7 +856,7 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<BigNumber>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1008,13 +883,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1050,14 +918,6 @@ export interface LiFiDEXAggregator extends BaseContract {
 
     bentoBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     dragonswapV2SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -1085,8 +945,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     priviledgedUsers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1109,6 +967,10 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     resume(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -1127,7 +989,7 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      _newOwner: PromiseOrValue<string>,
+      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1154,13 +1016,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
