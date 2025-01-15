@@ -29,30 +29,44 @@ import type {
 export interface ERC20ProxyInterface extends utils.Interface {
   functions: {
     "authorizedCallers(address)": FunctionFragment;
+    "cancelOwnershipTransfer()": FunctionFragment;
+    "confirmOwnershipTransfer()": FunctionFragment;
     "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
+    "pendingOwner()": FunctionFragment;
     "setAuthorizedCaller(address,bool)": FunctionFragment;
     "transferFrom(address,address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "withdrawToken(address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "authorizedCallers"
+      | "cancelOwnershipTransfer"
+      | "confirmOwnershipTransfer"
       | "owner"
-      | "renounceOwnership"
+      | "pendingOwner"
       | "setAuthorizedCaller"
       | "transferFrom"
       | "transferOwnership"
+      | "withdrawToken"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "authorizedCallers",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "cancelOwnershipTransfer",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "confirmOwnershipTransfer",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -67,14 +81,26 @@ export interface ERC20ProxyInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawToken",
+    values: [string, string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "authorizedCallers",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelOwnershipTransfer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "confirmOwnershipTransfer",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
+    functionFragment: "pendingOwner",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -89,14 +115,22 @@ export interface ERC20ProxyInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawToken",
+    data: BytesLike
+  ): Result;
 
   events: {
     "AuthorizationChanged(address,bool)": EventFragment;
+    "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AuthorizationChanged"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
 
 export interface AuthorizationChangedEventObject {
@@ -111,6 +145,18 @@ export type AuthorizationChangedEvent = TypedEvent<
 export type AuthorizationChangedEventFilter =
   TypedEventFilter<AuthorizationChangedEvent>;
 
+export interface OwnershipTransferRequestedEventObject {
+  _from: string;
+  _to: string;
+}
+export type OwnershipTransferRequestedEvent = TypedEvent<
+  [string, string],
+  OwnershipTransferRequestedEventObject
+>;
+
+export type OwnershipTransferRequestedEventFilter =
+  TypedEventFilter<OwnershipTransferRequestedEvent>;
+
 export interface OwnershipTransferredEventObject {
   previousOwner: string;
   newOwner: string;
@@ -122,6 +168,18 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface TokensWithdrawnEventObject {
+  assetId: string;
+  receiver: string;
+  amount: BigNumber;
+}
+export type TokensWithdrawnEvent = TypedEvent<
+  [string, string, BigNumber],
+  TokensWithdrawnEventObject
+>;
+
+export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 
 export interface ERC20Proxy extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -155,11 +213,17 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
-    renounceOwnership(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string }
+    ): Promise<ContractTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
     setAuthorizedCaller(
       caller: string,
@@ -176,18 +240,31 @@ export interface ERC20Proxy extends BaseContract {
     ): Promise<ContractTransaction>;
 
     transferOwnership(
-      newOwner: string,
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
+    ): Promise<ContractTransaction>;
+
+    withdrawToken(
+      assetId: string,
+      receiver: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
   authorizedCallers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  renounceOwnership(
+  cancelOwnershipTransfer(
     overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
+
+  confirmOwnershipTransfer(
+    overrides?: Overrides & { from?: string }
+  ): Promise<ContractTransaction>;
+
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  pendingOwner(overrides?: CallOverrides): Promise<string>;
 
   setAuthorizedCaller(
     caller: string,
@@ -204,7 +281,14 @@ export interface ERC20Proxy extends BaseContract {
   ): Promise<ContractTransaction>;
 
   transferOwnership(
-    newOwner: string,
+    _newOwner: string,
+    overrides?: Overrides & { from?: string }
+  ): Promise<ContractTransaction>;
+
+  withdrawToken(
+    assetId: string,
+    receiver: string,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
@@ -214,9 +298,13 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+
+    confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     setAuthorizedCaller(
       caller: string,
@@ -233,7 +321,14 @@ export interface ERC20Proxy extends BaseContract {
     ): Promise<void>;
 
     transferOwnership(
-      newOwner: string,
+      _newOwner: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    withdrawToken(
+      assetId: string,
+      receiver: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -248,6 +343,15 @@ export interface ERC20Proxy extends BaseContract {
       authorized?: null
     ): AuthorizationChangedEventFilter;
 
+    "OwnershipTransferRequested(address,address)"(
+      _from?: string | null,
+      _to?: string | null
+    ): OwnershipTransferRequestedEventFilter;
+    OwnershipTransferRequested(
+      _from?: string | null,
+      _to?: string | null
+    ): OwnershipTransferRequestedEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -256,6 +360,17 @@ export interface ERC20Proxy extends BaseContract {
       previousOwner?: string | null,
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
+
+    "TokensWithdrawn(address,address,uint256)"(
+      assetId?: null,
+      receiver?: null,
+      amount?: null
+    ): TokensWithdrawnEventFilter;
+    TokensWithdrawn(
+      assetId?: null,
+      receiver?: null,
+      amount?: null
+    ): TokensWithdrawnEventFilter;
   };
 
   estimateGas: {
@@ -264,11 +379,17 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string }
+    ): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     setAuthorizedCaller(
       caller: string,
@@ -285,7 +406,14 @@ export interface ERC20Proxy extends BaseContract {
     ): Promise<BigNumber>;
 
     transferOwnership(
-      newOwner: string,
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
+    ): Promise<BigNumber>;
+
+    withdrawToken(
+      assetId: string,
+      receiver: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
@@ -296,11 +424,17 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
+    cancelOwnershipTransfer(
       overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
+
+    confirmOwnershipTransfer(
+      overrides?: Overrides & { from?: string }
+    ): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setAuthorizedCaller(
       caller: string,
@@ -317,7 +451,14 @@ export interface ERC20Proxy extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(
-      newOwner: string,
+      _newOwner: string,
+      overrides?: Overrides & { from?: string }
+    ): Promise<PopulatedTransaction>;
+
+    withdrawToken(
+      assetId: string,
+      receiver: string,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };

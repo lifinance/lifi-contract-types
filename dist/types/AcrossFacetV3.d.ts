@@ -45,6 +45,7 @@ export declare namespace AcrossFacetV3 {
         refundAddress: string;
         receivingAssetId: string;
         outputAmount: BigNumberish;
+        outputAmountPercent: BigNumberish;
         exclusiveRelayer: string;
         quoteTimestamp: BigNumberish;
         fillDeadline: BigNumberish;
@@ -56,6 +57,7 @@ export declare namespace AcrossFacetV3 {
         string,
         string,
         BigNumber,
+        BigNumber,
         string,
         number,
         number,
@@ -66,6 +68,7 @@ export declare namespace AcrossFacetV3 {
         refundAddress: string;
         receivingAssetId: string;
         outputAmount: BigNumber;
+        outputAmountPercent: BigNumber;
         exclusiveRelayer: string;
         quoteTimestamp: number;
         fillDeadline: number;
@@ -104,8 +107,8 @@ export declare namespace LibSwap {
 export interface AcrossFacetV3Interface extends utils.Interface {
     functions: {
         "spokePool()": FunctionFragment;
-        "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+        "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
         "wrappedNative()": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "spokePool" | "startBridgeTokensViaAcrossV3" | "swapAndStartBridgeTokensViaAcrossV3" | "wrappedNative"): FunctionFragment;

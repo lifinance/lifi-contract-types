@@ -72,6 +72,7 @@ export declare namespace AcrossFacetV3 {
     refundAddress: string;
     receivingAssetId: string;
     outputAmount: BigNumberish;
+    outputAmountPercent: BigNumberish;
     exclusiveRelayer: string;
     quoteTimestamp: BigNumberish;
     fillDeadline: BigNumberish;
@@ -84,6 +85,7 @@ export declare namespace AcrossFacetV3 {
     string,
     string,
     BigNumber,
+    BigNumber,
     string,
     number,
     number,
@@ -94,6 +96,7 @@ export declare namespace AcrossFacetV3 {
     refundAddress: string;
     receivingAssetId: string;
     outputAmount: BigNumber;
+    outputAmountPercent: BigNumber;
     exclusiveRelayer: string;
     quoteTimestamp: number;
     fillDeadline: number;
@@ -106,6 +109,7 @@ export declare namespace AcrossFacetPackedV3 {
   export type PackedParametersStruct = {
     transactionId: BytesLike;
     receiver: string;
+    depositor: string;
     destinationChainId: BigNumberish;
     receivingAssetId: string;
     outputAmount: BigNumberish;
@@ -119,6 +123,7 @@ export declare namespace AcrossFacetPackedV3 {
   export type PackedParametersStructOutput = [
     string,
     string,
+    string,
     BigNumber,
     string,
     BigNumber,
@@ -130,6 +135,7 @@ export declare namespace AcrossFacetPackedV3 {
   ] & {
     transactionId: string;
     receiver: string;
+    depositor: string;
     destinationChainId: BigNumber;
     receivingAssetId: string;
     outputAmount: BigNumber;
@@ -147,16 +153,16 @@ export interface AcrossFacetPackedV3Interface extends utils.Interface {
     "confirmOwnershipTransfer()": FunctionFragment;
     "decode_startBridgeTokensViaAcrossV3ERC20Packed(bytes)": FunctionFragment;
     "decode_startBridgeTokensViaAcrossV3NativePacked(bytes)": FunctionFragment;
-    "encode_startBridgeTokensViaAcrossV3ERC20Packed((bytes32,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": FunctionFragment;
-    "encode_startBridgeTokensViaAcrossV3NativePacked((bytes32,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "encode_startBridgeTokensViaAcrossV3ERC20Packed((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": FunctionFragment;
+    "encode_startBridgeTokensViaAcrossV3NativePacked((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
     "executeCallAndWithdraw(address,bytes,address,address,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "setApprovalForBridge(address[])": FunctionFragment;
     "spokePool()": FunctionFragment;
-    "startBridgeTokensViaAcrossV3ERC20Min((bytes32,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": FunctionFragment;
+    "startBridgeTokensViaAcrossV3ERC20Min((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": FunctionFragment;
     "startBridgeTokensViaAcrossV3ERC20Packed()": FunctionFragment;
-    "startBridgeTokensViaAcrossV3NativeMin((bytes32,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "startBridgeTokensViaAcrossV3NativeMin((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": FunctionFragment;
     "startBridgeTokensViaAcrossV3NativePacked()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "wrappedNative()": FunctionFragment;
