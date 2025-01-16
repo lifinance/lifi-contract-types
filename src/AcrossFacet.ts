@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -119,16 +120,19 @@ export declare namespace LibSwap {
 
 export interface AcrossFacetInterface extends utils.Interface {
   functions: {
+    "bla()": FunctionFragment;
     "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(int64,uint32,bytes,uint256))": FunctionFragment;
     "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(int64,uint32,bytes,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "bla"
       | "startBridgeTokensViaAcross"
       | "swapAndStartBridgeTokensViaAcross"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "bla", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAcross",
     values: [ILiFi.BridgeDataStruct, AcrossFacet.AcrossDataStruct]
@@ -142,6 +146,7 @@ export interface AcrossFacetInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaAcross",
     data: BytesLike
@@ -269,6 +274,10 @@ export interface AcrossFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     startBridgeTokensViaAcross(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacet.AcrossDataStruct,
@@ -282,6 +291,10 @@ export interface AcrossFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  bla(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   startBridgeTokensViaAcross(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -297,6 +310,8 @@ export interface AcrossFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    bla(overrides?: CallOverrides): Promise<void>;
+
     startBridgeTokensViaAcross(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacet.AcrossDataStruct,
@@ -389,6 +404,10 @@ export interface AcrossFacet extends BaseContract {
   };
 
   estimateGas: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     startBridgeTokensViaAcross(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacet.AcrossDataStruct,
@@ -404,6 +423,10 @@ export interface AcrossFacet extends BaseContract {
   };
 
   populateTransaction: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaAcross(
       _bridgeData: ILiFi.BridgeDataStruct,
       _acrossData: AcrossFacet.AcrossDataStruct,
