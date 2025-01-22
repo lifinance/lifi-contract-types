@@ -35,6 +35,7 @@ export { ERC165__factory } from "./ERC165__factory";
 export { ERC20__factory } from "./ERC20__factory";
 export { ERC20Permit__factory } from "./ERC20Permit__factory";
 export { ERC20Proxy__factory } from "./ERC20Proxy__factory";
+export { ERC2771ContextCustom__factory } from "./ERC2771ContextCustom__factory";
 export { ERC721Holder__factory } from "./ERC721Holder__factory";
 export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
