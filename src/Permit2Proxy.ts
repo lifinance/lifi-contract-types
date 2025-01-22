@@ -64,15 +64,18 @@ export interface Permit2ProxyInterface extends utils.Interface {
     "WITNESS_TYPEHASH()": FunctionFragment;
     "WITNESS_TYPE_STRING()": FunctionFragment;
     "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
+    "callDiamondWithEIP2612SignatureViaTrustedForwarder(address,uint256,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
     "callDiamondWithPermit2(bytes,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
     "callDiamondWithPermit2Witness(bytes,address,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "getPermit2MsgHash(bytes,address,uint256,uint256,uint256)": FunctionFragment;
+    "isTrustedForwarder(address)": FunctionFragment;
     "nextNonce(address)": FunctionFragment;
     "nextNonceAfter(address,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
+    "setTrustedForwarders(address[],bool[])": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawToken(address,address,uint256)": FunctionFragment;
   };
@@ -85,15 +88,18 @@ export interface Permit2ProxyInterface extends utils.Interface {
       | "WITNESS_TYPEHASH"
       | "WITNESS_TYPE_STRING"
       | "callDiamondWithEIP2612Signature"
+      | "callDiamondWithEIP2612SignatureViaTrustedForwarder"
       | "callDiamondWithPermit2"
       | "callDiamondWithPermit2Witness"
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "getPermit2MsgHash"
+      | "isTrustedForwarder"
       | "nextNonce"
       | "nextNonceAfter"
       | "owner"
       | "pendingOwner"
+      | "setTrustedForwarders"
       | "transferOwnership"
       | "withdrawToken"
   ): FunctionFragment;
@@ -117,6 +123,18 @@ export interface Permit2ProxyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "callDiamondWithEIP2612Signature",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callDiamondWithEIP2612SignatureViaTrustedForwarder",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -163,6 +181,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "isTrustedForwarder",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "nextNonce",
     values: [PromiseOrValue<string>]
   ): string;
@@ -174,6 +196,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTrustedForwarders",
+    values: [PromiseOrValue<string>[], PromiseOrValue<boolean>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -210,6 +236,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "callDiamondWithEIP2612SignatureViaTrustedForwarder",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "callDiamondWithPermit2",
     data: BytesLike
   ): Result;
@@ -229,6 +259,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
     functionFragment: "getPermit2MsgHash",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "isTrustedForwarder",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "nextNonce", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nextNonceAfter",
@@ -237,6 +271,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTrustedForwarders",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -252,11 +290,13 @@ export interface Permit2ProxyInterface extends utils.Interface {
     "OwnershipTransferRequested(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "TokensWithdrawn(address,address,uint256)": EventFragment;
+    "TrustedForwardersUpdated(address[],bool[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TrustedForwardersUpdated"): EventFragment;
 }
 
 export interface OwnershipTransferRequestedEventObject {
@@ -294,6 +334,18 @@ export type TokensWithdrawnEvent = TypedEvent<
 >;
 
 export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
+
+export interface TrustedForwardersUpdatedEventObject {
+  forwarderAddresses: string[];
+  isTrusted: boolean[];
+}
+export type TrustedForwardersUpdatedEvent = TypedEvent<
+  [string[], boolean[]],
+  TrustedForwardersUpdatedEventObject
+>;
+
+export type TrustedForwardersUpdatedEventFilter =
+  TypedEventFilter<TrustedForwardersUpdatedEvent>;
 
 export interface Permit2Proxy extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -343,6 +395,17 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    callDiamondWithEIP2612SignatureViaTrustedForwarder(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     callDiamondWithPermit2(
       _diamondCalldata: PromiseOrValue<BytesLike>,
       _permit: ISignatureTransfer.PermitTransferFromStruct,
@@ -375,6 +438,11 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string] & { msgHash: string }>;
 
+    isTrustedForwarder(
+      _forwarder: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     nextNonce(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -389,6 +457,12 @@ export interface Permit2Proxy extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+
+    setTrustedForwarders(
+      _forwarderAddresses: PromiseOrValue<string>[],
+      _isTrusted: PromiseOrValue<boolean>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
@@ -414,6 +488,17 @@ export interface Permit2Proxy extends BaseContract {
   WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
   callDiamondWithEIP2612Signature(
+    tokenAddress: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    diamondCalldata: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  callDiamondWithEIP2612SignatureViaTrustedForwarder(
     tokenAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     deadline: PromiseOrValue<BigNumberish>,
@@ -456,6 +541,11 @@ export interface Permit2Proxy extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  isTrustedForwarder(
+    _forwarder: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   nextNonce(
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -470,6 +560,12 @@ export interface Permit2Proxy extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
+
+  setTrustedForwarders(
+    _forwarderAddresses: PromiseOrValue<string>[],
+    _isTrusted: PromiseOrValue<boolean>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   transferOwnership(
     _newOwner: PromiseOrValue<string>,
@@ -495,6 +591,17 @@ export interface Permit2Proxy extends BaseContract {
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
     callDiamondWithEIP2612Signature(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    callDiamondWithEIP2612SignatureViaTrustedForwarder(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -533,6 +640,11 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    isTrustedForwarder(
+      _forwarder: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     nextNonce(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -547,6 +659,12 @@ export interface Permit2Proxy extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
+
+    setTrustedForwarders(
+      _forwarderAddresses: PromiseOrValue<string>[],
+      _isTrusted: PromiseOrValue<boolean>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
@@ -590,6 +708,15 @@ export interface Permit2Proxy extends BaseContract {
       receiver?: null,
       amount?: null
     ): TokensWithdrawnEventFilter;
+
+    "TrustedForwardersUpdated(address[],bool[])"(
+      forwarderAddresses?: null,
+      isTrusted?: null
+    ): TrustedForwardersUpdatedEventFilter;
+    TrustedForwardersUpdated(
+      forwarderAddresses?: null,
+      isTrusted?: null
+    ): TrustedForwardersUpdatedEventFilter;
   };
 
   estimateGas: {
@@ -604,6 +731,17 @@ export interface Permit2Proxy extends BaseContract {
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<BigNumber>;
 
     callDiamondWithEIP2612Signature(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    callDiamondWithEIP2612SignatureViaTrustedForwarder(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -646,6 +784,11 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isTrustedForwarder(
+      _forwarder: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     nextNonce(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -660,6 +803,12 @@ export interface Permit2Proxy extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setTrustedForwarders(
+      _forwarderAddresses: PromiseOrValue<string>[],
+      _isTrusted: PromiseOrValue<boolean>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
@@ -700,6 +849,17 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    callDiamondWithEIP2612SignatureViaTrustedForwarder(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     callDiamondWithPermit2(
       _diamondCalldata: PromiseOrValue<BytesLike>,
       _permit: ISignatureTransfer.PermitTransferFromStruct,
@@ -732,6 +892,11 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    isTrustedForwarder(
+      _forwarder: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     nextNonce(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -746,6 +911,12 @@ export interface Permit2Proxy extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setTrustedForwarders(
+      _forwarderAddresses: PromiseOrValue<string>[],
+      _isTrusted: PromiseOrValue<boolean>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
