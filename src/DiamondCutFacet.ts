@@ -43,11 +43,13 @@ export declare namespace LibDiamond {
 
 export interface DiamondCutFacetInterface extends utils.Interface {
   functions: {
+    "bla()": FunctionFragment;
     "diamondCut((address,uint8,bytes4[])[],address,bytes)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "diamondCut"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "bla" | "diamondCut"): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "bla", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "diamondCut",
     values: [
@@ -57,6 +59,7 @@ export interface DiamondCutFacetInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
 
   events: {
@@ -105,6 +108,10 @@ export interface DiamondCutFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     diamondCut(
       _diamondCut: LibDiamond.FacetCutStruct[],
       _init: PromiseOrValue<string>,
@@ -112,6 +119,10 @@ export interface DiamondCutFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  bla(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   diamondCut(
     _diamondCut: LibDiamond.FacetCutStruct[],
@@ -121,6 +132,8 @@ export interface DiamondCutFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    bla(overrides?: CallOverrides): Promise<void>;
+
     diamondCut(
       _diamondCut: LibDiamond.FacetCutStruct[],
       _init: PromiseOrValue<string>,
@@ -143,6 +156,10 @@ export interface DiamondCutFacet extends BaseContract {
   };
 
   estimateGas: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     diamondCut(
       _diamondCut: LibDiamond.FacetCutStruct[],
       _init: PromiseOrValue<string>,
@@ -152,6 +169,10 @@ export interface DiamondCutFacet extends BaseContract {
   };
 
   populateTransaction: {
+    bla(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     diamondCut(
       _diamondCut: LibDiamond.FacetCutStruct[],
       _init: PromiseOrValue<string>,
