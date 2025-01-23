@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -106,12 +106,14 @@ export declare namespace LibSwap {
 }
 export interface AcrossFacetV3Interface extends utils.Interface {
     functions: {
+        "bla()": FunctionFragment;
         "spokePool()": FunctionFragment;
         "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
         "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
         "wrappedNative()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "spokePool" | "startBridgeTokensViaAcrossV3" | "swapAndStartBridgeTokensViaAcrossV3" | "wrappedNative"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "bla" | "spokePool" | "startBridgeTokensViaAcrossV3" | "swapAndStartBridgeTokensViaAcrossV3" | "wrappedNative"): FunctionFragment;
+    encodeFunctionData(functionFragment: "bla", values?: undefined): string;
     encodeFunctionData(functionFragment: "spokePool", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAcrossV3", values: [ILiFi.BridgeDataStruct, AcrossFacetV3.AcrossV3DataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAcrossV3", values: [
@@ -120,6 +122,7 @@ export interface AcrossFacetV3Interface extends utils.Interface {
         AcrossFacetV3.AcrossV3DataStruct
     ]): string;
     encodeFunctionData(functionFragment: "wrappedNative", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "bla", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "spokePool", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAcrossV3", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaAcrossV3", data: BytesLike): Result;
@@ -229,6 +232,9 @@ export interface AcrossFacetV3 extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        bla(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         spokePool(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
@@ -238,6 +244,9 @@ export interface AcrossFacetV3 extends BaseContract {
         }): Promise<ContractTransaction>;
         wrappedNative(overrides?: CallOverrides): Promise<[string]>;
     };
+    bla(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     spokePool(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
@@ -247,6 +256,7 @@ export interface AcrossFacetV3 extends BaseContract {
     }): Promise<ContractTransaction>;
     wrappedNative(overrides?: CallOverrides): Promise<string>;
     callStatic: {
+        bla(overrides?: CallOverrides): Promise<void>;
         spokePool(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: CallOverrides): Promise<void>;
@@ -265,6 +275,9 @@ export interface AcrossFacetV3 extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
+        bla(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         spokePool(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
@@ -275,6 +288,9 @@ export interface AcrossFacetV3 extends BaseContract {
         wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
+        bla(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         spokePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaAcrossV3(_bridgeData: ILiFi.BridgeDataStruct, _acrossData: AcrossFacetV3.AcrossV3DataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
