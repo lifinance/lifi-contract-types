@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export type { celerImFacetBaseSol };
+import type * as iChainflipSol from "./IChainflip.sol";
+export type { iChainflipSol };
 import type * as iHopBridgeSol from "./IHopBridge.sol";
 export type { iHopBridgeSol };
 import type * as iStargateSol from "./IStargate.sol";
@@ -30,6 +32,7 @@ export type { CBridgeFacetPacked } from "./CBridgeFacetPacked";
 export type { CalldataVerificationFacet } from "./CalldataVerificationFacet";
 export type { CelerCircleBridgeFacet } from "./CelerCircleBridgeFacet";
 export type { CelerIMFacetMutable } from "./CelerIMFacetMutable";
+export type { ChainflipFacet } from "./ChainflipFacet";
 export type { DeBridgeDlnFacet } from "./DeBridgeDlnFacet";
 export type { DexManagerFacet } from "./DexManagerFacet";
 export type { DiamondCutFacet } from "./DiamondCutFacet";
@@ -158,6 +161,7 @@ export { CelerIMFacetBase__factory } from "./factories/CelerIMFacetBase.sol/Cele
 export type { CelerToken } from "./CelerIMFacetBase.sol/CelerToken";
 export { CelerToken__factory } from "./factories/CelerIMFacetBase.sol/CelerToken__factory";
 export { CelerIMFacetMutable__factory } from "./factories/CelerIMFacetMutable__factory";
+export { ChainflipFacet__factory } from "./factories/ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./factories/DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
@@ -188,6 +192,8 @@ export { IAllBridge__factory } from "./factories/IAllBridge__factory";
 export { IAllowanceTransfer__factory } from "./factories/IAllowanceTransfer__factory";
 export { IBridge__factory } from "./factories/IBridge__factory";
 export { ICBridge__factory } from "./factories/ICBridge__factory";
+export type { IChainflipVault } from "./IChainflip.sol/IChainflipVault";
+export { IChainflipVault__factory } from "./factories/IChainflip.sol/IChainflipVault__factory";
 export { ICircleBridgeProxy__factory } from "./factories/ICircleBridgeProxy__factory";
 export { IConnextHandler__factory } from "./factories/IConnextHandler__factory";
 export { IDeBridgeGate__factory } from "./factories/IDeBridgeGate__factory";
