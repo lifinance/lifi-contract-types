@@ -137,6 +137,7 @@ export declare namespace LibSwap {
 
 export interface AcrossFacetV3Interface extends utils.Interface {
   functions: {
+    "dd()": FunctionFragment;
     "spokePool()": FunctionFragment;
     "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
     "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
@@ -145,12 +146,14 @@ export interface AcrossFacetV3Interface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "dd"
       | "spokePool"
       | "startBridgeTokensViaAcrossV3"
       | "swapAndStartBridgeTokensViaAcrossV3"
       | "wrappedNative"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "dd", values?: undefined): string;
   encodeFunctionData(functionFragment: "spokePool", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaAcrossV3",
@@ -169,6 +172,7 @@ export interface AcrossFacetV3Interface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(functionFragment: "dd", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "spokePool", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaAcrossV3",
@@ -301,6 +305,8 @@ export interface AcrossFacetV3 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    dd(overrides?: CallOverrides): Promise<[string]>;
+
     spokePool(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaAcrossV3(
@@ -318,6 +324,8 @@ export interface AcrossFacetV3 extends BaseContract {
 
     wrappedNative(overrides?: CallOverrides): Promise<[string]>;
   };
+
+  dd(overrides?: CallOverrides): Promise<string>;
 
   spokePool(overrides?: CallOverrides): Promise<string>;
 
@@ -337,6 +345,8 @@ export interface AcrossFacetV3 extends BaseContract {
   wrappedNative(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    dd(overrides?: CallOverrides): Promise<string>;
+
     spokePool(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaAcrossV3(
@@ -433,6 +443,8 @@ export interface AcrossFacetV3 extends BaseContract {
   };
 
   estimateGas: {
+    dd(overrides?: CallOverrides): Promise<BigNumber>;
+
     spokePool(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaAcrossV3(
@@ -452,6 +464,8 @@ export interface AcrossFacetV3 extends BaseContract {
   };
 
   populateTransaction: {
+    dd(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     spokePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaAcrossV3(
