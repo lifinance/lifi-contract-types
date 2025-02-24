@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as iChainflipSol from "./IChainflip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
@@ -23,6 +24,7 @@ export { CBridgeFacetPacked__factory } from "./CBridgeFacetPacked__factory";
 export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet__factory";
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
+export { ChainflipFacet__factory } from "./ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
@@ -114,6 +116,7 @@ export { PermitHash__factory } from "./PermitHash__factory";
 export { PolygonBridgeFacet__factory } from "./PolygonBridgeFacet__factory";
 export { Receiver__factory } from "./Receiver__factory";
 export { ReceiverAcrossV3__factory } from "./ReceiverAcrossV3__factory";
+export { ReceiverChainflip__factory } from "./ReceiverChainflip__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
 export { RelayFacet__factory } from "./RelayFacet__factory";
 export { RelayerCelerIM__factory } from "./RelayerCelerIM__factory";
