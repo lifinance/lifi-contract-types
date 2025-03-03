@@ -98,6 +98,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
     "extractMainParameters(bytes)": FunctionFragment;
     "extractNonEVMAddress(bytes)": FunctionFragment;
     "extractSwapData(bytes)": FunctionFragment;
+    "test()": FunctionFragment;
     "validateCalldata(bytes,string,address,address,uint256,uint256,bool,bool)": FunctionFragment;
     "validateDestinationCalldata(bytes,bytes,bytes)": FunctionFragment;
   };
@@ -110,6 +111,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
       | "extractMainParameters"
       | "extractNonEVMAddress"
       | "extractSwapData"
+      | "test"
       | "validateCalldata"
       | "validateDestinationCalldata"
   ): FunctionFragment;
@@ -138,6 +140,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
     functionFragment: "extractSwapData",
     values: [PromiseOrValue<BytesLike>]
   ): string;
+  encodeFunctionData(functionFragment: "test", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "validateCalldata",
     values: [
@@ -184,6 +187,7 @@ export interface CalldataVerificationFacetInterface extends utils.Interface {
     functionFragment: "extractSwapData",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "test", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "validateCalldata",
     data: BytesLike
@@ -284,6 +288,8 @@ export interface CalldataVerificationFacet extends BaseContract {
       }
     >;
 
+    test(overrides?: CallOverrides): Promise<[string]>;
+
     validateCalldata(
       data: PromiseOrValue<BytesLike>,
       bridge: PromiseOrValue<string>,
@@ -356,6 +362,8 @@ export interface CalldataVerificationFacet extends BaseContract {
     data: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<LibSwap.SwapDataStructOutput[]>;
+
+  test(overrides?: CallOverrides): Promise<string>;
 
   validateCalldata(
     data: PromiseOrValue<BytesLike>,
@@ -430,6 +438,8 @@ export interface CalldataVerificationFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<LibSwap.SwapDataStructOutput[]>;
 
+    test(overrides?: CallOverrides): Promise<string>;
+
     validateCalldata(
       data: PromiseOrValue<BytesLike>,
       bridge: PromiseOrValue<string>,
@@ -483,6 +493,8 @@ export interface CalldataVerificationFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    test(overrides?: CallOverrides): Promise<BigNumber>;
+
     validateCalldata(
       data: PromiseOrValue<BytesLike>,
       bridge: PromiseOrValue<string>,
@@ -533,6 +545,8 @@ export interface CalldataVerificationFacet extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    test(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     validateCalldata(
       data: PromiseOrValue<BytesLike>,
