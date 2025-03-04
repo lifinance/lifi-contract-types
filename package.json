@@ -8,8 +8,16 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.js"
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./ISquidRouter": {
+      "require": "./dist/ISquidRouter.js",
+      "import": "./dist/ISquidRouter.js",
+      "types": "./dist/ISquidRouter.d.ts"
+    }
   },
   "files": [
     "dist"
