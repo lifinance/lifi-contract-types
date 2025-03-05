@@ -13,6 +13,11 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./CelerIMFacetMutable": {
+      "types": "./dist/types/CelerIMFacetMutable.d.ts",
+      "import": "./dist/esm/CelerIMFacetMutable.js",
+      "default": "./dist/cjs/CelerIMFacetMutable.js"
+    },
     "./ISquidRouter": {
       "require": "./dist/ISquidRouter.js",
       "import": "./dist/ISquidRouter.js",
