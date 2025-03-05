@@ -99,7 +99,6 @@ export { ITransactionManager__factory } from "./ITransactionManager__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
-export { LiFuelFeeCollector__factory } from "./LiFuelFeeCollector__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
 export { LibDiamond__factory } from "./LibDiamond__factory";
