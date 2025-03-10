@@ -28,9 +28,12 @@ export interface ICBridgeInterface extends utils.Interface {
   functions: {
     "send(address,address,uint256,uint64,uint64,uint32)": FunctionFragment;
     "sendNative(address,uint256,uint64,uint64,uint32)": FunctionFragment;
+    "sendNative2(address,uint256,uint64,uint64,uint32)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "send" | "sendNative"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "send" | "sendNative" | "sendNative2"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "send",
@@ -53,9 +56,23 @@ export interface ICBridgeInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "sendNative2",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
 
   decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sendNative", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "sendNative2",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -105,6 +122,15 @@ export interface ICBridge extends BaseContract {
       _maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    sendNative2(
+      _receiver: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _maxSlippage: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   send(
@@ -126,6 +152,15 @@ export interface ICBridge extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  sendNative2(
+    _receiver: PromiseOrValue<string>,
+    _amount: PromiseOrValue<BigNumberish>,
+    _dstChainId: PromiseOrValue<BigNumberish>,
+    _nonce: PromiseOrValue<BigNumberish>,
+    _maxSlippage: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     send(
       _receiver: PromiseOrValue<string>,
@@ -138,6 +173,15 @@ export interface ICBridge extends BaseContract {
     ): Promise<void>;
 
     sendNative(
+      _receiver: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _maxSlippage: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    sendNative2(
       _receiver: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _dstChainId: PromiseOrValue<BigNumberish>,
@@ -168,6 +212,15 @@ export interface ICBridge extends BaseContract {
       _maxSlippage: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    sendNative2(
+      _receiver: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _maxSlippage: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -182,6 +235,15 @@ export interface ICBridge extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     sendNative(
+      _receiver: PromiseOrValue<string>,
+      _amount: PromiseOrValue<BigNumberish>,
+      _dstChainId: PromiseOrValue<BigNumberish>,
+      _nonce: PromiseOrValue<BigNumberish>,
+      _maxSlippage: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    sendNative2(
       _receiver: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _dstChainId: PromiseOrValue<BigNumberish>,
