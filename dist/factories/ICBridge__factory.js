@@ -77,6 +77,39 @@ var _abi = [
         outputs: [],
         stateMutability: "payable",
     },
+    {
+        type: "function",
+        name: "sendNative2",
+        inputs: [
+            {
+                name: "_receiver",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "_dstChainId",
+                type: "uint64",
+                internalType: "uint64",
+            },
+            {
+                name: "_nonce",
+                type: "uint64",
+                internalType: "uint64",
+            },
+            {
+                name: "_maxSlippage",
+                type: "uint32",
+                internalType: "uint32",
+            },
+        ],
+        outputs: [],
+        stateMutability: "payable",
+    },
 ];
 var ICBridge__factory = /** @class */ (function () {
     function ICBridge__factory() {

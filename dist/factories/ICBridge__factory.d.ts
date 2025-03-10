@@ -58,6 +58,32 @@ export declare class ICBridge__factory {
         }];
         readonly outputs: readonly [];
         readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "sendNative2";
+        readonly inputs: readonly [{
+            readonly name: "_receiver";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_amount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "_dstChainId";
+            readonly type: "uint64";
+            readonly internalType: "uint64";
+        }, {
+            readonly name: "_nonce";
+            readonly type: "uint64";
+            readonly internalType: "uint64";
+        }, {
+            readonly name: "_maxSlippage";
+            readonly type: "uint32";
+            readonly internalType: "uint32";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
     }];
     static createInterface(): ICBridgeInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ICBridge;
