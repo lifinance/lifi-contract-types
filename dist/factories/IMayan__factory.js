@@ -84,6 +84,24 @@ var _abi = [
         outputs: [],
         stateMutability: "payable",
     },
+    {
+        type: "function",
+        name: "forwardEth2",
+        inputs: [
+            {
+                name: "mayanProtocol",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "protocolData",
+                type: "bytes",
+                internalType: "bytes",
+            },
+        ],
+        outputs: [],
+        stateMutability: "payable",
+    },
 ];
 var IMayan__factory = /** @class */ (function () {
     function IMayan__factory() {
