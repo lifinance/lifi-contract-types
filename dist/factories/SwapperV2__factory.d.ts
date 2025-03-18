@@ -13,7 +13,7 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212209596fb114af25a71ba70738cbe0ae86081c258a321e7b25d40550e1082ec1aca64736f6c63430008110033";
+    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212204c28d10a4ba0633e67f0c6a3d54191f6c6f9123fc3f19f920770559747f655d664736f6c63430008110033";
     static readonly abi: readonly [{
         readonly type: "event";
         readonly name: "LiFiGenericSwapCompleted";
