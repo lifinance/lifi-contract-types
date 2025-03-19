@@ -124,21 +124,21 @@ export declare namespace LibSwap {
 }
 export interface StargateFacetV2Interface extends utils.Interface {
     functions: {
+        "TOKEN_MESSAGING()": FunctionFragment;
         "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": FunctionFragment;
         "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": FunctionFragment;
-        "tokenMessaging()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate" | "tokenMessaging"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "TOKEN_MESSAGING" | "startBridgeTokensViaStargate" | "swapAndStartBridgeTokensViaStargate"): FunctionFragment;
+    encodeFunctionData(functionFragment: "TOKEN_MESSAGING", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaStargate", values: [ILiFi.BridgeDataStruct, StargateFacetV2.StargateDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaStargate", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         StargateFacetV2.StargateDataStruct
     ]): string;
-    encodeFunctionData(functionFragment: "tokenMessaging", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "TOKEN_MESSAGING", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaStargate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaStargate", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "tokenMessaging", data: BytesLike): Result;
     events: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -244,25 +244,25 @@ export interface StargateFacetV2 extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        TOKEN_MESSAGING(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        tokenMessaging(overrides?: CallOverrides): Promise<[string]>;
     };
+    TOKEN_MESSAGING(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    tokenMessaging(overrides?: CallOverrides): Promise<string>;
     callStatic: {
+        TOKEN_MESSAGING(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: CallOverrides): Promise<void>;
-        tokenMessaging(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
@@ -277,21 +277,21 @@ export interface StargateFacetV2 extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
+        TOKEN_MESSAGING(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        tokenMessaging(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
+        TOKEN_MESSAGING(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaStargate(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _stargateData: StargateFacetV2.StargateDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        tokenMessaging(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }
