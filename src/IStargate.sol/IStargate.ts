@@ -23,16 +23,6 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export type TicketStruct = {
-  ticketId: PromiseOrValue<BigNumberish>;
-  passengerBytes: PromiseOrValue<BytesLike>;
-};
-
-export type TicketStructOutput = [BigNumber, string] & {
-  ticketId: BigNumber;
-  passengerBytes: string;
-};
-
 export declare namespace IStargate {
   export type SendParamStruct = {
     dstEid: PromiseOrValue<BigNumberish>;
@@ -116,6 +106,16 @@ export declare namespace IStargate {
     guid: string;
     nonce: BigNumber;
     fee: IStargate.MessagingFeeStructOutput;
+  };
+
+  export type TicketStruct = {
+    ticketId: PromiseOrValue<BigNumberish>;
+    passengerBytes: PromiseOrValue<BytesLike>;
+  };
+
+  export type TicketStructOutput = [BigNumber, string] & {
+    ticketId: BigNumber;
+    passengerBytes: string;
   };
 }
 
@@ -257,11 +257,11 @@ export interface IStargate extends BaseContract {
       [
         IStargate.MessagingReceiptStructOutput,
         IStargate.OFTReceiptStructOutput,
-        TicketStructOutput
+        IStargate.TicketStructOutput
       ] & {
         msgReceipt: IStargate.MessagingReceiptStructOutput;
         oftReceipt: IStargate.OFTReceiptStructOutput;
-        ticket: TicketStructOutput;
+        ticket: IStargate.TicketStructOutput;
       }
     >;
   };
