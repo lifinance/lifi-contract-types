@@ -100,7 +100,6 @@ export type { IThorSwap } from "./IThorSwap";
 export type { IXDaiBridge } from "./IXDaiBridge";
 export type { IXDaiBridgeL2 } from "./IXDaiBridgeL2";
 export type { LiFiDiamond } from "./LiFiDiamond";
-export type { LiFuelFeeCollector } from "./LiFuelFeeCollector";
 export type { LibAccess } from "./LibAccess";
 export type { LibBytes } from "./LibBytes";
 export type { LibDiamond } from "./LibDiamond";
@@ -256,7 +255,6 @@ export type { EmergencyPause } from "./LiFiTimelockController.sol/EmergencyPause
 export { EmergencyPause__factory } from "./factories/LiFiTimelockController.sol/EmergencyPause__factory";
 export type { LiFiTimelockController } from "./LiFiTimelockController.sol/LiFiTimelockController";
 export { LiFiTimelockController__factory } from "./factories/LiFiTimelockController.sol/LiFiTimelockController__factory";
-export { LiFuelFeeCollector__factory } from "./factories/LiFuelFeeCollector__factory";
 export { MayanFacet__factory } from "./factories/MayanFacet__factory";
 export { OmniBridgeFacet__factory } from "./factories/OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./factories/OptimismBridgeFacet__factory";
