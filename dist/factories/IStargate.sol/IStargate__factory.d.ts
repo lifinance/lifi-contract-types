@@ -232,7 +232,7 @@ export declare class IStargate__factory {
         }, {
             readonly name: "ticket";
             readonly type: "tuple";
-            readonly internalType: "struct IStargate.Ticket";
+            readonly internalType: "struct Ticket";
             readonly components: readonly [{
                 readonly name: "ticketId";
                 readonly type: "uint72";
