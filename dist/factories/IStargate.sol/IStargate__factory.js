@@ -305,7 +305,7 @@ var _abi = [
             {
                 name: "ticket",
                 type: "tuple",
-                internalType: "struct IStargate.Ticket",
+                internalType: "struct Ticket",
                 components: [
                     {
                         name: "ticketId",
