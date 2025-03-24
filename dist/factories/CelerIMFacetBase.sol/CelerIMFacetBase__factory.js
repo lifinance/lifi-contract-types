@@ -8,7 +8,7 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
-        name: "relayer",
+        name: "RELAYER",
         inputs: [],
         outputs: [
             {

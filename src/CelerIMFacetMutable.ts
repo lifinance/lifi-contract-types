@@ -125,19 +125,19 @@ export declare namespace LibSwap {
 
 export interface CelerIMFacetMutableInterface extends utils.Interface {
   functions: {
-    "relayer()": FunctionFragment;
+    "RELAYER()": FunctionFragment;
     "startBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
     "swapAndStartBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "relayer"
+      | "RELAYER"
       | "startBridgeTokensViaCelerIM"
       | "swapAndStartBridgeTokensViaCelerIM"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "relayer", values?: undefined): string;
+  encodeFunctionData(functionFragment: "RELAYER", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaCelerIM",
     values: [ILiFi.BridgeDataStruct, CelerIM.CelerIMDataStruct]
@@ -151,7 +151,7 @@ export interface CelerIMFacetMutableInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "relayer", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "RELAYER", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaCelerIM",
     data: BytesLike
@@ -279,7 +279,7 @@ export interface CelerIMFacetMutable extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    relayer(overrides?: CallOverrides): Promise<[string]>;
+    RELAYER(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -295,7 +295,7 @@ export interface CelerIMFacetMutable extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  relayer(overrides?: CallOverrides): Promise<string>;
+  RELAYER(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaCelerIM(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -311,7 +311,7 @@ export interface CelerIMFacetMutable extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    relayer(overrides?: CallOverrides): Promise<string>;
+    RELAYER(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -405,7 +405,7 @@ export interface CelerIMFacetMutable extends BaseContract {
   };
 
   estimateGas: {
-    relayer(overrides?: CallOverrides): Promise<BigNumber>;
+    RELAYER(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -422,7 +422,7 @@ export interface CelerIMFacetMutable extends BaseContract {
   };
 
   populateTransaction: {
-    relayer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    RELAYER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
