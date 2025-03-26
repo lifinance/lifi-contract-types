@@ -4,7 +4,7 @@ import type { CelerIMFacetBase, CelerIMFacetBaseInterface } from "../../CelerIMF
 export declare class CelerIMFacetBase__factory {
     static readonly abi: readonly [{
         readonly type: "function";
-        readonly name: "relayer";
+        readonly name: "RELAYER";
         readonly inputs: readonly [];
         readonly outputs: readonly [{
             readonly name: "";
