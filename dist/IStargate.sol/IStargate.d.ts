@@ -2,6 +2,14 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+export declare type TicketStruct = {
+    ticketId: PromiseOrValue<BigNumberish>;
+    passengerBytes: PromiseOrValue<BytesLike>;
+};
+export declare type TicketStructOutput = [BigNumber, string] & {
+    ticketId: BigNumber;
+    passengerBytes: string;
+};
 export declare namespace IStargate {
     type SendParamStruct = {
         dstEid: PromiseOrValue<BigNumberish>;
@@ -75,14 +83,6 @@ export declare namespace IStargate {
         nonce: BigNumber;
         fee: IStargate.MessagingFeeStructOutput;
     };
-    type TicketStruct = {
-        ticketId: PromiseOrValue<BigNumberish>;
-        passengerBytes: PromiseOrValue<BytesLike>;
-    };
-    type TicketStructOutput = [BigNumber, string] & {
-        ticketId: BigNumber;
-        passengerBytes: string;
-    };
 }
 export interface IStargateInterface extends utils.Interface {
     functions: {
@@ -153,11 +153,11 @@ export interface IStargate extends BaseContract {
         sendToken(_sendParam: IStargate.SendParamStruct, _fee: IStargate.MessagingFeeStruct, _refundAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[
             IStargate.MessagingReceiptStructOutput,
             IStargate.OFTReceiptStructOutput,
-            IStargate.TicketStructOutput
+            TicketStructOutput
         ] & {
             msgReceipt: IStargate.MessagingReceiptStructOutput;
             oftReceipt: IStargate.OFTReceiptStructOutput;
-            ticket: IStargate.TicketStructOutput;
+            ticket: TicketStructOutput;
         }>;
     };
     filters: {};
