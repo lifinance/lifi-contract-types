@@ -16,7 +16,6 @@ export { AcrossFacetPacked__factory } from "./AcrossFacetPacked__factory";
 export { AcrossFacetPackedV3__factory } from "./AcrossFacetPackedV3__factory";
 export { AcrossFacetV3__factory } from "./AcrossFacetV3__factory";
 export { AllBridgeFacet__factory } from "./AllBridgeFacet__factory";
-export { AmarokFacet__factory } from "./AmarokFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./ArbitrumBridgeFacet__factory";
 export { CBridgeFacet__factory } from "./CBridgeFacet__factory";
 export { CBridgeFacetPacked__factory } from "./CBridgeFacetPacked__factory";
