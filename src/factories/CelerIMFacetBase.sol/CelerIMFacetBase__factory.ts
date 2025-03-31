@@ -12,7 +12,7 @@ import type {
 const _abi = [
   {
     type: "function",
-    name: "relayer",
+    name: "RELAYER",
     inputs: [],
     outputs: [
       {

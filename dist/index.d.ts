@@ -21,6 +21,7 @@ export type { AcrossFacetPacked } from "./AcrossFacetPacked";
 export type { AcrossFacetPackedV3 } from "./AcrossFacetPackedV3";
 export type { AcrossFacetV3 } from "./AcrossFacetV3";
 export type { AllBridgeFacet } from "./AllBridgeFacet";
+export type { AmarokFacet } from "./AmarokFacet";
 export type { ArbitrumBridgeFacet } from "./ArbitrumBridgeFacet";
 export type { CBridgeFacet } from "./CBridgeFacet";
 export type { CBridgeFacetPacked } from "./CBridgeFacetPacked";
@@ -133,6 +134,7 @@ export { AcrossFacetPacked__factory } from "./factories/AcrossFacetPacked__facto
 export { AcrossFacetPackedV3__factory } from "./factories/AcrossFacetPackedV3__factory";
 export { AcrossFacetV3__factory } from "./factories/AcrossFacetV3__factory";
 export { AllBridgeFacet__factory } from "./factories/AllBridgeFacet__factory";
+export { AmarokFacet__factory } from "./factories/AmarokFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./factories/ArbitrumBridgeFacet__factory";
 export { CalldataVerificationFacet__factory } from "./factories/CalldataVerificationFacet__factory";
 export { CBridgeFacet__factory } from "./factories/CBridgeFacet__factory";
