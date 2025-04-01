@@ -25,7 +25,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "./common";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
@@ -66,30 +66,33 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace CelerIM {
-  export type CelerIMDataStruct = {
-    maxSlippage: PromiseOrValue<BigNumberish>;
-    nonce: PromiseOrValue<BigNumberish>;
-    callTo: PromiseOrValue<BytesLike>;
+export declare namespace AmarokFacet {
+  export type AmarokDataStruct = {
     callData: PromiseOrValue<BytesLike>;
-    messageBusFee: PromiseOrValue<BigNumberish>;
-    bridgeType: PromiseOrValue<BigNumberish>;
+    callTo: PromiseOrValue<string>;
+    relayerFee: PromiseOrValue<BigNumberish>;
+    slippageTol: PromiseOrValue<BigNumberish>;
+    delegate: PromiseOrValue<string>;
+    destChainDomainId: PromiseOrValue<BigNumberish>;
+    payFeeWithSendingAsset: PromiseOrValue<boolean>;
   };
 
-  export type CelerIMDataStructOutput = [
+  export type AmarokDataStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string,
     number,
-    BigNumber,
-    string,
-    string,
-    BigNumber,
-    number
+    boolean
   ] & {
-    maxSlippage: number;
-    nonce: BigNumber;
-    callTo: string;
     callData: string;
-    messageBusFee: BigNumber;
-    bridgeType: number;
+    callTo: string;
+    relayerFee: BigNumber;
+    slippageTol: BigNumber;
+    delegate: string;
+    destChainDomainId: number;
+    payFeeWithSendingAsset: boolean;
   };
 }
 
@@ -123,41 +126,37 @@ export declare namespace LibSwap {
   };
 }
 
-export interface CelerIMFacetBaseInterface extends utils.Interface {
+export interface AmarokFacetInterface extends utils.Interface {
   functions: {
-    "relayer()": FunctionFragment;
-    "startBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
-    "swapAndStartBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
+    "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "relayer"
-      | "startBridgeTokensViaCelerIM"
-      | "swapAndStartBridgeTokensViaCelerIM"
+      | "startBridgeTokensViaAmarok"
+      | "swapAndStartBridgeTokensViaAmarok"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "relayer", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaCelerIM",
-    values: [ILiFi.BridgeDataStruct, CelerIM.CelerIMDataStruct]
+    functionFragment: "startBridgeTokensViaAmarok",
+    values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaCelerIM",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      CelerIM.CelerIMDataStruct
+      AmarokFacet.AmarokDataStruct
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "relayer", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaCelerIM",
+    functionFragment: "startBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaCelerIM",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
 
@@ -252,12 +251,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface CelerIMFacetBase extends BaseContract {
+export interface AmarokFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CelerIMFacetBaseInterface;
+  interface: AmarokFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -279,50 +278,44 @@ export interface CelerIMFacetBase extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    relayer(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaCelerIM(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaCelerIM(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  relayer(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaCelerIM(
+  startBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _celerIMData: CelerIM.CelerIMDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaCelerIM(
+  swapAndStartBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _celerIMData: CelerIM.CelerIMDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    relayer(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaCelerIM(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaCelerIM(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -405,35 +398,31 @@ export interface CelerIMFacetBase extends BaseContract {
   };
 
   estimateGas: {
-    relayer(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaCelerIM(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaCelerIM(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    relayer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaCelerIM(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaCelerIM(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _celerIMData: CelerIM.CelerIMDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

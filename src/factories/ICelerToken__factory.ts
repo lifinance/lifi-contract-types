@@ -4,10 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type {
-  CelerToken,
-  CelerTokenInterface,
-} from "../../CelerIMFacetBase.sol/CelerToken";
+import type { ICelerToken, ICelerTokenInterface } from "../ICelerToken";
 
 const _abi = [
   {
@@ -25,15 +22,15 @@ const _abi = [
   },
 ] as const;
 
-export class CelerToken__factory {
+export class ICelerToken__factory {
   static readonly abi = _abi;
-  static createInterface(): CelerTokenInterface {
-    return new utils.Interface(_abi) as CelerTokenInterface;
+  static createInterface(): ICelerTokenInterface {
+    return new utils.Interface(_abi) as ICelerTokenInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): CelerToken {
-    return new Contract(address, _abi, signerOrProvider) as CelerToken;
+  ): ICelerToken {
+    return new Contract(address, _abi, signerOrProvider) as ICelerToken;
   }
 }

@@ -102,7 +102,7 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface CelerIMFacetMutableInterface extends utils.Interface {
+export interface CelerIMFacetBaseInterface extends utils.Interface {
     functions: {
         "RELAYER()": FunctionFragment;
         "initCelerIM((uint256,address)[])": FunctionFragment;
@@ -233,11 +233,11 @@ export declare type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface CelerIMFacetMutable extends BaseContract {
+export interface CelerIMFacetBase extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: CelerIMFacetMutableInterface;
+    interface: CelerIMFacetBaseInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;

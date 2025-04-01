@@ -7,12 +7,12 @@ import type { Provider } from "@ethersproject/providers";
 import type {
   CelerIMFacetBase,
   CelerIMFacetBaseInterface,
-} from "../../CelerIMFacetBase.sol/CelerIMFacetBase";
+} from "../CelerIMFacetBase";
 
 const _abi = [
   {
     type: "function",
-    name: "relayer",
+    name: "RELAYER",
     inputs: [],
     outputs: [
       {
@@ -22,6 +22,31 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "initCelerIM",
+    inputs: [
+      {
+        name: "configs",
+        type: "tuple[]",
+        internalType: "struct CelerIMFacetBase.ZkLikeChainIdRelayerConfig[]",
+        components: [
+          {
+            name: "chainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "relayer",
+            type: "address",
+            internalType: "address",
+          },
+        ],
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
   },
   {
     type: "function",
@@ -270,6 +295,81 @@ const _abi = [
     stateMutability: "payable",
   },
   {
+    type: "function",
+    name: "updateRelayerConfigForZkLikeChains",
+    inputs: [
+      {
+        name: "configs",
+        type: "tuple[]",
+        internalType: "struct CelerIMFacetBase.ZkLikeChainIdRelayerConfig[]",
+        components: [
+          {
+            name: "chainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "relayer",
+            type: "address",
+            internalType: "address",
+          },
+        ],
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "CelerIMInitialized",
+    inputs: [
+      {
+        name: "zkLikeChainIdRelayerConfigs",
+        type: "tuple[]",
+        indexed: false,
+        internalType: "struct CelerIMFacetBase.ZkLikeChainIdRelayerConfig[]",
+        components: [
+          {
+            name: "chainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "relayer",
+            type: "address",
+            internalType: "address",
+          },
+        ],
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "CelerIMRelayerConfig",
+    inputs: [
+      {
+        name: "zkLikeChainIdRelayerConfigs",
+        type: "tuple[]",
+        indexed: false,
+        internalType: "struct CelerIMFacetBase.ZkLikeChainIdRelayerConfig[]",
+        components: [
+          {
+            name: "chainId",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "relayer",
+            type: "address",
+            internalType: "address",
+          },
+        ],
+      },
+    ],
+    anonymous: false,
+  },
+  {
     type: "event",
     name: "LiFiGenericSwapCompleted",
     inputs: [
@@ -514,6 +614,11 @@ const _abi = [
   },
   {
     type: "error",
+    name: "AlreadyInitialized",
+    inputs: [],
+  },
+  {
+    type: "error",
     name: "CannotBridgeToSameNetwork",
     inputs: [],
   },
@@ -566,6 +671,11 @@ const _abi = [
   },
   {
     type: "error",
+    name: "InvalidConfig",
+    inputs: [],
+  },
+  {
+    type: "error",
     name: "InvalidContract",
     inputs: [],
   },
@@ -596,12 +706,22 @@ const _abi = [
   },
   {
     type: "error",
+    name: "NotInitialized",
+    inputs: [],
+  },
+  {
+    type: "error",
     name: "NullAddrIsNotAValidSpender",
     inputs: [],
   },
   {
     type: "error",
     name: "NullAddrIsNotAnERC20Token",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "OnlyContractOwner",
     inputs: [],
   },
   {
