@@ -136,7 +136,7 @@ export declare namespace LibSwap {
   };
 }
 
-export interface CelerIMFacetMutableInterface extends utils.Interface {
+export interface CelerIMFacetBaseInterface extends utils.Interface {
   functions: {
     "RELAYER()": FunctionFragment;
     "initCelerIM((uint256,address)[])": FunctionFragment;
@@ -311,12 +311,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface CelerIMFacetMutable extends BaseContract {
+export interface CelerIMFacetBase extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CelerIMFacetMutableInterface;
+  interface: CelerIMFacetBaseInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,

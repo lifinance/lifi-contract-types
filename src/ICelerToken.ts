@@ -20,9 +20,9 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "./common";
 
-export interface CelerTokenInterface extends utils.Interface {
+export interface ICelerTokenInterface extends utils.Interface {
   functions: {
     "canonical()": FunctionFragment;
   };
@@ -36,12 +36,12 @@ export interface CelerTokenInterface extends utils.Interface {
   events: {};
 }
 
-export interface CelerToken extends BaseContract {
+export interface ICelerToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CelerTokenInterface;
+  interface: ICelerTokenInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
