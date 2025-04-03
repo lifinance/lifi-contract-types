@@ -30,9 +30,9 @@ import type {
 
 export interface LiFiDEXAggregatorInterface extends utils.Interface {
   functions: {
+    "BENTO_BOX()": FunctionFragment;
     "agniSwapCallback(int256,int256,bytes)": FunctionFragment;
     "algebraSwapCallback(int256,int256,bytes)": FunctionFragment;
-    "bentoBox()": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "dragonswapV2SwapCallback(int256,int256,bytes)": FunctionFragment;
@@ -58,9 +58,9 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "BENTO_BOX"
       | "agniSwapCallback"
       | "algebraSwapCallback"
-      | "bentoBox"
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "dragonswapV2SwapCallback"
@@ -84,6 +84,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "zebraV3SwapCallback"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "BENTO_BOX", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "agniSwapCallback",
     values: [
@@ -100,7 +101,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(functionFragment: "bentoBox", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "cancelOwnershipTransfer",
     values?: undefined
@@ -233,6 +233,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "BENTO_BOX", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "agniSwapCallback",
     data: BytesLike
@@ -241,7 +242,6 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     functionFragment: "algebraSwapCallback",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "bentoBox", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "cancelOwnershipTransfer",
     data: BytesLike
@@ -410,6 +410,8 @@ export interface LiFiDEXAggregator extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    BENTO_BOX(overrides?: CallOverrides): Promise<[string]>;
+
     agniSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -423,8 +425,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    bentoBox(overrides?: CallOverrides): Promise<[string]>;
 
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -555,6 +555,8 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  BENTO_BOX(overrides?: CallOverrides): Promise<string>;
+
   agniSwapCallback(
     amount0Delta: PromiseOrValue<BigNumberish>,
     amount1Delta: PromiseOrValue<BigNumberish>,
@@ -568,8 +570,6 @@ export interface LiFiDEXAggregator extends BaseContract {
     data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
-
-  bentoBox(overrides?: CallOverrides): Promise<string>;
 
   cancelOwnershipTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -700,6 +700,8 @@ export interface LiFiDEXAggregator extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    BENTO_BOX(overrides?: CallOverrides): Promise<string>;
+
     agniSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -713,8 +715,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    bentoBox(overrides?: CallOverrides): Promise<string>;
 
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
@@ -888,6 +888,8 @@ export interface LiFiDEXAggregator extends BaseContract {
   };
 
   estimateGas: {
+    BENTO_BOX(overrides?: CallOverrides): Promise<BigNumber>;
+
     agniSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -901,8 +903,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    bentoBox(overrides?: CallOverrides): Promise<BigNumber>;
 
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1034,6 +1034,8 @@ export interface LiFiDEXAggregator extends BaseContract {
   };
 
   populateTransaction: {
+    BENTO_BOX(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     agniSwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -1047,8 +1049,6 @@ export interface LiFiDEXAggregator extends BaseContract {
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    bentoBox(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
