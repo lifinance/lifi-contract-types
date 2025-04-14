@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -25,6 +26,20 @@ import type {
   OnEvent,
   PromiseOrValue,
 } from "./common";
+
+export declare namespace LibDiamond {
+  export type FacetCutStruct = {
+    facetAddress: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    functionSelectors: PromiseOrValue<BytesLike>[];
+  };
+
+  export type FacetCutStructOutput = [string, number, string[]] & {
+    facetAddress: string;
+    action: number;
+    functionSelectors: string[];
+  };
+}
 
 export interface EmergencyPauseFacetInterface extends utils.Interface {
   functions: {
@@ -77,15 +92,29 @@ export interface EmergencyPauseFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "DiamondCut(tuple[],address,bytes)": EventFragment;
     "EmergencyFacetRemoved(address,address)": EventFragment;
     "EmergencyPaused(address)": EventFragment;
     "EmergencyUnpaused(address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "DiamondCut"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "EmergencyFacetRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "EmergencyPaused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "EmergencyUnpaused"): EventFragment;
 }
+
+export interface DiamondCutEventObject {
+  _diamondCut: LibDiamond.FacetCutStructOutput[];
+  _init: string;
+  _calldata: string;
+}
+export type DiamondCutEvent = TypedEvent<
+  [LibDiamond.FacetCutStructOutput[], string, string],
+  DiamondCutEventObject
+>;
+
+export type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
 
 export interface EmergencyFacetRemovedEventObject {
   facetAddress: string;
@@ -197,6 +226,17 @@ export interface EmergencyPauseFacet extends BaseContract {
   };
 
   filters: {
+    "DiamondCut(tuple[],address,bytes)"(
+      _diamondCut?: null,
+      _init?: null,
+      _calldata?: null
+    ): DiamondCutEventFilter;
+    DiamondCut(
+      _diamondCut?: null,
+      _init?: null,
+      _calldata?: null
+    ): DiamondCutEventFilter;
+
     "EmergencyFacetRemoved(address,address)"(
       facetAddress?: PromiseOrValue<string> | null,
       msgSender?: PromiseOrValue<string> | null

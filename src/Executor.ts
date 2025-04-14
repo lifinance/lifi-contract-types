@@ -261,6 +261,7 @@ export interface ExecutorInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "ERC20ProxySet(address)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -272,6 +273,7 @@ export interface ExecutorInterface extends utils.Interface {
     "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20ProxySet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
@@ -282,6 +284,22 @@ export interface ExecutorInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
+
+export interface AssetSwappedEventObject {
+  transactionId: string;
+  dex: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+  timestamp: BigNumber;
+}
+export type AssetSwappedEvent = TypedEvent<
+  [string, string, string, string, BigNumber, BigNumber, BigNumber],
+  AssetSwappedEventObject
+>;
+
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 
 export interface ERC20ProxySetEventObject {
   proxy: string;
@@ -651,6 +669,25 @@ export interface Executor extends BaseContract {
   };
 
   filters: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+    AssetSwapped(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+
     "ERC20ProxySet(address)"(
       proxy?: PromiseOrValue<string> | null
     ): ERC20ProxySetEventFilter;
