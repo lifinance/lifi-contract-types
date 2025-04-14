@@ -267,6 +267,55 @@ var _abi = [
     },
     {
         type: "event",
+        name: "AssetSwapped",
+        inputs: [
+            {
+                name: "transactionId",
+                type: "bytes32",
+                indexed: false,
+                internalType: "bytes32",
+            },
+            {
+                name: "dex",
+                type: "address",
+                indexed: false,
+                internalType: "address",
+            },
+            {
+                name: "fromAssetId",
+                type: "address",
+                indexed: false,
+                internalType: "address",
+            },
+            {
+                name: "toAssetId",
+                type: "address",
+                indexed: false,
+                internalType: "address",
+            },
+            {
+                name: "fromAmount",
+                type: "uint256",
+                indexed: false,
+                internalType: "uint256",
+            },
+            {
+                name: "toAmount",
+                type: "uint256",
+                indexed: false,
+                internalType: "uint256",
+            },
+            {
+                name: "timestamp",
+                type: "uint256",
+                indexed: false,
+                internalType: "uint256",
+            },
+        ],
+        anonymous: false,
+    },
+    {
+        type: "event",
         name: "LiFiGenericSwapCompleted",
         inputs: [
             {
