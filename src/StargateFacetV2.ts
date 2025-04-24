@@ -202,6 +202,7 @@ export interface StargateFacetV2Interface extends utils.Interface {
   ): Result;
 
   events: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -209,12 +210,29 @@ export interface StargateFacetV2Interface extends utils.Interface {
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+
+export interface AssetSwappedEventObject {
+  transactionId: string;
+  dex: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+  timestamp: BigNumber;
+}
+export type AssetSwappedEvent = TypedEvent<
+  [string, string, string, string, BigNumber, BigNumber, BigNumber],
+  AssetSwappedEventObject
+>;
+
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -368,6 +386,25 @@ export interface StargateFacetV2 extends BaseContract {
   };
 
   filters: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+    AssetSwapped(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       integrator?: null,

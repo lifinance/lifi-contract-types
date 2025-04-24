@@ -143,6 +143,7 @@ export interface ExecutorInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdrawToken", data: BytesLike): Result;
     events: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "ERC20ProxySet(address)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -153,6 +154,7 @@ export interface ExecutorInterface extends utils.Interface {
         "OwnershipTransferred(address,address)": EventFragment;
         "TokensWithdrawn(address,address,uint256)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ERC20ProxySet"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
@@ -163,6 +165,25 @@ export interface ExecutorInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
+export interface AssetSwappedEventObject {
+    transactionId: string;
+    dex: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+    timestamp: BigNumber;
+}
+export declare type AssetSwappedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+], AssetSwappedEventObject>;
+export declare type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 export interface ERC20ProxySetEventObject {
     proxy: string;
 }
@@ -368,6 +389,8 @@ export interface Executor extends BaseContract {
         withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
+        AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         "ERC20ProxySet(address)"(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
         ERC20ProxySet(proxy?: PromiseOrValue<string> | null): ERC20ProxySetEventFilter;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
