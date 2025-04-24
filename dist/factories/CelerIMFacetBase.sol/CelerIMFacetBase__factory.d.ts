@@ -451,10 +451,6 @@ export declare class CelerIMFacetBase__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
-        readonly name: "NativeAssetTransferFailed";
-        readonly inputs: readonly [];
-    }, {
-        readonly type: "error";
         readonly name: "NoSwapDataProvided";
         readonly inputs: readonly [];
     }, {
@@ -463,15 +459,7 @@ export declare class CelerIMFacetBase__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
-        readonly name: "NoTransferToNullAddress";
-        readonly inputs: readonly [];
-    }, {
-        readonly type: "error";
         readonly name: "NullAddrIsNotAValidSpender";
-        readonly inputs: readonly [];
-    }, {
-        readonly type: "error";
-        readonly name: "NullAddrIsNotAnERC20Token";
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
