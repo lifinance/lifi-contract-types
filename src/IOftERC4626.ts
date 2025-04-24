@@ -23,34 +23,43 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface IVelodromeV2PoolCalleeInterface extends utils.Interface {
+export interface IOftERC4626Interface extends utils.Interface {
   functions: {
-    "hook(address,uint256,uint256,bytes)": FunctionFragment;
+    "exchangeRate()": FunctionFragment;
+    "transferShares(address,uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "hook"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "exchangeRate" | "transferShares"
+  ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "hook",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "exchangeRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferShares",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "hook", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "exchangeRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferShares",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
 
-export interface IVelodromeV2PoolCallee extends BaseContract {
+export interface IOftERC4626 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVelodromeV2PoolCalleeInterface;
+  interface: IOftERC4626Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -72,29 +81,29 @@ export interface IVelodromeV2PoolCallee extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    exchangeRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    transferShares(
+      to: PromiseOrValue<string>,
+      shares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  hook(
-    sender: PromiseOrValue<string>,
-    amount0: PromiseOrValue<BigNumberish>,
-    amount1: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
+  exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  transferShares(
+    to: PromiseOrValue<string>,
+    shares: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    transferShares(
+      to: PromiseOrValue<string>,
+      shares: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -102,21 +111,21 @@ export interface IVelodromeV2PoolCallee extends BaseContract {
   filters: {};
 
   estimateGas: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    exchangeRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    transferShares(
+      to: PromiseOrValue<string>,
+      shares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    exchangeRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    transferShares(
+      to: PromiseOrValue<string>,
+      shares: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
