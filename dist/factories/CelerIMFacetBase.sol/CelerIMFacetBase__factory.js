@@ -572,11 +572,6 @@ var _abi = [
     },
     {
         type: "error",
-        name: "NativeAssetTransferFailed",
-        inputs: [],
-    },
-    {
-        type: "error",
         name: "NoSwapDataProvided",
         inputs: [],
     },
@@ -587,17 +582,7 @@ var _abi = [
     },
     {
         type: "error",
-        name: "NoTransferToNullAddress",
-        inputs: [],
-    },
-    {
-        type: "error",
         name: "NullAddrIsNotAValidSpender",
-        inputs: [],
-    },
-    {
-        type: "error",
-        name: "NullAddrIsNotAnERC20Token",
         inputs: [],
     },
     {
