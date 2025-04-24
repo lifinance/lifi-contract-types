@@ -1,7 +1,19 @@
-import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace LibDiamond {
+    type FacetCutStruct = {
+        facetAddress: PromiseOrValue<string>;
+        action: PromiseOrValue<BigNumberish>;
+        functionSelectors: PromiseOrValue<BytesLike>[];
+    };
+    type FacetCutStructOutput = [string, number, string[]] & {
+        facetAddress: string;
+        action: number;
+        functionSelectors: string[];
+    };
+}
 export interface EmergencyPauseFacetInterface extends utils.Interface {
     functions: {
         "pauseDiamond()": FunctionFragment;
@@ -19,14 +31,27 @@ export interface EmergencyPauseFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "removeFacet", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "unpauseDiamond", data: BytesLike): Result;
     events: {
+        "DiamondCut(tuple[],address,bytes)": EventFragment;
         "EmergencyFacetRemoved(address,address)": EventFragment;
         "EmergencyPaused(address)": EventFragment;
         "EmergencyUnpaused(address)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "DiamondCut"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "EmergencyFacetRemoved"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "EmergencyPaused"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "EmergencyUnpaused"): EventFragment;
 }
+export interface DiamondCutEventObject {
+    _diamondCut: LibDiamond.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
+}
+export declare type DiamondCutEvent = TypedEvent<[
+    LibDiamond.FacetCutStructOutput[],
+    string,
+    string
+], DiamondCutEventObject>;
+export declare type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
 export interface EmergencyFacetRemovedEventObject {
     facetAddress: string;
     msgSender: string;
@@ -93,6 +118,8 @@ export interface EmergencyPauseFacet extends BaseContract {
         unpauseDiamond(_blacklist: PromiseOrValue<string>[], overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "DiamondCut(tuple[],address,bytes)"(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
+        DiamondCut(_diamondCut?: null, _init?: null, _calldata?: null): DiamondCutEventFilter;
         "EmergencyFacetRemoved(address,address)"(facetAddress?: PromiseOrValue<string> | null, msgSender?: PromiseOrValue<string> | null): EmergencyFacetRemovedEventFilter;
         EmergencyFacetRemoved(facetAddress?: PromiseOrValue<string> | null, msgSender?: PromiseOrValue<string> | null): EmergencyFacetRemovedEventFilter;
         "EmergencyPaused(address)"(msgSender?: PromiseOrValue<string> | null): EmergencyPausedEventFilter;
