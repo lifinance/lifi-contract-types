@@ -160,7 +160,6 @@ export interface CBridgeFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "CBridgeRefund(address,address,uint256)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
@@ -169,7 +168,6 @@ export interface CBridgeFacetInterface extends utils.Interface {
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CBridgeRefund"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
@@ -177,22 +175,6 @@ export interface CBridgeFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface AssetSwappedEventObject {
-  transactionId: string;
-  dex: string;
-  fromAssetId: string;
-  toAssetId: string;
-  fromAmount: BigNumber;
-  toAmount: BigNumber;
-  timestamp: BigNumber;
-}
-export type AssetSwappedEvent = TypedEvent<
-  [string, string, string, string, BigNumber, BigNumber, BigNumber],
-  AssetSwappedEventObject
->;
-
-export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 
 export interface CBridgeRefundEventObject {
   _assetAddress: string;
@@ -379,25 +361,6 @@ export interface CBridgeFacet extends BaseContract {
   };
 
   filters: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-    AssetSwapped(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-
     "CBridgeRefund(address,address,uint256)"(
       _assetAddress?: PromiseOrValue<string> | null,
       _to?: PromiseOrValue<string> | null,
