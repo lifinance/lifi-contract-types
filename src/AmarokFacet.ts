@@ -66,36 +66,33 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace SymbiosisFacet {
-  export type SymbiosisDataStruct = {
-    firstSwapCalldata: PromiseOrValue<BytesLike>;
-    secondSwapCalldata: PromiseOrValue<BytesLike>;
-    intermediateToken: PromiseOrValue<string>;
-    firstDexRouter: PromiseOrValue<string>;
-    secondDexRouter: PromiseOrValue<string>;
-    approvedTokens: PromiseOrValue<string>[];
-    callTo: PromiseOrValue<string>;
+export declare namespace AmarokFacet {
+  export type AmarokDataStruct = {
     callData: PromiseOrValue<BytesLike>;
+    callTo: PromiseOrValue<string>;
+    relayerFee: PromiseOrValue<BigNumberish>;
+    slippageTol: PromiseOrValue<BigNumberish>;
+    delegate: PromiseOrValue<string>;
+    destChainDomainId: PromiseOrValue<BigNumberish>;
+    payFeeWithSendingAsset: PromiseOrValue<boolean>;
   };
 
-  export type SymbiosisDataStructOutput = [
+  export type AmarokDataStructOutput = [
     string,
     string,
+    BigNumber,
+    BigNumber,
     string,
-    string,
-    string,
-    string[],
-    string,
-    string
+    number,
+    boolean
   ] & {
-    firstSwapCalldata: string;
-    secondSwapCalldata: string;
-    intermediateToken: string;
-    firstDexRouter: string;
-    secondDexRouter: string;
-    approvedTokens: string[];
-    callTo: string;
     callData: string;
+    callTo: string;
+    relayerFee: BigNumber;
+    slippageTol: BigNumber;
+    delegate: string;
+    destChainDomainId: number;
+    payFeeWithSendingAsset: boolean;
   };
 }
 
@@ -129,37 +126,37 @@ export declare namespace LibSwap {
   };
 }
 
-export interface SymbiosisFacetInterface extends utils.Interface {
+export interface AmarokFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,address,address,address,address[],address,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,address,address,address,address[],address,bytes))": FunctionFragment;
+    "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaSymbiosis"
-      | "swapAndStartBridgeTokensViaSymbiosis"
+      | "startBridgeTokensViaAmarok"
+      | "swapAndStartBridgeTokensViaAmarok"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaSymbiosis",
-    values: [ILiFi.BridgeDataStruct, SymbiosisFacet.SymbiosisDataStruct]
+    functionFragment: "startBridgeTokensViaAmarok",
+    values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaSymbiosis",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      SymbiosisFacet.SymbiosisDataStruct
+      AmarokFacet.AmarokDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaSymbiosis",
+    functionFragment: "startBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaSymbiosis",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
 
@@ -254,12 +251,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface SymbiosisFacet extends BaseContract {
+export interface AmarokFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SymbiosisFacetInterface;
+  interface: AmarokFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -281,44 +278,44 @@ export interface SymbiosisFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaSymbiosis(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaSymbiosis(
+  startBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaSymbiosis(
+  swapAndStartBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaSymbiosis(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -401,31 +398,31 @@ export interface SymbiosisFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaSymbiosis(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaSymbiosis(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
