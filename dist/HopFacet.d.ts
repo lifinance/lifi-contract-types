@@ -127,7 +127,6 @@ export interface HopFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "startBridgeTokensViaHop", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaHop", data: BytesLike): Result;
     events: {
-        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "HopBridgeRegistered(address,address)": EventFragment;
         "HopInitialized(tuple[])": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -136,7 +135,6 @@ export interface HopFacetInterface extends utils.Interface {
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
-    getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "HopInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -145,25 +143,6 @@ export interface HopFacetInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-export interface AssetSwappedEventObject {
-    transactionId: string;
-    dex: string;
-    fromAssetId: string;
-    toAssetId: string;
-    fromAmount: BigNumber;
-    toAmount: BigNumber;
-    timestamp: BigNumber;
-}
-export declare type AssetSwappedEvent = TypedEvent<[
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-], AssetSwappedEventObject>;
-export declare type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 export interface HopBridgeRegisteredEventObject {
     assetId: string;
     bridge: string;
@@ -304,8 +283,6 @@ export interface HopFacet extends BaseContract {
         swapAndStartBridgeTokensViaHop(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _hopData: HopFacet.HopDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
-        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
-        AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         "HopBridgeRegistered(address,address)"(assetId?: PromiseOrValue<string> | null, bridge?: null): HopBridgeRegisteredEventFilter;
         HopBridgeRegistered(assetId?: PromiseOrValue<string> | null, bridge?: null): HopBridgeRegisteredEventFilter;
         "HopInitialized(tuple[])"(configs?: null): HopInitializedEventFilter;
