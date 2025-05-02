@@ -4,7 +4,6 @@
 import type {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -13,7 +12,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -21,36 +24,42 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface IVelodromeV2PoolCalleeInterface extends utils.Interface {
+export interface IGuardManagerInterface extends utils.Interface {
   functions: {
-    "hook(address,uint256,uint256,bytes)": FunctionFragment;
+    "setGuard(address)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "hook"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "setGuard"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "hook",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "setGuard",
+    values: [PromiseOrValue<string>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "hook", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setGuard", data: BytesLike): Result;
 
-  events: {};
+  events: {
+    "ChangedGuard(address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "ChangedGuard"): EventFragment;
 }
 
-export interface IVelodromeV2PoolCallee extends BaseContract {
+export interface ChangedGuardEventObject {
+  guard: string;
+}
+export type ChangedGuardEvent = TypedEvent<[string], ChangedGuardEventObject>;
+
+export type ChangedGuardEventFilter = TypedEventFilter<ChangedGuardEvent>;
+
+export interface IGuardManager extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVelodromeV2PoolCalleeInterface;
+  interface: IGuardManagerInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -72,51 +81,43 @@ export interface IVelodromeV2PoolCallee extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    setGuard(
+      guard: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  hook(
-    sender: PromiseOrValue<string>,
-    amount0: PromiseOrValue<BigNumberish>,
-    amount1: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
+  setGuard(
+    guard: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    setGuard(
+      guard: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "ChangedGuard(address)"(
+      guard?: PromiseOrValue<string> | null
+    ): ChangedGuardEventFilter;
+    ChangedGuard(
+      guard?: PromiseOrValue<string> | null
+    ): ChangedGuardEventFilter;
+  };
 
   estimateGas: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    setGuard(
+      guard: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    setGuard(
+      guard: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

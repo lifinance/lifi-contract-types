@@ -18,31 +18,34 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface IVelodromeV2PoolFactoryInterface extends utils.Interface {
+export interface IERC165Interface extends utils.Interface {
   functions: {
-    "getFee(address,bool)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "getFee"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "supportsInterface"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "getFee",
-    values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+    functionFragment: "supportsInterface",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "getFee", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
 
-export interface IVelodromeV2PoolFactory extends BaseContract {
+export interface IERC165 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVelodromeV2PoolFactoryInterface;
+  interface: IERC165Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -64,41 +67,36 @@ export interface IVelodromeV2PoolFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getFee(
-      _pool: PromiseOrValue<string>,
-      _stable: PromiseOrValue<boolean>,
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[boolean]>;
   };
 
-  getFee(
-    _pool: PromiseOrValue<string>,
-    _stable: PromiseOrValue<boolean>,
+  supportsInterface(
+    interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<boolean>;
 
   callStatic: {
-    getFee(
-      _pool: PromiseOrValue<string>,
-      _stable: PromiseOrValue<boolean>,
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<boolean>;
   };
 
   filters: {};
 
   estimateGas: {
-    getFee(
-      _pool: PromiseOrValue<string>,
-      _stable: PromiseOrValue<boolean>,
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    getFee(
-      _pool: PromiseOrValue<string>,
-      _stable: PromiseOrValue<boolean>,
+    supportsInterface(
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
