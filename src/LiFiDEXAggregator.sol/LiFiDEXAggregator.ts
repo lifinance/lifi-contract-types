@@ -37,6 +37,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "confirmOwnershipTransfer()": FunctionFragment;
     "dragonswapV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "fusionXV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "iZiSwapV3SwapCallback(uint256,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pancakeV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "pause()": FunctionFragment;
@@ -65,6 +66,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "confirmOwnershipTransfer"
       | "dragonswapV2SwapCallback"
       | "fusionXV3SwapCallback"
+      | "iZiSwapV3SwapCallback"
       | "owner"
       | "pancakeV3SwapCallback"
       | "pause"
@@ -119,6 +121,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "fusionXV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "iZiSwapV3SwapCallback",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -256,6 +266,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "fusionXV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "iZiSwapV3SwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -448,6 +462,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    iZiSwapV3SwapCallback(
+      amountX: PromiseOrValue<BigNumberish>,
+      amountY: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pancakeV3SwapCallback(
@@ -593,6 +614,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  iZiSwapV3SwapCallback(
+    amountX: PromiseOrValue<BigNumberish>,
+    amountY: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   pancakeV3SwapCallback(
@@ -730,6 +758,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     fusionXV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    iZiSwapV3SwapCallback(
+      amountX: PromiseOrValue<BigNumberish>,
+      amountY: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -926,6 +961,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    iZiSwapV3SwapCallback(
+      amountX: PromiseOrValue<BigNumberish>,
+      amountY: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pancakeV3SwapCallback(
@@ -1068,6 +1110,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     fusionXV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    iZiSwapV3SwapCallback(
+      amountX: PromiseOrValue<BigNumberish>,
+      amountY: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
