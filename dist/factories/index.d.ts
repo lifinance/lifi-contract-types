@@ -47,6 +47,10 @@ export { HopFacetOptimized__factory } from "./HopFacetOptimized__factory";
 export { HopFacetPacked__factory } from "./HopFacetPacked__factory";
 export { IAccessControl__factory } from "./IAccessControl__factory";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
+export { IAlgebraFactory__factory } from "./IAlgebraFactory__factory";
+export { IAlgebraPool__factory } from "./IAlgebraPool__factory";
+export { IAlgebraQuoter__factory } from "./IAlgebraQuoter__factory";
+export { IAlgebraRouter__factory } from "./IAlgebraRouter__factory";
 export { IAllBridge__factory } from "./IAllBridge__factory";
 export { IAllowanceTransfer__factory } from "./IAllowanceTransfer__factory";
 export { IBridge__factory } from "./IBridge__factory";
@@ -91,6 +95,7 @@ export { IVelodromeV2PoolFactory__factory } from "./IVelodromeV2PoolFactory__fac
 export { IVelodromeV2Router__factory } from "./IVelodromeV2Router__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
+export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
