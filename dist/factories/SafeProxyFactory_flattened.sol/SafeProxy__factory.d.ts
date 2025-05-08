@@ -1,0 +1,32 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../common";
+import type { SafeProxy, SafeProxyInterface } from "../../SafeProxyFactory_flattened.sol/SafeProxy";
+declare type SafeProxyConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class SafeProxy__factory extends ContractFactory {
+    constructor(...args: SafeProxyConstructorParams);
+    deploy(_singleton: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<SafeProxy>;
+    getDeployTransaction(_singleton: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): SafeProxy;
+    connect(signer: Signer): SafeProxy__factory;
+    static readonly bytecode = "0x608060405234801561001057600080fd5b5060405161018638038061018683398101604081905261002f916100b9565b6001600160a01b0381166100945760405162461bcd60e51b815260206004820152602260248201527f496e76616c69642073696e676c65746f6e20616464726573732070726f766964604482015261195960f21b606482015260840160405180910390fd5b600080546001600160a01b0319166001600160a01b03929092169190911790556100e9565b6000602082840312156100cb57600080fd5b81516001600160a01b03811681146100e257600080fd5b9392505050565b608f806100f76000396000f3fe6080604052600080547fa619486e00000000000000000000000000000000000000000000000000000000823503603b578060601b600c52602082f35b3682833781823684845af490503d82833e806054573d82fd5b503d81f3fea2646970667358221220ef350e83a08cdd0b991586ad05414503c72e68aa74bea5ba1729c2719875cfdc64736f6c63430008110033";
+    static readonly abi: readonly [{
+        readonly type: "constructor";
+        readonly inputs: readonly [{
+            readonly name: "_singleton";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "fallback";
+        readonly stateMutability: "payable";
+    }];
+    static createInterface(): SafeProxyInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): SafeProxy;
+}
+export {};
