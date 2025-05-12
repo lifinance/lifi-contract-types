@@ -1,0 +1,126 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../common";
+import type { SafeProxyFactory, SafeProxyFactoryInterface } from "../../SafeProxyFactory_flattened.sol/SafeProxyFactory";
+declare type SafeProxyFactoryConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class SafeProxyFactory__factory extends ContractFactory {
+    constructor(...args: SafeProxyFactoryConstructorParams);
+    deploy(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<SafeProxyFactory>;
+    getDeployTransaction(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): SafeProxyFactory;
+    connect(signer: Signer): SafeProxyFactory__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b5061092e8061001c5f395ff3fe608060405234801561000f575f5ffd5b5060043610610064575f3560e01c806353e5d9351161004d57806353e5d935146100b3578063d18af54d146100c8578063ec9e80bb146100db575f5ffd5b80631688f0b9146100685780633408e470146100a5575b5f5ffd5b61007b6100763660046105d8565b6100ee565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020015b60405180910390f35b60405146815260200161009c565b6100bb61018f565b60405161009c919061067a565b61007b6100d6366004610693565b6101d7565b61007b6100e93660046105d8565b6102ec565b5f5f838051906020012083604051602001610113929190918252602082015260400190565b60405160208183030381529060405280519060200120905061013685858361031d565b60405173ffffffffffffffffffffffffffffffffffffffff8781168252919350908316907f4f51faf6c4561ff95f067657e43439f0f856d97c04d9ec9070a6199ad418e2359060200160405180910390a2509392505050565b6060604051806020016101a1906104b2565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe082820381018352601f90910116604052919050565b5f5f838360405160200161021a92919091825260601b7fffffffffffffffffffffffffffffffffffffffff00000000000000000000000016602082015260340190565b604051602081830303815290604052805190602001205f1c905061023f8686836100ee565b915073ffffffffffffffffffffffffffffffffffffffff8316156102e3576040517f1e52b51800000000000000000000000000000000000000000000000000000000815273ffffffffffffffffffffffffffffffffffffffff841690631e52b518906102b59085908a908a908a906004016106fb565b5f604051808303815f87803b1580156102cc575f5ffd5b505af11580156102de573d5f5f3e3d5ffd5b505050505b50949350505050565b5f5f8380519060200120836102fe4690565b6040805160208101949094528301919091526060820152608001610113565b5f833b61038b576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601f60248201527f53696e676c65746f6e20636f6e7472616374206e6f74206465706c6f7965640060448201526064015b60405180910390fd5b5f6040518060200161039c906104b2565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe082820381018352601f9091011660408190526103f4919073ffffffffffffffffffffffffffffffffffffffff881690602001610756565b6040516020818303038152906040529050828151826020015ff5915073ffffffffffffffffffffffffffffffffffffffff821661048d576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601360248201527f437265617465322063616c6c206661696c6564000000000000000000000000006044820152606401610382565b8351156104aa575f5f5f8651602088015f875af1036104aa575f5ffd5b509392505050565b6101888061077183390190565b73ffffffffffffffffffffffffffffffffffffffff811681146104e0575f5ffd5b50565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b5f82601f83011261051f575f5ffd5b813567ffffffffffffffff811115610539576105396104e3565b6040517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0603f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8501160116810181811067ffffffffffffffff821117156105a5576105a56104e3565b6040528181528382016020018510156105bc575f5ffd5b816020850160208301375f918101602001919091529392505050565b5f5f5f606084860312156105ea575f5ffd5b83356105f5816104bf565b9250602084013567ffffffffffffffff811115610610575f5ffd5b61061c86828701610510565b93969395505050506040919091013590565b5f81518084528060208401602086015e5f6020828601015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f83011685010191505092915050565b602081525f61068c602083018461062e565b9392505050565b5f5f5f5f608085870312156106a6575f5ffd5b84356106b1816104bf565b9350602085013567ffffffffffffffff8111156106cc575f5ffd5b6106d887828801610510565b9350506040850135915060608501356106f0816104bf565b939692955090935050565b73ffffffffffffffffffffffffffffffffffffffff8516815273ffffffffffffffffffffffffffffffffffffffff84166020820152608060408201525f610745608083018561062e565b905082606083015295945050505050565b5f83518060208601845e919091019182525060200191905056fe6080604052348015600e575f5ffd5b50604051610188380380610188833981016040819052602b9160b2565b6001600160a01b038116608f5760405162461bcd60e51b815260206004820152602260248201527f496e76616c69642073696e676c65746f6e20616464726573732070726f766964604482015261195960f21b606482015260840160405180910390fd5b5f80546001600160a01b0319166001600160a01b039290921691909117905560dd565b5f6020828403121560c1575f5ffd5b81516001600160a01b038116811460d6575f5ffd5b9392505050565b609f806100e95f395ff3fe608060405273ffffffffffffffffffffffffffffffffffffffff5f54167fa619486e000000000000000000000000000000000000000000000000000000005f3503604b57805f5260205ff35b365f5f375f5f365f845af490503d5f5f3e806064573d5ffd5b503d5ff3fea2646970667358221220dafefb771ebff5004857b7a829461506470d12872914f1d49a6d70e2e8268d0d64736f6c634300081d0033a2646970667358221220c544f3c9dfaf862cd3d6b68307d3ee8efe6b0d7cb29bb95ba6d147ade9e10f2a64736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "createChainSpecificProxyWithNonce";
+        readonly inputs: readonly [{
+            readonly name: "_singleton";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "initializer";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "saltNonce";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "proxy";
+            readonly type: "address";
+            readonly internalType: "contract SafeProxy";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "createProxyWithCallback";
+        readonly inputs: readonly [{
+            readonly name: "_singleton";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "initializer";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "saltNonce";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "callback";
+            readonly type: "address";
+            readonly internalType: "contract IProxyCreationCallback";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "proxy";
+            readonly type: "address";
+            readonly internalType: "contract SafeProxy";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "createProxyWithNonce";
+        readonly inputs: readonly [{
+            readonly name: "_singleton";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "initializer";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "saltNonce";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "proxy";
+            readonly type: "address";
+            readonly internalType: "contract SafeProxy";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "getChainId";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "proxyCreationCode";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "pure";
+    }, {
+        readonly type: "event";
+        readonly name: "ProxyCreation";
+        readonly inputs: readonly [{
+            readonly name: "proxy";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "contract SafeProxy";
+        }, {
+            readonly name: "singleton";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }];
+        readonly anonymous: false;
+    }];
+    static createInterface(): SafeProxyFactoryInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): SafeProxyFactory;
+}
+export {};
