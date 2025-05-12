@@ -5,6 +5,8 @@ export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as liFiTimelockControllerSol from "./LiFiTimelockController.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
+export * as safeProxyFactoryFlattenedSol from "./SafeProxyFactory_flattened.sol";
+export * as safeFlattenedSol from "./Safe_flattened.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
 export { AccessControl__factory } from "./AccessControl__factory";
 export { AccessManagerFacet__factory } from "./AccessManagerFacet__factory";
