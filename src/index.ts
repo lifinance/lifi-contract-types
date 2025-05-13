@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export type { celerImFacetBaseSol };
+import type * as gasZipPeripherySol from "./GasZipPeriphery.sol";
+export type { gasZipPeripherySol };
 import type * as iChainflipSol from "./IChainflip.sol";
 export type { iChainflipSol };
 import type * as iHopBridgeSol from "./IHopBridge.sol";
@@ -48,7 +50,6 @@ export type { EmergencyPauseFacet } from "./EmergencyPauseFacet";
 export type { Executor } from "./Executor";
 export type { FeeCollector } from "./FeeCollector";
 export type { GasZipFacet } from "./GasZipFacet";
-export type { GasZipPeriphery } from "./GasZipPeriphery";
 export type { GenericSwapFacet } from "./GenericSwapFacet";
 export type { GenericSwapFacetV3 } from "./GenericSwapFacetV3";
 export type { GlacisFacet } from "./GlacisFacet";
@@ -168,7 +169,10 @@ export { ERC721Holder__factory } from "./factories/ERC721Holder__factory";
 export { Executor__factory } from "./factories/Executor__factory";
 export { FeeCollector__factory } from "./factories/FeeCollector__factory";
 export { GasZipFacet__factory } from "./factories/GasZipFacet__factory";
-export { GasZipPeriphery__factory } from "./factories/GasZipPeriphery__factory";
+export type { GasZipPeriphery } from "./GasZipPeriphery.sol/GasZipPeriphery";
+export { GasZipPeriphery__factory } from "./factories/GasZipPeriphery.sol/GasZipPeriphery__factory";
+export type { IDexManager } from "./GasZipPeriphery.sol/IDexManager";
+export { IDexManager__factory } from "./factories/GasZipPeriphery.sol/IDexManager__factory";
 export { GenericSwapFacet__factory } from "./factories/GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./factories/GenericSwapFacetV3__factory";
 export { GlacisFacet__factory } from "./factories/GlacisFacet__factory";
