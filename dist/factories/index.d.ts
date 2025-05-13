@@ -1,4 +1,5 @@
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as gasZipPeripherySol from "./GasZipPeriphery.sol";
 export * as iChainflipSol from "./IChainflip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
@@ -37,7 +38,6 @@ export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
-export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./GenericSwapFacetV3__factory";
 export { GlacisFacet__factory } from "./GlacisFacet__factory";
