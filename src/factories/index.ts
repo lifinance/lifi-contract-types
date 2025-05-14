@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as gasZipPeripherySol from "./GasZipPeriphery.sol";
 export * as iChainflipSol from "./IChainflip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
@@ -40,7 +41,6 @@ export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
-export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
 export { GenericSwapFacetV3__factory } from "./GenericSwapFacetV3__factory";
 export { GlacisFacet__factory } from "./GlacisFacet__factory";
@@ -50,10 +50,6 @@ export { HopFacetOptimized__factory } from "./HopFacetOptimized__factory";
 export { HopFacetPacked__factory } from "./HopFacetPacked__factory";
 export { IAccessControl__factory } from "./IAccessControl__factory";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
-export { IAlgebraFactory__factory } from "./IAlgebraFactory__factory";
-export { IAlgebraPool__factory } from "./IAlgebraPool__factory";
-export { IAlgebraQuoter__factory } from "./IAlgebraQuoter__factory";
-export { IAlgebraRouter__factory } from "./IAlgebraRouter__factory";
 export { IAllBridge__factory } from "./IAllBridge__factory";
 export { IAllowanceTransfer__factory } from "./IAllowanceTransfer__factory";
 export { IBridge__factory } from "./IBridge__factory";
