@@ -33,6 +33,7 @@ export interface DexManagerFacetInterface extends utils.Interface {
     "batchAddDex(address[])": FunctionFragment;
     "batchRemoveDex(address[])": FunctionFragment;
     "batchSetFunctionApprovalBySignature(bytes4[],bool)": FunctionFragment;
+    "isContractApproved(address)": FunctionFragment;
     "isFunctionApproved(bytes4)": FunctionFragment;
     "removeDex(address)": FunctionFragment;
     "setFunctionApprovalBySignature(bytes4,bool)": FunctionFragment;
@@ -45,6 +46,7 @@ export interface DexManagerFacetInterface extends utils.Interface {
       | "batchAddDex"
       | "batchRemoveDex"
       | "batchSetFunctionApprovalBySignature"
+      | "isContractApproved"
       | "isFunctionApproved"
       | "removeDex"
       | "setFunctionApprovalBySignature"
@@ -69,6 +71,10 @@ export interface DexManagerFacetInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "batchSetFunctionApprovalBySignature",
     values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isContractApproved",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isFunctionApproved",
@@ -98,6 +104,10 @@ export interface DexManagerFacetInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "batchSetFunctionApprovalBySignature",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isContractApproved",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -201,6 +211,11 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    isContractApproved(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { approved: boolean }>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -241,6 +256,11 @@ export interface DexManagerFacet extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  isContractApproved(
+    _contract: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   isFunctionApproved(
     _signature: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -280,6 +300,11 @@ export interface DexManagerFacet extends BaseContract {
       _approval: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    isContractApproved(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
@@ -345,6 +370,11 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    isContractApproved(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -384,6 +414,11 @@ export interface DexManagerFacet extends BaseContract {
       _signatures: PromiseOrValue<BytesLike>[],
       _approval: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    isContractApproved(
+      _contract: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isFunctionApproved(
