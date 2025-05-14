@@ -26,7 +26,7 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface DexManagerFacetInterface extends utils.Interface {
+export interface IDexManagerFacetInterface extends utils.Interface {
   functions: {
     "addDex(address)": FunctionFragment;
     "approvedDexs()": FunctionFragment;
@@ -159,12 +159,12 @@ export type FunctionSignatureApprovalChangedEvent = TypedEvent<
 export type FunctionSignatureApprovalChangedEventFilter =
   TypedEventFilter<FunctionSignatureApprovalChangedEvent>;
 
-export interface DexManagerFacet extends BaseContract {
+export interface IDexManagerFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: DexManagerFacetInterface;
+  interface: IDexManagerFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
