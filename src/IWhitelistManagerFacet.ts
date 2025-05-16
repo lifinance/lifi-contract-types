@@ -26,44 +26,44 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface DexManagerFacetInterface extends utils.Interface {
+export interface IWhitelistManagerFacetInterface extends utils.Interface {
   functions: {
-    "addDex(address)": FunctionFragment;
-    "approvedDexs()": FunctionFragment;
-    "batchAddDex(address[])": FunctionFragment;
-    "batchRemoveDex(address[])": FunctionFragment;
+    "addToWhitelist(address)": FunctionFragment;
+    "batchAddToWhitelist(address[])": FunctionFragment;
+    "batchRemoveFromWhitelist(address[])": FunctionFragment;
     "batchSetFunctionApprovalBySignature(bytes4[],bool)": FunctionFragment;
+    "getApprovedFunctionSignatures()": FunctionFragment;
+    "getWhitelistedAddresses()": FunctionFragment;
+    "isAddressWhitelisted(address)": FunctionFragment;
     "isFunctionApproved(bytes4)": FunctionFragment;
-    "removeDex(address)": FunctionFragment;
+    "removeFromWhitelist(address)": FunctionFragment;
     "setFunctionApprovalBySignature(bytes4,bool)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "addDex"
-      | "approvedDexs"
-      | "batchAddDex"
-      | "batchRemoveDex"
+      | "addToWhitelist"
+      | "batchAddToWhitelist"
+      | "batchRemoveFromWhitelist"
       | "batchSetFunctionApprovalBySignature"
+      | "getApprovedFunctionSignatures"
+      | "getWhitelistedAddresses"
+      | "isAddressWhitelisted"
       | "isFunctionApproved"
-      | "removeDex"
+      | "removeFromWhitelist"
       | "setFunctionApprovalBySignature"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "addDex",
+    functionFragment: "addToWhitelist",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "approvedDexs",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "batchAddDex",
+    functionFragment: "batchAddToWhitelist",
     values: [PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "batchRemoveDex",
+    functionFragment: "batchRemoveFromWhitelist",
     values: [PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
@@ -71,11 +71,23 @@ export interface DexManagerFacetInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>[], PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
+    functionFragment: "getApprovedFunctionSignatures",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getWhitelistedAddresses",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAddressWhitelisted",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "isFunctionApproved",
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeDex",
+    functionFragment: "removeFromWhitelist",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -83,17 +95,16 @@ export interface DexManagerFacetInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<boolean>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "addDex", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "approvedDexs",
+    functionFragment: "addToWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "batchAddDex",
+    functionFragment: "batchAddToWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "batchRemoveDex",
+    functionFragment: "batchRemoveFromWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -101,41 +112,63 @@ export interface DexManagerFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getApprovedFunctionSignatures",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getWhitelistedAddresses",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isAddressWhitelisted",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "isFunctionApproved",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "removeDex", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "removeFromWhitelist",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setFunctionApprovalBySignature",
     data: BytesLike
   ): Result;
 
   events: {
-    "DexAdded(address)": EventFragment;
-    "DexRemoved(address)": EventFragment;
+    "AddressRemoved(address)": EventFragment;
+    "AddressWhitelisted(address)": EventFragment;
     "FunctionSignatureApprovalChanged(bytes4,bool)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "DexAdded"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "DexRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AddressRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AddressWhitelisted"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "FunctionSignatureApprovalChanged"
   ): EventFragment;
 }
 
-export interface DexAddedEventObject {
-  dexAddress: string;
+export interface AddressRemovedEventObject {
+  removedAddress: string;
 }
-export type DexAddedEvent = TypedEvent<[string], DexAddedEventObject>;
+export type AddressRemovedEvent = TypedEvent<
+  [string],
+  AddressRemovedEventObject
+>;
 
-export type DexAddedEventFilter = TypedEventFilter<DexAddedEvent>;
+export type AddressRemovedEventFilter = TypedEventFilter<AddressRemovedEvent>;
 
-export interface DexRemovedEventObject {
-  dexAddress: string;
+export interface AddressWhitelistedEventObject {
+  whitelistedAddress: string;
 }
-export type DexRemovedEvent = TypedEvent<[string], DexRemovedEventObject>;
+export type AddressWhitelistedEvent = TypedEvent<
+  [string],
+  AddressWhitelistedEventObject
+>;
 
-export type DexRemovedEventFilter = TypedEventFilter<DexRemovedEvent>;
+export type AddressWhitelistedEventFilter =
+  TypedEventFilter<AddressWhitelistedEvent>;
 
 export interface FunctionSignatureApprovalChangedEventObject {
   functionSignature: string;
@@ -149,12 +182,12 @@ export type FunctionSignatureApprovalChangedEvent = TypedEvent<
 export type FunctionSignatureApprovalChangedEventFilter =
   TypedEventFilter<FunctionSignatureApprovalChangedEvent>;
 
-export interface DexManagerFacet extends BaseContract {
+export interface IWhitelistManagerFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: DexManagerFacetInterface;
+  interface: IWhitelistManagerFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -176,22 +209,18 @@ export interface DexManagerFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    addDex(
-      _dex: PromiseOrValue<string>,
+    addToWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    approvedDexs(
-      overrides?: CallOverrides
-    ): Promise<[string[]] & { addresses: string[] }>;
-
-    batchAddDex(
-      _dexs: PromiseOrValue<string>[],
+    batchAddToWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
+    batchRemoveFromWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -201,13 +230,26 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getApprovedFunctionSignatures(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { signatures: string[] }>;
+
+    getWhitelistedAddresses(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { addresses: string[] }>;
+
+    isAddressWhitelisted(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { approved: boolean }>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean] & { approved: boolean }>;
 
-    removeDex(
-      _dex: PromiseOrValue<string>,
+    removeFromWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -218,20 +260,18 @@ export interface DexManagerFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  addDex(
-    _dex: PromiseOrValue<string>,
+  addToWhitelist(
+    _address: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  approvedDexs(overrides?: CallOverrides): Promise<string[]>;
-
-  batchAddDex(
-    _dexs: PromiseOrValue<string>[],
+  batchAddToWhitelist(
+    _addresses: PromiseOrValue<string>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  batchRemoveDex(
-    _dexs: PromiseOrValue<string>[],
+  batchRemoveFromWhitelist(
+    _addresses: PromiseOrValue<string>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -241,13 +281,22 @@ export interface DexManagerFacet extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getApprovedFunctionSignatures(overrides?: CallOverrides): Promise<string[]>;
+
+  getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
+
+  isAddressWhitelisted(
+    _address: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   isFunctionApproved(
     _signature: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  removeDex(
-    _dex: PromiseOrValue<string>,
+  removeFromWhitelist(
+    _address: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -258,20 +307,18 @@ export interface DexManagerFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    addDex(
-      _dex: PromiseOrValue<string>,
+    addToWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    approvedDexs(overrides?: CallOverrides): Promise<string[]>;
-
-    batchAddDex(
-      _dexs: PromiseOrValue<string>[],
+    batchAddToWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
+    batchRemoveFromWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -281,13 +328,22 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    getApprovedFunctionSignatures(overrides?: CallOverrides): Promise<string[]>;
+
+    getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
+
+    isAddressWhitelisted(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    removeDex(
-      _dex: PromiseOrValue<string>,
+    removeFromWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -299,17 +355,19 @@ export interface DexManagerFacet extends BaseContract {
   };
 
   filters: {
-    "DexAdded(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexAddedEventFilter;
-    DexAdded(dexAddress?: PromiseOrValue<string> | null): DexAddedEventFilter;
+    "AddressRemoved(address)"(
+      removedAddress?: PromiseOrValue<string> | null
+    ): AddressRemovedEventFilter;
+    AddressRemoved(
+      removedAddress?: PromiseOrValue<string> | null
+    ): AddressRemovedEventFilter;
 
-    "DexRemoved(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
-    DexRemoved(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
+    "AddressWhitelisted(address)"(
+      whitelistedAddress?: PromiseOrValue<string> | null
+    ): AddressWhitelistedEventFilter;
+    AddressWhitelisted(
+      whitelistedAddress?: PromiseOrValue<string> | null
+    ): AddressWhitelistedEventFilter;
 
     "FunctionSignatureApprovalChanged(bytes4,bool)"(
       functionSignature?: PromiseOrValue<BytesLike> | null,
@@ -322,20 +380,18 @@ export interface DexManagerFacet extends BaseContract {
   };
 
   estimateGas: {
-    addDex(
-      _dex: PromiseOrValue<string>,
+    addToWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    approvedDexs(overrides?: CallOverrides): Promise<BigNumber>;
-
-    batchAddDex(
-      _dexs: PromiseOrValue<string>[],
+    batchAddToWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
+    batchRemoveFromWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -345,13 +401,24 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getApprovedFunctionSignatures(
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getWhitelistedAddresses(overrides?: CallOverrides): Promise<BigNumber>;
+
+    isAddressWhitelisted(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    removeDex(
-      _dex: PromiseOrValue<string>,
+    removeFromWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -363,20 +430,18 @@ export interface DexManagerFacet extends BaseContract {
   };
 
   populateTransaction: {
-    addDex(
-      _dex: PromiseOrValue<string>,
+    addToWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    approvedDexs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    batchAddDex(
-      _dexs: PromiseOrValue<string>[],
+    batchAddToWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    batchRemoveDex(
-      _dexs: PromiseOrValue<string>[],
+    batchRemoveFromWhitelist(
+      _addresses: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -386,13 +451,26 @@ export interface DexManagerFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    getApprovedFunctionSignatures(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getWhitelistedAddresses(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    isAddressWhitelisted(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     isFunctionApproved(
       _signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    removeDex(
-      _dex: PromiseOrValue<string>,
+    removeFromWhitelist(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
