@@ -1,0 +1,4 @@
+export type { IProxy } from "./IProxy";
+export type { IProxyCreationCallback } from "./IProxyCreationCallback";
+export type { SafeProxy } from "./SafeProxy";
+export type { SafeProxyFactory } from "./SafeProxyFactory";
