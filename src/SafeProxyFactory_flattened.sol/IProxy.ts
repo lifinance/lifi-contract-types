@@ -17,32 +17,31 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
-  PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface IAlgebraRouterInterface extends utils.Interface {
+export interface IProxyInterface extends utils.Interface {
   functions: {
-    "poolByPair(address,address)": FunctionFragment;
+    "masterCopy()": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "poolByPair"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "masterCopy"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "poolByPair",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    functionFragment: "masterCopy",
+    values?: undefined
   ): string;
 
-  decodeFunctionResult(functionFragment: "poolByPair", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "masterCopy", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface IAlgebraRouter extends BaseContract {
+export interface IProxy extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IAlgebraRouterInterface;
+  interface: IProxyInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -64,42 +63,22 @@ export interface IAlgebraRouter extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    poolByPair(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[string] & { pool: string }>;
+    masterCopy(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  poolByPair(
-    tokenA: PromiseOrValue<string>,
-    tokenB: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  masterCopy(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    poolByPair(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    masterCopy(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    poolByPair(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    masterCopy(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    poolByPair(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    masterCopy(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

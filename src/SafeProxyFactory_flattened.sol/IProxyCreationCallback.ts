@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -20,31 +21,39 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface IAlgebraFactoryInterface extends utils.Interface {
+export interface IProxyCreationCallbackInterface extends utils.Interface {
   functions: {
-    "createPool(address,address)": FunctionFragment;
+    "proxyCreated(address,address,bytes,uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "createPool"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "proxyCreated"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "createPool",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    functionFragment: "proxyCreated",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "createPool", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "proxyCreated",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
 
-export interface IAlgebraFactory extends BaseContract {
+export interface IProxyCreationCallback extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IAlgebraFactoryInterface;
+  interface: IProxyCreationCallbackInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,41 +75,51 @@ export interface IAlgebraFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    proxyCreated(
+      proxy: PromiseOrValue<string>,
+      _singleton: PromiseOrValue<string>,
+      initializer: PromiseOrValue<BytesLike>,
+      saltNonce: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  createPool(
-    tokenA: PromiseOrValue<string>,
-    tokenB: PromiseOrValue<string>,
+  proxyCreated(
+    proxy: PromiseOrValue<string>,
+    _singleton: PromiseOrValue<string>,
+    initializer: PromiseOrValue<BytesLike>,
+    saltNonce: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    proxyCreated(
+      proxy: PromiseOrValue<string>,
+      _singleton: PromiseOrValue<string>,
+      initializer: PromiseOrValue<BytesLike>,
+      saltNonce: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    proxyCreated(
+      proxy: PromiseOrValue<string>,
+      _singleton: PromiseOrValue<string>,
+      initializer: PromiseOrValue<BytesLike>,
+      saltNonce: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    proxyCreated(
+      proxy: PromiseOrValue<string>,
+      _singleton: PromiseOrValue<string>,
+      initializer: PromiseOrValue<BytesLike>,
+      saltNonce: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

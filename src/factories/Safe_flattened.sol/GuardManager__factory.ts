@@ -5,46 +5,48 @@
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
 import type {
-  IAlgebraRouter,
-  IAlgebraRouterInterface,
-} from "../IAlgebraRouter";
+  GuardManager,
+  GuardManagerInterface,
+} from "../../Safe_flattened.sol/GuardManager";
 
 const _abi = [
   {
     type: "function",
-    name: "poolByPair",
+    name: "setGuard",
     inputs: [
       {
-        name: "tokenA",
-        type: "address",
-        internalType: "address",
-      },
-      {
-        name: "tokenB",
+        name: "guard",
         type: "address",
         internalType: "address",
       },
     ],
-    outputs: [
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "ChangedGuard",
+    inputs: [
       {
-        name: "pool",
+        name: "guard",
         type: "address",
+        indexed: true,
         internalType: "address",
       },
     ],
-    stateMutability: "view",
+    anonymous: false,
   },
 ] as const;
 
-export class IAlgebraRouter__factory {
+export class GuardManager__factory {
   static readonly abi = _abi;
-  static createInterface(): IAlgebraRouterInterface {
-    return new utils.Interface(_abi) as IAlgebraRouterInterface;
+  static createInterface(): GuardManagerInterface {
+    return new utils.Interface(_abi) as GuardManagerInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IAlgebraRouter {
-    return new Contract(address, _abi, signerOrProvider) as IAlgebraRouter;
+  ): GuardManager {
+    return new Contract(address, _abi, signerOrProvider) as GuardManager;
   }
 }
