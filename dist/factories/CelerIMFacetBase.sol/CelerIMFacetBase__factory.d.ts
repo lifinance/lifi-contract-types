@@ -207,46 +207,6 @@ export declare class CelerIMFacetBase__factory {
         readonly stateMutability: "payable";
     }, {
         readonly type: "event";
-        readonly name: "AssetSwapped";
-        readonly inputs: readonly [{
-            readonly name: "transactionId";
-            readonly type: "bytes32";
-            readonly indexed: false;
-            readonly internalType: "bytes32";
-        }, {
-            readonly name: "dex";
-            readonly type: "address";
-            readonly indexed: false;
-            readonly internalType: "address";
-        }, {
-            readonly name: "fromAssetId";
-            readonly type: "address";
-            readonly indexed: false;
-            readonly internalType: "address";
-        }, {
-            readonly name: "toAssetId";
-            readonly type: "address";
-            readonly indexed: false;
-            readonly internalType: "address";
-        }, {
-            readonly name: "fromAmount";
-            readonly type: "uint256";
-            readonly indexed: false;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "toAmount";
-            readonly type: "uint256";
-            readonly indexed: false;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "timestamp";
-            readonly type: "uint256";
-            readonly indexed: false;
-            readonly internalType: "uint256";
-        }];
-        readonly anonymous: false;
-    }, {
-        readonly type: "event";
         readonly name: "LiFiGenericSwapCompleted";
         readonly inputs: readonly [{
             readonly name: "transactionId";
@@ -491,6 +451,10 @@ export declare class CelerIMFacetBase__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
+        readonly name: "NativeAssetTransferFailed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
         readonly name: "NoSwapDataProvided";
         readonly inputs: readonly [];
     }, {
@@ -499,7 +463,15 @@ export declare class CelerIMFacetBase__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
+        readonly name: "NoTransferToNullAddress";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
         readonly name: "NullAddrIsNotAValidSpender";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NullAddrIsNotAnERC20Token";
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
