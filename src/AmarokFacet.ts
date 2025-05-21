@@ -66,6 +66,36 @@ export declare namespace ILiFi {
   };
 }
 
+export declare namespace AmarokFacet {
+  export type AmarokDataStruct = {
+    callData: PromiseOrValue<BytesLike>;
+    callTo: PromiseOrValue<string>;
+    relayerFee: PromiseOrValue<BigNumberish>;
+    slippageTol: PromiseOrValue<BigNumberish>;
+    delegate: PromiseOrValue<string>;
+    destChainDomainId: PromiseOrValue<BigNumberish>;
+    payFeeWithSendingAsset: PromiseOrValue<boolean>;
+  };
+
+  export type AmarokDataStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string,
+    number,
+    boolean
+  ] & {
+    callData: string;
+    callTo: string;
+    relayerFee: BigNumber;
+    slippageTol: BigNumber;
+    delegate: string;
+    destChainDomainId: number;
+    payFeeWithSendingAsset: boolean;
+  };
+}
+
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -96,80 +126,41 @@ export declare namespace LibSwap {
   };
 }
 
-export declare namespace ChainflipFacet {
-  export type ChainflipDataStruct = {
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    dstToken: PromiseOrValue<BigNumberish>;
-    dstCallReceiver: PromiseOrValue<string>;
-    dstCallSwapData: LibSwap.SwapDataStruct[];
-    gasAmount: PromiseOrValue<BigNumberish>;
-    cfParameters: PromiseOrValue<BytesLike>;
-  };
-
-  export type ChainflipDataStructOutput = [
-    string,
-    number,
-    string,
-    LibSwap.SwapDataStructOutput[],
-    BigNumber,
-    string
-  ] & {
-    nonEVMReceiver: string;
-    dstToken: number;
-    dstCallReceiver: string;
-    dstCallSwapData: LibSwap.SwapDataStructOutput[];
-    gasAmount: BigNumber;
-    cfParameters: string;
-  };
-}
-
-export interface ChainflipFacetInterface extends utils.Interface {
+export interface AmarokFacetInterface extends utils.Interface {
   functions: {
-    "chainflipVault()": FunctionFragment;
-    "startBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
+    "startBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAmarok((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint256,uint256,address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "chainflipVault"
-      | "startBridgeTokensViaChainflip"
-      | "swapAndStartBridgeTokensViaChainflip"
+      | "startBridgeTokensViaAmarok"
+      | "swapAndStartBridgeTokensViaAmarok"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "chainflipVault",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaAmarok",
+    values: [ILiFi.BridgeDataStruct, AmarokFacet.AmarokDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaChainflip",
-    values: [ILiFi.BridgeDataStruct, ChainflipFacet.ChainflipDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaChainflip",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      ChainflipFacet.ChainflipDataStruct
+      AmarokFacet.AmarokDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "chainflipVault",
+    functionFragment: "startBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaChainflip",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaChainflip",
+    functionFragment: "swapAndStartBridgeTokensViaAmarok",
     data: BytesLike
   ): Result;
 
   events: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -177,43 +168,12 @@ export interface ChainflipFacetInterface extends utils.Interface {
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface AssetSwappedEventObject {
-  transactionId: string;
-  dex: string;
-  fromAssetId: string;
-  toAssetId: string;
-  fromAmount: BigNumber;
-  toAmount: BigNumber;
-  timestamp: BigNumber;
-}
-export type AssetSwappedEvent = TypedEvent<
-  [string, string, string, string, BigNumber, BigNumber, BigNumber],
-  AssetSwappedEventObject
->;
-
-export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
-
-export interface BridgeToNonEVMChainEventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainEventObject
->;
-
-export type BridgeToNonEVMChainEventFilter =
-  TypedEventFilter<BridgeToNonEVMChainEvent>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -291,12 +251,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface ChainflipFacet extends BaseContract {
+export interface AmarokFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ChainflipFacetInterface;
+  interface: AmarokFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -318,85 +278,49 @@ export interface ChainflipFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    chainflipVault(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaChainflip(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaChainflip(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  chainflipVault(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaChainflip(
+  startBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _chainflipData: ChainflipFacet.ChainflipDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaChainflip(
+  swapAndStartBridgeTokensViaAmarok(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _chainflipData: ChainflipFacet.ChainflipDataStruct,
+    _amarokData: AmarokFacet.AmarokDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    chainflipVault(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaChainflip(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaChainflip(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-    AssetSwapped(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-    BridgeToNonEVMChain(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       integrator?: null,
@@ -474,35 +398,31 @@ export interface ChainflipFacet extends BaseContract {
   };
 
   estimateGas: {
-    chainflipVault(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaChainflip(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaChainflip(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    chainflipVault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaChainflip(
+    startBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaChainflip(
+    swapAndStartBridgeTokensViaAmarok(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _chainflipData: ChainflipFacet.ChainflipDataStruct,
+      _amarokData: AmarokFacet.AmarokDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

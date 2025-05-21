@@ -23,34 +23,37 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface IVelodromeV2PoolCalleeInterface extends utils.Interface {
+export interface ITokenMessengerInterface extends utils.Interface {
   functions: {
-    "hook(address,uint256,uint256,bytes)": FunctionFragment;
+    "depositForBurn(uint256,uint32,bytes32,address)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "hook"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "hook",
+    functionFragment: "depositForBurn",
     values: [
-      PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "hook", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "depositForBurn",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
 
-export interface IVelodromeV2PoolCallee extends BaseContract {
+export interface ITokenMessenger extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IVelodromeV2PoolCalleeInterface;
+  interface: ITokenMessengerInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -72,51 +75,51 @@ export interface IVelodromeV2PoolCallee extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    depositForBurn(
+      amount: PromiseOrValue<BigNumberish>,
+      destinationDomain: PromiseOrValue<BigNumberish>,
+      mintRecipient: PromiseOrValue<BytesLike>,
+      burnToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  hook(
-    sender: PromiseOrValue<string>,
-    amount0: PromiseOrValue<BigNumberish>,
-    amount1: PromiseOrValue<BigNumberish>,
-    data: PromiseOrValue<BytesLike>,
+  depositForBurn(
+    amount: PromiseOrValue<BigNumberish>,
+    destinationDomain: PromiseOrValue<BigNumberish>,
+    mintRecipient: PromiseOrValue<BytesLike>,
+    burnToken: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    depositForBurn(
+      amount: PromiseOrValue<BigNumberish>,
+      destinationDomain: PromiseOrValue<BigNumberish>,
+      mintRecipient: PromiseOrValue<BytesLike>,
+      burnToken: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    depositForBurn(
+      amount: PromiseOrValue<BigNumberish>,
+      destinationDomain: PromiseOrValue<BigNumberish>,
+      mintRecipient: PromiseOrValue<BytesLike>,
+      burnToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    hook(
-      sender: PromiseOrValue<string>,
-      amount0: PromiseOrValue<BigNumberish>,
-      amount1: PromiseOrValue<BigNumberish>,
-      data: PromiseOrValue<BytesLike>,
+    depositForBurn(
+      amount: PromiseOrValue<BigNumberish>,
+      destinationDomain: PromiseOrValue<BigNumberish>,
+      mintRecipient: PromiseOrValue<BytesLike>,
+      burnToken: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

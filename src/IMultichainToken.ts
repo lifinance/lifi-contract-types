@@ -22,29 +22,29 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface IAlgebraFactoryInterface extends utils.Interface {
+export interface IMultichainTokenInterface extends utils.Interface {
   functions: {
-    "createPool(address,address)": FunctionFragment;
+    "underlying()": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "createPool"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "underlying"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "createPool",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    functionFragment: "underlying",
+    values?: undefined
   ): string;
 
-  decodeFunctionResult(functionFragment: "createPool", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "underlying", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface IAlgebraFactory extends BaseContract {
+export interface IMultichainToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IAlgebraFactoryInterface;
+  interface: IMultichainTokenInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,41 +66,29 @@ export interface IAlgebraFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    underlying(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  createPool(
-    tokenA: PromiseOrValue<string>,
-    tokenB: PromiseOrValue<string>,
+  underlying(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    underlying(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    underlying(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    createPool(
-      tokenA: PromiseOrValue<string>,
-      tokenB: PromiseOrValue<string>,
+    underlying(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
