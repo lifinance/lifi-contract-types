@@ -30,6 +30,7 @@ import type {
 export interface ERC20ProxyInterface extends utils.Interface {
   functions: {
     "authorizedCallers(address)": FunctionFragment;
+    "bla9000832()": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -43,6 +44,7 @@ export interface ERC20ProxyInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "authorizedCallers"
+      | "bla9000832"
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "owner"
@@ -56,6 +58,10 @@ export interface ERC20ProxyInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "authorizedCallers",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "bla9000832",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "cancelOwnershipTransfer",
@@ -100,6 +106,7 @@ export interface ERC20ProxyInterface extends utils.Interface {
     functionFragment: "authorizedCallers",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "bla9000832", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "cancelOwnershipTransfer",
     data: BytesLike
@@ -223,6 +230,10 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    bla9000832(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -267,6 +278,10 @@ export interface ERC20Proxy extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  bla9000832(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   cancelOwnershipTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -310,6 +325,8 @@ export interface ERC20Proxy extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    bla9000832(overrides?: CallOverrides): Promise<void>;
 
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
@@ -392,6 +409,10 @@ export interface ERC20Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    bla9000832(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -435,6 +456,10 @@ export interface ERC20Proxy extends BaseContract {
     authorizedCallers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    bla9000832(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     cancelOwnershipTransfer(
