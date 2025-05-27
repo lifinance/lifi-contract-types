@@ -1,4 +1,5 @@
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as extCodeHelperSol from "./ExtCodeHelper.sol";
 export * as iChainflipSol from "./IChainflip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
@@ -71,6 +72,7 @@ export { IERC20Proxy__factory } from "./IERC20Proxy__factory";
 export { IERC5267__factory } from "./IERC5267__factory";
 export { IERC721Receiver__factory } from "./IERC721Receiver__factory";
 export { IExecutor__factory } from "./IExecutor__factory";
+export { IExtcodeHelper__factory } from "./IExtcodeHelper__factory";
 export { IGasZip__factory } from "./IGasZip__factory";
 export { IGatewayRouter__factory } from "./IGatewayRouter__factory";
 export { IGlacisAirlift__factory } from "./IGlacisAirlift__factory";
