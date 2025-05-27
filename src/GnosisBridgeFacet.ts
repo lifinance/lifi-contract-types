@@ -99,31 +99,31 @@ export declare namespace LibSwap {
 
 export interface GnosisBridgeFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
-    "swapAndStartBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "startBridgeTokensViaGnosisBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaGnosisBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaXDaiBridge"
-      | "swapAndStartBridgeTokensViaXDaiBridge"
+      | "startBridgeTokensViaGnosisBridge"
+      | "swapAndStartBridgeTokensViaGnosisBridge"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaXDaiBridge",
+    functionFragment: "startBridgeTokensViaGnosisBridge",
     values: [ILiFi.BridgeDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaXDaiBridge",
+    functionFragment: "swapAndStartBridgeTokensViaGnosisBridge",
     values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaXDaiBridge",
+    functionFragment: "startBridgeTokensViaGnosisBridge",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaXDaiBridge",
+    functionFragment: "swapAndStartBridgeTokensViaGnosisBridge",
     data: BytesLike
   ): Result;
 
@@ -263,36 +263,36 @@ export interface GnosisBridgeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaXDaiBridge(
+    startBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaXDaiBridge(
+    swapAndStartBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaXDaiBridge(
+  startBridgeTokensViaGnosisBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaXDaiBridge(
+  swapAndStartBridgeTokensViaGnosisBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaXDaiBridge(
+    startBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaXDaiBridge(
+    swapAndStartBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: CallOverrides
@@ -396,12 +396,12 @@ export interface GnosisBridgeFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaXDaiBridge(
+    startBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaXDaiBridge(
+    swapAndStartBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -409,12 +409,12 @@ export interface GnosisBridgeFacet extends BaseContract {
   };
 
   populateTransaction: {
-    startBridgeTokensViaXDaiBridge(
+    startBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaXDaiBridge(
+    swapAndStartBridgeTokensViaGnosisBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
