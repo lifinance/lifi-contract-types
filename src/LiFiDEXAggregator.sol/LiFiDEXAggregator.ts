@@ -37,6 +37,8 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "confirmOwnershipTransfer()": FunctionFragment;
     "dragonswapV2SwapCallback(int256,int256,bytes)": FunctionFragment;
     "fusionXV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "hyperswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "laminarV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pancakeV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "pause()": FunctionFragment;
@@ -65,6 +67,8 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "confirmOwnershipTransfer"
       | "dragonswapV2SwapCallback"
       | "fusionXV3SwapCallback"
+      | "hyperswapV3SwapCallback"
+      | "laminarV3SwapCallback"
       | "owner"
       | "pancakeV3SwapCallback"
       | "pause"
@@ -119,6 +123,22 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "fusionXV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hyperswapV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "laminarV3SwapCallback",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -256,6 +276,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "fusionXV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "hyperswapV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "laminarV3SwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -448,6 +476,20 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    laminarV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pancakeV3SwapCallback(
@@ -593,6 +635,20 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  hyperswapV3SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  laminarV3SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   pancakeV3SwapCallback(
@@ -728,6 +784,20 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<void>;
 
     fusionXV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    laminarV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
@@ -926,6 +996,20 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    laminarV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pancakeV3SwapCallback(
@@ -1066,6 +1150,20 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     fusionXV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    laminarV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
