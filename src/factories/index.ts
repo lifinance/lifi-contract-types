@@ -77,7 +77,6 @@ export { IExecutor__factory } from "./IExecutor__factory";
 export { IGasZip__factory } from "./IGasZip__factory";
 export { IGatewayRouter__factory } from "./IGatewayRouter__factory";
 export { IGlacisAirlift__factory } from "./IGlacisAirlift__factory";
-export { IGnosisBridgeRouter__factory } from "./IGnosisBridgeRouter__factory";
 export { IL1StandardBridge__factory } from "./IL1StandardBridge__factory";
 export { ILiFi__factory } from "./ILiFi__factory";
 export { IMayan__factory } from "./IMayan__factory";
