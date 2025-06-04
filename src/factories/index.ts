@@ -111,6 +111,7 @@ export { OwnershipFacet__factory } from "./OwnershipFacet__factory";
 export { PeripheryRegistryFacet__factory } from "./PeripheryRegistryFacet__factory";
 export { Permit2Proxy__factory } from "./Permit2Proxy__factory";
 export { PermitHash__factory } from "./PermitHash__factory";
+export { PioneerFacet__factory } from "./PioneerFacet__factory";
 export { PolygonBridgeFacet__factory } from "./PolygonBridgeFacet__factory";
 export { ReceiverAcrossV3__factory } from "./ReceiverAcrossV3__factory";
 export { ReceiverChainflip__factory } from "./ReceiverChainflip__factory";
