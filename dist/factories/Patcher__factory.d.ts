@@ -1,0 +1,209 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { Patcher, PatcherInterface } from "../Patcher";
+declare type PatcherConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class Patcher__factory extends ContractFactory {
+    constructor(...args: PatcherConstructorParams);
+    deploy(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<Patcher>;
+    getDeployTransaction(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): Patcher;
+    connect(signer: Signer): Patcher__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50610fa08061001c5f395ff3fe60806040526004361061003e575f3560e01c80634d91497914610042578063922c8daa1461006c578063b7c527771461007f578063efae576b14610092575b5f5ffd5b6100556100503660046109ad565b6100a5565b604051610063929190610aa5565b60405180910390f35b61005561007a366004610b01565b6100cf565b61005561008d366004610bd9565b6102be565b6100556100a0366004610ce7565b6104c8565b5f60606100bb8d8d8d8d8d8d8d8d8d8d8d6104f0565b915091509b509b9950505050505050505050565b6040517f70a082310000000000000000000000000000000000000000000000000000000081523360048201525f90606090829073ffffffffffffffffffffffffffffffffffffffff8f16906370a0823190602401602060405180830381865afa15801561013e573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906101629190610dc3565b6040517f23b872dd0000000000000000000000000000000000000000000000000000000081523360048201523060248201526044810182905290915073ffffffffffffffffffffffffffffffffffffffff8f16906323b872dd906064016020604051808303815f875af11580156101db573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906101ff9190610dda565b506040517f095ea7b300000000000000000000000000000000000000000000000000000000815273ffffffffffffffffffffffffffffffffffffffff8b81166004830152602482018390528f169063095ea7b3906044016020604051808303815f875af1158015610272573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906102969190610dda565b506102a98d8d8d8d8d8d8d8d8d8d61059b565b92509250509b509b9950505050505050505050565b5f60605f8e73ffffffffffffffffffffffffffffffffffffffff166370a08231336040518263ffffffff1660e01b8152600401610317919073ffffffffffffffffffffffffffffffffffffffff91909116815260200190565b602060405180830381865afa158015610332573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906103569190610dc3565b90508e73ffffffffffffffffffffffffffffffffffffffff166323b872dd3330846040518463ffffffff1660e01b81526004016103c19392919073ffffffffffffffffffffffffffffffffffffffff9384168152919092166020820152604081019190915260600190565b6020604051808303815f875af11580156103dd573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906104019190610dda565b508e73ffffffffffffffffffffffffffffffffffffffff1663095ea7b38b836040518363ffffffff1660e01b815260040161045e92919073ffffffffffffffffffffffffffffffffffffffff929092168252602082015260400190565b6020604051808303815f875af115801561047a573d5f5f3e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061049e9190610dda565b506104b28e8e8e8e8e8e8e8e8e8e8e6104f0565b92509250509c509c9a5050505050505050505050565b5f60606104dd8c8c8c8c8c8c8c8c8c8c61059b565b915091509a509a98505050505050505050565b5f60608b8a14158061050257508b8414155b15610539576040517f568efce200000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f87878080601f0160208091040260200160405190810160405280939291908181526020018383808284375f81840152601f19601f82011690508083019250505050505050905061058f8e8e8e8e8a8a87610615565b6102a98a8a83876106c0565b5f60605f6105aa8d8d8d6107ab565b90505f88888080601f0160208091040260200160405190810160405280939291908181526020018383808284375f920191909152509293506105f49250839150899050888561085b565b6106008b8b83886106c0565b9350935050509a509a98505050505050505050565b5f5b868110156106b6575f61067389898481811061063557610635610dfc565b905060200201602081019061064a9190610e29565b88888581811061065c5761065c610dfc565b905060200281019061066e9190610e42565b6107ab565b9050365f86868581811061068957610689610dfc565b905060200281019061069b9190610ea3565b915091506106ab8583838661085b565b505050600101610617565b5050505050505050565b5f60608215610736578573ffffffffffffffffffffffffffffffffffffffff16846040516106ee9190610f07565b5f60405180830381855af49150503d805f8114610726576040519150601f19603f3d011682016040523d82523d5f602084013e61072b565b606091505b5090925090506107a2565b8573ffffffffffffffffffffffffffffffffffffffff16858560405161075c9190610f07565b5f6040518083038185875af1925050503d805f8114610796576040519150601f19603f3d011682016040523d82523d5f602084013e61079b565b606091505b5090925090505b94509492505050565b5f5f5f8573ffffffffffffffffffffffffffffffffffffffff1685856040516107d5929190610f1d565b5f60405180830381855afa9150503d805f811461080d576040519150601f19603f3d011682016040523d82523d5f602084013e610812565b606091505b50915091508161084e576040517f9711393900000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6020015195945050505050565b5f5b82811015610890576108888585858481811061087b5761087b610dfc565b9050602002013584610897565b60010161085d565b5050505050565b82516108a4836020610f2c565b11156108dc576040517faaf9032800000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b910160200152565b5f5f83601f8401126108f4575f5ffd5b50813567ffffffffffffffff81111561090b575f5ffd5b6020830191508360208260051b8501011115610925575f5ffd5b9250929050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461094f575f5ffd5b919050565b5f5f83601f840112610964575f5ffd5b50813567ffffffffffffffff81111561097b575f5ffd5b602083019150836020828501011115610925575f5ffd5b801515811461099f575f5ffd5b50565b803561094f81610992565b5f5f5f5f5f5f5f5f5f5f5f60e08c8e0312156109c7575f5ffd5b8b3567ffffffffffffffff8111156109dd575f5ffd5b6109e98e828f016108e4565b909c509a505060208c013567ffffffffffffffff811115610a08575f5ffd5b610a148e828f016108e4565b909a509850610a27905060408d0161092c565b965060608c0135955060808c013567ffffffffffffffff811115610a49575f5ffd5b610a558e828f01610954565b90965094505060a08c013567ffffffffffffffff811115610a74575f5ffd5b610a808e828f016108e4565b9094509250610a93905060c08d016109a2565b90509295989b509295989b9093969950565b8215158152604060208201525f82518060408401528060208501606085015e5f6060828501015260607fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168401019150509392505050565b5f5f5f5f5f5f5f5f5f5f5f6101008c8e031215610b1c575f5ffd5b610b258c61092c565b9a50610b3360208d0161092c565b995060408c013567ffffffffffffffff811115610b4e575f5ffd5b610b5a8e828f01610954565b909a509850610b6d905060608d0161092c565b965060808c0135955060a08c013567ffffffffffffffff811115610b8f575f5ffd5b610b9b8e828f01610954565b90965094505060c08c013567ffffffffffffffff811115610bba575f5ffd5b610bc68e828f016108e4565b9094509250610a93905060e08d016109a2565b5f5f5f5f5f5f5f5f5f5f5f5f6101008d8f031215610bf5575f5ffd5b610bfe8d61092c565b9b5067ffffffffffffffff60208e01351115610c18575f5ffd5b610c288e60208f01358f016108e4565b909b50995067ffffffffffffffff60408e01351115610c45575f5ffd5b610c558e60408f01358f016108e4565b9099509750610c6660608e0161092c565b965060808d0135955067ffffffffffffffff60a08e01351115610c87575f5ffd5b610c978e60a08f01358f01610954565b909550935067ffffffffffffffff60c08e01351115610cb4575f5ffd5b610cc48e60c08f01358f016108e4565b9093509150610cd560e08e016109a2565b90509295989b509295989b509295989b565b5f5f5f5f5f5f5f5f5f5f60e08b8d031215610d00575f5ffd5b610d098b61092c565b995060208b013567ffffffffffffffff811115610d24575f5ffd5b610d308d828e01610954565b909a509850610d43905060408c0161092c565b965060608b0135955060808b013567ffffffffffffffff811115610d65575f5ffd5b610d718d828e01610954565b90965094505060a08b013567ffffffffffffffff811115610d90575f5ffd5b610d9c8d828e016108e4565b90945092505060c08b0135610db081610992565b809150509295989b9194979a5092959850565b5f60208284031215610dd3575f5ffd5b5051919050565b5f60208284031215610dea575f5ffd5b8151610df581610992565b9392505050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52603260045260245ffd5b5f60208284031215610e39575f5ffd5b610df58261092c565b5f5f83357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe1843603018112610e75575f5ffd5b83018035915067ffffffffffffffff821115610e8f575f5ffd5b602001915036819003821315610925575f5ffd5b5f5f83357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe1843603018112610ed6575f5ffd5b83018035915067ffffffffffffffff821115610ef0575f5ffd5b6020019150600581901b3603821315610925575f5ffd5b5f82518060208501845e5f920191825250919050565b818382375f9101908152919050565b80820180821115610f64577f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b9291505056fea264697066735822122071ab344d906ebfa8def0446ffef2f64ebb978226ec4817c331de9ec08a2c4dff64736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "depositAndExecuteWithDynamicPatches";
+        readonly inputs: readonly [{
+            readonly name: "tokenAddress";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "valueSource";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "valueGetter";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "finalTarget";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "offsets";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }, {
+            readonly name: "delegateCall";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "success";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "depositAndExecuteWithMultiplePatches";
+        readonly inputs: readonly [{
+            readonly name: "tokenAddress";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "valueSources";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "valueGetters";
+            readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
+        }, {
+            readonly name: "finalTarget";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "offsetGroups";
+            readonly type: "uint256[][]";
+            readonly internalType: "uint256[][]";
+        }, {
+            readonly name: "delegateCall";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "success";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "executeWithDynamicPatches";
+        readonly inputs: readonly [{
+            readonly name: "valueSource";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "valueGetter";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "finalTarget";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "offsets";
+            readonly type: "uint256[]";
+            readonly internalType: "uint256[]";
+        }, {
+            readonly name: "delegateCall";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "success";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "executeWithMultiplePatches";
+        readonly inputs: readonly [{
+            readonly name: "valueSources";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "valueGetters";
+            readonly type: "bytes[]";
+            readonly internalType: "bytes[]";
+        }, {
+            readonly name: "finalTarget";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "value";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "offsetGroups";
+            readonly type: "uint256[][]";
+            readonly internalType: "uint256[][]";
+        }, {
+            readonly name: "delegateCall";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "success";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }, {
+            readonly name: "returnData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "error";
+        readonly name: "FailedToGetDynamicValue";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidPatchOffset";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "MismatchedArrayLengths";
+        readonly inputs: readonly [];
+    }];
+    static createInterface(): PatcherInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): Patcher;
+}
+export {};
