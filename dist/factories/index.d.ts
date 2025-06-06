@@ -124,6 +124,5 @@ export { ThorSwapFacet__factory } from "./ThorSwapFacet__factory";
 export { TimelockController__factory } from "./TimelockController__factory";
 export { TransferrableOwnership__factory } from "./TransferrableOwnership__factory";
 export { WETH__factory } from "./WETH__factory";
-export { WhitelistManagerFacet__factory } from "./WhitelistManagerFacet__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
 export { WithdrawablePeriphery__factory } from "./WithdrawablePeriphery__factory";
