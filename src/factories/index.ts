@@ -77,9 +77,6 @@ export { IExecutor__factory } from "./IExecutor__factory";
 export { IGasZip__factory } from "./IGasZip__factory";
 export { IGatewayRouter__factory } from "./IGatewayRouter__factory";
 export { IGlacisAirlift__factory } from "./IGlacisAirlift__factory";
-export { IGnosisBridgeRouter__factory } from "./IGnosisBridgeRouter__factory";
-export { IHyperswapV3Factory__factory } from "./IHyperswapV3Factory__factory";
-export { IHyperswapV3QuoterV2__factory } from "./IHyperswapV3QuoterV2__factory";
 export { IL1StandardBridge__factory } from "./IL1StandardBridge__factory";
 export { ILiFi__factory } from "./ILiFi__factory";
 export { IMayan__factory } from "./IMayan__factory";
@@ -101,6 +98,7 @@ export { IVelodromeV2PoolFactory__factory } from "./IVelodromeV2PoolFactory__fac
 export { IVelodromeV2Router__factory } from "./IVelodromeV2Router__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
+export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
