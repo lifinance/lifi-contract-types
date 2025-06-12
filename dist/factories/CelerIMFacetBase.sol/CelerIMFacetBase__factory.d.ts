@@ -467,6 +467,18 @@ export declare class CelerIMFacetBase__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
+        readonly name: "InsufficientBalance";
+        readonly inputs: readonly [{
+            readonly name: "required";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "balance";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+    }, {
+        readonly type: "error";
         readonly name: "InvalidAmount";
         readonly inputs: readonly [];
     }, {

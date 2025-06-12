@@ -594,6 +594,22 @@ const _abi = [
   },
   {
     type: "error",
+    name: "InsufficientBalance",
+    inputs: [
+      {
+        name: "required",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "balance",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+  },
+  {
+    type: "error",
     name: "InvalidAmount",
     inputs: [],
   },
