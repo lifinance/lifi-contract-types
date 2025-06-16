@@ -30,6 +30,30 @@ var _abi = [
         ],
         stateMutability: "nonpayable",
     },
+    {
+        type: "function",
+        name: "createTestPool",
+        inputs: [
+            {
+                name: "tokenA",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "tokenB",
+                type: "address",
+                internalType: "address",
+            },
+        ],
+        outputs: [
+            {
+                name: "pool",
+                type: "address",
+                internalType: "address",
+            },
+        ],
+        stateMutability: "nonpayable",
+    },
 ];
 var IAlgebraFactory__factory = /** @class */ (function () {
     function IAlgebraFactory__factory() {

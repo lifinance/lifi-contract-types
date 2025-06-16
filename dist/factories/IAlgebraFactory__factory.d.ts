@@ -20,6 +20,24 @@ export declare class IAlgebraFactory__factory {
             readonly internalType: "address";
         }];
         readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "createTestPool";
+        readonly inputs: readonly [{
+            readonly name: "tokenA";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "tokenB";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "pool";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "nonpayable";
     }];
     static createInterface(): IAlgebraFactoryInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IAlgebraFactory;

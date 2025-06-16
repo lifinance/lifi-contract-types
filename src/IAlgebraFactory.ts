@@ -25,16 +25,27 @@ import type {
 export interface IAlgebraFactoryInterface extends utils.Interface {
   functions: {
     "createPool(address,address)": FunctionFragment;
+    "createTestPool(address,address)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "createPool"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic: "createPool" | "createTestPool"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "createPool",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "createTestPool",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "createPool", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "createTestPool",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -71,6 +82,12 @@ export interface IAlgebraFactory extends BaseContract {
       tokenB: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    createTestPool(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   createPool(
@@ -79,8 +96,20 @@ export interface IAlgebraFactory extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  createTestPool(
+    tokenA: PromiseOrValue<string>,
+    tokenB: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     createPool(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    createTestPool(
       tokenA: PromiseOrValue<string>,
       tokenB: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -95,10 +124,22 @@ export interface IAlgebraFactory extends BaseContract {
       tokenB: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    createTestPool(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     createPool(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    createTestPool(
       tokenA: PromiseOrValue<string>,
       tokenB: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
