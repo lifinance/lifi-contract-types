@@ -99,6 +99,7 @@ export { IVelodromeV2PoolFactory__factory } from "./IVelodromeV2PoolFactory__fac
 export { IVelodromeV2Router__factory } from "./IVelodromeV2Router__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
+export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
