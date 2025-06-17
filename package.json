@@ -1,6 +1,6 @@
 {
   "name": "lifi-contract-typings",
-  "version": "3.4.115",
+  "version": "3.4.116",
   "description": "Typings from LiFi Solidity contracts",
   "author": "Ed Zynda",
   "license": "MIT",
@@ -23,10 +23,10 @@
       "import": "./dist/ISquidRouter.js",
       "types": "./dist/ISquidRouter.d.ts"
     },
-    "./IGasZip": {
-      "require": "./dist/IGasZip.js",
-      "import": "./dist/IGasZip.js",
-      "types": "./dist/IGasZip.d.ts"
+    "./GasZipFacet": {
+      "require": "./dist/GasZipFacet.js",
+      "import": "./dist/GasZipFacet.js",
+      "types": "./dist/GasZipFacet.d.ts"
     }
   },
   "files": [
