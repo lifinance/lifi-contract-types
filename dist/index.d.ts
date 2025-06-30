@@ -1,5 +1,7 @@
 import type * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
 export type { celerImFacetBaseSol };
+import type * as contractTestTwoSol from "./ContractTestTwo.sol";
+export type { contractTestTwoSol };
 import type * as iChainflipSol from "./IChainflip.sol";
 export type { iChainflipSol };
 import type * as iHopBridgeSol from "./IHopBridge.sol";
@@ -157,6 +159,8 @@ export type { CelerToken } from "./CelerIMFacetBase.sol/CelerToken";
 export { CelerToken__factory } from "./factories/CelerIMFacetBase.sol/CelerToken__factory";
 export { CelerIMFacetMutable__factory } from "./factories/CelerIMFacetMutable__factory";
 export { ChainflipFacet__factory } from "./factories/ChainflipFacet__factory";
+export type { TestContractOne } from "./ContractTestTwo.sol/TestContractOne";
+export { TestContractOne__factory } from "./factories/ContractTestTwo.sol/TestContractOne__factory";
 export { DeBridgeDlnFacet__factory } from "./factories/DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
