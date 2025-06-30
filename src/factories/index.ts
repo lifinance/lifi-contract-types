@@ -9,6 +9,7 @@ export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as liFiTimelockControllerSol from "./LiFiTimelockController.sol";
 export * as lidoWrapperSol from "./LidoWrapper.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
+export * as reentrancyVulnSol from "./ReentrancyVuln.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
 export { AccessControl__factory } from "./AccessControl__factory";
 export { AccessManagerFacet__factory } from "./AccessManagerFacet__factory";

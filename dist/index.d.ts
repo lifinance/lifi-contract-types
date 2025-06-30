@@ -14,6 +14,8 @@ import type * as lidoWrapperSol from "./LidoWrapper.sol";
 export type { lidoWrapperSol };
 import type * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
 export type { receiverStargateV2Sol };
+import type * as reentrancyVulnSol from "./ReentrancyVuln.sol";
+export type { reentrancyVulnSol };
 import type * as tokenWrapperSol from "./TokenWrapper.sol";
 export type { tokenWrapperSol };
 export type { AccessControl } from "./AccessControl";
@@ -293,6 +295,8 @@ export { ILayerZeroComposer__factory } from "./factories/ReceiverStargateV2.sol/
 export type { ReceiverStargateV2 } from "./ReceiverStargateV2.sol/ReceiverStargateV2";
 export { ReceiverStargateV2__factory } from "./factories/ReceiverStargateV2.sol/ReceiverStargateV2__factory";
 export { ReentrancyGuard__factory } from "./factories/ReentrancyGuard__factory";
+export type { TestContractOne } from "./ReentrancyVuln.sol/TestContractOne";
+export { TestContractOne__factory } from "./factories/ReentrancyVuln.sol/TestContractOne__factory";
 export { RelayerCelerIM__factory } from "./factories/RelayerCelerIM__factory";
 export { RelayFacet__factory } from "./factories/RelayFacet__factory";
 export { SafeTransferLib__factory } from "./factories/SafeTransferLib__factory";
