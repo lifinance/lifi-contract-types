@@ -2,6 +2,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as celerImFacetBaseSol from "./CelerIMFacetBase.sol";
+export * as contractFiveFacetTestSol from "./ContractFiveFacetTest.sol";
+export * as contractSixFacetTestSol from "./ContractSixFacetTest.sol";
 export * as iChainflipSol from "./IChainflip.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
@@ -26,6 +28,7 @@ export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
 export { ChainflipFacet__factory } from "./ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
+export { Diamond__factory } from "./Diamond__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./DiamondLoupeFacet__factory";
 export { ECDSA__factory } from "./ECDSA__factory";
