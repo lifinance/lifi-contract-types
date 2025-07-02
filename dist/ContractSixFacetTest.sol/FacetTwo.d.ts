@@ -1,0 +1,66 @@
+import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+export interface FacetTwoInterface extends utils.Interface {
+    functions: {
+        "getTreasury()": FunctionFragment;
+        "setTreasury(address)": FunctionFragment;
+        "treasury()": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "getTreasury" | "setTreasury" | "treasury"): FunctionFragment;
+    encodeFunctionData(functionFragment: "getTreasury", values?: undefined): string;
+    encodeFunctionData(functionFragment: "setTreasury", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "treasury", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "getTreasury", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setTreasury", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "treasury", data: BytesLike): Result;
+    events: {};
+}
+export interface FacetTwo extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: FacetTwoInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        getTreasury(overrides?: CallOverrides): Promise<[string]>;
+        setTreasury(_treasury: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        treasury(overrides?: CallOverrides): Promise<[string]>;
+    };
+    getTreasury(overrides?: CallOverrides): Promise<string>;
+    setTreasury(_treasury: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    treasury(overrides?: CallOverrides): Promise<string>;
+    callStatic: {
+        getTreasury(overrides?: CallOverrides): Promise<string>;
+        setTreasury(_treasury: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        treasury(overrides?: CallOverrides): Promise<string>;
+    };
+    filters: {};
+    estimateGas: {
+        getTreasury(overrides?: CallOverrides): Promise<BigNumber>;
+        setTreasury(_treasury: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        treasury(overrides?: CallOverrides): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        getTreasury(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setTreasury(_treasury: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        treasury(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    };
+}
