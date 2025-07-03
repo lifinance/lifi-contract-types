@@ -92,8 +92,6 @@ export { IRootChainManager__factory } from "./IRootChainManager__factory";
 export { ISignatureTransfer__factory } from "./ISignatureTransfer__factory";
 export { ISquidRouter__factory } from "./ISquidRouter__factory";
 export { ISymbiosisMetaRouter__factory } from "./ISymbiosisMetaRouter__factory";
-export { ISyncSwapPool__factory } from "./ISyncSwapPool__factory";
-export { ISyncSwapVault__factory } from "./ISyncSwapVault__factory";
 export { IThorSwap__factory } from "./IThorSwap__factory";
 export { IVelodromeV2Pool__factory } from "./IVelodromeV2Pool__factory";
 export { IVelodromeV2PoolCallee__factory } from "./IVelodromeV2PoolCallee__factory";
@@ -101,7 +99,6 @@ export { IVelodromeV2PoolFactory__factory } from "./IVelodromeV2PoolFactory__fac
 export { IVelodromeV2Router__factory } from "./IVelodromeV2Router__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
-export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
