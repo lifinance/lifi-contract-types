@@ -24,6 +24,7 @@ export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet_
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { CelerIMFacetMutable__factory } from "./CelerIMFacetMutable__factory";
 export { ChainflipFacet__factory } from "./ChainflipFacet__factory";
+export { ContractThreeTest__factory } from "./ContractThreeTest__factory";
 export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
@@ -95,8 +96,6 @@ export { IRootChainManager__factory } from "./IRootChainManager__factory";
 export { ISignatureTransfer__factory } from "./ISignatureTransfer__factory";
 export { ISquidRouter__factory } from "./ISquidRouter__factory";
 export { ISymbiosisMetaRouter__factory } from "./ISymbiosisMetaRouter__factory";
-export { ISyncSwapPool__factory } from "./ISyncSwapPool__factory";
-export { ISyncSwapVault__factory } from "./ISyncSwapVault__factory";
 export { IThorSwap__factory } from "./IThorSwap__factory";
 export { IVelodromeV2Pool__factory } from "./IVelodromeV2Pool__factory";
 export { IVelodromeV2PoolCallee__factory } from "./IVelodromeV2PoolCallee__factory";
@@ -104,7 +103,6 @@ export { IVelodromeV2PoolFactory__factory } from "./IVelodromeV2PoolFactory__fac
 export { IVelodromeV2Router__factory } from "./IVelodromeV2Router__factory";
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
-export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
