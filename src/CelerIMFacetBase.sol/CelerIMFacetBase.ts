@@ -25,7 +25,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
@@ -66,10 +66,31 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace PioneerFacet {
-  export type PioneerDataStruct = { refundAddress: PromiseOrValue<string> };
+export declare namespace CelerIM {
+  export type CelerIMDataStruct = {
+    maxSlippage: PromiseOrValue<BigNumberish>;
+    nonce: PromiseOrValue<BigNumberish>;
+    callTo: PromiseOrValue<BytesLike>;
+    callData: PromiseOrValue<BytesLike>;
+    messageBusFee: PromiseOrValue<BigNumberish>;
+    bridgeType: PromiseOrValue<BigNumberish>;
+  };
 
-  export type PioneerDataStructOutput = [string] & { refundAddress: string };
+  export type CelerIMDataStructOutput = [
+    number,
+    BigNumber,
+    string,
+    string,
+    BigNumber,
+    number
+  ] & {
+    maxSlippage: number;
+    nonce: BigNumber;
+    callTo: string;
+    callData: string;
+    messageBusFee: BigNumber;
+    bridgeType: number;
+  };
 }
 
 export declare namespace LibSwap {
@@ -102,47 +123,41 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PioneerFacetInterface extends utils.Interface {
+export interface CelerIMFacetBaseInterface extends utils.Interface {
   functions: {
-    "PIONEER_ADDRESS()": FunctionFragment;
-    "startBridgeTokensViaPioneer((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPioneer((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address))": FunctionFragment;
+    "relayer()": FunctionFragment;
+    "startBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
+    "swapAndStartBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "PIONEER_ADDRESS"
-      | "startBridgeTokensViaPioneer"
-      | "swapAndStartBridgeTokensViaPioneer"
+      | "relayer"
+      | "startBridgeTokensViaCelerIM"
+      | "swapAndStartBridgeTokensViaCelerIM"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "relayer", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "PIONEER_ADDRESS",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaCelerIM",
+    values: [ILiFi.BridgeDataStruct, CelerIM.CelerIMDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPioneer",
-    values: [ILiFi.BridgeDataStruct, PioneerFacet.PioneerDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPioneer",
+    functionFragment: "swapAndStartBridgeTokensViaCelerIM",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PioneerFacet.PioneerDataStruct
+      CelerIM.CelerIMDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "relayer", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "PIONEER_ADDRESS",
+    functionFragment: "startBridgeTokensViaCelerIM",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPioneer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPioneer",
+    functionFragment: "swapAndStartBridgeTokensViaCelerIM",
     data: BytesLike
   ): Result;
 
@@ -153,7 +168,6 @@ export interface PioneerFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "PioneerRefundAddressRegistered(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -162,9 +176,6 @@ export interface PioneerFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "PioneerRefundAddressRegistered"
-  ): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -259,23 +270,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PioneerRefundAddressRegisteredEventObject {
-  refundTo: string;
-}
-export type PioneerRefundAddressRegisteredEvent = TypedEvent<
-  [string],
-  PioneerRefundAddressRegisteredEventObject
->;
-
-export type PioneerRefundAddressRegisteredEventFilter =
-  TypedEventFilter<PioneerRefundAddressRegisteredEvent>;
-
-export interface PioneerFacet extends BaseContract {
+export interface CelerIMFacetBase extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PioneerFacetInterface;
+  interface: CelerIMFacetBaseInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -297,50 +297,50 @@ export interface PioneerFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    PIONEER_ADDRESS(overrides?: CallOverrides): Promise<[string]>;
+    relayer(overrides?: CallOverrides): Promise<[string]>;
 
-    startBridgeTokensViaPioneer(
+    startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaPioneer(
+    swapAndStartBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  PIONEER_ADDRESS(overrides?: CallOverrides): Promise<string>;
+  relayer(overrides?: CallOverrides): Promise<string>;
 
-  startBridgeTokensViaPioneer(
+  startBridgeTokensViaCelerIM(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _pioneerData: PioneerFacet.PioneerDataStruct,
+    _celerIMData: CelerIM.CelerIMDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaPioneer(
+  swapAndStartBridgeTokensViaCelerIM(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _pioneerData: PioneerFacet.PioneerDataStruct,
+    _celerIMData: CelerIM.CelerIMDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    PIONEER_ADDRESS(overrides?: CallOverrides): Promise<string>;
+    relayer(overrides?: CallOverrides): Promise<string>;
 
-    startBridgeTokensViaPioneer(
+    startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPioneer(
+    swapAndStartBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -439,45 +439,38 @@ export interface PioneerFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-
-    "PioneerRefundAddressRegistered(address)"(
-      refundTo?: PromiseOrValue<string> | null
-    ): PioneerRefundAddressRegisteredEventFilter;
-    PioneerRefundAddressRegistered(
-      refundTo?: PromiseOrValue<string> | null
-    ): PioneerRefundAddressRegisteredEventFilter;
   };
 
   estimateGas: {
-    PIONEER_ADDRESS(overrides?: CallOverrides): Promise<BigNumber>;
+    relayer(overrides?: CallOverrides): Promise<BigNumber>;
 
-    startBridgeTokensViaPioneer(
+    startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaPioneer(
+    swapAndStartBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    PIONEER_ADDRESS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    relayer(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaPioneer(
+    startBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaPioneer(
+    swapAndStartBridgeTokensViaCelerIM(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _pioneerData: PioneerFacet.PioneerDataStruct,
+      _celerIMData: CelerIM.CelerIMDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
