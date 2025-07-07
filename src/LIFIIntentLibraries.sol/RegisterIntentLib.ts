@@ -4,10 +4,9 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
-  ContractTransaction,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -20,31 +19,34 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface ISyncSwapVaultInterface extends utils.Interface {
+export interface RegisterIntentLibInterface extends utils.Interface {
   functions: {
-    "deposit(address,address)": FunctionFragment;
+    "getLocksHash(uint256[2][])": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "deposit"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "getLocksHash"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "deposit",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    functionFragment: "getLocksHash",
+    values: [[PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>][]]
   ): string;
 
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getLocksHash",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
 
-export interface ISyncSwapVault extends BaseContract {
+export interface RegisterIntentLib extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ISyncSwapVaultInterface;
+  interface: RegisterIntentLibInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,42 +68,52 @@ export interface ISyncSwapVault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    getLocksHash(
+      idsAndAmounts: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ][],
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
-  deposit(
-    token: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
+  getLocksHash(
+    idsAndAmounts: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ][],
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
+    getLocksHash(
+      idsAndAmounts: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ][],
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    getLocksHash(
+      idsAndAmounts: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ][],
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    getLocksHash(
+      idsAndAmounts: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ][],
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
