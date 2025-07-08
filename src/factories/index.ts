@@ -22,6 +22,7 @@ export { CBridgeFacetPacked__factory } from "./CBridgeFacetPacked__factory";
 export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet__factory";
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { ChainflipFacet__factory } from "./ChainflipFacet__factory";
+export { ContractThreeTest__factory } from "./ContractThreeTest__factory";
 export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
 export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
