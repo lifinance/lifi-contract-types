@@ -1,0 +1,111 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+export declare type MandateOutputStruct = {
+    oracle: PromiseOrValue<BytesLike>;
+    settler: PromiseOrValue<BytesLike>;
+    chainId: PromiseOrValue<BigNumberish>;
+    token: PromiseOrValue<BytesLike>;
+    amount: PromiseOrValue<BigNumberish>;
+    recipient: PromiseOrValue<BytesLike>;
+    call: PromiseOrValue<BytesLike>;
+    context: PromiseOrValue<BytesLike>;
+};
+export declare type MandateOutputStructOutput = [
+    string,
+    string,
+    BigNumber,
+    string,
+    BigNumber,
+    string,
+    string,
+    string
+] & {
+    oracle: string;
+    settler: string;
+    chainId: BigNumber;
+    token: string;
+    amount: BigNumber;
+    recipient: string;
+    call: string;
+    context: string;
+};
+export declare type StandardOrderStruct = {
+    user: PromiseOrValue<string>;
+    nonce: PromiseOrValue<BigNumberish>;
+    originChainId: PromiseOrValue<BigNumberish>;
+    expires: PromiseOrValue<BigNumberish>;
+    fillDeadline: PromiseOrValue<BigNumberish>;
+    localOracle: PromiseOrValue<string>;
+    inputs: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>][];
+    outputs: MandateOutputStruct[];
+};
+export declare type StandardOrderStructOutput = [
+    string,
+    BigNumber,
+    BigNumber,
+    number,
+    number,
+    string,
+    [
+        BigNumber,
+        BigNumber
+    ][],
+    MandateOutputStructOutput[]
+] & {
+    user: string;
+    nonce: BigNumber;
+    originChainId: BigNumber;
+    expires: number;
+    fillDeadline: number;
+    localOracle: string;
+    inputs: [BigNumber, BigNumber][];
+    outputs: MandateOutputStructOutput[];
+};
+export interface IBroadcastableSettlerInterface extends utils.Interface {
+    functions: {
+        "broadcast((address,uint256,uint256,uint32,uint32,address,uint256[2][],(bytes32,bytes32,uint256,bytes32,uint256,bytes32,bytes,bytes)[]))": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "broadcast"): FunctionFragment;
+    encodeFunctionData(functionFragment: "broadcast", values: [StandardOrderStruct]): string;
+    decodeFunctionResult(functionFragment: "broadcast", data: BytesLike): Result;
+    events: {};
+}
+export interface IBroadcastableSettler extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: IBroadcastableSettlerInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        broadcast(order: StandardOrderStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    broadcast(order: StandardOrderStruct, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        broadcast(order: StandardOrderStruct, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {};
+    estimateGas: {
+        broadcast(order: StandardOrderStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        broadcast(order: StandardOrderStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
