@@ -12,11 +12,7 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type {
-  FunctionFragment,
-  Result,
-  EventFragment,
-} from "@ethersproject/abi";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -26,7 +22,7 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface DexManagerFacetInterface extends utils.Interface {
+export interface IDexManagerFacetInterface extends utils.Interface {
   functions: {
     "addDex(address)": FunctionFragment;
     "approvedDexs()": FunctionFragment;
@@ -110,51 +106,15 @@ export interface DexManagerFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {
-    "DexAdded(address)": EventFragment;
-    "DexRemoved(address)": EventFragment;
-    "FunctionSignatureApprovalChanged(bytes4,bool)": EventFragment;
-  };
-
-  getEvent(nameOrSignatureOrTopic: "DexAdded"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "DexRemoved"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "FunctionSignatureApprovalChanged"
-  ): EventFragment;
+  events: {};
 }
 
-export interface DexAddedEventObject {
-  dexAddress: string;
-}
-export type DexAddedEvent = TypedEvent<[string], DexAddedEventObject>;
-
-export type DexAddedEventFilter = TypedEventFilter<DexAddedEvent>;
-
-export interface DexRemovedEventObject {
-  dexAddress: string;
-}
-export type DexRemovedEvent = TypedEvent<[string], DexRemovedEventObject>;
-
-export type DexRemovedEventFilter = TypedEventFilter<DexRemovedEvent>;
-
-export interface FunctionSignatureApprovalChangedEventObject {
-  functionSignature: string;
-  approved: boolean;
-}
-export type FunctionSignatureApprovalChangedEvent = TypedEvent<
-  [string, boolean],
-  FunctionSignatureApprovalChangedEventObject
->;
-
-export type FunctionSignatureApprovalChangedEventFilter =
-  TypedEventFilter<FunctionSignatureApprovalChangedEvent>;
-
-export interface DexManagerFacet extends BaseContract {
+export interface IDexManagerFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: DexManagerFacetInterface;
+  interface: IDexManagerFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -298,28 +258,7 @@ export interface DexManagerFacet extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {
-    "DexAdded(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexAddedEventFilter;
-    DexAdded(dexAddress?: PromiseOrValue<string> | null): DexAddedEventFilter;
-
-    "DexRemoved(address)"(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
-    DexRemoved(
-      dexAddress?: PromiseOrValue<string> | null
-    ): DexRemovedEventFilter;
-
-    "FunctionSignatureApprovalChanged(bytes4,bool)"(
-      functionSignature?: PromiseOrValue<BytesLike> | null,
-      approved?: PromiseOrValue<boolean> | null
-    ): FunctionSignatureApprovalChangedEventFilter;
-    FunctionSignatureApprovalChanged(
-      functionSignature?: PromiseOrValue<BytesLike> | null,
-      approved?: PromiseOrValue<boolean> | null
-    ): FunctionSignatureApprovalChangedEventFilter;
-  };
+  filters: {};
 
   estimateGas: {
     addDex(
