@@ -11,8 +11,9 @@
     "baseUrl": "./",
     "rootDir": "./src",
     "composite": true,
-    "noEmitOnError": false
+    "noEmitOnError": false,
+    "skipLibCheck": true /* Skip type checking of declaration files */
   },
   "include": ["src"],
-  "exclude": ["dist"]
+  "exclude": ["dist", "node_modules"]
 }
