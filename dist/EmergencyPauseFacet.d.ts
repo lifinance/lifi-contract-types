@@ -46,35 +46,35 @@ export interface DiamondCutEventObject {
     _init: string;
     _calldata: string;
 }
-export declare type DiamondCutEvent = TypedEvent<[
+export type DiamondCutEvent = TypedEvent<[
     LibDiamond.FacetCutStructOutput[],
     string,
     string
 ], DiamondCutEventObject>;
-export declare type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
+export type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
 export interface EmergencyFacetRemovedEventObject {
     facetAddress: string;
     msgSender: string;
 }
-export declare type EmergencyFacetRemovedEvent = TypedEvent<[
+export type EmergencyFacetRemovedEvent = TypedEvent<[
     string,
     string
 ], EmergencyFacetRemovedEventObject>;
-export declare type EmergencyFacetRemovedEventFilter = TypedEventFilter<EmergencyFacetRemovedEvent>;
+export type EmergencyFacetRemovedEventFilter = TypedEventFilter<EmergencyFacetRemovedEvent>;
 export interface EmergencyPausedEventObject {
     msgSender: string;
 }
-export declare type EmergencyPausedEvent = TypedEvent<[
+export type EmergencyPausedEvent = TypedEvent<[
     string
 ], EmergencyPausedEventObject>;
-export declare type EmergencyPausedEventFilter = TypedEventFilter<EmergencyPausedEvent>;
+export type EmergencyPausedEventFilter = TypedEventFilter<EmergencyPausedEvent>;
 export interface EmergencyUnpausedEventObject {
     msgSender: string;
 }
-export declare type EmergencyUnpausedEvent = TypedEvent<[
+export type EmergencyUnpausedEvent = TypedEvent<[
     string
 ], EmergencyUnpausedEventObject>;
-export declare type EmergencyUnpausedEventFilter = TypedEventFilter<EmergencyUnpausedEvent>;
+export type EmergencyUnpausedEventFilter = TypedEventFilter<EmergencyUnpausedEvent>;
 export interface EmergencyPauseFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

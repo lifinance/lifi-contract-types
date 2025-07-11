@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ShortStrings, ShortStringsInterface } from "../ShortStrings";
-declare type ShortStringsConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ShortStringsConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ShortStrings__factory extends ContractFactory {
     constructor(...args: ShortStringsConstructorParams);
     deploy(overrides?: Overrides & {

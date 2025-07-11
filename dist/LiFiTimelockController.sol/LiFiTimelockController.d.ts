@@ -182,20 +182,20 @@ export interface CallExecutedEventObject {
     value: BigNumber;
     data: string;
 }
-export declare type CallExecutedEvent = TypedEvent<[
+export type CallExecutedEvent = TypedEvent<[
     string,
     BigNumber,
     string,
     BigNumber,
     string
 ], CallExecutedEventObject>;
-export declare type CallExecutedEventFilter = TypedEventFilter<CallExecutedEvent>;
+export type CallExecutedEventFilter = TypedEventFilter<CallExecutedEvent>;
 export interface CallSaltEventObject {
     id: string;
     salt: string;
 }
-export declare type CallSaltEvent = TypedEvent<[string, string], CallSaltEventObject>;
-export declare type CallSaltEventFilter = TypedEventFilter<CallSaltEvent>;
+export type CallSaltEvent = TypedEvent<[string, string], CallSaltEventObject>;
+export type CallSaltEventFilter = TypedEventFilter<CallSaltEvent>;
 export interface CallScheduledEventObject {
     id: string;
     index: BigNumber;
@@ -205,7 +205,7 @@ export interface CallScheduledEventObject {
     predecessor: string;
     delay: BigNumber;
 }
-export declare type CallScheduledEvent = TypedEvent<[
+export type CallScheduledEvent = TypedEvent<[
     string,
     BigNumber,
     string,
@@ -214,61 +214,61 @@ export declare type CallScheduledEvent = TypedEvent<[
     string,
     BigNumber
 ], CallScheduledEventObject>;
-export declare type CallScheduledEventFilter = TypedEventFilter<CallScheduledEvent>;
+export type CallScheduledEventFilter = TypedEventFilter<CallScheduledEvent>;
 export interface CancelledEventObject {
     id: string;
 }
-export declare type CancelledEvent = TypedEvent<[string], CancelledEventObject>;
-export declare type CancelledEventFilter = TypedEventFilter<CancelledEvent>;
+export type CancelledEvent = TypedEvent<[string], CancelledEventObject>;
+export type CancelledEventFilter = TypedEventFilter<CancelledEvent>;
 export interface DiamondAddressUpdatedEventObject {
     diamond: string;
 }
-export declare type DiamondAddressUpdatedEvent = TypedEvent<[
+export type DiamondAddressUpdatedEvent = TypedEvent<[
     string
 ], DiamondAddressUpdatedEventObject>;
-export declare type DiamondAddressUpdatedEventFilter = TypedEventFilter<DiamondAddressUpdatedEvent>;
+export type DiamondAddressUpdatedEventFilter = TypedEventFilter<DiamondAddressUpdatedEvent>;
 export interface MinDelayChangeEventObject {
     oldDuration: BigNumber;
     newDuration: BigNumber;
 }
-export declare type MinDelayChangeEvent = TypedEvent<[
+export type MinDelayChangeEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], MinDelayChangeEventObject>;
-export declare type MinDelayChangeEventFilter = TypedEventFilter<MinDelayChangeEvent>;
+export type MinDelayChangeEventFilter = TypedEventFilter<MinDelayChangeEvent>;
 export interface RoleAdminChangedEventObject {
     role: string;
     previousAdminRole: string;
     newAdminRole: string;
 }
-export declare type RoleAdminChangedEvent = TypedEvent<[
+export type RoleAdminChangedEvent = TypedEvent<[
     string,
     string,
     string
 ], RoleAdminChangedEventObject>;
-export declare type RoleAdminChangedEventFilter = TypedEventFilter<RoleAdminChangedEvent>;
+export type RoleAdminChangedEventFilter = TypedEventFilter<RoleAdminChangedEvent>;
 export interface RoleGrantedEventObject {
     role: string;
     account: string;
     sender: string;
 }
-export declare type RoleGrantedEvent = TypedEvent<[
+export type RoleGrantedEvent = TypedEvent<[
     string,
     string,
     string
 ], RoleGrantedEventObject>;
-export declare type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
+export type RoleGrantedEventFilter = TypedEventFilter<RoleGrantedEvent>;
 export interface RoleRevokedEventObject {
     role: string;
     account: string;
     sender: string;
 }
-export declare type RoleRevokedEvent = TypedEvent<[
+export type RoleRevokedEvent = TypedEvent<[
     string,
     string,
     string
 ], RoleRevokedEventObject>;
-export declare type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
+export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 export interface LiFiTimelockController extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

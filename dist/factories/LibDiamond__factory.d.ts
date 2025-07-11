@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { LibDiamond, LibDiamondInterface } from "../LibDiamond";
-declare type LibDiamondConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LibDiamondConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibDiamond__factory extends ContractFactory {
     constructor(...args: LibDiamondConstructorParams);
     deploy(overrides?: Overrides & {
@@ -13,7 +13,7 @@ export declare class LibDiamond__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): LibDiamond;
     connect(signer: Signer): LibDiamond__factory;
-    static readonly bytecode = "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea264697066735822122084e895fccc4ee9cf709e7c21a698995461662ef99671b49e0cdaf2a6734b9ce464736f6c634300081d0033";
+    static readonly bytecode = "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea26469706673582212203ab843d84fa63474438d06a1e46e9394b36c93729f8ac373df7ae599275a929c64736f6c634300081d0033";
     static readonly abi: readonly [{
         readonly type: "event";
         readonly name: "DiamondCut";

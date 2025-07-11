@@ -18,7 +18,7 @@ export interface AssetSwappedEventObject {
     toAmount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type AssetSwappedEvent = TypedEvent<[
+export type AssetSwappedEvent = TypedEvent<[
     string,
     string,
     string,
@@ -27,7 +27,7 @@ export declare type AssetSwappedEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], AssetSwappedEventObject>;
-export declare type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 export interface LibSwap extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

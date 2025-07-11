@@ -21,11 +21,11 @@ export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface IERC173 extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

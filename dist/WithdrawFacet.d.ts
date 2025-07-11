@@ -32,12 +32,12 @@ export interface LogWithdrawEventObject {
     _to: string;
     amount: BigNumber;
 }
-export declare type LogWithdrawEvent = TypedEvent<[
+export type LogWithdrawEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], LogWithdrawEventObject>;
-export declare type LogWithdrawEventFilter = TypedEventFilter<LogWithdrawEvent>;
+export type LogWithdrawEventFilter = TypedEventFilter<LogWithdrawEvent>;
 export interface WithdrawFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

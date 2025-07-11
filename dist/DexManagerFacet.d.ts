@@ -42,22 +42,22 @@ export interface DexManagerFacetInterface extends utils.Interface {
 export interface DexAddedEventObject {
     dexAddress: string;
 }
-export declare type DexAddedEvent = TypedEvent<[string], DexAddedEventObject>;
-export declare type DexAddedEventFilter = TypedEventFilter<DexAddedEvent>;
+export type DexAddedEvent = TypedEvent<[string], DexAddedEventObject>;
+export type DexAddedEventFilter = TypedEventFilter<DexAddedEvent>;
 export interface DexRemovedEventObject {
     dexAddress: string;
 }
-export declare type DexRemovedEvent = TypedEvent<[string], DexRemovedEventObject>;
-export declare type DexRemovedEventFilter = TypedEventFilter<DexRemovedEvent>;
+export type DexRemovedEvent = TypedEvent<[string], DexRemovedEventObject>;
+export type DexRemovedEventFilter = TypedEventFilter<DexRemovedEvent>;
 export interface FunctionSignatureApprovalChangedEventObject {
     functionSignature: string;
     approved: boolean;
 }
-export declare type FunctionSignatureApprovalChangedEvent = TypedEvent<[
+export type FunctionSignatureApprovalChangedEvent = TypedEvent<[
     string,
     boolean
 ], FunctionSignatureApprovalChangedEventObject>;
-export declare type FunctionSignatureApprovalChangedEventFilter = TypedEventFilter<FunctionSignatureApprovalChangedEvent>;
+export type FunctionSignatureApprovalChangedEventFilter = TypedEventFilter<FunctionSignatureApprovalChangedEvent>;
 export interface DexManagerFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, BigNumberish, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { TimelockController, TimelockControllerInterface } from "../TimelockController";
-declare type TimelockControllerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type TimelockControllerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TimelockController__factory extends ContractFactory {
     constructor(...args: TimelockControllerConstructorParams);
     deploy(minDelay: PromiseOrValue<BigNumberish>, proposers: PromiseOrValue<string>[], executors: PromiseOrValue<string>[], admin: PromiseOrValue<string>, overrides?: Overrides & {

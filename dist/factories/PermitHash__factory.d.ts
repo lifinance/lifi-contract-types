@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { PermitHash, PermitHashInterface } from "../PermitHash";
-declare type PermitHashConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type PermitHashConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PermitHash__factory extends ContractFactory {
     constructor(...args: PermitHashConstructorParams);
     deploy(overrides?: Overrides & {

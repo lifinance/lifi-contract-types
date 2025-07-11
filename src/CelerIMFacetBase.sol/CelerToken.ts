@@ -7,7 +7,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  PayableOverrides,
+  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -20,31 +20,28 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface ISyncSwapVaultInterface extends utils.Interface {
+export interface CelerTokenInterface extends utils.Interface {
   functions: {
-    "deposit(address,address)": FunctionFragment;
+    "canonical()": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "deposit"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "canonical"): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
-  ): string;
+  encodeFunctionData(functionFragment: "canonical", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "canonical", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface ISyncSwapVault extends BaseContract {
+export interface CelerToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ISyncSwapVaultInterface;
+  interface: CelerTokenInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -66,42 +63,30 @@ export interface ISyncSwapVault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    canonical(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  deposit(
-    token: PromiseOrValue<string>,
-    to: PromiseOrValue<string>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  canonical(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    canonical(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {};
 
   estimateGas: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    canonical(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    deposit(
-      token: PromiseOrValue<string>,
-      to: PromiseOrValue<string>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    canonical(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -257,7 +257,7 @@ export interface LiFiGenericSwapCompletedEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+export type LiFiGenericSwapCompletedEvent = TypedEvent<[
     string,
     string,
     string,
@@ -267,14 +267,14 @@ export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiGenericSwapCompletedEventObject>;
-export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
 export interface LiFiHopTransferEventObject {
     _transactionId: string;
 }
-export declare type LiFiHopTransferEvent = TypedEvent<[
+export type LiFiHopTransferEvent = TypedEvent<[
     string
 ], LiFiHopTransferEventObject>;
-export declare type LiFiHopTransferEventFilter = TypedEventFilter<LiFiHopTransferEvent>;
+export type LiFiHopTransferEventFilter = TypedEventFilter<LiFiHopTransferEvent>;
 export interface LiFiSwappedGenericEventObject {
     transactionId: string;
     integrator: string;
@@ -284,7 +284,7 @@ export interface LiFiSwappedGenericEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiSwappedGenericEvent = TypedEvent<[
+export type LiFiSwappedGenericEvent = TypedEvent<[
     string,
     string,
     string,
@@ -293,7 +293,7 @@ export declare type LiFiSwappedGenericEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiSwappedGenericEventObject>;
-export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
+export type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -301,14 +301,14 @@ export interface LiFiTransferCompletedEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferCompletedEvent = TypedEvent<[
+export type LiFiTransferCompletedEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferCompletedEventObject>;
-export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
+export type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferRecoveredEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -316,39 +316,39 @@ export interface LiFiTransferRecoveredEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferRecoveredEvent = TypedEvent<[
+export type LiFiTransferRecoveredEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferRecoveredEventObject>;
-export declare type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
+export type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
 export interface LiFiTransferStartedEventObject {
     bridgeData: ILiFi.BridgeDataStructOutput;
 }
-export declare type LiFiTransferStartedEvent = TypedEvent<[
+export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
-export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
+export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface OwnershipTransferRequestedEventObject {
     _from: string;
     _to: string;
 }
-export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+export type OwnershipTransferRequestedEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferRequestedEventObject>;
-export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface HopFacetPacked extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
