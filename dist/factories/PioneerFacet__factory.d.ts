@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { PioneerFacet, PioneerFacetInterface } from "../PioneerFacet";
-declare type PioneerFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type PioneerFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PioneerFacet__factory extends ContractFactory {
     constructor(...args: PioneerFacetConstructorParams);
     deploy(_pioneerAddress: PromiseOrValue<string>, overrides?: Overrides & {

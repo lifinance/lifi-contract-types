@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { AcrossFacetPackedV3, AcrossFacetPackedV3Interface } from "../AcrossFacetPackedV3";
-declare type AcrossFacetPackedV3ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type AcrossFacetPackedV3ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AcrossFacetPackedV3__factory extends ContractFactory {
     constructor(...args: AcrossFacetPackedV3ConstructorParams);
     deploy(_spokePool: PromiseOrValue<string>, _wrappedNative: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {

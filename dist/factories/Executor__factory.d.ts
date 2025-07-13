@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { Executor, ExecutorInterface } from "../Executor";
-declare type ExecutorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ExecutorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Executor__factory extends ContractFactory {
     constructor(...args: ExecutorConstructorParams);
     deploy(_erc20Proxy: PromiseOrValue<string>, _owner: PromiseOrValue<string>, overrides?: Overrides & {

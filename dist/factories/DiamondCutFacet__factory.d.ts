@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { DiamondCutFacet, DiamondCutFacetInterface } from "../DiamondCutFacet";
-declare type DiamondCutFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type DiamondCutFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class DiamondCutFacet__factory extends ContractFactory {
     constructor(...args: DiamondCutFacetConstructorParams);
     deploy(overrides?: Overrides & {

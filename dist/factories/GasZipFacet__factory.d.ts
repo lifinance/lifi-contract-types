@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { GasZipFacet, GasZipFacetInterface } from "../GasZipFacet";
-declare type GasZipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type GasZipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class GasZipFacet__factory extends ContractFactory {
     constructor(...args: GasZipFacetConstructorParams);
     deploy(_gasZipRouter: PromiseOrValue<string>, overrides?: Overrides & {

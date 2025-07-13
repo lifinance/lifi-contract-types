@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { PeripheryRegistryFacet, PeripheryRegistryFacetInterface } from "../PeripheryRegistryFacet";
-declare type PeripheryRegistryFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type PeripheryRegistryFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PeripheryRegistryFacet__factory extends ContractFactory {
     constructor(...args: PeripheryRegistryFacetConstructorParams);
     deploy(overrides?: Overrides & {

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { WETH, WETHInterface } from "../WETH";
-declare type WETHConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type WETHConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WETH__factory extends ContractFactory {
     constructor(...args: WETHConstructorParams);
     deploy(overrides?: Overrides & {

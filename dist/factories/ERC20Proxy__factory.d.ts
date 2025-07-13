@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ERC20Proxy, ERC20ProxyInterface } from "../ERC20Proxy";
-declare type ERC20ProxyConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ERC20ProxyConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ERC20Proxy__factory extends ContractFactory {
     constructor(...args: ERC20ProxyConstructorParams);
     deploy(_owner: PromiseOrValue<string>, overrides?: Overrides & {

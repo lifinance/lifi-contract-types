@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { MayanFacet, MayanFacetInterface } from "../MayanFacet";
-declare type MayanFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type MayanFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MayanFacet__factory extends ContractFactory {
     constructor(...args: MayanFacetConstructorParams);
     deploy(_mayan: PromiseOrValue<string>, overrides?: Overrides & {

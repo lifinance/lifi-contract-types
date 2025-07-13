@@ -16,9 +16,9 @@ export interface EIP712Interface extends utils.Interface {
 }
 export interface EIP712DomainChangedEventObject {
 }
-export declare type EIP712DomainChangedEvent = TypedEvent<[
+export type EIP712DomainChangedEvent = TypedEvent<[
 ], EIP712DomainChangedEventObject>;
-export declare type EIP712DomainChangedEventFilter = TypedEventFilter<EIP712DomainChangedEvent>;
+export type EIP712DomainChangedEventFilter = TypedEventFilter<EIP712DomainChangedEvent>;
 export interface EIP712 extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

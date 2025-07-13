@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { GlacisFacet, GlacisFacetInterface } from "../GlacisFacet";
-declare type GlacisFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type GlacisFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class GlacisFacet__factory extends ContractFactory {
     constructor(...args: GlacisFacetConstructorParams);
     deploy(_airlift: PromiseOrValue<string>, overrides?: Overrides & {

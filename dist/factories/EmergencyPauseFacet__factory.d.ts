@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { EmergencyPauseFacet, EmergencyPauseFacetInterface } from "../EmergencyPauseFacet";
-declare type EmergencyPauseFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type EmergencyPauseFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class EmergencyPauseFacet__factory extends ContractFactory {
     constructor(...args: EmergencyPauseFacetConstructorParams);
     deploy(_pauserWallet: PromiseOrValue<string>, overrides?: Overrides & {

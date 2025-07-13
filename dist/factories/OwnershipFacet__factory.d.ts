@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { OwnershipFacet, OwnershipFacetInterface } from "../OwnershipFacet";
-declare type OwnershipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type OwnershipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class OwnershipFacet__factory extends ContractFactory {
     constructor(...args: OwnershipFacetConstructorParams);
     deploy(overrides?: Overrides & {

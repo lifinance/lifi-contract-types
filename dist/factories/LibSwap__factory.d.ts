@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { LibSwap, LibSwapInterface } from "../LibSwap";
-declare type LibSwapConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LibSwapConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibSwap__factory extends ContractFactory {
     constructor(...args: LibSwapConstructorParams);
     deploy(overrides?: Overrides & {

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { FeeCollector, FeeCollectorInterface } from "../FeeCollector";
-declare type FeeCollectorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type FeeCollectorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class FeeCollector__factory extends ContractFactory {
     constructor(...args: FeeCollectorConstructorParams);
     deploy(_owner: PromiseOrValue<string>, overrides?: Overrides & {

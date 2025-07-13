@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ThorSwapFacet, ThorSwapFacetInterface } from "../ThorSwapFacet";
-declare type ThorSwapFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ThorSwapFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ThorSwapFacet__factory extends ContractFactory {
     constructor(...args: ThorSwapFacetConstructorParams);
     deploy(_thorchainRouter: PromiseOrValue<string>, overrides?: Overrides & {

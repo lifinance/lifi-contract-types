@@ -57,40 +57,40 @@ export interface AuthorizationChangedEventObject {
     caller: string;
     authorized: boolean;
 }
-export declare type AuthorizationChangedEvent = TypedEvent<[
+export type AuthorizationChangedEvent = TypedEvent<[
     string,
     boolean
 ], AuthorizationChangedEventObject>;
-export declare type AuthorizationChangedEventFilter = TypedEventFilter<AuthorizationChangedEvent>;
+export type AuthorizationChangedEventFilter = TypedEventFilter<AuthorizationChangedEvent>;
 export interface OwnershipTransferRequestedEventObject {
     _from: string;
     _to: string;
 }
-export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+export type OwnershipTransferRequestedEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferRequestedEventObject>;
-export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface TokensWithdrawnEventObject {
     assetId: string;
     receiver: string;
     amount: BigNumber;
 }
-export declare type TokensWithdrawnEvent = TypedEvent<[
+export type TokensWithdrawnEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], TokensWithdrawnEventObject>;
-export declare type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
+export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 export interface ERC20Proxy extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { LibDiamond, LibDiamondInterface } from "../LibDiamond";
-declare type LibDiamondConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LibDiamondConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibDiamond__factory extends ContractFactory {
     constructor(...args: LibDiamondConstructorParams);
     deploy(overrides?: Overrides & {

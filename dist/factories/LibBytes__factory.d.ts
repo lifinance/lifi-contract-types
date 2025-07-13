@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { LibBytes, LibBytesInterface } from "../LibBytes";
-declare type LibBytesConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LibBytesConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibBytes__factory extends ContractFactory {
     constructor(...args: LibBytesConstructorParams);
     deploy(overrides?: Overrides & {

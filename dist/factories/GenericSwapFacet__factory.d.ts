@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { GenericSwapFacet, GenericSwapFacetInterface } from "../GenericSwapFacet";
-declare type GenericSwapFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type GenericSwapFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class GenericSwapFacet__factory extends ContractFactory {
     constructor(...args: GenericSwapFacetConstructorParams);
     deploy(overrides?: Overrides & {

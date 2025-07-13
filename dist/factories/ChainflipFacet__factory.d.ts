@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ChainflipFacet, ChainflipFacetInterface } from "../ChainflipFacet";
-declare type ChainflipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ChainflipFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ChainflipFacet__factory extends ContractFactory {
     constructor(...args: ChainflipFacetConstructorParams);
     deploy(_chainflipVault: PromiseOrValue<string>, overrides?: Overrides & {

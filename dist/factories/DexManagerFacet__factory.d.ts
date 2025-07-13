@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { DexManagerFacet, DexManagerFacetInterface } from "../DexManagerFacet";
-declare type DexManagerFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type DexManagerFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class DexManagerFacet__factory extends ContractFactory {
     constructor(...args: DexManagerFacetConstructorParams);
     deploy(overrides?: Overrides & {

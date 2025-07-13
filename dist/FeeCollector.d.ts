@@ -73,53 +73,53 @@ export interface FeesCollectedEventObject {
     _integratorFee: BigNumber;
     _lifiFee: BigNumber;
 }
-export declare type FeesCollectedEvent = TypedEvent<[
+export type FeesCollectedEvent = TypedEvent<[
     string,
     string,
     BigNumber,
     BigNumber
 ], FeesCollectedEventObject>;
-export declare type FeesCollectedEventFilter = TypedEventFilter<FeesCollectedEvent>;
+export type FeesCollectedEventFilter = TypedEventFilter<FeesCollectedEvent>;
 export interface FeesWithdrawnEventObject {
     _token: string;
     _to: string;
     _amount: BigNumber;
 }
-export declare type FeesWithdrawnEvent = TypedEvent<[
+export type FeesWithdrawnEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], FeesWithdrawnEventObject>;
-export declare type FeesWithdrawnEventFilter = TypedEventFilter<FeesWithdrawnEvent>;
+export type FeesWithdrawnEventFilter = TypedEventFilter<FeesWithdrawnEvent>;
 export interface LiFiFeesWithdrawnEventObject {
     _token: string;
     _to: string;
     _amount: BigNumber;
 }
-export declare type LiFiFeesWithdrawnEvent = TypedEvent<[
+export type LiFiFeesWithdrawnEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], LiFiFeesWithdrawnEventObject>;
-export declare type LiFiFeesWithdrawnEventFilter = TypedEventFilter<LiFiFeesWithdrawnEvent>;
+export type LiFiFeesWithdrawnEventFilter = TypedEventFilter<LiFiFeesWithdrawnEvent>;
 export interface OwnershipTransferRequestedEventObject {
     _from: string;
     _to: string;
 }
-export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+export type OwnershipTransferRequestedEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferRequestedEventObject>;
-export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface FeeCollector extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

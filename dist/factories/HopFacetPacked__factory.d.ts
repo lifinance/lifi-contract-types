@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { HopFacetPacked, HopFacetPackedInterface } from "../HopFacetPacked";
-declare type HopFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type HopFacetPackedConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class HopFacetPacked__factory extends ContractFactory {
     constructor(...args: HopFacetPackedConstructorParams);
     deploy(_owner: PromiseOrValue<string>, _wrapper: PromiseOrValue<string>, overrides?: Overrides & {

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { LibAccess, LibAccessInterface } from "../LibAccess";
-declare type LibAccessConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LibAccessConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LibAccess__factory extends ContractFactory {
     constructor(...args: LibAccessConstructorParams);
     deploy(overrides?: Overrides & {

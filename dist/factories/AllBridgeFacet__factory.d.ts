@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { AllBridgeFacet, AllBridgeFacetInterface } from "../AllBridgeFacet";
-declare type AllBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type AllBridgeFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class AllBridgeFacet__factory extends ContractFactory {
     constructor(...args: AllBridgeFacetConstructorParams);
     deploy(_allBridge: PromiseOrValue<string>, overrides?: Overrides & {

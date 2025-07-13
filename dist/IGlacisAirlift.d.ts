@@ -2,20 +2,20 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
-export declare type FeeStruct = {
+export type FeeStruct = {
     nativeFee: PromiseOrValue<BigNumberish>;
     tokenFee: PromiseOrValue<BigNumberish>;
 };
-export declare type FeeStructOutput = [BigNumber, BigNumber] & {
+export type FeeStructOutput = [BigNumber, BigNumber] & {
     nativeFee: BigNumber;
     tokenFee: BigNumber;
 };
-export declare type AirliftFeeInfoStruct = {
+export type AirliftFeeInfoStruct = {
     airliftFee: FeeStruct;
     correctedAmount: PromiseOrValue<BigNumberish>;
     correctedValue: PromiseOrValue<BigNumberish>;
 };
-export declare type AirliftFeeInfoStructOutput = [
+export type AirliftFeeInfoStructOutput = [
     FeeStructOutput,
     BigNumber,
     BigNumber
@@ -24,13 +24,13 @@ export declare type AirliftFeeInfoStructOutput = [
     correctedAmount: BigNumber;
     correctedValue: BigNumber;
 };
-export declare type QuoteSendInfoStruct = {
+export type QuoteSendInfoStruct = {
     gmpFee: FeeStruct;
     amountSent: PromiseOrValue<BigNumberish>;
     valueSent: PromiseOrValue<BigNumberish>;
     airliftFeeInfo: AirliftFeeInfoStruct;
 };
-export declare type QuoteSendInfoStructOutput = [
+export type QuoteSendInfoStructOutput = [
     FeeStructOutput,
     BigNumber,
     BigNumber,

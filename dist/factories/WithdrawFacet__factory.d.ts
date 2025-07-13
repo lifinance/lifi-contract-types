@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { WithdrawFacet, WithdrawFacetInterface } from "../WithdrawFacet";
-declare type WithdrawFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type WithdrawFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WithdrawFacet__factory extends ContractFactory {
     constructor(...args: WithdrawFacetConstructorParams);
     deploy(overrides?: Overrides & {

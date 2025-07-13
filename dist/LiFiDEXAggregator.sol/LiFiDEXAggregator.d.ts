@@ -206,20 +206,20 @@ export interface OwnershipTransferRequestedEventObject {
     _from: string;
     _to: string;
 }
-export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+export type OwnershipTransferRequestedEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferRequestedEventObject>;
-export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface RouteEventObject {
     from: string;
     to: string;
@@ -229,7 +229,7 @@ export interface RouteEventObject {
     amountOutMin: BigNumber;
     amountOut: BigNumber;
 }
-export declare type RouteEvent = TypedEvent<[
+export type RouteEvent = TypedEvent<[
     string,
     string,
     string,
@@ -238,18 +238,18 @@ export declare type RouteEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], RouteEventObject>;
-export declare type RouteEventFilter = TypedEventFilter<RouteEvent>;
+export type RouteEventFilter = TypedEventFilter<RouteEvent>;
 export interface TokensWithdrawnEventObject {
     assetId: string;
     receiver: string;
     amount: BigNumber;
 }
-export declare type TokensWithdrawnEvent = TypedEvent<[
+export type TokensWithdrawnEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], TokensWithdrawnEventObject>;
-export declare type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
+export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
 export interface LiFiDEXAggregator extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

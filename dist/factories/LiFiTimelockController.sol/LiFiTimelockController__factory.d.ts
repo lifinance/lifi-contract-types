@@ -2,7 +2,7 @@ import { Signer, ContractFactory, BigNumberish, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../../common";
 import type { LiFiTimelockController, LiFiTimelockControllerInterface } from "../../LiFiTimelockController.sol/LiFiTimelockController";
-declare type LiFiTimelockControllerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type LiFiTimelockControllerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LiFiTimelockController__factory extends ContractFactory {
     constructor(...args: LiFiTimelockControllerConstructorParams);
     deploy(_minDelay: PromiseOrValue<BigNumberish>, _proposers: PromiseOrValue<string>[], _executors: PromiseOrValue<string>[], _cancellerWallet: PromiseOrValue<string>, _admin: PromiseOrValue<string>, _diamond: PromiseOrValue<string>, overrides?: Overrides & {

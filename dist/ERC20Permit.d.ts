@@ -77,28 +77,28 @@ export interface ApprovalEventObject {
     spender: string;
     value: BigNumber;
 }
-export declare type ApprovalEvent = TypedEvent<[
+export type ApprovalEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], ApprovalEventObject>;
-export declare type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 export interface EIP712DomainChangedEventObject {
 }
-export declare type EIP712DomainChangedEvent = TypedEvent<[
+export type EIP712DomainChangedEvent = TypedEvent<[
 ], EIP712DomainChangedEventObject>;
-export declare type EIP712DomainChangedEventFilter = TypedEventFilter<EIP712DomainChangedEvent>;
+export type EIP712DomainChangedEventFilter = TypedEventFilter<EIP712DomainChangedEvent>;
 export interface TransferEventObject {
     from: string;
     to: string;
     value: BigNumber;
 }
-export declare type TransferEvent = TypedEvent<[
+export type TransferEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], TransferEventObject>;
-export declare type TransferEventFilter = TypedEventFilter<TransferEvent>;
+export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 export interface ERC20Permit extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
