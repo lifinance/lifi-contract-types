@@ -48,26 +48,26 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
 export interface AddressRemovedEventObject {
     removedAddress: string;
 }
-export declare type AddressRemovedEvent = TypedEvent<[
+export type AddressRemovedEvent = TypedEvent<[
     string
 ], AddressRemovedEventObject>;
-export declare type AddressRemovedEventFilter = TypedEventFilter<AddressRemovedEvent>;
+export type AddressRemovedEventFilter = TypedEventFilter<AddressRemovedEvent>;
 export interface AddressWhitelistedEventObject {
     whitelistedAddress: string;
 }
-export declare type AddressWhitelistedEvent = TypedEvent<[
+export type AddressWhitelistedEvent = TypedEvent<[
     string
 ], AddressWhitelistedEventObject>;
-export declare type AddressWhitelistedEventFilter = TypedEventFilter<AddressWhitelistedEvent>;
+export type AddressWhitelistedEventFilter = TypedEventFilter<AddressWhitelistedEvent>;
 export interface FunctionSelectorApprovalChangedEventObject {
     functionSelector: string;
     approved: boolean;
 }
-export declare type FunctionSelectorApprovalChangedEvent = TypedEvent<[
+export type FunctionSelectorApprovalChangedEvent = TypedEvent<[
     string,
     boolean
 ], FunctionSelectorApprovalChangedEventObject>;
-export declare type FunctionSelectorApprovalChangedEventFilter = TypedEventFilter<FunctionSelectorApprovalChangedEvent>;
+export type FunctionSelectorApprovalChangedEventFilter = TypedEventFilter<FunctionSelectorApprovalChangedEvent>;
 export interface IWhitelistManagerFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
