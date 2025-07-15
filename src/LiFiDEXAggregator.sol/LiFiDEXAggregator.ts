@@ -39,6 +39,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
     "enosysdexV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "fusionXV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "hyperswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+    "katanaV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "laminarV3SwapCallback(int256,int256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "pancakeV3SwapCallback(int256,int256,bytes)": FunctionFragment;
@@ -74,6 +75,7 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
       | "enosysdexV3SwapCallback"
       | "fusionXV3SwapCallback"
       | "hyperswapV3SwapCallback"
+      | "katanaV3SwapCallback"
       | "laminarV3SwapCallback"
       | "owner"
       | "pancakeV3SwapCallback"
@@ -149,6 +151,14 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "hyperswapV3SwapCallback",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "katanaV3SwapCallback",
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
@@ -334,6 +344,10 @@ export interface LiFiDEXAggregatorInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "hyperswapV3SwapCallback",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "katanaV3SwapCallback",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -560,6 +574,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    katanaV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     laminarV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -754,6 +775,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  katanaV3SwapCallback(
+    amount0Delta: PromiseOrValue<BigNumberish>,
+    amount1Delta: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   laminarV3SwapCallback(
     amount0Delta: PromiseOrValue<BigNumberish>,
     amount1Delta: PromiseOrValue<BigNumberish>,
@@ -938,6 +966,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<void>;
 
     hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    katanaV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
@@ -1185,6 +1220,13 @@ export interface LiFiDEXAggregator extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    katanaV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     laminarV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
@@ -1374,6 +1416,13 @@ export interface LiFiDEXAggregator extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     hyperswapV3SwapCallback(
+      amount0Delta: PromiseOrValue<BigNumberish>,
+      amount1Delta: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    katanaV3SwapCallback(
       amount0Delta: PromiseOrValue<BigNumberish>,
       amount1Delta: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
