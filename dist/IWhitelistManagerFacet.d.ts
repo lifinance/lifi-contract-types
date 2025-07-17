@@ -12,10 +12,12 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
         "getWhitelistedAddresses()": FunctionFragment;
         "isAddressWhitelisted(address)": FunctionFragment;
         "isFunctionApproved(bytes4)": FunctionFragment;
+        "isMigrated()": FunctionFragment;
+        "migrate(bytes4[],address[],bytes4[])": FunctionFragment;
         "removeFromWhitelist(address)": FunctionFragment;
         "setFunctionApprovalBySelector(bytes4,bool)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "addToWhitelist" | "batchAddToWhitelist" | "batchRemoveFromWhitelist" | "batchSetFunctionApprovalBySelector" | "getApprovedFunctionSelectors" | "getWhitelistedAddresses" | "isAddressWhitelisted" | "isFunctionApproved" | "removeFromWhitelist" | "setFunctionApprovalBySelector"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "addToWhitelist" | "batchAddToWhitelist" | "batchRemoveFromWhitelist" | "batchSetFunctionApprovalBySelector" | "getApprovedFunctionSelectors" | "getWhitelistedAddresses" | "isAddressWhitelisted" | "isFunctionApproved" | "isMigrated" | "migrate" | "removeFromWhitelist" | "setFunctionApprovalBySelector"): FunctionFragment;
     encodeFunctionData(functionFragment: "addToWhitelist", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "batchAddToWhitelist", values: [PromiseOrValue<string>[]]): string;
     encodeFunctionData(functionFragment: "batchRemoveFromWhitelist", values: [PromiseOrValue<string>[]]): string;
@@ -24,6 +26,12 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "getWhitelistedAddresses", values?: undefined): string;
     encodeFunctionData(functionFragment: "isAddressWhitelisted", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "isFunctionApproved", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "isMigrated", values?: undefined): string;
+    encodeFunctionData(functionFragment: "migrate", values: [
+        PromiseOrValue<BytesLike>[],
+        PromiseOrValue<string>[],
+        PromiseOrValue<BytesLike>[]
+    ]): string;
     encodeFunctionData(functionFragment: "removeFromWhitelist", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "setFunctionApprovalBySelector", values: [PromiseOrValue<BytesLike>, PromiseOrValue<boolean>]): string;
     decodeFunctionResult(functionFragment: "addToWhitelist", data: BytesLike): Result;
@@ -34,6 +42,8 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "getWhitelistedAddresses", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "isAddressWhitelisted", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "isFunctionApproved", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "isMigrated", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "migrate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "removeFromWhitelist", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setFunctionApprovalBySelector", data: BytesLike): Result;
     events: {
@@ -48,26 +58,26 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
 export interface AddressRemovedEventObject {
     removedAddress: string;
 }
-export declare type AddressRemovedEvent = TypedEvent<[
+export type AddressRemovedEvent = TypedEvent<[
     string
 ], AddressRemovedEventObject>;
-export declare type AddressRemovedEventFilter = TypedEventFilter<AddressRemovedEvent>;
+export type AddressRemovedEventFilter = TypedEventFilter<AddressRemovedEvent>;
 export interface AddressWhitelistedEventObject {
     whitelistedAddress: string;
 }
-export declare type AddressWhitelistedEvent = TypedEvent<[
+export type AddressWhitelistedEvent = TypedEvent<[
     string
 ], AddressWhitelistedEventObject>;
-export declare type AddressWhitelistedEventFilter = TypedEventFilter<AddressWhitelistedEvent>;
+export type AddressWhitelistedEventFilter = TypedEventFilter<AddressWhitelistedEvent>;
 export interface FunctionSelectorApprovalChangedEventObject {
     functionSelector: string;
     approved: boolean;
 }
-export declare type FunctionSelectorApprovalChangedEvent = TypedEvent<[
+export type FunctionSelectorApprovalChangedEvent = TypedEvent<[
     string,
     boolean
 ], FunctionSelectorApprovalChangedEventObject>;
-export declare type FunctionSelectorApprovalChangedEventFilter = TypedEventFilter<FunctionSelectorApprovalChangedEvent>;
+export type FunctionSelectorApprovalChangedEventFilter = TypedEventFilter<FunctionSelectorApprovalChangedEvent>;
 export interface IWhitelistManagerFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -107,6 +117,10 @@ export interface IWhitelistManagerFacet extends BaseContract {
         isFunctionApproved(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean] & {
             approved: boolean;
         }>;
+        isMigrated(overrides?: CallOverrides): Promise<[boolean]>;
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contractsToAdd: PromiseOrValue<string>[], _selectorsToAdd: PromiseOrValue<BytesLike>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         removeFromWhitelist(_address: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -130,6 +144,10 @@ export interface IWhitelistManagerFacet extends BaseContract {
     getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
     isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
     isFunctionApproved(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    isMigrated(overrides?: CallOverrides): Promise<boolean>;
+    migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contractsToAdd: PromiseOrValue<string>[], _selectorsToAdd: PromiseOrValue<BytesLike>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     removeFromWhitelist(_address: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -145,6 +163,8 @@ export interface IWhitelistManagerFacet extends BaseContract {
         getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
         isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         isFunctionApproved(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        isMigrated(overrides?: CallOverrides): Promise<boolean>;
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contractsToAdd: PromiseOrValue<string>[], _selectorsToAdd: PromiseOrValue<BytesLike>[], overrides?: CallOverrides): Promise<void>;
         removeFromWhitelist(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         setFunctionApprovalBySelector(_selector: PromiseOrValue<BytesLike>, _approval: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
     };
@@ -173,6 +193,10 @@ export interface IWhitelistManagerFacet extends BaseContract {
         getWhitelistedAddresses(overrides?: CallOverrides): Promise<BigNumber>;
         isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         isFunctionApproved(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        isMigrated(overrides?: CallOverrides): Promise<BigNumber>;
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contractsToAdd: PromiseOrValue<string>[], _selectorsToAdd: PromiseOrValue<BytesLike>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         removeFromWhitelist(_address: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -197,6 +221,10 @@ export interface IWhitelistManagerFacet extends BaseContract {
         getWhitelistedAddresses(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isFunctionApproved(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isMigrated(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contractsToAdd: PromiseOrValue<string>[], _selectorsToAdd: PromiseOrValue<BytesLike>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         removeFromWhitelist(_address: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
