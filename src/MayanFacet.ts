@@ -112,19 +112,19 @@ export declare namespace LibSwap {
 
 export interface MayanFacetInterface extends utils.Interface {
   functions: {
-    "mayan()": FunctionFragment;
+    "MAYAN()": FunctionFragment;
     "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes))": FunctionFragment;
     "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "mayan"
+      | "MAYAN"
       | "startBridgeTokensViaMayan"
       | "swapAndStartBridgeTokensViaMayan"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "mayan", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAYAN", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaMayan",
     values: [ILiFi.BridgeDataStruct, MayanFacet.MayanDataStruct]
@@ -138,7 +138,7 @@ export interface MayanFacetInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "mayan", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAYAN", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaMayan",
     data: BytesLike
@@ -299,7 +299,7 @@ export interface MayanFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    mayan(overrides?: CallOverrides): Promise<[string]>;
+    MAYAN(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -315,7 +315,7 @@ export interface MayanFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  mayan(overrides?: CallOverrides): Promise<string>;
+  MAYAN(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaMayan(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -331,7 +331,7 @@ export interface MayanFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    mayan(overrides?: CallOverrides): Promise<string>;
+    MAYAN(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -455,7 +455,7 @@ export interface MayanFacet extends BaseContract {
   };
 
   estimateGas: {
-    mayan(overrides?: CallOverrides): Promise<BigNumber>;
+    MAYAN(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -472,7 +472,7 @@ export interface MayanFacet extends BaseContract {
   };
 
   populateTransaction: {
-    mayan(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    MAYAN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,

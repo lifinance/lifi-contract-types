@@ -94,19 +94,19 @@ export declare namespace ChainflipFacet {
 }
 export interface ChainflipFacetInterface extends utils.Interface {
     functions: {
-        "chainflipVault()": FunctionFragment;
+        "CHAINFLIP_VAULT()": FunctionFragment;
         "startBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
         "swapAndStartBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "chainflipVault" | "startBridgeTokensViaChainflip" | "swapAndStartBridgeTokensViaChainflip"): FunctionFragment;
-    encodeFunctionData(functionFragment: "chainflipVault", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "CHAINFLIP_VAULT" | "startBridgeTokensViaChainflip" | "swapAndStartBridgeTokensViaChainflip"): FunctionFragment;
+    encodeFunctionData(functionFragment: "CHAINFLIP_VAULT", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaChainflip", values: [ILiFi.BridgeDataStruct, ChainflipFacet.ChainflipDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaChainflip", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         ChainflipFacet.ChainflipDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "chainflipVault", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "CHAINFLIP_VAULT", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaChainflip", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaChainflip", data: BytesLike): Result;
     events: {
@@ -248,7 +248,7 @@ export interface ChainflipFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        chainflipVault(overrides?: CallOverrides): Promise<[string]>;
+        CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -256,7 +256,7 @@ export interface ChainflipFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    chainflipVault(overrides?: CallOverrides): Promise<string>;
+    CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -264,7 +264,7 @@ export interface ChainflipFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        chainflipVault(overrides?: CallOverrides): Promise<string>;
+        CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -285,7 +285,7 @@ export interface ChainflipFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        chainflipVault(overrides?: CallOverrides): Promise<BigNumber>;
+        CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -294,7 +294,7 @@ export interface ChainflipFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        chainflipVault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaChainflip(_bridgeData: ILiFi.BridgeDataStruct, _chainflipData: ChainflipFacet.ChainflipDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;

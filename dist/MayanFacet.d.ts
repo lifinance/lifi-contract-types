@@ -81,19 +81,19 @@ export declare namespace LibSwap {
 }
 export interface MayanFacetInterface extends utils.Interface {
     functions: {
-        "mayan()": FunctionFragment;
+        "MAYAN()": FunctionFragment;
         "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes))": FunctionFragment;
         "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "mayan" | "startBridgeTokensViaMayan" | "swapAndStartBridgeTokensViaMayan"): FunctionFragment;
-    encodeFunctionData(functionFragment: "mayan", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "MAYAN" | "startBridgeTokensViaMayan" | "swapAndStartBridgeTokensViaMayan"): FunctionFragment;
+    encodeFunctionData(functionFragment: "MAYAN", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaMayan", values: [ILiFi.BridgeDataStruct, MayanFacet.MayanDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaMayan", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         MayanFacet.MayanDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "mayan", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "MAYAN", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaMayan", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaMayan", data: BytesLike): Result;
     events: {
@@ -235,7 +235,7 @@ export interface MayanFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        mayan(overrides?: CallOverrides): Promise<[string]>;
+        MAYAN(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _mayanData: MayanFacet.MayanDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -243,7 +243,7 @@ export interface MayanFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    mayan(overrides?: CallOverrides): Promise<string>;
+    MAYAN(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _mayanData: MayanFacet.MayanDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -251,7 +251,7 @@ export interface MayanFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        mayan(overrides?: CallOverrides): Promise<string>;
+        MAYAN(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _mayanData: MayanFacet.MayanDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _mayanData: MayanFacet.MayanDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -272,7 +272,7 @@ export interface MayanFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        mayan(overrides?: CallOverrides): Promise<BigNumber>;
+        MAYAN(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _mayanData: MayanFacet.MayanDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -281,7 +281,7 @@ export interface MayanFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        mayan(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        MAYAN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaMayan(_bridgeData: ILiFi.BridgeDataStruct, _mayanData: MayanFacet.MayanDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
