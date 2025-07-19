@@ -96,6 +96,34 @@ export declare class IWhitelistManagerFacet__factory {
         readonly stateMutability: "view";
     }, {
         readonly type: "function";
+        readonly name: "isMigrated";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "migrate";
+        readonly inputs: readonly [{
+            readonly name: "_selectorsToRemove";
+            readonly type: "bytes4[]";
+            readonly internalType: "bytes4[]";
+        }, {
+            readonly name: "_contractsToAdd";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "_selectorsToAdd";
+            readonly type: "bytes4[]";
+            readonly internalType: "bytes4[]";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
         readonly name: "removeFromWhitelist";
         readonly inputs: readonly [{
             readonly name: "_address";
