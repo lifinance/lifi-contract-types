@@ -112,19 +112,19 @@ export declare namespace LibSwap {
 
 export interface MayanFacetInterface extends utils.Interface {
   functions: {
-    "mayan()": FunctionFragment;
+    "MAYAN()": FunctionFragment;
     "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes))": FunctionFragment;
     "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "mayan"
+      | "MAYAN"
       | "startBridgeTokensViaMayan"
       | "swapAndStartBridgeTokensViaMayan"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "mayan", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAYAN", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaMayan",
     values: [ILiFi.BridgeDataStruct, MayanFacet.MayanDataStruct]
@@ -138,7 +138,7 @@ export interface MayanFacetInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "mayan", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAYAN", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaMayan",
     data: BytesLike
@@ -150,7 +150,8 @@ export interface MayanFacetInterface extends utils.Interface {
 
   events: {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "BridgeToNonEVMChain(bytes32,uint256,bytes32)": EventFragment;
+    "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
+    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -160,6 +161,7 @@ export interface MayanFacetInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -195,6 +197,19 @@ export type BridgeToNonEVMChainEvent = TypedEvent<
 
 export type BridgeToNonEVMChainEventFilter =
   TypedEventFilter<BridgeToNonEVMChainEvent>;
+
+export interface BridgeToNonEVMChainBytes32EventObject {
+  transactionId: string;
+  destinationChainId: BigNumber;
+  receiver: string;
+}
+export type BridgeToNonEVMChainBytes32Event = TypedEvent<
+  [string, BigNumber, string],
+  BridgeToNonEVMChainBytes32EventObject
+>;
+
+export type BridgeToNonEVMChainBytes32EventFilter =
+  TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -299,7 +314,7 @@ export interface MayanFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    mayan(overrides?: CallOverrides): Promise<[string]>;
+    MAYAN(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -315,7 +330,7 @@ export interface MayanFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  mayan(overrides?: CallOverrides): Promise<string>;
+  MAYAN(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaMayan(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -331,7 +346,7 @@ export interface MayanFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    mayan(overrides?: CallOverrides): Promise<string>;
+    MAYAN(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -367,7 +382,7 @@ export interface MayanFacet extends BaseContract {
       timestamp?: null
     ): AssetSwappedEventFilter;
 
-    "BridgeToNonEVMChain(bytes32,uint256,bytes32)"(
+    "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
       receiver?: null
@@ -377,6 +392,17 @@ export interface MayanFacet extends BaseContract {
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
       receiver?: null
     ): BridgeToNonEVMChainEventFilter;
+
+    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      destinationChainId?: PromiseOrValue<BigNumberish> | null,
+      receiver?: null
+    ): BridgeToNonEVMChainBytes32EventFilter;
+    BridgeToNonEVMChainBytes32(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      destinationChainId?: PromiseOrValue<BigNumberish> | null,
+      receiver?: null
+    ): BridgeToNonEVMChainBytes32EventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -455,7 +481,7 @@ export interface MayanFacet extends BaseContract {
   };
 
   estimateGas: {
-    mayan(overrides?: CallOverrides): Promise<BigNumber>;
+    MAYAN(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -472,7 +498,7 @@ export interface MayanFacet extends BaseContract {
   };
 
   populateTransaction: {
-    mayan(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    MAYAN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaMayan(
       _bridgeData: ILiFi.BridgeDataStruct,
