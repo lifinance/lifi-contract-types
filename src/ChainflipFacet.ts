@@ -125,20 +125,20 @@ export declare namespace ChainflipFacet {
 
 export interface ChainflipFacetInterface extends utils.Interface {
   functions: {
-    "CHAINFLIP_VAULT()": FunctionFragment;
+    "chainflipVault()": FunctionFragment;
     "startBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
     "swapAndStartBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "CHAINFLIP_VAULT"
+      | "chainflipVault"
       | "startBridgeTokensViaChainflip"
       | "swapAndStartBridgeTokensViaChainflip"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "CHAINFLIP_VAULT",
+    functionFragment: "chainflipVault",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -155,7 +155,7 @@ export interface ChainflipFacetInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "CHAINFLIP_VAULT",
+    functionFragment: "chainflipVault",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -170,7 +170,6 @@ export interface ChainflipFacetInterface extends utils.Interface {
   events: {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -180,7 +179,6 @@ export interface ChainflipFacetInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -216,19 +214,6 @@ export type BridgeToNonEVMChainEvent = TypedEvent<
 
 export type BridgeToNonEVMChainEventFilter =
   TypedEventFilter<BridgeToNonEVMChainEvent>;
-
-export interface BridgeToNonEVMChainBytes32EventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainBytes32EventObject
->;
-
-export type BridgeToNonEVMChainBytes32EventFilter =
-  TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -333,7 +318,7 @@ export interface ChainflipFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<[string]>;
+    chainflipVault(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaChainflip(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -349,7 +334,7 @@ export interface ChainflipFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<string>;
+  chainflipVault(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaChainflip(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -365,7 +350,7 @@ export interface ChainflipFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<string>;
+    chainflipVault(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaChainflip(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -411,17 +396,6 @@ export interface ChainflipFacet extends BaseContract {
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
       receiver?: null
     ): BridgeToNonEVMChainEventFilter;
-
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
-    BridgeToNonEVMChainBytes32(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -500,7 +474,7 @@ export interface ChainflipFacet extends BaseContract {
   };
 
   estimateGas: {
-    CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<BigNumber>;
+    chainflipVault(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaChainflip(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -517,7 +491,7 @@ export interface ChainflipFacet extends BaseContract {
   };
 
   populateTransaction: {
-    CHAINFLIP_VAULT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    chainflipVault(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaChainflip(
       _bridgeData: ILiFi.BridgeDataStruct,

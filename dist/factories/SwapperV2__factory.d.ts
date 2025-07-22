@@ -13,48 +13,8 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea264697066735822122019225e69229a8be64bea281dc724ae5a2bc21d27fc17732e3f5d463494d4809264736f6c634300081d0033";
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea26469706673582212207cd7d5137ba0298200da88ed5dd2f8741742b90513111a8144927f512d32205264736f6c634300081d0033";
     static readonly abi: readonly [{
-        readonly type: "event";
-        readonly name: "BridgeToNonEVMChain";
-        readonly inputs: readonly [{
-            readonly name: "transactionId";
-            readonly type: "bytes32";
-            readonly indexed: true;
-            readonly internalType: "bytes32";
-        }, {
-            readonly name: "destinationChainId";
-            readonly type: "uint256";
-            readonly indexed: true;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "receiver";
-            readonly type: "bytes";
-            readonly indexed: false;
-            readonly internalType: "bytes";
-        }];
-        readonly anonymous: false;
-    }, {
-        readonly type: "event";
-        readonly name: "BridgeToNonEVMChainBytes32";
-        readonly inputs: readonly [{
-            readonly name: "transactionId";
-            readonly type: "bytes32";
-            readonly indexed: true;
-            readonly internalType: "bytes32";
-        }, {
-            readonly name: "destinationChainId";
-            readonly type: "uint256";
-            readonly indexed: true;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "receiver";
-            readonly type: "bytes32";
-            readonly indexed: false;
-            readonly internalType: "bytes32";
-        }];
-        readonly anonymous: false;
-    }, {
         readonly type: "event";
         readonly name: "LiFiGenericSwapCompleted";
         readonly inputs: readonly [{

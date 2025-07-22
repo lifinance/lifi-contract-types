@@ -9,56 +9,6 @@ import type { SwapperV2, SwapperV2Interface } from "../SwapperV2";
 const _abi = [
   {
     type: "event",
-    name: "BridgeToNonEVMChain",
-    inputs: [
-      {
-        name: "transactionId",
-        type: "bytes32",
-        indexed: true,
-        internalType: "bytes32",
-      },
-      {
-        name: "destinationChainId",
-        type: "uint256",
-        indexed: true,
-        internalType: "uint256",
-      },
-      {
-        name: "receiver",
-        type: "bytes",
-        indexed: false,
-        internalType: "bytes",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "BridgeToNonEVMChainBytes32",
-    inputs: [
-      {
-        name: "transactionId",
-        type: "bytes32",
-        indexed: true,
-        internalType: "bytes32",
-      },
-      {
-        name: "destinationChainId",
-        type: "uint256",
-        indexed: true,
-        internalType: "uint256",
-      },
-      {
-        name: "receiver",
-        type: "bytes32",
-        indexed: false,
-        internalType: "bytes32",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
     name: "LiFiGenericSwapCompleted",
     inputs: [
       {
@@ -303,7 +253,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea264697066735822122019225e69229a8be64bea281dc724ae5a2bc21d27fc17732e3f5d463494d4809264736f6c634300081d0033";
+  "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea26469706673582212207cd7d5137ba0298200da88ed5dd2f8741742b90513111a8144927f512d32205264736f6c634300081d0033";
 
 type SwapperV2ConstructorParams =
   | [signer?: Signer]
