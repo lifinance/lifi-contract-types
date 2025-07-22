@@ -5,6 +5,56 @@ import { utils, Contract, ContractFactory } from "ethers";
 const _abi = [
     {
         type: "event",
+        name: "BridgeToNonEVMChain",
+        inputs: [
+            {
+                name: "transactionId",
+                type: "bytes32",
+                indexed: true,
+                internalType: "bytes32",
+            },
+            {
+                name: "destinationChainId",
+                type: "uint256",
+                indexed: true,
+                internalType: "uint256",
+            },
+            {
+                name: "receiver",
+                type: "bytes",
+                indexed: false,
+                internalType: "bytes",
+            },
+        ],
+        anonymous: false,
+    },
+    {
+        type: "event",
+        name: "BridgeToNonEVMChainBytes32",
+        inputs: [
+            {
+                name: "transactionId",
+                type: "bytes32",
+                indexed: true,
+                internalType: "bytes32",
+            },
+            {
+                name: "destinationChainId",
+                type: "uint256",
+                indexed: true,
+                internalType: "uint256",
+            },
+            {
+                name: "receiver",
+                type: "bytes32",
+                indexed: false,
+                internalType: "bytes32",
+            },
+        ],
+        anonymous: false,
+    },
+    {
+        type: "event",
         name: "LiFiGenericSwapCompleted",
         inputs: [
             {
@@ -247,7 +297,7 @@ const _abi = [
         anonymous: false,
     },
 ];
-const _bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea2646970667358221220c82c0fee2ac44b969ef8fe13af8304216ae860f6891730f9a7f0728f33eb5b2d64736f6c634300081d0033";
+const _bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea264697066735822122019225e69229a8be64bea281dc724ae5a2bc21d27fc17732e3f5d463494d4809264736f6c634300081d0033";
 const isSuperArgs = (xs) => xs.length > 1;
 export class SwapperV2__factory extends ContractFactory {
     constructor(...args) {
