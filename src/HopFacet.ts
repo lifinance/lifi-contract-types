@@ -193,8 +193,6 @@ export interface HopFacetInterface extends utils.Interface {
 
   events: {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "HopBridgeRegistered(address,address)": EventFragment;
     "HopInitialized(tuple[])": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -205,8 +203,6 @@ export interface HopFacetInterface extends utils.Interface {
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HopInitialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -231,32 +227,6 @@ export type AssetSwappedEvent = TypedEvent<
 >;
 
 export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
-
-export interface BridgeToNonEVMChainEventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainEventObject
->;
-
-export type BridgeToNonEVMChainEventFilter =
-  TypedEventFilter<BridgeToNonEVMChainEvent>;
-
-export interface BridgeToNonEVMChainBytes32EventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainBytes32EventObject
->;
-
-export type BridgeToNonEVMChainBytes32EventFilter =
-  TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 
 export interface HopBridgeRegisteredEventObject {
   assetId: string;
@@ -477,28 +447,6 @@ export interface HopFacet extends BaseContract {
       toAmount?: null,
       timestamp?: null
     ): AssetSwappedEventFilter;
-
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-    BridgeToNonEVMChain(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
-    BridgeToNonEVMChainBytes32(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
 
     "HopBridgeRegistered(address,address)"(
       assetId?: PromiseOrValue<string> | null,

@@ -228,8 +228,6 @@ export interface GasZipPeripheryInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -240,8 +238,6 @@ export interface GasZipPeripheryInterface extends utils.Interface {
     "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -251,32 +247,6 @@ export interface GasZipPeripheryInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
-
-export interface BridgeToNonEVMChainEventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainEventObject
->;
-
-export type BridgeToNonEVMChainEventFilter =
-  TypedEventFilter<BridgeToNonEVMChainEvent>;
-
-export interface BridgeToNonEVMChainBytes32EventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainBytes32EventObject
->;
-
-export type BridgeToNonEVMChainBytes32EventFilter =
-  TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -552,28 +522,6 @@ export interface GasZipPeriphery extends BaseContract {
   };
 
   filters: {
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-    BridgeToNonEVMChain(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
-    BridgeToNonEVMChainBytes32(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
-
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       integrator?: null,
