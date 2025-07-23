@@ -4,46 +4,6 @@ import type { ILiFi, ILiFiInterface } from "../ILiFi";
 export declare class ILiFi__factory {
     static readonly abi: readonly [{
         readonly type: "event";
-        readonly name: "BridgeToNonEVMChain";
-        readonly inputs: readonly [{
-            readonly name: "transactionId";
-            readonly type: "bytes32";
-            readonly indexed: true;
-            readonly internalType: "bytes32";
-        }, {
-            readonly name: "destinationChainId";
-            readonly type: "uint256";
-            readonly indexed: true;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "receiver";
-            readonly type: "bytes";
-            readonly indexed: false;
-            readonly internalType: "bytes";
-        }];
-        readonly anonymous: false;
-    }, {
-        readonly type: "event";
-        readonly name: "BridgeToNonEVMChainBytes32";
-        readonly inputs: readonly [{
-            readonly name: "transactionId";
-            readonly type: "bytes32";
-            readonly indexed: true;
-            readonly internalType: "bytes32";
-        }, {
-            readonly name: "destinationChainId";
-            readonly type: "uint256";
-            readonly indexed: true;
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "receiver";
-            readonly type: "bytes32";
-            readonly indexed: false;
-            readonly internalType: "bytes32";
-        }];
-        readonly anonymous: false;
-    }, {
-        readonly type: "event";
         readonly name: "LiFiGenericSwapCompleted";
         readonly inputs: readonly [{
             readonly name: "transactionId";
