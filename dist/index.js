@@ -14,7 +14,6 @@ export { CBridgeFacetPacked__factory } from "./factories/CBridgeFacetPacked__fac
 export { CelerCircleBridgeFacet__factory } from "./factories/CelerCircleBridgeFacet__factory";
 export { ChainflipFacet__factory } from "./factories/ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./factories/DeBridgeDlnFacet__factory";
-export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./factories/DiamondLoupeFacet__factory";
 export { ECDSA__factory } from "./factories/ECDSA__factory";
@@ -91,6 +90,7 @@ export { IVelodromeV2Pool__factory } from "./factories/IVelodromeV2Pool__factory
 export { IVelodromeV2PoolCallee__factory } from "./factories/IVelodromeV2PoolCallee__factory";
 export { IVelodromeV2PoolFactory__factory } from "./factories/IVelodromeV2PoolFactory__factory";
 export { IVelodromeV2Router__factory } from "./factories/IVelodromeV2Router__factory";
+export { IWhitelistManagerFacet__factory } from "./factories/IWhitelistManagerFacet__factory";
 export { IXDaiBridge__factory } from "./factories/IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./factories/IXDaiBridgeL2__factory";
 export { LibAccess__factory } from "./factories/LibAccess__factory";
@@ -138,5 +138,6 @@ export { IWrapper__factory } from "./factories/TokenWrapper.sol/IWrapper__factor
 export { TokenWrapper__factory } from "./factories/TokenWrapper.sol/TokenWrapper__factory";
 export { TransferrableOwnership__factory } from "./factories/TransferrableOwnership__factory";
 export { WETH__factory } from "./factories/WETH__factory";
+export { WhitelistManagerFacet__factory } from "./factories/WhitelistManagerFacet__factory";
 export { WithdrawablePeriphery__factory } from "./factories/WithdrawablePeriphery__factory";
 export { WithdrawFacet__factory } from "./factories/WithdrawFacet__factory";
