@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { SafeTransferLib, SafeTransferLibInterface } from "../SafeTransferLib";
-declare type SafeTransferLibConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type SafeTransferLibConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SafeTransferLib__factory extends ContractFactory {
     constructor(...args: SafeTransferLibConstructorParams);
     deploy(overrides?: Overrides & {

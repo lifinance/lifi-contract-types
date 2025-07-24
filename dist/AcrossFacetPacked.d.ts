@@ -153,6 +153,8 @@ export interface AcrossFacetPackedInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAcrossNativePacked", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     events: {
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
         "CallExecutedAndFundsWithdrawn()": EventFragment;
         "LiFiAcrossTransfer(bytes8)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -163,6 +165,8 @@ export interface AcrossFacetPackedInterface extends utils.Interface {
         "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "CallExecutedAndFundsWithdrawn"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiAcrossTransfer"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -173,18 +177,40 @@ export interface AcrossFacetPackedInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+export interface BridgeToNonEVMChainEventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainEvent = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainEventObject>;
+export type BridgeToNonEVMChainEventFilter = TypedEventFilter<BridgeToNonEVMChainEvent>;
+export interface BridgeToNonEVMChainBytes32EventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainBytes32EventObject>;
+export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 export interface CallExecutedAndFundsWithdrawnEventObject {
 }
-export declare type CallExecutedAndFundsWithdrawnEvent = TypedEvent<[
+export type CallExecutedAndFundsWithdrawnEvent = TypedEvent<[
 ], CallExecutedAndFundsWithdrawnEventObject>;
-export declare type CallExecutedAndFundsWithdrawnEventFilter = TypedEventFilter<CallExecutedAndFundsWithdrawnEvent>;
+export type CallExecutedAndFundsWithdrawnEventFilter = TypedEventFilter<CallExecutedAndFundsWithdrawnEvent>;
 export interface LiFiAcrossTransferEventObject {
     _transactionId: string;
 }
-export declare type LiFiAcrossTransferEvent = TypedEvent<[
+export type LiFiAcrossTransferEvent = TypedEvent<[
     string
 ], LiFiAcrossTransferEventObject>;
-export declare type LiFiAcrossTransferEventFilter = TypedEventFilter<LiFiAcrossTransferEvent>;
+export type LiFiAcrossTransferEventFilter = TypedEventFilter<LiFiAcrossTransferEvent>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -195,7 +221,7 @@ export interface LiFiGenericSwapCompletedEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+export type LiFiGenericSwapCompletedEvent = TypedEvent<[
     string,
     string,
     string,
@@ -205,7 +231,7 @@ export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiGenericSwapCompletedEventObject>;
-export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
 export interface LiFiSwappedGenericEventObject {
     transactionId: string;
     integrator: string;
@@ -215,7 +241,7 @@ export interface LiFiSwappedGenericEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiSwappedGenericEvent = TypedEvent<[
+export type LiFiSwappedGenericEvent = TypedEvent<[
     string,
     string,
     string,
@@ -224,7 +250,7 @@ export declare type LiFiSwappedGenericEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiSwappedGenericEventObject>;
-export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
+export type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -232,14 +258,14 @@ export interface LiFiTransferCompletedEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferCompletedEvent = TypedEvent<[
+export type LiFiTransferCompletedEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferCompletedEventObject>;
-export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
+export type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferRecoveredEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -247,39 +273,39 @@ export interface LiFiTransferRecoveredEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferRecoveredEvent = TypedEvent<[
+export type LiFiTransferRecoveredEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferRecoveredEventObject>;
-export declare type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
+export type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
 export interface LiFiTransferStartedEventObject {
     bridgeData: ILiFi.BridgeDataStructOutput;
 }
-export declare type LiFiTransferStartedEvent = TypedEvent<[
+export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
-export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
+export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface OwnershipTransferRequestedEventObject {
     _from: string;
     _to: string;
 }
-export declare type OwnershipTransferRequestedEvent = TypedEvent<[
+export type OwnershipTransferRequestedEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferRequestedEventObject>;
-export declare type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
 }
-export declare type OwnershipTransferredEvent = TypedEvent<[
+export type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
 ], OwnershipTransferredEventObject>;
-export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
 export interface AcrossFacetPacked extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -419,6 +445,10 @@ export interface AcrossFacetPacked extends BaseContract {
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
+        BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
         "CallExecutedAndFundsWithdrawn()"(): CallExecutedAndFundsWithdrawnEventFilter;
         CallExecutedAndFundsWithdrawn(): CallExecutedAndFundsWithdrawnEventFilter;
         "LiFiAcrossTransfer(bytes8)"(_transactionId?: null): LiFiAcrossTransferEventFilter;

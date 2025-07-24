@@ -128,6 +128,8 @@ export interface HopFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaHop", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
         "HopBridgeRegistered(address,address)": EventFragment;
         "HopInitialized(tuple[])": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -137,6 +139,8 @@ export interface HopFacetInterface extends utils.Interface {
         "LiFiTransferStarted(tuple)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "HopBridgeRegistered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "HopInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -154,7 +158,7 @@ export interface AssetSwappedEventObject {
     toAmount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type AssetSwappedEvent = TypedEvent<[
+export type AssetSwappedEvent = TypedEvent<[
     string,
     string,
     string,
@@ -163,23 +167,45 @@ export declare type AssetSwappedEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], AssetSwappedEventObject>;
-export declare type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
+export interface BridgeToNonEVMChainEventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainEvent = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainEventObject>;
+export type BridgeToNonEVMChainEventFilter = TypedEventFilter<BridgeToNonEVMChainEvent>;
+export interface BridgeToNonEVMChainBytes32EventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainBytes32EventObject>;
+export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 export interface HopBridgeRegisteredEventObject {
     assetId: string;
     bridge: string;
 }
-export declare type HopBridgeRegisteredEvent = TypedEvent<[
+export type HopBridgeRegisteredEvent = TypedEvent<[
     string,
     string
 ], HopBridgeRegisteredEventObject>;
-export declare type HopBridgeRegisteredEventFilter = TypedEventFilter<HopBridgeRegisteredEvent>;
+export type HopBridgeRegisteredEventFilter = TypedEventFilter<HopBridgeRegisteredEvent>;
 export interface HopInitializedEventObject {
     configs: HopFacet.ConfigStructOutput[];
 }
-export declare type HopInitializedEvent = TypedEvent<[
+export type HopInitializedEvent = TypedEvent<[
     HopFacet.ConfigStructOutput[]
 ], HopInitializedEventObject>;
-export declare type HopInitializedEventFilter = TypedEventFilter<HopInitializedEvent>;
+export type HopInitializedEventFilter = TypedEventFilter<HopInitializedEvent>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -190,7 +216,7 @@ export interface LiFiGenericSwapCompletedEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
+export type LiFiGenericSwapCompletedEvent = TypedEvent<[
     string,
     string,
     string,
@@ -200,7 +226,7 @@ export declare type LiFiGenericSwapCompletedEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiGenericSwapCompletedEventObject>;
-export declare type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
 export interface LiFiSwappedGenericEventObject {
     transactionId: string;
     integrator: string;
@@ -210,7 +236,7 @@ export interface LiFiSwappedGenericEventObject {
     fromAmount: BigNumber;
     toAmount: BigNumber;
 }
-export declare type LiFiSwappedGenericEvent = TypedEvent<[
+export type LiFiSwappedGenericEvent = TypedEvent<[
     string,
     string,
     string,
@@ -219,7 +245,7 @@ export declare type LiFiSwappedGenericEvent = TypedEvent<[
     BigNumber,
     BigNumber
 ], LiFiSwappedGenericEventObject>;
-export declare type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
+export type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
 export interface LiFiTransferCompletedEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -227,14 +253,14 @@ export interface LiFiTransferCompletedEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferCompletedEvent = TypedEvent<[
+export type LiFiTransferCompletedEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferCompletedEventObject>;
-export declare type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
+export type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
 export interface LiFiTransferRecoveredEventObject {
     transactionId: string;
     receivingAssetId: string;
@@ -242,21 +268,21 @@ export interface LiFiTransferRecoveredEventObject {
     amount: BigNumber;
     timestamp: BigNumber;
 }
-export declare type LiFiTransferRecoveredEvent = TypedEvent<[
+export type LiFiTransferRecoveredEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], LiFiTransferRecoveredEventObject>;
-export declare type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
+export type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
 export interface LiFiTransferStartedEventObject {
     bridgeData: ILiFi.BridgeDataStructOutput;
 }
-export declare type LiFiTransferStartedEvent = TypedEvent<[
+export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
-export declare type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
+export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
 export interface HopFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
@@ -306,6 +332,10 @@ export interface HopFacet extends BaseContract {
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
+        BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
         "HopBridgeRegistered(address,address)"(assetId?: PromiseOrValue<string> | null, bridge?: null): HopBridgeRegisteredEventFilter;
         HopBridgeRegistered(assetId?: PromiseOrValue<string> | null, bridge?: null): HopBridgeRegisteredEventFilter;
         "HopInitialized(tuple[])"(configs?: null): HopInitializedEventFilter;

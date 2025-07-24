@@ -31,38 +31,38 @@ export interface AccessGrantedEventObject {
     account: string;
     method: string;
 }
-export declare type AccessGrantedEvent = TypedEvent<[
+export type AccessGrantedEvent = TypedEvent<[
     string,
     string
 ], AccessGrantedEventObject>;
-export declare type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
+export type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
 export interface AccessRevokedEventObject {
     account: string;
     method: string;
 }
-export declare type AccessRevokedEvent = TypedEvent<[
+export type AccessRevokedEvent = TypedEvent<[
     string,
     string
 ], AccessRevokedEventObject>;
-export declare type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
+export type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
 export interface ExecutionAllowedEventObject {
     account: string;
     method: string;
 }
-export declare type ExecutionAllowedEvent = TypedEvent<[
+export type ExecutionAllowedEvent = TypedEvent<[
     string,
     string
 ], ExecutionAllowedEventObject>;
-export declare type ExecutionAllowedEventFilter = TypedEventFilter<ExecutionAllowedEvent>;
+export type ExecutionAllowedEventFilter = TypedEventFilter<ExecutionAllowedEvent>;
 export interface ExecutionDeniedEventObject {
     account: string;
     method: string;
 }
-export declare type ExecutionDeniedEvent = TypedEvent<[
+export type ExecutionDeniedEvent = TypedEvent<[
     string,
     string
 ], ExecutionDeniedEventObject>;
-export declare type ExecutionDeniedEventFilter = TypedEventFilter<ExecutionDeniedEvent>;
+export type ExecutionDeniedEventFilter = TypedEventFilter<ExecutionDeniedEvent>;
 export interface AccessManagerFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

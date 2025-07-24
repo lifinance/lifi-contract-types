@@ -35,12 +35,12 @@ export interface DiamondCutEventObject {
     _init: string;
     _calldata: string;
 }
-export declare type DiamondCutEvent = TypedEvent<[
+export type DiamondCutEvent = TypedEvent<[
     LibDiamond.FacetCutStructOutput[],
     string,
     string
 ], DiamondCutEventObject>;
-export declare type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
+export type DiamondCutEventFilter = TypedEventFilter<DiamondCutEvent>;
 export interface DiamondCutFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

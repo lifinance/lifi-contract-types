@@ -149,25 +149,25 @@ export interface ApprovalEventObject {
     amount: BigNumber;
     expiration: number;
 }
-export declare type ApprovalEvent = TypedEvent<[
+export type ApprovalEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     number
 ], ApprovalEventObject>;
-export declare type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 export interface LockdownEventObject {
     owner: string;
     token: string;
     spender: string;
 }
-export declare type LockdownEvent = TypedEvent<[
+export type LockdownEvent = TypedEvent<[
     string,
     string,
     string
 ], LockdownEventObject>;
-export declare type LockdownEventFilter = TypedEventFilter<LockdownEvent>;
+export type LockdownEventFilter = TypedEventFilter<LockdownEvent>;
 export interface NonceInvalidationEventObject {
     owner: string;
     token: string;
@@ -175,14 +175,14 @@ export interface NonceInvalidationEventObject {
     newNonce: number;
     oldNonce: number;
 }
-export declare type NonceInvalidationEvent = TypedEvent<[
+export type NonceInvalidationEvent = TypedEvent<[
     string,
     string,
     string,
     number,
     number
 ], NonceInvalidationEventObject>;
-export declare type NonceInvalidationEventFilter = TypedEventFilter<NonceInvalidationEvent>;
+export type NonceInvalidationEventFilter = TypedEventFilter<NonceInvalidationEvent>;
 export interface PermitEventObject {
     owner: string;
     token: string;
@@ -191,7 +191,7 @@ export interface PermitEventObject {
     expiration: number;
     nonce: number;
 }
-export declare type PermitEvent = TypedEvent<[
+export type PermitEvent = TypedEvent<[
     string,
     string,
     string,
@@ -199,7 +199,7 @@ export declare type PermitEvent = TypedEvent<[
     number,
     number
 ], PermitEventObject>;
-export declare type PermitEventFilter = TypedEventFilter<PermitEvent>;
+export type PermitEventFilter = TypedEventFilter<PermitEvent>;
 export interface IAllowanceTransfer extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

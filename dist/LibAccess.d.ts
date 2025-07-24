@@ -15,20 +15,20 @@ export interface AccessGrantedEventObject {
     account: string;
     method: string;
 }
-export declare type AccessGrantedEvent = TypedEvent<[
+export type AccessGrantedEvent = TypedEvent<[
     string,
     string
 ], AccessGrantedEventObject>;
-export declare type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
+export type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
 export interface AccessRevokedEventObject {
     account: string;
     method: string;
 }
-export declare type AccessRevokedEvent = TypedEvent<[
+export type AccessRevokedEvent = TypedEvent<[
     string,
     string
 ], AccessRevokedEventObject>;
-export declare type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
+export type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
 export interface LibAccess extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

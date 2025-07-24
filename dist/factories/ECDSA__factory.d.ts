@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ECDSA, ECDSAInterface } from "../ECDSA";
-declare type ECDSAConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ECDSAConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ECDSA__factory extends ContractFactory {
     constructor(...args: ECDSAConstructorParams);
     deploy(overrides?: Overrides & {

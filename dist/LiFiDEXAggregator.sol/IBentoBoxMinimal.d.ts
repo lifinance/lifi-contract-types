@@ -2,21 +2,21 @@ import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, C
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
-export declare type StrategyDataStruct = {
+export type StrategyDataStruct = {
     strategyStartDate: PromiseOrValue<BigNumberish>;
     targetPercentage: PromiseOrValue<BigNumberish>;
     balance: PromiseOrValue<BigNumberish>;
 };
-export declare type StrategyDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
+export type StrategyDataStructOutput = [BigNumber, BigNumber, BigNumber] & {
     strategyStartDate: BigNumber;
     targetPercentage: BigNumber;
     balance: BigNumber;
 };
-export declare type RebaseStruct = {
+export type RebaseStruct = {
     elastic: PromiseOrValue<BigNumberish>;
     base: PromiseOrValue<BigNumberish>;
 };
-export declare type RebaseStructOutput = [BigNumber, BigNumber] & {
+export type RebaseStructOutput = [BigNumber, BigNumber] & {
     elastic: BigNumber;
     base: BigNumber;
 };

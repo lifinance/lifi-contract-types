@@ -21,11 +21,11 @@ export interface PeripheryContractRegisteredEventObject {
     name: string;
     contractAddress: string;
 }
-export declare type PeripheryContractRegisteredEvent = TypedEvent<[
+export type PeripheryContractRegisteredEvent = TypedEvent<[
     string,
     string
 ], PeripheryContractRegisteredEventObject>;
-export declare type PeripheryContractRegisteredEventFilter = TypedEventFilter<PeripheryContractRegisteredEvent>;
+export type PeripheryContractRegisteredEventFilter = TypedEventFilter<PeripheryContractRegisteredEvent>;
 export interface PeripheryRegistryFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

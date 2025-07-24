@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { SwapperV2, SwapperV2Interface } from "../SwapperV2";
-declare type SwapperV2ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type SwapperV2ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SwapperV2__factory extends ContractFactory {
     constructor(...args: SwapperV2ConstructorParams);
     deploy(overrides?: Overrides & {
@@ -13,8 +13,48 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea26469706673582212208a1b13bbd2fb06fe5a51976a276620586808c6ae9e6147768d6015d0f10d22ae64736f6c634300081d0033";
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea264697066735822122014a34e7309e9cbd0885ccb4b5e5c8e3a227d3a4ca410404b10657df5e2ed50e064736f6c634300081d0033";
     static readonly abi: readonly [{
+        readonly type: "event";
+        readonly name: "BridgeToNonEVMChain";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "destinationChainId";
+            readonly type: "uint256";
+            readonly indexed: true;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "receiver";
+            readonly type: "bytes";
+            readonly indexed: false;
+            readonly internalType: "bytes";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "BridgeToNonEVMChainBytes32";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "destinationChainId";
+            readonly type: "uint256";
+            readonly indexed: true;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "receiver";
+            readonly type: "bytes32";
+            readonly indexed: false;
+            readonly internalType: "bytes32";
+        }];
+        readonly anonymous: false;
+    }, {
         readonly type: "event";
         readonly name: "LiFiGenericSwapCompleted";
         readonly inputs: readonly [{

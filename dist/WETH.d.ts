@@ -76,38 +76,38 @@ export interface ApprovalEventObject {
     spender: string;
     amount: BigNumber;
 }
-export declare type ApprovalEvent = TypedEvent<[
+export type ApprovalEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], ApprovalEventObject>;
-export declare type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 export interface DepositEventObject {
     from: string;
     amount: BigNumber;
 }
-export declare type DepositEvent = TypedEvent<[string, BigNumber], DepositEventObject>;
-export declare type DepositEventFilter = TypedEventFilter<DepositEvent>;
+export type DepositEvent = TypedEvent<[string, BigNumber], DepositEventObject>;
+export type DepositEventFilter = TypedEventFilter<DepositEvent>;
 export interface TransferEventObject {
     from: string;
     to: string;
     amount: BigNumber;
 }
-export declare type TransferEvent = TypedEvent<[
+export type TransferEvent = TypedEvent<[
     string,
     string,
     BigNumber
 ], TransferEventObject>;
-export declare type TransferEventFilter = TypedEventFilter<TransferEvent>;
+export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 export interface WithdrawalEventObject {
     to: string;
     amount: BigNumber;
 }
-export declare type WithdrawalEvent = TypedEvent<[
+export type WithdrawalEvent = TypedEvent<[
     string,
     BigNumber
 ], WithdrawalEventObject>;
-export declare type WithdrawalEventFilter = TypedEventFilter<WithdrawalEvent>;
+export type WithdrawalEventFilter = TypedEventFilter<WithdrawalEvent>;
 export interface WETH extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

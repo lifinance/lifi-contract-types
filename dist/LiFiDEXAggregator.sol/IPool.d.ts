@@ -55,14 +55,14 @@ export interface SwapEventObject {
     amountIn: BigNumber;
     amountOut: BigNumber;
 }
-export declare type SwapEvent = TypedEvent<[
+export type SwapEvent = TypedEvent<[
     string,
     string,
     string,
     BigNumber,
     BigNumber
 ], SwapEventObject>;
-export declare type SwapEventFilter = TypedEventFilter<SwapEvent>;
+export type SwapEventFilter = TypedEventFilter<SwapEvent>;
 export interface IPool extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

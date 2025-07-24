@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PromiseOrValue } from "../common";
 import type { ERC1155Holder, ERC1155HolderInterface } from "../ERC1155Holder";
-declare type ERC1155HolderConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type ERC1155HolderConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ERC1155Holder__factory extends ContractFactory {
     constructor(...args: ERC1155HolderConstructorParams);
     deploy(overrides?: Overrides & {
