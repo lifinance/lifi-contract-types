@@ -6,6 +6,7 @@ export { AcrossFacet__factory } from "./factories/AcrossFacet__factory";
 export { AcrossFacetPacked__factory } from "./factories/AcrossFacetPacked__factory";
 export { AcrossFacetPackedV3__factory } from "./factories/AcrossFacetPackedV3__factory";
 export { AcrossFacetV3__factory } from "./factories/AcrossFacetV3__factory";
+export { AcrossFacetV4__factory } from "./factories/AcrossFacetV4__factory";
 export { AllBridgeFacet__factory } from "./factories/AllBridgeFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./factories/ArbitrumBridgeFacet__factory";
 export { CalldataVerificationFacet__factory } from "./factories/CalldataVerificationFacet__factory";
@@ -40,6 +41,7 @@ export { HopFacetOptimized__factory } from "./factories/HopFacetOptimized__facto
 export { HopFacetPacked__factory } from "./factories/HopFacetPacked__factory";
 export { IAccessControl__factory } from "./factories/IAccessControl__factory";
 export { IAcrossSpokePool__factory } from "./factories/IAcrossSpokePool__factory";
+export { IAcrossSpokePoolV4__factory } from "./factories/IAcrossSpokePoolV4__factory";
 export { IAlgebraFactory__factory } from "./factories/IAlgebraFactory__factory";
 export { IAlgebraPool__factory } from "./factories/IAlgebraPool__factory";
 export { IAlgebraQuoter__factory } from "./factories/IAlgebraQuoter__factory";
