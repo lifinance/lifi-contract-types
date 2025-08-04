@@ -102,7 +102,6 @@ export { MayanFacet__factory } from "./MayanFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";
 export { OwnershipFacet__factory } from "./OwnershipFacet__factory";
-export { Patcher__factory } from "./Patcher__factory";
 export { PeripheryRegistryFacet__factory } from "./PeripheryRegistryFacet__factory";
 export { Permit2Proxy__factory } from "./Permit2Proxy__factory";
 export { PermitHash__factory } from "./PermitHash__factory";
