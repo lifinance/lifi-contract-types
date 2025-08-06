@@ -41,10 +41,12 @@ export declare namespace ILiFi {
 }
 export declare namespace GlacisFacet {
     type GlacisDataStruct = {
+        receiverAddress: PromiseOrValue<BytesLike>;
         refundAddress: PromiseOrValue<string>;
         nativeFee: PromiseOrValue<BigNumberish>;
     };
-    type GlacisDataStructOutput = [string, BigNumber] & {
+    type GlacisDataStructOutput = [string, string, BigNumber] & {
+        receiverAddress: string;
         refundAddress: string;
         nativeFee: BigNumber;
     };
@@ -79,19 +81,19 @@ export declare namespace LibSwap {
 }
 export interface GlacisFacetInterface extends utils.Interface {
     functions: {
-        "airlift()": FunctionFragment;
-        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256))": FunctionFragment;
+        "AIRLIFT()": FunctionFragment;
+        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
+        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "airlift" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
-    encodeFunctionData(functionFragment: "airlift", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "AIRLIFT" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
+    encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaGlacis", values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaGlacis", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         GlacisFacet.GlacisDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "airlift", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaGlacis", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaGlacis", data: BytesLike): Result;
     events: {
@@ -246,7 +248,7 @@ export interface GlacisFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        airlift(overrides?: CallOverrides): Promise<[string]>;
+        AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -254,7 +256,7 @@ export interface GlacisFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    airlift(overrides?: CallOverrides): Promise<string>;
+    AIRLIFT(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -262,7 +264,7 @@ export interface GlacisFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        airlift(overrides?: CallOverrides): Promise<string>;
+        AIRLIFT(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -285,7 +287,7 @@ export interface GlacisFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        airlift(overrides?: CallOverrides): Promise<BigNumber>;
+        AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -294,7 +296,7 @@ export interface GlacisFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        airlift(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
