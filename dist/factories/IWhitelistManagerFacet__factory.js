@@ -47,7 +47,7 @@ var _abi = [
     },
     {
         type: "function",
-        name: "batchSetFunctionApprovalBySelector",
+        name: "batchSetFunctionWhitelistBySelector",
         inputs: [
             {
                 name: "_selectors",
@@ -55,26 +55,13 @@ var _abi = [
                 internalType: "bytes4[]",
             },
             {
-                name: "_approval",
+                name: "_whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
         ],
         outputs: [],
         stateMutability: "nonpayable",
-    },
-    {
-        type: "function",
-        name: "getApprovedFunctionSelectors",
-        inputs: [],
-        outputs: [
-            {
-                name: "selectors",
-                type: "bytes4[]",
-                internalType: "bytes4[]",
-            },
-        ],
-        stateMutability: "view",
     },
     {
         type: "function",
@@ -91,6 +78,19 @@ var _abi = [
     },
     {
         type: "function",
+        name: "getWhitelistedFunctionSelectors",
+        inputs: [],
+        outputs: [
+            {
+                name: "selectors",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
         name: "isAddressWhitelisted",
         inputs: [
             {
@@ -101,7 +101,7 @@ var _abi = [
         ],
         outputs: [
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -110,7 +110,7 @@ var _abi = [
     },
     {
         type: "function",
-        name: "isFunctionApproved",
+        name: "isFunctionSelectorWhitelisted",
         inputs: [
             {
                 name: "_selector",
@@ -120,12 +120,48 @@ var _abi = [
         ],
         outputs: [
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
         ],
         stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "isMigrated",
+        inputs: [],
+        outputs: [
+            {
+                name: "",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "migrate",
+        inputs: [
+            {
+                name: "_selectorsToRemove",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+            {
+                name: "_contractsToAdd",
+                type: "address[]",
+                internalType: "address[]",
+            },
+            {
+                name: "_selectorsToAdd",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+        ],
+        outputs: [],
+        stateMutability: "nonpayable",
     },
     {
         type: "function",
@@ -142,7 +178,7 @@ var _abi = [
     },
     {
         type: "function",
-        name: "setFunctionApprovalBySelector",
+        name: "setFunctionWhitelistBySelector",
         inputs: [
             {
                 name: "_selector",
@@ -150,7 +186,7 @@ var _abi = [
                 internalType: "bytes4",
             },
             {
-                name: "_approval",
+                name: "_whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -186,7 +222,7 @@ var _abi = [
     },
     {
         type: "event",
-        name: "FunctionSelectorApprovalChanged",
+        name: "FunctionSelectorWhitelistChanged",
         inputs: [
             {
                 name: "functionSelector",
@@ -195,7 +231,7 @@ var _abi = [
                 internalType: "bytes4",
             },
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 indexed: true,
                 internalType: "bool",
