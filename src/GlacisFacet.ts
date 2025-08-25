@@ -68,13 +68,11 @@ export declare namespace ILiFi {
 
 export declare namespace GlacisFacet {
   export type GlacisDataStruct = {
-    receiverAddress: PromiseOrValue<BytesLike>;
     refundAddress: PromiseOrValue<string>;
     nativeFee: PromiseOrValue<BigNumberish>;
   };
 
-  export type GlacisDataStructOutput = [string, string, BigNumber] & {
-    receiverAddress: string;
+  export type GlacisDataStructOutput = [string, BigNumber] & {
     refundAddress: string;
     nativeFee: BigNumber;
   };
@@ -112,19 +110,19 @@ export declare namespace LibSwap {
 
 export interface GlacisFacetInterface extends utils.Interface {
   functions: {
-    "AIRLIFT()": FunctionFragment;
-    "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
+    "airlift()": FunctionFragment;
+    "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "AIRLIFT"
+      | "airlift"
       | "startBridgeTokensViaGlacis"
       | "swapAndStartBridgeTokensViaGlacis"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
+  encodeFunctionData(functionFragment: "airlift", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaGlacis",
     values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]
@@ -138,7 +136,7 @@ export interface GlacisFacetInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "airlift", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaGlacis",
     data: BytesLike
@@ -314,7 +312,7 @@ export interface GlacisFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
+    airlift(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaGlacis(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -330,7 +328,7 @@ export interface GlacisFacet extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  AIRLIFT(overrides?: CallOverrides): Promise<string>;
+  airlift(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaGlacis(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -346,7 +344,7 @@ export interface GlacisFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    AIRLIFT(overrides?: CallOverrides): Promise<string>;
+    airlift(overrides?: CallOverrides): Promise<string>;
 
     startBridgeTokensViaGlacis(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -481,7 +479,7 @@ export interface GlacisFacet extends BaseContract {
   };
 
   estimateGas: {
-    AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
+    airlift(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaGlacis(
       _bridgeData: ILiFi.BridgeDataStruct,
@@ -498,7 +496,7 @@ export interface GlacisFacet extends BaseContract {
   };
 
   populateTransaction: {
-    AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    airlift(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     startBridgeTokensViaGlacis(
       _bridgeData: ILiFi.BridgeDataStruct,
