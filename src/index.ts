@@ -112,6 +112,7 @@ export type { LibSwap } from "./LibSwap";
 export type { MayanFacet } from "./MayanFacet";
 export type { OmniBridgeFacet } from "./OmniBridgeFacet";
 export type { OptimismBridgeFacet } from "./OptimismBridgeFacet";
+export type { OutputValidator } from "./OutputValidator";
 export type { OwnershipFacet } from "./OwnershipFacet";
 export type { Patcher } from "./Patcher";
 export type { PeripheryRegistryFacet } from "./PeripheryRegistryFacet";
@@ -269,6 +270,7 @@ export { LiFiTimelockController__factory } from "./factories/LiFiTimelockControl
 export { MayanFacet__factory } from "./factories/MayanFacet__factory";
 export { OmniBridgeFacet__factory } from "./factories/OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./factories/OptimismBridgeFacet__factory";
+export { OutputValidator__factory } from "./factories/OutputValidator__factory";
 export { OwnershipFacet__factory } from "./factories/OwnershipFacet__factory";
 export { Patcher__factory } from "./factories/Patcher__factory";
 export { PeripheryRegistryFacet__factory } from "./factories/PeripheryRegistryFacet__factory";
