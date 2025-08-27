@@ -39,14 +39,14 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace GlacisFacet {
-    type GlacisDataStruct = {
-        refundAddress: PromiseOrValue<string>;
-        nativeFee: PromiseOrValue<BigNumberish>;
+export declare namespace RelayDepositoryFacet {
+    type RelayDepositoryDataStruct = {
+        orderId: PromiseOrValue<BytesLike>;
+        depositorAddress: PromiseOrValue<string>;
     };
-    type GlacisDataStructOutput = [string, BigNumber] & {
-        refundAddress: string;
-        nativeFee: BigNumber;
+    type RelayDepositoryDataStructOutput = [string, string] & {
+        orderId: string;
+        depositorAddress: string;
     };
 }
 export declare namespace LibSwap {
@@ -77,23 +77,26 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface GlacisFacetInterface extends utils.Interface {
+export interface RelayDepositoryFacetInterface extends utils.Interface {
     functions: {
-        "airlift()": FunctionFragment;
-        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256))": FunctionFragment;
+        "RELAY_DEPOSITORY()": FunctionFragment;
+        "startBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address))": FunctionFragment;
+        "swapAndStartBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "airlift" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
-    encodeFunctionData(functionFragment: "airlift", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaGlacis", values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaGlacis", values: [
+    getFunction(nameOrSignatureOrTopic: "RELAY_DEPOSITORY" | "startBridgeTokensViaRelayDepository" | "swapAndStartBridgeTokensViaRelayDepository"): FunctionFragment;
+    encodeFunctionData(functionFragment: "RELAY_DEPOSITORY", values?: undefined): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaRelayDepository", values: [
+        ILiFi.BridgeDataStruct,
+        RelayDepositoryFacet.RelayDepositoryDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaRelayDepository", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
-        GlacisFacet.GlacisDataStruct
+        RelayDepositoryFacet.RelayDepositoryDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "airlift", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "startBridgeTokensViaGlacis", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaGlacis", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "RELAY_DEPOSITORY", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeTokensViaRelayDepository", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaRelayDepository", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
@@ -231,11 +234,11 @@ export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface GlacisFacet extends BaseContract {
+export interface RelayDepositoryFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: GlacisFacetInterface;
+    interface: RelayDepositoryFacetInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -246,25 +249,25 @@ export interface GlacisFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        airlift(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<[string]>;
+        startBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    airlift(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+    startBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        airlift(overrides?: CallOverrides): Promise<string>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
+        RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+        startBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
@@ -285,20 +288,20 @@ export interface GlacisFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        airlift(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<BigNumber>;
+        startBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        airlift(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaRelayDepository(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
