@@ -1,0 +1,77 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { NativeWrapperFacet, NativeWrapperFacetInterface } from "../NativeWrapperFacet";
+type NativeWrapperFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class NativeWrapperFacet__factory extends ContractFactory {
+    constructor(...args: NativeWrapperFacetConstructorParams);
+    deploy(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<NativeWrapperFacet>;
+    getDeployTransaction(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): NativeWrapperFacet;
+    connect(signer: Signer): NativeWrapperFacet__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b506106b98061001c5f395ff3fe608060405260043610610028575f3560e01c806331ce21c71461002c5780637d545ff814610041575b5f5ffd5b61003f61003a36600461056b565b610060565b005b34801561004c575f5ffd5b5061003f61005b36600461056b565b610180565b83516040805160208088018252928701830192810192909252818101905280518051601482018084525160289092018352606090811c91901c8115806100ba575073ffffffffffffffffffffffffffffffffffffffff8116155b156100f1576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8173ffffffffffffffffffffffffffffffffffffffff1663d0e30db0856040518263ffffffff1660e01b81526004015f604051808303818588803b158015610137575f5ffd5b505af1158015610149573d5f5f3e3d5ffd5b5050505073ffffffffffffffffffffffffffffffffffffffff821630149050610177576101778282866102b6565b50505050505050565b835160408051602080880182529287018301928101929092528181019052805180516014909101825260601c806101e3576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b3373ffffffffffffffffffffffffffffffffffffffff86160361020c5761020c84333086610329565b6040517f2e1a7d4d0000000000000000000000000000000000000000000000000000000081526004810184905273ffffffffffffffffffffffffffffffffffffffff851690632e1a7d4d906024015f604051808303815f87803b158015610271575f5ffd5b505af1158015610283573d5f5f3e3d5ffd5b5050505073ffffffffffffffffffffffffffffffffffffffff811630146102ae576102ae81846103eb565b505050505050565b73ffffffffffffffffffffffffffffffffffffffff8216610303576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61032473ffffffffffffffffffffffffffffffffffffffff8416838361045c565b505050565b73ffffffffffffffffffffffffffffffffffffffff8416610376576040517fd1bebf0c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82166103c3576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6103e573ffffffffffffffffffffffffffffffffffffffff85168484846104a5565b50505050565b73ffffffffffffffffffffffffffffffffffffffff8216610438576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61045873ffffffffffffffffffffffffffffffffffffffff8316826104fd565b5050565b81601452806034526fa9059cbb0000000000000000000000005f5260205f604460105f875af13d1560015f5114171661049c576390b8ec185f526004601cfd5b5f603452505050565b60405181606052826040528360601b602c526f23b872dd000000000000000000000000600c5260205f6064601c5f895af13d1560015f511417166104f057637939f4245f526004601cfd5b5f60605260405250505050565b5f385f3884865af16104585763b12d13eb5f526004601cfd5b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b803573ffffffffffffffffffffffffffffffffffffffff81168114610566575f5ffd5b919050565b5f5f5f5f6080858703121561057e575f5ffd5b843567ffffffffffffffff811115610594575f5ffd5b8501601f810187136105a4575f5ffd5b803567ffffffffffffffff8111156105be576105be610516565b6040517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0603f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8501160116810181811067ffffffffffffffff8211171561062a5761062a610516565b604052818152828201602001891015610641575f5ffd5b816020840160208301375f6020838301015280965050505061066560208601610543565b925061067360408601610543565b939692955092936060013592505056fea2646970667358221220e318ff06fe5abff5d1c35b8fc99e43139868631a9629fdc358b5da65d0695b6664736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "unwrapNative";
+        readonly inputs: readonly [{
+            readonly name: "swapData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "from";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "tokenIn";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "amountIn";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "wrapNative";
+        readonly inputs: readonly [{
+            readonly name: "swapData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "amountIn";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidCallData";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidReceiver";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NullAddrIsNotAnERC20Token";
+        readonly inputs: readonly [];
+    }];
+    static createInterface(): NativeWrapperFacetInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): NativeWrapperFacet;
+}
+export {};
