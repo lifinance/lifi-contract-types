@@ -1,0 +1,56 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export interface IGardenInterface extends utils.Interface {
+    functions: {
+        "initiateOnBehalf(address,address,uint256,uint256,bytes32)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "initiateOnBehalf"): FunctionFragment;
+    encodeFunctionData(functionFragment: "initiateOnBehalf", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    decodeFunctionResult(functionFragment: "initiateOnBehalf", data: BytesLike): Result;
+    events: {};
+}
+export interface IGarden extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: IGardenInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        initiateOnBehalf(initiator: PromiseOrValue<string>, redeemer: PromiseOrValue<string>, timelock: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, secretHash: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    initiateOnBehalf(initiator: PromiseOrValue<string>, redeemer: PromiseOrValue<string>, timelock: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, secretHash: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        initiateOnBehalf(initiator: PromiseOrValue<string>, redeemer: PromiseOrValue<string>, timelock: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, secretHash: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {};
+    estimateGas: {
+        initiateOnBehalf(initiator: PromiseOrValue<string>, redeemer: PromiseOrValue<string>, timelock: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, secretHash: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        initiateOnBehalf(initiator: PromiseOrValue<string>, redeemer: PromiseOrValue<string>, timelock: PromiseOrValue<BigNumberish>, amount: PromiseOrValue<BigNumberish>, secretHash: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
