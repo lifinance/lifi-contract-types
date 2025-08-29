@@ -66,15 +66,56 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace RelayDepositoryFacet {
-  export type RelayDepositoryDataStruct = {
-    orderId: PromiseOrValue<BytesLike>;
-    depositorAddress: PromiseOrValue<string>;
+export declare namespace IEcoPortal {
+  export type CallStruct = {
+    target: PromiseOrValue<string>;
+    data: PromiseOrValue<BytesLike>;
+    value: PromiseOrValue<BigNumberish>;
   };
 
-  export type RelayDepositoryDataStructOutput = [string, string] & {
-    orderId: string;
-    depositorAddress: string;
+  export type CallStructOutput = [string, string, BigNumber] & {
+    target: string;
+    data: string;
+    value: BigNumber;
+  };
+}
+
+export declare namespace EcoFacet {
+  export type EcoDataStruct = {
+    receiverAddress: PromiseOrValue<string>;
+    nonEVMReceiver: PromiseOrValue<BytesLike>;
+    receivingAssetId: PromiseOrValue<string>;
+    salt: PromiseOrValue<BytesLike>;
+    routeDeadline: PromiseOrValue<BigNumberish>;
+    destinationPortal: PromiseOrValue<string>;
+    prover: PromiseOrValue<string>;
+    rewardDeadline: PromiseOrValue<BigNumberish>;
+    solverReward: PromiseOrValue<BigNumberish>;
+    destinationCalls: IEcoPortal.CallStruct[];
+  };
+
+  export type EcoDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    IEcoPortal.CallStructOutput[]
+  ] & {
+    receiverAddress: string;
+    nonEVMReceiver: string;
+    receivingAssetId: string;
+    salt: string;
+    routeDeadline: BigNumber;
+    destinationPortal: string;
+    prover: string;
+    rewardDeadline: BigNumber;
+    solverReward: BigNumber;
+    destinationCalls: IEcoPortal.CallStructOutput[];
   };
 }
 
@@ -108,50 +149,41 @@ export declare namespace LibSwap {
   };
 }
 
-export interface RelayDepositoryFacetInterface extends utils.Interface {
+export interface EcoFacetInterface extends utils.Interface {
   functions: {
-    "RELAY_DEPOSITORY()": FunctionFragment;
-    "startBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address))": FunctionFragment;
-    "swapAndStartBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address))": FunctionFragment;
+    "portal()": FunctionFragment;
+    "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes,address,bytes32,uint64,address,address,uint64,uint256,(address,bytes,uint256)[]))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes,address,bytes32,uint64,address,address,uint64,uint256,(address,bytes,uint256)[]))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "RELAY_DEPOSITORY"
-      | "startBridgeTokensViaRelayDepository"
-      | "swapAndStartBridgeTokensViaRelayDepository"
+      | "portal"
+      | "startBridgeTokensViaEco"
+      | "swapAndStartBridgeTokensViaEco"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "portal", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "RELAY_DEPOSITORY",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaEco",
+    values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaRelayDepository",
-    values: [
-      ILiFi.BridgeDataStruct,
-      RelayDepositoryFacet.RelayDepositoryDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaRelayDepository",
+    functionFragment: "swapAndStartBridgeTokensViaEco",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      RelayDepositoryFacet.RelayDepositoryDataStruct
+      EcoFacet.EcoDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "portal", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "RELAY_DEPOSITORY",
+    functionFragment: "startBridgeTokensViaEco",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaRelayDepository",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaRelayDepository",
+    functionFragment: "swapAndStartBridgeTokensViaEco",
     data: BytesLike
   ): Result;
 
@@ -294,12 +326,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface RelayDepositoryFacet extends BaseContract {
+export interface EcoFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RelayDepositoryFacetInterface;
+  interface: EcoFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -321,50 +353,50 @@ export interface RelayDepositoryFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<[string]>;
+    portal(overrides?: CallOverrides): Promise<[string]>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+  portal(overrides?: CallOverrides): Promise<string>;
 
-  startBridgeTokensViaRelayDepository(
+  startBridgeTokensViaEco(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+    _ecoData: EcoFacet.EcoDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaRelayDepository(
+  swapAndStartBridgeTokensViaEco(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+    _ecoData: EcoFacet.EcoDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+    portal(overrides?: CallOverrides): Promise<string>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -488,35 +520,35 @@ export interface RelayDepositoryFacet extends BaseContract {
   };
 
   estimateGas: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<BigNumber>;
+    portal(overrides?: CallOverrides): Promise<BigNumber>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    portal(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

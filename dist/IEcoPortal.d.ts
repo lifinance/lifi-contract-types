@@ -1,0 +1,130 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace IEcoPortal {
+    type TokenAmountStruct = {
+        token: PromiseOrValue<string>;
+        amount: PromiseOrValue<BigNumberish>;
+    };
+    type TokenAmountStructOutput = [string, BigNumber] & {
+        token: string;
+        amount: BigNumber;
+    };
+    type CallStruct = {
+        target: PromiseOrValue<string>;
+        data: PromiseOrValue<BytesLike>;
+        value: PromiseOrValue<BigNumberish>;
+    };
+    type CallStructOutput = [string, string, BigNumber] & {
+        target: string;
+        data: string;
+        value: BigNumber;
+    };
+    type RouteStruct = {
+        salt: PromiseOrValue<BytesLike>;
+        deadline: PromiseOrValue<BigNumberish>;
+        portal: PromiseOrValue<string>;
+        nativeAmount: PromiseOrValue<BigNumberish>;
+        tokens: IEcoPortal.TokenAmountStruct[];
+        calls: IEcoPortal.CallStruct[];
+    };
+    type RouteStructOutput = [
+        string,
+        BigNumber,
+        string,
+        BigNumber,
+        IEcoPortal.TokenAmountStructOutput[],
+        IEcoPortal.CallStructOutput[]
+    ] & {
+        salt: string;
+        deadline: BigNumber;
+        portal: string;
+        nativeAmount: BigNumber;
+        tokens: IEcoPortal.TokenAmountStructOutput[];
+        calls: IEcoPortal.CallStructOutput[];
+    };
+    type RewardStruct = {
+        deadline: PromiseOrValue<BigNumberish>;
+        creator: PromiseOrValue<string>;
+        prover: PromiseOrValue<string>;
+        nativeAmount: PromiseOrValue<BigNumberish>;
+        tokens: IEcoPortal.TokenAmountStruct[];
+    };
+    type RewardStructOutput = [
+        BigNumber,
+        string,
+        string,
+        BigNumber,
+        IEcoPortal.TokenAmountStructOutput[]
+    ] & {
+        deadline: BigNumber;
+        creator: string;
+        prover: string;
+        nativeAmount: BigNumber;
+        tokens: IEcoPortal.TokenAmountStructOutput[];
+    };
+    type IntentStruct = {
+        destination: PromiseOrValue<BigNumberish>;
+        route: IEcoPortal.RouteStruct;
+        reward: IEcoPortal.RewardStruct;
+    };
+    type IntentStructOutput = [
+        BigNumber,
+        IEcoPortal.RouteStructOutput,
+        IEcoPortal.RewardStructOutput
+    ] & {
+        destination: BigNumber;
+        route: IEcoPortal.RouteStructOutput;
+        reward: IEcoPortal.RewardStructOutput;
+    };
+}
+export interface IEcoPortalInterface extends utils.Interface {
+    functions: {
+        "publishAndFund((uint64,(bytes32,uint64,address,uint256,(address,uint256)[],(address,bytes,uint256)[]),(uint64,address,address,uint256,(address,uint256)[])),bool)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "publishAndFund"): FunctionFragment;
+    encodeFunctionData(functionFragment: "publishAndFund", values: [IEcoPortal.IntentStruct, PromiseOrValue<boolean>]): string;
+    decodeFunctionResult(functionFragment: "publishAndFund", data: BytesLike): Result;
+    events: {};
+}
+export interface IEcoPortal extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: IEcoPortalInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        publishAndFund(intent: IEcoPortal.IntentStruct, allowPartial: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    publishAndFund(intent: IEcoPortal.IntentStruct, allowPartial: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        publishAndFund(intent: IEcoPortal.IntentStruct, allowPartial: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<[string, string] & {
+            intentHash: string;
+            vault: string;
+        }>;
+    };
+    filters: {};
+    estimateGas: {
+        publishAndFund(intent: IEcoPortal.IntentStruct, allowPartial: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        publishAndFund(intent: IEcoPortal.IntentStruct, allowPartial: PromiseOrValue<boolean>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
