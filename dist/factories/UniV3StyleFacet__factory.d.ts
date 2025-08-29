@@ -1,0 +1,341 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { UniV3StyleFacet, UniV3StyleFacetInterface } from "../UniV3StyleFacet";
+type UniV3StyleFacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class UniV3StyleFacet__factory extends ContractFactory {
+    constructor(...args: UniV3StyleFacetConstructorParams);
+    deploy(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<UniV3StyleFacet>;
+    getDeployTransaction(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): UniV3StyleFacet;
+    connect(signer: Signer): UniV3StyleFacet__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50610a7d8061001c5f395ff3fe608060405234801561000f575f5ffd5b50600436106100fb575f3560e01c80639feb758b11610093578063be83e10f11610063578063be83e10f146100ff578063e81f56f4146100ff578063fa461e33146100ff578063fa85398b146100ff575f5ffd5b80639feb758b146100ff578063a224ef83146100ff578063ae067e0f146100ff578063b05a3306146100ff575f5ffd5b80636118b15d116100ce5780636118b15d146100ff578063654b6487146100ff57806386cbcd52146100ff5780638ae6e750146100ff575f5ffd5b806314cf7886146100ff57806323a69e75146100ff57806332f23b5b146101145780635bee97a3146100ff575b5f5ffd5b61011261010d3660046106e9565b610127565b005b6101126101223660046107c3565b61018d565b61012f610442565b61013b848484846104d8565b6101877ffdcc6c44da30e7c49fd2b43345be3db7f90d50c636b93a701c14974ea66ea61280547fffffffffffffffffffffffff0000000000000000000000000000000000000000169055565b50505050565b835160408051602080880182529287018301928101929092528181019052805180516014820180845251601583018085525160299093018452606091821c925f9190911a600114911c8215806101f7575073ffffffffffffffffffffffffffffffffffffffff8116155b8061022157507f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff85115b15610258576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b3373ffffffffffffffffffffffffffffffffffffffff8816036102815761028186333088610519565b7ffdcc6c44da30e7c49fd2b43345be3db7f90d50c636b93a701c14974ea66ea61280547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff85161790558273ffffffffffffffffffffffffffffffffffffffff1663128acb088284888661032857610323600173fffd8963efd1fc6a506488495d951d5263988d26610908565b610338565b6103386401000276a3600161093a565b6040805173ffffffffffffffffffffffffffffffffffffffff8e166020820152016040516020818303038152906040526040518663ffffffff1660e01b8152600401610388959493929190610966565b60408051808303815f875af11580156103a3573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906103c79190610a03565b50507ffdcc6c44da30e7c49fd2b43345be3db7f90d50c636b93a701c14974ea66ea6125473ffffffffffffffffffffffffffffffffffffffff1615610438576040517f8184471100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5050505050505050565b7ffdcc6c44da30e7c49fd2b43345be3db7f90d50c636b93a701c14974ea66ea6125473ffffffffffffffffffffffffffffffffffffffff163381146104d5576040517f48f89ac500000000000000000000000000000000000000000000000000000000815233600482015273ffffffffffffffffffffffffffffffffffffffff8216602482015260440160405180910390fd5b50565b5f5f85136104e657836104e8565b845b90505f81136104f75750610187565b5f61050483850185610a25565b90506105118133846105d5565b505050505050565b73ffffffffffffffffffffffffffffffffffffffff8416610566576040517fd1bebf0c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82166105b3576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61018773ffffffffffffffffffffffffffffffffffffffff8516848484610648565b73ffffffffffffffffffffffffffffffffffffffff8216610622576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61064373ffffffffffffffffffffffffffffffffffffffff841683836106a0565b505050565b60405181606052826040528360601b602c526f23b872dd000000000000000000000000600c5260205f6064601c5f895af13d1560015f5114171661069357637939f4245f526004601cfd5b5f60605260405250505050565b81601452806034526fa9059cbb0000000000000000000000005f5260205f604460105f875af13d1560015f511417166106e0576390b8ec185f526004601cfd5b5f603452505050565b5f5f5f5f606085870312156106fc575f5ffd5b8435935060208501359250604085013567ffffffffffffffff811115610720575f5ffd5b8501601f81018713610730575f5ffd5b803567ffffffffffffffff811115610746575f5ffd5b876020828401011115610757575f5ffd5b949793965060200194505050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b73ffffffffffffffffffffffffffffffffffffffff811681146104d5575f5ffd5b80356107be81610792565b919050565b5f5f5f5f608085870312156107d6575f5ffd5b843567ffffffffffffffff8111156107ec575f5ffd5b8501601f810187136107fc575f5ffd5b803567ffffffffffffffff81111561081657610816610765565b6040517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0603f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8501160116810181811067ffffffffffffffff8211171561088257610882610765565b604052818152828201602001891015610899575f5ffd5b816020840160208301375f602083830101528096505050506108bd602086016107b3565b92506108cb604086016107b3565b9396929550929360600135925050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b73ffffffffffffffffffffffffffffffffffffffff8281168282160390811115610934576109346108db565b92915050565b73ffffffffffffffffffffffffffffffffffffffff8181168382160190811115610934576109346108db565b73ffffffffffffffffffffffffffffffffffffffff86168152841515602082015283604082015273ffffffffffffffffffffffffffffffffffffffff8316606082015260a060808201525f82518060a0840152806020850160c085015e5f60c0828501015260c07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168401019150509695505050505050565b5f5f60408385031215610a14575f5ffd5b505080516020909101519092909150565b5f60208284031215610a35575f5ffd5b8135610a4081610792565b939250505056fea26469706673582212209d46cecf0e88e24182ca192d00703e4af0144c0acf0d372356d0e19734a6a67964736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "agniSwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "dragonswapV2SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "enosysdexV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "fusionXV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "hyperswapV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "laminarV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "pancakeV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "rabbitSwapV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "ramsesV2SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "supV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "swapUniV3";
+        readonly inputs: readonly [{
+            readonly name: "swapData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "from";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "tokenIn";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "amountIn";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "uniswapV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "vvsV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "xeiV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "xswapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "zebraV3SwapCallback";
+        readonly inputs: readonly [{
+            readonly name: "amount0Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "amount1Delta";
+            readonly type: "int256";
+            readonly internalType: "int256";
+        }, {
+            readonly name: "data";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidCallData";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidReceiver";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NullAddrIsNotAnERC20Token";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "SwapCallbackNotExecuted";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "UnexpectedCallbackSender";
+        readonly inputs: readonly [{
+            readonly name: "actual";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "expected";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+    }];
+    static createInterface(): UniV3StyleFacetInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): UniV3StyleFacet;
+}
+export {};
