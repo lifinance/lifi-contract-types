@@ -66,15 +66,48 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace RelayDepositoryFacet {
-  export type RelayDepositoryDataStruct = {
-    orderId: PromiseOrValue<BytesLike>;
-    depositorAddress: PromiseOrValue<string>;
+export declare namespace LIFIIntentEscrowFacet {
+  export type LIFIIntentEscrowDataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
+    user: PromiseOrValue<string>;
+    nonce: PromiseOrValue<BigNumberish>;
+    expires: PromiseOrValue<BigNumberish>;
+    fillDeadline: PromiseOrValue<BigNumberish>;
+    inputOracle: PromiseOrValue<string>;
+    outputOracle: PromiseOrValue<BytesLike>;
+    outputSettler: PromiseOrValue<BytesLike>;
+    outputToken: PromiseOrValue<BytesLike>;
+    outputAmount: PromiseOrValue<BigNumberish>;
+    outputCall: PromiseOrValue<BytesLike>;
+    outputContext: PromiseOrValue<BytesLike>;
   };
 
-  export type RelayDepositoryDataStructOutput = [string, string] & {
-    orderId: string;
-    depositorAddress: string;
+  export type LIFIIntentEscrowDataStructOutput = [
+    string,
+    string,
+    BigNumber,
+    number,
+    number,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    string,
+    string
+  ] & {
+    receiverAddress: string;
+    user: string;
+    nonce: BigNumber;
+    expires: number;
+    fillDeadline: number;
+    inputOracle: string;
+    outputOracle: string;
+    outputSettler: string;
+    outputToken: string;
+    outputAmount: BigNumber;
+    outputCall: string;
+    outputContext: string;
   };
 }
 
@@ -108,57 +141,55 @@ export declare namespace LibSwap {
   };
 }
 
-export interface RelayDepositoryFacetInterface extends utils.Interface {
+export interface LIFIIntentEscrowFacetInterface extends utils.Interface {
   functions: {
-    "RELAY_DEPOSITORY()": FunctionFragment;
-    "startBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address))": FunctionFragment;
-    "swapAndStartBridgeTokensViaRelayDepository((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address))": FunctionFragment;
+    "LIFI_INTENT_ESCROW_SETTLER()": FunctionFragment;
+    "startBridgeTokensViaLIFIIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaLIFIIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "RELAY_DEPOSITORY"
-      | "startBridgeTokensViaRelayDepository"
-      | "swapAndStartBridgeTokensViaRelayDepository"
+      | "LIFI_INTENT_ESCROW_SETTLER"
+      | "startBridgeTokensViaLIFIIntentEscrow"
+      | "swapAndStartBridgeTokensViaLIFIIntentEscrow"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "RELAY_DEPOSITORY",
+    functionFragment: "LIFI_INTENT_ESCROW_SETTLER",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaRelayDepository",
+    functionFragment: "startBridgeTokensViaLIFIIntentEscrow",
     values: [
       ILiFi.BridgeDataStruct,
-      RelayDepositoryFacet.RelayDepositoryDataStruct
+      LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaRelayDepository",
+    functionFragment: "swapAndStartBridgeTokensViaLIFIIntentEscrow",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      RelayDepositoryFacet.RelayDepositoryDataStruct
+      LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "RELAY_DEPOSITORY",
+    functionFragment: "LIFI_INTENT_ESCROW_SETTLER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaRelayDepository",
+    functionFragment: "startBridgeTokensViaLIFIIntentEscrow",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaRelayDepository",
+    functionFragment: "swapAndStartBridgeTokensViaLIFIIntentEscrow",
     data: BytesLike
   ): Result;
 
   events: {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -167,8 +198,6 @@ export interface RelayDepositoryFacetInterface extends utils.Interface {
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -191,32 +220,6 @@ export type AssetSwappedEvent = TypedEvent<
 >;
 
 export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
-
-export interface BridgeToNonEVMChainEventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainEventObject
->;
-
-export type BridgeToNonEVMChainEventFilter =
-  TypedEventFilter<BridgeToNonEVMChainEvent>;
-
-export interface BridgeToNonEVMChainBytes32EventObject {
-  transactionId: string;
-  destinationChainId: BigNumber;
-  receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<
-  [string, BigNumber, string],
-  BridgeToNonEVMChainBytes32EventObject
->;
-
-export type BridgeToNonEVMChainBytes32EventFilter =
-  TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -294,12 +297,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface RelayDepositoryFacet extends BaseContract {
+export interface LIFIIntentEscrowFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RelayDepositoryFacetInterface;
+  interface: LIFIIntentEscrowFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -321,50 +324,50 @@ export interface RelayDepositoryFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<[string]>;
+    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<[string]>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+  LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
 
-  startBridgeTokensViaRelayDepository(
+  startBridgeTokensViaLIFIIntentEscrow(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+    _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaRelayDepository(
+  swapAndStartBridgeTokensViaLIFIIntentEscrow(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+    _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -388,28 +391,6 @@ export interface RelayDepositoryFacet extends BaseContract {
       toAmount?: null,
       timestamp?: null
     ): AssetSwappedEventFilter;
-
-    "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-    BridgeToNonEVMChain(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainEventFilter;
-
-    "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
-    BridgeToNonEVMChainBytes32(
-      transactionId?: PromiseOrValue<BytesLike> | null,
-      destinationChainId?: PromiseOrValue<BigNumberish> | null,
-      receiver?: null
-    ): BridgeToNonEVMChainBytes32EventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -488,35 +469,37 @@ export interface RelayDepositoryFacet extends BaseContract {
   };
 
   estimateGas: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<BigNumber>;
+    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<BigNumber>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    RELAY_DEPOSITORY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    LIFI_INTENT_ESCROW_SETTLER(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaRelayDepository(
+    startBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaRelayDepository(
+    swapAndStartBridgeTokensViaLIFIIntentEscrow(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _relayDepositoryData: RelayDepositoryFacet.RelayDepositoryDataStruct,
+      _lifiIntentData: LIFIIntentEscrowFacet.LIFIIntentEscrowDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

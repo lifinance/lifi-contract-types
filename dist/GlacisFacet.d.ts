@@ -41,12 +41,10 @@ export declare namespace ILiFi {
 }
 export declare namespace GlacisFacet {
     type GlacisDataStruct = {
-        receiverAddress: PromiseOrValue<BytesLike>;
         refundAddress: PromiseOrValue<string>;
         nativeFee: PromiseOrValue<BigNumberish>;
     };
-    type GlacisDataStructOutput = [string, string, BigNumber] & {
-        receiverAddress: string;
+    type GlacisDataStructOutput = [string, BigNumber] & {
         refundAddress: string;
         nativeFee: BigNumber;
     };
@@ -81,25 +79,23 @@ export declare namespace LibSwap {
 }
 export interface GlacisFacetInterface extends utils.Interface {
     functions: {
-        "AIRLIFT()": FunctionFragment;
-        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
+        "airlift()": FunctionFragment;
+        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256))": FunctionFragment;
+        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "AIRLIFT" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
-    encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "airlift" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
+    encodeFunctionData(functionFragment: "airlift", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaGlacis", values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaGlacis", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         GlacisFacet.GlacisDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "airlift", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaGlacis", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaGlacis", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-        "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -107,8 +103,6 @@ export interface GlacisFacetInterface extends utils.Interface {
         "LiFiTransferStarted(tuple)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -134,28 +128,6 @@ export type AssetSwappedEvent = TypedEvent<[
     BigNumber
 ], AssetSwappedEventObject>;
 export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
-export interface BridgeToNonEVMChainEventObject {
-    transactionId: string;
-    destinationChainId: BigNumber;
-    receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<[
-    string,
-    BigNumber,
-    string
-], BridgeToNonEVMChainEventObject>;
-export type BridgeToNonEVMChainEventFilter = TypedEventFilter<BridgeToNonEVMChainEvent>;
-export interface BridgeToNonEVMChainBytes32EventObject {
-    transactionId: string;
-    destinationChainId: BigNumber;
-    receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
-    string,
-    BigNumber,
-    string
-], BridgeToNonEVMChainBytes32EventObject>;
-export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -248,7 +220,7 @@ export interface GlacisFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
+        airlift(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -256,7 +228,7 @@ export interface GlacisFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    AIRLIFT(overrides?: CallOverrides): Promise<string>;
+    airlift(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -264,17 +236,13 @@ export interface GlacisFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        AIRLIFT(overrides?: CallOverrides): Promise<string>;
+        airlift(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
-        "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
-        BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
-        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
-        BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
@@ -287,7 +255,7 @@ export interface GlacisFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
+        airlift(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -296,7 +264,7 @@ export interface GlacisFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        airlift(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;

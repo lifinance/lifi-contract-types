@@ -109,8 +109,6 @@ export interface OptimismBridgeFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaOptimismBridge", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
-        "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
-        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
@@ -120,8 +118,6 @@ export interface OptimismBridgeFacetInterface extends utils.Interface {
         "OptimismInitialized(tuple[])": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
@@ -149,28 +145,6 @@ export type AssetSwappedEvent = TypedEvent<[
     BigNumber
 ], AssetSwappedEventObject>;
 export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
-export interface BridgeToNonEVMChainEventObject {
-    transactionId: string;
-    destinationChainId: BigNumber;
-    receiver: string;
-}
-export type BridgeToNonEVMChainEvent = TypedEvent<[
-    string,
-    BigNumber,
-    string
-], BridgeToNonEVMChainEventObject>;
-export type BridgeToNonEVMChainEventFilter = TypedEventFilter<BridgeToNonEVMChainEvent>;
-export interface BridgeToNonEVMChainBytes32EventObject {
-    transactionId: string;
-    destinationChainId: BigNumber;
-    receiver: string;
-}
-export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
-    string,
-    BigNumber,
-    string
-], BridgeToNonEVMChainBytes32EventObject>;
-export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -313,10 +287,6 @@ export interface OptimismBridgeFacet extends BaseContract {
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
-        "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
-        BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
-        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
-        BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;

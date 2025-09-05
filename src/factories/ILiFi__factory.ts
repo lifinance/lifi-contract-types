@@ -9,56 +9,6 @@ import type { ILiFi, ILiFiInterface } from "../ILiFi";
 const _abi = [
   {
     type: "event",
-    name: "BridgeToNonEVMChain",
-    inputs: [
-      {
-        name: "transactionId",
-        type: "bytes32",
-        indexed: true,
-        internalType: "bytes32",
-      },
-      {
-        name: "destinationChainId",
-        type: "uint256",
-        indexed: true,
-        internalType: "uint256",
-      },
-      {
-        name: "receiver",
-        type: "bytes",
-        indexed: false,
-        internalType: "bytes",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "BridgeToNonEVMChainBytes32",
-    inputs: [
-      {
-        name: "transactionId",
-        type: "bytes32",
-        indexed: true,
-        internalType: "bytes32",
-      },
-      {
-        name: "destinationChainId",
-        type: "uint256",
-        indexed: true,
-        internalType: "uint256",
-      },
-      {
-        name: "receiver",
-        type: "bytes32",
-        indexed: false,
-        internalType: "bytes32",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
     name: "LiFiGenericSwapCompleted",
     inputs: [
       {
