@@ -8,7 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -66,98 +66,86 @@ export declare namespace ILiFi {
   };
 }
 
-export interface ReceiverAcrossV4Interface extends utils.Interface {
+export declare namespace GardenFacet {
+  export type GardenDataStruct = {
+    redeemer: PromiseOrValue<string>;
+    timelock: PromiseOrValue<BigNumberish>;
+    secretHash: PromiseOrValue<BytesLike>;
+  };
+
+  export type GardenDataStructOutput = [string, BigNumber, string] & {
+    redeemer: string;
+    timelock: BigNumber;
+    secretHash: string;
+  };
+}
+
+export declare namespace LibSwap {
+  export type SwapDataStruct = {
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
+  };
+
+  export type SwapDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    string,
+    boolean
+  ] & {
+    callTo: string;
+    approveTo: string;
+    sendingAssetId: string;
+    receivingAssetId: string;
+    fromAmount: BigNumber;
+    callData: string;
+    requiresDeposit: boolean;
+  };
+}
+
+export interface GardenFacetInterface extends utils.Interface {
   functions: {
-    "EXECUTOR()": FunctionFragment;
-    "SPOKEPOOL()": FunctionFragment;
-    "cancelOwnershipTransfer()": FunctionFragment;
-    "confirmOwnershipTransfer()": FunctionFragment;
-    "handleV3AcrossMessage(address,uint256,address,bytes)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "pendingOwner()": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
-    "withdrawToken(address,address,uint256)": FunctionFragment;
+    "startBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256,bytes32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256,bytes32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "EXECUTOR"
-      | "SPOKEPOOL"
-      | "cancelOwnershipTransfer"
-      | "confirmOwnershipTransfer"
-      | "handleV3AcrossMessage"
-      | "owner"
-      | "pendingOwner"
-      | "transferOwnership"
-      | "withdrawToken"
+      | "startBridgeTokensViaGarden"
+      | "swapAndStartBridgeTokensViaGarden"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "EXECUTOR", values?: undefined): string;
-  encodeFunctionData(functionFragment: "SPOKEPOOL", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "cancelOwnershipTransfer",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaGarden",
+    values: [ILiFi.BridgeDataStruct, GardenFacet.GardenDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "confirmOwnershipTransfer",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "handleV3AcrossMessage",
+    functionFragment: "swapAndStartBridgeTokensViaGarden",
     values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "pendingOwner",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawToken",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
+      ILiFi.BridgeDataStruct,
+      LibSwap.SwapDataStruct[],
+      GardenFacet.GardenDataStruct
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "EXECUTOR", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "SPOKEPOOL", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "cancelOwnershipTransfer",
+    functionFragment: "startBridgeTokensViaGarden",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "confirmOwnershipTransfer",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "handleV3AcrossMessage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "pendingOwner",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawToken",
+    functionFragment: "swapAndStartBridgeTokensViaGarden",
     data: BytesLike
   ): Result;
 
   events: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
     "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -165,11 +153,9 @@ export interface ReceiverAcrossV4Interface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "OwnershipTransferRequested(address,address)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
-    "TokensWithdrawn(address,address,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -177,10 +163,23 @@ export interface ReceiverAcrossV4Interface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "TokensWithdrawn"): EventFragment;
 }
+
+export interface AssetSwappedEventObject {
+  transactionId: string;
+  dex: string;
+  fromAssetId: string;
+  toAssetId: string;
+  fromAmount: BigNumber;
+  toAmount: BigNumber;
+  timestamp: BigNumber;
+}
+export type AssetSwappedEvent = TypedEvent<
+  [string, string, string, string, BigNumber, BigNumber, BigNumber],
+  AssetSwappedEventObject
+>;
+
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 
 export interface BridgeToNonEVMChainEventObject {
   transactionId: string;
@@ -284,48 +283,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface OwnershipTransferRequestedEventObject {
-  _from: string;
-  _to: string;
-}
-export type OwnershipTransferRequestedEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferRequestedEventObject
->;
-
-export type OwnershipTransferRequestedEventFilter =
-  TypedEventFilter<OwnershipTransferRequestedEvent>;
-
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
-}
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
->;
-
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
-
-export interface TokensWithdrawnEventObject {
-  assetId: string;
-  receiver: string;
-  amount: BigNumber;
-}
-export type TokensWithdrawnEvent = TypedEvent<
-  [string, string, BigNumber],
-  TokensWithdrawnEventObject
->;
-
-export type TokensWithdrawnEventFilter = TypedEventFilter<TokensWithdrawnEvent>;
-
-export interface ReceiverAcrossV4 extends BaseContract {
+export interface GardenFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ReceiverAcrossV4Interface;
+  interface: GardenFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -347,114 +310,68 @@ export interface ReceiverAcrossV4 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    EXECUTOR(overrides?: CallOverrides): Promise<[string]>;
-
-    SPOKEPOOL(overrides?: CallOverrides): Promise<[string]>;
-
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    startBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    handleV3AcrossMessage(
-      tokenSent: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<[string]>;
-
-    transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  EXECUTOR(overrides?: CallOverrides): Promise<string>;
-
-  SPOKEPOOL(overrides?: CallOverrides): Promise<string>;
-
-  cancelOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  startBridgeTokensViaGarden(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _gardenData: GardenFacet.GardenDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  confirmOwnershipTransfer(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  handleV3AcrossMessage(
-    tokenSent: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    arg2: PromiseOrValue<string>,
-    message: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-  transferOwnership(
-    _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  withdrawToken(
-    assetId: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  swapAndStartBridgeTokensViaGarden(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _swapData: LibSwap.SwapDataStruct[],
+    _gardenData: GardenFacet.GardenDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    EXECUTOR(overrides?: CallOverrides): Promise<string>;
-
-    SPOKEPOOL(overrides?: CallOverrides): Promise<string>;
-
-    cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-
-    confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
-
-    handleV3AcrossMessage(
-      tokenSent: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      message: PromiseOrValue<BytesLike>,
+    startBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<string>;
-
-    transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
+    swapAndStartBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
+    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+    AssetSwapped(
+      transactionId?: null,
+      dex?: null,
+      fromAssetId?: null,
+      toAssetId?: null,
+      fromAmount?: null,
+      toAmount?: null,
+      timestamp?: null
+    ): AssetSwappedEventFilter;
+
     "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
@@ -551,110 +468,35 @@ export interface ReceiverAcrossV4 extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-
-    "OwnershipTransferRequested(address,address)"(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
-    ): OwnershipTransferRequestedEventFilter;
-    OwnershipTransferRequested(
-      _from?: PromiseOrValue<string> | null,
-      _to?: PromiseOrValue<string> | null
-    ): OwnershipTransferRequestedEventFilter;
-
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-
-    "TokensWithdrawn(address,address,uint256)"(
-      assetId?: null,
-      receiver?: null,
-      amount?: null
-    ): TokensWithdrawnEventFilter;
-    TokensWithdrawn(
-      assetId?: null,
-      receiver?: null,
-      amount?: null
-    ): TokensWithdrawnEventFilter;
   };
 
   estimateGas: {
-    EXECUTOR(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SPOKEPOOL(overrides?: CallOverrides): Promise<BigNumber>;
-
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    startBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    handleV3AcrossMessage(
-      tokenSent: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    EXECUTOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    SPOKEPOOL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    cancelOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    startBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    confirmOwnershipTransfer(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    handleV3AcrossMessage(
-      tokenSent: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      arg2: PromiseOrValue<string>,
-      message: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    withdrawToken(
-      assetId: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaGarden(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
