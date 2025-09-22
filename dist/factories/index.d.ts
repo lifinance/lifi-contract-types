@@ -63,6 +63,7 @@ export { IDiamondLoupe__factory } from "./IDiamondLoupe__factory";
 export { IDlnSource__factory } from "./IDlnSource__factory";
 export { IEIP712__factory } from "./IEIP712__factory";
 export { IERC1155Receiver__factory } from "./IERC1155Receiver__factory";
+export { IERC1271__factory } from "./IERC1271__factory";
 export { IERC165__factory } from "./IERC165__factory";
 export { IERC173__factory } from "./IERC173__factory";
 export { IERC20__factory } from "./IERC20__factory";
