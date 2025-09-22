@@ -63,6 +63,7 @@ export interface Permit2ProxyInterface extends utils.Interface {
     "PERMIT_WITH_WITNESS_TYPEHASH()": FunctionFragment;
     "WITNESS_TYPEHASH()": FunctionFragment;
     "WITNESS_TYPE_STRING()": FunctionFragment;
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)": FunctionFragment;
     "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
     "callDiamondWithPermit2(bytes,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
     "callDiamondWithPermit2Witness(bytes,address,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
@@ -71,6 +72,7 @@ export interface Permit2ProxyInterface extends utils.Interface {
     "getPermit2MsgHash(bytes,address,uint256,uint256,uint256)": FunctionFragment;
     "nextNonce(address)": FunctionFragment;
     "nextNonceAfter(address,uint256)": FunctionFragment;
+    "nonces(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -84,7 +86,8 @@ export interface Permit2ProxyInterface extends utils.Interface {
       | "PERMIT_WITH_WITNESS_TYPEHASH"
       | "WITNESS_TYPEHASH"
       | "WITNESS_TYPE_STRING"
-      | "callDiamondWithEIP2612Signature"
+      | "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"
+      | "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"
       | "callDiamondWithPermit2"
       | "callDiamondWithPermit2Witness"
       | "cancelOwnershipTransfer"
@@ -92,6 +95,7 @@ export interface Permit2ProxyInterface extends utils.Interface {
       | "getPermit2MsgHash"
       | "nextNonce"
       | "nextNonceAfter"
+      | "nonces"
       | "owner"
       | "pendingOwner"
       | "transferOwnership"
@@ -116,7 +120,17 @@ export interface Permit2ProxyInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "callDiamondWithEIP2612Signature",
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
@@ -170,6 +184,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
     functionFragment: "nextNonceAfter",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "nonces",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
@@ -206,7 +224,11 @@ export interface Permit2ProxyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "callDiamondWithEIP2612Signature",
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -234,6 +256,7 @@ export interface Permit2ProxyInterface extends utils.Interface {
     functionFragment: "nextNonceAfter",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
@@ -332,7 +355,16 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<[string]>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -386,6 +418,11 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { nonce: BigNumber }>;
 
+    nonces(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
@@ -413,7 +450,16 @@ export interface Permit2Proxy extends BaseContract {
 
   WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
-  callDiamondWithEIP2612Signature(
+  "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
+    tokenAddress: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    signature: PromiseOrValue<BytesLike>,
+    diamondCalldata: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
     tokenAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     deadline: PromiseOrValue<BigNumberish>,
@@ -467,6 +513,11 @@ export interface Permit2Proxy extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  nonces(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
@@ -494,7 +545,16 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -541,6 +601,11 @@ export interface Permit2Proxy extends BaseContract {
     nextNonceAfter(
       owner: PromiseOrValue<string>,
       start: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    nonces(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -603,7 +668,16 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<BigNumber>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -654,6 +728,11 @@ export interface Permit2Proxy extends BaseContract {
     nextNonceAfter(
       owner: PromiseOrValue<string>,
       start: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    nonces(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -689,7 +768,16 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
@@ -740,6 +828,11 @@ export interface Permit2Proxy extends BaseContract {
     nextNonceAfter(
       owner: PromiseOrValue<string>,
       start: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    nonces(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
