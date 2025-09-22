@@ -33,6 +33,7 @@ export interface Permit2ProxyInterface extends utils.Interface {
         "PERMIT_WITH_WITNESS_TYPEHASH()": FunctionFragment;
         "WITNESS_TYPEHASH()": FunctionFragment;
         "WITNESS_TYPE_STRING()": FunctionFragment;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)": FunctionFragment;
         "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
         "callDiamondWithPermit2(bytes,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
         "callDiamondWithPermit2Witness(bytes,address,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
@@ -46,13 +47,20 @@ export interface Permit2ProxyInterface extends utils.Interface {
         "transferOwnership(address)": FunctionFragment;
         "withdrawToken(address,address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "LIFI_DIAMOND" | "PERMIT2" | "PERMIT_WITH_WITNESS_TYPEHASH" | "WITNESS_TYPEHASH" | "WITNESS_TYPE_STRING" | "callDiamondWithEIP2612Signature" | "callDiamondWithPermit2" | "callDiamondWithPermit2Witness" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "getPermit2MsgHash" | "nextNonce" | "nextNonceAfter" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawToken"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "LIFI_DIAMOND" | "PERMIT2" | "PERMIT_WITH_WITNESS_TYPEHASH" | "WITNESS_TYPEHASH" | "WITNESS_TYPE_STRING" | "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)" | "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)" | "callDiamondWithPermit2" | "callDiamondWithPermit2Witness" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "getPermit2MsgHash" | "nextNonce" | "nextNonceAfter" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawToken"): FunctionFragment;
     encodeFunctionData(functionFragment: "LIFI_DIAMOND", values?: undefined): string;
     encodeFunctionData(functionFragment: "PERMIT2", values?: undefined): string;
     encodeFunctionData(functionFragment: "PERMIT_WITH_WITNESS_TYPEHASH", values?: undefined): string;
     encodeFunctionData(functionFragment: "WITNESS_TYPEHASH", values?: undefined): string;
     encodeFunctionData(functionFragment: "WITNESS_TYPE_STRING", values?: undefined): string;
-    encodeFunctionData(functionFragment: "callDiamondWithEIP2612Signature", values: [
+    encodeFunctionData(functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
@@ -96,7 +104,8 @@ export interface Permit2ProxyInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "PERMIT_WITH_WITNESS_TYPEHASH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "WITNESS_TYPEHASH", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "WITNESS_TYPE_STRING", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "callDiamondWithEIP2612Signature", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "callDiamondWithPermit2", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "callDiamondWithPermit2Witness", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
@@ -166,7 +175,10 @@ export interface Permit2Proxy extends BaseContract {
         PERMIT_WITH_WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
         WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<[string]>;
         WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<[string]>;
-        callDiamondWithEIP2612Signature(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, signature: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         callDiamondWithPermit2(_diamondCalldata: PromiseOrValue<BytesLike>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
@@ -204,7 +216,10 @@ export interface Permit2Proxy extends BaseContract {
     PERMIT_WITH_WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<string>;
     WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<string>;
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
-    callDiamondWithEIP2612Signature(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, signature: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callDiamondWithPermit2(_diamondCalldata: PromiseOrValue<BytesLike>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
@@ -236,7 +251,8 @@ export interface Permit2Proxy extends BaseContract {
         PERMIT_WITH_WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<string>;
         WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<string>;
         WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
-        callDiamondWithEIP2612Signature(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, signature: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         callDiamondWithPermit2(_diamondCalldata: PromiseOrValue<BytesLike>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         callDiamondWithPermit2Witness(_diamondCalldata: PromiseOrValue<BytesLike>, _signer: PromiseOrValue<string>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
@@ -263,7 +279,10 @@ export interface Permit2Proxy extends BaseContract {
         PERMIT_WITH_WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
         WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<BigNumber>;
         WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<BigNumber>;
-        callDiamondWithEIP2612Signature(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, signature: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         callDiamondWithPermit2(_diamondCalldata: PromiseOrValue<BytesLike>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
@@ -296,7 +315,10 @@ export interface Permit2Proxy extends BaseContract {
         PERMIT_WITH_WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         WITNESS_TYPEHASH(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        callDiamondWithEIP2612Signature(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, signature: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(tokenAddress: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, deadline: PromiseOrValue<BigNumberish>, v: PromiseOrValue<BigNumberish>, r: PromiseOrValue<BytesLike>, s: PromiseOrValue<BytesLike>, diamondCalldata: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         callDiamondWithPermit2(_diamondCalldata: PromiseOrValue<BytesLike>, _permit: ISignatureTransfer.PermitTransferFromStruct, _signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
