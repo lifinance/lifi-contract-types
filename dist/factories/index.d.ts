@@ -130,6 +130,7 @@ export { SymbiosisFacet__factory } from "./SymbiosisFacet__factory";
 export { ThorSwapFacet__factory } from "./ThorSwapFacet__factory";
 export { TimelockController__factory } from "./TimelockController__factory";
 export { TransferrableOwnership__factory } from "./TransferrableOwnership__factory";
+export { UnitFacet__factory } from "./UnitFacet__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
 export { WithdrawablePeriphery__factory } from "./WithdrawablePeriphery__factory";
