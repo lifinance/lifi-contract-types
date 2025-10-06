@@ -141,6 +141,7 @@ export type { SymbiosisFacet } from "./SymbiosisFacet";
 export type { ThorSwapFacet } from "./ThorSwapFacet";
 export type { TimelockController } from "./TimelockController";
 export type { TransferrableOwnership } from "./TransferrableOwnership";
+export type { UnitFacet } from "./UnitFacet";
 export type { WETH } from "./WETH";
 export type { WithdrawFacet } from "./WithdrawFacet";
 export type { WithdrawablePeriphery } from "./WithdrawablePeriphery";
@@ -315,6 +316,7 @@ export { IWrapper__factory } from "./factories/TokenWrapper.sol/IWrapper__factor
 export type { TokenWrapper } from "./TokenWrapper.sol/TokenWrapper";
 export { TokenWrapper__factory } from "./factories/TokenWrapper.sol/TokenWrapper__factory";
 export { TransferrableOwnership__factory } from "./factories/TransferrableOwnership__factory";
+export { UnitFacet__factory } from "./factories/UnitFacet__factory";
 export { WETH__factory } from "./factories/WETH__factory";
 export { WithdrawablePeriphery__factory } from "./factories/WithdrawablePeriphery__factory";
 export { WithdrawFacet__factory } from "./factories/WithdrawFacet__factory";
