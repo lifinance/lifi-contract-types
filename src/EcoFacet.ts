@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -66,17 +67,30 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace UnitFacet {
-  export type UnitDataStruct = {
-    depositAddress: PromiseOrValue<string>;
-    signature: PromiseOrValue<BytesLike>;
-    deadline: PromiseOrValue<BigNumberish>;
+export declare namespace EcoFacet {
+  export type EcoDataStruct = {
+    nonEVMReceiver: PromiseOrValue<BytesLike>;
+    prover: PromiseOrValue<string>;
+    rewardDeadline: PromiseOrValue<BigNumberish>;
+    solverReward: PromiseOrValue<BigNumberish>;
+    encodedRoute: PromiseOrValue<BytesLike>;
+    solanaATA: PromiseOrValue<BytesLike>;
   };
 
-  export type UnitDataStructOutput = [string, string, BigNumber] & {
-    depositAddress: string;
-    signature: string;
-    deadline: BigNumber;
+  export type EcoDataStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string,
+    string
+  ] & {
+    nonEVMReceiver: string;
+    prover: string;
+    rewardDeadline: BigNumber;
+    solverReward: BigNumber;
+    encodedRoute: string;
+    solanaATA: string;
   };
 }
 
@@ -110,37 +124,41 @@ export declare namespace LibSwap {
   };
 }
 
-export interface UnitFacetInterface extends utils.Interface {
+export interface EcoFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes,uint256))": FunctionFragment;
+    "PORTAL()": FunctionFragment;
+    "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,uint256,bytes,bytes32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,uint256,bytes,bytes32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaUnit"
-      | "swapAndStartBridgeTokensViaUnit"
+      | "PORTAL"
+      | "startBridgeTokensViaEco"
+      | "swapAndStartBridgeTokensViaEco"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaUnit",
-    values: [ILiFi.BridgeDataStruct, UnitFacet.UnitDataStruct]
+    functionFragment: "startBridgeTokensViaEco",
+    values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaUnit",
+    functionFragment: "swapAndStartBridgeTokensViaEco",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      UnitFacet.UnitDataStruct
+      EcoFacet.EcoDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "PORTAL", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaUnit",
+    functionFragment: "startBridgeTokensViaEco",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaUnit",
+    functionFragment: "swapAndStartBridgeTokensViaEco",
     data: BytesLike
   ): Result;
 
@@ -283,12 +301,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface UnitFacet extends BaseContract {
+export interface EcoFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: UnitFacetInterface;
+  interface: EcoFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -310,44 +328,50 @@ export interface UnitFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaUnit(
+    PORTAL(overrides?: CallOverrides): Promise<[string]>;
+
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _ecoData: EcoFacet.EcoDataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaUnit(
+  PORTAL(overrides?: CallOverrides): Promise<string>;
+
+  startBridgeTokensViaEco(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _unitData: UnitFacet.UnitDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _ecoData: EcoFacet.EcoDataStruct,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaUnit(
+  swapAndStartBridgeTokensViaEco(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _unitData: UnitFacet.UnitDataStruct,
+    _ecoData: EcoFacet.EcoDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaUnit(
+    PORTAL(overrides?: CallOverrides): Promise<string>;
+
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -471,31 +495,35 @@ export interface UnitFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaUnit(
+    PORTAL(overrides?: CallOverrides): Promise<BigNumber>;
+
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _ecoData: EcoFacet.EcoDataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaUnit(
+    PORTAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _ecoData: EcoFacet.EcoDataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEco(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _ecoData: EcoFacet.EcoDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
