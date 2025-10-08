@@ -1,6 +1,6 @@
 {
   "name": "lifi-contract-typings",
-  "version": "3.27.64",
+  "version": "3.27.71-beta",
   "description": "Typings from LiFi Solidity contracts",
   "author": "Ed Zynda",
   "license": "MIT",
