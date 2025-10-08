@@ -66,17 +66,36 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace UnitFacet {
-  export type UnitDataStruct = {
-    depositAddress: PromiseOrValue<string>;
-    signature: PromiseOrValue<BytesLike>;
+export declare namespace EverclearFacet {
+  export type EverclearDataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
+    outputAsset: PromiseOrValue<BytesLike>;
+    maxFee: PromiseOrValue<BigNumberish>;
+    ttl: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+    fee: PromiseOrValue<BigNumberish>;
     deadline: PromiseOrValue<BigNumberish>;
+    sig: PromiseOrValue<BytesLike>;
   };
 
-  export type UnitDataStructOutput = [string, string, BigNumber] & {
-    depositAddress: string;
-    signature: string;
+  export type EverclearDataStructOutput = [
+    string,
+    string,
+    number,
+    number,
+    string,
+    BigNumber,
+    BigNumber,
+    string
+  ] & {
+    receiverAddress: string;
+    outputAsset: string;
+    maxFee: number;
+    ttl: number;
+    data: string;
+    fee: BigNumber;
     deadline: BigNumber;
+    sig: string;
   };
 }
 
@@ -110,37 +129,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface UnitFacetInterface extends utils.Interface {
+export interface EverclearFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes,uint256))": FunctionFragment;
+    "FEE_ADAPTER()": FunctionFragment;
+    "startBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,uint24,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,uint24,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaUnit"
-      | "swapAndStartBridgeTokensViaUnit"
+      | "FEE_ADAPTER"
+      | "startBridgeTokensViaEverclear"
+      | "swapAndStartBridgeTokensViaEverclear"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaUnit",
-    values: [ILiFi.BridgeDataStruct, UnitFacet.UnitDataStruct]
+    functionFragment: "FEE_ADAPTER",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaUnit",
+    functionFragment: "startBridgeTokensViaEverclear",
+    values: [ILiFi.BridgeDataStruct, EverclearFacet.EverclearDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      UnitFacet.UnitDataStruct
+      EverclearFacet.EverclearDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaUnit",
+    functionFragment: "FEE_ADAPTER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaUnit",
+    functionFragment: "startBridgeTokensViaEverclear",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     data: BytesLike
   ): Result;
 
@@ -283,12 +312,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface UnitFacet extends BaseContract {
+export interface EverclearFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: UnitFacetInterface;
+  interface: EverclearFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -310,44 +339,50 @@ export interface UnitFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaUnit(
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<[string]>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaUnit(
+  FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
+
+  startBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _unitData: UnitFacet.UnitDataStruct,
+    _everclearData: EverclearFacet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaUnit(
+  swapAndStartBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _unitData: UnitFacet.UnitDataStruct,
+    _everclearData: EverclearFacet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaUnit(
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -471,31 +506,35 @@ export interface UnitFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaUnit(
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaUnit(
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaUnit(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _unitData: UnitFacet.UnitDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
