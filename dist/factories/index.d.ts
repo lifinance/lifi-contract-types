@@ -37,6 +37,7 @@ export { ERC721Holder__factory } from "./ERC721Holder__factory";
 export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
+export { FeeForwarder__factory } from "./FeeForwarder__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
 export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
