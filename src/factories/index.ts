@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as iChainflipSol from "./IChainflip.sol";
+export * as iGardenSol from "./IGarden.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
@@ -41,6 +42,7 @@ export { EcoFacet__factory } from "./EcoFacet__factory";
 export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
+export { GardenFacet__factory } from "./GardenFacet__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
 export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
