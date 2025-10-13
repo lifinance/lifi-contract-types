@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,27 +66,27 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace EcoFacet {
-  export type EcoDataStruct = {
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    prover: PromiseOrValue<string>;
-    rewardDeadline: PromiseOrValue<BigNumberish>;
-    encodedRoute: PromiseOrValue<BytesLike>;
-    solanaATA: PromiseOrValue<BytesLike>;
+export declare namespace GardenFacet {
+  export type GardenDataStruct = {
+    redeemer: PromiseOrValue<string>;
+    refundAddress: PromiseOrValue<string>;
+    timelock: PromiseOrValue<BigNumberish>;
+    secretHash: PromiseOrValue<BytesLike>;
+    nonEvmReceiver: PromiseOrValue<BytesLike>;
   };
 
-  export type EcoDataStructOutput = [
+  export type GardenDataStructOutput = [
     string,
     string,
     BigNumber,
     string,
     string
   ] & {
-    nonEVMReceiver: string;
-    prover: string;
-    rewardDeadline: BigNumber;
-    encodedRoute: string;
-    solanaATA: string;
+    redeemer: string;
+    refundAddress: string;
+    timelock: BigNumber;
+    secretHash: string;
+    nonEvmReceiver: string;
   };
 }
 
@@ -121,41 +120,37 @@ export declare namespace LibSwap {
   };
 }
 
-export interface EcoFacetInterface extends utils.Interface {
+export interface GardenFacetInterface extends utils.Interface {
   functions: {
-    "PORTAL()": FunctionFragment;
-    "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
+    "startBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,uint256,bytes32,bytes32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,uint256,bytes32,bytes32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "PORTAL"
-      | "startBridgeTokensViaEco"
-      | "swapAndStartBridgeTokensViaEco"
+      | "startBridgeTokensViaGarden"
+      | "swapAndStartBridgeTokensViaGarden"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaEco",
-    values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]
+    functionFragment: "startBridgeTokensViaGarden",
+    values: [ILiFi.BridgeDataStruct, GardenFacet.GardenDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaEco",
+    functionFragment: "swapAndStartBridgeTokensViaGarden",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      EcoFacet.EcoDataStruct
+      GardenFacet.GardenDataStruct
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "PORTAL", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaEco",
+    functionFragment: "startBridgeTokensViaGarden",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaEco",
+    functionFragment: "swapAndStartBridgeTokensViaGarden",
     data: BytesLike
   ): Result;
 
@@ -298,12 +293,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface EcoFacet extends BaseContract {
+export interface GardenFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: EcoFacetInterface;
+  interface: GardenFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -325,50 +320,44 @@ export interface EcoFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    PORTAL(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaEco(
+    startBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  PORTAL(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaEco(
+  startBridgeTokensViaGarden(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _ecoData: EcoFacet.EcoDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _gardenData: GardenFacet.GardenDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaEco(
+  swapAndStartBridgeTokensViaGarden(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _ecoData: EcoFacet.EcoDataStruct,
+    _gardenData: GardenFacet.GardenDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    PORTAL(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaEco(
+    startBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -492,35 +481,31 @@ export interface EcoFacet extends BaseContract {
   };
 
   estimateGas: {
-    PORTAL(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaEco(
+    startBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    PORTAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaEco(
+    startBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _gardenData: GardenFacet.GardenDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaGarden(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _gardenData: GardenFacet.GardenDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
