@@ -66,27 +66,39 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace GardenFacet {
-  export type GardenDataStruct = {
-    redeemer: PromiseOrValue<string>;
-    refundAddress: PromiseOrValue<string>;
-    timelock: PromiseOrValue<BigNumberish>;
-    secretHash: PromiseOrValue<BytesLike>;
-    nonEvmReceiver: PromiseOrValue<BytesLike>;
+export declare namespace EverclearV2Facet {
+  export type EverclearDataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
+    nativeFee: PromiseOrValue<BigNumberish>;
+    outputAsset: PromiseOrValue<BytesLike>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    ttl: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+    fee: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    sig: PromiseOrValue<BytesLike>;
   };
 
-  export type GardenDataStructOutput = [
-    string,
+  export type EverclearDataStructOutput = [
     string,
     BigNumber,
     string,
+    BigNumber,
+    number,
+    string,
+    BigNumber,
+    BigNumber,
     string
   ] & {
-    redeemer: string;
-    refundAddress: string;
-    timelock: BigNumber;
-    secretHash: string;
-    nonEvmReceiver: string;
+    receiverAddress: string;
+    nativeFee: BigNumber;
+    outputAsset: string;
+    amountOutMin: BigNumber;
+    ttl: number;
+    data: string;
+    fee: BigNumber;
+    deadline: BigNumber;
+    sig: string;
   };
 }
 
@@ -120,37 +132,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface GardenFacetInterface extends utils.Interface {
+export interface EverclearV2FacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,uint256,bytes32,bytes32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaGarden((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,uint256,bytes32,bytes32))": FunctionFragment;
+    "FEE_ADAPTER_V2()": FunctionFragment;
+    "startBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaGarden"
-      | "swapAndStartBridgeTokensViaGarden"
+      | "FEE_ADAPTER_V2"
+      | "startBridgeTokensViaEverclear"
+      | "swapAndStartBridgeTokensViaEverclear"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaGarden",
-    values: [ILiFi.BridgeDataStruct, GardenFacet.GardenDataStruct]
+    functionFragment: "FEE_ADAPTER_V2",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaGarden",
+    functionFragment: "startBridgeTokensViaEverclear",
+    values: [ILiFi.BridgeDataStruct, EverclearV2Facet.EverclearDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      GardenFacet.GardenDataStruct
+      EverclearV2Facet.EverclearDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaGarden",
+    functionFragment: "FEE_ADAPTER_V2",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaGarden",
+    functionFragment: "startBridgeTokensViaEverclear",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     data: BytesLike
   ): Result;
 
@@ -293,12 +315,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface GardenFacet extends BaseContract {
+export interface EverclearV2Facet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: GardenFacetInterface;
+  interface: EverclearV2FacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -320,44 +342,50 @@ export interface GardenFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaGarden(
+    FEE_ADAPTER_V2(overrides?: CallOverrides): Promise<[string]>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaGarden(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaGarden(
+  FEE_ADAPTER_V2(overrides?: CallOverrides): Promise<string>;
+
+  startBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _gardenData: GardenFacet.GardenDataStruct,
+    _everclearData: EverclearV2Facet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaGarden(
+  swapAndStartBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _gardenData: GardenFacet.GardenDataStruct,
+    _everclearData: EverclearV2Facet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaGarden(
+    FEE_ADAPTER_V2(overrides?: CallOverrides): Promise<string>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaGarden(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -481,31 +509,35 @@ export interface GardenFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaGarden(
+    FEE_ADAPTER_V2(overrides?: CallOverrides): Promise<BigNumber>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaGarden(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaGarden(
+    FEE_ADAPTER_V2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaGarden(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _gardenData: GardenFacet.GardenDataStruct,
+      _everclearData: EverclearV2Facet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

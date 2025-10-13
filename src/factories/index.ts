@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as iChainflipSol from "./IChainflip.sol";
-export * as iGardenSol from "./IGarden.sol";
 export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
@@ -38,11 +37,11 @@ export { ERC20__factory } from "./ERC20__factory";
 export { ERC20Permit__factory } from "./ERC20Permit__factory";
 export { ERC20Proxy__factory } from "./ERC20Proxy__factory";
 export { ERC721Holder__factory } from "./ERC721Holder__factory";
-export { EcoFacet__factory } from "./EcoFacet__factory";
 export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
+export { EverclearFacet__factory } from "./EverclearFacet__factory";
+export { EverclearV2Facet__factory } from "./EverclearV2Facet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
-export { GardenFacet__factory } from "./GardenFacet__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
 export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacet__factory } from "./GenericSwapFacet__factory";
@@ -77,7 +76,8 @@ export { IERC20Permit__factory } from "./IERC20Permit__factory";
 export { IERC20Proxy__factory } from "./IERC20Proxy__factory";
 export { IERC5267__factory } from "./IERC5267__factory";
 export { IERC721Receiver__factory } from "./IERC721Receiver__factory";
-export { IEcoPortal__factory } from "./IEcoPortal__factory";
+export { IEverclearFeeAdapter__factory } from "./IEverclearFeeAdapter__factory";
+export { IEverclearFeeAdapterV2__factory } from "./IEverclearFeeAdapterV2__factory";
 export { IExecutor__factory } from "./IExecutor__factory";
 export { IGasZip__factory } from "./IGasZip__factory";
 export { IGatewayRouter__factory } from "./IGatewayRouter__factory";

@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,27 +66,39 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace EcoFacet {
-  export type EcoDataStruct = {
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    prover: PromiseOrValue<string>;
-    rewardDeadline: PromiseOrValue<BigNumberish>;
-    encodedRoute: PromiseOrValue<BytesLike>;
-    solanaATA: PromiseOrValue<BytesLike>;
+export declare namespace EverclearFacet {
+  export type EverclearDataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
+    nativeFee: PromiseOrValue<BigNumberish>;
+    outputAsset: PromiseOrValue<BytesLike>;
+    maxFee: PromiseOrValue<BigNumberish>;
+    ttl: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+    fee: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    sig: PromiseOrValue<BytesLike>;
   };
 
-  export type EcoDataStructOutput = [
-    string,
+  export type EverclearDataStructOutput = [
     string,
     BigNumber,
     string,
+    number,
+    number,
+    string,
+    BigNumber,
+    BigNumber,
     string
   ] & {
-    nonEVMReceiver: string;
-    prover: string;
-    rewardDeadline: BigNumber;
-    encodedRoute: string;
-    solanaATA: string;
+    receiverAddress: string;
+    nativeFee: BigNumber;
+    outputAsset: string;
+    maxFee: number;
+    ttl: number;
+    data: string;
+    fee: BigNumber;
+    deadline: BigNumber;
+    sig: string;
   };
 }
 
@@ -121,41 +132,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface EcoFacetInterface extends utils.Interface {
+export interface EverclearFacetInterface extends utils.Interface {
   functions: {
-    "PORTAL()": FunctionFragment;
-    "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
+    "FEE_ADAPTER()": FunctionFragment;
+    "startBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256,bytes32,uint24,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256,bytes32,uint24,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "PORTAL"
-      | "startBridgeTokensViaEco"
-      | "swapAndStartBridgeTokensViaEco"
+      | "FEE_ADAPTER"
+      | "startBridgeTokensViaEverclear"
+      | "swapAndStartBridgeTokensViaEverclear"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaEco",
-    values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]
+    functionFragment: "FEE_ADAPTER",
+    values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaEco",
+    functionFragment: "startBridgeTokensViaEverclear",
+    values: [ILiFi.BridgeDataStruct, EverclearFacet.EverclearDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      EcoFacet.EcoDataStruct
+      EverclearFacet.EverclearDataStruct
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "PORTAL", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaEco",
+    functionFragment: "FEE_ADAPTER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaEco",
+    functionFragment: "startBridgeTokensViaEverclear",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     data: BytesLike
   ): Result;
 
@@ -298,12 +315,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface EcoFacet extends BaseContract {
+export interface EverclearFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: EcoFacetInterface;
+  interface: EverclearFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -325,50 +342,50 @@ export interface EcoFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    PORTAL(overrides?: CallOverrides): Promise<[string]>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<[string]>;
 
-    startBridgeTokensViaEco(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  PORTAL(overrides?: CallOverrides): Promise<string>;
+  FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
 
-  startBridgeTokensViaEco(
+  startBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _ecoData: EcoFacet.EcoDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _everclearData: EverclearFacet.EverclearDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaEco(
+  swapAndStartBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _ecoData: EcoFacet.EcoDataStruct,
+    _everclearData: EverclearFacet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    PORTAL(overrides?: CallOverrides): Promise<string>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
 
-    startBridgeTokensViaEco(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -492,35 +509,35 @@ export interface EcoFacet extends BaseContract {
   };
 
   estimateGas: {
-    PORTAL(overrides?: CallOverrides): Promise<BigNumber>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<BigNumber>;
 
-    startBridgeTokensViaEco(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    PORTAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaEco(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _ecoData: EcoFacet.EcoDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaEco(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _ecoData: EcoFacet.EcoDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
