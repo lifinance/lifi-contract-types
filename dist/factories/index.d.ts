@@ -39,6 +39,7 @@ export { EcoFacet__factory } from "./EcoFacet__factory";
 export { EmergencyPauseFacet__factory } from "./EmergencyPauseFacet__factory";
 export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
+export { FeeForwarder__factory } from "./FeeForwarder__factory";
 export { GardenFacet__factory } from "./GardenFacet__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
 export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
