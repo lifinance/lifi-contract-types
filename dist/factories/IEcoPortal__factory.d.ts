@@ -4,20 +4,6 @@ import type { IEcoPortal, IEcoPortalInterface } from "../IEcoPortal";
 export declare class IEcoPortal__factory {
     static readonly abi: readonly [{
         readonly type: "function";
-        readonly name: "getRewardStatus";
-        readonly inputs: readonly [{
-            readonly name: "intentHash";
-            readonly type: "bytes32";
-            readonly internalType: "bytes32";
-        }];
-        readonly outputs: readonly [{
-            readonly name: "status";
-            readonly type: "uint8";
-            readonly internalType: "enum IEcoPortal.Status";
-        }];
-        readonly stateMutability: "view";
-    }, {
-        readonly type: "function";
         readonly name: "publishAndFund";
         readonly inputs: readonly [{
             readonly name: "destination";

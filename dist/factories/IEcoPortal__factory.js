@@ -8,25 +8,6 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
-        name: "getRewardStatus",
-        inputs: [
-            {
-                name: "intentHash",
-                type: "bytes32",
-                internalType: "bytes32",
-            },
-        ],
-        outputs: [
-            {
-                name: "status",
-                type: "uint8",
-                internalType: "enum IEcoPortal.Status",
-            },
-        ],
-        stateMutability: "view",
-    },
-    {
-        type: "function",
         name: "publishAndFund",
         inputs: [
             {
