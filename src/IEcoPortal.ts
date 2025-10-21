@@ -59,18 +59,11 @@ export declare namespace IEcoPortal {
 
 export interface IEcoPortalInterface extends utils.Interface {
   functions: {
-    "getRewardStatus(bytes32)": FunctionFragment;
     "publishAndFund(uint64,bytes,(uint64,address,address,uint256,(address,uint256)[]),bool)": FunctionFragment;
   };
 
-  getFunction(
-    nameOrSignatureOrTopic: "getRewardStatus" | "publishAndFund"
-  ): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "publishAndFund"): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "getRewardStatus",
-    values: [PromiseOrValue<BytesLike>]
-  ): string;
   encodeFunctionData(
     functionFragment: "publishAndFund",
     values: [
@@ -81,10 +74,6 @@ export interface IEcoPortalInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "getRewardStatus",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "publishAndFund",
     data: BytesLike
@@ -120,11 +109,6 @@ export interface IEcoPortal extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    getRewardStatus(
-      intentHash: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<[number] & { status: number }>;
-
     publishAndFund(
       destination: PromiseOrValue<BigNumberish>,
       route: PromiseOrValue<BytesLike>,
@@ -133,11 +117,6 @@ export interface IEcoPortal extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
-
-  getRewardStatus(
-    intentHash: PromiseOrValue<BytesLike>,
-    overrides?: CallOverrides
-  ): Promise<number>;
 
   publishAndFund(
     destination: PromiseOrValue<BigNumberish>,
@@ -148,11 +127,6 @@ export interface IEcoPortal extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    getRewardStatus(
-      intentHash: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<number>;
-
     publishAndFund(
       destination: PromiseOrValue<BigNumberish>,
       route: PromiseOrValue<BytesLike>,
@@ -165,11 +139,6 @@ export interface IEcoPortal extends BaseContract {
   filters: {};
 
   estimateGas: {
-    getRewardStatus(
-      intentHash: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     publishAndFund(
       destination: PromiseOrValue<BigNumberish>,
       route: PromiseOrValue<BytesLike>,
@@ -180,11 +149,6 @@ export interface IEcoPortal extends BaseContract {
   };
 
   populateTransaction: {
-    getRewardStatus(
-      intentHash: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     publishAndFund(
       destination: PromiseOrValue<BigNumberish>,
       route: PromiseOrValue<BytesLike>,
