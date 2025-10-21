@@ -46,13 +46,11 @@ export declare namespace EcoFacet {
         rewardDeadline: PromiseOrValue<BigNumberish>;
         encodedRoute: PromiseOrValue<BytesLike>;
         solanaATA: PromiseOrValue<BytesLike>;
-        refundRecipient: PromiseOrValue<string>;
     };
     type EcoDataStructOutput = [
         string,
         string,
         BigNumber,
-        string,
         string,
         string
     ] & {
@@ -61,7 +59,6 @@ export declare namespace EcoFacet {
         rewardDeadline: BigNumber;
         encodedRoute: string;
         solanaATA: string;
-        refundRecipient: string;
     };
 }
 export declare namespace LibSwap {
@@ -95,8 +92,8 @@ export declare namespace LibSwap {
 export interface EcoFacetInterface extends utils.Interface {
     functions: {
         "PORTAL()": FunctionFragment;
-        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32,address))": FunctionFragment;
-        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32,address))": FunctionFragment;
+        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "PORTAL" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
     encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
