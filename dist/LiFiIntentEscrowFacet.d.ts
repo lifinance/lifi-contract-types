@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -39,26 +39,47 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace EcoFacet {
-    type EcoDataStruct = {
-        nonEVMReceiver: PromiseOrValue<BytesLike>;
-        prover: PromiseOrValue<string>;
-        rewardDeadline: PromiseOrValue<BigNumberish>;
-        encodedRoute: PromiseOrValue<BytesLike>;
-        solanaATA: PromiseOrValue<BytesLike>;
+export declare namespace LiFiIntentEscrowFacet {
+    type LiFiIntentEscrowDataStruct = {
+        receiverAddress: PromiseOrValue<BytesLike>;
+        depositAndRefundAddress: PromiseOrValue<string>;
+        nonce: PromiseOrValue<BigNumberish>;
+        expires: PromiseOrValue<BigNumberish>;
+        fillDeadline: PromiseOrValue<BigNumberish>;
+        inputOracle: PromiseOrValue<string>;
+        outputOracle: PromiseOrValue<BytesLike>;
+        outputSettler: PromiseOrValue<BytesLike>;
+        outputToken: PromiseOrValue<BytesLike>;
+        outputAmount: PromiseOrValue<BigNumberish>;
+        outputCall: PromiseOrValue<BytesLike>;
+        outputContext: PromiseOrValue<BytesLike>;
     };
-    type EcoDataStructOutput = [
+    type LiFiIntentEscrowDataStructOutput = [
+        string,
+        string,
+        BigNumber,
+        number,
+        number,
+        string,
+        string,
         string,
         string,
         BigNumber,
         string,
         string
     ] & {
-        nonEVMReceiver: string;
-        prover: string;
-        rewardDeadline: BigNumber;
-        encodedRoute: string;
-        solanaATA: string;
+        receiverAddress: string;
+        depositAndRefundAddress: string;
+        nonce: BigNumber;
+        expires: number;
+        fillDeadline: number;
+        inputOracle: string;
+        outputOracle: string;
+        outputSettler: string;
+        outputToken: string;
+        outputAmount: BigNumber;
+        outputCall: string;
+        outputContext: string;
     };
 }
 export declare namespace LibSwap {
@@ -89,23 +110,26 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface EcoFacetInterface extends utils.Interface {
+export interface LiFiIntentEscrowFacetInterface extends utils.Interface {
     functions: {
-        "PORTAL()": FunctionFragment;
-        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32))": FunctionFragment;
+        "LIFI_INTENT_ESCROW_SETTLER()": FunctionFragment;
+        "startBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "PORTAL" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
-    encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaEco", values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaEco", values: [
+    getFunction(nameOrSignatureOrTopic: "LIFI_INTENT_ESCROW_SETTLER" | "startBridgeTokensViaLiFiIntentEscrow" | "swapAndStartBridgeTokensViaLiFiIntentEscrow"): FunctionFragment;
+    encodeFunctionData(functionFragment: "LIFI_INTENT_ESCROW_SETTLER", values?: undefined): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaLiFiIntentEscrow", values: [
+        ILiFi.BridgeDataStruct,
+        LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrow", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
-        EcoFacet.EcoDataStruct
+        LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "PORTAL", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "startBridgeTokensViaEco", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaEco", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "LIFI_INTENT_ESCROW_SETTLER", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeTokensViaLiFiIntentEscrow", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrow", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
@@ -243,11 +267,11 @@ export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface EcoFacet extends BaseContract {
+export interface LiFiIntentEscrowFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: EcoFacetInterface;
+    interface: LiFiIntentEscrowFacetInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -258,25 +282,25 @@ export interface EcoFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        PORTAL(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
+        LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<[string]>;
+        startBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    PORTAL(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
+    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
+    startBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        PORTAL(overrides?: CallOverrides): Promise<string>;
-        startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: CallOverrides): Promise<void>;
+        LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
+        startBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
@@ -297,20 +321,20 @@ export interface EcoFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        PORTAL(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
+        LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<BigNumber>;
+        startBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        PORTAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
+        LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaLiFiIntentEscrow(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
