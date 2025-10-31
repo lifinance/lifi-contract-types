@@ -34,28 +34,18 @@ export declare class IWhitelistManagerFacet__factory {
         readonly stateMutability: "nonpayable";
     }, {
         readonly type: "function";
-        readonly name: "batchSetFunctionApprovalBySelector";
+        readonly name: "batchSetFunctionWhitelistBySelector";
         readonly inputs: readonly [{
             readonly name: "_selectors";
             readonly type: "bytes4[]";
             readonly internalType: "bytes4[]";
         }, {
-            readonly name: "_approval";
+            readonly name: "_whitelisted";
             readonly type: "bool";
             readonly internalType: "bool";
         }];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
-    }, {
-        readonly type: "function";
-        readonly name: "getApprovedFunctionSelectors";
-        readonly inputs: readonly [];
-        readonly outputs: readonly [{
-            readonly name: "selectors";
-            readonly type: "bytes4[]";
-            readonly internalType: "bytes4[]";
-        }];
-        readonly stateMutability: "view";
     }, {
         readonly type: "function";
         readonly name: "getWhitelistedAddresses";
@@ -68,6 +58,16 @@ export declare class IWhitelistManagerFacet__factory {
         readonly stateMutability: "view";
     }, {
         readonly type: "function";
+        readonly name: "getWhitelistedFunctionSelectors";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "selectors";
+            readonly type: "bytes4[]";
+            readonly internalType: "bytes4[]";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
         readonly name: "isAddressWhitelisted";
         readonly inputs: readonly [{
             readonly name: "_address";
@@ -75,25 +75,53 @@ export declare class IWhitelistManagerFacet__factory {
             readonly internalType: "address";
         }];
         readonly outputs: readonly [{
-            readonly name: "approved";
+            readonly name: "whitelisted";
             readonly type: "bool";
             readonly internalType: "bool";
         }];
         readonly stateMutability: "view";
     }, {
         readonly type: "function";
-        readonly name: "isFunctionApproved";
+        readonly name: "isFunctionSelectorWhitelisted";
         readonly inputs: readonly [{
             readonly name: "_selector";
             readonly type: "bytes4";
             readonly internalType: "bytes4";
         }];
         readonly outputs: readonly [{
-            readonly name: "approved";
+            readonly name: "whitelisted";
             readonly type: "bool";
             readonly internalType: "bool";
         }];
         readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "isMigrated";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "migrate";
+        readonly inputs: readonly [{
+            readonly name: "_selectorsToRemove";
+            readonly type: "bytes4[]";
+            readonly internalType: "bytes4[]";
+        }, {
+            readonly name: "_contractsToAdd";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "_selectorsToAdd";
+            readonly type: "bytes4[]";
+            readonly internalType: "bytes4[]";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
     }, {
         readonly type: "function";
         readonly name: "removeFromWhitelist";
@@ -106,13 +134,13 @@ export declare class IWhitelistManagerFacet__factory {
         readonly stateMutability: "nonpayable";
     }, {
         readonly type: "function";
-        readonly name: "setFunctionApprovalBySelector";
+        readonly name: "setFunctionWhitelistBySelector";
         readonly inputs: readonly [{
             readonly name: "_selector";
             readonly type: "bytes4";
             readonly internalType: "bytes4";
         }, {
-            readonly name: "_approval";
+            readonly name: "_whitelisted";
             readonly type: "bool";
             readonly internalType: "bool";
         }];
@@ -140,14 +168,14 @@ export declare class IWhitelistManagerFacet__factory {
         readonly anonymous: false;
     }, {
         readonly type: "event";
-        readonly name: "FunctionSelectorApprovalChanged";
+        readonly name: "FunctionSelectorWhitelistChanged";
         readonly inputs: readonly [{
             readonly name: "functionSelector";
             readonly type: "bytes4";
             readonly indexed: true;
             readonly internalType: "bytes4";
         }, {
-            readonly name: "approved";
+            readonly name: "whitelisted";
             readonly type: "bool";
             readonly indexed: true;
             readonly internalType: "bool";
