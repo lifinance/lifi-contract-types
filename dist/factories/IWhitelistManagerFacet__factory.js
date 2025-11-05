@@ -8,54 +8,20 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
-        name: "addToWhitelist",
+        name: "batchSetContractSelectorWhitelist",
         inputs: [
             {
-                name: "_contractAddress",
-                type: "address",
-                internalType: "address",
-            },
-        ],
-        outputs: [],
-        stateMutability: "nonpayable",
-    },
-    {
-        type: "function",
-        name: "batchAddToWhitelist",
-        inputs: [
-            {
-                name: "_addresses",
+                name: "_contracts",
                 type: "address[]",
                 internalType: "address[]",
             },
-        ],
-        outputs: [],
-        stateMutability: "nonpayable",
-    },
-    {
-        type: "function",
-        name: "batchRemoveFromWhitelist",
-        inputs: [
-            {
-                name: "_addresses",
-                type: "address[]",
-                internalType: "address[]",
-            },
-        ],
-        outputs: [],
-        stateMutability: "nonpayable",
-    },
-    {
-        type: "function",
-        name: "batchSetFunctionApprovalBySelector",
-        inputs: [
             {
                 name: "_selectors",
                 type: "bytes4[]",
                 internalType: "bytes4[]",
             },
             {
-                name: "_approval",
+                name: "_whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -65,13 +31,18 @@ var _abi = [
     },
     {
         type: "function",
-        name: "getApprovedFunctionSelectors",
+        name: "getAllContractSelectorPairs",
         inputs: [],
         outputs: [
             {
+                name: "contracts",
+                type: "address[]",
+                internalType: "address[]",
+            },
+            {
                 name: "selectors",
-                type: "bytes4[]",
-                internalType: "bytes4[]",
+                type: "bytes4[][]",
+                internalType: "bytes4[][]",
             },
         ],
         stateMutability: "view",
@@ -91,6 +62,38 @@ var _abi = [
     },
     {
         type: "function",
+        name: "getWhitelistedFunctionSelectors",
+        inputs: [],
+        outputs: [
+            {
+                name: "selectors",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "getWhitelistedSelectorsForContract",
+        inputs: [
+            {
+                name: "_contract",
+                type: "address",
+                internalType: "address",
+            },
+        ],
+        outputs: [
+            {
+                name: "selectors",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
         name: "isAddressWhitelisted",
         inputs: [
             {
@@ -101,7 +104,7 @@ var _abi = [
         ],
         outputs: [
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -110,7 +113,31 @@ var _abi = [
     },
     {
         type: "function",
-        name: "isFunctionApproved",
+        name: "isContractSelectorWhitelisted",
+        inputs: [
+            {
+                name: "_contract",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_selector",
+                type: "bytes4",
+                internalType: "bytes4",
+            },
+        ],
+        outputs: [
+            {
+                name: "whitelisted",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "isFunctionSelectorWhitelisted",
         inputs: [
             {
                 name: "_selector",
@@ -120,7 +147,7 @@ var _abi = [
         ],
         outputs: [
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -129,12 +156,35 @@ var _abi = [
     },
     {
         type: "function",
-        name: "removeFromWhitelist",
+        name: "isMigrated",
+        inputs: [],
+        outputs: [
+            {
+                name: "",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "migrate",
         inputs: [
             {
-                name: "_address",
-                type: "address",
-                internalType: "address",
+                name: "_selectorsToRemove",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+            {
+                name: "_contracts",
+                type: "address[]",
+                internalType: "address[]",
+            },
+            {
+                name: "_selectors",
+                type: "bytes4[][]",
+                internalType: "bytes4[][]",
             },
         ],
         outputs: [],
@@ -142,15 +192,20 @@ var _abi = [
     },
     {
         type: "function",
-        name: "setFunctionApprovalBySelector",
+        name: "setContractSelectorWhitelist",
         inputs: [
+            {
+                name: "_contract",
+                type: "address",
+                internalType: "address",
+            },
             {
                 name: "_selector",
                 type: "bytes4",
                 internalType: "bytes4",
             },
             {
-                name: "_approval",
+                name: "_whitelisted",
                 type: "bool",
                 internalType: "bool",
             },
@@ -160,42 +215,22 @@ var _abi = [
     },
     {
         type: "event",
-        name: "AddressRemoved",
+        name: "ContractSelectorWhitelistChanged",
         inputs: [
             {
-                name: "removedAddress",
+                name: "contractAddress",
                 type: "address",
                 indexed: true,
                 internalType: "address",
             },
-        ],
-        anonymous: false,
-    },
-    {
-        type: "event",
-        name: "AddressWhitelisted",
-        inputs: [
             {
-                name: "whitelistedAddress",
-                type: "address",
-                indexed: true,
-                internalType: "address",
-            },
-        ],
-        anonymous: false,
-    },
-    {
-        type: "event",
-        name: "FunctionSelectorApprovalChanged",
-        inputs: [
-            {
-                name: "functionSelector",
+                name: "selector",
                 type: "bytes4",
                 indexed: true,
                 internalType: "bytes4",
             },
             {
-                name: "approved",
+                name: "whitelisted",
                 type: "bool",
                 indexed: true,
                 internalType: "bool",
