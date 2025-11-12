@@ -37,7 +37,7 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     "isContractSelectorWhitelisted(address,bytes4)": FunctionFragment;
     "isFunctionSelectorWhitelisted(bytes4)": FunctionFragment;
     "isMigrated()": FunctionFragment;
-    "migrate(bytes4[],address[],bytes4[][])": FunctionFragment;
+    "migrate(bytes4[],address[],bytes4[][],address)": FunctionFragment;
     "setContractSelectorWhitelist(address,bytes4,bool)": FunctionFragment;
   };
 
@@ -101,7 +101,8 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     values: [
       PromiseOrValue<BytesLike>[],
       PromiseOrValue<string>[],
-      PromiseOrValue<BytesLike>[][]
+      PromiseOrValue<BytesLike>[][],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
@@ -153,13 +154,26 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "AccessGranted(address,bytes4)": EventFragment;
     "ContractSelectorWhitelistChanged(address,bytes4,bool)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AccessGranted"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ContractSelectorWhitelistChanged"
   ): EventFragment;
 }
+
+export interface AccessGrantedEventObject {
+  account: string;
+  method: string;
+}
+export type AccessGrantedEvent = TypedEvent<
+  [string, string],
+  AccessGrantedEventObject
+>;
+
+export type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
 
 export interface ContractSelectorWhitelistChangedEventObject {
   contractAddress: string;
@@ -249,6 +263,7 @@ export interface WhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -304,6 +319,7 @@ export interface WhitelistManagerFacet extends BaseContract {
     _selectorsToRemove: PromiseOrValue<BytesLike>[],
     _contracts: PromiseOrValue<string>[],
     _selectors: PromiseOrValue<BytesLike>[][],
+    _grantAccessTo: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -361,6 +377,7 @@ export interface WhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -373,6 +390,15 @@ export interface WhitelistManagerFacet extends BaseContract {
   };
 
   filters: {
+    "AccessGranted(address,bytes4)"(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): AccessGrantedEventFilter;
+    AccessGranted(
+      account?: PromiseOrValue<string> | null,
+      method?: PromiseOrValue<BytesLike> | null
+    ): AccessGrantedEventFilter;
+
     "ContractSelectorWhitelistChanged(address,bytes4,bool)"(
       contractAddress?: PromiseOrValue<string> | null,
       selector?: PromiseOrValue<BytesLike> | null,
@@ -428,6 +454,7 @@ export interface WhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -486,6 +513,7 @@ export interface WhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

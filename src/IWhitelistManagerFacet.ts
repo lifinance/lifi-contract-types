@@ -37,7 +37,7 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
     "isContractSelectorWhitelisted(address,bytes4)": FunctionFragment;
     "isFunctionSelectorWhitelisted(bytes4)": FunctionFragment;
     "isMigrated()": FunctionFragment;
-    "migrate(bytes4[],address[],bytes4[][])": FunctionFragment;
+    "migrate(bytes4[],address[],bytes4[][],address)": FunctionFragment;
     "setContractSelectorWhitelist(address,bytes4,bool)": FunctionFragment;
   };
 
@@ -101,7 +101,8 @@ export interface IWhitelistManagerFacetInterface extends utils.Interface {
     values: [
       PromiseOrValue<BytesLike>[],
       PromiseOrValue<string>[],
-      PromiseOrValue<BytesLike>[][]
+      PromiseOrValue<BytesLike>[][],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
@@ -249,6 +250,7 @@ export interface IWhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -304,6 +306,7 @@ export interface IWhitelistManagerFacet extends BaseContract {
     _selectorsToRemove: PromiseOrValue<BytesLike>[],
     _contracts: PromiseOrValue<string>[],
     _selectors: PromiseOrValue<BytesLike>[][],
+    _grantAccessTo: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -361,6 +364,7 @@ export interface IWhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -428,6 +432,7 @@ export interface IWhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -486,6 +491,7 @@ export interface IWhitelistManagerFacet extends BaseContract {
       _selectorsToRemove: PromiseOrValue<BytesLike>[],
       _contracts: PromiseOrValue<string>[],
       _selectors: PromiseOrValue<BytesLike>[][],
+      _grantAccessTo: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

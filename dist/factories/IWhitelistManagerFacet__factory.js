@@ -186,6 +186,11 @@ var _abi = [
                 type: "bytes4[][]",
                 internalType: "bytes4[][]",
             },
+            {
+                name: "_grantAccessTo",
+                type: "address",
+                internalType: "address",
+            },
         ],
         outputs: [],
         stateMutability: "nonpayable",
