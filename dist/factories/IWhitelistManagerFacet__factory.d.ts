@@ -139,6 +139,10 @@ export declare class IWhitelistManagerFacet__factory {
             readonly name: "_selectors";
             readonly type: "bytes4[][]";
             readonly internalType: "bytes4[][]";
+        }, {
+            readonly name: "_grantAccessTo";
+            readonly type: "address";
+            readonly internalType: "address";
         }];
         readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";

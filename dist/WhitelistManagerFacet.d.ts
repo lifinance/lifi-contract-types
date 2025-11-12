@@ -13,7 +13,7 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
         "isContractSelectorWhitelisted(address,bytes4)": FunctionFragment;
         "isFunctionSelectorWhitelisted(bytes4)": FunctionFragment;
         "isMigrated()": FunctionFragment;
-        "migrate(bytes4[],address[],bytes4[][])": FunctionFragment;
+        "migrate(bytes4[],address[],bytes4[][],address)": FunctionFragment;
         "setContractSelectorWhitelist(address,bytes4,bool)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "batchSetContractSelectorWhitelist" | "getAllContractSelectorPairs" | "getWhitelistedAddresses" | "getWhitelistedFunctionSelectors" | "getWhitelistedSelectorsForContract" | "isAddressWhitelisted" | "isContractSelectorWhitelisted" | "isFunctionSelectorWhitelisted" | "isMigrated" | "migrate" | "setContractSelectorWhitelist"): FunctionFragment;
@@ -33,7 +33,8 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "migrate", values: [
         PromiseOrValue<BytesLike>[],
         PromiseOrValue<string>[],
-        PromiseOrValue<BytesLike>[][]
+        PromiseOrValue<BytesLike>[][],
+        PromiseOrValue<string>
     ]): string;
     encodeFunctionData(functionFragment: "setContractSelectorWhitelist", values: [
         PromiseOrValue<string>,
@@ -52,10 +53,21 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "migrate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setContractSelectorWhitelist", data: BytesLike): Result;
     events: {
+        "AccessGranted(address,bytes4)": EventFragment;
         "ContractSelectorWhitelistChanged(address,bytes4,bool)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "AccessGranted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ContractSelectorWhitelistChanged"): EventFragment;
 }
+export interface AccessGrantedEventObject {
+    account: string;
+    method: string;
+}
+export type AccessGrantedEvent = TypedEvent<[
+    string,
+    string
+], AccessGrantedEventObject>;
+export type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
 export interface ContractSelectorWhitelistChangedEventObject {
     contractAddress: string;
     selector: string;
@@ -111,7 +123,7 @@ export interface WhitelistManagerFacet extends BaseContract {
             whitelisted: boolean;
         }>;
         isMigrated(overrides?: CallOverrides): Promise<[boolean]>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], _grantAccessTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
@@ -135,7 +147,7 @@ export interface WhitelistManagerFacet extends BaseContract {
     isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     isMigrated(overrides?: CallOverrides): Promise<boolean>;
-    migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
+    migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], _grantAccessTo: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
@@ -157,10 +169,12 @@ export interface WhitelistManagerFacet extends BaseContract {
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
         isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
         isMigrated(overrides?: CallOverrides): Promise<boolean>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: CallOverrides): Promise<void>;
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], _grantAccessTo: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "AccessGranted(address,bytes4)"(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
+        AccessGranted(account?: PromiseOrValue<string> | null, method?: PromiseOrValue<BytesLike> | null): AccessGrantedEventFilter;
         "ContractSelectorWhitelistChanged(address,bytes4,bool)"(contractAddress?: PromiseOrValue<string> | null, selector?: PromiseOrValue<BytesLike> | null, whitelisted?: PromiseOrValue<boolean> | null): ContractSelectorWhitelistChangedEventFilter;
         ContractSelectorWhitelistChanged(contractAddress?: PromiseOrValue<string> | null, selector?: PromiseOrValue<BytesLike> | null, whitelisted?: PromiseOrValue<boolean> | null): ContractSelectorWhitelistChangedEventFilter;
     };
@@ -176,7 +190,7 @@ export interface WhitelistManagerFacet extends BaseContract {
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         isMigrated(overrides?: CallOverrides): Promise<BigNumber>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], _grantAccessTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
@@ -195,7 +209,7 @@ export interface WhitelistManagerFacet extends BaseContract {
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isMigrated(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
+        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], _grantAccessTo: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
