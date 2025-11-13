@@ -4,14 +4,17 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
 export interface ITokenMessengerInterface extends utils.Interface {
     functions: {
-        "depositForBurn(uint256,uint32,bytes32,address)": FunctionFragment;
+        "depositForBurn(uint256,uint32,bytes32,address,bytes32,uint256,uint32)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
     encodeFunctionData(functionFragment: "depositForBurn", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
     ]): string;
     decodeFunctionResult(functionFragment: "depositForBurn", data: BytesLike): Result;
     events: {};
@@ -31,24 +34,24 @@ export interface ITokenMessenger extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
+        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
+    depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
+        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, overrides?: Overrides & {
+        depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
