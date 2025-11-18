@@ -30,14 +30,23 @@ var _abi = [
                 type: "address",
                 internalType: "address",
             },
-        ],
-        outputs: [
             {
-                name: "nonce",
-                type: "uint64",
-                internalType: "uint64",
+                name: "destinationCaller",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "maxFee",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "minFinalityThreshold",
+                type: "uint32",
+                internalType: "uint32",
             },
         ],
+        outputs: [],
         stateMutability: "nonpayable",
     },
 ];
