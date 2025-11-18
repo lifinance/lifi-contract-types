@@ -21,12 +21,20 @@ export declare class ITokenMessenger__factory {
             readonly name: "burnToken";
             readonly type: "address";
             readonly internalType: "address";
+        }, {
+            readonly name: "destinationCaller";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "maxFee";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "minFinalityThreshold";
+            readonly type: "uint32";
+            readonly internalType: "uint32";
         }];
-        readonly outputs: readonly [{
-            readonly name: "nonce";
-            readonly type: "uint64";
-            readonly internalType: "uint64";
-        }];
+        readonly outputs: readonly [];
         readonly stateMutability: "nonpayable";
     }];
     static createInterface(): ITokenMessengerInterface;
