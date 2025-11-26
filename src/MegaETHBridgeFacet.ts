@@ -28,6 +28,30 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace MegaETHBridgeFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
+  export type MegaETHDataStruct = {
+    assetIdOnL2: PromiseOrValue<string>;
+    l2Gas: PromiseOrValue<BigNumberish>;
+    isSynthetix: PromiseOrValue<boolean>;
+  };
+
+  export type MegaETHDataStructOutput = [string, number, boolean] & {
+    assetIdOnL2: string;
+    l2Gas: number;
+    isSynthetix: boolean;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -67,51 +91,6 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace LiFiIntentEscrowFacet {
-  export type LiFiIntentEscrowDataStruct = {
-    receiverAddress: PromiseOrValue<BytesLike>;
-    depositAndRefundAddress: PromiseOrValue<string>;
-    nonce: PromiseOrValue<BigNumberish>;
-    expires: PromiseOrValue<BigNumberish>;
-    fillDeadline: PromiseOrValue<BigNumberish>;
-    inputOracle: PromiseOrValue<string>;
-    outputOracle: PromiseOrValue<BytesLike>;
-    outputSettler: PromiseOrValue<BytesLike>;
-    outputToken: PromiseOrValue<BytesLike>;
-    outputAmount: PromiseOrValue<BigNumberish>;
-    outputCall: PromiseOrValue<BytesLike>;
-    outputContext: PromiseOrValue<BytesLike>;
-  };
-
-  export type LiFiIntentEscrowDataStructOutput = [
-    string,
-    string,
-    BigNumber,
-    number,
-    number,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    string,
-    string
-  ] & {
-    receiverAddress: string;
-    depositAndRefundAddress: string;
-    nonce: BigNumber;
-    expires: number;
-    fillDeadline: number;
-    inputOracle: string;
-    outputOracle: string;
-    outputSettler: string;
-    outputToken: string;
-    outputAmount: BigNumber;
-    outputCall: string;
-    outputContext: string;
-  };
-}
-
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -142,50 +121,57 @@ export declare namespace LibSwap {
   };
 }
 
-export interface LiFiIntentEscrowFacetInterface extends utils.Interface {
+export interface MegaETHBridgeFacetInterface extends utils.Interface {
   functions: {
-    "LIFI_INTENT_ESCROW_SETTLER()": FunctionFragment;
-    "startBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
+    "initMegaETH((address,address)[],address)": FunctionFragment;
+    "registerMegaETHBridge(address,address)": FunctionFragment;
+    "startBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "LIFI_INTENT_ESCROW_SETTLER"
-      | "startBridgeTokensViaLiFiIntentEscrow"
-      | "swapAndStartBridgeTokensViaLiFiIntentEscrow"
+      | "initMegaETH"
+      | "registerMegaETHBridge"
+      | "startBridgeTokensViaMegaETHBridge"
+      | "swapAndStartBridgeTokensViaMegaETHBridge"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "LIFI_INTENT_ESCROW_SETTLER",
-    values?: undefined
+    functionFragment: "initMegaETH",
+    values: [MegaETHBridgeFacet.ConfigStruct[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaLiFiIntentEscrow",
-    values: [
-      ILiFi.BridgeDataStruct,
-      LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct
-    ]
+    functionFragment: "registerMegaETHBridge",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrow",
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
+    values: [ILiFi.BridgeDataStruct, MegaETHBridgeFacet.MegaETHDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct
+      MegaETHBridgeFacet.MegaETHDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "LIFI_INTENT_ESCROW_SETTLER",
+    functionFragment: "initMegaETH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaLiFiIntentEscrow",
+    functionFragment: "registerMegaETHBridge",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrow",
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     data: BytesLike
   ): Result;
 
@@ -198,6 +184,8 @@ export interface LiFiIntentEscrowFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
+    "MegaETHBridgeRegistered(address,address)": EventFragment;
+    "MegaETHInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -208,6 +196,8 @@ export interface LiFiIntentEscrowFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHBridgeRegistered"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHInitialized"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -328,12 +318,35 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface LiFiIntentEscrowFacet extends BaseContract {
+export interface MegaETHBridgeRegisteredEventObject {
+  assetId: string;
+  bridge: string;
+}
+export type MegaETHBridgeRegisteredEvent = TypedEvent<
+  [string, string],
+  MegaETHBridgeRegisteredEventObject
+>;
+
+export type MegaETHBridgeRegisteredEventFilter =
+  TypedEventFilter<MegaETHBridgeRegisteredEvent>;
+
+export interface MegaETHInitializedEventObject {
+  configs: MegaETHBridgeFacet.ConfigStructOutput[];
+}
+export type MegaETHInitializedEvent = TypedEvent<
+  [MegaETHBridgeFacet.ConfigStructOutput[]],
+  MegaETHInitializedEventObject
+>;
+
+export type MegaETHInitializedEventFilter =
+  TypedEventFilter<MegaETHInitializedEvent>;
+
+export interface MegaETHBridgeFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: LiFiIntentEscrowFacetInterface;
+  interface: MegaETHBridgeFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -355,50 +368,80 @@ export interface LiFiIntentEscrowFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaLiFiIntentEscrow(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+    initMegaETH(
+      configs: MegaETHBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrow(
+    registerMegaETHBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaLiFiIntentEscrow(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+  initMegaETH(
+    configs: MegaETHBridgeFacet.ConfigStruct[],
+    standardBridge: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaLiFiIntentEscrow(
+  registerMegaETHBridge(
+    assetId: PromiseOrValue<string>,
+    bridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  startBridgeTokensViaMegaETHBridge(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  swapAndStartBridgeTokensViaMegaETHBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaLiFiIntentEscrow(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+    initMegaETH(
+      configs: MegaETHBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrow(
+    registerMegaETHBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -519,40 +562,72 @@ export interface LiFiIntentEscrowFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+
+    "MegaETHBridgeRegistered(address,address)"(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+    MegaETHBridgeRegistered(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+
+    "MegaETHInitialized(tuple[])"(
+      configs?: null
+    ): MegaETHInitializedEventFilter;
+    MegaETHInitialized(configs?: null): MegaETHInitializedEventFilter;
   };
 
   estimateGas: {
-    LIFI_INTENT_ESCROW_SETTLER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaLiFiIntentEscrow(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+    initMegaETH(
+      configs: MegaETHBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrow(
+    registerMegaETHBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    LIFI_INTENT_ESCROW_SETTLER(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaLiFiIntentEscrow(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+    initMegaETH(
+      configs: MegaETHBridgeFacet.ConfigStruct[],
+      standardBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrow(
+    registerMegaETHBridge(
+      assetId: PromiseOrValue<string>,
+      bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacet.LiFiIntentEscrowDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
