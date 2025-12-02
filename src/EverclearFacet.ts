@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,24 +66,39 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace PolymerCCTPFacet {
-  export type PolymerCCTPDataStruct = {
-    polymerTokenFee: PromiseOrValue<BigNumberish>;
-    maxCCTPFee: PromiseOrValue<BigNumberish>;
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    minFinalityThreshold: PromiseOrValue<BigNumberish>;
+export declare namespace EverclearFacet {
+  export type EverclearDataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
+    nativeFee: PromiseOrValue<BigNumberish>;
+    outputAsset: PromiseOrValue<BytesLike>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    ttl: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+    fee: PromiseOrValue<BigNumberish>;
+    deadline: PromiseOrValue<BigNumberish>;
+    sig: PromiseOrValue<BytesLike>;
   };
 
-  export type PolymerCCTPDataStructOutput = [
-    BigNumber,
+  export type EverclearDataStructOutput = [
+    string,
     BigNumber,
     string,
-    number
+    BigNumber,
+    number,
+    string,
+    BigNumber,
+    BigNumber,
+    string
   ] & {
-    polymerTokenFee: BigNumber;
-    maxCCTPFee: BigNumber;
-    nonEVMReceiver: string;
-    minFinalityThreshold: number;
+    receiverAddress: string;
+    nativeFee: BigNumber;
+    outputAsset: string;
+    amountOutMin: BigNumber;
+    ttl: number;
+    data: string;
+    fee: BigNumber;
+    deadline: BigNumber;
+    sig: string;
   };
 }
 
@@ -118,71 +132,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PolymerCCTPFacetInterface extends utils.Interface {
+export interface EverclearFacetInterface extends utils.Interface {
   functions: {
-    "POLYMER_FEE_RECEIVER()": FunctionFragment;
-    "TOKEN_MESSENGER()": FunctionFragment;
-    "USDC()": FunctionFragment;
-    "initPolymerCCTP()": FunctionFragment;
-    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,uint32))": FunctionFragment;
+    "FEE_ADAPTER()": FunctionFragment;
+    "startBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "POLYMER_FEE_RECEIVER"
-      | "TOKEN_MESSENGER"
-      | "USDC"
-      | "initPolymerCCTP"
-      | "startBridgeTokensViaPolymerCCTP"
-      | "swapAndStartBridgeTokensViaPolymerCCTP"
+      | "FEE_ADAPTER"
+      | "startBridgeTokensViaEverclear"
+      | "swapAndStartBridgeTokensViaEverclear"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "POLYMER_FEE_RECEIVER",
+    functionFragment: "FEE_ADAPTER",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "TOKEN_MESSENGER",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "initPolymerCCTP",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaEverclear",
+    values: [ILiFi.BridgeDataStruct, EverclearFacet.EverclearDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    values: [ILiFi.BridgeDataStruct, PolymerCCTPFacet.PolymerCCTPDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PolymerCCTPFacet.PolymerCCTPDataStruct
+      EverclearFacet.EverclearDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "POLYMER_FEE_RECEIVER",
+    functionFragment: "FEE_ADAPTER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TOKEN_MESSENGER",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "initPolymerCCTP",
+    functionFragment: "startBridgeTokensViaEverclear",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaEverclear",
     data: BytesLike
   ): Result;
 
@@ -195,7 +185,6 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -206,7 +195,6 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PolymerCCTPFeeSent"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -327,25 +315,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PolymerCCTPFeeSentEventObject {
-  bridgeAmount: BigNumber;
-  polymerFee: BigNumber;
-  minFinalityThreshold: number;
-}
-export type PolymerCCTPFeeSentEvent = TypedEvent<
-  [BigNumber, BigNumber, number],
-  PolymerCCTPFeeSentEventObject
->;
-
-export type PolymerCCTPFeeSentEventFilter =
-  TypedEventFilter<PolymerCCTPFeeSentEvent>;
-
-export interface PolymerCCTPFacet extends BaseContract {
+export interface EverclearFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PolymerCCTPFacetInterface;
+  interface: EverclearFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -367,72 +342,50 @@ export interface PolymerCCTPFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<[string]>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<[string]>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
-
-    USDC(overrides?: CallOverrides): Promise<[string]>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+  FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
 
-  TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-  USDC(overrides?: CallOverrides): Promise<string>;
-
-  initPolymerCCTP(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  startBridgeTokensViaPolymerCCTP(
+  startBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _everclearData: EverclearFacet.EverclearDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaPolymerCCTP(
+  swapAndStartBridgeTokensViaEverclear(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+    _everclearData: EverclearFacet.EverclearDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-    USDC(overrides?: CallOverrides): Promise<string>;
-
-    initPolymerCCTP(overrides?: CallOverrides): Promise<void>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -553,67 +506,38 @@ export interface PolymerCCTPFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)"(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
-    PolymerCCTPFeeSent(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
   };
 
   estimateGas: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<BigNumber>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    USDC(overrides?: CallOverrides): Promise<BigNumber>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    POLYMER_FEE_RECEIVER(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _everclearData: EverclearFacet.EverclearDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaEverclear(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _everclearData: EverclearFacet.EverclearDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
