@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -26,6 +27,30 @@ import type {
   OnEvent,
   PromiseOrValue,
 } from "./common";
+
+export declare namespace MegaETHBridgeFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
+  export type MegaETHDataStruct = {
+    assetIdOnL2: PromiseOrValue<string>;
+    l2Gas: PromiseOrValue<BigNumberish>;
+    requiresDepositTo: PromiseOrValue<boolean>;
+  };
+
+  export type MegaETHDataStructOutput = [string, number, boolean] & {
+    assetIdOnL2: string;
+    l2Gas: number;
+    requiresDepositTo: boolean;
+  };
+}
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
@@ -66,22 +91,6 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace GlacisFacet {
-  export type GlacisDataStruct = {
-    receiverAddress: PromiseOrValue<BytesLike>;
-    refundAddress: PromiseOrValue<string>;
-    nativeFee: PromiseOrValue<BigNumberish>;
-    outputToken: PromiseOrValue<BytesLike>;
-  };
-
-  export type GlacisDataStructOutput = [string, string, BigNumber, string] & {
-    receiverAddress: string;
-    refundAddress: string;
-    nativeFee: BigNumber;
-    outputToken: string;
-  };
-}
-
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -112,41 +121,57 @@ export declare namespace LibSwap {
   };
 }
 
-export interface GlacisFacetInterface extends utils.Interface {
+export interface MegaETHBridgeFacetInterface extends utils.Interface {
   functions: {
-    "AIRLIFT()": FunctionFragment;
-    "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,bytes32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,bytes32))": FunctionFragment;
+    "initMegaETH((address,address)[],address)": FunctionFragment;
+    "registerMegaETHBridge(address,address)": FunctionFragment;
+    "startBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "AIRLIFT"
-      | "startBridgeTokensViaGlacis"
-      | "swapAndStartBridgeTokensViaGlacis"
+      | "initMegaETH"
+      | "registerMegaETHBridge"
+      | "startBridgeTokensViaMegaETHBridge"
+      | "swapAndStartBridgeTokensViaMegaETHBridge"
   ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaGlacis",
-    values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]
+    functionFragment: "initMegaETH",
+    values: [MegaETHBridgeFacet.ConfigStruct[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaGlacis",
+    functionFragment: "registerMegaETHBridge",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
+    values: [ILiFi.BridgeDataStruct, MegaETHBridgeFacet.MegaETHDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      GlacisFacet.GlacisDataStruct
+      MegaETHBridgeFacet.MegaETHDataStruct
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaGlacis",
+    functionFragment: "initMegaETH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaGlacis",
+    functionFragment: "registerMegaETHBridge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     data: BytesLike
   ): Result;
 
@@ -159,6 +184,8 @@ export interface GlacisFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
+    "MegaETHBridgeRegistered(address,address)": EventFragment;
+    "MegaETHInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -169,6 +196,8 @@ export interface GlacisFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHBridgeRegistered"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHInitialized"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -289,12 +318,35 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface GlacisFacet extends BaseContract {
+export interface MegaETHBridgeRegisteredEventObject {
+  assetId: string;
+  bridge: string;
+}
+export type MegaETHBridgeRegisteredEvent = TypedEvent<
+  [string, string],
+  MegaETHBridgeRegisteredEventObject
+>;
+
+export type MegaETHBridgeRegisteredEventFilter =
+  TypedEventFilter<MegaETHBridgeRegisteredEvent>;
+
+export interface MegaETHInitializedEventObject {
+  configs: MegaETHBridgeFacet.ConfigStructOutput[];
+}
+export type MegaETHInitializedEvent = TypedEvent<
+  [MegaETHBridgeFacet.ConfigStructOutput[]],
+  MegaETHInitializedEventObject
+>;
+
+export type MegaETHInitializedEventFilter =
+  TypedEventFilter<MegaETHInitializedEvent>;
+
+export interface MegaETHBridgeFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: GlacisFacetInterface;
+  interface: MegaETHBridgeFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -316,50 +368,80 @@ export interface GlacisFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
-    startBridgeTokensViaGlacis(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaGlacis(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  AIRLIFT(overrides?: CallOverrides): Promise<string>;
+  initMegaETH(
+    _configs: MegaETHBridgeFacet.ConfigStruct[],
+    _standardBridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
-  startBridgeTokensViaGlacis(
+  registerMegaETHBridge(
+    _assetId: PromiseOrValue<string>,
+    _bridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  startBridgeTokensViaMegaETHBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _glacisData: GlacisFacet.GlacisDataStruct,
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaGlacis(
+  swapAndStartBridgeTokensViaMegaETHBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _glacisData: GlacisFacet.GlacisDataStruct,
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    AIRLIFT(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaGlacis(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _glacisData: GlacisFacet.GlacisDataStruct,
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _standardBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaGlacis(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -480,38 +562,72 @@ export interface GlacisFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+
+    "MegaETHBridgeRegistered(address,address)"(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+    MegaETHBridgeRegistered(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+
+    "MegaETHInitialized(tuple[])"(
+      configs?: null
+    ): MegaETHInitializedEventFilter;
+    MegaETHInitialized(configs?: null): MegaETHInitializedEventFilter;
   };
 
   estimateGas: {
-    AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
-    startBridgeTokensViaGlacis(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaGlacis(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _standardBridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaGlacis(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaGlacis(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _glacisData: GlacisFacet.GlacisDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
