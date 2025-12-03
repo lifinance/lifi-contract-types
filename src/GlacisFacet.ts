@@ -71,14 +71,12 @@ export declare namespace GlacisFacet {
     receiverAddress: PromiseOrValue<BytesLike>;
     refundAddress: PromiseOrValue<string>;
     nativeFee: PromiseOrValue<BigNumberish>;
-    outputToken: PromiseOrValue<BytesLike>;
   };
 
-  export type GlacisDataStructOutput = [string, string, BigNumber, string] & {
+  export type GlacisDataStructOutput = [string, string, BigNumber] & {
     receiverAddress: string;
     refundAddress: string;
     nativeFee: BigNumber;
-    outputToken: string;
   };
 }
 
@@ -115,8 +113,8 @@ export declare namespace LibSwap {
 export interface GlacisFacetInterface extends utils.Interface {
   functions: {
     "AIRLIFT()": FunctionFragment;
-    "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,bytes32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,bytes32))": FunctionFragment;
+    "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
   };
 
   getFunction(
