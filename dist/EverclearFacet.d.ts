@@ -39,16 +39,38 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace GlacisFacet {
-    type GlacisDataStruct = {
+export declare namespace EverclearFacet {
+    type EverclearDataStruct = {
         receiverAddress: PromiseOrValue<BytesLike>;
-        refundAddress: PromiseOrValue<string>;
         nativeFee: PromiseOrValue<BigNumberish>;
+        outputAsset: PromiseOrValue<BytesLike>;
+        amountOutMin: PromiseOrValue<BigNumberish>;
+        ttl: PromiseOrValue<BigNumberish>;
+        data: PromiseOrValue<BytesLike>;
+        fee: PromiseOrValue<BigNumberish>;
+        deadline: PromiseOrValue<BigNumberish>;
+        sig: PromiseOrValue<BytesLike>;
     };
-    type GlacisDataStructOutput = [string, string, BigNumber] & {
+    type EverclearDataStructOutput = [
+        string,
+        BigNumber,
+        string,
+        BigNumber,
+        number,
+        string,
+        BigNumber,
+        BigNumber,
+        string
+    ] & {
         receiverAddress: string;
-        refundAddress: string;
         nativeFee: BigNumber;
+        outputAsset: string;
+        amountOutMin: BigNumber;
+        ttl: number;
+        data: string;
+        fee: BigNumber;
+        deadline: BigNumber;
+        sig: string;
     };
 }
 export declare namespace LibSwap {
@@ -79,23 +101,23 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface GlacisFacetInterface extends utils.Interface {
+export interface EverclearFacetInterface extends utils.Interface {
     functions: {
-        "AIRLIFT()": FunctionFragment;
-        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
+        "FEE_ADAPTER()": FunctionFragment;
+        "startBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaEverclear((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256,bytes32,uint256,uint48,bytes,uint256,uint256,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "AIRLIFT" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
-    encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaGlacis", values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaGlacis", values: [
+    getFunction(nameOrSignatureOrTopic: "FEE_ADAPTER" | "startBridgeTokensViaEverclear" | "swapAndStartBridgeTokensViaEverclear"): FunctionFragment;
+    encodeFunctionData(functionFragment: "FEE_ADAPTER", values?: undefined): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaEverclear", values: [ILiFi.BridgeDataStruct, EverclearFacet.EverclearDataStruct]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaEverclear", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
-        GlacisFacet.GlacisDataStruct
+        EverclearFacet.EverclearDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "startBridgeTokensViaGlacis", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaGlacis", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "FEE_ADAPTER", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeTokensViaEverclear", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaEverclear", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
@@ -233,11 +255,11 @@ export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface GlacisFacet extends BaseContract {
+export interface EverclearFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: GlacisFacetInterface;
+    interface: EverclearFacetInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -248,25 +270,25 @@ export interface GlacisFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        FEE_ADAPTER(overrides?: CallOverrides): Promise<[string]>;
+        startBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    AIRLIFT(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
+    startBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        AIRLIFT(overrides?: CallOverrides): Promise<string>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
+        FEE_ADAPTER(overrides?: CallOverrides): Promise<string>;
+        startBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _everclearData: EverclearFacet.EverclearDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _everclearData: EverclearFacet.EverclearDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
@@ -287,20 +309,20 @@ export interface GlacisFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        FEE_ADAPTER(overrides?: CallOverrides): Promise<BigNumber>;
+        startBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        FEE_ADAPTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaEverclear(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _everclearData: EverclearFacet.EverclearDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
