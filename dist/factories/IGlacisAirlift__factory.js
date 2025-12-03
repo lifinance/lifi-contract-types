@@ -115,6 +115,118 @@ var _abi = [
     },
     {
         type: "function",
+        name: "quoteSend",
+        inputs: [
+            {
+                name: "token",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "receiver",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "destinationChainId",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "refundAddress",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "msgValue",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "outputToken",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+        ],
+        outputs: [
+            {
+                name: "",
+                type: "tuple",
+                internalType: "struct QuoteSendInfo",
+                components: [
+                    {
+                        name: "gmpFee",
+                        type: "tuple",
+                        internalType: "struct Fee",
+                        components: [
+                            {
+                                name: "nativeFee",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                            {
+                                name: "tokenFee",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                        ],
+                    },
+                    {
+                        name: "amountSent",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "valueSent",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "airliftFeeInfo",
+                        type: "tuple",
+                        internalType: "struct AirliftFeeInfo",
+                        components: [
+                            {
+                                name: "airliftFee",
+                                type: "tuple",
+                                internalType: "struct Fee",
+                                components: [
+                                    {
+                                        name: "nativeFee",
+                                        type: "uint256",
+                                        internalType: "uint256",
+                                    },
+                                    {
+                                        name: "tokenFee",
+                                        type: "uint256",
+                                        internalType: "uint256",
+                                    },
+                                ],
+                            },
+                            {
+                                name: "correctedAmount",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                            {
+                                name: "correctedValue",
+                                type: "uint256",
+                                internalType: "uint256",
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+        stateMutability: "nonpayable",
+    },
+    {
+        type: "function",
         name: "send",
         inputs: [
             {
@@ -142,8 +254,19 @@ var _abi = [
                 type: "address",
                 internalType: "address",
             },
+            {
+                name: "outputToken",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
         ],
-        outputs: [],
+        outputs: [
+            {
+                name: "",
+                type: "bytes",
+                internalType: "bytes",
+            },
+        ],
         stateMutability: "payable",
     },
 ];
