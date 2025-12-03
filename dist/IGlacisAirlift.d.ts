@@ -44,10 +44,12 @@ export type QuoteSendInfoStructOutput = [
 export interface IGlacisAirliftInterface extends utils.Interface {
     functions: {
         "quoteSend(address,uint256,bytes32,uint256,address,uint256)": FunctionFragment;
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)": FunctionFragment;
+        "send(address,uint256,bytes32,uint256,address,bytes32)": FunctionFragment;
         "send(address,uint256,bytes32,uint256,address)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "quoteSend" | "send"): FunctionFragment;
-    encodeFunctionData(functionFragment: "quoteSend", values: [
+    getFunction(nameOrSignatureOrTopic: "quoteSend(address,uint256,bytes32,uint256,address,uint256)" | "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)" | "send(address,uint256,bytes32,uint256,address,bytes32)" | "send(address,uint256,bytes32,uint256,address)"): FunctionFragment;
+    encodeFunctionData(functionFragment: "quoteSend(address,uint256,bytes32,uint256,address,uint256)", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>,
@@ -55,15 +57,34 @@ export interface IGlacisAirliftInterface extends utils.Interface {
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "send", values: [
+    encodeFunctionData(functionFragment: "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "send(address,uint256,bytes32,uint256,address,bytes32)", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "send(address,uint256,bytes32,uint256,address)", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<string>
     ]): string;
-    decodeFunctionResult(functionFragment: "quoteSend", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "send", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "quoteSend(address,uint256,bytes32,uint256,address,uint256)", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "send(address,uint256,bytes32,uint256,address,bytes32)", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "send(address,uint256,bytes32,uint256,address)", data: BytesLike): Result;
     events: {};
 }
 export interface IGlacisAirlift extends BaseContract {
@@ -81,37 +102,63 @@ export interface IGlacisAirlift extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        quoteSend(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        send(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, outputToken: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        "send(address,uint256,bytes32,uint256,address,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, outputToken: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        "send(address,uint256,bytes32,uint256,address)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    quoteSend(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+    "quoteSend(address,uint256,bytes32,uint256,address,uint256)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    send(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+    "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, outputToken: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    "send(address,uint256,bytes32,uint256,address,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, outputToken: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    "send(address,uint256,bytes32,uint256,address)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        quoteSend(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<QuoteSendInfoStructOutput>;
-        send(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<QuoteSendInfoStructOutput>;
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, outputToken: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<QuoteSendInfoStructOutput>;
+        "send(address,uint256,bytes32,uint256,address,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, outputToken: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+        "send(address,uint256,bytes32,uint256,address)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
-        quoteSend(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        send(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, outputToken: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        "send(address,uint256,bytes32,uint256,address,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, outputToken: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        "send(address,uint256,bytes32,uint256,address)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        quoteSend(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        send(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
+        "quoteSend(address,uint256,bytes32,uint256,address,uint256,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, msgValue: PromiseOrValue<BigNumberish>, outputToken: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        "send(address,uint256,bytes32,uint256,address,bytes32)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, outputToken: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        "send(address,uint256,bytes32,uint256,address)"(token: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, receiver: PromiseOrValue<BytesLike>, destinationChainId: PromiseOrValue<BigNumberish>, refundAddress: PromiseOrValue<string>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
