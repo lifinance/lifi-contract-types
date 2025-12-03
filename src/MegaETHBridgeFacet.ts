@@ -28,6 +28,30 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace MegaETHBridgeFacet {
+  export type ConfigStruct = {
+    assetId: PromiseOrValue<string>;
+    bridge: PromiseOrValue<string>;
+  };
+
+  export type ConfigStructOutput = [string, string] & {
+    assetId: string;
+    bridge: string;
+  };
+
+  export type MegaETHDataStruct = {
+    assetIdOnL2: PromiseOrValue<string>;
+    l2Gas: PromiseOrValue<BigNumberish>;
+    requiresDepositTo: PromiseOrValue<boolean>;
+  };
+
+  export type MegaETHDataStructOutput = [string, number, boolean] & {
+    assetIdOnL2: string;
+    l2Gas: number;
+    requiresDepositTo: boolean;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -67,27 +91,6 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace PolymerCCTPFacet {
-  export type PolymerCCTPDataStruct = {
-    polymerTokenFee: PromiseOrValue<BigNumberish>;
-    maxCCTPFee: PromiseOrValue<BigNumberish>;
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    minFinalityThreshold: PromiseOrValue<BigNumberish>;
-  };
-
-  export type PolymerCCTPDataStructOutput = [
-    BigNumber,
-    BigNumber,
-    string,
-    number
-  ] & {
-    polymerTokenFee: BigNumber;
-    maxCCTPFee: BigNumber;
-    nonEVMReceiver: string;
-    minFinalityThreshold: number;
-  };
-}
-
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -118,71 +121,57 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PolymerCCTPFacetInterface extends utils.Interface {
+export interface MegaETHBridgeFacetInterface extends utils.Interface {
   functions: {
-    "POLYMER_FEE_RECEIVER()": FunctionFragment;
-    "TOKEN_MESSENGER()": FunctionFragment;
-    "USDC()": FunctionFragment;
-    "initPolymerCCTP()": FunctionFragment;
-    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,uint32))": FunctionFragment;
+    "initMegaETH((address,address)[],address)": FunctionFragment;
+    "registerMegaETHBridge(address,address)": FunctionFragment;
+    "startBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint32,bool))": FunctionFragment;
+    "swapAndStartBridgeTokensViaMegaETHBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,bool))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "POLYMER_FEE_RECEIVER"
-      | "TOKEN_MESSENGER"
-      | "USDC"
-      | "initPolymerCCTP"
-      | "startBridgeTokensViaPolymerCCTP"
-      | "swapAndStartBridgeTokensViaPolymerCCTP"
+      | "initMegaETH"
+      | "registerMegaETHBridge"
+      | "startBridgeTokensViaMegaETHBridge"
+      | "swapAndStartBridgeTokensViaMegaETHBridge"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "POLYMER_FEE_RECEIVER",
-    values?: undefined
+    functionFragment: "initMegaETH",
+    values: [MegaETHBridgeFacet.ConfigStruct[], PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "TOKEN_MESSENGER",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "initPolymerCCTP",
-    values?: undefined
+    functionFragment: "registerMegaETHBridge",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    values: [ILiFi.BridgeDataStruct, PolymerCCTPFacet.PolymerCCTPDataStruct]
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
+    values: [ILiFi.BridgeDataStruct, MegaETHBridgeFacet.MegaETHDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PolymerCCTPFacet.PolymerCCTPDataStruct
+      MegaETHBridgeFacet.MegaETHDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "POLYMER_FEE_RECEIVER",
+    functionFragment: "initMegaETH",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TOKEN_MESSENGER",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "initPolymerCCTP",
+    functionFragment: "registerMegaETHBridge",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
+    functionFragment: "startBridgeTokensViaMegaETHBridge",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaMegaETHBridge",
     data: BytesLike
   ): Result;
 
@@ -195,7 +184,8 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)": EventFragment;
+    "MegaETHBridgeRegistered(address,address)": EventFragment;
+    "MegaETHInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -206,7 +196,8 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PolymerCCTPFeeSent"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHBridgeRegistered"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "MegaETHInitialized"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -327,25 +318,35 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PolymerCCTPFeeSentEventObject {
-  bridgeAmount: BigNumber;
-  polymerFee: BigNumber;
-  minFinalityThreshold: number;
+export interface MegaETHBridgeRegisteredEventObject {
+  assetId: string;
+  bridge: string;
 }
-export type PolymerCCTPFeeSentEvent = TypedEvent<
-  [BigNumber, BigNumber, number],
-  PolymerCCTPFeeSentEventObject
+export type MegaETHBridgeRegisteredEvent = TypedEvent<
+  [string, string],
+  MegaETHBridgeRegisteredEventObject
 >;
 
-export type PolymerCCTPFeeSentEventFilter =
-  TypedEventFilter<PolymerCCTPFeeSentEvent>;
+export type MegaETHBridgeRegisteredEventFilter =
+  TypedEventFilter<MegaETHBridgeRegisteredEvent>;
 
-export interface PolymerCCTPFacet extends BaseContract {
+export interface MegaETHInitializedEventObject {
+  configs: MegaETHBridgeFacet.ConfigStructOutput[];
+}
+export type MegaETHInitializedEvent = TypedEvent<
+  [MegaETHBridgeFacet.ConfigStructOutput[]],
+  MegaETHInitializedEventObject
+>;
+
+export type MegaETHInitializedEventFilter =
+  TypedEventFilter<MegaETHInitializedEvent>;
+
+export interface MegaETHBridgeFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PolymerCCTPFacetInterface;
+  interface: MegaETHBridgeFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -367,72 +368,80 @@ export interface PolymerCCTPFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<[string]>;
-
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
-
-    USDC(overrides?: CallOverrides): Promise<[string]>;
-
-    initPolymerCCTP(
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _defaultBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    startBridgeTokensViaPolymerCCTP(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
-
-  TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-  USDC(overrides?: CallOverrides): Promise<string>;
-
-  initPolymerCCTP(
+  initMegaETH(
+    _configs: MegaETHBridgeFacet.ConfigStruct[],
+    _defaultBridge: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  startBridgeTokensViaPolymerCCTP(
+  registerMegaETHBridge(
+    _assetId: PromiseOrValue<string>,
+    _bridge: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  startBridgeTokensViaMegaETHBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaPolymerCCTP(
+  swapAndStartBridgeTokensViaMegaETHBridge(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+    _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
-
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-    USDC(overrides?: CallOverrides): Promise<string>;
-
-    initPolymerCCTP(overrides?: CallOverrides): Promise<void>;
-
-    startBridgeTokensViaPolymerCCTP(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _defaultBridge: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    startBridgeTokensViaMegaETHBridge(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -554,66 +563,71 @@ export interface PolymerCCTPFacet extends BaseContract {
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)"(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
-    PolymerCCTPFeeSent(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
+    "MegaETHBridgeRegistered(address,address)"(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+    MegaETHBridgeRegistered(
+      assetId?: PromiseOrValue<string> | null,
+      bridge?: null
+    ): MegaETHBridgeRegisteredEventFilter;
+
+    "MegaETHInitialized(tuple[])"(
+      configs?: null
+    ): MegaETHInitializedEventFilter;
+    MegaETHInitialized(configs?: null): MegaETHInitializedEventFilter;
   };
 
   estimateGas: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    USDC(overrides?: CallOverrides): Promise<BigNumber>;
-
-    initPolymerCCTP(
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _defaultBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    startBridgeTokensViaPolymerCCTP(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    POLYMER_FEE_RECEIVER(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    initPolymerCCTP(
+    initMegaETH(
+      _configs: MegaETHBridgeFacet.ConfigStruct[],
+      _defaultBridge: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaPolymerCCTP(
+    registerMegaETHBridge(
+      _assetId: PromiseOrValue<string>,
+      _bridge: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaMegaETHBridge(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _megaETHData: MegaETHBridgeFacet.MegaETHDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
