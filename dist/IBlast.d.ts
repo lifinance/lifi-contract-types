@@ -1,0 +1,82 @@
+import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export interface IBlastInterface extends utils.Interface {
+    functions: {
+        "claimAllGas(address,address)": FunctionFragment;
+        "configureClaimableGas()": FunctionFragment;
+        "configureGovernor(address)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "claimAllGas" | "configureClaimableGas" | "configureGovernor"): FunctionFragment;
+    encodeFunctionData(functionFragment: "claimAllGas", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "configureClaimableGas", values?: undefined): string;
+    encodeFunctionData(functionFragment: "configureGovernor", values: [PromiseOrValue<string>]): string;
+    decodeFunctionResult(functionFragment: "claimAllGas", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "configureClaimableGas", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "configureGovernor", data: BytesLike): Result;
+    events: {};
+}
+export interface IBlast extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: IBlastInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        claimAllGas(_contractAddress: PromiseOrValue<string>, _recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        configureClaimableGas(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        configureGovernor(_governor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    claimAllGas(_contractAddress: PromiseOrValue<string>, _recipient: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    configureClaimableGas(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    configureGovernor(_governor: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        claimAllGas(_contractAddress: PromiseOrValue<string>, _recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        configureClaimableGas(overrides?: CallOverrides): Promise<void>;
+        configureGovernor(_governor: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {};
+    estimateGas: {
+        claimAllGas(_contractAddress: PromiseOrValue<string>, _recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        configureClaimableGas(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        configureGovernor(_governor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        claimAllGas(_contractAddress: PromiseOrValue<string>, _recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        configureClaimableGas(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        configureGovernor(_governor: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
