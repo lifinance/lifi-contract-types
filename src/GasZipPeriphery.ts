@@ -111,13 +111,13 @@ export declare namespace ILiFi {
 
 export interface GasZipPeripheryInterface extends utils.Interface {
   functions: {
+    "GAS_ZIP_ROUTER()": FunctionFragment;
+    "LIFI_DIAMOND()": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "depositToGasZipERC20((address,address,address,address,uint256,bytes,bool),(bytes32,uint256))": FunctionFragment;
     "depositToGasZipNative((bytes32,uint256),uint256)": FunctionFragment;
-    "gasZipRouter()": FunctionFragment;
     "getDestinationChainsValue(uint8[])": FunctionFragment;
-    "liFiDEXAggregator()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -126,19 +126,27 @@ export interface GasZipPeripheryInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "GAS_ZIP_ROUTER"
+      | "LIFI_DIAMOND"
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "depositToGasZipERC20"
       | "depositToGasZipNative"
-      | "gasZipRouter"
       | "getDestinationChainsValue"
-      | "liFiDEXAggregator"
       | "owner"
       | "pendingOwner"
       | "transferOwnership"
       | "withdrawToken"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "GAS_ZIP_ROUTER",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "LIFI_DIAMOND",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "cancelOwnershipTransfer",
     values?: undefined
@@ -156,16 +164,8 @@ export interface GasZipPeripheryInterface extends utils.Interface {
     values: [IGasZip.GasZipDataStruct, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "gasZipRouter",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "getDestinationChainsValue",
     values: [PromiseOrValue<BigNumberish>[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "liFiDEXAggregator",
-    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -186,6 +186,14 @@ export interface GasZipPeripheryInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "GAS_ZIP_ROUTER",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "LIFI_DIAMOND",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "cancelOwnershipTransfer",
     data: BytesLike
   ): Result;
@@ -202,15 +210,7 @@ export interface GasZipPeripheryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "gasZipRouter",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getDestinationChainsValue",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liFiDEXAggregator",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -417,6 +417,10 @@ export interface GasZipPeriphery extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    GAS_ZIP_ROUTER(overrides?: CallOverrides): Promise<[string]>;
+
+    LIFI_DIAMOND(overrides?: CallOverrides): Promise<[string]>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -437,14 +441,10 @@ export interface GasZipPeriphery extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    gasZipRouter(overrides?: CallOverrides): Promise<[string]>;
-
     getDestinationChainsValue(
       _chainIds: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { destinationChains: BigNumber }>;
-
-    liFiDEXAggregator(overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -462,6 +462,10 @@ export interface GasZipPeriphery extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  GAS_ZIP_ROUTER(overrides?: CallOverrides): Promise<string>;
+
+  LIFI_DIAMOND(overrides?: CallOverrides): Promise<string>;
 
   cancelOwnershipTransfer(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -483,14 +487,10 @@ export interface GasZipPeriphery extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  gasZipRouter(overrides?: CallOverrides): Promise<string>;
-
   getDestinationChainsValue(
     _chainIds: PromiseOrValue<BigNumberish>[],
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  liFiDEXAggregator(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -509,6 +509,10 @@ export interface GasZipPeriphery extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    GAS_ZIP_ROUTER(overrides?: CallOverrides): Promise<string>;
+
+    LIFI_DIAMOND(overrides?: CallOverrides): Promise<string>;
+
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
@@ -525,14 +529,10 @@ export interface GasZipPeriphery extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    gasZipRouter(overrides?: CallOverrides): Promise<string>;
-
     getDestinationChainsValue(
       _chainIds: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    liFiDEXAggregator(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -680,6 +680,10 @@ export interface GasZipPeriphery extends BaseContract {
   };
 
   estimateGas: {
+    GAS_ZIP_ROUTER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    LIFI_DIAMOND(overrides?: CallOverrides): Promise<BigNumber>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -700,14 +704,10 @@ export interface GasZipPeriphery extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    gasZipRouter(overrides?: CallOverrides): Promise<BigNumber>;
-
     getDestinationChainsValue(
       _chainIds: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    liFiDEXAggregator(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -727,6 +727,10 @@ export interface GasZipPeriphery extends BaseContract {
   };
 
   populateTransaction: {
+    GAS_ZIP_ROUTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    LIFI_DIAMOND(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     cancelOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -747,14 +751,10 @@ export interface GasZipPeriphery extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    gasZipRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     getDestinationChainsValue(
       _chainIds: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    liFiDEXAggregator(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
