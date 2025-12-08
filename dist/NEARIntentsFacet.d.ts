@@ -39,16 +39,29 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace GlacisFacet {
-    type GlacisDataStruct = {
-        receiverAddress: PromiseOrValue<BytesLike>;
-        refundAddress: PromiseOrValue<string>;
-        nativeFee: PromiseOrValue<BigNumberish>;
+export declare namespace NEARIntentsFacet {
+    type NEARIntentsDataStruct = {
+        depositAddress: PromiseOrValue<string>;
+        nonEVMReceiver: PromiseOrValue<BytesLike>;
+        quoteId: PromiseOrValue<BytesLike>;
+        deadline: PromiseOrValue<BigNumberish>;
+        minAmountOut: PromiseOrValue<BigNumberish>;
+        signature: PromiseOrValue<BytesLike>;
     };
-    type GlacisDataStructOutput = [string, string, BigNumber] & {
-        receiverAddress: string;
-        refundAddress: string;
-        nativeFee: BigNumber;
+    type NEARIntentsDataStructOutput = [
+        string,
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        string
+    ] & {
+        depositAddress: string;
+        nonEVMReceiver: string;
+        quoteId: string;
+        deadline: BigNumber;
+        minAmountOut: BigNumber;
+        signature: string;
     };
 }
 export declare namespace LibSwap {
@@ -79,23 +92,23 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
-export interface GlacisFacetInterface extends utils.Interface {
+export interface NEARIntentsFacetInterface extends utils.Interface {
     functions: {
-        "AIRLIFT()": FunctionFragment;
-        "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256))": FunctionFragment;
-        "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256))": FunctionFragment;
+        "isQuoteConsumed(bytes32)": FunctionFragment;
+        "startBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes32,bytes32,uint256,uint256,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes32,bytes32,uint256,uint256,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "AIRLIFT" | "startBridgeTokensViaGlacis" | "swapAndStartBridgeTokensViaGlacis"): FunctionFragment;
-    encodeFunctionData(functionFragment: "AIRLIFT", values?: undefined): string;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaGlacis", values: [ILiFi.BridgeDataStruct, GlacisFacet.GlacisDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaGlacis", values: [
+    getFunction(nameOrSignatureOrTopic: "isQuoteConsumed" | "startBridgeTokensViaNEARIntents" | "swapAndStartBridgeTokensViaNEARIntents"): FunctionFragment;
+    encodeFunctionData(functionFragment: "isQuoteConsumed", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaNEARIntents", values: [ILiFi.BridgeDataStruct, NEARIntentsFacet.NEARIntentsDataStruct]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaNEARIntents", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
-        GlacisFacet.GlacisDataStruct
+        NEARIntentsFacet.NEARIntentsDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "AIRLIFT", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "startBridgeTokensViaGlacis", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaGlacis", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "isQuoteConsumed", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeTokensViaNEARIntents", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaNEARIntents", data: BytesLike): Result;
     events: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
@@ -105,6 +118,7 @@ export interface GlacisFacetInterface extends utils.Interface {
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
+        "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
@@ -114,6 +128,7 @@ export interface GlacisFacetInterface extends utils.Interface {
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "NEARIntentsBridgeStarted"): EventFragment;
 }
 export interface AssetSwappedEventObject {
     transactionId: string;
@@ -233,11 +248,28 @@ export type LiFiTransferStartedEvent = TypedEvent<[
     ILiFi.BridgeDataStructOutput
 ], LiFiTransferStartedEventObject>;
 export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
-export interface GlacisFacet extends BaseContract {
+export interface NEARIntentsBridgeStartedEventObject {
+    transactionId: string;
+    quoteId: string;
+    depositAddress: string;
+    sendingAssetId: string;
+    amount: BigNumber;
+    deadline: BigNumber;
+}
+export type NEARIntentsBridgeStartedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], NEARIntentsBridgeStartedEventObject>;
+export type NEARIntentsBridgeStartedEventFilter = TypedEventFilter<NEARIntentsBridgeStartedEvent>;
+export interface NEARIntentsFacet extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: GlacisFacetInterface;
+    interface: NEARIntentsFacetInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -248,25 +280,27 @@ export interface GlacisFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        AIRLIFT(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        isQuoteConsumed(_quoteId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean] & {
+            consumed: boolean;
+        }>;
+        startBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    AIRLIFT(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    isQuoteConsumed(_quoteId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    startBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        AIRLIFT(overrides?: CallOverrides): Promise<string>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: CallOverrides): Promise<void>;
+        isQuoteConsumed(_quoteId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        startBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
@@ -285,22 +319,24 @@ export interface GlacisFacet extends BaseContract {
         LiFiTransferRecovered(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
         "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+        "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, quoteId?: PromiseOrValue<BytesLike> | null, depositAddress?: PromiseOrValue<string> | null, sendingAssetId?: null, amount?: null, deadline?: null): NEARIntentsBridgeStartedEventFilter;
+        NEARIntentsBridgeStarted(transactionId?: PromiseOrValue<BytesLike> | null, quoteId?: PromiseOrValue<BytesLike> | null, depositAddress?: PromiseOrValue<string> | null, sendingAssetId?: null, amount?: null, deadline?: null): NEARIntentsBridgeStartedEventFilter;
     };
     estimateGas: {
-        AIRLIFT(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        isQuoteConsumed(_quoteId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        startBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        AIRLIFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        isQuoteConsumed(_quoteId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaGlacis(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _glacisData: GlacisFacet.GlacisDataStruct, overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaNEARIntents(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _nearData: NEARIntentsFacet.NEARIntentsDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };

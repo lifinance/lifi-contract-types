@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,24 +66,30 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace PolymerCCTPFacet {
-  export type PolymerCCTPDataStruct = {
-    polymerTokenFee: PromiseOrValue<BigNumberish>;
-    maxCCTPFee: PromiseOrValue<BigNumberish>;
+export declare namespace NEARIntentsFacet {
+  export type NEARIntentsDataStruct = {
+    depositAddress: PromiseOrValue<string>;
     nonEVMReceiver: PromiseOrValue<BytesLike>;
-    minFinalityThreshold: PromiseOrValue<BigNumberish>;
+    quoteId: PromiseOrValue<BytesLike>;
+    deadline: PromiseOrValue<BigNumberish>;
+    minAmountOut: PromiseOrValue<BigNumberish>;
+    signature: PromiseOrValue<BytesLike>;
   };
 
-  export type PolymerCCTPDataStructOutput = [
-    BigNumber,
-    BigNumber,
+  export type NEARIntentsDataStructOutput = [
     string,
-    number
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string
   ] & {
-    polymerTokenFee: BigNumber;
-    maxCCTPFee: BigNumber;
+    depositAddress: string;
     nonEVMReceiver: string;
-    minFinalityThreshold: number;
+    quoteId: string;
+    deadline: BigNumber;
+    minAmountOut: BigNumber;
+    signature: string;
   };
 }
 
@@ -118,71 +123,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PolymerCCTPFacetInterface extends utils.Interface {
+export interface NEARIntentsFacetInterface extends utils.Interface {
   functions: {
-    "POLYMER_FEE_RECEIVER()": FunctionFragment;
-    "TOKEN_MESSENGER()": FunctionFragment;
-    "USDC()": FunctionFragment;
-    "initPolymerCCTP()": FunctionFragment;
-    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,uint32))": FunctionFragment;
+    "isQuoteConsumed(bytes32)": FunctionFragment;
+    "startBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes32,bytes32,uint256,uint256,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes32,bytes32,uint256,uint256,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "POLYMER_FEE_RECEIVER"
-      | "TOKEN_MESSENGER"
-      | "USDC"
-      | "initPolymerCCTP"
-      | "startBridgeTokensViaPolymerCCTP"
-      | "swapAndStartBridgeTokensViaPolymerCCTP"
+      | "isQuoteConsumed"
+      | "startBridgeTokensViaNEARIntents"
+      | "swapAndStartBridgeTokensViaNEARIntents"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "POLYMER_FEE_RECEIVER",
-    values?: undefined
+    functionFragment: "isQuoteConsumed",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "TOKEN_MESSENGER",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "initPolymerCCTP",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaNEARIntents",
+    values: [ILiFi.BridgeDataStruct, NEARIntentsFacet.NEARIntentsDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    values: [ILiFi.BridgeDataStruct, PolymerCCTPFacet.PolymerCCTPDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaNEARIntents",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PolymerCCTPFacet.PolymerCCTPDataStruct
+      NEARIntentsFacet.NEARIntentsDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "POLYMER_FEE_RECEIVER",
+    functionFragment: "isQuoteConsumed",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TOKEN_MESSENGER",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "initPolymerCCTP",
+    functionFragment: "startBridgeTokensViaNEARIntents",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaNEARIntents",
     data: BytesLike
   ): Result;
 
@@ -195,7 +176,7 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)": EventFragment;
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -206,7 +187,7 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PolymerCCTPFeeSent"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NEARIntentsBridgeStarted"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -327,25 +308,28 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PolymerCCTPFeeSentEventObject {
-  bridgeAmount: BigNumber;
-  polymerFee: BigNumber;
-  minFinalityThreshold: number;
+export interface NEARIntentsBridgeStartedEventObject {
+  transactionId: string;
+  quoteId: string;
+  depositAddress: string;
+  sendingAssetId: string;
+  amount: BigNumber;
+  deadline: BigNumber;
 }
-export type PolymerCCTPFeeSentEvent = TypedEvent<
-  [BigNumber, BigNumber, number],
-  PolymerCCTPFeeSentEventObject
+export type NEARIntentsBridgeStartedEvent = TypedEvent<
+  [string, string, string, string, BigNumber, BigNumber],
+  NEARIntentsBridgeStartedEventObject
 >;
 
-export type PolymerCCTPFeeSentEventFilter =
-  TypedEventFilter<PolymerCCTPFeeSentEvent>;
+export type NEARIntentsBridgeStartedEventFilter =
+  TypedEventFilter<NEARIntentsBridgeStartedEvent>;
 
-export interface PolymerCCTPFacet extends BaseContract {
+export interface NEARIntentsFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PolymerCCTPFacetInterface;
+  interface: NEARIntentsFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -367,72 +351,59 @@ export interface PolymerCCTPFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<[string]>;
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { consumed: boolean }>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
-
-    USDC(overrides?: CallOverrides): Promise<[string]>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+  isQuoteConsumed(
+    _quoteId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-  USDC(overrides?: CallOverrides): Promise<string>;
-
-  initPolymerCCTP(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  startBridgeTokensViaPolymerCCTP(
+  startBridgeTokensViaNEARIntents(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaPolymerCCTP(
+  swapAndStartBridgeTokensViaNEARIntents(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+    _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-    USDC(overrides?: CallOverrides): Promise<string>;
-
-    initPolymerCCTP(overrides?: CallOverrides): Promise<void>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -554,66 +525,60 @@ export interface PolymerCCTPFacet extends BaseContract {
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)"(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
-    PolymerCCTPFeeSent(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      quoteId?: PromiseOrValue<BytesLike> | null,
+      depositAddress?: PromiseOrValue<string> | null,
+      sendingAssetId?: null,
+      amount?: null,
+      deadline?: null
+    ): NEARIntentsBridgeStartedEventFilter;
+    NEARIntentsBridgeStarted(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      quoteId?: PromiseOrValue<BytesLike> | null,
+      depositAddress?: PromiseOrValue<string> | null,
+      sendingAssetId?: null,
+      amount?: null,
+      deadline?: null
+    ): NEARIntentsBridgeStartedEventFilter;
   };
 
   estimateGas: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    USDC(overrides?: CallOverrides): Promise<BigNumber>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    POLYMER_FEE_RECEIVER(
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    initPolymerCCTP(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
