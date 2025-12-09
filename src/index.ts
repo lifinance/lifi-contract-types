@@ -128,6 +128,7 @@ export type { LibDiamond } from "./LibDiamond";
 export type { LibSwap } from "./LibSwap";
 export type { MayanFacet } from "./MayanFacet";
 export type { MegaETHBridgeFacet } from "./MegaETHBridgeFacet";
+export type { NEARIntentsFacet } from "./NEARIntentsFacet";
 export type { OmniBridgeFacet } from "./OmniBridgeFacet";
 export type { OptimismBridgeFacet } from "./OptimismBridgeFacet";
 export type { OwnershipFacet } from "./OwnershipFacet";
@@ -310,6 +311,7 @@ export type { LiFiTimelockController } from "./LiFiTimelockController.sol/LiFiTi
 export { LiFiTimelockController__factory } from "./factories/LiFiTimelockController.sol/LiFiTimelockController__factory";
 export { MayanFacet__factory } from "./factories/MayanFacet__factory";
 export { MegaETHBridgeFacet__factory } from "./factories/MegaETHBridgeFacet__factory";
+export { NEARIntentsFacet__factory } from "./factories/NEARIntentsFacet__factory";
 export { OmniBridgeFacet__factory } from "./factories/OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./factories/OptimismBridgeFacet__factory";
 export { OwnershipFacet__factory } from "./factories/OwnershipFacet__factory";
