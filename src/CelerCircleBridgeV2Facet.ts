@@ -67,6 +67,18 @@ export declare namespace ILiFi {
   };
 }
 
+export declare namespace CelerCircleBridgeV2Facet {
+  export type CelerCircleDataStruct = {
+    maxFee: PromiseOrValue<BigNumberish>;
+    minFinalityThreshold: PromiseOrValue<BigNumberish>;
+  };
+
+  export type CelerCircleDataStructOutput = [BigNumber, number] & {
+    maxFee: BigNumber;
+    minFinalityThreshold: number;
+  };
+}
+
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -97,27 +109,48 @@ export declare namespace LibSwap {
   };
 }
 
-export interface CelerCircleBridgeFacetInterface extends utils.Interface {
+export interface CelerCircleBridgeV2FacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaCelerCircleBridgeV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
-    "swapAndStartBridgeTokensViaCelerCircleBridgeV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "CIRCLE_BRIDGE_PROXY_V2()": FunctionFragment;
+    "USDC()": FunctionFragment;
+    "startBridgeTokensViaCelerCircleBridgeV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaCelerCircleBridgeV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "CIRCLE_BRIDGE_PROXY_V2"
+      | "USDC"
       | "startBridgeTokensViaCelerCircleBridgeV2"
       | "swapAndStartBridgeTokensViaCelerCircleBridgeV2"
   ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "CIRCLE_BRIDGE_PROXY_V2",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
+  encodeFunctionData(
     functionFragment: "startBridgeTokensViaCelerCircleBridgeV2",
-    values: [ILiFi.BridgeDataStruct]
+    values: [
+      ILiFi.BridgeDataStruct,
+      CelerCircleBridgeV2Facet.CelerCircleDataStruct
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridgeV2",
-    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]
+    values: [
+      ILiFi.BridgeDataStruct,
+      LibSwap.SwapDataStruct[],
+      CelerCircleBridgeV2Facet.CelerCircleDataStruct
+    ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "CIRCLE_BRIDGE_PROXY_V2",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaCelerCircleBridgeV2",
     data: BytesLike
@@ -266,12 +299,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface CelerCircleBridgeFacet extends BaseContract {
+export interface CelerCircleBridgeV2Facet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CelerCircleBridgeFacetInterface;
+  interface: CelerCircleBridgeV2FacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -293,38 +326,56 @@ export interface CelerCircleBridgeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    CIRCLE_BRIDGE_PROXY_V2(overrides?: CallOverrides): Promise<[string]>;
+
+    USDC(overrides?: CallOverrides): Promise<[string]>;
+
     startBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
+  CIRCLE_BRIDGE_PROXY_V2(overrides?: CallOverrides): Promise<string>;
+
+  USDC(overrides?: CallOverrides): Promise<string>;
+
   startBridgeTokensViaCelerCircleBridgeV2(
     _bridgeData: ILiFi.BridgeDataStruct,
+    _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaCelerCircleBridgeV2(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
+    _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    CIRCLE_BRIDGE_PROXY_V2(overrides?: CallOverrides): Promise<string>;
+
+    USDC(overrides?: CallOverrides): Promise<string>;
+
     startBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     swapAndStartBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -448,27 +499,41 @@ export interface CelerCircleBridgeFacet extends BaseContract {
   };
 
   estimateGas: {
+    CIRCLE_BRIDGE_PROXY_V2(overrides?: CallOverrides): Promise<BigNumber>;
+
+    USDC(overrides?: CallOverrides): Promise<BigNumber>;
+
     startBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    CIRCLE_BRIDGE_PROXY_V2(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaCelerCircleBridgeV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _celerCircleData: CelerCircleBridgeV2Facet.CelerCircleDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
