@@ -32,6 +32,7 @@ export interface TokenWrapperInterface extends utils.Interface {
   functions: {
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
+    "converter()": FunctionFragment;
     "deposit()": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -45,6 +46,7 @@ export interface TokenWrapperInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
+      | "converter"
       | "deposit"
       | "owner"
       | "pendingOwner"
@@ -62,6 +64,7 @@ export interface TokenWrapperInterface extends utils.Interface {
     functionFragment: "confirmOwnershipTransfer",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "converter", values?: undefined): string;
   encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -94,6 +97,7 @@ export interface TokenWrapperInterface extends utils.Interface {
     functionFragment: "confirmOwnershipTransfer",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "converter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
@@ -196,6 +200,8 @@ export interface TokenWrapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    converter(overrides?: CallOverrides): Promise<[string]>;
+
     deposit(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -231,6 +237,8 @@ export interface TokenWrapper extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  converter(overrides?: CallOverrides): Promise<string>;
+
   deposit(
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -261,6 +269,8 @@ export interface TokenWrapper extends BaseContract {
     cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+
+    converter(overrides?: CallOverrides): Promise<string>;
 
     deposit(overrides?: CallOverrides): Promise<void>;
 
@@ -325,6 +335,8 @@ export interface TokenWrapper extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    converter(overrides?: CallOverrides): Promise<BigNumber>;
+
     deposit(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -360,6 +372,8 @@ export interface TokenWrapper extends BaseContract {
     confirmOwnershipTransfer(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    converter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     deposit(
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
