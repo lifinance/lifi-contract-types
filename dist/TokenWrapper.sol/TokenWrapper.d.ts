@@ -6,6 +6,7 @@ export interface TokenWrapperInterface extends utils.Interface {
     functions: {
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
+        "converter()": FunctionFragment;
         "deposit()": FunctionFragment;
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
@@ -14,9 +15,10 @@ export interface TokenWrapperInterface extends utils.Interface {
         "withdrawToken(address,address,uint256)": FunctionFragment;
         "wrappedToken()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "deposit" | "owner" | "pendingOwner" | "transferOwnership" | "withdraw" | "withdrawToken" | "wrappedToken"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "converter" | "deposit" | "owner" | "pendingOwner" | "transferOwnership" | "withdraw" | "withdrawToken" | "wrappedToken"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "converter", values?: undefined): string;
     encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
@@ -30,6 +32,7 @@ export interface TokenWrapperInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "wrappedToken", values?: undefined): string;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "converter", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
@@ -96,6 +99,7 @@ export interface TokenWrapper extends BaseContract {
         confirmOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        converter(overrides?: CallOverrides): Promise<[string]>;
         deposit(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -118,6 +122,7 @@ export interface TokenWrapper extends BaseContract {
     confirmOwnershipTransfer(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    converter(overrides?: CallOverrides): Promise<string>;
     deposit(overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -136,6 +141,7 @@ export interface TokenWrapper extends BaseContract {
     callStatic: {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        converter(overrides?: CallOverrides): Promise<string>;
         deposit(overrides?: CallOverrides): Promise<void>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
@@ -159,6 +165,7 @@ export interface TokenWrapper extends BaseContract {
         confirmOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        converter(overrides?: CallOverrides): Promise<BigNumber>;
         deposit(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -182,6 +189,7 @@ export interface TokenWrapper extends BaseContract {
         confirmOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
+        converter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         deposit(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
