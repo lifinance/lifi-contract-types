@@ -25,7 +25,7 @@ import type {
 
 export interface ICircleBridgeProxyInterface extends utils.Interface {
   functions: {
-    "depositForBurn(uint256,uint64,bytes32,address)": FunctionFragment;
+    "depositForBurn(uint256,uint64,bytes32,address,uint256,uint32)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
@@ -36,7 +36,9 @@ export interface ICircleBridgeProxyInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
 
@@ -80,6 +82,8 @@ export interface ICircleBridgeProxy extends BaseContract {
       _dstChid: PromiseOrValue<BigNumberish>,
       _mintRecipient: PromiseOrValue<BytesLike>,
       _burnToken: PromiseOrValue<string>,
+      _maxFee: PromiseOrValue<BigNumberish>,
+      _minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -89,6 +93,8 @@ export interface ICircleBridgeProxy extends BaseContract {
     _dstChid: PromiseOrValue<BigNumberish>,
     _mintRecipient: PromiseOrValue<BytesLike>,
     _burnToken: PromiseOrValue<string>,
+    _maxFee: PromiseOrValue<BigNumberish>,
+    _minFinalityThreshold: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -98,8 +104,10 @@ export interface ICircleBridgeProxy extends BaseContract {
       _dstChid: PromiseOrValue<BigNumberish>,
       _mintRecipient: PromiseOrValue<BytesLike>,
       _burnToken: PromiseOrValue<string>,
+      _maxFee: PromiseOrValue<BigNumberish>,
+      _minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<void>;
   };
 
   filters: {};
@@ -110,6 +118,8 @@ export interface ICircleBridgeProxy extends BaseContract {
       _dstChid: PromiseOrValue<BigNumberish>,
       _mintRecipient: PromiseOrValue<BytesLike>,
       _burnToken: PromiseOrValue<string>,
+      _maxFee: PromiseOrValue<BigNumberish>,
+      _minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -120,6 +130,8 @@ export interface ICircleBridgeProxy extends BaseContract {
       _dstChid: PromiseOrValue<BigNumberish>,
       _mintRecipient: PromiseOrValue<BytesLike>,
       _burnToken: PromiseOrValue<string>,
+      _maxFee: PromiseOrValue<BigNumberish>,
+      _minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
