@@ -39,6 +39,16 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
+export declare namespace CelerCircleBridgeFacet {
+    type CelerCircleDataStruct = {
+        maxFee: PromiseOrValue<BigNumberish>;
+        minFinalityThreshold: PromiseOrValue<BigNumberish>;
+    };
+    type CelerCircleDataStructOutput = [BigNumber, number] & {
+        maxFee: BigNumber;
+        minFinalityThreshold: number;
+    };
+}
 export declare namespace LibSwap {
     type SwapDataStruct = {
         callTo: PromiseOrValue<string>;
@@ -69,12 +79,25 @@ export declare namespace LibSwap {
 }
 export interface CelerCircleBridgeFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
-        "swapAndStartBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+        "CIRCLE_BRIDGE_PROXY()": FunctionFragment;
+        "USDC()": FunctionFragment;
+        "startBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint32))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaCelerCircleBridge" | "swapAndStartBridgeTokensViaCelerCircleBridge"): FunctionFragment;
-    encodeFunctionData(functionFragment: "startBridgeTokensViaCelerCircleBridge", values: [ILiFi.BridgeDataStruct]): string;
-    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridge", values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]): string;
+    getFunction(nameOrSignatureOrTopic: "CIRCLE_BRIDGE_PROXY" | "USDC" | "startBridgeTokensViaCelerCircleBridge" | "swapAndStartBridgeTokensViaCelerCircleBridge"): FunctionFragment;
+    encodeFunctionData(functionFragment: "CIRCLE_BRIDGE_PROXY", values?: undefined): string;
+    encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaCelerCircleBridge", values: [
+        ILiFi.BridgeDataStruct,
+        CelerCircleBridgeFacet.CelerCircleDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridge", values: [
+        ILiFi.BridgeDataStruct,
+        LibSwap.SwapDataStruct[],
+        CelerCircleBridgeFacet.CelerCircleDataStruct
+    ]): string;
+    decodeFunctionResult(functionFragment: "CIRCLE_BRIDGE_PROXY", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaCelerCircleBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridge", data: BytesLike): Result;
     events: {
@@ -229,22 +252,28 @@ export interface CelerCircleBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
+        CIRCLE_BRIDGE_PROXY(overrides?: CallOverrides): Promise<[string]>;
+        USDC(overrides?: CallOverrides): Promise<[string]>;
+        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
+    CIRCLE_BRIDGE_PROXY(overrides?: CallOverrides): Promise<string>;
+    USDC(overrides?: CallOverrides): Promise<string>;
+    startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+    swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: CallOverrides): Promise<void>;
-        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: CallOverrides): Promise<void>;
+        CIRCLE_BRIDGE_PROXY(overrides?: CallOverrides): Promise<string>;
+        USDC(overrides?: CallOverrides): Promise<string>;
+        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
@@ -265,18 +294,22 @@ export interface CelerCircleBridgeFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
+        CIRCLE_BRIDGE_PROXY(overrides?: CallOverrides): Promise<BigNumber>;
+        USDC(overrides?: CallOverrides): Promise<BigNumber>;
+        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, overrides?: Overrides & {
+        CIRCLE_BRIDGE_PROXY(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        startBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], overrides?: PayableOverrides & {
+        swapAndStartBridgeTokensViaCelerCircleBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _celerCircleData: CelerCircleBridgeFacet.CelerCircleDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
