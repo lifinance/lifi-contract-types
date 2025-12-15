@@ -4,16 +4,14 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
 export interface ICircleBridgeProxyInterface extends utils.Interface {
     functions: {
-        "depositForBurn(uint256,uint64,bytes32,address,uint256,uint32)": FunctionFragment;
+        "depositForBurn(uint256,uint64,bytes32,address)": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
     encodeFunctionData(functionFragment: "depositForBurn", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BytesLike>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>
+        PromiseOrValue<string>
     ]): string;
     decodeFunctionResult(functionFragment: "depositForBurn", data: BytesLike): Result;
     events: {};
@@ -33,24 +31,24 @@ export interface ICircleBridgeProxy extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, _maxFee: PromiseOrValue<BigNumberish>, _minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, _maxFee: PromiseOrValue<BigNumberish>, _minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+    depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, _maxFee: PromiseOrValue<BigNumberish>, _minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {};
     estimateGas: {
-        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, _maxFee: PromiseOrValue<BigNumberish>, _minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, _maxFee: PromiseOrValue<BigNumberish>, _minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        depositForBurn(_amount: PromiseOrValue<BigNumberish>, _dstChid: PromiseOrValue<BigNumberish>, _mintRecipient: PromiseOrValue<BytesLike>, _burnToken: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
