@@ -4,6 +4,8 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
 export interface TokenWrapperInterface extends utils.Interface {
     functions: {
+        "CONVERTER()": FunctionFragment;
+        "WRAPPED_TOKEN()": FunctionFragment;
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
         "deposit()": FunctionFragment;
@@ -12,9 +14,10 @@ export interface TokenWrapperInterface extends utils.Interface {
         "transferOwnership(address)": FunctionFragment;
         "withdraw()": FunctionFragment;
         "withdrawToken(address,address,uint256)": FunctionFragment;
-        "wrappedToken()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "deposit" | "owner" | "pendingOwner" | "transferOwnership" | "withdraw" | "withdrawToken" | "wrappedToken"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "CONVERTER" | "WRAPPED_TOKEN" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "deposit" | "owner" | "pendingOwner" | "transferOwnership" | "withdraw" | "withdrawToken"): FunctionFragment;
+    encodeFunctionData(functionFragment: "CONVERTER", values?: undefined): string;
+    encodeFunctionData(functionFragment: "WRAPPED_TOKEN", values?: undefined): string;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "deposit", values?: undefined): string;
@@ -27,7 +30,8 @@ export interface TokenWrapperInterface extends utils.Interface {
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>
     ]): string;
-    encodeFunctionData(functionFragment: "wrappedToken", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "CONVERTER", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "WRAPPED_TOKEN", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
@@ -36,7 +40,6 @@ export interface TokenWrapperInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdrawToken", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "wrappedToken", data: BytesLike): Result;
     events: {
         "OwnershipTransferRequested(address,address)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
@@ -90,6 +93,8 @@ export interface TokenWrapper extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        CONVERTER(overrides?: CallOverrides): Promise<[string]>;
+        WRAPPED_TOKEN(overrides?: CallOverrides): Promise<[string]>;
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -110,8 +115,9 @@ export interface TokenWrapper extends BaseContract {
         withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        wrappedToken(overrides?: CallOverrides): Promise<[string]>;
     };
+    CONVERTER(overrides?: CallOverrides): Promise<string>;
+    WRAPPED_TOKEN(overrides?: CallOverrides): Promise<string>;
     cancelOwnershipTransfer(overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -132,8 +138,9 @@ export interface TokenWrapper extends BaseContract {
     withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    wrappedToken(overrides?: CallOverrides): Promise<string>;
     callStatic: {
+        CONVERTER(overrides?: CallOverrides): Promise<string>;
+        WRAPPED_TOKEN(overrides?: CallOverrides): Promise<string>;
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         deposit(overrides?: CallOverrides): Promise<void>;
@@ -142,7 +149,6 @@ export interface TokenWrapper extends BaseContract {
         transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         withdraw(overrides?: CallOverrides): Promise<void>;
         withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        wrappedToken(overrides?: CallOverrides): Promise<string>;
     };
     filters: {
         "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
@@ -153,6 +159,8 @@ export interface TokenWrapper extends BaseContract {
         TokensWithdrawn(assetId?: null, receiver?: null, amount?: null): TokensWithdrawnEventFilter;
     };
     estimateGas: {
+        CONVERTER(overrides?: CallOverrides): Promise<BigNumber>;
+        WRAPPED_TOKEN(overrides?: CallOverrides): Promise<BigNumber>;
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -173,9 +181,10 @@ export interface TokenWrapper extends BaseContract {
         withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        wrappedToken(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
+        CONVERTER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        WRAPPED_TOKEN(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         cancelOwnershipTransfer(overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
@@ -196,6 +205,5 @@ export interface TokenWrapper extends BaseContract {
         withdrawToken(assetId: PromiseOrValue<string>, receiver: PromiseOrValue<string>, amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        wrappedToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }
