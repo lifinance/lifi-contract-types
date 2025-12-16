@@ -22,7 +22,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "./common";
 
 export interface IWrapperInterface extends utils.Interface {
   functions: {

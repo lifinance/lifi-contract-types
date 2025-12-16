@@ -4,10 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type {
-  IWrapper,
-  IWrapperInterface,
-} from "../../TokenWrapper.sol/IWrapper";
+import type { IWrapper, IWrapperInterface } from "../IWrapper";
 
 const _abi = [
   {
