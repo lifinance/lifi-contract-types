@@ -21,16 +21,12 @@ export declare class ICircleBridgeProxy__factory {
             readonly name: "_burnToken";
             readonly type: "address";
             readonly internalType: "address";
-        }, {
-            readonly name: "_maxFee";
-            readonly type: "uint256";
-            readonly internalType: "uint256";
-        }, {
-            readonly name: "_minFinalityThreshold";
-            readonly type: "uint32";
-            readonly internalType: "uint32";
         }];
-        readonly outputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "nonce";
+            readonly type: "uint64";
+            readonly internalType: "uint64";
+        }];
         readonly stateMutability: "nonpayable";
     }];
     static createInterface(): ICircleBridgeProxyInterface;
