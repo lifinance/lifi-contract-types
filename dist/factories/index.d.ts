@@ -5,7 +5,6 @@ export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as liFiTimelockControllerSol from "./LiFiTimelockController.sol";
 export * as lidoWrapperSol from "./LidoWrapper.sol";
-export * as receiverOifSol from "./ReceiverOIF.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
 export * as tokenWrapperSol from "./TokenWrapper.sol";
 export { AccessControl__factory } from "./AccessControl__factory";
