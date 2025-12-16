@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -67,6 +66,36 @@ export declare namespace ILiFi {
   };
 }
 
+export declare namespace NEARIntentsFacet {
+  export type NEARIntentsDataStruct = {
+    nonEVMReceiver: PromiseOrValue<BytesLike>;
+    depositAddress: PromiseOrValue<string>;
+    quoteId: PromiseOrValue<BytesLike>;
+    deadline: PromiseOrValue<BigNumberish>;
+    minAmountOut: PromiseOrValue<BigNumberish>;
+    refundRecipient: PromiseOrValue<string>;
+    signature: PromiseOrValue<BytesLike>;
+  };
+
+  export type NEARIntentsDataStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string,
+    string
+  ] & {
+    nonEVMReceiver: string;
+    depositAddress: string;
+    quoteId: string;
+    deadline: BigNumber;
+    minAmountOut: BigNumber;
+    refundRecipient: string;
+    signature: string;
+  };
+}
+
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -97,33 +126,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface CelerCircleBridgeFacetInterface extends utils.Interface {
+export interface NEARIntentsFacetInterface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": FunctionFragment;
-    "swapAndStartBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+    "isQuoteConsumed(bytes32)": FunctionFragment;
+    "startBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaCelerCircleBridge"
-      | "swapAndStartBridgeTokensViaCelerCircleBridge"
+      | "isQuoteConsumed"
+      | "startBridgeTokensViaNEARIntents"
+      | "swapAndStartBridgeTokensViaNEARIntents"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaCelerCircleBridge",
-    values: [ILiFi.BridgeDataStruct]
+    functionFragment: "isQuoteConsumed",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridge",
-    values: [ILiFi.BridgeDataStruct, LibSwap.SwapDataStruct[]]
+    functionFragment: "startBridgeTokensViaNEARIntents",
+    values: [ILiFi.BridgeDataStruct, NEARIntentsFacet.NEARIntentsDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaNEARIntents",
+    values: [
+      ILiFi.BridgeDataStruct,
+      LibSwap.SwapDataStruct[],
+      NEARIntentsFacet.NEARIntentsDataStruct
+    ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaCelerCircleBridge",
+    functionFragment: "isQuoteConsumed",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaCelerCircleBridge",
+    functionFragment: "startBridgeTokensViaNEARIntents",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaNEARIntents",
     data: BytesLike
   ): Result;
 
@@ -136,6 +179,7 @@ export interface CelerCircleBridgeFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -146,6 +190,7 @@ export interface CelerCircleBridgeFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NEARIntentsBridgeStarted"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -266,12 +311,29 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface CelerCircleBridgeFacet extends BaseContract {
+export interface NEARIntentsBridgeStartedEventObject {
+  transactionId: string;
+  quoteId: string;
+  depositAddress: string;
+  sendingAssetId: string;
+  amount: BigNumber;
+  deadline: BigNumber;
+  minAmountOut: BigNumber;
+}
+export type NEARIntentsBridgeStartedEvent = TypedEvent<
+  [string, string, string, string, BigNumber, BigNumber, BigNumber],
+  NEARIntentsBridgeStartedEventObject
+>;
+
+export type NEARIntentsBridgeStartedEventFilter =
+  TypedEventFilter<NEARIntentsBridgeStartedEvent>;
+
+export interface NEARIntentsFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CelerCircleBridgeFacetInterface;
+  interface: NEARIntentsFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -293,38 +355,59 @@ export interface CelerCircleBridgeFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaCelerCircleBridge(
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { consumed: boolean }>;
+
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaCelerCircleBridge(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  startBridgeTokensViaCelerCircleBridge(
+  isQuoteConsumed(
+    _quoteId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  startBridgeTokensViaNEARIntents(
     _bridgeData: ILiFi.BridgeDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaCelerCircleBridge(
+  swapAndStartBridgeTokensViaNEARIntents(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
+    _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    startBridgeTokensViaCelerCircleBridge(
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    startBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaCelerCircleBridge(
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -445,30 +528,63 @@ export interface CelerCircleBridgeFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256)"(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      quoteId?: PromiseOrValue<BytesLike> | null,
+      depositAddress?: PromiseOrValue<string> | null,
+      sendingAssetId?: null,
+      amount?: null,
+      deadline?: null,
+      minAmountOut?: null
+    ): NEARIntentsBridgeStartedEventFilter;
+    NEARIntentsBridgeStarted(
+      transactionId?: PromiseOrValue<BytesLike> | null,
+      quoteId?: PromiseOrValue<BytesLike> | null,
+      depositAddress?: PromiseOrValue<string> | null,
+      sendingAssetId?: null,
+      amount?: null,
+      deadline?: null,
+      minAmountOut?: null
+    ): NEARIntentsBridgeStartedEventFilter;
   };
 
   estimateGas: {
-    startBridgeTokensViaCelerCircleBridge(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaCelerCircleBridge(
+    startBridgeTokensViaNEARIntents(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaCelerCircleBridge(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    isQuoteConsumed(
+      _quoteId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaCelerCircleBridge(
+    startBridgeTokensViaNEARIntents(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapAndStartBridgeTokensViaNEARIntents(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _nearData: NEARIntentsFacet.NEARIntentsDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
