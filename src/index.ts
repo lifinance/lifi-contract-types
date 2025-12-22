@@ -37,7 +37,6 @@ export type { CalldataVerificationFacet } from "./CalldataVerificationFacet";
 export type { CelerCircleBridgeFacet } from "./CelerCircleBridgeFacet";
 export type { ChainflipFacet } from "./ChainflipFacet";
 export type { DeBridgeDlnFacet } from "./DeBridgeDlnFacet";
-export type { DexManagerFacet } from "./DexManagerFacet";
 export type { DiamondCutFacet } from "./DiamondCutFacet";
 export type { DiamondLoupeFacet } from "./DiamondLoupeFacet";
 export type { ECDSA } from "./ECDSA";
@@ -178,7 +177,6 @@ export { CBridgeFacetPacked__factory } from "./factories/CBridgeFacetPacked__fac
 export { CelerCircleBridgeFacet__factory } from "./factories/CelerCircleBridgeFacet__factory";
 export { ChainflipFacet__factory } from "./factories/ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./factories/DeBridgeDlnFacet__factory";
-export { DexManagerFacet__factory } from "./factories/DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./factories/DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./factories/DiamondLoupeFacet__factory";
 export { ECDSA__factory } from "./factories/ECDSA__factory";
