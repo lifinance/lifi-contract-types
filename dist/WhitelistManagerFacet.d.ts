@@ -6,35 +6,19 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     functions: {
         "batchSetContractSelectorWhitelist(address[],bytes4[],bool)": FunctionFragment;
         "getAllContractSelectorPairs()": FunctionFragment;
-        "getWhitelistedAddresses()": FunctionFragment;
-        "getWhitelistedFunctionSelectors()": FunctionFragment;
         "getWhitelistedSelectorsForContract(address)": FunctionFragment;
-        "isAddressWhitelisted(address)": FunctionFragment;
         "isContractSelectorWhitelisted(address,bytes4)": FunctionFragment;
-        "isFunctionSelectorWhitelisted(bytes4)": FunctionFragment;
-        "isMigrated()": FunctionFragment;
-        "migrate(bytes4[],address[],bytes4[][])": FunctionFragment;
         "setContractSelectorWhitelist(address,bytes4,bool)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "batchSetContractSelectorWhitelist" | "getAllContractSelectorPairs" | "getWhitelistedAddresses" | "getWhitelistedFunctionSelectors" | "getWhitelistedSelectorsForContract" | "isAddressWhitelisted" | "isContractSelectorWhitelisted" | "isFunctionSelectorWhitelisted" | "isMigrated" | "migrate" | "setContractSelectorWhitelist"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "batchSetContractSelectorWhitelist" | "getAllContractSelectorPairs" | "getWhitelistedSelectorsForContract" | "isContractSelectorWhitelisted" | "setContractSelectorWhitelist"): FunctionFragment;
     encodeFunctionData(functionFragment: "batchSetContractSelectorWhitelist", values: [
         PromiseOrValue<string>[],
         PromiseOrValue<BytesLike>[],
         PromiseOrValue<boolean>
     ]): string;
     encodeFunctionData(functionFragment: "getAllContractSelectorPairs", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getWhitelistedAddresses", values?: undefined): string;
-    encodeFunctionData(functionFragment: "getWhitelistedFunctionSelectors", values?: undefined): string;
     encodeFunctionData(functionFragment: "getWhitelistedSelectorsForContract", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "isAddressWhitelisted", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "isContractSelectorWhitelisted", values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]): string;
-    encodeFunctionData(functionFragment: "isFunctionSelectorWhitelisted", values: [PromiseOrValue<BytesLike>]): string;
-    encodeFunctionData(functionFragment: "isMigrated", values?: undefined): string;
-    encodeFunctionData(functionFragment: "migrate", values: [
-        PromiseOrValue<BytesLike>[],
-        PromiseOrValue<string>[],
-        PromiseOrValue<BytesLike>[][]
-    ]): string;
     encodeFunctionData(functionFragment: "setContractSelectorWhitelist", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BytesLike>,
@@ -42,14 +26,8 @@ export interface WhitelistManagerFacetInterface extends utils.Interface {
     ]): string;
     decodeFunctionResult(functionFragment: "batchSetContractSelectorWhitelist", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getAllContractSelectorPairs", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "getWhitelistedAddresses", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "getWhitelistedFunctionSelectors", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getWhitelistedSelectorsForContract", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "isAddressWhitelisted", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "isContractSelectorWhitelisted", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "isFunctionSelectorWhitelisted", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "isMigrated", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "migrate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setContractSelectorWhitelist", data: BytesLike): Result;
     events: {
         "ContractSelectorWhitelistChanged(address,bytes4,bool)": EventFragment;
@@ -92,28 +70,12 @@ export interface WhitelistManagerFacet extends BaseContract {
             contracts: string[];
             selectors: string[][];
         }>;
-        getWhitelistedAddresses(overrides?: CallOverrides): Promise<[string[]] & {
-            addresses: string[];
-        }>;
-        getWhitelistedFunctionSelectors(overrides?: CallOverrides): Promise<[string[]] & {
-            selectors: string[];
-        }>;
         getWhitelistedSelectorsForContract(_contract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string[]] & {
             selectors: string[];
-        }>;
-        isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean] & {
-            whitelisted: boolean;
         }>;
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean] & {
             whitelisted: boolean;
         }>;
-        isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean] & {
-            whitelisted: boolean;
-        }>;
-        isMigrated(overrides?: CallOverrides): Promise<[boolean]>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -128,16 +90,8 @@ export interface WhitelistManagerFacet extends BaseContract {
         contracts: string[];
         selectors: string[][];
     }>;
-    getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
-    getWhitelistedFunctionSelectors(overrides?: CallOverrides): Promise<string[]>;
     getWhitelistedSelectorsForContract(_contract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
-    isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
     isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-    isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-    isMigrated(overrides?: CallOverrides): Promise<boolean>;
-    migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
     setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -150,14 +104,8 @@ export interface WhitelistManagerFacet extends BaseContract {
             contracts: string[];
             selectors: string[][];
         }>;
-        getWhitelistedAddresses(overrides?: CallOverrides): Promise<string[]>;
-        getWhitelistedFunctionSelectors(overrides?: CallOverrides): Promise<string[]>;
         getWhitelistedSelectorsForContract(_contract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
-        isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-        isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-        isMigrated(overrides?: CallOverrides): Promise<boolean>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: CallOverrides): Promise<void>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -169,16 +117,8 @@ export interface WhitelistManagerFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         getAllContractSelectorPairs(overrides?: CallOverrides): Promise<BigNumber>;
-        getWhitelistedAddresses(overrides?: CallOverrides): Promise<BigNumber>;
-        getWhitelistedFunctionSelectors(overrides?: CallOverrides): Promise<BigNumber>;
         getWhitelistedSelectorsForContract(_contract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
-        isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
-        isMigrated(overrides?: CallOverrides): Promise<BigNumber>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -188,16 +128,8 @@ export interface WhitelistManagerFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         getAllContractSelectorPairs(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getWhitelistedAddresses(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getWhitelistedFunctionSelectors(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getWhitelistedSelectorsForContract(_contract: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isAddressWhitelisted(_address: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isContractSelectorWhitelisted(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isFunctionSelectorWhitelisted(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        isMigrated(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        migrate(_selectorsToRemove: PromiseOrValue<BytesLike>[], _contracts: PromiseOrValue<string>[], _selectors: PromiseOrValue<BytesLike>[][], overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
         setContractSelectorWhitelist(_contract: PromiseOrValue<string>, _selector: PromiseOrValue<BytesLike>, _whitelisted: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
