@@ -26,7 +26,6 @@ export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet_
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { ChainflipFacet__factory } from "./ChainflipFacet__factory";
 export { DeBridgeDlnFacet__factory } from "./DeBridgeDlnFacet__factory";
-export { DexManagerFacet__factory } from "./DexManagerFacet__factory";
 export { DiamondCutFacet__factory } from "./DiamondCutFacet__factory";
 export { DiamondLoupeFacet__factory } from "./DiamondLoupeFacet__factory";
 export { ECDSA__factory } from "./ECDSA__factory";
