@@ -228,15 +228,13 @@ export interface WETH extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    DOMAIN_SEPARATOR(
-      overrides?: CallOverrides
-    ): Promise<[string] & { result: string }>;
+    DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
+    ): Promise<[BigNumber]>;
 
     approve(
       spender: PromiseOrValue<string>,
@@ -245,9 +243,9 @@ export interface WETH extends BaseContract {
     ): Promise<ContractTransaction>;
 
     balanceOf(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
+    ): Promise<[BigNumber]>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
@@ -258,9 +256,9 @@ export interface WETH extends BaseContract {
     name(overrides?: CallOverrides): Promise<[string]>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
+    ): Promise<[BigNumber]>;
 
     permit(
       owner: PromiseOrValue<string>,
@@ -275,9 +273,7 @@ export interface WETH extends BaseContract {
 
     symbol(overrides?: CallOverrides): Promise<[string]>;
 
-    totalSupply(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { result: BigNumber }>;
+    totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transfer(
       to: PromiseOrValue<string>,
@@ -301,8 +297,8 @@ export interface WETH extends BaseContract {
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   allowance(
-    owner: PromiseOrValue<string>,
-    spender: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -313,7 +309,7 @@ export interface WETH extends BaseContract {
   ): Promise<ContractTransaction>;
 
   balanceOf(
-    owner: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -326,7 +322,7 @@ export interface WETH extends BaseContract {
   name(overrides?: CallOverrides): Promise<string>;
 
   nonces(
-    owner: PromiseOrValue<string>,
+    arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -367,8 +363,8 @@ export interface WETH extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -379,7 +375,7 @@ export interface WETH extends BaseContract {
     ): Promise<boolean>;
 
     balanceOf(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -390,7 +386,7 @@ export interface WETH extends BaseContract {
     name(overrides?: CallOverrides): Promise<string>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -474,8 +470,8 @@ export interface WETH extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -486,7 +482,7 @@ export interface WETH extends BaseContract {
     ): Promise<BigNumber>;
 
     balanceOf(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -499,7 +495,7 @@ export interface WETH extends BaseContract {
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -541,8 +537,8 @@ export interface WETH extends BaseContract {
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     allowance(
-      owner: PromiseOrValue<string>,
-      spender: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -553,7 +549,7 @@ export interface WETH extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -566,7 +562,7 @@ export interface WETH extends BaseContract {
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nonces(
-      owner: PromiseOrValue<string>,
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
