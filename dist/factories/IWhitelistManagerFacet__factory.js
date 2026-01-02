@@ -49,6 +49,32 @@ var _abi = [
     },
     {
         type: "function",
+        name: "getWhitelistedAddresses",
+        inputs: [],
+        outputs: [
+            {
+                name: "addresses",
+                type: "address[]",
+                internalType: "address[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "getWhitelistedFunctionSelectors",
+        inputs: [],
+        outputs: [
+            {
+                name: "selectors",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
         name: "getWhitelistedSelectorsForContract",
         inputs: [
             {
@@ -62,6 +88,25 @@ var _abi = [
                 name: "selectors",
                 type: "bytes4[]",
                 internalType: "bytes4[]",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "isAddressWhitelisted",
+        inputs: [
+            {
+                name: "_address",
+                type: "address",
+                internalType: "address",
+            },
+        ],
+        outputs: [
+            {
+                name: "whitelisted",
+                type: "bool",
+                internalType: "bool",
             },
         ],
         stateMutability: "view",
@@ -89,6 +134,61 @@ var _abi = [
             },
         ],
         stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "isFunctionSelectorWhitelisted",
+        inputs: [
+            {
+                name: "_selector",
+                type: "bytes4",
+                internalType: "bytes4",
+            },
+        ],
+        outputs: [
+            {
+                name: "whitelisted",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "isMigrated",
+        inputs: [],
+        outputs: [
+            {
+                name: "",
+                type: "bool",
+                internalType: "bool",
+            },
+        ],
+        stateMutability: "view",
+    },
+    {
+        type: "function",
+        name: "migrate",
+        inputs: [
+            {
+                name: "_selectorsToRemove",
+                type: "bytes4[]",
+                internalType: "bytes4[]",
+            },
+            {
+                name: "_contracts",
+                type: "address[]",
+                internalType: "address[]",
+            },
+            {
+                name: "_selectors",
+                type: "bytes4[][]",
+                internalType: "bytes4[][]",
+            },
+        ],
+        outputs: [],
+        stateMutability: "nonpayable",
     },
     {
         type: "function",
