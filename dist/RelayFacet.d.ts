@@ -83,25 +83,19 @@ export declare namespace LibSwap {
 }
 export interface RelayFacetInterface extends utils.Interface {
     functions: {
-        "consumedIds(bytes32)": FunctionFragment;
-        "relayReceiver()": FunctionFragment;
-        "relaySolver()": FunctionFragment;
+        "isRequestIdConsumed(bytes32)": FunctionFragment;
         "startBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,bytes32,bytes))": FunctionFragment;
         "swapAndStartBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,bytes32,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "consumedIds" | "relayReceiver" | "relaySolver" | "startBridgeTokensViaRelay" | "swapAndStartBridgeTokensViaRelay"): FunctionFragment;
-    encodeFunctionData(functionFragment: "consumedIds", values: [PromiseOrValue<BytesLike>]): string;
-    encodeFunctionData(functionFragment: "relayReceiver", values?: undefined): string;
-    encodeFunctionData(functionFragment: "relaySolver", values?: undefined): string;
+    getFunction(nameOrSignatureOrTopic: "isRequestIdConsumed" | "startBridgeTokensViaRelay" | "swapAndStartBridgeTokensViaRelay"): FunctionFragment;
+    encodeFunctionData(functionFragment: "isRequestIdConsumed", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaRelay", values: [ILiFi.BridgeDataStruct, RelayFacet.RelayDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaRelay", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         RelayFacet.RelayDataStruct
     ]): string;
-    decodeFunctionResult(functionFragment: "consumedIds", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "relayReceiver", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "relaySolver", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "isRequestIdConsumed", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaRelay", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaRelay", data: BytesLike): Result;
     events: {
@@ -256,9 +250,7 @@ export interface RelayFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        consumedIds(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
-        relayReceiver(overrides?: CallOverrides): Promise<[string]>;
-        relaySolver(overrides?: CallOverrides): Promise<[string]>;
+        isRequestIdConsumed(requestId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
         startBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _relayData: RelayFacet.RelayDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -266,9 +258,7 @@ export interface RelayFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    consumedIds(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-    relayReceiver(overrides?: CallOverrides): Promise<string>;
-    relaySolver(overrides?: CallOverrides): Promise<string>;
+    isRequestIdConsumed(requestId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     startBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _relayData: RelayFacet.RelayDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -276,9 +266,7 @@ export interface RelayFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        consumedIds(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
-        relayReceiver(overrides?: CallOverrides): Promise<string>;
-        relaySolver(overrides?: CallOverrides): Promise<string>;
+        isRequestIdConsumed(requestId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
         startBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _relayData: RelayFacet.RelayDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _relayData: RelayFacet.RelayDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -301,9 +289,7 @@ export interface RelayFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
-        consumedIds(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
-        relayReceiver(overrides?: CallOverrides): Promise<BigNumber>;
-        relaySolver(overrides?: CallOverrides): Promise<BigNumber>;
+        isRequestIdConsumed(requestId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _relayData: RelayFacet.RelayDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -312,9 +298,7 @@ export interface RelayFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        consumedIds(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        relayReceiver(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        relaySolver(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        isRequestIdConsumed(requestId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaRelay(_bridgeData: ILiFi.BridgeDataStruct, _relayData: RelayFacet.RelayDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
