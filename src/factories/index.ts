@@ -148,5 +148,6 @@ export { TransferrableOwnership__factory } from "./TransferrableOwnership__facto
 export { UnitFacet__factory } from "./UnitFacet__factory";
 export { WETH__factory } from "./WETH__factory";
 export { WhitelistManagerFacet__factory } from "./WhitelistManagerFacet__factory";
+export { WhitelistRecoveryFacet__factory } from "./WhitelistRecoveryFacet__factory";
 export { WithdrawFacet__factory } from "./WithdrawFacet__factory";
 export { WithdrawablePeriphery__factory } from "./WithdrawablePeriphery__factory";
