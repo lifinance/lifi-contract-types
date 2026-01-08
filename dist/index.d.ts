@@ -154,6 +154,7 @@ export type { TransferrableOwnership } from "./TransferrableOwnership";
 export type { UnitFacet } from "./UnitFacet";
 export type { WETH } from "./WETH";
 export type { WhitelistManagerFacet } from "./WhitelistManagerFacet";
+export type { WhitelistRecoveryFacet } from "./WhitelistRecoveryFacet";
 export type { WithdrawFacet } from "./WithdrawFacet";
 export type { WithdrawablePeriphery } from "./WithdrawablePeriphery";
 export * as factories from "./factories";
@@ -345,5 +346,6 @@ export { TransferrableOwnership__factory } from "./factories/TransferrableOwners
 export { UnitFacet__factory } from "./factories/UnitFacet__factory";
 export { WETH__factory } from "./factories/WETH__factory";
 export { WhitelistManagerFacet__factory } from "./factories/WhitelistManagerFacet__factory";
+export { WhitelistRecoveryFacet__factory } from "./factories/WhitelistRecoveryFacet__factory";
 export { WithdrawablePeriphery__factory } from "./factories/WithdrawablePeriphery__factory";
 export { WithdrawFacet__factory } from "./factories/WithdrawFacet__factory";
