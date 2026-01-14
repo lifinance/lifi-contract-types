@@ -131,7 +131,6 @@ export { ReceiverAcrossV4__factory } from "./ReceiverAcrossV4__factory";
 export { ReceiverChainflip__factory } from "./ReceiverChainflip__factory";
 export { ReentrancyGuard__factory } from "./ReentrancyGuard__factory";
 export { RelayDepositoryFacet__factory } from "./RelayDepositoryFacet__factory";
-export { RelayFacet__factory } from "./RelayFacet__factory";
 export { SafeTransferLib__factory } from "./SafeTransferLib__factory";
 export { ShortStrings__factory } from "./ShortStrings__factory";
 export { SquidFacet__factory } from "./SquidFacet__factory";
