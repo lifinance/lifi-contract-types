@@ -140,7 +140,6 @@ export type { ReceiverAcrossV4 } from "./ReceiverAcrossV4";
 export type { ReceiverChainflip } from "./ReceiverChainflip";
 export type { ReentrancyGuard } from "./ReentrancyGuard";
 export type { RelayDepositoryFacet } from "./RelayDepositoryFacet";
-export type { RelayFacet } from "./RelayFacet";
 export type { SafeTransferLib } from "./SafeTransferLib";
 export type { ShortStrings } from "./ShortStrings";
 export type { SquidFacet } from "./SquidFacet";
@@ -331,7 +330,6 @@ export type { ReceiverStargateV2 } from "./ReceiverStargateV2.sol/ReceiverStarga
 export { ReceiverStargateV2__factory } from "./factories/ReceiverStargateV2.sol/ReceiverStargateV2__factory";
 export { ReentrancyGuard__factory } from "./factories/ReentrancyGuard__factory";
 export { RelayDepositoryFacet__factory } from "./factories/RelayDepositoryFacet__factory";
-export { RelayFacet__factory } from "./factories/RelayFacet__factory";
 export { SafeTransferLib__factory } from "./factories/SafeTransferLib__factory";
 export { ShortStrings__factory } from "./factories/ShortStrings__factory";
 export { SquidFacet__factory } from "./factories/SquidFacet__factory";
