@@ -39,49 +39,6 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace LiFiIntentEscrowFacet {
-    type LiFiIntentEscrowDataStruct = {
-        receiverAddress: PromiseOrValue<BytesLike>;
-        depositAndRefundAddress: PromiseOrValue<string>;
-        nonce: PromiseOrValue<BigNumberish>;
-        expires: PromiseOrValue<BigNumberish>;
-        fillDeadline: PromiseOrValue<BigNumberish>;
-        inputOracle: PromiseOrValue<string>;
-        outputOracle: PromiseOrValue<BytesLike>;
-        outputSettler: PromiseOrValue<BytesLike>;
-        outputToken: PromiseOrValue<BytesLike>;
-        outputAmount: PromiseOrValue<BigNumberish>;
-        outputCall: PromiseOrValue<BytesLike>;
-        outputContext: PromiseOrValue<BytesLike>;
-    };
-    type LiFiIntentEscrowDataStructOutput = [
-        string,
-        string,
-        BigNumber,
-        number,
-        number,
-        string,
-        string,
-        string,
-        string,
-        BigNumber,
-        string,
-        string
-    ] & {
-        receiverAddress: string;
-        depositAndRefundAddress: string;
-        nonce: BigNumber;
-        expires: number;
-        fillDeadline: number;
-        inputOracle: string;
-        outputOracle: string;
-        outputSettler: string;
-        outputToken: string;
-        outputAmount: BigNumber;
-        outputCall: string;
-        outputContext: string;
-    };
-}
 export declare namespace LibSwap {
     type SwapDataStruct = {
         callTo: PromiseOrValue<string>;
@@ -110,11 +67,57 @@ export declare namespace LibSwap {
         requiresDeposit: boolean;
     };
 }
+export declare namespace LiFiIntentEscrowFacet {
+    type LiFiIntentEscrowDataStruct = {
+        dstCallReceiver: PromiseOrValue<BytesLike>;
+        recipient: PromiseOrValue<BytesLike>;
+        depositAndRefundAddress: PromiseOrValue<string>;
+        nonce: PromiseOrValue<BigNumberish>;
+        expires: PromiseOrValue<BigNumberish>;
+        fillDeadline: PromiseOrValue<BigNumberish>;
+        inputOracle: PromiseOrValue<string>;
+        outputOracle: PromiseOrValue<BytesLike>;
+        outputSettler: PromiseOrValue<BytesLike>;
+        outputToken: PromiseOrValue<BytesLike>;
+        outputAmount: PromiseOrValue<BigNumberish>;
+        dstCallSwapData: LibSwap.SwapDataStruct[];
+        outputContext: PromiseOrValue<BytesLike>;
+    };
+    type LiFiIntentEscrowDataStructOutput = [
+        string,
+        string,
+        string,
+        BigNumber,
+        number,
+        number,
+        string,
+        string,
+        string,
+        string,
+        BigNumber,
+        LibSwap.SwapDataStructOutput[],
+        string
+    ] & {
+        dstCallReceiver: string;
+        recipient: string;
+        depositAndRefundAddress: string;
+        nonce: BigNumber;
+        expires: number;
+        fillDeadline: number;
+        inputOracle: string;
+        outputOracle: string;
+        outputSettler: string;
+        outputToken: string;
+        outputAmount: BigNumber;
+        dstCallSwapData: LibSwap.SwapDataStructOutput[];
+        outputContext: string;
+    };
+}
 export interface LiFiIntentEscrowFacetInterface extends utils.Interface {
     functions: {
         "LIFI_INTENT_ESCROW_SETTLER()": FunctionFragment;
-        "startBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,bytes,bytes))": FunctionFragment;
+        "startBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,(address,address,address,address,uint256,bytes,bool)[],bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaLiFiIntentEscrow((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint256,(address,address,address,address,uint256,bytes,bool)[],bytes))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "LIFI_INTENT_ESCROW_SETTLER" | "startBridgeTokensViaLiFiIntentEscrow" | "swapAndStartBridgeTokensViaLiFiIntentEscrow"): FunctionFragment;
     encodeFunctionData(functionFragment: "LIFI_INTENT_ESCROW_SETTLER", values?: undefined): string;
