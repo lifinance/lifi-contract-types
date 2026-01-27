@@ -156,7 +156,6 @@ export interface RelayDepositoryFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
     "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
@@ -166,7 +165,6 @@ export interface RelayDepositoryFacetInterface extends utils.Interface {
     "LiFiTransferStarted(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
@@ -175,22 +173,6 @@ export interface RelayDepositoryFacetInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
-
-export interface AssetSwappedEventObject {
-  transactionId: string;
-  dex: string;
-  fromAssetId: string;
-  toAssetId: string;
-  fromAmount: BigNumber;
-  toAmount: BigNumber;
-  timestamp: BigNumber;
-}
-export type AssetSwappedEvent = TypedEvent<
-  [string, string, string, string, BigNumber, BigNumber, BigNumber],
-  AssetSwappedEventObject
->;
-
-export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
 
 export interface BridgeToNonEVMChainEventObject {
   transactionId: string;
@@ -370,25 +352,6 @@ export interface RelayDepositoryFacet extends BaseContract {
   };
 
   filters: {
-    "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-    AssetSwapped(
-      transactionId?: null,
-      dex?: null,
-      fromAssetId?: null,
-      toAssetId?: null,
-      fromAmount?: null,
-      toAmount?: null,
-      timestamp?: null
-    ): AssetSwappedEventFilter;
-
     "BridgeToNonEVMChain(bytes32,uint256,bytes)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
