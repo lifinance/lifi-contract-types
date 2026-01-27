@@ -59,39 +59,13 @@ export interface AccessManagerFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "AccessGranted(address,bytes4)": EventFragment;
-    "AccessRevoked(address,bytes4)": EventFragment;
     "ExecutionAllowed(address,bytes4)": EventFragment;
     "ExecutionDenied(address,bytes4)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "AccessGranted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "AccessRevoked"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ExecutionAllowed"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ExecutionDenied"): EventFragment;
 }
-
-export interface AccessGrantedEventObject {
-  account: string;
-  method: string;
-}
-export type AccessGrantedEvent = TypedEvent<
-  [string, string],
-  AccessGrantedEventObject
->;
-
-export type AccessGrantedEventFilter = TypedEventFilter<AccessGrantedEvent>;
-
-export interface AccessRevokedEventObject {
-  account: string;
-  method: string;
-}
-export type AccessRevokedEvent = TypedEvent<
-  [string, string],
-  AccessRevokedEventObject
->;
-
-export type AccessRevokedEventFilter = TypedEventFilter<AccessRevokedEvent>;
 
 export interface ExecutionAllowedEventObject {
   account: string;
@@ -186,24 +160,6 @@ export interface AccessManagerFacet extends BaseContract {
   };
 
   filters: {
-    "AccessGranted(address,bytes4)"(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
-    ): AccessGrantedEventFilter;
-    AccessGranted(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
-    ): AccessGrantedEventFilter;
-
-    "AccessRevoked(address,bytes4)"(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
-    ): AccessRevokedEventFilter;
-    AccessRevoked(
-      account?: PromiseOrValue<string> | null,
-      method?: PromiseOrValue<BytesLike> | null
-    ): AccessRevokedEventFilter;
-
     "ExecutionAllowed(address,bytes4)"(
       account?: PromiseOrValue<string> | null,
       method?: PromiseOrValue<BytesLike> | null
