@@ -13,7 +13,7 @@ export declare class SwapperV2__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): SwapperV2;
     connect(signer: Signer): SwapperV2__factory;
-    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50603e80601a5f395ff3fe60806040525f5ffdfea2646970667358221220fdfe3abb482dca84ca7230e730982557b5ea674f8fa3d5a3118f2ac223ff245564736f6c634300081d0033";
+    static readonly bytecode = "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220bf80590e5643431038a8588344bf2d4248255f972cf5dd4b0dbbb85fd0e6ebac64736f6c63430008110033";
     static readonly abi: readonly [{
         readonly type: "event";
         readonly name: "BridgeToNonEVMChain";
