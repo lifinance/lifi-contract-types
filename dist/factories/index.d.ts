@@ -17,6 +17,7 @@ export { AcrossFacetV3__factory } from "./AcrossFacetV3__factory";
 export { AcrossFacetV4__factory } from "./AcrossFacetV4__factory";
 export { AllBridgeFacet__factory } from "./AllBridgeFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./ArbitrumBridgeFacet__factory";
+export { BadLicensePragma__factory } from "./BadLicensePragma__factory";
 export { CBridgeFacet__factory } from "./CBridgeFacet__factory";
 export { CBridgeFacetPacked__factory } from "./CBridgeFacetPacked__factory";
 export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet__factory";
