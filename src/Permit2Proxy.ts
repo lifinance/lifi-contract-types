@@ -63,7 +63,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
     "PERMIT_WITH_WITNESS_TYPEHASH()": FunctionFragment;
     "WITNESS_TYPEHASH()": FunctionFragment;
     "WITNESS_TYPE_STRING()": FunctionFragment;
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)": FunctionFragment;
     "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)": FunctionFragment;
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)": FunctionFragment;
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)": FunctionFragment;
     "callDiamondWithPermit2(bytes,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
     "callDiamondWithPermit2Witness(bytes,address,((address,uint256),uint256,uint256),bytes)": FunctionFragment;
     "cancelOwnershipTransfer()": FunctionFragment;
@@ -84,7 +87,10 @@ export interface Permit2ProxyInterface extends utils.Interface {
       | "PERMIT_WITH_WITNESS_TYPEHASH"
       | "WITNESS_TYPEHASH"
       | "WITNESS_TYPE_STRING"
-      | "callDiamondWithEIP2612Signature"
+      | "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"
+      | "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"
+      | "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"
+      | "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"
       | "callDiamondWithPermit2"
       | "callDiamondWithPermit2Witness"
       | "cancelOwnershipTransfer"
@@ -116,11 +122,47 @@ export interface Permit2ProxyInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "callDiamondWithEIP2612Signature",
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BytesLike>,
@@ -206,7 +248,19 @@ export interface Permit2ProxyInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "callDiamondWithEIP2612Signature",
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -332,10 +386,43 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<[string]>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
@@ -413,10 +500,43 @@ export interface Permit2Proxy extends BaseContract {
 
   WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
-  callDiamondWithEIP2612Signature(
+  "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
     tokenAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     deadline: PromiseOrValue<BigNumberish>,
+    signature: PromiseOrValue<BytesLike>,
+    diamondCalldata: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
+    tokenAddress: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    deadline: PromiseOrValue<BigNumberish>,
+    v: PromiseOrValue<BigNumberish>,
+    r: PromiseOrValue<BytesLike>,
+    s: PromiseOrValue<BytesLike>,
+    diamondCalldata: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"(
+    tokenAddress: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    validAfter: PromiseOrValue<BigNumberish>,
+    validBefore: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BytesLike>,
+    signature: PromiseOrValue<BytesLike>,
+    diamondCalldata: PromiseOrValue<BytesLike>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"(
+    tokenAddress: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    validAfter: PromiseOrValue<BigNumberish>,
+    validBefore: PromiseOrValue<BigNumberish>,
+    nonce: PromiseOrValue<BytesLike>,
     v: PromiseOrValue<BigNumberish>,
     r: PromiseOrValue<BytesLike>,
     s: PromiseOrValue<BytesLike>,
@@ -494,10 +614,43 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<string>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
@@ -603,10 +756,43 @@ export interface Permit2Proxy extends BaseContract {
 
     WITNESS_TYPE_STRING(overrides?: CallOverrides): Promise<BigNumber>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
@@ -689,10 +875,43 @@ export interface Permit2Proxy extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    callDiamondWithEIP2612Signature(
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,bytes,bytes)"(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       deadline: PromiseOrValue<BigNumberish>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "callDiamondWithEIP2612Signature(address,uint256,uint256,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      deadline: PromiseOrValue<BigNumberish>,
+      v: PromiseOrValue<BigNumberish>,
+      r: PromiseOrValue<BytesLike>,
+      s: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,bytes,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
+      signature: PromiseOrValue<BytesLike>,
+      diamondCalldata: PromiseOrValue<BytesLike>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "callDiamondWithEIP3009Signature(address,uint256,uint256,uint256,bytes32,uint8,bytes32,bytes32,bytes)"(
+      tokenAddress: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      validAfter: PromiseOrValue<BigNumberish>,
+      validBefore: PromiseOrValue<BigNumberish>,
+      nonce: PromiseOrValue<BytesLike>,
       v: PromiseOrValue<BigNumberish>,
       r: PromiseOrValue<BytesLike>,
       s: PromiseOrValue<BytesLike>,
