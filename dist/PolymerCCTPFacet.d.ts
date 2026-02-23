@@ -44,20 +44,17 @@ export declare namespace PolymerCCTPFacet {
         polymerTokenFee: PromiseOrValue<BigNumberish>;
         maxCCTPFee: PromiseOrValue<BigNumberish>;
         nonEVMReceiver: PromiseOrValue<BytesLike>;
-        solanaReceiverATA: PromiseOrValue<BytesLike>;
         minFinalityThreshold: PromiseOrValue<BigNumberish>;
     };
     type PolymerCCTPDataStructOutput = [
         BigNumber,
         BigNumber,
         string,
-        string,
         number
     ] & {
         polymerTokenFee: BigNumber;
         maxCCTPFee: BigNumber;
         nonEVMReceiver: string;
-        solanaReceiverATA: string;
         minFinalityThreshold: number;
     };
 }
@@ -95,8 +92,8 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
         "TOKEN_MESSENGER()": FunctionFragment;
         "USDC()": FunctionFragment;
         "initPolymerCCTP()": FunctionFragment;
-        "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,bytes32,uint32))": FunctionFragment;
-        "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,bytes32,uint32))": FunctionFragment;
+        "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,uint32))": FunctionFragment;
+        "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,uint32))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "POLYMER_FEE_RECEIVER" | "TOKEN_MESSENGER" | "USDC" | "initPolymerCCTP" | "startBridgeTokensViaPolymerCCTP" | "swapAndStartBridgeTokensViaPolymerCCTP"): FunctionFragment;
     encodeFunctionData(functionFragment: "POLYMER_FEE_RECEIVER", values?: undefined): string;
