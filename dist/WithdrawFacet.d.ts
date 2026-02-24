@@ -4,10 +4,16 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
 export interface WithdrawFacetInterface extends utils.Interface {
     functions: {
+        "batchWithdraw(address[],address,uint256[])": FunctionFragment;
         "executeCallAndWithdraw(address,bytes,address,address,uint256)": FunctionFragment;
         "withdraw(address,address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "executeCallAndWithdraw" | "withdraw"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "batchWithdraw" | "executeCallAndWithdraw" | "withdraw"): FunctionFragment;
+    encodeFunctionData(functionFragment: "batchWithdraw", values: [
+        PromiseOrValue<string>[],
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>[]
+    ]): string;
     encodeFunctionData(functionFragment: "executeCallAndWithdraw", values: [
         PromiseOrValue<string>,
         PromiseOrValue<BytesLike>,
@@ -20,13 +26,27 @@ export interface WithdrawFacetInterface extends utils.Interface {
         PromiseOrValue<string>,
         PromiseOrValue<BigNumberish>
     ]): string;
+    decodeFunctionResult(functionFragment: "batchWithdraw", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "executeCallAndWithdraw", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
     events: {
+        "BatchWithdrawCompleted(address[],address,uint256)": EventFragment;
         "LogWithdraw(address,address,uint256)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "BatchWithdrawCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LogWithdraw"): EventFragment;
 }
+export interface BatchWithdrawCompletedEventObject {
+    assets: string[];
+    to: string;
+    totalAmount: BigNumber;
+}
+export type BatchWithdrawCompletedEvent = TypedEvent<[
+    string[],
+    string,
+    BigNumber
+], BatchWithdrawCompletedEventObject>;
+export type BatchWithdrawCompletedEventFilter = TypedEventFilter<BatchWithdrawCompletedEvent>;
 export interface LogWithdrawEventObject {
     _assetAddress: string;
     _to: string;
@@ -53,6 +73,9 @@ export interface WithdrawFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        batchWithdraw(_assetAddresses: PromiseOrValue<string>[], _to: PromiseOrValue<string>, _amounts: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         executeCallAndWithdraw(_callTo: PromiseOrValue<string>, _callData: PromiseOrValue<BytesLike>, _assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -60,6 +83,9 @@ export interface WithdrawFacet extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
+    batchWithdraw(_assetAddresses: PromiseOrValue<string>[], _to: PromiseOrValue<string>, _amounts: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     executeCallAndWithdraw(_callTo: PromiseOrValue<string>, _callData: PromiseOrValue<BytesLike>, _assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -67,14 +93,20 @@ export interface WithdrawFacet extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
+        batchWithdraw(_assetAddresses: PromiseOrValue<string>[], _to: PromiseOrValue<string>, _amounts: PromiseOrValue<BigNumberish>[], overrides?: CallOverrides): Promise<void>;
         executeCallAndWithdraw(_callTo: PromiseOrValue<string>, _callData: PromiseOrValue<BytesLike>, _assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         withdraw(_assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "BatchWithdrawCompleted(address[],address,uint256)"(assets?: PromiseOrValue<string>[] | null, to?: PromiseOrValue<string> | null, totalAmount?: null): BatchWithdrawCompletedEventFilter;
+        BatchWithdrawCompleted(assets?: PromiseOrValue<string>[] | null, to?: PromiseOrValue<string> | null, totalAmount?: null): BatchWithdrawCompletedEventFilter;
         "LogWithdraw(address,address,uint256)"(_assetAddress?: PromiseOrValue<string> | null, _to?: null, amount?: null): LogWithdrawEventFilter;
         LogWithdraw(_assetAddress?: PromiseOrValue<string> | null, _to?: null, amount?: null): LogWithdrawEventFilter;
     };
     estimateGas: {
+        batchWithdraw(_assetAddresses: PromiseOrValue<string>[], _to: PromiseOrValue<string>, _amounts: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         executeCallAndWithdraw(_callTo: PromiseOrValue<string>, _callData: PromiseOrValue<BytesLike>, _assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -83,6 +115,9 @@ export interface WithdrawFacet extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
+        batchWithdraw(_assetAddresses: PromiseOrValue<string>[], _to: PromiseOrValue<string>, _amounts: PromiseOrValue<BigNumberish>[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         executeCallAndWithdraw(_callTo: PromiseOrValue<string>, _callData: PromiseOrValue<BytesLike>, _assetAddress: PromiseOrValue<string>, _to: PromiseOrValue<string>, _amount: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
