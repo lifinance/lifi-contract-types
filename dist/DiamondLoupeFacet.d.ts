@@ -16,20 +16,26 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
     functions: {
         "facetAddress(bytes4)": FunctionFragment;
         "facetAddresses()": FunctionFragment;
+        "facetCount()": FunctionFragment;
         "facetFunctionSelectors(address)": FunctionFragment;
         "facets()": FunctionFragment;
+        "hasFacets()": FunctionFragment;
         "supportsInterface(bytes4)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "facetAddress" | "facetAddresses" | "facetFunctionSelectors" | "facets" | "supportsInterface"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "facetAddress" | "facetAddresses" | "facetCount" | "facetFunctionSelectors" | "facets" | "hasFacets" | "supportsInterface"): FunctionFragment;
     encodeFunctionData(functionFragment: "facetAddress", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "facetAddresses", values?: undefined): string;
+    encodeFunctionData(functionFragment: "facetCount", values?: undefined): string;
     encodeFunctionData(functionFragment: "facetFunctionSelectors", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "facets", values?: undefined): string;
+    encodeFunctionData(functionFragment: "hasFacets", values?: undefined): string;
     encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
     decodeFunctionResult(functionFragment: "facetAddress", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "facetAddresses", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "facetCount", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "facetFunctionSelectors", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "facets", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "hasFacets", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
     events: {};
 }
@@ -54,6 +60,9 @@ export interface DiamondLoupeFacet extends BaseContract {
         facetAddresses(overrides?: CallOverrides): Promise<[string[]] & {
             facetAddresses_: string[];
         }>;
+        facetCount(overrides?: CallOverrides): Promise<[BigNumber] & {
+            count_: BigNumber;
+        }>;
         facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string[]] & {
             facetFunctionSelectors_: string[];
         }>;
@@ -62,33 +71,44 @@ export interface DiamondLoupeFacet extends BaseContract {
         ] & {
             facets_: IDiamondLoupe.FacetStructOutput[];
         }>;
+        hasFacets(overrides?: CallOverrides): Promise<[boolean] & {
+            hasFacets_: boolean;
+        }>;
         supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
     };
     facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
     facetAddresses(overrides?: CallOverrides): Promise<string[]>;
+    facetCount(overrides?: CallOverrides): Promise<BigNumber>;
     facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
     facets(overrides?: CallOverrides): Promise<IDiamondLoupe.FacetStructOutput[]>;
+    hasFacets(overrides?: CallOverrides): Promise<boolean>;
     supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     callStatic: {
         facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
         facetAddresses(overrides?: CallOverrides): Promise<string[]>;
+        facetCount(overrides?: CallOverrides): Promise<BigNumber>;
         facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string[]>;
         facets(overrides?: CallOverrides): Promise<IDiamondLoupe.FacetStructOutput[]>;
+        hasFacets(overrides?: CallOverrides): Promise<boolean>;
         supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
     };
     filters: {};
     estimateGas: {
         facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
         facetAddresses(overrides?: CallOverrides): Promise<BigNumber>;
+        facetCount(overrides?: CallOverrides): Promise<BigNumber>;
         facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         facets(overrides?: CallOverrides): Promise<BigNumber>;
+        hasFacets(overrides?: CallOverrides): Promise<BigNumber>;
         supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         facetAddress(_functionSelector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         facetAddresses(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        facetCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         facetFunctionSelectors(_facet: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         facets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        hasFacets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         supportsInterface(_interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

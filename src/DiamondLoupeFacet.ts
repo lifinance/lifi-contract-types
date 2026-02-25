@@ -36,8 +36,10 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
   functions: {
     "facetAddress(bytes4)": FunctionFragment;
     "facetAddresses()": FunctionFragment;
+    "facetCount()": FunctionFragment;
     "facetFunctionSelectors(address)": FunctionFragment;
     "facets()": FunctionFragment;
+    "hasFacets()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
   };
 
@@ -45,8 +47,10 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "facetAddress"
       | "facetAddresses"
+      | "facetCount"
       | "facetFunctionSelectors"
       | "facets"
+      | "hasFacets"
       | "supportsInterface"
   ): FunctionFragment;
 
@@ -59,10 +63,15 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "facetCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "facetFunctionSelectors",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "facets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "hasFacets", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
@@ -76,11 +85,13 @@ export interface DiamondLoupeFacetInterface extends utils.Interface {
     functionFragment: "facetAddresses",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "facetCount", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "facetFunctionSelectors",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "facets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasFacets", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -125,6 +136,10 @@ export interface DiamondLoupeFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string[]] & { facetAddresses_: string[] }>;
 
+    facetCount(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { count_: BigNumber }>;
+
     facetFunctionSelectors(
       _facet: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -137,6 +152,10 @@ export interface DiamondLoupeFacet extends BaseContract {
         facets_: IDiamondLoupe.FacetStructOutput[];
       }
     >;
+
+    hasFacets(
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { hasFacets_: boolean }>;
 
     supportsInterface(
       _interfaceId: PromiseOrValue<BytesLike>,
@@ -151,12 +170,16 @@ export interface DiamondLoupeFacet extends BaseContract {
 
   facetAddresses(overrides?: CallOverrides): Promise<string[]>;
 
+  facetCount(overrides?: CallOverrides): Promise<BigNumber>;
+
   facetFunctionSelectors(
     _facet: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
   facets(overrides?: CallOverrides): Promise<IDiamondLoupe.FacetStructOutput[]>;
+
+  hasFacets(overrides?: CallOverrides): Promise<boolean>;
 
   supportsInterface(
     _interfaceId: PromiseOrValue<BytesLike>,
@@ -171,6 +194,8 @@ export interface DiamondLoupeFacet extends BaseContract {
 
     facetAddresses(overrides?: CallOverrides): Promise<string[]>;
 
+    facetCount(overrides?: CallOverrides): Promise<BigNumber>;
+
     facetFunctionSelectors(
       _facet: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -179,6 +204,8 @@ export interface DiamondLoupeFacet extends BaseContract {
     facets(
       overrides?: CallOverrides
     ): Promise<IDiamondLoupe.FacetStructOutput[]>;
+
+    hasFacets(overrides?: CallOverrides): Promise<boolean>;
 
     supportsInterface(
       _interfaceId: PromiseOrValue<BytesLike>,
@@ -196,12 +223,16 @@ export interface DiamondLoupeFacet extends BaseContract {
 
     facetAddresses(overrides?: CallOverrides): Promise<BigNumber>;
 
+    facetCount(overrides?: CallOverrides): Promise<BigNumber>;
+
     facetFunctionSelectors(
       _facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     facets(overrides?: CallOverrides): Promise<BigNumber>;
+
+    hasFacets(overrides?: CallOverrides): Promise<BigNumber>;
 
     supportsInterface(
       _interfaceId: PromiseOrValue<BytesLike>,
@@ -217,12 +248,16 @@ export interface DiamondLoupeFacet extends BaseContract {
 
     facetAddresses(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    facetCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     facetFunctionSelectors(
       _facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     facets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    hasFacets(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     supportsInterface(
       _interfaceId: PromiseOrValue<BytesLike>,
