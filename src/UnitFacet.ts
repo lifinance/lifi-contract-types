@@ -112,16 +112,22 @@ export declare namespace LibSwap {
 
 export interface UnitFacetInterface extends utils.Interface {
   functions: {
+    "getUnitFacetVersion()": FunctionFragment;
     "startBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,bytes,uint256))": FunctionFragment;
     "swapAndStartBridgeTokensViaUnit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,bytes,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "getUnitFacetVersion"
       | "startBridgeTokensViaUnit"
       | "swapAndStartBridgeTokensViaUnit"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "getUnitFacetVersion",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "startBridgeTokensViaUnit",
     values: [ILiFi.BridgeDataStruct, UnitFacet.UnitDataStruct]
@@ -135,6 +141,10 @@ export interface UnitFacetInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getUnitFacetVersion",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "startBridgeTokensViaUnit",
     data: BytesLike
@@ -310,6 +320,8 @@ export interface UnitFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getUnitFacetVersion(overrides?: CallOverrides): Promise<[string]>;
+
     startBridgeTokensViaUnit(
       _bridgeData: ILiFi.BridgeDataStruct,
       _unitData: UnitFacet.UnitDataStruct,
@@ -323,6 +335,8 @@ export interface UnitFacet extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  getUnitFacetVersion(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaUnit(
     _bridgeData: ILiFi.BridgeDataStruct,
@@ -338,6 +352,8 @@ export interface UnitFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getUnitFacetVersion(overrides?: CallOverrides): Promise<string>;
+
     startBridgeTokensViaUnit(
       _bridgeData: ILiFi.BridgeDataStruct,
       _unitData: UnitFacet.UnitDataStruct,
@@ -471,6 +487,8 @@ export interface UnitFacet extends BaseContract {
   };
 
   estimateGas: {
+    getUnitFacetVersion(overrides?: CallOverrides): Promise<BigNumber>;
+
     startBridgeTokensViaUnit(
       _bridgeData: ILiFi.BridgeDataStruct,
       _unitData: UnitFacet.UnitDataStruct,
@@ -486,6 +504,10 @@ export interface UnitFacet extends BaseContract {
   };
 
   populateTransaction: {
+    getUnitFacetVersion(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     startBridgeTokensViaUnit(
       _bridgeData: ILiFi.BridgeDataStruct,
       _unitData: UnitFacet.UnitDataStruct,
