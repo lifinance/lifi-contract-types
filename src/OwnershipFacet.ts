@@ -31,6 +31,7 @@ export interface OwnershipFacetInterface extends utils.Interface {
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "owner()": FunctionFragment;
+    "pendingOwner()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -39,6 +40,7 @@ export interface OwnershipFacetInterface extends utils.Interface {
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "owner"
+      | "pendingOwner"
       | "transferOwnership"
   ): FunctionFragment;
 
@@ -51,6 +53,10 @@ export interface OwnershipFacetInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "pendingOwner",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
@@ -65,6 +71,10 @@ export interface OwnershipFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingOwner",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -140,6 +150,10 @@ export interface OwnershipFacet extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string] & { owner_: string }>;
 
+    pendingOwner(
+      overrides?: CallOverrides
+    ): Promise<[string] & { pendingOwner_: string }>;
+
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -156,6 +170,8 @@ export interface OwnershipFacet extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  pendingOwner(overrides?: CallOverrides): Promise<string>;
+
   transferOwnership(
     _newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -167,6 +183,8 @@ export interface OwnershipFacet extends BaseContract {
     confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
@@ -205,6 +223,8 @@ export interface OwnershipFacet extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -221,6 +241,8 @@ export interface OwnershipFacet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
