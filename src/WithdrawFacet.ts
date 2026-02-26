@@ -29,14 +29,30 @@ import type {
 
 export interface WithdrawFacetInterface extends utils.Interface {
   functions: {
+    "batchWithdraw(address[],address,uint256[])": FunctionFragment;
     "executeCallAndWithdraw(address,bytes,address,address,uint256)": FunctionFragment;
+    "getWithdrawFacetName()": FunctionFragment;
+    "getWithdrawFacetVersion()": FunctionFragment;
     "withdraw(address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "executeCallAndWithdraw" | "withdraw"
+    nameOrSignatureOrTopic:
+      | "batchWithdraw"
+      | "executeCallAndWithdraw"
+      | "getWithdrawFacetName"
+      | "getWithdrawFacetVersion"
+      | "withdraw"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "batchWithdraw",
+    values: [
+      PromiseOrValue<string>[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[]
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "executeCallAndWithdraw",
     values: [
@@ -48,6 +64,14 @@ export interface WithdrawFacetInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "getWithdrawFacetName",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getWithdrawFacetVersion",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdraw",
     values: [
       PromiseOrValue<string>,
@@ -57,7 +81,19 @@ export interface WithdrawFacetInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "batchWithdraw",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "executeCallAndWithdraw",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getWithdrawFacetName",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getWithdrawFacetVersion",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -108,6 +144,13 @@ export interface WithdrawFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    batchWithdraw(
+      _assetAddresses: PromiseOrValue<string>[],
+      _to: PromiseOrValue<string>,
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     executeCallAndWithdraw(
       _callTo: PromiseOrValue<string>,
       _callData: PromiseOrValue<BytesLike>,
@@ -117,6 +160,10 @@ export interface WithdrawFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getWithdrawFacetName(overrides?: CallOverrides): Promise<[string]>;
+
+    getWithdrawFacetVersion(overrides?: CallOverrides): Promise<[string]>;
+
     withdraw(
       _assetAddress: PromiseOrValue<string>,
       _to: PromiseOrValue<string>,
@@ -124,6 +171,13 @@ export interface WithdrawFacet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  batchWithdraw(
+    _assetAddresses: PromiseOrValue<string>[],
+    _to: PromiseOrValue<string>,
+    _amounts: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   executeCallAndWithdraw(
     _callTo: PromiseOrValue<string>,
@@ -134,6 +188,10 @@ export interface WithdrawFacet extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getWithdrawFacetName(overrides?: CallOverrides): Promise<string>;
+
+  getWithdrawFacetVersion(overrides?: CallOverrides): Promise<string>;
+
   withdraw(
     _assetAddress: PromiseOrValue<string>,
     _to: PromiseOrValue<string>,
@@ -142,6 +200,13 @@ export interface WithdrawFacet extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    batchWithdraw(
+      _assetAddresses: PromiseOrValue<string>[],
+      _to: PromiseOrValue<string>,
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     executeCallAndWithdraw(
       _callTo: PromiseOrValue<string>,
       _callData: PromiseOrValue<BytesLike>,
@@ -150,6 +215,10 @@ export interface WithdrawFacet extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getWithdrawFacetName(overrides?: CallOverrides): Promise<string>;
+
+    getWithdrawFacetVersion(overrides?: CallOverrides): Promise<string>;
 
     withdraw(
       _assetAddress: PromiseOrValue<string>,
@@ -173,6 +242,13 @@ export interface WithdrawFacet extends BaseContract {
   };
 
   estimateGas: {
+    batchWithdraw(
+      _assetAddresses: PromiseOrValue<string>[],
+      _to: PromiseOrValue<string>,
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     executeCallAndWithdraw(
       _callTo: PromiseOrValue<string>,
       _callData: PromiseOrValue<BytesLike>,
@@ -181,6 +257,10 @@ export interface WithdrawFacet extends BaseContract {
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    getWithdrawFacetName(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getWithdrawFacetVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     withdraw(
       _assetAddress: PromiseOrValue<string>,
@@ -191,6 +271,13 @@ export interface WithdrawFacet extends BaseContract {
   };
 
   populateTransaction: {
+    batchWithdraw(
+      _assetAddresses: PromiseOrValue<string>[],
+      _to: PromiseOrValue<string>,
+      _amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     executeCallAndWithdraw(
       _callTo: PromiseOrValue<string>,
       _callData: PromiseOrValue<BytesLike>,
@@ -198,6 +285,14 @@ export interface WithdrawFacet extends BaseContract {
       _to: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getWithdrawFacetName(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getWithdrawFacetVersion(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     withdraw(
