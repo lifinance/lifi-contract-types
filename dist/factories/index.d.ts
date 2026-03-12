@@ -118,6 +118,7 @@ export { MegaETHBridgeFacet__factory } from "./MegaETHBridgeFacet__factory";
 export { NEARIntentsFacet__factory } from "./NEARIntentsFacet__factory";
 export { OmniBridgeFacet__factory } from "./OmniBridgeFacet__factory";
 export { OptimismBridgeFacet__factory } from "./OptimismBridgeFacet__factory";
+export { OutputValidator__factory } from "./OutputValidator__factory";
 export { OwnershipFacet__factory } from "./OwnershipFacet__factory";
 export { Patcher__factory } from "./Patcher__factory";
 export { PeripheryRegistryFacet__factory } from "./PeripheryRegistryFacet__factory";
