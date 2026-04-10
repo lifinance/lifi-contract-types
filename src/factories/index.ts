@@ -110,6 +110,7 @@ export { IWhitelistManagerFacet__factory } from "./IWhitelistManagerFacet__facto
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
+export { LayerSwapFacet__factory } from "./LayerSwapFacet__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiIntentEscrowFacet__factory } from "./LiFiIntentEscrowFacet__factory";
 export { LibAccess__factory } from "./LibAccess__factory";

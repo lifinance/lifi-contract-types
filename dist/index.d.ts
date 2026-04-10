@@ -116,6 +116,7 @@ export type { IWhitelistManagerFacet } from "./IWhitelistManagerFacet";
 export type { IXDaiBridge } from "./IXDaiBridge";
 export type { IXDaiBridgeL2 } from "./IXDaiBridgeL2";
 export type { IiZiSwapPool } from "./IiZiSwapPool";
+export type { LayerSwapFacet } from "./LayerSwapFacet";
 export type { LiFiDiamond } from "./LiFiDiamond";
 export type { LiFiIntentEscrowFacet } from "./LiFiIntentEscrowFacet";
 export type { LibAccess } from "./LibAccess";
@@ -273,6 +274,7 @@ export { IVelodromeV2Router__factory } from "./factories/IVelodromeV2Router__fac
 export { IWhitelistManagerFacet__factory } from "./factories/IWhitelistManagerFacet__factory";
 export { IXDaiBridge__factory } from "./factories/IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./factories/IXDaiBridgeL2__factory";
+export { LayerSwapFacet__factory } from "./factories/LayerSwapFacet__factory";
 export { LibAccess__factory } from "./factories/LibAccess__factory";
 export { LibBytes__factory } from "./factories/LibBytes__factory";
 export { LibDiamond__factory } from "./factories/LibDiamond__factory";
