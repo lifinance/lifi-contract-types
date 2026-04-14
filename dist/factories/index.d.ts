@@ -87,6 +87,7 @@ export { IKatanaV3AggregateRouter__factory } from "./IKatanaV3AggregateRouter__f
 export { IKatanaV3Governance__factory } from "./IKatanaV3Governance__factory";
 export { IKatanaV3Pool__factory } from "./IKatanaV3Pool__factory";
 export { IL1StandardBridge__factory } from "./IL1StandardBridge__factory";
+export { ILayerSwapDepository__factory } from "./ILayerSwapDepository__factory";
 export { ILiFi__factory } from "./ILiFi__factory";
 export { IMayan__factory } from "./IMayan__factory";
 export { IOmniBridge__factory } from "./IOmniBridge__factory";
@@ -111,6 +112,7 @@ export { IWhitelistManagerFacet__factory } from "./IWhitelistManagerFacet__facto
 export { IXDaiBridge__factory } from "./IXDaiBridge__factory";
 export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
+export { LayerSwapFacet__factory } from "./LayerSwapFacet__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiIntentEscrowFacet__factory } from "./LiFiIntentEscrowFacet__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
