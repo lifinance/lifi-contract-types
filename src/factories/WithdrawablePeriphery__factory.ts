@@ -156,6 +156,11 @@ const _abi = [
   },
   {
     type: "error",
+    name: "InvalidReceiver",
+    inputs: [],
+  },
+  {
+    type: "error",
     name: "NewOwnerMustNotBeSelf",
     inputs: [],
   },

@@ -118,6 +118,10 @@ export declare class WithdrawablePeriphery__factory {
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
+        readonly name: "InvalidReceiver";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
         readonly name: "NewOwnerMustNotBeSelf";
         readonly inputs: readonly [];
     }, {
