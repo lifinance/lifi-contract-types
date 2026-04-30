@@ -42,6 +42,7 @@ export declare namespace DeBridgeDlnFacet {
   export type DeBridgeDlnDataStruct = {
     receivingAssetId: PromiseOrValue<BytesLike>;
     receiver: PromiseOrValue<BytesLike>;
+    givePatchAuthoritySrc: PromiseOrValue<string>;
     orderAuthorityDst: PromiseOrValue<BytesLike>;
     minAmountOut: PromiseOrValue<BigNumberish>;
   };
@@ -50,10 +51,12 @@ export declare namespace DeBridgeDlnFacet {
     string,
     string,
     string,
+    string,
     BigNumber
   ] & {
     receivingAssetId: string;
     receiver: string;
+    givePatchAuthoritySrc: string;
     orderAuthorityDst: string;
     minAmountOut: BigNumber;
   };
@@ -134,8 +137,8 @@ export interface DeBridgeDlnFacetInterface extends utils.Interface {
     "getDeBridgeChainId(uint256)": FunctionFragment;
     "initDeBridgeDln((uint256,uint256)[])": FunctionFragment;
     "setDeBridgeChainId(uint256,uint256)": FunctionFragment;
-    "startBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,bytes,uint256))": FunctionFragment;
-    "swapAndStartBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,bytes,uint256))": FunctionFragment;
+    "startBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,address,bytes,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,address,bytes,uint256))": FunctionFragment;
   };
 
   getFunction(
