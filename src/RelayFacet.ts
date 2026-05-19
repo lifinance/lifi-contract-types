@@ -66,16 +66,18 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace AcrossV4SwapFacet {
-  export type AcrossV4SwapFacetDataStruct = {
-    swapApiTarget: PromiseOrValue<BigNumberish>;
-    callData: PromiseOrValue<BytesLike>;
+export declare namespace RelayFacet {
+  export type RelayDataStruct = {
+    requestId: PromiseOrValue<BytesLike>;
+    nonEVMReceiver: PromiseOrValue<BytesLike>;
+    receivingAssetId: PromiseOrValue<BytesLike>;
     signature: PromiseOrValue<BytesLike>;
   };
 
-  export type AcrossV4SwapFacetDataStructOutput = [number, string, string] & {
-    swapApiTarget: number;
-    callData: string;
+  export type RelayDataStructOutput = [string, string, string, string] & {
+    requestId: string;
+    nonEVMReceiver: string;
+    receivingAssetId: string;
     signature: string;
   };
 }
@@ -110,107 +112,67 @@ export declare namespace LibSwap {
   };
 }
 
-export interface AcrossV4SwapFacetInterface extends utils.Interface {
+export interface RelayFacetInterface extends utils.Interface {
   functions: {
-    "ACROSS_CHAIN_ID_SOLANA()": FunctionFragment;
-    "MULTIPLIER_BASE()": FunctionFragment;
-    "SPOKE_POOL()": FunctionFragment;
-    "SPOKE_POOL_PERIPHERY()": FunctionFragment;
-    "SPONSORED_CCTP_SRC_PERIPHERY()": FunctionFragment;
-    "SPONSORED_OFT_SRC_PERIPHERY()": FunctionFragment;
-    "WRAPPED_NATIVE()": FunctionFragment;
-    "startBridgeTokensViaAcrossV4Swap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint8,bytes,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaAcrossV4Swap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint8,bytes,bytes))": FunctionFragment;
+    "consumedIds(bytes32)": FunctionFragment;
+    "relayReceiver()": FunctionFragment;
+    "relaySolver()": FunctionFragment;
+    "startBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,bytes32,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,bytes32,bytes))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "ACROSS_CHAIN_ID_SOLANA"
-      | "MULTIPLIER_BASE"
-      | "SPOKE_POOL"
-      | "SPOKE_POOL_PERIPHERY"
-      | "SPONSORED_CCTP_SRC_PERIPHERY"
-      | "SPONSORED_OFT_SRC_PERIPHERY"
-      | "WRAPPED_NATIVE"
-      | "startBridgeTokensViaAcrossV4Swap"
-      | "swapAndStartBridgeTokensViaAcrossV4Swap"
+      | "consumedIds"
+      | "relayReceiver"
+      | "relaySolver"
+      | "startBridgeTokensViaRelay"
+      | "swapAndStartBridgeTokensViaRelay"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "ACROSS_CHAIN_ID_SOLANA",
+    functionFragment: "consumedIds",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "relayReceiver",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MULTIPLIER_BASE",
+    functionFragment: "relaySolver",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "SPOKE_POOL",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaRelay",
+    values: [ILiFi.BridgeDataStruct, RelayFacet.RelayDataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "SPOKE_POOL_PERIPHERY",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SPONSORED_CCTP_SRC_PERIPHERY",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SPONSORED_OFT_SRC_PERIPHERY",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "WRAPPED_NATIVE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "startBridgeTokensViaAcrossV4Swap",
-    values: [
-      ILiFi.BridgeDataStruct,
-      AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaAcrossV4Swap",
+    functionFragment: "swapAndStartBridgeTokensViaRelay",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct
+      RelayFacet.RelayDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "ACROSS_CHAIN_ID_SOLANA",
+    functionFragment: "consumedIds",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MULTIPLIER_BASE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "SPOKE_POOL", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "SPOKE_POOL_PERIPHERY",
+    functionFragment: "relayReceiver",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "SPONSORED_CCTP_SRC_PERIPHERY",
+    functionFragment: "relaySolver",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "SPONSORED_OFT_SRC_PERIPHERY",
+    functionFragment: "startBridgeTokensViaRelay",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "WRAPPED_NATIVE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaAcrossV4Swap",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaAcrossV4Swap",
+    functionFragment: "swapAndStartBridgeTokensViaRelay",
     data: BytesLike
   ): Result;
 
@@ -353,12 +315,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface AcrossV4SwapFacet extends BaseContract {
+export interface RelayFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: AcrossV4SwapFacetInterface;
+  interface: RelayFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -380,86 +342,71 @@ export interface AcrossV4SwapFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    ACROSS_CHAIN_ID_SOLANA(overrides?: CallOverrides): Promise<[BigNumber]>;
+    consumedIds(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
 
-    MULTIPLIER_BASE(overrides?: CallOverrides): Promise<[BigNumber]>;
+    relayReceiver(overrides?: CallOverrides): Promise<[string]>;
 
-    SPOKE_POOL(overrides?: CallOverrides): Promise<[string]>;
+    relaySolver(overrides?: CallOverrides): Promise<[string]>;
 
-    SPOKE_POOL_PERIPHERY(overrides?: CallOverrides): Promise<[string]>;
-
-    SPONSORED_CCTP_SRC_PERIPHERY(overrides?: CallOverrides): Promise<[string]>;
-
-    SPONSORED_OFT_SRC_PERIPHERY(overrides?: CallOverrides): Promise<[string]>;
-
-    WRAPPED_NATIVE(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaAcrossV4Swap(
+    startBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaAcrossV4Swap(
+    swapAndStartBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  ACROSS_CHAIN_ID_SOLANA(overrides?: CallOverrides): Promise<BigNumber>;
+  consumedIds(
+    arg0: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
-  MULTIPLIER_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+  relayReceiver(overrides?: CallOverrides): Promise<string>;
 
-  SPOKE_POOL(overrides?: CallOverrides): Promise<string>;
+  relaySolver(overrides?: CallOverrides): Promise<string>;
 
-  SPOKE_POOL_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-  SPONSORED_CCTP_SRC_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-  SPONSORED_OFT_SRC_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-  WRAPPED_NATIVE(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaAcrossV4Swap(
+  startBridgeTokensViaRelay(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+    _relayData: RelayFacet.RelayDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaAcrossV4Swap(
+  swapAndStartBridgeTokensViaRelay(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+    _relayData: RelayFacet.RelayDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    ACROSS_CHAIN_ID_SOLANA(overrides?: CallOverrides): Promise<BigNumber>;
+    consumedIds(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
-    MULTIPLIER_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+    relayReceiver(overrides?: CallOverrides): Promise<string>;
 
-    SPOKE_POOL(overrides?: CallOverrides): Promise<string>;
+    relaySolver(overrides?: CallOverrides): Promise<string>;
 
-    SPOKE_POOL_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-    SPONSORED_CCTP_SRC_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-    SPONSORED_OFT_SRC_PERIPHERY(overrides?: CallOverrides): Promise<string>;
-
-    WRAPPED_NATIVE(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaAcrossV4Swap(
+    startBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaAcrossV4Swap(
+    swapAndStartBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -583,67 +530,49 @@ export interface AcrossV4SwapFacet extends BaseContract {
   };
 
   estimateGas: {
-    ACROSS_CHAIN_ID_SOLANA(overrides?: CallOverrides): Promise<BigNumber>;
+    consumedIds(
+      arg0: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
-    MULTIPLIER_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+    relayReceiver(overrides?: CallOverrides): Promise<BigNumber>;
 
-    SPOKE_POOL(overrides?: CallOverrides): Promise<BigNumber>;
+    relaySolver(overrides?: CallOverrides): Promise<BigNumber>;
 
-    SPOKE_POOL_PERIPHERY(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SPONSORED_CCTP_SRC_PERIPHERY(overrides?: CallOverrides): Promise<BigNumber>;
-
-    SPONSORED_OFT_SRC_PERIPHERY(overrides?: CallOverrides): Promise<BigNumber>;
-
-    WRAPPED_NATIVE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaAcrossV4Swap(
+    startBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaAcrossV4Swap(
+    swapAndStartBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    ACROSS_CHAIN_ID_SOLANA(
+    consumedIds(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MULTIPLIER_BASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    relayReceiver(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    SPOKE_POOL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    relaySolver(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    SPOKE_POOL_PERIPHERY(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SPONSORED_CCTP_SRC_PERIPHERY(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    SPONSORED_OFT_SRC_PERIPHERY(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    WRAPPED_NATIVE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaAcrossV4Swap(
+    startBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaAcrossV4Swap(
+    swapAndStartBridgeTokensViaRelay(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _acrossV4SwapFacetData: AcrossV4SwapFacet.AcrossV4SwapFacetDataStruct,
+      _relayData: RelayFacet.RelayDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
