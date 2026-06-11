@@ -49,7 +49,7 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "build": "yarn compile && yarn copy-dts",
+    "build": "bun run compile && bun run copy-dts",
     "compile": "tsc -p ./tsconfig.json",
     "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
   }
