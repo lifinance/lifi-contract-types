@@ -10,6 +10,7 @@ export * as liFiTimelockControllerSol from "./LiFiTimelockController.sol";
 export * as lidoWrapperSol from "./LidoWrapper.sol";
 export * as receiverOifSol from "./ReceiverOIF.sol";
 export * as receiverStargateV2Sol from "./ReceiverStargateV2.sol";
+export * as securityReviewProbeFacetSol from "./SecurityReviewProbeFacet.sol";
 export { AccessControl__factory } from "./AccessControl__factory";
 export { AccessManagerFacet__factory } from "./AccessManagerFacet__factory";
 export { AcrossFacet__factory } from "./AcrossFacet__factory";
