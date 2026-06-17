@@ -49,6 +49,54 @@ var _abi = [
         outputs: [],
         stateMutability: "nonpayable",
     },
+    {
+        type: "function",
+        name: "depositForBurnWithHook",
+        inputs: [
+            {
+                name: "amount",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "destinationDomain",
+                type: "uint32",
+                internalType: "uint32",
+            },
+            {
+                name: "mintRecipient",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "burnToken",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "destinationCaller",
+                type: "bytes32",
+                internalType: "bytes32",
+            },
+            {
+                name: "maxFee",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "minFinalityThreshold",
+                type: "uint32",
+                internalType: "uint32",
+            },
+            {
+                name: "hookData",
+                type: "bytes",
+                internalType: "bytes",
+            },
+        ],
+        outputs: [],
+        stateMutability: "nonpayable",
+    },
 ];
 var ITokenMessenger__factory = /** @class */ (function () {
     function ITokenMessenger__factory() {
