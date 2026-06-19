@@ -1,0 +1,166 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { MockVaultWrapper, MockVaultWrapperInterface } from "../MockVaultWrapper";
+type MockVaultWrapperConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class MockVaultWrapper__factory extends ContractFactory {
+    constructor(...args: MockVaultWrapperConstructorParams);
+    deploy(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<MockVaultWrapper>;
+    getDeployTransaction(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): MockVaultWrapper;
+    connect(signer: Signer): MockVaultWrapper__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b506108d48061001c5f395ff3fe608060405234801561000f575f5ffd5b50600436106100b9575f3560e01c80636ec520d4116100725780638eb36e3d116100585780638eb36e3d146101d5578063d3441de5146101ea578063f90b13d4146101fd575f5ffd5b80636ec520d41461017c5780636f307dc3146101b5575f5ffd5b8063158ef93e116100a2578063158ef93e1461011c57806330521c5b1461013857806338d52e0f14610158575f5ffd5b806303eadcfc146100bd5780630f2da77614610107575b5f5ffd5b6002546100dd9073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff90911681526020015b60405180910390f35b61011a61011536600461047e565b610210565b005b5f546101289060ff1681565b60405190151581526020016100fe565b6003546100dd9073ffffffffffffffffffffffffffffffffffffffff1681565b5f546100dd90610100900473ffffffffffffffffffffffffffffffffffffffff1681565b6003546101a29074010000000000000000000000000000000000000000900461ffff1681565b60405161ffff90911681526020016100fe565b6001546100dd9073ffffffffffffffffffffffffffffffffffffffff1681565b6101dd61034d565b6040516100fe919061057a565b6101286101f83660046105cd565b6103d9565b6101a261020b3660046105cd565b61040c565b5f5460ff161561024c576040517f0dc149f000000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f805460017fffffffffffffffffffffff00000000000000000000000000000000000000000090911661010073ffffffffffffffffffffffffffffffffffffffff8c81169190910291909117821790925580547fffffffffffffffffffffffff00000000000000000000000000000000000000009081168a84161790915560028054909116888316179055600380549187167fffffffffffffffffffff00000000000000000000000000000000000000000000909216919091177401000000000000000000000000000000000000000061ffff8716021790558260056103328282610621565b506004905061034282848361075b565b505050505050505050565b6004805461035a906106be565b80601f0160208091040260200160405190810160405280929190818152602001828054610386906106be565b80156103d15780601f106103a8576101008083540402835291602001916103d1565b820191905f5260205f20905b8154815290600101906020018083116103b457829003601f168201915b505050505081565b5f600660ff8316600481106103f0576103f0610871565b602081049091015460ff601f9092166101000a90041692915050565b5f600560ff83166004811061042357610423610871565b601091828204019190066002029054906101000a900461ffff169050919050565b803573ffffffffffffffffffffffffffffffffffffffff81168114610467575f5ffd5b919050565b61ffff8116811461047b575f5ffd5b50565b5f5f5f5f5f5f5f5f888a036101c0811215610497575f5ffd5b6104a08a610444565b98506104ae60208b01610444565b97506104bc60408b01610444565b96506104ca60608b01610444565b955060808a01356104da8161046c565b94506101007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff608201121561050c575f5ffd5b5060a0890192506101a089013567ffffffffffffffff81111561052d575f5ffd5b8901601f81018b1361053d575f5ffd5b803567ffffffffffffffff811115610553575f5ffd5b8b6020828401011115610564575f5ffd5b989b979a50959850939692959194602001935050565b602081525f82518060208401528060208501604085015e5f6040828501015260407fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f83011684010191505092915050565b5f602082840312156105dd575f5ffd5b813560ff811681146105ed575f5ffd5b9392505050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b815f805b6004811015610664575f833561063a8161046c565b6020949094019361ffff600484901b81811b1995909516911690931b929092179150600101610625565b50825550608082015f805b60048110156106b1575f83358015158114610688575f5ffd5b6020949094019360ff600384901b81811b1995909516911690931b92909217915060010161066f565b5080600184015550505050565b600181811c908216806106d257607f821691505b602082108103610709577f4e487b71000000000000000000000000000000000000000000000000000000005f52602260045260245ffd5b50919050565b601f82111561075657805f5260205f20601f840160051c810160208510156107345750805b601f840160051c820191505b81811015610753575f8155600101610740565b50505b505050565b67ffffffffffffffff831115610773576107736105f4565b6107878361078183546106be565b8361070f565b5f601f8411600181146107d7575f85156107a15750838201355b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff600387901b1c1916600186901b178355610753565b5f838152602081207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe08716915b828110156108245786850135825560209485019460019092019101610804565b508682101561085f577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff60f88860031b161c19848701351681555b505060018560011b0183555050505050565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52603260045260245ffdfea26469706673582212207fa680f56ab3c17329c01b408b8c34ab039aa39007502549c7119005e1b8170c64736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "function";
+        readonly name: "adapter";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "asset";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "feeEnabled";
+        readonly inputs: readonly [{
+            readonly name: "_feeType";
+            readonly type: "uint8";
+            readonly internalType: "uint8";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "feeRate";
+        readonly inputs: readonly [{
+            readonly name: "_feeType";
+            readonly type: "uint8";
+            readonly internalType: "uint8";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "uint16";
+            readonly internalType: "uint16";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "initData";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "initialize";
+        readonly inputs: readonly [{
+            readonly name: "_asset";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_underlying";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_adapter";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_vaultWrapperAdmin";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_integratorShareBps";
+            readonly type: "uint16";
+            readonly internalType: "uint16";
+        }, {
+            readonly name: "_fees";
+            readonly type: "tuple";
+            readonly internalType: "struct FeeConfig";
+            readonly components: readonly [{
+                readonly name: "rateBps";
+                readonly type: "uint16[4]";
+                readonly internalType: "uint16[4]";
+            }, {
+                readonly name: "enabled";
+                readonly type: "bool[4]";
+                readonly internalType: "bool[4]";
+            }];
+        }, {
+            readonly name: "_initData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "initialized";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "integratorShareBps";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "uint16";
+            readonly internalType: "uint16";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "underlying";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "vaultWrapperAdmin";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "error";
+        readonly name: "AlreadyInitialized";
+        readonly inputs: readonly [];
+    }];
+    static createInterface(): MockVaultWrapperInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): MockVaultWrapper;
+}
+export {};
