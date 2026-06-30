@@ -113,7 +113,6 @@ export { IXDaiBridgeL2__factory } from "./IXDaiBridgeL2__factory";
 export { IiZiSwapPool__factory } from "./IiZiSwapPool__factory";
 export { LiFiDiamond__factory } from "./LiFiDiamond__factory";
 export { LiFiIntentEscrowFacet__factory } from "./LiFiIntentEscrowFacet__factory";
-export { LiFiIntentEscrowFacetV2__factory } from "./LiFiIntentEscrowFacetV2__factory";
 export { LibAccess__factory } from "./LibAccess__factory";
 export { LibBytes__factory } from "./LibBytes__factory";
 export { LibDiamond__factory } from "./LibDiamond__factory";
