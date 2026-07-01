@@ -28,6 +28,49 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace SupersetFacet {
+  export type ChainIdConfigStruct = {
+    chainId: PromiseOrValue<BigNumberish>;
+    lzEid: PromiseOrValue<BigNumberish>;
+  };
+
+  export type ChainIdConfigStructOutput = [BigNumber, number] & {
+    chainId: BigNumber;
+    lzEid: number;
+  };
+
+  export type SupersetDataStruct = {
+    path: PromiseOrValue<BytesLike>;
+    amountOutMin: PromiseOrValue<BigNumberish>;
+    refundAddress: PromiseOrValue<string>;
+    fallbackEoA: PromiseOrValue<string>;
+    deadline: PromiseOrValue<BigNumberish>;
+    toEid: PromiseOrValue<BigNumberish>;
+    options: PromiseOrValue<BytesLike>;
+    lzFee: PromiseOrValue<BigNumberish>;
+  };
+
+  export type SupersetDataStructOutput = [
+    string,
+    BigNumber,
+    string,
+    string,
+    BigNumber,
+    number,
+    string,
+    BigNumber
+  ] & {
+    path: string;
+    amountOutMin: BigNumber;
+    refundAddress: string;
+    fallbackEoA: string;
+    deadline: BigNumber;
+    toEid: number;
+    options: string;
+    lzFee: BigNumber;
+  };
+}
+
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -97,98 +140,81 @@ export declare namespace LibSwap {
   };
 }
 
-export declare namespace LiFiIntentEscrowFacetV2 {
-  export type LiFiIntentEscrowDataV2Struct = {
-    dstCallReceiver: PromiseOrValue<BytesLike>;
-    recipient: PromiseOrValue<BytesLike>;
-    depositAndRefundAddress: PromiseOrValue<string>;
-    nonce: PromiseOrValue<BigNumberish>;
-    expires: PromiseOrValue<BigNumberish>;
-    fillDeadline: PromiseOrValue<BigNumberish>;
-    inputOracle: PromiseOrValue<string>;
-    outputOracle: PromiseOrValue<BytesLike>;
-    outputSettler: PromiseOrValue<BytesLike>;
-    outputToken: PromiseOrValue<BytesLike>;
-    outputAmountMultiplier: PromiseOrValue<BigNumberish>;
-    dstCallSwapData: LibSwap.SwapDataStruct[];
-    outputContext: PromiseOrValue<BytesLike>;
-  };
-
-  export type LiFiIntentEscrowDataV2StructOutput = [
-    string,
-    string,
-    string,
-    BigNumber,
-    number,
-    number,
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    LibSwap.SwapDataStructOutput[],
-    string
-  ] & {
-    dstCallReceiver: string;
-    recipient: string;
-    depositAndRefundAddress: string;
-    nonce: BigNumber;
-    expires: number;
-    fillDeadline: number;
-    inputOracle: string;
-    outputOracle: string;
-    outputSettler: string;
-    outputToken: string;
-    outputAmountMultiplier: BigNumber;
-    dstCallSwapData: LibSwap.SwapDataStructOutput[];
-    outputContext: string;
-  };
-}
-
-export interface LiFiIntentEscrowFacetV2Interface extends utils.Interface {
+export interface SupersetFacetInterface extends utils.Interface {
   functions: {
-    "LIFI_INTENT_ESCROW_SETTLER_V2()": FunctionFragment;
-    "startBridgeTokensViaLiFiIntentEscrowV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint128,(address,address,address,address,uint256,bytes,bool)[],bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaLiFiIntentEscrowV2((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,address,uint256,uint32,uint32,address,bytes32,bytes32,bytes32,uint128,(address,address,address,address,uint256,bytes,bool)[],bytes))": FunctionFragment;
+    "IS_HUB()": FunctionFragment;
+    "POOL_MANAGER()": FunctionFragment;
+    "getChainIdToEid(uint256)": FunctionFragment;
+    "initSuperset((uint256,uint32)[])": FunctionFragment;
+    "setChainIdToEid((uint256,uint32)[])": FunctionFragment;
+    "startBridgeTokensViaSuperset((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint256,address,address,uint256,uint32,bytes,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaSuperset((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint256,address,address,uint256,uint32,bytes,uint256))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "LIFI_INTENT_ESCROW_SETTLER_V2"
-      | "startBridgeTokensViaLiFiIntentEscrowV2"
-      | "swapAndStartBridgeTokensViaLiFiIntentEscrowV2"
+      | "IS_HUB"
+      | "POOL_MANAGER"
+      | "getChainIdToEid"
+      | "initSuperset"
+      | "setChainIdToEid"
+      | "startBridgeTokensViaSuperset"
+      | "swapAndStartBridgeTokensViaSuperset"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "IS_HUB", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "LIFI_INTENT_ESCROW_SETTLER_V2",
+    functionFragment: "POOL_MANAGER",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaLiFiIntentEscrowV2",
-    values: [
-      ILiFi.BridgeDataStruct,
-      LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct
-    ]
+    functionFragment: "getChainIdToEid",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrowV2",
+    functionFragment: "initSuperset",
+    values: [SupersetFacet.ChainIdConfigStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setChainIdToEid",
+    values: [SupersetFacet.ChainIdConfigStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "startBridgeTokensViaSuperset",
+    values: [ILiFi.BridgeDataStruct, SupersetFacet.SupersetDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaSuperset",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct
+      SupersetFacet.SupersetDataStruct
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "IS_HUB", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "LIFI_INTENT_ESCROW_SETTLER_V2",
+    functionFragment: "POOL_MANAGER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaLiFiIntentEscrowV2",
+    functionFragment: "getChainIdToEid",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaLiFiIntentEscrowV2",
+    functionFragment: "initSuperset",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setChainIdToEid",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "startBridgeTokensViaSuperset",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaSuperset",
     data: BytesLike
   ): Result;
 
@@ -196,21 +222,27 @@ export interface LiFiIntentEscrowFacetV2Interface extends utils.Interface {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
     "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
+    "ChainIdToEidSet(uint256,uint32)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
+    "SupersetChainMappingsInitialized(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ChainIdToEidSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "SupersetChainMappingsInitialized"
+  ): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -254,6 +286,17 @@ export type BridgeToNonEVMChainBytes32Event = TypedEvent<
 
 export type BridgeToNonEVMChainBytes32EventFilter =
   TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
+
+export interface ChainIdToEidSetEventObject {
+  chainId: BigNumber;
+  lzEid: number;
+}
+export type ChainIdToEidSetEvent = TypedEvent<
+  [BigNumber, number],
+  ChainIdToEidSetEventObject
+>;
+
+export type ChainIdToEidSetEventFilter = TypedEventFilter<ChainIdToEidSetEvent>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -331,12 +374,23 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface LiFiIntentEscrowFacetV2 extends BaseContract {
+export interface SupersetChainMappingsInitializedEventObject {
+  chainIdConfigs: SupersetFacet.ChainIdConfigStructOutput[];
+}
+export type SupersetChainMappingsInitializedEvent = TypedEvent<
+  [SupersetFacet.ChainIdConfigStructOutput[]],
+  SupersetChainMappingsInitializedEventObject
+>;
+
+export type SupersetChainMappingsInitializedEventFilter =
+  TypedEventFilter<SupersetChainMappingsInitializedEvent>;
+
+export interface SupersetFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: LiFiIntentEscrowFacetV2Interface;
+  interface: SupersetFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -358,50 +412,101 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<[string]>;
+    IS_HUB(overrides?: CallOverrides): Promise<[boolean]>;
 
-    startBridgeTokensViaLiFiIntentEscrowV2(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+    POOL_MANAGER(overrides?: CallOverrides): Promise<[string]>;
+
+    getChainIdToEid(
+      _chainId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[number] & { lzEid: number }>;
+
+    initSuperset(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
+    setChainIdToEid(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    startBridgeTokensViaSuperset(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    swapAndStartBridgeTokensViaSuperset(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<string>;
+  IS_HUB(overrides?: CallOverrides): Promise<boolean>;
 
-  startBridgeTokensViaLiFiIntentEscrowV2(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+  POOL_MANAGER(overrides?: CallOverrides): Promise<string>;
+
+  getChainIdToEid(
+    _chainId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  initSuperset(
+    _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
+  setChainIdToEid(
+    _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  startBridgeTokensViaSuperset(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _supersetData: SupersetFacet.SupersetDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  swapAndStartBridgeTokensViaSuperset(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+    _supersetData: SupersetFacet.SupersetDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<string>;
+    IS_HUB(overrides?: CallOverrides): Promise<boolean>;
 
-    startBridgeTokensViaLiFiIntentEscrowV2(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+    POOL_MANAGER(overrides?: CallOverrides): Promise<string>;
+
+    getChainIdToEid(
+      _chainId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    initSuperset(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
+    setChainIdToEid(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    startBridgeTokensViaSuperset(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapAndStartBridgeTokensViaSuperset(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -447,6 +552,15 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
       receiver?: null
     ): BridgeToNonEVMChainBytes32EventFilter;
+
+    "ChainIdToEidSet(uint256,uint32)"(
+      chainId?: PromiseOrValue<BigNumberish> | null,
+      lzEid?: null
+    ): ChainIdToEidSetEventFilter;
+    ChainIdToEidSet(
+      chainId?: PromiseOrValue<BigNumberish> | null,
+      lzEid?: null
+    ): ChainIdToEidSetEventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -522,42 +636,79 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+
+    "SupersetChainMappingsInitialized(tuple[])"(
+      chainIdConfigs?: null
+    ): SupersetChainMappingsInitializedEventFilter;
+    SupersetChainMappingsInitialized(
+      chainIdConfigs?: null
+    ): SupersetChainMappingsInitializedEventFilter;
   };
 
   estimateGas: {
-    LIFI_INTENT_ESCROW_SETTLER_V2(
+    IS_HUB(overrides?: CallOverrides): Promise<BigNumber>;
+
+    POOL_MANAGER(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getChainIdToEid(
+      _chainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    startBridgeTokensViaLiFiIntentEscrowV2(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+    initSuperset(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
+    setChainIdToEid(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    startBridgeTokensViaSuperset(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapAndStartBridgeTokensViaSuperset(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    LIFI_INTENT_ESCROW_SETTLER_V2(
+    IS_HUB(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    POOL_MANAGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getChainIdToEid(
+      _chainId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    startBridgeTokensViaLiFiIntentEscrowV2(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+    initSuperset(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
+    setChainIdToEid(
+      _chainIdConfigs: SupersetFacet.ChainIdConfigStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaSuperset(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapAndStartBridgeTokensViaSuperset(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
+      _supersetData: SupersetFacet.SupersetDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
