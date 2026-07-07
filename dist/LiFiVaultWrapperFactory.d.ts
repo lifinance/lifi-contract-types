@@ -1,0 +1,613 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export type FeeConfigStruct = {
+    rateBps: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ];
+};
+export type FeeConfigStructOutput = [[number, number, number, number]] & {
+    rateBps: [number, number, number, number];
+};
+export type IntegratorReceiversStruct = {
+    wallets: PromiseOrValue<string>[];
+    bps: PromiseOrValue<BigNumberish>[];
+};
+export type IntegratorReceiversStructOutput = [string[], number[]] & {
+    wallets: string[];
+    bps: number[];
+};
+export type DeployParamsStruct = {
+    namespace: PromiseOrValue<BytesLike>;
+    vaultWrapperAdmin: PromiseOrValue<string>;
+    adapter: PromiseOrValue<string>;
+    underlying: PromiseOrValue<string>;
+    nonce: PromiseOrValue<BigNumberish>;
+    fees: FeeConfigStruct;
+    integratorShareBps: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ];
+    initData: PromiseOrValue<BytesLike>;
+    receivers: IntegratorReceiversStruct;
+};
+export type DeployParamsStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    FeeConfigStructOutput,
+    [
+        number,
+        number,
+        number,
+        number
+    ],
+    string,
+    IntegratorReceiversStructOutput
+] & {
+    namespace: string;
+    vaultWrapperAdmin: string;
+    adapter: string;
+    underlying: string;
+    nonce: BigNumber;
+    fees: FeeConfigStructOutput;
+    integratorShareBps: [number, number, number, number];
+    initData: string;
+    receivers: IntegratorReceiversStructOutput;
+};
+export interface LiFiVaultWrapperFactoryInterface extends utils.Interface {
+    functions: {
+        "BEACON()": FunctionFragment;
+        "allowedUnderlying(address)": FunctionFragment;
+        "approvedAdapter(address)": FunctionFragment;
+        "approvedIntegratorDeployer(bytes32)": FunctionFragment;
+        "cancelOwnershipTransfer()": FunctionFragment;
+        "confirmOwnershipTransfer()": FunctionFragment;
+        "defaultIntegratorShareBps()": FunctionFragment;
+        "deploy((bytes32,address,address,address,uint256,(uint16[4]),uint16[4],bytes,(address[],uint16[])))": FunctionFragment;
+        "emergencyPauser()": FunctionFragment;
+        "feeBounds(uint8)": FunctionFragment;
+        "globalPause()": FunctionFragment;
+        "globalPaused()": FunctionFragment;
+        "globalUnpause()": FunctionFragment;
+        "isInstance(address)": FunctionFragment;
+        "lifiFeeRecipient()": FunctionFragment;
+        "onboardingManager()": FunctionFragment;
+        "owner()": FunctionFragment;
+        "pendingOwner()": FunctionFragment;
+        "predictAddress(bytes32,address,address,uint256)": FunctionFragment;
+        "setAdapterApproved(address,bool)": FunctionFragment;
+        "setApprovedIntegratorDeployer(bytes32,address)": FunctionFragment;
+        "setDefaultSplit(uint16)": FunctionFragment;
+        "setEmergencyPauser(address)": FunctionFragment;
+        "setFeeBounds(uint8,uint16,uint16)": FunctionFragment;
+        "setLifiFeeRecipient(address)": FunctionFragment;
+        "setOnboardingManager(address)": FunctionFragment;
+        "setUnderlyingAllowed(address,bool)": FunctionFragment;
+        "transferOwnership(address)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "BEACON" | "allowedUnderlying" | "approvedAdapter" | "approvedIntegratorDeployer" | "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "defaultIntegratorShareBps" | "deploy" | "emergencyPauser" | "feeBounds" | "globalPause" | "globalPaused" | "globalUnpause" | "isInstance" | "lifiFeeRecipient" | "onboardingManager" | "owner" | "pendingOwner" | "predictAddress" | "setAdapterApproved" | "setApprovedIntegratorDeployer" | "setDefaultSplit" | "setEmergencyPauser" | "setFeeBounds" | "setLifiFeeRecipient" | "setOnboardingManager" | "setUnderlyingAllowed" | "transferOwnership"): FunctionFragment;
+    encodeFunctionData(functionFragment: "BEACON", values?: undefined): string;
+    encodeFunctionData(functionFragment: "allowedUnderlying", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "approvedAdapter", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "approvedIntegratorDeployer", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
+    encodeFunctionData(functionFragment: "defaultIntegratorShareBps", values?: undefined): string;
+    encodeFunctionData(functionFragment: "deploy", values: [DeployParamsStruct]): string;
+    encodeFunctionData(functionFragment: "emergencyPauser", values?: undefined): string;
+    encodeFunctionData(functionFragment: "feeBounds", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "globalPause", values?: undefined): string;
+    encodeFunctionData(functionFragment: "globalPaused", values?: undefined): string;
+    encodeFunctionData(functionFragment: "globalUnpause", values?: undefined): string;
+    encodeFunctionData(functionFragment: "isInstance", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "lifiFeeRecipient", values?: undefined): string;
+    encodeFunctionData(functionFragment: "onboardingManager", values?: undefined): string;
+    encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+    encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+    encodeFunctionData(functionFragment: "predictAddress", values: [
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "setAdapterApproved", values: [PromiseOrValue<string>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "setApprovedIntegratorDeployer", values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setDefaultSplit", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "setEmergencyPauser", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setFeeBounds", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "setLifiFeeRecipient", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setOnboardingManager", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setUnderlyingAllowed", values: [PromiseOrValue<string>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
+    decodeFunctionResult(functionFragment: "BEACON", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "allowedUnderlying", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "approvedAdapter", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "approvedIntegratorDeployer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "defaultIntegratorShareBps", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "emergencyPauser", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "feeBounds", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "globalPause", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "globalPaused", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "globalUnpause", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "isInstance", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "lifiFeeRecipient", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "onboardingManager", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "predictAddress", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setAdapterApproved", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setApprovedIntegratorDeployer", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setDefaultSplit", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setEmergencyPauser", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setFeeBounds", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setLifiFeeRecipient", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setOnboardingManager", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setUnderlyingAllowed", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+    events: {
+        "AdapterApprovedSet(address,bool)": EventFragment;
+        "DefaultSplitSet(uint16)": EventFragment;
+        "FeeBoundsSet(uint8,uint16,uint16)": EventFragment;
+        "GlobalPauseSet(bool,address)": EventFragment;
+        "IntegratorDeployerSet(bytes32,address)": EventFragment;
+        "LifiFeeRecipientSet(address)": EventFragment;
+        "OwnershipTransferRequested(address,address)": EventFragment;
+        "OwnershipTransferred(address,address)": EventFragment;
+        "RoleRotated(bytes32,address,address)": EventFragment;
+        "UnderlyingAllowedSet(address,bool)": EventFragment;
+        "WrapperDeployed(address,bytes32,address,address,address,address,uint16[4],uint256,bytes32)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "AdapterApprovedSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "DefaultSplitSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "FeeBoundsSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "GlobalPauseSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "IntegratorDeployerSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LifiFeeRecipientSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "OwnershipTransferRequested"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "RoleRotated"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "UnderlyingAllowedSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "WrapperDeployed"): EventFragment;
+}
+export interface AdapterApprovedSetEventObject {
+    adapter: string;
+    approved: boolean;
+}
+export type AdapterApprovedSetEvent = TypedEvent<[
+    string,
+    boolean
+], AdapterApprovedSetEventObject>;
+export type AdapterApprovedSetEventFilter = TypedEventFilter<AdapterApprovedSetEvent>;
+export interface DefaultSplitSetEventObject {
+    integratorBps: number;
+}
+export type DefaultSplitSetEvent = TypedEvent<[
+    number
+], DefaultSplitSetEventObject>;
+export type DefaultSplitSetEventFilter = TypedEventFilter<DefaultSplitSetEvent>;
+export interface FeeBoundsSetEventObject {
+    feeType: number;
+    minBps: number;
+    maxBps: number;
+}
+export type FeeBoundsSetEvent = TypedEvent<[
+    number,
+    number,
+    number
+], FeeBoundsSetEventObject>;
+export type FeeBoundsSetEventFilter = TypedEventFilter<FeeBoundsSetEvent>;
+export interface GlobalPauseSetEventObject {
+    paused: boolean;
+    by: string;
+}
+export type GlobalPauseSetEvent = TypedEvent<[
+    boolean,
+    string
+], GlobalPauseSetEventObject>;
+export type GlobalPauseSetEventFilter = TypedEventFilter<GlobalPauseSetEvent>;
+export interface IntegratorDeployerSetEventObject {
+    namespace: string;
+    deployer: string;
+}
+export type IntegratorDeployerSetEvent = TypedEvent<[
+    string,
+    string
+], IntegratorDeployerSetEventObject>;
+export type IntegratorDeployerSetEventFilter = TypedEventFilter<IntegratorDeployerSetEvent>;
+export interface LifiFeeRecipientSetEventObject {
+    recipient: string;
+}
+export type LifiFeeRecipientSetEvent = TypedEvent<[
+    string
+], LifiFeeRecipientSetEventObject>;
+export type LifiFeeRecipientSetEventFilter = TypedEventFilter<LifiFeeRecipientSetEvent>;
+export interface OwnershipTransferRequestedEventObject {
+    _from: string;
+    _to: string;
+}
+export type OwnershipTransferRequestedEvent = TypedEvent<[
+    string,
+    string
+], OwnershipTransferRequestedEventObject>;
+export type OwnershipTransferRequestedEventFilter = TypedEventFilter<OwnershipTransferRequestedEvent>;
+export interface OwnershipTransferredEventObject {
+    previousOwner: string;
+    newOwner: string;
+}
+export type OwnershipTransferredEvent = TypedEvent<[
+    string,
+    string
+], OwnershipTransferredEventObject>;
+export type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export interface RoleRotatedEventObject {
+    role: string;
+    oldAddr: string;
+    newAddr: string;
+}
+export type RoleRotatedEvent = TypedEvent<[
+    string,
+    string,
+    string
+], RoleRotatedEventObject>;
+export type RoleRotatedEventFilter = TypedEventFilter<RoleRotatedEvent>;
+export interface UnderlyingAllowedSetEventObject {
+    underlying: string;
+    allowed: boolean;
+}
+export type UnderlyingAllowedSetEvent = TypedEvent<[
+    string,
+    boolean
+], UnderlyingAllowedSetEventObject>;
+export type UnderlyingAllowedSetEventFilter = TypedEventFilter<UnderlyingAllowedSetEvent>;
+export interface WrapperDeployedEventObject {
+    instance: string;
+    namespace: string;
+    underlying: string;
+    adapter: string;
+    asset: string;
+    vaultWrapperAdmin: string;
+    integratorShareBps: [number, number, number, number];
+    nonce: BigNumber;
+    salt: string;
+}
+export type WrapperDeployedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    [
+        number,
+        number,
+        number,
+        number
+    ],
+    BigNumber,
+    string
+], WrapperDeployedEventObject>;
+export type WrapperDeployedEventFilter = TypedEventFilter<WrapperDeployedEvent>;
+export interface LiFiVaultWrapperFactory extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: LiFiVaultWrapperFactoryInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        BEACON(overrides?: CallOverrides): Promise<[string]>;
+        allowedUnderlying(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        approvedAdapter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        approvedIntegratorDeployer(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[string]>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        defaultIntegratorShareBps(overrides?: CallOverrides): Promise<[number]>;
+        deploy(_params: DeployParamsStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        emergencyPauser(overrides?: CallOverrides): Promise<[string]>;
+        feeBounds(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number, number] & {
+            minBps: number;
+            maxBps: number;
+        }>;
+        globalPause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        globalPaused(overrides?: CallOverrides): Promise<[boolean]>;
+        globalUnpause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        isInstance(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
+        lifiFeeRecipient(overrides?: CallOverrides): Promise<[string]>;
+        onboardingManager(overrides?: CallOverrides): Promise<[string]>;
+        owner(overrides?: CallOverrides): Promise<[string]>;
+        pendingOwner(overrides?: CallOverrides): Promise<[string]>;
+        predictAddress(_namespace: PromiseOrValue<BytesLike>, _adapter: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _nonce: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
+        setAdapterApproved(_adapter: PromiseOrValue<string>, _approved: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setApprovedIntegratorDeployer(_namespace: PromiseOrValue<BytesLike>, _deployer: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setDefaultSplit(_integratorBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setEmergencyPauser(_newPauser: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setFeeBounds(_feeType: PromiseOrValue<BigNumberish>, _minBps: PromiseOrValue<BigNumberish>, _maxBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setLifiFeeRecipient(_recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setOnboardingManager(_newManager: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setUnderlyingAllowed(_underlying: PromiseOrValue<string>, _allowed: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    BEACON(overrides?: CallOverrides): Promise<string>;
+    allowedUnderlying(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    approvedAdapter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    approvedIntegratorDeployer(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+    cancelOwnershipTransfer(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    confirmOwnershipTransfer(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    defaultIntegratorShareBps(overrides?: CallOverrides): Promise<number>;
+    deploy(_params: DeployParamsStruct, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    emergencyPauser(overrides?: CallOverrides): Promise<string>;
+    feeBounds(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number, number] & {
+        minBps: number;
+        maxBps: number;
+    }>;
+    globalPause(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    globalPaused(overrides?: CallOverrides): Promise<boolean>;
+    globalUnpause(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    isInstance(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+    lifiFeeRecipient(overrides?: CallOverrides): Promise<string>;
+    onboardingManager(overrides?: CallOverrides): Promise<string>;
+    owner(overrides?: CallOverrides): Promise<string>;
+    pendingOwner(overrides?: CallOverrides): Promise<string>;
+    predictAddress(_namespace: PromiseOrValue<BytesLike>, _adapter: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _nonce: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+    setAdapterApproved(_adapter: PromiseOrValue<string>, _approved: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setApprovedIntegratorDeployer(_namespace: PromiseOrValue<BytesLike>, _deployer: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setDefaultSplit(_integratorBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setEmergencyPauser(_newPauser: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setFeeBounds(_feeType: PromiseOrValue<BigNumberish>, _minBps: PromiseOrValue<BigNumberish>, _maxBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setLifiFeeRecipient(_recipient: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setOnboardingManager(_newManager: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setUnderlyingAllowed(_underlying: PromiseOrValue<string>, _allowed: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        BEACON(overrides?: CallOverrides): Promise<string>;
+        allowedUnderlying(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        approvedAdapter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        approvedIntegratorDeployer(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<string>;
+        cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
+        defaultIntegratorShareBps(overrides?: CallOverrides): Promise<number>;
+        deploy(_params: DeployParamsStruct, overrides?: CallOverrides): Promise<string>;
+        emergencyPauser(overrides?: CallOverrides): Promise<string>;
+        feeBounds(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number, number] & {
+            minBps: number;
+            maxBps: number;
+        }>;
+        globalPause(overrides?: CallOverrides): Promise<void>;
+        globalPaused(overrides?: CallOverrides): Promise<boolean>;
+        globalUnpause(overrides?: CallOverrides): Promise<void>;
+        isInstance(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
+        lifiFeeRecipient(overrides?: CallOverrides): Promise<string>;
+        onboardingManager(overrides?: CallOverrides): Promise<string>;
+        owner(overrides?: CallOverrides): Promise<string>;
+        pendingOwner(overrides?: CallOverrides): Promise<string>;
+        predictAddress(_namespace: PromiseOrValue<BytesLike>, _adapter: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _nonce: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        setAdapterApproved(_adapter: PromiseOrValue<string>, _approved: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        setApprovedIntegratorDeployer(_namespace: PromiseOrValue<BytesLike>, _deployer: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setDefaultSplit(_integratorBps: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setEmergencyPauser(_newPauser: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setFeeBounds(_feeType: PromiseOrValue<BigNumberish>, _minBps: PromiseOrValue<BigNumberish>, _maxBps: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        setLifiFeeRecipient(_recipient: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setOnboardingManager(_newManager: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setUnderlyingAllowed(_underlying: PromiseOrValue<string>, _allowed: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {
+        "AdapterApprovedSet(address,bool)"(adapter?: PromiseOrValue<string> | null, approved?: null): AdapterApprovedSetEventFilter;
+        AdapterApprovedSet(adapter?: PromiseOrValue<string> | null, approved?: null): AdapterApprovedSetEventFilter;
+        "DefaultSplitSet(uint16)"(integratorBps?: null): DefaultSplitSetEventFilter;
+        DefaultSplitSet(integratorBps?: null): DefaultSplitSetEventFilter;
+        "FeeBoundsSet(uint8,uint16,uint16)"(feeType?: PromiseOrValue<BigNumberish> | null, minBps?: null, maxBps?: null): FeeBoundsSetEventFilter;
+        FeeBoundsSet(feeType?: PromiseOrValue<BigNumberish> | null, minBps?: null, maxBps?: null): FeeBoundsSetEventFilter;
+        "GlobalPauseSet(bool,address)"(paused?: null, by?: PromiseOrValue<string> | null): GlobalPauseSetEventFilter;
+        GlobalPauseSet(paused?: null, by?: PromiseOrValue<string> | null): GlobalPauseSetEventFilter;
+        "IntegratorDeployerSet(bytes32,address)"(namespace?: PromiseOrValue<BytesLike> | null, deployer?: PromiseOrValue<string> | null): IntegratorDeployerSetEventFilter;
+        IntegratorDeployerSet(namespace?: PromiseOrValue<BytesLike> | null, deployer?: PromiseOrValue<string> | null): IntegratorDeployerSetEventFilter;
+        "LifiFeeRecipientSet(address)"(recipient?: PromiseOrValue<string> | null): LifiFeeRecipientSetEventFilter;
+        LifiFeeRecipientSet(recipient?: PromiseOrValue<string> | null): LifiFeeRecipientSetEventFilter;
+        "OwnershipTransferRequested(address,address)"(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        OwnershipTransferRequested(_from?: PromiseOrValue<string> | null, _to?: PromiseOrValue<string> | null): OwnershipTransferRequestedEventFilter;
+        "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
+        "RoleRotated(bytes32,address,address)"(role?: PromiseOrValue<BytesLike> | null, oldAddr?: null, newAddr?: null): RoleRotatedEventFilter;
+        RoleRotated(role?: PromiseOrValue<BytesLike> | null, oldAddr?: null, newAddr?: null): RoleRotatedEventFilter;
+        "UnderlyingAllowedSet(address,bool)"(underlying?: PromiseOrValue<string> | null, allowed?: null): UnderlyingAllowedSetEventFilter;
+        UnderlyingAllowedSet(underlying?: PromiseOrValue<string> | null, allowed?: null): UnderlyingAllowedSetEventFilter;
+        "WrapperDeployed(address,bytes32,address,address,address,address,uint16[4],uint256,bytes32)"(instance?: PromiseOrValue<string> | null, namespace?: PromiseOrValue<BytesLike> | null, underlying?: PromiseOrValue<string> | null, adapter?: null, asset?: null, vaultWrapperAdmin?: null, integratorShareBps?: null, nonce?: null, salt?: null): WrapperDeployedEventFilter;
+        WrapperDeployed(instance?: PromiseOrValue<string> | null, namespace?: PromiseOrValue<BytesLike> | null, underlying?: PromiseOrValue<string> | null, adapter?: null, asset?: null, vaultWrapperAdmin?: null, integratorShareBps?: null, nonce?: null, salt?: null): WrapperDeployedEventFilter;
+    };
+    estimateGas: {
+        BEACON(overrides?: CallOverrides): Promise<BigNumber>;
+        allowedUnderlying(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approvedAdapter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        approvedIntegratorDeployer(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        defaultIntegratorShareBps(overrides?: CallOverrides): Promise<BigNumber>;
+        deploy(_params: DeployParamsStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        emergencyPauser(overrides?: CallOverrides): Promise<BigNumber>;
+        feeBounds(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        globalPause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        globalPaused(overrides?: CallOverrides): Promise<BigNumber>;
+        globalUnpause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        isInstance(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        lifiFeeRecipient(overrides?: CallOverrides): Promise<BigNumber>;
+        onboardingManager(overrides?: CallOverrides): Promise<BigNumber>;
+        owner(overrides?: CallOverrides): Promise<BigNumber>;
+        pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
+        predictAddress(_namespace: PromiseOrValue<BytesLike>, _adapter: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _nonce: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        setAdapterApproved(_adapter: PromiseOrValue<string>, _approved: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setApprovedIntegratorDeployer(_namespace: PromiseOrValue<BytesLike>, _deployer: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setDefaultSplit(_integratorBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setEmergencyPauser(_newPauser: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setFeeBounds(_feeType: PromiseOrValue<BigNumberish>, _minBps: PromiseOrValue<BigNumberish>, _maxBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setLifiFeeRecipient(_recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setOnboardingManager(_newManager: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setUnderlyingAllowed(_underlying: PromiseOrValue<string>, _allowed: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        BEACON(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        allowedUnderlying(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        approvedAdapter(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        approvedIntegratorDeployer(arg0: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        cancelOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        confirmOwnershipTransfer(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        defaultIntegratorShareBps(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        deploy(_params: DeployParamsStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        emergencyPauser(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        feeBounds(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        globalPause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        globalPaused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        globalUnpause(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        isInstance(arg0: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        lifiFeeRecipient(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        onboardingManager(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        predictAddress(_namespace: PromiseOrValue<BytesLike>, _adapter: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _nonce: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setAdapterApproved(_adapter: PromiseOrValue<string>, _approved: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setApprovedIntegratorDeployer(_namespace: PromiseOrValue<BytesLike>, _deployer: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setDefaultSplit(_integratorBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setEmergencyPauser(_newPauser: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setFeeBounds(_feeType: PromiseOrValue<BigNumberish>, _minBps: PromiseOrValue<BigNumberish>, _maxBps: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setLifiFeeRecipient(_recipient: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setOnboardingManager(_newManager: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setUnderlyingAllowed(_underlying: PromiseOrValue<string>, _allowed: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        transferOwnership(_newOwner: PromiseOrValue<string>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
