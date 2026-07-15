@@ -41,6 +41,7 @@ export declare namespace ILiFi {
 }
 export declare namespace SymbiosisFacet {
     type SymbiosisDataStruct = {
+        nonEvmReceiver: PromiseOrValue<BytesLike>;
         firstSwapCalldata: PromiseOrValue<BytesLike>;
         secondSwapCalldata: PromiseOrValue<BytesLike>;
         intermediateToken: PromiseOrValue<string>;
@@ -49,6 +50,12 @@ export declare namespace SymbiosisFacet {
         approvedTokens: PromiseOrValue<string>[];
         callTo: PromiseOrValue<string>;
         callData: PromiseOrValue<BytesLike>;
+        viaOnchainSwapV3: PromiseOrValue<boolean>;
+        dex: PromiseOrValue<string>;
+        dexgateway: PromiseOrValue<string>;
+        onchainSwapData: PromiseOrValue<BytesLike>;
+        deadline: PromiseOrValue<BigNumberish>;
+        signature: PromiseOrValue<BytesLike>;
     };
     type SymbiosisDataStructOutput = [
         string,
@@ -56,10 +63,18 @@ export declare namespace SymbiosisFacet {
         string,
         string,
         string,
+        string,
         string[],
         string,
+        string,
+        boolean,
+        string,
+        string,
+        string,
+        BigNumber,
         string
     ] & {
+        nonEvmReceiver: string;
         firstSwapCalldata: string;
         secondSwapCalldata: string;
         intermediateToken: string;
@@ -68,6 +83,12 @@ export declare namespace SymbiosisFacet {
         approvedTokens: string[];
         callTo: string;
         callData: string;
+        viaOnchainSwapV3: boolean;
+        dex: string;
+        dexgateway: string;
+        onchainSwapData: string;
+        deadline: BigNumber;
+        signature: string;
     };
 }
 export declare namespace LibSwap {
@@ -100,8 +121,8 @@ export declare namespace LibSwap {
 }
 export interface SymbiosisFacetInterface extends utils.Interface {
     functions: {
-        "startBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,address,address,address,address[],address,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,address,address,address,address[],address,bytes))": FunctionFragment;
+        "startBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes,bytes,address,address,address,address[],address,bytes,bool,address,address,bytes,uint256,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes,bytes,address,address,address,address[],address,bytes,bool,address,address,bytes,uint256,bytes))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaSymbiosis" | "swapAndStartBridgeTokensViaSymbiosis"): FunctionFragment;
     encodeFunctionData(functionFragment: "startBridgeTokensViaSymbiosis", values: [ILiFi.BridgeDataStruct, SymbiosisFacet.SymbiosisDataStruct]): string;
