@@ -45,6 +45,7 @@ export declare namespace PolymerCCTPFacet {
     nonEVMReceiver: PromiseOrValue<BytesLike>;
     solanaReceiverATA: PromiseOrValue<BytesLike>;
     minFinalityThreshold: PromiseOrValue<BigNumberish>;
+    hookData: PromiseOrValue<BytesLike>;
   };
 
   export type PolymerCCTPDataStructOutput = [
@@ -52,13 +53,15 @@ export declare namespace PolymerCCTPFacet {
     BigNumber,
     string,
     string,
-    number
+    number,
+    string
   ] & {
     polymerTokenFee: BigNumber;
     maxCCTPFee: BigNumber;
     nonEVMReceiver: string;
     solanaReceiverATA: string;
     minFinalityThreshold: number;
+    hookData: string;
   };
 }
 
@@ -139,8 +142,8 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
     "getChainIdToDomainId(uint256)": FunctionFragment;
     "initPolymerCCTP((uint256,uint32)[])": FunctionFragment;
     "setChainIdToDomainId((uint256,uint32)[])": FunctionFragment;
-    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,bytes32,uint32))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,bytes32,uint32))": FunctionFragment;
+    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,bytes32,uint32,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,bytes32,uint32,bytes))": FunctionFragment;
     "unsetChainIdToDomainId(uint256)": FunctionFragment;
   };
 
