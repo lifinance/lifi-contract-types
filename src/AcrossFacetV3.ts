@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -27,46 +26,6 @@ import type {
   OnEvent,
   PromiseOrValue,
 } from "./common";
-
-export declare namespace PolymerCCTPFacet {
-  export type ChainIdConfigStruct = {
-    chainId: PromiseOrValue<BigNumberish>;
-    domainId: PromiseOrValue<BigNumberish>;
-  };
-
-  export type ChainIdConfigStructOutput = [BigNumber, number] & {
-    chainId: BigNumber;
-    domainId: number;
-  };
-
-  export type PolymerCCTPDataStruct = {
-    polymerTokenFee: PromiseOrValue<BigNumberish>;
-    maxCCTPFee: PromiseOrValue<BigNumberish>;
-    nonEVMReceiver: PromiseOrValue<BytesLike>;
-    solanaReceiverATA: PromiseOrValue<BytesLike>;
-    minFinalityThreshold: PromiseOrValue<BigNumberish>;
-    refundRecipient: PromiseOrValue<string>;
-    hookData: PromiseOrValue<BytesLike>;
-  };
-
-  export type PolymerCCTPDataStructOutput = [
-    BigNumber,
-    BigNumber,
-    string,
-    string,
-    number,
-    string,
-    string
-  ] & {
-    polymerTokenFee: BigNumber;
-    maxCCTPFee: BigNumber;
-    nonEVMReceiver: string;
-    solanaReceiverATA: string;
-    minFinalityThreshold: number;
-    refundRecipient: string;
-    hookData: string;
-  };
-}
 
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
@@ -107,6 +66,45 @@ export declare namespace ILiFi {
   };
 }
 
+export declare namespace AcrossFacetV3 {
+  export type AcrossV3DataStruct = {
+    receiverAddress: PromiseOrValue<string>;
+    refundAddress: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    outputAmount: PromiseOrValue<BigNumberish>;
+    outputAmountPercent: PromiseOrValue<BigNumberish>;
+    exclusiveRelayer: PromiseOrValue<string>;
+    quoteTimestamp: PromiseOrValue<BigNumberish>;
+    fillDeadline: PromiseOrValue<BigNumberish>;
+    exclusivityDeadline: PromiseOrValue<BigNumberish>;
+    message: PromiseOrValue<BytesLike>;
+  };
+
+  export type AcrossV3DataStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    string,
+    number,
+    number,
+    number,
+    string
+  ] & {
+    receiverAddress: string;
+    refundAddress: string;
+    receivingAssetId: string;
+    outputAmount: BigNumber;
+    outputAmountPercent: BigNumber;
+    exclusiveRelayer: string;
+    quoteTimestamp: number;
+    fillDeadline: number;
+    exclusivityDeadline: number;
+    message: string;
+  };
+}
+
 export declare namespace LibSwap {
   export type SwapDataStruct = {
     callTo: PromiseOrValue<string>;
@@ -137,101 +135,51 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PolymerCCTPFacetInterface extends utils.Interface {
+export interface AcrossFacetV3Interface extends utils.Interface {
   functions: {
-    "POLYMER_FEE_RECEIVER()": FunctionFragment;
-    "TOKEN_MESSENGER()": FunctionFragment;
-    "USDC()": FunctionFragment;
-    "getChainIdToDomainId(uint256)": FunctionFragment;
-    "initPolymerCCTP((uint256,uint32)[])": FunctionFragment;
-    "setChainIdToDomainId((uint256,uint32)[])": FunctionFragment;
-    "startBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,bytes32,bytes32,uint32,address,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPolymerCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,bytes32,bytes32,uint32,address,bytes))": FunctionFragment;
-    "unsetChainIdToDomainId(uint256)": FunctionFragment;
+    "spokePool()": FunctionFragment;
+    "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "wrappedNative()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "POLYMER_FEE_RECEIVER"
-      | "TOKEN_MESSENGER"
-      | "USDC"
-      | "getChainIdToDomainId"
-      | "initPolymerCCTP"
-      | "setChainIdToDomainId"
-      | "startBridgeTokensViaPolymerCCTP"
-      | "swapAndStartBridgeTokensViaPolymerCCTP"
-      | "unsetChainIdToDomainId"
+      | "spokePool"
+      | "startBridgeTokensViaAcrossV3"
+      | "swapAndStartBridgeTokensViaAcrossV3"
+      | "wrappedNative"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "spokePool", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "POLYMER_FEE_RECEIVER",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaAcrossV3",
+    values: [ILiFi.BridgeDataStruct, AcrossFacetV3.AcrossV3DataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "TOKEN_MESSENGER",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "USDC", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getChainIdToDomainId",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initPolymerCCTP",
-    values: [PolymerCCTPFacet.ChainIdConfigStruct[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setChainIdToDomainId",
-    values: [PolymerCCTPFacet.ChainIdConfigStruct[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    values: [ILiFi.BridgeDataStruct, PolymerCCTPFacet.PolymerCCTPDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
+    functionFragment: "swapAndStartBridgeTokensViaAcrossV3",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PolymerCCTPFacet.PolymerCCTPDataStruct
+      AcrossFacetV3.AcrossV3DataStruct
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "unsetChainIdToDomainId",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "wrappedNative",
+    values?: undefined
   ): string;
 
+  decodeFunctionResult(functionFragment: "spokePool", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "POLYMER_FEE_RECEIVER",
+    functionFragment: "startBridgeTokensViaAcrossV3",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TOKEN_MESSENGER",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "USDC", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getChainIdToDomainId",
+    functionFragment: "swapAndStartBridgeTokensViaAcrossV3",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "initPolymerCCTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setChainIdToDomainId",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPolymerCCTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPolymerCCTP",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "unsetChainIdToDomainId",
+    functionFragment: "wrappedNative",
     data: BytesLike
   ): Result;
 
@@ -239,31 +187,21 @@ export interface PolymerCCTPFacetInterface extends utils.Interface {
     "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
     "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
     "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
-    "ChainIdToDomainIdSet(uint256,uint32)": EventFragment;
-    "ChainIdToDomainIdUnset(uint256)": EventFragment;
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
     "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "PolymerCCTPChainMappingsInitialized(tuple[])": EventFragment;
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ChainIdToDomainIdSet"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ChainIdToDomainIdUnset"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "PolymerCCTPChainMappingsInitialized"
-  ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "PolymerCCTPFeeSent"): EventFragment;
 }
 
 export interface AssetSwappedEventObject {
@@ -307,29 +245,6 @@ export type BridgeToNonEVMChainBytes32Event = TypedEvent<
 
 export type BridgeToNonEVMChainBytes32EventFilter =
   TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
-
-export interface ChainIdToDomainIdSetEventObject {
-  chainId: BigNumber;
-  domainId: number;
-}
-export type ChainIdToDomainIdSetEvent = TypedEvent<
-  [BigNumber, number],
-  ChainIdToDomainIdSetEventObject
->;
-
-export type ChainIdToDomainIdSetEventFilter =
-  TypedEventFilter<ChainIdToDomainIdSetEvent>;
-
-export interface ChainIdToDomainIdUnsetEventObject {
-  chainId: BigNumber;
-}
-export type ChainIdToDomainIdUnsetEvent = TypedEvent<
-  [BigNumber],
-  ChainIdToDomainIdUnsetEventObject
->;
-
-export type ChainIdToDomainIdUnsetEventFilter =
-  TypedEventFilter<ChainIdToDomainIdUnsetEvent>;
 
 export interface LiFiGenericSwapCompletedEventObject {
   transactionId: string;
@@ -407,36 +322,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PolymerCCTPChainMappingsInitializedEventObject {
-  chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStructOutput[];
-}
-export type PolymerCCTPChainMappingsInitializedEvent = TypedEvent<
-  [PolymerCCTPFacet.ChainIdConfigStructOutput[]],
-  PolymerCCTPChainMappingsInitializedEventObject
->;
-
-export type PolymerCCTPChainMappingsInitializedEventFilter =
-  TypedEventFilter<PolymerCCTPChainMappingsInitializedEvent>;
-
-export interface PolymerCCTPFeeSentEventObject {
-  bridgeAmount: BigNumber;
-  polymerFee: BigNumber;
-  minFinalityThreshold: number;
-}
-export type PolymerCCTPFeeSentEvent = TypedEvent<
-  [BigNumber, BigNumber, number],
-  PolymerCCTPFeeSentEventObject
->;
-
-export type PolymerCCTPFeeSentEventFilter =
-  TypedEventFilter<PolymerCCTPFeeSentEvent>;
-
-export interface PolymerCCTPFacet extends BaseContract {
+export interface AcrossFacetV3 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PolymerCCTPFacetInterface;
+  interface: AcrossFacetV3Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -458,124 +349,58 @@ export interface PolymerCCTPFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<[string]>;
+    spokePool(overrides?: CallOverrides): Promise<[string]>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
-
-    USDC(overrides?: CallOverrides): Promise<[string]>;
-
-    getChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[number] & { domainId: number }>;
-
-    initPolymerCCTP(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    setChainIdToDomainId(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    swapAndStartBridgeTokensViaPolymerCCTP(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    unsetChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaAcrossV3(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+  spokePool(overrides?: CallOverrides): Promise<string>;
 
-  TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-  USDC(overrides?: CallOverrides): Promise<string>;
-
-  getChainIdToDomainId(
-    _chainId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<number>;
-
-  initPolymerCCTP(
-    chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  setChainIdToDomainId(
-    chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  startBridgeTokensViaPolymerCCTP(
+  startBridgeTokensViaAcrossV3(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  swapAndStartBridgeTokensViaPolymerCCTP(
-    _bridgeData: ILiFi.BridgeDataStruct,
-    _swapData: LibSwap.SwapDataStruct[],
-    _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+    _acrossData: AcrossFacetV3.AcrossV3DataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  unsetChainIdToDomainId(
-    _chainId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  swapAndStartBridgeTokensViaAcrossV3(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _swapData: LibSwap.SwapDataStruct[],
+    _acrossData: AcrossFacetV3.AcrossV3DataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  wrappedNative(overrides?: CallOverrides): Promise<string>;
+
   callStatic: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<string>;
+    spokePool(overrides?: CallOverrides): Promise<string>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
-
-    USDC(overrides?: CallOverrides): Promise<string>;
-
-    getChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<number>;
-
-    initPolymerCCTP(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setChainIdToDomainId(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPolymerCCTP(
+    swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    unsetChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    wrappedNative(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -619,22 +444,6 @@ export interface PolymerCCTPFacet extends BaseContract {
       destinationChainId?: PromiseOrValue<BigNumberish> | null,
       receiver?: null
     ): BridgeToNonEVMChainBytes32EventFilter;
-
-    "ChainIdToDomainIdSet(uint256,uint32)"(
-      chainId?: PromiseOrValue<BigNumberish> | null,
-      domainId?: null
-    ): ChainIdToDomainIdSetEventFilter;
-    ChainIdToDomainIdSet(
-      chainId?: PromiseOrValue<BigNumberish> | null,
-      domainId?: null
-    ): ChainIdToDomainIdSetEventFilter;
-
-    "ChainIdToDomainIdUnset(uint256)"(
-      chainId?: PromiseOrValue<BigNumberish> | null
-    ): ChainIdToDomainIdUnsetEventFilter;
-    ChainIdToDomainIdUnset(
-      chainId?: PromiseOrValue<BigNumberish> | null
-    ): ChainIdToDomainIdUnsetEventFilter;
 
     "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -710,107 +519,43 @@ export interface PolymerCCTPFacet extends BaseContract {
       bridgeData?: null
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
-
-    "PolymerCCTPChainMappingsInitialized(tuple[])"(
-      chainIdConfigs?: null
-    ): PolymerCCTPChainMappingsInitializedEventFilter;
-    PolymerCCTPChainMappingsInitialized(
-      chainIdConfigs?: null
-    ): PolymerCCTPChainMappingsInitializedEventFilter;
-
-    "PolymerCCTPFeeSent(uint256,uint256,uint32)"(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
-    PolymerCCTPFeeSent(
-      bridgeAmount?: null,
-      polymerFee?: null,
-      minFinalityThreshold?: null
-    ): PolymerCCTPFeeSentEventFilter;
   };
 
   estimateGas: {
-    POLYMER_FEE_RECEIVER(overrides?: CallOverrides): Promise<BigNumber>;
+    spokePool(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
-
-    USDC(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    initPolymerCCTP(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    setChainIdToDomainId(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    swapAndStartBridgeTokensViaPolymerCCTP(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    unsetChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaAcrossV3(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    POLYMER_FEE_RECEIVER(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    spokePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    initPolymerCCTP(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setChainIdToDomainId(
-      chainIdConfigs: PolymerCCTPFacet.ChainIdConfigStruct[],
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaPolymerCCTP(
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    swapAndStartBridgeTokensViaPolymerCCTP(
-      _bridgeData: ILiFi.BridgeDataStruct,
-      _swapData: LibSwap.SwapDataStruct[],
-      _polymerData: PolymerCCTPFacet.PolymerCCTPDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    unsetChainIdToDomainId(
-      _chainId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    swapAndStartBridgeTokensViaAcrossV3(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _swapData: LibSwap.SwapDataStruct[],
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
