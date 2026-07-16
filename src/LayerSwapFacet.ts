@@ -27,36 +27,6 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export declare namespace LibSwap {
-  export type SwapDataStruct = {
-    callTo: PromiseOrValue<string>;
-    approveTo: PromiseOrValue<string>;
-    sendingAssetId: PromiseOrValue<string>;
-    receivingAssetId: PromiseOrValue<string>;
-    fromAmount: PromiseOrValue<BigNumberish>;
-    callData: PromiseOrValue<BytesLike>;
-    requiresDeposit: PromiseOrValue<boolean>;
-  };
-
-  export type SwapDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    BigNumber,
-    string,
-    boolean
-  ] & {
-    callTo: string;
-    approveTo: string;
-    sendingAssetId: string;
-    receivingAssetId: string;
-    fromAmount: BigNumber;
-    callData: string;
-    requiresDeposit: boolean;
-  };
-}
-
 export declare namespace ILiFi {
   export type BridgeDataStruct = {
     transactionId: PromiseOrValue<BytesLike>;
@@ -96,27 +66,104 @@ export declare namespace ILiFi {
   };
 }
 
-export interface GenericSwapFacetInterface extends utils.Interface {
-  functions: {
-    "swapTokensGeneric(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": FunctionFragment;
+export declare namespace LayerSwapFacet {
+  export type LayerSwapDataStruct = {
+    requestId: PromiseOrValue<BytesLike>;
+    depositoryReceiver: PromiseOrValue<string>;
+    refundRecipient: PromiseOrValue<string>;
+    nonEVMReceiver: PromiseOrValue<BytesLike>;
+    signature: PromiseOrValue<BytesLike>;
+    deadline: PromiseOrValue<BigNumberish>;
   };
 
-  getFunction(nameOrSignatureOrTopic: "swapTokensGeneric"): FunctionFragment;
+  export type LayerSwapDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber
+  ] & {
+    requestId: string;
+    depositoryReceiver: string;
+    refundRecipient: string;
+    nonEVMReceiver: string;
+    signature: string;
+    deadline: BigNumber;
+  };
+}
+
+export declare namespace LibSwap {
+  export type SwapDataStruct = {
+    callTo: PromiseOrValue<string>;
+    approveTo: PromiseOrValue<string>;
+    sendingAssetId: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    fromAmount: PromiseOrValue<BigNumberish>;
+    callData: PromiseOrValue<BytesLike>;
+    requiresDeposit: PromiseOrValue<boolean>;
+  };
+
+  export type SwapDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    string,
+    boolean
+  ] & {
+    callTo: string;
+    approveTo: string;
+    sendingAssetId: string;
+    receivingAssetId: string;
+    fromAmount: BigNumber;
+    callData: string;
+    requiresDeposit: boolean;
+  };
+}
+
+export interface LayerSwapFacetInterface extends utils.Interface {
+  functions: {
+    "LAYERSWAP_DEPOSITORY()": FunctionFragment;
+    "startBridgeTokensViaLayerSwap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,address,bytes32,bytes,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaLayerSwap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,address,bytes32,bytes,uint256))": FunctionFragment;
+  };
+
+  getFunction(
+    nameOrSignatureOrTopic:
+      | "LAYERSWAP_DEPOSITORY"
+      | "startBridgeTokensViaLayerSwap"
+      | "swapAndStartBridgeTokensViaLayerSwap"
+  ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "swapTokensGeneric",
+    functionFragment: "LAYERSWAP_DEPOSITORY",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "startBridgeTokensViaLayerSwap",
+    values: [ILiFi.BridgeDataStruct, LayerSwapFacet.LayerSwapDataStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "swapAndStartBridgeTokensViaLayerSwap",
     values: [
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      LibSwap.SwapDataStruct[]
+      ILiFi.BridgeDataStruct,
+      LibSwap.SwapDataStruct[],
+      LayerSwapFacet.LayerSwapDataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "swapTokensGeneric",
+    functionFragment: "LAYERSWAP_DEPOSITORY",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "startBridgeTokensViaLayerSwap",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "swapAndStartBridgeTokensViaLayerSwap",
     data: BytesLike
   ): Result;
 
@@ -259,12 +306,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface GenericSwapFacet extends BaseContract {
+export interface LayerSwapFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: GenericSwapFacetInterface;
+  interface: LayerSwapFacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -286,35 +333,50 @@ export interface GenericSwapFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    swapTokensGeneric(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmount: PromiseOrValue<BigNumberish>,
+    LAYERSWAP_DEPOSITORY(overrides?: CallOverrides): Promise<[string]>;
+
+    startBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    swapAndStartBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  swapTokensGeneric(
-    _transactionId: PromiseOrValue<BytesLike>,
-    _integrator: PromiseOrValue<string>,
-    _referrer: PromiseOrValue<string>,
-    _receiver: PromiseOrValue<string>,
-    _minAmount: PromiseOrValue<BigNumberish>,
+  LAYERSWAP_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+
+  startBridgeTokensViaLayerSwap(
+    _bridgeData: ILiFi.BridgeDataStruct,
+    _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  swapAndStartBridgeTokensViaLayerSwap(
+    _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
+    _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    swapTokensGeneric(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmount: PromiseOrValue<BigNumberish>,
+    LAYERSWAP_DEPOSITORY(overrides?: CallOverrides): Promise<string>;
+
+    startBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    swapAndStartBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -438,25 +500,37 @@ export interface GenericSwapFacet extends BaseContract {
   };
 
   estimateGas: {
-    swapTokensGeneric(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmount: PromiseOrValue<BigNumberish>,
+    LAYERSWAP_DEPOSITORY(overrides?: CallOverrides): Promise<BigNumber>;
+
+    startBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    swapAndStartBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    swapTokensGeneric(
-      _transactionId: PromiseOrValue<BytesLike>,
-      _integrator: PromiseOrValue<string>,
-      _referrer: PromiseOrValue<string>,
-      _receiver: PromiseOrValue<string>,
-      _minAmount: PromiseOrValue<BigNumberish>,
+    LAYERSWAP_DEPOSITORY(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    swapAndStartBridgeTokensViaLayerSwap(
+      _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
+      _layerSwapData: LayerSwapFacet.LayerSwapDataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
