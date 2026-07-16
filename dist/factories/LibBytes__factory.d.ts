@@ -13,11 +13,23 @@ export declare class LibBytes__factory extends ContractFactory {
     }): TransactionRequest;
     attach(address: string): LibBytes;
     connect(signer: Signer): LibBytes__factory;
-    static readonly bytecode = "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea2646970667358221220a5cf1ec3c44d71cdfd88aa65f74ee15d89ba7b60f9f12cb97d12159c412db5c364736f6c634300081d0033";
+    static readonly bytecode = "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea26469706673582212202ee2624c69f2dbeddc44998caccaeefd55ce69c2523fca0b05189ea6de1fdda364736f6c634300081d0033";
     static readonly abi: readonly [{
         readonly type: "error";
         readonly name: "AddressOutOfBounds";
         readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "HexLengthInsufficient";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NotAnAddress";
+        readonly inputs: readonly [{
+            readonly name: "value";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
     }, {
         readonly type: "error";
         readonly name: "SliceOutOfBounds";
