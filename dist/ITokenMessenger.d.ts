@@ -5,8 +5,9 @@ import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrVal
 export interface ITokenMessengerInterface extends utils.Interface {
     functions: {
         "depositForBurn(uint256,uint32,bytes32,address,bytes32,uint256,uint32)": FunctionFragment;
+        "depositForBurnWithHook(uint256,uint32,bytes32,address,bytes32,uint256,uint32,bytes)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "depositForBurn" | "depositForBurnWithHook"): FunctionFragment;
     encodeFunctionData(functionFragment: "depositForBurn", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
@@ -16,7 +17,18 @@ export interface ITokenMessengerInterface extends utils.Interface {
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>
     ]): string;
+    encodeFunctionData(functionFragment: "depositForBurnWithHook", values: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
     decodeFunctionResult(functionFragment: "depositForBurn", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "depositForBurnWithHook", data: BytesLike): Result;
     events: {};
 }
 export interface ITokenMessenger extends BaseContract {
@@ -37,21 +49,34 @@ export interface ITokenMessenger extends BaseContract {
         depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        depositForBurnWithHook(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, hookData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
     };
     depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    depositForBurnWithHook(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, hookData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     callStatic: {
         depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        depositForBurnWithHook(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, hookData: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {};
     estimateGas: {
         depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        depositForBurnWithHook(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, hookData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
     };
     populateTransaction: {
         depositForBurn(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        depositForBurnWithHook(amount: PromiseOrValue<BigNumberish>, destinationDomain: PromiseOrValue<BigNumberish>, mintRecipient: PromiseOrValue<BytesLike>, burnToken: PromiseOrValue<string>, destinationCaller: PromiseOrValue<BytesLike>, maxFee: PromiseOrValue<BigNumberish>, minFinalityThreshold: PromiseOrValue<BigNumberish>, hookData: PromiseOrValue<BytesLike>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
