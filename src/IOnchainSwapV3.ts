@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -24,48 +23,35 @@ import type {
   PromiseOrValue,
 } from "./common";
 
-export interface ILayerSwapDepositoryInterface extends utils.Interface {
+export interface IOnchainSwapV3Interface extends utils.Interface {
   functions: {
-    "depositERC20(bytes32,address,address,uint256)": FunctionFragment;
-    "depositNative(bytes32,address)": FunctionFragment;
+    "onswap(address,uint256,address,address,bytes)": FunctionFragment;
   };
 
-  getFunction(
-    nameOrSignatureOrTopic: "depositERC20" | "depositNative"
-  ): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "onswap"): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "depositERC20",
+    functionFragment: "onswap",
     values: [
-      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>
+      PromiseOrValue<BytesLike>
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "depositNative",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
-  ): string;
 
-  decodeFunctionResult(
-    functionFragment: "depositERC20",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "depositNative",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "onswap", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface ILayerSwapDepository extends BaseContract {
+export interface IOnchainSwapV3 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ILayerSwapDepositoryInterface;
+  interface: IOnchainSwapV3Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -87,47 +73,32 @@ export interface ILayerSwapDepository extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    depositERC20(
-      id: PromiseOrValue<BytesLike>,
+    onswap(
       token: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    depositNative(
-      id: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
+      dex: PromiseOrValue<string>,
+      dexgateway: PromiseOrValue<string>,
+      calldata_: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  depositERC20(
-    id: PromiseOrValue<BytesLike>,
+  onswap(
     token: PromiseOrValue<string>,
-    receiver: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  depositNative(
-    id: PromiseOrValue<BytesLike>,
-    receiver: PromiseOrValue<string>,
+    dex: PromiseOrValue<string>,
+    dexgateway: PromiseOrValue<string>,
+    calldata_: PromiseOrValue<BytesLike>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    depositERC20(
-      id: PromiseOrValue<BytesLike>,
+    onswap(
       token: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    depositNative(
-      id: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
+      dex: PromiseOrValue<string>,
+      dexgateway: PromiseOrValue<string>,
+      calldata_: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -135,33 +106,23 @@ export interface ILayerSwapDepository extends BaseContract {
   filters: {};
 
   estimateGas: {
-    depositERC20(
-      id: PromiseOrValue<BytesLike>,
+    onswap(
       token: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    depositNative(
-      id: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
+      dex: PromiseOrValue<string>,
+      dexgateway: PromiseOrValue<string>,
+      calldata_: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    depositERC20(
-      id: PromiseOrValue<BytesLike>,
+    onswap(
       token: PromiseOrValue<string>,
-      receiver: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    depositNative(
-      id: PromiseOrValue<BytesLike>,
-      receiver: PromiseOrValue<string>,
+      dex: PromiseOrValue<string>,
+      dexgateway: PromiseOrValue<string>,
+      calldata_: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

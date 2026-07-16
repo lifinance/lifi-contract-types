@@ -66,57 +66,42 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace SymbiosisFacet {
-  export type SymbiosisDataStruct = {
-    nonEvmReceiver: PromiseOrValue<BytesLike>;
-    firstSwapCalldata: PromiseOrValue<BytesLike>;
-    secondSwapCalldata: PromiseOrValue<BytesLike>;
-    intermediateToken: PromiseOrValue<string>;
-    firstDexRouter: PromiseOrValue<string>;
-    secondDexRouter: PromiseOrValue<string>;
-    approvedTokens: PromiseOrValue<string>[];
-    callTo: PromiseOrValue<string>;
-    callData: PromiseOrValue<BytesLike>;
-    viaOnchainSwapV3: PromiseOrValue<boolean>;
-    dex: PromiseOrValue<string>;
-    dexgateway: PromiseOrValue<string>;
-    onchainSwapData: PromiseOrValue<BytesLike>;
-    deadline: PromiseOrValue<BigNumberish>;
-    signature: PromiseOrValue<BytesLike>;
+export declare namespace AcrossFacetV3 {
+  export type AcrossV3DataStruct = {
+    receiverAddress: PromiseOrValue<string>;
+    refundAddress: PromiseOrValue<string>;
+    receivingAssetId: PromiseOrValue<string>;
+    outputAmount: PromiseOrValue<BigNumberish>;
+    outputAmountPercent: PromiseOrValue<BigNumberish>;
+    exclusiveRelayer: PromiseOrValue<string>;
+    quoteTimestamp: PromiseOrValue<BigNumberish>;
+    fillDeadline: PromiseOrValue<BigNumberish>;
+    exclusivityDeadline: PromiseOrValue<BigNumberish>;
+    message: PromiseOrValue<BytesLike>;
   };
 
-  export type SymbiosisDataStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string[],
-    string,
-    string,
-    boolean,
+  export type AcrossV3DataStructOutput = [
     string,
     string,
     string,
     BigNumber,
+    BigNumber,
+    string,
+    number,
+    number,
+    number,
     string
   ] & {
-    nonEvmReceiver: string;
-    firstSwapCalldata: string;
-    secondSwapCalldata: string;
-    intermediateToken: string;
-    firstDexRouter: string;
-    secondDexRouter: string;
-    approvedTokens: string[];
-    callTo: string;
-    callData: string;
-    viaOnchainSwapV3: boolean;
-    dex: string;
-    dexgateway: string;
-    onchainSwapData: string;
-    deadline: BigNumber;
-    signature: string;
+    receiverAddress: string;
+    refundAddress: string;
+    receivingAssetId: string;
+    outputAmount: BigNumber;
+    outputAmountPercent: BigNumber;
+    exclusiveRelayer: string;
+    quoteTimestamp: number;
+    fillDeadline: number;
+    exclusivityDeadline: number;
+    message: string;
   };
 }
 
@@ -150,37 +135,51 @@ export declare namespace LibSwap {
   };
 }
 
-export interface SymbiosisFacetInterface extends utils.Interface {
+export interface AcrossFacetV3Interface extends utils.Interface {
   functions: {
-    "startBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes,bytes,address,address,address,address[],address,bytes,bool,address,address,bytes,uint256,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes,bytes,address,address,address,address[],address,bytes,bool,address,address,bytes,uint256,bytes))": FunctionFragment;
+    "spokePool()": FunctionFragment;
+    "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": FunctionFragment;
+    "wrappedNative()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "startBridgeTokensViaSymbiosis"
-      | "swapAndStartBridgeTokensViaSymbiosis"
+      | "spokePool"
+      | "startBridgeTokensViaAcrossV3"
+      | "swapAndStartBridgeTokensViaAcrossV3"
+      | "wrappedNative"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "spokePool", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaSymbiosis",
-    values: [ILiFi.BridgeDataStruct, SymbiosisFacet.SymbiosisDataStruct]
+    functionFragment: "startBridgeTokensViaAcrossV3",
+    values: [ILiFi.BridgeDataStruct, AcrossFacetV3.AcrossV3DataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaSymbiosis",
+    functionFragment: "swapAndStartBridgeTokensViaAcrossV3",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      SymbiosisFacet.SymbiosisDataStruct
+      AcrossFacetV3.AcrossV3DataStruct
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "wrappedNative",
+    values?: undefined
+  ): string;
 
+  decodeFunctionResult(functionFragment: "spokePool", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaSymbiosis",
+    functionFragment: "startBridgeTokensViaAcrossV3",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaSymbiosis",
+    functionFragment: "swapAndStartBridgeTokensViaAcrossV3",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "wrappedNative",
     data: BytesLike
   ): Result;
 
@@ -323,12 +322,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface SymbiosisFacet extends BaseContract {
+export interface AcrossFacetV3 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SymbiosisFacetInterface;
+  interface: AcrossFacetV3Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -350,46 +349,58 @@ export interface SymbiosisFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    startBridgeTokensViaSymbiosis(
+    spokePool(overrides?: CallOverrides): Promise<[string]>;
+
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  startBridgeTokensViaSymbiosis(
+  spokePool(overrides?: CallOverrides): Promise<string>;
+
+  startBridgeTokensViaAcrossV3(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+    _acrossData: AcrossFacetV3.AcrossV3DataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaSymbiosis(
+  swapAndStartBridgeTokensViaAcrossV3(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+    _acrossData: AcrossFacetV3.AcrossV3DataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  wrappedNative(overrides?: CallOverrides): Promise<string>;
+
   callStatic: {
-    startBridgeTokensViaSymbiosis(
+    spokePool(overrides?: CallOverrides): Promise<string>;
+
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -511,32 +522,40 @@ export interface SymbiosisFacet extends BaseContract {
   };
 
   estimateGas: {
-    startBridgeTokensViaSymbiosis(
+    spokePool(overrides?: CallOverrides): Promise<BigNumber>;
+
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    startBridgeTokensViaSymbiosis(
+    spokePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    startBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaSymbiosis(
+    swapAndStartBridgeTokensViaAcrossV3(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _symbiosisData: SymbiosisFacet.SymbiosisDataStruct,
+      _acrossData: AcrossFacetV3.AcrossV3DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    wrappedNative(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
