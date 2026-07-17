@@ -26,12 +26,9 @@ import type {
 export interface ITokenMessengerInterface extends utils.Interface {
   functions: {
     "depositForBurn(uint256,uint32,bytes32,address,bytes32,uint256,uint32)": FunctionFragment;
-    "depositForBurnWithHook(uint256,uint32,bytes32,address,bytes32,uint256,uint32,bytes)": FunctionFragment;
   };
 
-  getFunction(
-    nameOrSignatureOrTopic: "depositForBurn" | "depositForBurnWithHook"
-  ): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "depositForBurn"): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "depositForBurn",
@@ -45,26 +42,9 @@ export interface ITokenMessengerInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "depositForBurnWithHook",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "depositForBurn",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "depositForBurnWithHook",
     data: BytesLike
   ): Result;
 
@@ -108,18 +88,6 @@ export interface ITokenMessenger extends BaseContract {
       minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    depositForBurnWithHook(
-      amount: PromiseOrValue<BigNumberish>,
-      destinationDomain: PromiseOrValue<BigNumberish>,
-      mintRecipient: PromiseOrValue<BytesLike>,
-      burnToken: PromiseOrValue<string>,
-      destinationCaller: PromiseOrValue<BytesLike>,
-      maxFee: PromiseOrValue<BigNumberish>,
-      minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      hookData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
   };
 
   depositForBurn(
@@ -133,18 +101,6 @@ export interface ITokenMessenger extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  depositForBurnWithHook(
-    amount: PromiseOrValue<BigNumberish>,
-    destinationDomain: PromiseOrValue<BigNumberish>,
-    mintRecipient: PromiseOrValue<BytesLike>,
-    burnToken: PromiseOrValue<string>,
-    destinationCaller: PromiseOrValue<BytesLike>,
-    maxFee: PromiseOrValue<BigNumberish>,
-    minFinalityThreshold: PromiseOrValue<BigNumberish>,
-    hookData: PromiseOrValue<BytesLike>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     depositForBurn(
       amount: PromiseOrValue<BigNumberish>,
@@ -154,18 +110,6 @@ export interface ITokenMessenger extends BaseContract {
       destinationCaller: PromiseOrValue<BytesLike>,
       maxFee: PromiseOrValue<BigNumberish>,
       minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    depositForBurnWithHook(
-      amount: PromiseOrValue<BigNumberish>,
-      destinationDomain: PromiseOrValue<BigNumberish>,
-      mintRecipient: PromiseOrValue<BytesLike>,
-      burnToken: PromiseOrValue<string>,
-      destinationCaller: PromiseOrValue<BytesLike>,
-      maxFee: PromiseOrValue<BigNumberish>,
-      minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      hookData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -183,18 +127,6 @@ export interface ITokenMessenger extends BaseContract {
       minFinalityThreshold: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    depositForBurnWithHook(
-      amount: PromiseOrValue<BigNumberish>,
-      destinationDomain: PromiseOrValue<BigNumberish>,
-      mintRecipient: PromiseOrValue<BytesLike>,
-      burnToken: PromiseOrValue<string>,
-      destinationCaller: PromiseOrValue<BytesLike>,
-      maxFee: PromiseOrValue<BigNumberish>,
-      minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      hookData: PromiseOrValue<BytesLike>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -206,18 +138,6 @@ export interface ITokenMessenger extends BaseContract {
       destinationCaller: PromiseOrValue<BytesLike>,
       maxFee: PromiseOrValue<BigNumberish>,
       minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    depositForBurnWithHook(
-      amount: PromiseOrValue<BigNumberish>,
-      destinationDomain: PromiseOrValue<BigNumberish>,
-      mintRecipient: PromiseOrValue<BytesLike>,
-      burnToken: PromiseOrValue<string>,
-      destinationCaller: PromiseOrValue<BytesLike>,
-      maxFee: PromiseOrValue<BigNumberish>,
-      minFinalityThreshold: PromiseOrValue<BigNumberish>,
-      hookData: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
