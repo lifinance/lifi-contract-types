@@ -1,7 +1,40 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace AllBridgeFacet {
+    type ChainIdConfigStruct = {
+        chainId: PromiseOrValue<BigNumberish>;
+        allBridgeChainId: PromiseOrValue<BigNumberish>;
+    };
+    type ChainIdConfigStructOutput = [BigNumber, BigNumber] & {
+        chainId: BigNumber;
+        allBridgeChainId: BigNumber;
+    };
+    type AllBridgeDataStruct = {
+        recipient: PromiseOrValue<BytesLike>;
+        fees: PromiseOrValue<BigNumberish>;
+        receiveToken: PromiseOrValue<BytesLike>;
+        nonce: PromiseOrValue<BigNumberish>;
+        messenger: PromiseOrValue<BigNumberish>;
+        payFeeWithSendingAsset: PromiseOrValue<boolean>;
+    };
+    type AllBridgeDataStructOutput = [
+        string,
+        BigNumber,
+        string,
+        BigNumber,
+        number,
+        boolean
+    ] & {
+        recipient: string;
+        fees: BigNumber;
+        receiveToken: string;
+        nonce: BigNumber;
+        messenger: number;
+        payFeeWithSendingAsset: boolean;
+    };
+}
 export declare namespace ILiFi {
     type BridgeDataStruct = {
         transactionId: PromiseOrValue<BytesLike>;
@@ -39,31 +72,6 @@ export declare namespace ILiFi {
         hasDestinationCall: boolean;
     };
 }
-export declare namespace AllBridgeFacet {
-    type AllBridgeDataStruct = {
-        recipient: PromiseOrValue<BytesLike>;
-        fees: PromiseOrValue<BigNumberish>;
-        receiveToken: PromiseOrValue<BytesLike>;
-        nonce: PromiseOrValue<BigNumberish>;
-        messenger: PromiseOrValue<BigNumberish>;
-        payFeeWithSendingAsset: PromiseOrValue<boolean>;
-    };
-    type AllBridgeDataStructOutput = [
-        string,
-        BigNumber,
-        string,
-        BigNumber,
-        number,
-        boolean
-    ] & {
-        recipient: string;
-        fees: BigNumber;
-        receiveToken: string;
-        nonce: BigNumber;
-        messenger: number;
-        payFeeWithSendingAsset: boolean;
-    };
-}
 export declare namespace LibSwap {
     type SwapDataStruct = {
         callTo: PromiseOrValue<string>;
@@ -94,37 +102,62 @@ export declare namespace LibSwap {
 }
 export interface AllBridgeFacetInterface extends utils.Interface {
     functions: {
+        "getChainIdToAllBridgeChainId(uint256)": FunctionFragment;
+        "initAllBridge((uint256,uint256)[])": FunctionFragment;
+        "setChainIdToAllBridgeChainId((uint256,uint256)[])": FunctionFragment;
         "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
         "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256,bytes32,uint256,uint8,bool))": FunctionFragment;
+        "unsetChainIdToAllBridgeChainId(uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "getChainIdToAllBridgeChainId" | "initAllBridge" | "setChainIdToAllBridgeChainId" | "startBridgeTokensViaAllBridge" | "swapAndStartBridgeTokensViaAllBridge" | "unsetChainIdToAllBridgeChainId"): FunctionFragment;
+    encodeFunctionData(functionFragment: "getChainIdToAllBridgeChainId", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "initAllBridge", values: [AllBridgeFacet.ChainIdConfigStruct[]]): string;
+    encodeFunctionData(functionFragment: "setChainIdToAllBridgeChainId", values: [AllBridgeFacet.ChainIdConfigStruct[]]): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaAllBridge", values: [ILiFi.BridgeDataStruct, AllBridgeFacet.AllBridgeDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaAllBridge", values: [
         ILiFi.BridgeDataStruct,
         LibSwap.SwapDataStruct[],
         AllBridgeFacet.AllBridgeDataStruct
     ]): string;
+    encodeFunctionData(functionFragment: "unsetChainIdToAllBridgeChainId", values: [PromiseOrValue<BigNumberish>]): string;
+    decodeFunctionResult(functionFragment: "getChainIdToAllBridgeChainId", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "initAllBridge", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setChainIdToAllBridgeChainId", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaAllBridge", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaAllBridge", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "unsetChainIdToAllBridgeChainId", data: BytesLike): Result;
     events: {
+        "AllBridgeChainMappingsInitialized(tuple[])": EventFragment;
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
         "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
+        "ChainIdToAllBridgeChainIdSet(uint256,uint256)": EventFragment;
+        "ChainIdToAllBridgeChainIdUnset(uint256)": EventFragment;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
         "LiFiTransferStarted(tuple)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "AllBridgeChainMappingsInitialized"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "ChainIdToAllBridgeChainIdSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "ChainIdToAllBridgeChainIdUnset"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
 }
+export interface AllBridgeChainMappingsInitializedEventObject {
+    chainIdConfigs: AllBridgeFacet.ChainIdConfigStructOutput[];
+}
+export type AllBridgeChainMappingsInitializedEvent = TypedEvent<[
+    AllBridgeFacet.ChainIdConfigStructOutput[]
+], AllBridgeChainMappingsInitializedEventObject>;
+export type AllBridgeChainMappingsInitializedEventFilter = TypedEventFilter<AllBridgeChainMappingsInitializedEvent>;
 export interface AssetSwappedEventObject {
     transactionId: string;
     dex: string;
@@ -166,6 +199,22 @@ export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
     string
 ], BridgeToNonEVMChainBytes32EventObject>;
 export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
+export interface ChainIdToAllBridgeChainIdSetEventObject {
+    chainId: BigNumber;
+    allBridgeChainId: BigNumber;
+}
+export type ChainIdToAllBridgeChainIdSetEvent = TypedEvent<[
+    BigNumber,
+    BigNumber
+], ChainIdToAllBridgeChainIdSetEventObject>;
+export type ChainIdToAllBridgeChainIdSetEventFilter = TypedEventFilter<ChainIdToAllBridgeChainIdSetEvent>;
+export interface ChainIdToAllBridgeChainIdUnsetEventObject {
+    chainId: BigNumber;
+}
+export type ChainIdToAllBridgeChainIdUnsetEvent = TypedEvent<[
+    BigNumber
+], ChainIdToAllBridgeChainIdUnsetEventObject>;
+export type ChainIdToAllBridgeChainIdUnsetEventFilter = TypedEventFilter<ChainIdToAllBridgeChainIdUnsetEvent>;
 export interface LiFiGenericSwapCompletedEventObject {
     transactionId: string;
     integrator: string;
@@ -258,30 +307,60 @@ export interface AllBridgeFacet extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        getChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber]>;
+        initAllBridge(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setChainIdToAllBridgeChainId(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        unsetChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
     };
+    getChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    initAllBridge(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setChainIdToAllBridgeChainId(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    unsetChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     callStatic: {
+        getChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        initAllBridge(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
+        setChainIdToAllBridgeChainId(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: CallOverrides): Promise<void>;
+        unsetChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "AllBridgeChainMappingsInitialized(tuple[])"(chainIdConfigs?: null): AllBridgeChainMappingsInitializedEventFilter;
+        AllBridgeChainMappingsInitialized(chainIdConfigs?: null): AllBridgeChainMappingsInitializedEventFilter;
         "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
         "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
         BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
         "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
         BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
+        "ChainIdToAllBridgeChainIdSet(uint256,uint256)"(chainId?: PromiseOrValue<BigNumberish> | null, allBridgeChainId?: null): ChainIdToAllBridgeChainIdSetEventFilter;
+        ChainIdToAllBridgeChainIdSet(chainId?: PromiseOrValue<BigNumberish> | null, allBridgeChainId?: null): ChainIdToAllBridgeChainIdSetEventFilter;
+        "ChainIdToAllBridgeChainIdUnset(uint256)"(chainId?: PromiseOrValue<BigNumberish> | null): ChainIdToAllBridgeChainIdUnsetEventFilter;
+        ChainIdToAllBridgeChainIdUnset(chainId?: PromiseOrValue<BigNumberish> | null): ChainIdToAllBridgeChainIdUnsetEventFilter;
         "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
         "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
@@ -294,18 +373,38 @@ export interface AllBridgeFacet extends BaseContract {
         LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
     };
     estimateGas: {
+        getChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        initAllBridge(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setChainIdToAllBridgeChainId(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        unsetChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
+        getChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        initAllBridge(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setChainIdToAllBridgeChainId(chainIdConfigs: AllBridgeFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
         startBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaAllBridge(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _allBridgeData: AllBridgeFacet.AllBridgeDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        unsetChainIdToAllBridgeChainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };
