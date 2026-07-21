@@ -1,0 +1,102 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
+export interface IFraxHopV2Interface extends utils.Interface {
+    functions: {
+        "quote(address,uint32,bytes32,uint256,uint128,bytes)": FunctionFragment;
+        "quoteStatic(address,uint32,bytes32,uint256,uint128,bytes,address)": FunctionFragment;
+        "removeDust(address,uint256)": FunctionFragment;
+        "sendOFT(address,uint32,bytes32,uint256,uint128,bytes)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "quote" | "quoteStatic" | "removeDust" | "sendOFT"): FunctionFragment;
+    encodeFunctionData(functionFragment: "quote", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    encodeFunctionData(functionFragment: "quoteStatic", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<string>
+    ]): string;
+    encodeFunctionData(functionFragment: "removeDust", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "sendOFT", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BytesLike>
+    ]): string;
+    decodeFunctionResult(functionFragment: "quote", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "quoteStatic", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "removeDust", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "sendOFT", data: BytesLike): Result;
+    events: {};
+}
+export interface IFraxHopV2 extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: IFraxHopV2Interface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        quote(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            fee: BigNumber;
+        }>;
+        quoteStatic(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, userToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            fee: BigNumber;
+        }>;
+        removeDust(oft: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            flooredAmountLD: BigNumber;
+        }>;
+        sendOFT(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amountLD: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    quote(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+    quoteStatic(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, userToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    removeDust(oft: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    sendOFT(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amountLD: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        quote(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        quoteStatic(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, userToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        removeDust(oft: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        sendOFT(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amountLD: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {};
+    estimateGas: {
+        quote(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        quoteStatic(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, userToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        removeDust(oft: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        sendOFT(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amountLD: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        quote(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        quoteStatic(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amount: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, userToken: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        removeDust(oft: PromiseOrValue<string>, amountLD: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        sendOFT(oft: PromiseOrValue<string>, dstEid: PromiseOrValue<BigNumberish>, recipient: PromiseOrValue<BytesLike>, amountLD: PromiseOrValue<BigNumberish>, dstGas: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
