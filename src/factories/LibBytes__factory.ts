@@ -14,22 +14,6 @@ const _abi = [
   },
   {
     type: "error",
-    name: "HexLengthInsufficient",
-    inputs: [],
-  },
-  {
-    type: "error",
-    name: "NotAnAddress",
-    inputs: [
-      {
-        name: "value",
-        type: "bytes32",
-        internalType: "bytes32",
-      },
-    ],
-  },
-  {
-    type: "error",
     name: "SliceOutOfBounds",
     inputs: [],
   },
@@ -41,7 +25,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea26469706673582212202ee2624c69f2dbeddc44998caccaeefd55ce69c2523fca0b05189ea6de1fdda364736f6c634300081d0033";
+  "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea26469706673582212209290c4f86d6dde98cb0aa5cbe363ddc65345ad96d04d9fc0d1cd1dff4777d41a64736f6c634300081d0033";
 
 type LibBytesConstructorParams =
   | [signer?: Signer]

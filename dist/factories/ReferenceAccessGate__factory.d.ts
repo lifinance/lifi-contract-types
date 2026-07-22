@@ -1,0 +1,376 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { ReferenceAccessGate, ReferenceAccessGateInterface } from "../ReferenceAccessGate";
+type ReferenceAccessGateConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class ReferenceAccessGate__factory extends ContractFactory {
+    constructor(...args: ReferenceAccessGateConstructorParams);
+    deploy(_owner: PromiseOrValue<string>, _allowlistEnabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ReferenceAccessGate>;
+    getDeployTransaction(_owner: PromiseOrValue<string>, _allowlistEnabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): ReferenceAccessGate;
+    connect(signer: Signer): ReferenceAccessGate__factory;
+    static readonly bytecode = "0x6080604052348015600e575f5ffd5b50604051611111380380611111833981016040819052602b916085565b5f80546001600160a01b0319166001600160a01b0384169081179091556064576040516306b7c75960e31b815260040160405180910390fd5b60018054911515600160a01b0260ff60a01b199092169190911790555060c9565b5f5f604083850312156095575f5ffd5b82516001600160a01b038116811460aa575f5ffd5b6020840151909250801515811460be575f5ffd5b809150509250929050565b61103b806100d65f395ff3fe608060405234801561000f575f5ffd5b5060043610610149575f3560e01c80639aa54181116100c7578063df592f7d1161007d578063e857901511610063578063e857901514610311578063eae4f19f14610324578063f2fde38b14610346575f5ffd5b8063df592f7d146102b9578063e30c3978146102f1575f5ffd5b8063b33f95fa116100ad578063b33f95fa14610280578063babcc53914610293578063d7644ba2146102a6575f5ffd5b80639aa541811461025a578063ace8bec91461026d575f5ffd5b8063300f32e81161011c5780637200b829116101025780637200b829146101e95780638da5cb5b146101f157806394c8e4ff14610235575f5ffd5b8063300f32e8146101c357806365c05aed146101d6575f5ffd5b806303f45d411461014d5780631aceaf9e1461018457806323452b9c1461019957806330026542146101a1575b5f5ffd5b61016f61015b366004610ebf565b60026020525f908152604090205460ff1681565b60405190151581526020015b60405180910390f35b610197610192366004610ee7565b610359565b005b6101976104b6565b61016f6101af366004610ebf565b60036020525f908152604090205460ff1681565b6101976101d1366004610ee7565b61057f565b6101976101e4366004610ee7565b6106d6565b61019761082d565b5f546102109073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200161017b565b60015461016f9074010000000000000000000000000000000000000000900460ff1681565b610197610268366004610f66565b610911565b61016f61027b366004610f97565b6109eb565b61019761028e366004610f66565b610a0c565b61016f6102a1366004610ebf565b610ade565b6101976102b4366004610fbf565b610b95565b61016f6102c7366004610ebf565b73ffffffffffffffffffffffffffffffffffffffff165f9081526004602052604090205460ff1690565b6001546102109073ffffffffffffffffffffffffffffffffffffffff1681565b61019761031f366004610f66565b610c69565b61016f610332366004610ebf565b60046020525f908152604090205460ff1681565b610197610354366004610ebf565b610d3b565b5f5473ffffffffffffffffffffffffffffffffffffffff1633146103a9576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f5b828110156104b0578160045f8686858181106103c9576103c9610fd8565b90506020020160208101906103de9190610ebf565b73ffffffffffffffffffffffffffffffffffffffff16815260208101919091526040015f2080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001691151591909117905583838281811061044257610442610fd8565b90506020020160208101906104579190610ebf565b73ffffffffffffffffffffffffffffffffffffffff167fe120f1c2a7416d3ef8776f69c89583cdc9ab7f2c3e525f55df52c5b5ce453608836040516104a0911515815260200190565b60405180910390a26001016103ab565b50505050565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610506576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60015473ffffffffffffffffffffffffffffffffffffffff16610555576040517f75cdea1200000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600180547fffffffffffffffffffffffff0000000000000000000000000000000000000000169055565b5f5473ffffffffffffffffffffffffffffffffffffffff1633146105cf576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f5b828110156104b0578160035f8686858181106105ef576105ef610fd8565b90506020020160208101906106049190610ebf565b73ffffffffffffffffffffffffffffffffffffffff16815260208101919091526040015f2080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001691151591909117905583838281811061066857610668610fd8565b905060200201602081019061067d9190610ebf565b73ffffffffffffffffffffffffffffffffffffffff167f4dcca662d4e33d75d9b9b07c0238c9aa4f2f6a38c018783999d6afa7928cba62836040516106c6911515815260200190565b60405180910390a26001016105d1565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610726576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f5b828110156104b0578160025f86868581811061074657610746610fd8565b905060200201602081019061075b9190610ebf565b73ffffffffffffffffffffffffffffffffffffffff16815260208101919091526040015f2080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00169115159190911790558383828181106107bf576107bf610fd8565b90506020020160208101906107d49190610ebf565b73ffffffffffffffffffffffffffffffffffffffff167ffaff2e43eb09669f07ccc23f57fe6afee69e4870bd95b6ea09b70276a37333318360405161081d911515815260200190565b60405180910390a2600101610728565b60015473ffffffffffffffffffffffffffffffffffffffff1633811461087f576040517f1853971c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f805460405173ffffffffffffffffffffffffffffffffffffffff808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a35f805473ffffffffffffffffffffffffffffffffffffffff9092167fffffffffffffffffffffffff0000000000000000000000000000000000000000928316179055600180549091169055565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610961576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82165f8181526002602090815260409182902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001685151590811790915591519182527ffaff2e43eb09669f07ccc23f57fe6afee69e4870bd95b6ea09b70276a373333191015b60405180910390a25050565b5f6109f583610ade565b8015610a055750610a0582610ade565b9392505050565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610a5c576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82165f8181526003602090815260409182902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001685151590811790915591519182527f4dcca662d4e33d75d9b9b07c0238c9aa4f2f6a38c018783999d6afa7928cba6291016109df565b73ffffffffffffffffffffffffffffffffffffffff81165f9081526003602052604081205460ff1680610b35575073ffffffffffffffffffffffffffffffffffffffff82165f9081526004602052604090205460ff165b15610b4157505f919050565b60015474010000000000000000000000000000000000000000900460ff161580610b8f575073ffffffffffffffffffffffffffffffffffffffff82165f9081526002602052604090205460ff165b92915050565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610be5576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001805482151574010000000000000000000000000000000000000000027fffffffffffffffffffffff00ffffffffffffffffffffffffffffffffffffffff9091161790556040517fa1bf86c493917580dec207969ef59976f0c378f10ece581237f19acfbd858f1c90610c5e90831515815260200190565b60405180910390a150565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610cb9576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82165f8181526004602090815260409182902080547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff001685151590811790915591519182527fe120f1c2a7416d3ef8776f69c89583cdc9ab7f2c3e525f55df52c5b5ce45360891016109df565b5f5473ffffffffffffffffffffffffffffffffffffffff163314610d8b576040517fbe24598300000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff8116610dd8576040517f1beca37400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b3373ffffffffffffffffffffffffffffffffffffffff821603610e27576040517fbf1ea9fb00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b600180547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff831690811790915560405133907fed8889f560326eb138920d842192f0eb3dd22b4f139c87a2c57538e05bae1278905f90a350565b803573ffffffffffffffffffffffffffffffffffffffff81168114610eba575f5ffd5b919050565b5f60208284031215610ecf575f5ffd5b610a0582610e97565b80358015158114610eba575f5ffd5b5f5f5f60408486031215610ef9575f5ffd5b833567ffffffffffffffff811115610f0f575f5ffd5b8401601f81018613610f1f575f5ffd5b803567ffffffffffffffff811115610f35575f5ffd5b8660208260051b8401011115610f49575f5ffd5b602091820194509250610f5d908501610ed8565b90509250925092565b5f5f60408385031215610f77575f5ffd5b610f8083610e97565b9150610f8e60208401610ed8565b90509250929050565b5f5f60408385031215610fa8575f5ffd5b610fb183610e97565b9150610f8e60208401610e97565b5f60208284031215610fcf575f5ffd5b610a0582610ed8565b7f4e487b71000000000000000000000000000000000000000000000000000000005f52603260045260245ffdfea2646970667358221220cc96c66694031f58968353307a29b40be5d6689e02cd7bd36925a90cf903602e64736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "constructor";
+        readonly inputs: readonly [{
+            readonly name: "_owner";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_allowlistEnabled";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "allowlistEnabled";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "allowlisted";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "cancelOwnershipTransfer";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "confirmOwnershipTransfer";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "denylisted";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "isAllowed";
+        readonly inputs: readonly [{
+            readonly name: "_account";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "isSanctioned";
+        readonly inputs: readonly [{
+            readonly name: "_account";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "isTransferable";
+        readonly inputs: readonly [{
+            readonly name: "_from";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_to";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "owner";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "pendingOwner";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "sanctioned";
+        readonly inputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "setAllowlistEnabled";
+        readonly inputs: readonly [{
+            readonly name: "_enabled";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setAllowlisted";
+        readonly inputs: readonly [{
+            readonly name: "_account";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_allowed";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setAllowlistedBatch";
+        readonly inputs: readonly [{
+            readonly name: "_accounts";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "_allowed";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setDenylisted";
+        readonly inputs: readonly [{
+            readonly name: "_account";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_denied";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setDenylistedBatch";
+        readonly inputs: readonly [{
+            readonly name: "_accounts";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "_denied";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setSanctioned";
+        readonly inputs: readonly [{
+            readonly name: "_account";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_flagged";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "setSanctionedBatch";
+        readonly inputs: readonly [{
+            readonly name: "_accounts";
+            readonly type: "address[]";
+            readonly internalType: "address[]";
+        }, {
+            readonly name: "_flagged";
+            readonly type: "bool";
+            readonly internalType: "bool";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "transferOwnership";
+        readonly inputs: readonly [{
+            readonly name: "_newOwner";
+            readonly type: "address";
+            readonly internalType: "address";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "event";
+        readonly name: "AllowlistEnabledSet";
+        readonly inputs: readonly [{
+            readonly name: "enabled";
+            readonly type: "bool";
+            readonly indexed: false;
+            readonly internalType: "bool";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "AllowlistedSet";
+        readonly inputs: readonly [{
+            readonly name: "account";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }, {
+            readonly name: "allowed";
+            readonly type: "bool";
+            readonly indexed: false;
+            readonly internalType: "bool";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "DenylistedSet";
+        readonly inputs: readonly [{
+            readonly name: "account";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }, {
+            readonly name: "denied";
+            readonly type: "bool";
+            readonly indexed: false;
+            readonly internalType: "bool";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "OwnershipTransferRequested";
+        readonly inputs: readonly [{
+            readonly name: "_from";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }, {
+            readonly name: "_to";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "OwnershipTransferred";
+        readonly inputs: readonly [{
+            readonly name: "previousOwner";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }, {
+            readonly name: "newOwner";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "SanctionedSet";
+        readonly inputs: readonly [{
+            readonly name: "account";
+            readonly type: "address";
+            readonly indexed: true;
+            readonly internalType: "address";
+        }, {
+            readonly name: "flagged";
+            readonly type: "bool";
+            readonly indexed: false;
+            readonly internalType: "bool";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidConfig";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NewOwnerMustNotBeSelf";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NoNullOwner";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NoPendingOwnershipTransfer";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NotPendingOwner";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "UnAuthorized";
+        readonly inputs: readonly [];
+    }];
+    static createInterface(): ReferenceAccessGateInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): ReferenceAccessGate;
+}
+export {};
