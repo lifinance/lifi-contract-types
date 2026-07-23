@@ -8,6 +8,49 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
+        name: "multiHopSwap",
+        inputs: [
+            {
+                name: "_path",
+                type: "bytes",
+                internalType: "bytes",
+            },
+            {
+                name: "_amountIn",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "_amountOutMin",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "_recipient",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_fallbackEoA",
+                type: "address",
+                internalType: "address",
+            },
+            {
+                name: "_deadline",
+                type: "uint256",
+                internalType: "uint256",
+            },
+            {
+                name: "_options",
+                type: "bytes",
+                internalType: "bytes",
+            },
+        ],
+        outputs: [],
+        stateMutability: "payable",
+    },
+    {
+        type: "function",
         name: "multiHopSwapWithOutputChain",
         inputs: [
             {

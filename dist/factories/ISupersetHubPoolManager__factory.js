@@ -8,6 +8,52 @@ var ethers_1 = require("ethers");
 var _abi = [
     {
         type: "function",
+        name: "exactInput",
+        inputs: [
+            {
+                name: "_params",
+                type: "tuple",
+                internalType: "struct ISupersetHubPoolManager.ExactInputParams",
+                components: [
+                    {
+                        name: "path",
+                        type: "bytes",
+                        internalType: "bytes",
+                    },
+                    {
+                        name: "recipient",
+                        type: "address",
+                        internalType: "address",
+                    },
+                    {
+                        name: "deadline",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "amountIn",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                    {
+                        name: "amountOutMinimum",
+                        type: "uint256",
+                        internalType: "uint256",
+                    },
+                ],
+            },
+        ],
+        outputs: [
+            {
+                name: "amountOut",
+                type: "uint256",
+                internalType: "uint256",
+            },
+        ],
+        stateMutability: "payable",
+    },
+    {
+        type: "function",
         name: "multiHopSwapWithOutputChain",
         inputs: [
             {
