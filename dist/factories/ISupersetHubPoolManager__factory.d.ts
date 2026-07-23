@@ -4,6 +4,41 @@ import type { ISupersetHubPoolManager, ISupersetHubPoolManagerInterface } from "
 export declare class ISupersetHubPoolManager__factory {
     static readonly abi: readonly [{
         readonly type: "function";
+        readonly name: "exactInput";
+        readonly inputs: readonly [{
+            readonly name: "_params";
+            readonly type: "tuple";
+            readonly internalType: "struct ISupersetHubPoolManager.ExactInputParams";
+            readonly components: readonly [{
+                readonly name: "path";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }, {
+                readonly name: "recipient";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "deadline";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "amountIn";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "amountOutMinimum";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }];
+        }];
+        readonly outputs: readonly [{
+            readonly name: "amountOut";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
         readonly name: "multiHopSwapWithOutputChain";
         readonly inputs: readonly [{
             readonly name: "_path";
