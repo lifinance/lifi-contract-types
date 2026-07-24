@@ -92,7 +92,6 @@ export { ILiFi__factory } from "./ILiFi__factory";
 export { IMayan__factory } from "./IMayan__factory";
 export { IOmniBridge__factory } from "./IOmniBridge__factory";
 export { IOmniTokenAddressBook__factory } from "./IOmniTokenAddressBook__factory";
-export { IOnchainSwapV3__factory } from "./IOnchainSwapV3__factory";
 export { IOriginSettler__factory } from "./IOriginSettler__factory";
 export { IPaxosTransit__factory } from "./IPaxosTransit__factory";
 export { IRelayDepository__factory } from "./IRelayDepository__factory";
