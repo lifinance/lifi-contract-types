@@ -63,6 +63,40 @@ export declare class IMayan__factory {
         }];
         readonly outputs: readonly [];
         readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "swapAndForwardEth";
+        readonly inputs: readonly [{
+            readonly name: "amountIn";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "swapProtocol";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "swapData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "middleToken";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "minMiddleAmount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "mayanProtocol";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "mayanData";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
     }];
     static createInterface(): IMayanInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IMayan;
