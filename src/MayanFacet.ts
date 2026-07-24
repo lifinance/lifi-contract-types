@@ -71,12 +71,34 @@ export declare namespace MayanFacet {
     nonEVMReceiver: PromiseOrValue<BytesLike>;
     mayanProtocol: PromiseOrValue<string>;
     protocolData: PromiseOrValue<BytesLike>;
+    swapProtocol: PromiseOrValue<string>;
+    swapData: PromiseOrValue<BytesLike>;
+    middleToken: PromiseOrValue<string>;
+    minMiddleAmount: PromiseOrValue<BigNumberish>;
+    refundRecipient: PromiseOrValue<string>;
+    mayanAmountIn: PromiseOrValue<BigNumberish>;
   };
 
-  export type MayanDataStructOutput = [string, string, string] & {
+  export type MayanDataStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    string,
+    BigNumber
+  ] & {
     nonEVMReceiver: string;
     mayanProtocol: string;
     protocolData: string;
+    swapProtocol: string;
+    swapData: string;
+    middleToken: string;
+    minMiddleAmount: BigNumber;
+    refundRecipient: string;
+    mayanAmountIn: BigNumber;
   };
 }
 
@@ -113,8 +135,8 @@ export declare namespace LibSwap {
 export interface MayanFacetInterface extends utils.Interface {
   functions: {
     "MAYAN()": FunctionFragment;
-    "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes))": FunctionFragment;
+    "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes,address,bytes,address,uint256,address,uint256))": FunctionFragment;
+    "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes,address,bytes,address,uint256,address,uint256))": FunctionFragment;
   };
 
   getFunction(
