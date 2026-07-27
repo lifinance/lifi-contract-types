@@ -147,7 +147,6 @@ export type { PaxosTransitFacet } from "./PaxosTransitFacet";
 export type { PeripheryRegistryFacet } from "./PeripheryRegistryFacet";
 export type { Permit2Proxy } from "./Permit2Proxy";
 export type { PermitHash } from "./PermitHash";
-export type { PioneerFacet } from "./PioneerFacet";
 export type { PolygonBridgeFacet } from "./PolygonBridgeFacet";
 export type { PolymerCCTPFacet } from "./PolymerCCTPFacet";
 export type { ReceiverAcrossV3 } from "./ReceiverAcrossV3";
@@ -342,7 +341,6 @@ export { PaxosTransitFacet__factory } from "./factories/PaxosTransitFacet__facto
 export { PeripheryRegistryFacet__factory } from "./factories/PeripheryRegistryFacet__factory";
 export { Permit2Proxy__factory } from "./factories/Permit2Proxy__factory";
 export { PermitHash__factory } from "./factories/PermitHash__factory";
-export { PioneerFacet__factory } from "./factories/PioneerFacet__factory";
 export { PolygonBridgeFacet__factory } from "./factories/PolygonBridgeFacet__factory";
 export { PolymerCCTPFacet__factory } from "./factories/PolymerCCTPFacet__factory";
 export { ReceiverAcrossV3__factory } from "./factories/ReceiverAcrossV3__factory";
