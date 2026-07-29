@@ -4,6 +4,40 @@ import type { ISupersetSpokePoolManager, ISupersetSpokePoolManagerInterface } fr
 export declare class ISupersetSpokePoolManager__factory {
     static readonly abi: readonly [{
         readonly type: "function";
+        readonly name: "multiHopSwap";
+        readonly inputs: readonly [{
+            readonly name: "_path";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }, {
+            readonly name: "_amountIn";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "_amountOutMin";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "_recipient";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_fallbackEoA";
+            readonly type: "address";
+            readonly internalType: "address";
+        }, {
+            readonly name: "_deadline";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "_options";
+            readonly type: "bytes";
+            readonly internalType: "bytes";
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
         readonly name: "multiHopSwapWithOutputChain";
         readonly inputs: readonly [{
             readonly name: "_path";
