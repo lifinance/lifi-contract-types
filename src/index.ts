@@ -129,7 +129,6 @@ export type { IXDaiBridgeL2 } from "./IXDaiBridgeL2";
 export type { IiZiSwapPool } from "./IiZiSwapPool";
 export type { LayerSwapFacet } from "./LayerSwapFacet";
 export type { LiFiDiamond } from "./LiFiDiamond";
-export type { LiFiIntentEscrowFacet } from "./LiFiIntentEscrowFacet";
 export type { LiFiIntentEscrowFacetV2 } from "./LiFiIntentEscrowFacetV2";
 export type { LibAccess } from "./LibAccess";
 export type { LibBytes } from "./LibBytes";
@@ -324,7 +323,6 @@ export { IWETH__factory } from "./factories/LiFiDEXAggregator.sol/IWETH__factory
 export type { LiFiDEXAggregator } from "./LiFiDEXAggregator.sol/LiFiDEXAggregator";
 export { LiFiDEXAggregator__factory } from "./factories/LiFiDEXAggregator.sol/LiFiDEXAggregator__factory";
 export { LiFiDiamond__factory } from "./factories/LiFiDiamond__factory";
-export { LiFiIntentEscrowFacet__factory } from "./factories/LiFiIntentEscrowFacet__factory";
 export { LiFiIntentEscrowFacetV2__factory } from "./factories/LiFiIntentEscrowFacetV2__factory";
 export type { EmergencyPause } from "./LiFiTimelockController.sol/EmergencyPause";
 export { EmergencyPause__factory } from "./factories/LiFiTimelockController.sol/EmergencyPause__factory";
