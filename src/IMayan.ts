@@ -51,11 +51,10 @@ export interface IMayanInterface extends utils.Interface {
   functions: {
     "forwardERC20(address,uint256,(uint256,uint256,uint8,bytes32,bytes32),address,bytes)": FunctionFragment;
     "forwardEth(address,bytes)": FunctionFragment;
-    "swapAndForwardEth(uint256,address,bytes,address,uint256,address,bytes)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "forwardERC20" | "forwardEth" | "swapAndForwardEth"
+    nameOrSignatureOrTopic: "forwardERC20" | "forwardEth"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -72,28 +71,12 @@ export interface IMayanInterface extends utils.Interface {
     functionFragment: "forwardEth",
     values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndForwardEth",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BytesLike>
-    ]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "forwardERC20",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "forwardEth", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndForwardEth",
-    data: BytesLike
-  ): Result;
 
   events: {};
 }
@@ -139,17 +122,6 @@ export interface IMayan extends BaseContract {
       protocolData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    swapAndForwardEth(
-      amountIn: PromiseOrValue<BigNumberish>,
-      swapProtocol: PromiseOrValue<string>,
-      swapData: PromiseOrValue<BytesLike>,
-      middleToken: PromiseOrValue<string>,
-      minMiddleAmount: PromiseOrValue<BigNumberish>,
-      mayanProtocol: PromiseOrValue<string>,
-      mayanData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
   };
 
   forwardERC20(
@@ -167,17 +139,6 @@ export interface IMayan extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndForwardEth(
-    amountIn: PromiseOrValue<BigNumberish>,
-    swapProtocol: PromiseOrValue<string>,
-    swapData: PromiseOrValue<BytesLike>,
-    middleToken: PromiseOrValue<string>,
-    minMiddleAmount: PromiseOrValue<BigNumberish>,
-    mayanProtocol: PromiseOrValue<string>,
-    mayanData: PromiseOrValue<BytesLike>,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     forwardERC20(
       tokenIn: PromiseOrValue<string>,
@@ -191,17 +152,6 @@ export interface IMayan extends BaseContract {
     forwardEth(
       mayanProtocol: PromiseOrValue<string>,
       protocolData: PromiseOrValue<BytesLike>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    swapAndForwardEth(
-      amountIn: PromiseOrValue<BigNumberish>,
-      swapProtocol: PromiseOrValue<string>,
-      swapData: PromiseOrValue<BytesLike>,
-      middleToken: PromiseOrValue<string>,
-      minMiddleAmount: PromiseOrValue<BigNumberish>,
-      mayanProtocol: PromiseOrValue<string>,
-      mayanData: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -223,17 +173,6 @@ export interface IMayan extends BaseContract {
       protocolData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    swapAndForwardEth(
-      amountIn: PromiseOrValue<BigNumberish>,
-      swapProtocol: PromiseOrValue<string>,
-      swapData: PromiseOrValue<BytesLike>,
-      middleToken: PromiseOrValue<string>,
-      minMiddleAmount: PromiseOrValue<BigNumberish>,
-      mayanProtocol: PromiseOrValue<string>,
-      mayanData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -249,17 +188,6 @@ export interface IMayan extends BaseContract {
     forwardEth(
       mayanProtocol: PromiseOrValue<string>,
       protocolData: PromiseOrValue<BytesLike>,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    swapAndForwardEth(
-      amountIn: PromiseOrValue<BigNumberish>,
-      swapProtocol: PromiseOrValue<string>,
-      swapData: PromiseOrValue<BytesLike>,
-      middleToken: PromiseOrValue<string>,
-      minMiddleAmount: PromiseOrValue<BigNumberish>,
-      mayanProtocol: PromiseOrValue<string>,
-      mayanData: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
