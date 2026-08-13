@@ -85,49 +85,6 @@ const _abi = [
     outputs: [],
     stateMutability: "payable",
   },
-  {
-    type: "function",
-    name: "swapAndForwardEth",
-    inputs: [
-      {
-        name: "amountIn",
-        type: "uint256",
-        internalType: "uint256",
-      },
-      {
-        name: "swapProtocol",
-        type: "address",
-        internalType: "address",
-      },
-      {
-        name: "swapData",
-        type: "bytes",
-        internalType: "bytes",
-      },
-      {
-        name: "middleToken",
-        type: "address",
-        internalType: "address",
-      },
-      {
-        name: "minMiddleAmount",
-        type: "uint256",
-        internalType: "uint256",
-      },
-      {
-        name: "mayanProtocol",
-        type: "address",
-        internalType: "address",
-      },
-      {
-        name: "mayanData",
-        type: "bytes",
-        internalType: "bytes",
-      },
-    ],
-    outputs: [],
-    stateMutability: "payable",
-  },
 ] as const;
 
 export class IMayan__factory {
