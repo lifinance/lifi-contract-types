@@ -1,0 +1,148 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export interface ERC4626AdapterInterface extends utils.Interface {
+    functions: {
+        "deposit(address,address,uint256)": FunctionFragment;
+        "maxWithdrawableValue(address,address)": FunctionFragment;
+        "previewWithdrawCost(address,uint256)": FunctionFragment;
+        "previewWithdrawUpTo(address,address,uint256)": FunctionFragment;
+        "resolveAsset(address)": FunctionFragment;
+        "totalAssets(address,address)": FunctionFragment;
+        "withdraw(address,address,uint256)": FunctionFragment;
+        "withdrawUpTo(address,address,uint256)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "deposit" | "maxWithdrawableValue" | "previewWithdrawCost" | "previewWithdrawUpTo" | "resolveAsset" | "totalAssets" | "withdraw" | "withdrawUpTo"): FunctionFragment;
+    encodeFunctionData(functionFragment: "deposit", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "maxWithdrawableValue", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "previewWithdrawCost", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "previewWithdrawUpTo", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "resolveAsset", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "totalAssets", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "withdraw", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    encodeFunctionData(functionFragment: "withdrawUpTo", values: [
+        PromiseOrValue<string>,
+        PromiseOrValue<string>,
+        PromiseOrValue<BigNumberish>
+    ]): string;
+    decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "maxWithdrawableValue", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "previewWithdrawCost", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "previewWithdrawUpTo", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "resolveAsset", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "totalAssets", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "withdrawUpTo", data: BytesLike): Result;
+    events: {};
+}
+export interface ERC4626Adapter extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: ERC4626AdapterInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        deposit(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        maxWithdrawableValue(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            assets: BigNumber;
+        }>;
+        previewWithdrawCost(_underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            cost: BigNumber;
+        }>;
+        previewWithdrawUpTo(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            delivered: BigNumber;
+        }>;
+        resolveAsset(_underlying: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string] & {
+            asset: string;
+        }>;
+        totalAssets(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber] & {
+            assets: BigNumber;
+        }>;
+        withdraw(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        withdrawUpTo(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    deposit(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    maxWithdrawableValue(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    previewWithdrawCost(_underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    previewWithdrawUpTo(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    resolveAsset(_underlying: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+    totalAssets(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+    withdraw(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    withdrawUpTo(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        deposit(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        maxWithdrawableValue(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        previewWithdrawCost(_underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        previewWithdrawUpTo(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        resolveAsset(_underlying: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
+        totalAssets(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        withdrawUpTo(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+    };
+    filters: {};
+    estimateGas: {
+        deposit(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        maxWithdrawableValue(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        previewWithdrawCost(_underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        previewWithdrawUpTo(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        resolveAsset(_underlying: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        totalAssets(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        withdrawUpTo(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        deposit(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        maxWithdrawableValue(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        previewWithdrawCost(_underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        previewWithdrawUpTo(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        resolveAsset(_underlying: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        totalAssets(_underlying: PromiseOrValue<string>, _holder: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        withdraw(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        withdrawUpTo(_asset: PromiseOrValue<string>, _underlying: PromiseOrValue<string>, _assets: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
