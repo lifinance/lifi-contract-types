@@ -3,7 +3,6 @@
 /* eslint-disable */
 export * as iChainflipSol from "./IChainflip.sol";
 export * as iGardenSol from "./IGarden.sol";
-export * as iHopBridgeSol from "./IHopBridge.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
 export * as liFiTimelockControllerSol from "./LiFiTimelockController.sol";
@@ -45,9 +44,6 @@ export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
 export { GenericSwapFacetV3__factory } from "./GenericSwapFacetV3__factory";
 export { GlacisFacet__factory } from "./GlacisFacet__factory";
 export { GnosisBridgeFacet__factory } from "./GnosisBridgeFacet__factory";
-export { HopFacet__factory } from "./HopFacet__factory";
-export { HopFacetOptimized__factory } from "./HopFacetOptimized__factory";
-export { HopFacetPacked__factory } from "./HopFacetPacked__factory";
 export { IAccessControl__factory } from "./IAccessControl__factory";
 export { IAcrossSpokePool__factory } from "./IAcrossSpokePool__factory";
 export { IAcrossSpokePoolV4__factory } from "./IAcrossSpokePoolV4__factory";
