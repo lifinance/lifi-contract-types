@@ -1,4 +1,5 @@
 export * as iChainflipSol from "./IChainflip.sol";
+export * as iFraxHopV2Sol from "./IFraxHopV2.sol";
 export * as iGardenSol from "./IGarden.sol";
 export * as iStargateSol from "./IStargate.sol";
 export * as liFiDexAggregatorSol from "./LiFiDEXAggregator.sol";
@@ -35,6 +36,7 @@ export { Executor__factory } from "./Executor__factory";
 export { FeeCollector__factory } from "./FeeCollector__factory";
 export { FeeForwarder__factory } from "./FeeForwarder__factory";
 export { FixedPointMathLib__factory } from "./FixedPointMathLib__factory";
+export { FraxFacet__factory } from "./FraxFacet__factory";
 export { GardenFacet__factory } from "./GardenFacet__factory";
 export { GasZipFacet__factory } from "./GasZipFacet__factory";
 export { GasZipPeriphery__factory } from "./GasZipPeriphery__factory";
