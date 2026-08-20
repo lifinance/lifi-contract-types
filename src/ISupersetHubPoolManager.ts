@@ -23,15 +23,44 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace ISupersetHubPoolManager {
+  export type ExactInputParamsStruct = {
+    path: PromiseOrValue<BytesLike>;
+    recipient: PromiseOrValue<string>;
+    deadline: PromiseOrValue<BigNumberish>;
+    amountIn: PromiseOrValue<BigNumberish>;
+    amountOutMinimum: PromiseOrValue<BigNumberish>;
+  };
+
+  export type ExactInputParamsStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    path: string;
+    recipient: string;
+    deadline: BigNumber;
+    amountIn: BigNumber;
+    amountOutMinimum: BigNumber;
+  };
+}
+
 export interface ISupersetHubPoolManagerInterface extends utils.Interface {
   functions: {
+    "exactInput((bytes,address,uint256,uint256,uint256))": FunctionFragment;
     "multiHopSwapWithOutputChain(bytes,uint256,uint256,address,address,uint256,uint32)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "multiHopSwapWithOutputChain"
+    nameOrSignatureOrTopic: "exactInput" | "multiHopSwapWithOutputChain"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "exactInput",
+    values: [ISupersetHubPoolManager.ExactInputParamsStruct]
+  ): string;
   encodeFunctionData(
     functionFragment: "multiHopSwapWithOutputChain",
     values: [
@@ -45,6 +74,7 @@ export interface ISupersetHubPoolManagerInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "exactInput", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "multiHopSwapWithOutputChain",
     data: BytesLike
@@ -80,6 +110,11 @@ export interface ISupersetHubPoolManager extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    exactInput(
+      _params: ISupersetHubPoolManager.ExactInputParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     multiHopSwapWithOutputChain(
       _path: PromiseOrValue<BytesLike>,
       _amountIn: PromiseOrValue<BigNumberish>,
@@ -91,6 +126,11 @@ export interface ISupersetHubPoolManager extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  exactInput(
+    _params: ISupersetHubPoolManager.ExactInputParamsStruct,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   multiHopSwapWithOutputChain(
     _path: PromiseOrValue<BytesLike>,
@@ -104,6 +144,11 @@ export interface ISupersetHubPoolManager extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    exactInput(
+      _params: ISupersetHubPoolManager.ExactInputParamsStruct,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     multiHopSwapWithOutputChain(
       _path: PromiseOrValue<BytesLike>,
       _amountIn: PromiseOrValue<BigNumberish>,
@@ -119,6 +164,11 @@ export interface ISupersetHubPoolManager extends BaseContract {
   filters: {};
 
   estimateGas: {
+    exactInput(
+      _params: ISupersetHubPoolManager.ExactInputParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     multiHopSwapWithOutputChain(
       _path: PromiseOrValue<BytesLike>,
       _amountIn: PromiseOrValue<BigNumberish>,
@@ -132,6 +182,11 @@ export interface ISupersetHubPoolManager extends BaseContract {
   };
 
   populateTransaction: {
+    exactInput(
+      _params: ISupersetHubPoolManager.ExactInputParamsStruct,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     multiHopSwapWithOutputChain(
       _path: PromiseOrValue<BytesLike>,
       _amountIn: PromiseOrValue<BigNumberish>,
