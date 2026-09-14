@@ -114,7 +114,7 @@ export declare class WithdrawablePeriphery__factory {
         readonly anonymous: false;
     }, {
         readonly type: "error";
-        readonly name: "ExternalCallFailed";
+        readonly name: "InvalidReceiver";
         readonly inputs: readonly [];
     }, {
         readonly type: "error";
@@ -135,6 +135,10 @@ export declare class WithdrawablePeriphery__factory {
     }, {
         readonly type: "error";
         readonly name: "UnAuthorized";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "ZeroAmount";
         readonly inputs: readonly [];
     }];
     static createInterface(): WithdrawablePeripheryInterface;
