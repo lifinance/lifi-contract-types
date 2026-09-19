@@ -33,10 +33,7 @@
     "dist"
   ],
   "dependencies": {
-    "@ethersproject/abi": "^5.5.0",
-    "@ethersproject/bytes": "^5.5.0",
-    "@ethersproject/providers": "^5.5.1",
-    "ethers": "^5.5.2"
+    "ethers": "^6.0.0"
   },
   "overrides": {
     "elliptic": "6.6.1"
