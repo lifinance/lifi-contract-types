@@ -47,8 +47,6 @@ export declare namespace EcoFacet {
         encodedRoute: PromiseOrValue<BytesLike>;
         solanaATA: PromiseOrValue<BytesLike>;
         refundRecipient: PromiseOrValue<string>;
-        deadline: PromiseOrValue<BigNumberish>;
-        signature: PromiseOrValue<BytesLike>;
     };
     type EcoDataStructOutput = [
         string,
@@ -56,8 +54,6 @@ export declare namespace EcoFacet {
         BigNumber,
         string,
         string,
-        string,
-        BigNumber,
         string
     ] & {
         nonEVMReceiver: string;
@@ -66,8 +62,6 @@ export declare namespace EcoFacet {
         encodedRoute: string;
         solanaATA: string;
         refundRecipient: string;
-        deadline: BigNumber;
-        signature: string;
     };
 }
 export declare namespace LibSwap {
@@ -101,8 +95,8 @@ export declare namespace LibSwap {
 export interface EcoFacetInterface extends utils.Interface {
     functions: {
         "PORTAL()": FunctionFragment;
-        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
+        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32,address))": FunctionFragment;
+        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32,address))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "PORTAL" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
     encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
