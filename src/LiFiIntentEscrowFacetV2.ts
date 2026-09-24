@@ -8,7 +8,6 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -363,7 +362,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     startBridgeTokensViaLiFiIntentEscrowV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
@@ -379,7 +378,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
   startBridgeTokensViaLiFiIntentEscrowV2(
     _bridgeData: ILiFi.BridgeDataStruct,
     _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
@@ -532,7 +531,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     startBridgeTokensViaLiFiIntentEscrowV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
@@ -551,7 +550,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     startBridgeTokensViaLiFiIntentEscrowV2(
       _bridgeData: ILiFi.BridgeDataStruct,
       _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     swapAndStartBridgeTokensViaLiFiIntentEscrowV2(
