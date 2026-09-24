@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -94,17 +94,17 @@ export interface IOriginSettler extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        open(order: StandardOrderStruct, overrides?: Overrides & {
+        open(order: StandardOrderStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    open(order: StandardOrderStruct, overrides?: Overrides & {
+    open(order: StandardOrderStruct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+    openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
@@ -113,18 +113,18 @@ export interface IOriginSettler extends BaseContract {
     };
     filters: {};
     estimateGas: {
-        open(order: StandardOrderStruct, overrides?: Overrides & {
+        open(order: StandardOrderStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        open(order: StandardOrderStruct, overrides?: Overrides & {
+        open(order: StandardOrderStruct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: Overrides & {
+        openFor(order: StandardOrderStruct, sponsor: PromiseOrValue<string>, signature: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
     };

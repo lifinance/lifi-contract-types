@@ -101,7 +101,7 @@ var _abi = [
             },
         ],
         outputs: [],
-        stateMutability: "nonpayable",
+        stateMutability: "payable",
     },
     {
         type: "function",
@@ -208,7 +208,7 @@ var _abi = [
             },
         ],
         outputs: [],
-        stateMutability: "nonpayable",
+        stateMutability: "payable",
     },
 ];
 var IOriginSettler__factory = /** @class */ (function () {
