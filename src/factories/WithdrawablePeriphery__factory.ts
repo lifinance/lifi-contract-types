@@ -151,7 +151,7 @@ const _abi = [
   },
   {
     type: "error",
-    name: "ExternalCallFailed",
+    name: "InvalidReceiver",
     inputs: [],
   },
   {
@@ -177,6 +177,11 @@ const _abi = [
   {
     type: "error",
     name: "UnAuthorized",
+    inputs: [],
+  },
+  {
+    type: "error",
+    name: "ZeroAmount",
     inputs: [],
   },
 ] as const;
