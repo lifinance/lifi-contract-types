@@ -1,0 +1,588 @@
+import { Signer, ContractFactory, Overrides } from "ethers";
+import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../common";
+import type { M0Facet, M0FacetInterface } from "../M0Facet";
+type M0FacetConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+export declare class M0Facet__factory extends ContractFactory {
+    constructor(...args: M0FacetConstructorParams);
+    deploy(_orderBook: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<M0Facet>;
+    getDeployTransaction(_orderBook: PromiseOrValue<string>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): TransactionRequest;
+    attach(address: string): M0Facet;
+    connect(signer: Signer): M0Facet__factory;
+    static readonly bytecode = "0x60a060405234801561000f575f5ffd5b506040516123b23803806123b283398101604081905261002e91610066565b6001600160a01b038116610055576040516306b7c75960e31b815260040160405180910390fd5b6001600160a01b0316608052610093565b5f60208284031215610076575f5ffd5b81516001600160a01b038116811461008c575f5ffd5b9392505050565b6080516122fa6100b85f395f8181607c015281816109c40152610a0001526122fa5ff3fe608060405260043610610033575f3560e01c806365782c4b14610037578063b9eaf86d14610058578063ca72c3411461006b575b5f5ffd5b348015610042575f5ffd5b50610056610051366004611d44565b6100c7565b005b610056610066366004611d91565b6102ee565b348015610076575f5ffd5b5061009e7f000000000000000000000000000000000000000000000000000000000000000081565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b7fa65bb2f450488ab0858c00edc14abc5297769bf42adb48cfb77752890e8b697b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01610142576040517f29f745a700000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001815560a0830151839073ffffffffffffffffffffffffffffffffffffffff16610199576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8060c001515f036101d6576040517f2c5211c600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8380610100015115610214576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8480610120015115610252576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b85610275816080015173ffffffffffffffffffffffffffffffffffffffff161590565b156102ac576040517f5ded599700000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6102b68787610692565b6102c887608001518860c00151610906565b6102e287876102dd60c0820160a08301611e3f565b6109ba565b50505f90925550505050565b7fa65bb2f450488ab0858c00edc14abc5297769bf42adb48cfb77752890e8b697b80547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01610369576040517f29f745a700000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6001815561037d6040830160208401611e75565b5f6103883447611e8e565b9050866103ad8160a0015173ffffffffffffffffffffffffffffffffffffffff161590565b156103e4576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8060c001515f03610421576040517f2c5211c600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8780610100015161045e576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b888061012001511561049c576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b896104bf816080015173ffffffffffffffffffffffffffffffffffffffff161590565b156104f6576040517f5ded599700000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6105008b89610692565b881580159061057d575060808b015173ffffffffffffffffffffffffffffffffffffffff168a8a610532600182611e8e565b81811061054157610541611ec6565b90506020028101906105539190611ef3565b610564906080810190606001611e75565b73ffffffffffffffffffffffffffffffffffffffff1614155b156105b4576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f8b60c0015190505f6105df8d5f0151838e8e8e60200160208101906105da9190611e75565b610c3b565b90505f61060e6105f560c08d0160a08e01611e3f565b6fffffffffffffffffffffffffffffffff168385610d7e565b9050805f03610649576040517f2c5211c600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60c08e0182905261065e8e8c6102dd84610da3565b505050505050505f47905081811115610685576106855f846106808585611e8e565b610dc8565b50505f9091555050505050565b5f6106a36040830160208401611e75565b73ffffffffffffffffffffffffffffffffffffffff16036106f0576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f6107016060830160408401611e75565b73ffffffffffffffffffffffffffffffffffffffff160361074e576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6060810135610789576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f6107978360e00151610df8565b9150507311f111f111f111f111f111f111f111f111f111f173ffffffffffffffffffffffffffffffffffffffff168360a0015173ffffffffffffffffffffffffffffffffffffffff1603610859578061081c576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b8135610854576040517f58b0510000000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b505050565b8015610891576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60a083015173ffffffffffffffffffffffffffffffffffffffff168235146108e5576040517f50dc905c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6108f28260600135610e78565b506109008260800135610e78565b50505050565b805f0361093f576040517f2c5211c600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b73ffffffffffffffffffffffffffffffffffffffff82166109985780341015610994576040517f2c5211c600000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5050565b61099473ffffffffffffffffffffffffffffffffffffffff8316333084610eb8565b6109ed83608001517f00000000000000000000000000000000000000000000000000000000000000008560c00151610f10565b5f6109fb8460e00151610df8565b5090507f000000000000000000000000000000000000000000000000000000000000000073ffffffffffffffffffffffffffffffffffffffff16633c48b0a2604051806101200160405280610a4f85610f3c565b63ffffffff168152602001610a6a60e0880160c08901611f2f565b63ffffffff168152602001876080015173ffffffffffffffffffffffffffffffffffffffff16815260200186606001358152602001610aac8860c00151610da3565b6fffffffffffffffffffffffffffffffff168152602001856fffffffffffffffffffffffffffffffff168152602001865f0135815260200186608001358152602001866040016020810190610b019190611e75565b73ffffffffffffffffffffffffffffffffffffffff168152506040518263ffffffff1660e01b8152600401610b369190611f52565b6020604051808303815f875af1158015610b52573d5f5f3e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610b769190612032565b507311f111f111f111f111f111f111f111f111f111f173ffffffffffffffffffffffffffffffffffffffff168460a0015173ffffffffffffffffffffffffffffffffffffffff1603610bfe5760e08401518451604051853581527f815cd8dc72093a13fe3577112c391b6279303956526382ab98772d0239dbf78c9060200160405180910390a35b7fcba69f43792f9f399347222505213b55af8e0b0b54b893085c2e27ecbe1644f184604051610c2d9190612095565b60405180910390a150505050565b5f82808203610c76576040517f0503c3ed00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f8585610c84600185611e8e565b818110610c9357610c93611ec6565b9050602002810190610ca59190611ef3565b610cb6906080810190606001611e75565b90505f610cc282610f51565b905073ffffffffffffffffffffffffffffffffffffffff8216610cec57610ce93482611e8e565b90505b5f610cf78888610f9b565b9050610d0388886110a5565b610d108a89898985611111565b5f82610d1b85610f51565b610d259190611e8e565b905089811015610d70576040517f275c273c000000000000000000000000000000000000000000000000000000008152600481018b9052602481018290526044015b60405180910390fd5b9a9950505050505050505050565b82820283158482048414178202610d9c5763ad251c275f526004601cfd5b0492915050565b5f7001000000000000000000000000000000008210610dc457610dc4611359565b5090565b73ffffffffffffffffffffffffffffffffffffffff8316610ded576108548282611366565b6108548383836113d3565b5f5f660416edef1601be8303610e17575063536f6c4d92600192509050565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffac9093b38301610e70576040517f1c49f4d100000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5090915f9150565b5f60a082901c15610dc4576040517f479ef3f700000000000000000000000000000000000000000000000000000000815260048101839052602401610d67565b60405181606052826040528360601b602c526f23b872dd000000000000000000000000600c5260205f6064601c5f895af13d1560015f51141716610f0357637939f4245f526004601cfd5b5f60605260405250505050565b6108548383837fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff611441565b5f6401000000008210610dc457610dc4611359565b5f73ffffffffffffffffffffffffffffffffffffffff821615610f9357610f8e73ffffffffffffffffffffffffffffffffffffffff831630611568565b610f95565b475b92915050565b6060815f8167ffffffffffffffff811115610fb857610fb8611b0f565b604051908082528060200260200182016040528015610fe1578160200160208202803683370190505b5090505f5f5b8381101561109a5786868281811061100157611001611ec6565b90506020028101906110139190611ef3565b611024906080810190606001611e75565b915061102f82610f51565b83828151811061104157611041611ec6565b602090810291909101015273ffffffffffffffffffffffffffffffffffffffff8216611092573483828151811061107a5761107a611ec6565b6020026020010181815161108e9190611e8e565b9052505b600101610fe7565b509095945050505050565b5f5b8181101561085457368383838181106110c2576110c2611ec6565b90506020028101906110d49190611ef3565b90506110e660e0820160c083016121a8565b15611108576111086110fe6060830160408401611e75565b8260800135610906565b506001016110a7565b83838383825f80805b8381101561133d57368c8c8381811061113557611135611ec6565b90506020028101906111479190611ef3565b90506111566020820182611e75565b93506111686040820160208301611e75565b925061120b8461117b60a08401846121c1565b611189916004915f91612229565b61119291612250565b73ffffffffffffffffffffffffffffffffffffffff919091165f9081527f7a8ac5d3b7183f220a0602439da45ea337311d699902d1ed11a3725a714e7f24602090815260408083207fffffffff000000000000000000000000000000000000000000000000000000009094168352929052205460ff1690565b15806112f3575061123f6112256060830160408401611e75565b73ffffffffffffffffffffffffffffffffffffffff161590565b15801561127857508373ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614155b80156112f3575073ffffffffffffffffffffffffffffffffffffffff83165f9081527f7a8ac5d3b7183f220a0602439da45ea337311d699902d1ed11a3725a714e7f24602090815260408083207fffffffff00000000000000000000000000000000000000000000000000000000845290915290205460ff16155b1561132a576040517f9453980400000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6113348e8261159b565b5060010161111a565b5050505061134e848484845f61180e565b505050505050505050565b6335278d125f526004601cfd5b73ffffffffffffffffffffffffffffffffffffffff82166113b3576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61099473ffffffffffffffffffffffffffffffffffffffff831682611a25565b73ffffffffffffffffffffffffffffffffffffffff8216611420576040517f1e4ec46b00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b61085473ffffffffffffffffffffffffffffffffffffffff84168383611a3e565b73ffffffffffffffffffffffffffffffffffffffff8416156109005773ffffffffffffffffffffffffffffffffffffffff83166114aa576040517f63ba9bff00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b6040517fdd62ed3e00000000000000000000000000000000000000000000000000000000815230600482015273ffffffffffffffffffffffffffffffffffffffff848116602483015283919086169063dd62ed3e90604401602060405180830381865afa15801561151d573d5f5f3e3d5ffd5b505050506040513d601f19601f820116820180604052508101906115419190612032565b10156109005761090073ffffffffffffffffffffffffffffffffffffffff85168483611a87565b5f816014526f70a082310000000000000000000000005f5260208060246010865afa601f3d111660205102905092915050565b6115b36115ab6020830183611e75565b6017903b1190565b6115e9576040517f6eefed2000000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b60808101355f819003611628576040517fe46e079c00000000000000000000000000000000000000000000000000000000815260040160405180910390fd5b5f61163c6112256060850160408601611e75565b611646575f61164c565b82608001355b90505f6116676116626080860160608701611e75565b610f51565b9050815f0361169d5761169d6116836060860160408701611e75565b6116936040870160208801611e75565b8660800135610f10565b5f806116ac6020870187611e75565b73ffffffffffffffffffffffffffffffffffffffff16846116d060a08901896121c1565b6040516116de9291906122b5565b5f6040518083038185875af1925050503d805f8114611718576040519150601f19603f3d011682016040523d82523d5f602084013e61171d565b606091505b5091509150816117305761173081611b05565b5f6117446116626080890160608a01611e75565b90507f7bfdfdb5e3a3776976e53cb0607060f54c5312701c8cba1155cc4d5394440b388861177560208a018a611e75565b61178560608b0160408c01611e75565b61179560808c0160608d01611e75565b8b608001358987116117a757866117b1565b6117b18a88611e8e565b6040805196875273ffffffffffffffffffffffffffffffffffffffff95861660208801529385169386019390935292166060840152608083019190915260a08201524260c082015260e00160405180910390a15050505050505050565b835f868261181d600182611e8e565b81811061182c5761182c611ec6565b905060200281019061183e9190611ef3565b61184f906080810190606001611e75565b90505f5f5f5f5f5f5f5b88811015611a155761186c60018a611e8e565b8110801561187b575088600114155b15611956578d8d8281811061189257611892611ec6565b90506020028101906118a49190611ef3565b6118b5906080810190606001611e75565b95508773ffffffffffffffffffffffffffffffffffffffff168673ffffffffffffffffffffffffffffffffffffffff1614611956578a81815181106118fc576118fc611ec6565b602002602001015161190d87610f51565b6119179190611e8e565b965073ffffffffffffffffffffffffffffffffffffffff86161561193b575f61193d565b895b93508387111561195657611956868d610680878b611e8e565b8d8d8281811061196857611968611ec6565b905060200281019061197a9190611ef3565b61198b906060810190604001611e75565b945061199685610f51565b925073ffffffffffffffffffffffffffffffffffffffff8516156119ba575f6119bc565b895b915081831180156119f957508773ffffffffffffffffffffffffffffffffffffffff168573ffffffffffffffffffffffffffffffffffffffff1614155b15611a0d57611a0d858d6106808587611e8e565b600101611859565b5050505050505050505050505050565b5f385f3884865af16109945763b12d13eb5f526004601cfd5b81601452806034526fa9059cbb0000000000000000000000005f5260205f604460105f875af13d1560015f51141716611a7e576390b8ec185f526004601cfd5b5f603452505050565b81601452806034526f095ea7b30000000000000000000000005f5260205f604460105f875af13d1560015f51141716611a7e575f6034526f095ea7b30000000000000000000000005f525f38604460105f875af1508060345260205f604460105f875af13d1560015f51141716611a7e57633e3f8f735f526004601cfd5b8051602082018181fd5b7f4e487b71000000000000000000000000000000000000000000000000000000005f52604160045260245ffd5b604051610140810167ffffffffffffffff81118282101715611b6057611b60611b0f565b60405290565b5f82601f830112611b75575f5ffd5b813567ffffffffffffffff811115611b8f57611b8f611b0f565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0908116603f0116810167ffffffffffffffff81118282101715611bdc57611bdc611b0f565b604052818152838201602001851015611bf3575f5ffd5b816020850160208301375f918101602001919091529392505050565b803573ffffffffffffffffffffffffffffffffffffffff81168114611c32575f5ffd5b919050565b80358015158114611c32575f5ffd5b5f6101408284031215611c57575f5ffd5b611c5f611b3c565b823581529050602082013567ffffffffffffffff811115611c7e575f5ffd5b611c8a84828501611b66565b602083015250604082013567ffffffffffffffff811115611ca9575f5ffd5b611cb584828501611b66565b604083015250611cc760608301611c0f565b6060820152611cd860808301611c0f565b6080820152611ce960a08301611c0f565b60a082015260c0828101359082015260e08083013590820152611d0f6101008301611c37565b610100820152611d226101208301611c37565b61012082015292915050565b5f60e08284031215611d3e575f5ffd5b50919050565b5f5f6101008385031215611d56575f5ffd5b823567ffffffffffffffff811115611d6c575f5ffd5b611d7885828601611c46565b925050611d888460208501611d2e565b90509250929050565b5f5f5f5f6101208587031215611da5575f5ffd5b843567ffffffffffffffff811115611dbb575f5ffd5b611dc787828801611c46565b945050602085013567ffffffffffffffff811115611de3575f5ffd5b8501601f81018713611df3575f5ffd5b803567ffffffffffffffff811115611e09575f5ffd5b8760208260051b8401011115611e1d575f5ffd5b60209190910193509150611e348660408701611d2e565b905092959194509250565b5f60208284031215611e4f575f5ffd5b81356fffffffffffffffffffffffffffffffff81168114611e6e575f5ffd5b9392505050565b5f60208284031215611e85575f5ffd5b611e6e82611c0f565b81810381811115610f95577f4e487b71000000000000000000000000000000000000000000000000000000005f52601160045260245ffd5b7f4e487b71000000000000000000000000000000000000000000000000000000005f52603260045260245ffd5b5f82357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff21833603018112611f25575f5ffd5b9190910192915050565b5f60208284031215611f3f575f5ffd5b813563ffffffff81168114611e6e575f5ffd5b5f6101208201905063ffffffff835116825263ffffffff60208401511660208301526040830151611f9b604084018273ffffffffffffffffffffffffffffffffffffffff169052565b50606083015160608301526080830151611fc960808401826fffffffffffffffffffffffffffffffff169052565b5060a0830151611fed60a08401826fffffffffffffffffffffffffffffffff169052565b5060c083015160c083015260e083015160e083015261010083015161202b61010084018273ffffffffffffffffffffffffffffffffffffffff169052565b5092915050565b5f60208284031215612042575f5ffd5b5051919050565b5f81518084528060208401602086015e5f6020828601015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f83011685010191505092915050565b60208152815160208201525f602083015161014060408401526120bc610160840182612049565b905060408401517fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe08483030160608501526120f78282612049565b9150506060840151612121608085018273ffffffffffffffffffffffffffffffffffffffff169052565b50608084015173ffffffffffffffffffffffffffffffffffffffff811660a08501525060a084015173ffffffffffffffffffffffffffffffffffffffff811660c08501525060c084015160e084015260e084015161010084015261010084015161219061012085018215159052565b50610120840151801515610140850152509392505050565b5f602082840312156121b8575f5ffd5b611e6e82611c37565b5f5f83357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe18436030181126121f4575f5ffd5b83018035915067ffffffffffffffff82111561220e575f5ffd5b602001915036819003821315612222575f5ffd5b9250929050565b5f5f85851115612237575f5ffd5b83861115612243575f5ffd5b5050820193919092039150565b80357fffffffff00000000000000000000000000000000000000000000000000000000811690600484101561202b577fffffffff00000000000000000000000000000000000000000000000000000000808560040360031b1b82161691505092915050565b818382375f910190815291905056fea2646970667358221220c30efe9eb210bd71ca0cbacdb4fdbdd05f364e23d8ec5536baaf83305c9d816d64736f6c634300081d0033";
+    static readonly abi: readonly [{
+        readonly type: "constructor";
+        readonly inputs: readonly [{
+            readonly name: "_orderBook";
+            readonly type: "address";
+            readonly internalType: "contract IM0OrderBook";
+        }];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "M0_ORDER_BOOK";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "address";
+            readonly internalType: "contract IM0OrderBook";
+        }];
+        readonly stateMutability: "view";
+    }, {
+        readonly type: "function";
+        readonly name: "startBridgeTokensViaM0";
+        readonly inputs: readonly [{
+            readonly name: "_bridgeData";
+            readonly type: "tuple";
+            readonly internalType: "struct ILiFi.BridgeData";
+            readonly components: readonly [{
+                readonly name: "transactionId";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "bridge";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "integrator";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "referrer";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "sendingAssetId";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "receiver";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "minAmount";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "destinationChainId";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "hasSourceSwaps";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "hasDestinationCall";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
+        }, {
+            readonly name: "_m0Data";
+            readonly type: "tuple";
+            readonly internalType: "struct M0Facet.M0Data";
+            readonly components: readonly [{
+                readonly name: "receiverAddress";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "refundRecipient";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "orderOwner";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "tokenOut";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "solver";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "amountOut";
+                readonly type: "uint128";
+                readonly internalType: "uint128";
+            }, {
+                readonly name: "fillDeadline";
+                readonly type: "uint32";
+                readonly internalType: "uint32";
+            }];
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "nonpayable";
+    }, {
+        readonly type: "function";
+        readonly name: "swapAndStartBridgeTokensViaM0";
+        readonly inputs: readonly [{
+            readonly name: "_bridgeData";
+            readonly type: "tuple";
+            readonly internalType: "struct ILiFi.BridgeData";
+            readonly components: readonly [{
+                readonly name: "transactionId";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "bridge";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "integrator";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "referrer";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "sendingAssetId";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "receiver";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "minAmount";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "destinationChainId";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "hasSourceSwaps";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "hasDestinationCall";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
+        }, {
+            readonly name: "_swapData";
+            readonly type: "tuple[]";
+            readonly internalType: "struct LibSwap.SwapData[]";
+            readonly components: readonly [{
+                readonly name: "callTo";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "approveTo";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "sendingAssetId";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "receivingAssetId";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "fromAmount";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "callData";
+                readonly type: "bytes";
+                readonly internalType: "bytes";
+            }, {
+                readonly name: "requiresDeposit";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
+        }, {
+            readonly name: "_m0Data";
+            readonly type: "tuple";
+            readonly internalType: "struct M0Facet.M0Data";
+            readonly components: readonly [{
+                readonly name: "receiverAddress";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "refundRecipient";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "orderOwner";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "tokenOut";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "solver";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "amountOut";
+                readonly type: "uint128";
+                readonly internalType: "uint128";
+            }, {
+                readonly name: "fillDeadline";
+                readonly type: "uint32";
+                readonly internalType: "uint32";
+            }];
+        }];
+        readonly outputs: readonly [];
+        readonly stateMutability: "payable";
+    }, {
+        readonly type: "event";
+        readonly name: "AssetSwapped";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: false;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "dex";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "fromAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "toAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "fromAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "toAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "timestamp";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "BridgeToNonEVMChain";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "destinationChainId";
+            readonly type: "uint256";
+            readonly indexed: true;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "receiver";
+            readonly type: "bytes";
+            readonly indexed: false;
+            readonly internalType: "bytes";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "BridgeToNonEVMChainBytes32";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "destinationChainId";
+            readonly type: "uint256";
+            readonly indexed: true;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "receiver";
+            readonly type: "bytes32";
+            readonly indexed: false;
+            readonly internalType: "bytes32";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "LiFiGenericSwapCompleted";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "integrator";
+            readonly type: "string";
+            readonly indexed: false;
+            readonly internalType: "string";
+        }, {
+            readonly name: "referrer";
+            readonly type: "string";
+            readonly indexed: false;
+            readonly internalType: "string";
+        }, {
+            readonly name: "receiver";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "fromAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "toAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "fromAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "toAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "LiFiSwappedGeneric";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "integrator";
+            readonly type: "string";
+            readonly indexed: false;
+            readonly internalType: "string";
+        }, {
+            readonly name: "referrer";
+            readonly type: "string";
+            readonly indexed: false;
+            readonly internalType: "string";
+        }, {
+            readonly name: "fromAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "toAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "fromAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "toAmount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "LiFiTransferCompleted";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "receivingAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "receiver";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "amount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "timestamp";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "LiFiTransferRecovered";
+        readonly inputs: readonly [{
+            readonly name: "transactionId";
+            readonly type: "bytes32";
+            readonly indexed: true;
+            readonly internalType: "bytes32";
+        }, {
+            readonly name: "receivingAssetId";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "receiver";
+            readonly type: "address";
+            readonly indexed: false;
+            readonly internalType: "address";
+        }, {
+            readonly name: "amount";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "timestamp";
+            readonly type: "uint256";
+            readonly indexed: false;
+            readonly internalType: "uint256";
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "event";
+        readonly name: "LiFiTransferStarted";
+        readonly inputs: readonly [{
+            readonly name: "bridgeData";
+            readonly type: "tuple";
+            readonly indexed: false;
+            readonly internalType: "struct ILiFi.BridgeData";
+            readonly components: readonly [{
+                readonly name: "transactionId";
+                readonly type: "bytes32";
+                readonly internalType: "bytes32";
+            }, {
+                readonly name: "bridge";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "integrator";
+                readonly type: "string";
+                readonly internalType: "string";
+            }, {
+                readonly name: "referrer";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "sendingAssetId";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "receiver";
+                readonly type: "address";
+                readonly internalType: "address";
+            }, {
+                readonly name: "minAmount";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "destinationChainId";
+                readonly type: "uint256";
+                readonly internalType: "uint256";
+            }, {
+                readonly name: "hasSourceSwaps";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }, {
+                readonly name: "hasDestinationCall";
+                readonly type: "bool";
+                readonly internalType: "bool";
+            }];
+        }];
+        readonly anonymous: false;
+    }, {
+        readonly type: "error";
+        readonly name: "ContractCallNotAllowed";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "CumulativeSlippageTooHigh";
+        readonly inputs: readonly [{
+            readonly name: "minAmount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }, {
+            readonly name: "receivedAmount";
+            readonly type: "uint256";
+            readonly internalType: "uint256";
+        }];
+    }, {
+        readonly type: "error";
+        readonly name: "InformationMismatch";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidAmount";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidCallData";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidConfig";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidContract";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidNonEVMReceiver";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "InvalidReceiver";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NativeAssetNotSupported";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NoSwapDataProvided";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NoSwapFromZeroBalance";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "NotAnAddress";
+        readonly inputs: readonly [{
+            readonly name: "value";
+            readonly type: "bytes32";
+            readonly internalType: "bytes32";
+        }];
+    }, {
+        readonly type: "error";
+        readonly name: "NullAddrIsNotAValidSpender";
+        readonly inputs: readonly [];
+    }, {
+        readonly type: "error";
+        readonly name: "ReentrancyError";
+        readonly inputs: readonly [];
+    }];
+    static createInterface(): M0FacetInterface;
+    static connect(address: string, signerOrProvider: Signer | Provider): M0Facet;
+}
+export {};
