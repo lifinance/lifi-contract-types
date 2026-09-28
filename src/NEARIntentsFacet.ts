@@ -69,7 +69,6 @@ export declare namespace ILiFi {
 export declare namespace NEARIntentsFacet {
   export type NEARIntentsDataStruct = {
     nonEVMReceiver: PromiseOrValue<BytesLike>;
-    destinationAsset: PromiseOrValue<BytesLike>;
     depositAddress: PromiseOrValue<string>;
     quoteId: PromiseOrValue<BytesLike>;
     deadline: PromiseOrValue<BigNumberish>;
@@ -82,14 +81,12 @@ export declare namespace NEARIntentsFacet {
     string,
     string,
     string,
-    string,
     BigNumber,
     BigNumber,
     string,
     string
   ] & {
     nonEVMReceiver: string;
-    destinationAsset: string;
     depositAddress: string;
     quoteId: string;
     deadline: BigNumber;
@@ -132,8 +129,8 @@ export declare namespace LibSwap {
 export interface NEARIntentsFacetInterface extends utils.Interface {
   functions: {
     "isQuoteConsumed(bytes32)": FunctionFragment;
-    "startBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
-    "swapAndStartBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
+    "startBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
+    "swapAndStartBridgeTokensViaNEARIntents((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes32,uint256,uint256,address,bytes))": FunctionFragment;
   };
 
   getFunction(
@@ -182,7 +179,7 @@ export interface NEARIntentsFacetInterface extends utils.Interface {
     "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
     "LiFiTransferStarted(tuple)": EventFragment;
-    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256,bytes32)": EventFragment;
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
@@ -322,10 +319,9 @@ export interface NEARIntentsBridgeStartedEventObject {
   amount: BigNumber;
   deadline: BigNumber;
   minAmountOut: BigNumber;
-  destinationAsset: string;
 }
 export type NEARIntentsBridgeStartedEvent = TypedEvent<
-  [string, string, string, string, BigNumber, BigNumber, BigNumber, string],
+  [string, string, string, string, BigNumber, BigNumber, BigNumber],
   NEARIntentsBridgeStartedEventObject
 >;
 
@@ -533,15 +529,14 @@ export interface NEARIntentsFacet extends BaseContract {
     ): LiFiTransferStartedEventFilter;
     LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
 
-    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256,bytes32)"(
+    "NEARIntentsBridgeStarted(bytes32,bytes32,address,address,uint256,uint256,uint256)"(
       transactionId?: PromiseOrValue<BytesLike> | null,
       quoteId?: PromiseOrValue<BytesLike> | null,
       depositAddress?: PromiseOrValue<string> | null,
       sendingAssetId?: null,
       amount?: null,
       deadline?: null,
-      minAmountOut?: null,
-      destinationAsset?: null
+      minAmountOut?: null
     ): NEARIntentsBridgeStartedEventFilter;
     NEARIntentsBridgeStarted(
       transactionId?: PromiseOrValue<BytesLike> | null,
@@ -550,8 +545,7 @@ export interface NEARIntentsFacet extends BaseContract {
       sendingAssetId?: null,
       amount?: null,
       deadline?: null,
-      minAmountOut?: null,
-      destinationAsset?: null
+      minAmountOut?: null
     ): NEARIntentsBridgeStartedEventFilter;
   };
 

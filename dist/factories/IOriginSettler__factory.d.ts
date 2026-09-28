@@ -77,7 +77,7 @@ export declare class IOriginSettler__factory {
             }];
         }];
         readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
+        readonly stateMutability: "payable";
     }, {
         readonly type: "function";
         readonly name: "openFor";
@@ -161,7 +161,7 @@ export declare class IOriginSettler__factory {
             readonly internalType: "bytes";
         }];
         readonly outputs: readonly [];
-        readonly stateMutability: "nonpayable";
+        readonly stateMutability: "payable";
     }];
     static createInterface(): IOriginSettlerInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IOriginSettler;
