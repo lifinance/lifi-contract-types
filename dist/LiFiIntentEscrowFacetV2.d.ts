@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
@@ -286,7 +286,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<[string]>;
-        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: Overrides & {
+        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         swapAndStartBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
@@ -294,7 +294,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
         }): Promise<ContractTransaction>;
     };
     LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<string>;
-    startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: Overrides & {
+    startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     swapAndStartBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
@@ -325,7 +325,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     };
     estimateGas: {
         LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<BigNumber>;
-        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: Overrides & {
+        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         swapAndStartBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
@@ -334,7 +334,7 @@ export interface LiFiIntentEscrowFacetV2 extends BaseContract {
     };
     populateTransaction: {
         LIFI_INTENT_ESCROW_SETTLER_V2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: Overrides & {
+        startBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         swapAndStartBridgeTokensViaLiFiIntentEscrowV2(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _lifiIntentData: LiFiIntentEscrowFacetV2.LiFiIntentEscrowDataV2Struct, overrides?: PayableOverrides & {
