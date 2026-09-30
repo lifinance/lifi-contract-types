@@ -147,7 +147,7 @@ var _abi = [
     },
     {
         type: "error",
-        name: "InvalidReceiver",
+        name: "ExternalCallFailed",
         inputs: [],
     },
     {
@@ -173,11 +173,6 @@ var _abi = [
     {
         type: "error",
         name: "UnAuthorized",
-        inputs: [],
-    },
-    {
-        type: "error",
-        name: "ZeroAmount",
         inputs: [],
     },
 ];
