@@ -105,7 +105,7 @@ const _abi = [
       },
     ],
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
   },
   {
     type: "function",
@@ -212,7 +212,7 @@ const _abi = [
       },
     ],
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
   },
 ] as const;
 
