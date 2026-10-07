@@ -8,6 +8,7 @@ import type {
   BytesLike,
   CallOverrides,
   ContractTransaction,
+  Overrides,
   PayableOverrides,
   PopulatedTransaction,
   Signer,
@@ -66,72 +67,33 @@ export declare namespace ILiFi {
   };
 }
 
-export declare namespace IPaxosTransit {
-  export type RouteStruct = {
-    destEID: PromiseOrValue<BigNumberish>;
-    offerAsset: PromiseOrValue<string>;
-    wantAsset: PromiseOrValue<string>;
-  };
-
-  export type RouteStructOutput = [number, string, string] & {
-    destEID: number;
-    offerAsset: string;
-    wantAsset: string;
-  };
-
-  export type QuoteStruct = {
-    route: IPaxosTransit.RouteStruct;
-    offerAmount: PromiseOrValue<BigNumberish>;
-    receiver: PromiseOrValue<string>;
-    protocolFee: PromiseOrValue<BigNumberish>;
-    integratorFee: PromiseOrValue<BigNumberish>;
-    integratorFeeReceiver: PromiseOrValue<string>;
-    distributorCode: PromiseOrValue<BytesLike>;
-    deadline: PromiseOrValue<BigNumberish>;
-    salt: PromiseOrValue<BytesLike>;
-  };
-
-  export type QuoteStructOutput = [
-    IPaxosTransit.RouteStructOutput,
-    BigNumber,
-    string,
-    BigNumber,
-    BigNumber,
-    string,
-    string,
-    BigNumber,
-    string
-  ] & {
-    route: IPaxosTransit.RouteStructOutput;
-    offerAmount: BigNumber;
-    receiver: string;
-    protocolFee: BigNumber;
-    integratorFee: BigNumber;
-    integratorFeeReceiver: string;
-    distributorCode: string;
-    deadline: BigNumber;
-    salt: string;
-  };
-}
-
-export declare namespace PaxosTransitFacet {
-  export type PaxosTransitDataStruct = {
-    quote: IPaxosTransit.QuoteStruct;
-    signature: PromiseOrValue<BytesLike>;
-    nativeFee: PromiseOrValue<BigNumberish>;
+export declare namespace M0Facet {
+  export type M0DataStruct = {
+    receiverAddress: PromiseOrValue<BytesLike>;
     refundRecipient: PromiseOrValue<string>;
+    orderOwner: PromiseOrValue<string>;
+    tokenOut: PromiseOrValue<BytesLike>;
+    solver: PromiseOrValue<BytesLike>;
+    amountOut: PromiseOrValue<BigNumberish>;
+    fillDeadline: PromiseOrValue<BigNumberish>;
   };
 
-  export type PaxosTransitDataStructOutput = [
-    IPaxosTransit.QuoteStructOutput,
+  export type M0DataStructOutput = [
+    string,
+    string,
+    string,
+    string,
     string,
     BigNumber,
-    string
+    number
   ] & {
-    quote: IPaxosTransit.QuoteStructOutput;
-    signature: string;
-    nativeFee: BigNumber;
+    receiverAddress: string;
     refundRecipient: string;
+    orderOwner: string;
+    tokenOut: string;
+    solver: string;
+    amountOut: BigNumber;
+    fillDeadline: number;
   };
 }
 
@@ -165,57 +127,47 @@ export declare namespace LibSwap {
   };
 }
 
-export interface PaxosTransitFacetInterface extends utils.Interface {
+export interface M0FacetInterface extends utils.Interface {
   functions: {
-    "LIFI_DISTRIBUTOR_CODE()": FunctionFragment;
-    "TRANSIT_STATION()": FunctionFragment;
-    "startBridgeTokensViaPaxosTransit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(((uint32,address,address),uint256,address,uint256,uint256,address,bytes32,uint256,bytes32),bytes,uint256,address))": FunctionFragment;
-    "swapAndStartBridgeTokensViaPaxosTransit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(((uint32,address,address),uint256,address,uint256,uint256,address,bytes32,uint256,bytes32),bytes,uint256,address))": FunctionFragment;
+    "M0_ORDER_BOOK()": FunctionFragment;
+    "startBridgeTokensViaM0((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,address,bytes32,bytes32,uint128,uint32))": FunctionFragment;
+    "swapAndStartBridgeTokensViaM0((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,address,bytes32,bytes32,uint128,uint32))": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "LIFI_DISTRIBUTOR_CODE"
-      | "TRANSIT_STATION"
-      | "startBridgeTokensViaPaxosTransit"
-      | "swapAndStartBridgeTokensViaPaxosTransit"
+      | "M0_ORDER_BOOK"
+      | "startBridgeTokensViaM0"
+      | "swapAndStartBridgeTokensViaM0"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "LIFI_DISTRIBUTOR_CODE",
+    functionFragment: "M0_ORDER_BOOK",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "TRANSIT_STATION",
-    values?: undefined
+    functionFragment: "startBridgeTokensViaM0",
+    values: [ILiFi.BridgeDataStruct, M0Facet.M0DataStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "startBridgeTokensViaPaxosTransit",
-    values: [ILiFi.BridgeDataStruct, PaxosTransitFacet.PaxosTransitDataStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "swapAndStartBridgeTokensViaPaxosTransit",
+    functionFragment: "swapAndStartBridgeTokensViaM0",
     values: [
       ILiFi.BridgeDataStruct,
       LibSwap.SwapDataStruct[],
-      PaxosTransitFacet.PaxosTransitDataStruct
+      M0Facet.M0DataStruct
     ]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "LIFI_DISTRIBUTOR_CODE",
+    functionFragment: "M0_ORDER_BOOK",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TRANSIT_STATION",
+    functionFragment: "startBridgeTokensViaM0",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "startBridgeTokensViaPaxosTransit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "swapAndStartBridgeTokensViaPaxosTransit",
+    functionFragment: "swapAndStartBridgeTokensViaM0",
     data: BytesLike
   ): Result;
 
@@ -358,12 +310,12 @@ export type LiFiTransferStartedEvent = TypedEvent<
 export type LiFiTransferStartedEventFilter =
   TypedEventFilter<LiFiTransferStartedEvent>;
 
-export interface PaxosTransitFacet extends BaseContract {
+export interface M0Facet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: PaxosTransitFacetInterface;
+  interface: M0FacetInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -385,56 +337,50 @@ export interface PaxosTransitFacet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<[string]>;
+    M0_ORDER_BOOK(overrides?: CallOverrides): Promise<[string]>;
 
-    TRANSIT_STATION(overrides?: CallOverrides): Promise<[string]>;
-
-    startBridgeTokensViaPaxosTransit(
+    startBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _m0Data: M0Facet.M0DataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    swapAndStartBridgeTokensViaPaxosTransit(
+    swapAndStartBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+      _m0Data: M0Facet.M0DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<string>;
+  M0_ORDER_BOOK(overrides?: CallOverrides): Promise<string>;
 
-  TRANSIT_STATION(overrides?: CallOverrides): Promise<string>;
-
-  startBridgeTokensViaPaxosTransit(
+  startBridgeTokensViaM0(
     _bridgeData: ILiFi.BridgeDataStruct,
-    _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
-    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    _m0Data: M0Facet.M0DataStruct,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  swapAndStartBridgeTokensViaPaxosTransit(
+  swapAndStartBridgeTokensViaM0(
     _bridgeData: ILiFi.BridgeDataStruct,
     _swapData: LibSwap.SwapDataStruct[],
-    _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+    _m0Data: M0Facet.M0DataStruct,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<string>;
+    M0_ORDER_BOOK(overrides?: CallOverrides): Promise<string>;
 
-    TRANSIT_STATION(overrides?: CallOverrides): Promise<string>;
-
-    startBridgeTokensViaPaxosTransit(
+    startBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+      _m0Data: M0Facet.M0DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    swapAndStartBridgeTokensViaPaxosTransit(
+    swapAndStartBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+      _m0Data: M0Facet.M0DataStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -558,41 +504,35 @@ export interface PaxosTransitFacet extends BaseContract {
   };
 
   estimateGas: {
-    LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<BigNumber>;
+    M0_ORDER_BOOK(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TRANSIT_STATION(overrides?: CallOverrides): Promise<BigNumber>;
-
-    startBridgeTokensViaPaxosTransit(
+    startBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _m0Data: M0Facet.M0DataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    swapAndStartBridgeTokensViaPaxosTransit(
+    swapAndStartBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+      _m0Data: M0Facet.M0DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    LIFI_DISTRIBUTOR_CODE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    M0_ORDER_BOOK(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    TRANSIT_STATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    startBridgeTokensViaPaxosTransit(
+    startBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
-      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+      _m0Data: M0Facet.M0DataStruct,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    swapAndStartBridgeTokensViaPaxosTransit(
+    swapAndStartBridgeTokensViaM0(
       _bridgeData: ILiFi.BridgeDataStruct,
       _swapData: LibSwap.SwapDataStruct[],
-      _paxosData: PaxosTransitFacet.PaxosTransitDataStruct,
+      _m0Data: M0Facet.M0DataStruct,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
