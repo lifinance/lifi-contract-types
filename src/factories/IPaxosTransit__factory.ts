@@ -95,19 +95,6 @@ const _abi = [
     ],
     stateMutability: "payable",
   },
-  {
-    type: "function",
-    name: "thisChainEID",
-    inputs: [],
-    outputs: [
-      {
-        name: "",
-        type: "uint32",
-        internalType: "uint32",
-      },
-    ],
-    stateMutability: "view",
-  },
 ] as const;
 
 export class IPaxosTransit__factory {
