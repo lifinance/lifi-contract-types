@@ -94,19 +94,6 @@ var _abi = [
         ],
         stateMutability: "payable",
     },
-    {
-        type: "function",
-        name: "thisChainEID",
-        inputs: [],
-        outputs: [
-            {
-                name: "",
-                type: "uint32",
-                internalType: "uint32",
-            },
-        ],
-        stateMutability: "view",
-    },
 ];
 var IPaxosTransit__factory = /** @class */ (function () {
     function IPaxosTransit__factory() {
