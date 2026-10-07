@@ -70,6 +70,16 @@ export declare class IPaxosTransit__factory {
             readonly internalType: "bytes32";
         }];
         readonly stateMutability: "payable";
+    }, {
+        readonly type: "function";
+        readonly name: "thisChainEID";
+        readonly inputs: readonly [];
+        readonly outputs: readonly [{
+            readonly name: "";
+            readonly type: "uint32";
+            readonly internalType: "uint32";
+        }];
+        readonly stateMutability: "view";
     }];
     static createInterface(): IPaxosTransitInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IPaxosTransit;
