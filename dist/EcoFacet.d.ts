@@ -101,11 +101,13 @@ export declare namespace LibSwap {
 export interface EcoFacetInterface extends utils.Interface {
     functions: {
         "PORTAL()": FunctionFragment;
+        "TOKEN_MESSENGER()": FunctionFragment;
         "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
         "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "PORTAL" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "PORTAL" | "TOKEN_MESSENGER" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
     encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
+    encodeFunctionData(functionFragment: "TOKEN_MESSENGER", values?: undefined): string;
     encodeFunctionData(functionFragment: "startBridgeTokensViaEco", values: [ILiFi.BridgeDataStruct, EcoFacet.EcoDataStruct]): string;
     encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaEco", values: [
         ILiFi.BridgeDataStruct,
@@ -113,6 +115,7 @@ export interface EcoFacetInterface extends utils.Interface {
         EcoFacet.EcoDataStruct
     ]): string;
     decodeFunctionResult(functionFragment: "PORTAL", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "TOKEN_MESSENGER", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "startBridgeTokensViaEco", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaEco", data: BytesLike): Result;
     events: {
@@ -268,6 +271,7 @@ export interface EcoFacet extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         PORTAL(overrides?: CallOverrides): Promise<[string]>;
+        TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
         startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -276,6 +280,7 @@ export interface EcoFacet extends BaseContract {
         }): Promise<ContractTransaction>;
     };
     PORTAL(overrides?: CallOverrides): Promise<string>;
+    TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
     startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -284,6 +289,7 @@ export interface EcoFacet extends BaseContract {
     }): Promise<ContractTransaction>;
     callStatic: {
         PORTAL(overrides?: CallOverrides): Promise<string>;
+        TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
         startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: CallOverrides): Promise<void>;
         swapAndStartBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _ecoData: EcoFacet.EcoDataStruct, overrides?: CallOverrides): Promise<void>;
     };
@@ -307,6 +313,7 @@ export interface EcoFacet extends BaseContract {
     };
     estimateGas: {
         PORTAL(overrides?: CallOverrides): Promise<BigNumber>;
+        TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
         startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -316,6 +323,7 @@ export interface EcoFacet extends BaseContract {
     };
     populateTransaction: {
         PORTAL(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         startBridgeTokensViaEco(_bridgeData: ILiFi.BridgeDataStruct, _ecoData: EcoFacet.EcoDataStruct, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
