@@ -74,28 +74,17 @@ export declare namespace IPaxosTransit {
 export interface IPaxosTransitInterface extends utils.Interface {
   functions: {
     "submitOrder(((uint32,address,address),uint256,address,uint256,uint256,address,bytes32,uint256,bytes32),bytes)": FunctionFragment;
-    "thisChainEID()": FunctionFragment;
   };
 
-  getFunction(
-    nameOrSignatureOrTopic: "submitOrder" | "thisChainEID"
-  ): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "submitOrder"): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "submitOrder",
     values: [IPaxosTransit.QuoteStruct, PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(
-    functionFragment: "thisChainEID",
-    values?: undefined
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "submitOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "thisChainEID",
     data: BytesLike
   ): Result;
 
@@ -134,8 +123,6 @@ export interface IPaxosTransit extends BaseContract {
       signature: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
-
-    thisChainEID(overrides?: CallOverrides): Promise<[number]>;
   };
 
   submitOrder(
@@ -144,16 +131,12 @@ export interface IPaxosTransit extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  thisChainEID(overrides?: CallOverrides): Promise<number>;
-
   callStatic: {
     submitOrder(
       quote: IPaxosTransit.QuoteStruct,
       signature: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    thisChainEID(overrides?: CallOverrides): Promise<number>;
   };
 
   filters: {};
@@ -164,8 +147,6 @@ export interface IPaxosTransit extends BaseContract {
       signature: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
-
-    thisChainEID(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -174,7 +155,5 @@ export interface IPaxosTransit extends BaseContract {
       signature: PromiseOrValue<BytesLike>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
-
-    thisChainEID(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

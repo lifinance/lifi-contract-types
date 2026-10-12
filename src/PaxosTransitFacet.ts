@@ -168,7 +168,6 @@ export declare namespace LibSwap {
 export interface PaxosTransitFacetInterface extends utils.Interface {
   functions: {
     "LIFI_DISTRIBUTOR_CODE()": FunctionFragment;
-    "PAXOS_TRANSIT_THIS_CHAIN_EID()": FunctionFragment;
     "TRANSIT_STATION()": FunctionFragment;
     "startBridgeTokensViaPaxosTransit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(((uint32,address,address),uint256,address,uint256,uint256,address,bytes32,uint256,bytes32),bytes,uint256,address))": FunctionFragment;
     "swapAndStartBridgeTokensViaPaxosTransit((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(((uint32,address,address),uint256,address,uint256,uint256,address,bytes32,uint256,bytes32),bytes,uint256,address))": FunctionFragment;
@@ -177,7 +176,6 @@ export interface PaxosTransitFacetInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "LIFI_DISTRIBUTOR_CODE"
-      | "PAXOS_TRANSIT_THIS_CHAIN_EID"
       | "TRANSIT_STATION"
       | "startBridgeTokensViaPaxosTransit"
       | "swapAndStartBridgeTokensViaPaxosTransit"
@@ -185,10 +183,6 @@ export interface PaxosTransitFacetInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "LIFI_DISTRIBUTOR_CODE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PAXOS_TRANSIT_THIS_CHAIN_EID",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -210,10 +204,6 @@ export interface PaxosTransitFacetInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "LIFI_DISTRIBUTOR_CODE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PAXOS_TRANSIT_THIS_CHAIN_EID",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -397,8 +387,6 @@ export interface PaxosTransitFacet extends BaseContract {
   functions: {
     LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<[string]>;
 
-    PAXOS_TRANSIT_THIS_CHAIN_EID(overrides?: CallOverrides): Promise<[number]>;
-
     TRANSIT_STATION(overrides?: CallOverrides): Promise<[string]>;
 
     startBridgeTokensViaPaxosTransit(
@@ -417,8 +405,6 @@ export interface PaxosTransitFacet extends BaseContract {
 
   LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<string>;
 
-  PAXOS_TRANSIT_THIS_CHAIN_EID(overrides?: CallOverrides): Promise<number>;
-
   TRANSIT_STATION(overrides?: CallOverrides): Promise<string>;
 
   startBridgeTokensViaPaxosTransit(
@@ -436,8 +422,6 @@ export interface PaxosTransitFacet extends BaseContract {
 
   callStatic: {
     LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<string>;
-
-    PAXOS_TRANSIT_THIS_CHAIN_EID(overrides?: CallOverrides): Promise<number>;
 
     TRANSIT_STATION(overrides?: CallOverrides): Promise<string>;
 
@@ -576,8 +560,6 @@ export interface PaxosTransitFacet extends BaseContract {
   estimateGas: {
     LIFI_DISTRIBUTOR_CODE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    PAXOS_TRANSIT_THIS_CHAIN_EID(overrides?: CallOverrides): Promise<BigNumber>;
-
     TRANSIT_STATION(overrides?: CallOverrides): Promise<BigNumber>;
 
     startBridgeTokensViaPaxosTransit(
@@ -596,10 +578,6 @@ export interface PaxosTransitFacet extends BaseContract {
 
   populateTransaction: {
     LIFI_DISTRIBUTOR_CODE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    PAXOS_TRANSIT_THIS_CHAIN_EID(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
