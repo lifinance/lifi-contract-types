@@ -38,6 +38,16 @@ export declare namespace FeeForwarder {
     recipient: string;
     amount: BigNumber;
   };
+
+  export type FeeBpsDistributionStruct = {
+    recipient: PromiseOrValue<string>;
+    bps: PromiseOrValue<BigNumberish>;
+  };
+
+  export type FeeBpsDistributionStructOutput = [string, number] & {
+    recipient: string;
+    bps: number;
+  };
 }
 
 export interface FeeForwarderInterface extends utils.Interface {
@@ -45,6 +55,7 @@ export interface FeeForwarderInterface extends utils.Interface {
     "cancelOwnershipTransfer()": FunctionFragment;
     "confirmOwnershipTransfer()": FunctionFragment;
     "forwardERC20Fees(address,(address,uint256)[])": FunctionFragment;
+    "forwardERC20FeesBps(address,(address,uint16)[])": FunctionFragment;
     "forwardNativeFees((address,uint256)[])": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
@@ -57,6 +68,7 @@ export interface FeeForwarderInterface extends utils.Interface {
       | "cancelOwnershipTransfer"
       | "confirmOwnershipTransfer"
       | "forwardERC20Fees"
+      | "forwardERC20FeesBps"
       | "forwardNativeFees"
       | "owner"
       | "pendingOwner"
@@ -75,6 +87,10 @@ export interface FeeForwarderInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "forwardERC20Fees",
     values: [PromiseOrValue<string>, FeeForwarder.FeeDistributionStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "forwardERC20FeesBps",
+    values: [PromiseOrValue<string>, FeeForwarder.FeeBpsDistributionStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "forwardNativeFees",
@@ -108,6 +124,10 @@ export interface FeeForwarderInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "forwardERC20Fees",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "forwardERC20FeesBps",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -229,6 +249,12 @@ export interface FeeForwarder extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    forwardERC20FeesBps(
+      _token: PromiseOrValue<string>,
+      _distributions: FeeForwarder.FeeBpsDistributionStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     forwardNativeFees(
       _distributions: FeeForwarder.FeeDistributionStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -265,6 +291,12 @@ export interface FeeForwarder extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  forwardERC20FeesBps(
+    _token: PromiseOrValue<string>,
+    _distributions: FeeForwarder.FeeBpsDistributionStruct[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   forwardNativeFees(
     _distributions: FeeForwarder.FeeDistributionStruct[],
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -294,6 +326,12 @@ export interface FeeForwarder extends BaseContract {
     forwardERC20Fees(
       _token: PromiseOrValue<string>,
       _distributions: FeeForwarder.FeeDistributionStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    forwardERC20FeesBps(
+      _token: PromiseOrValue<string>,
+      _distributions: FeeForwarder.FeeBpsDistributionStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -374,6 +412,12 @@ export interface FeeForwarder extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    forwardERC20FeesBps(
+      _token: PromiseOrValue<string>,
+      _distributions: FeeForwarder.FeeBpsDistributionStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     forwardNativeFees(
       _distributions: FeeForwarder.FeeDistributionStruct[],
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
@@ -408,6 +452,12 @@ export interface FeeForwarder extends BaseContract {
     forwardERC20Fees(
       _token: PromiseOrValue<string>,
       _distributions: FeeForwarder.FeeDistributionStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    forwardERC20FeesBps(
+      _token: PromiseOrValue<string>,
+      _distributions: FeeForwarder.FeeBpsDistributionStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
