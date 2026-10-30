@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISponsoredOFTSrcPeriphery__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "TOKEN",
@@ -144,16 +144,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISponsoredOFTSrcPeriphery__factory = /** @class */ (function () {
-    function ISponsoredOFTSrcPeriphery__factory() {
-    }
-    ISponsoredOFTSrcPeriphery__factory.createInterface = function () {
+class ISponsoredOFTSrcPeriphery__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISponsoredOFTSrcPeriphery__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISponsoredOFTSrcPeriphery__factory.abi = _abi;
-    return ISponsoredOFTSrcPeriphery__factory;
-}());
+    }
+}
 exports.ISponsoredOFTSrcPeriphery__factory = ISponsoredOFTSrcPeriphery__factory;
+ISponsoredOFTSrcPeriphery__factory.abi = _abi;

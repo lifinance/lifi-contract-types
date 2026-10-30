@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAcrossSpokePoolV4__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "deposit",
@@ -75,16 +75,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IAcrossSpokePoolV4__factory = /** @class */ (function () {
-    function IAcrossSpokePoolV4__factory() {
-    }
-    IAcrossSpokePoolV4__factory.createInterface = function () {
+class IAcrossSpokePoolV4__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAcrossSpokePoolV4__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAcrossSpokePoolV4__factory.abi = _abi;
-    return IAcrossSpokePoolV4__factory;
-}());
+    }
+}
 exports.IAcrossSpokePoolV4__factory = IAcrossSpokePoolV4__factory;
+IAcrossSpokePoolV4__factory.abi = _abi;

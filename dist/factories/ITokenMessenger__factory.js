@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ITokenMessenger__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositForBurn",
@@ -98,16 +98,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var ITokenMessenger__factory = /** @class */ (function () {
-    function ITokenMessenger__factory() {
-    }
-    ITokenMessenger__factory.createInterface = function () {
+class ITokenMessenger__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ITokenMessenger__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ITokenMessenger__factory.abi = _abi;
-    return ITokenMessenger__factory;
-}());
+    }
+}
 exports.ITokenMessenger__factory = ITokenMessenger__factory;
+ITokenMessenger__factory.abi = _abi;

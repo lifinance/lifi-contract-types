@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC20Proxy__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "transferFrom",
@@ -35,16 +35,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IERC20Proxy__factory = /** @class */ (function () {
-    function IERC20Proxy__factory() {
-    }
-    IERC20Proxy__factory.createInterface = function () {
+class IERC20Proxy__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC20Proxy__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC20Proxy__factory.abi = _abi;
-    return IERC20Proxy__factory;
-}());
+    }
+}
 exports.IERC20Proxy__factory = IERC20Proxy__factory;
+IERC20Proxy__factory.abi = _abi;

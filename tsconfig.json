@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
+    "module": "commonjs",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "outDir": "dist", /* Redirect output structure to the directory. */
-    "baseUrl": "./",
     "rootDir": "./src",
     "composite": true,
     "noEmitOnError": false,

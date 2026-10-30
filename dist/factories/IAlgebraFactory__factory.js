@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAlgebraFactory__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "createPool",
@@ -31,16 +31,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IAlgebraFactory__factory = /** @class */ (function () {
-    function IAlgebraFactory__factory() {
-    }
-    IAlgebraFactory__factory.createInterface = function () {
+class IAlgebraFactory__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAlgebraFactory__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAlgebraFactory__factory.abi = _abi;
-    return IAlgebraFactory__factory;
-}());
+    }
+}
 exports.IAlgebraFactory__factory = IAlgebraFactory__factory;
+IAlgebraFactory__factory.abi = _abi;

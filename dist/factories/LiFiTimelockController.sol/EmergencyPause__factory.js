@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmergencyPause__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "unpauseDiamond",
@@ -20,16 +20,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var EmergencyPause__factory = /** @class */ (function () {
-    function EmergencyPause__factory() {
-    }
-    EmergencyPause__factory.createInterface = function () {
+class EmergencyPause__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    EmergencyPause__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    EmergencyPause__factory.abi = _abi;
-    return EmergencyPause__factory;
-}());
+    }
+}
 exports.EmergencyPause__factory = EmergencyPause__factory;
+EmergencyPause__factory.abi = _abi;

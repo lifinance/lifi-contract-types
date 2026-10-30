@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccessControl__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "DEFAULT_ADMIN_ROLE",
@@ -211,16 +211,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var AccessControl__factory = /** @class */ (function () {
-    function AccessControl__factory() {
-    }
-    AccessControl__factory.createInterface = function () {
+class AccessControl__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    AccessControl__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    AccessControl__factory.abi = _abi;
-    return AccessControl__factory;
-}());
+    }
+}
 exports.AccessControl__factory = AccessControl__factory;
+AccessControl__factory.abi = _abi;

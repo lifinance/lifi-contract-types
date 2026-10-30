@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC1155Receiver__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "onERC1155BatchReceived",
@@ -104,16 +104,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IERC1155Receiver__factory = /** @class */ (function () {
-    function IERC1155Receiver__factory() {
-    }
-    IERC1155Receiver__factory.createInterface = function () {
+class IERC1155Receiver__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC1155Receiver__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC1155Receiver__factory.abi = _abi;
-    return IERC1155Receiver__factory;
-}());
+    }
+}
 exports.IERC1155Receiver__factory = IERC1155Receiver__factory;
+IERC1155Receiver__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ITridentCLPool__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "swap",
@@ -82,16 +82,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var ITridentCLPool__factory = /** @class */ (function () {
-    function ITridentCLPool__factory() {
-    }
-    ITridentCLPool__factory.createInterface = function () {
+class ITridentCLPool__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ITridentCLPool__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ITridentCLPool__factory.abi = _abi;
-    return ITridentCLPool__factory;
-}());
+    }
+}
 exports.ITridentCLPool__factory = ITridentCLPool__factory;
+ITridentCLPool__factory.abi = _abi;

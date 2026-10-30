@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IGarden__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "initiateOnBehalf",
@@ -40,16 +40,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IGarden__factory = /** @class */ (function () {
-    function IGarden__factory() {
-    }
-    IGarden__factory.createInterface = function () {
+class IGarden__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IGarden__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IGarden__factory.abi = _abi;
-    return IGarden__factory;
-}());
+    }
+}
 exports.IGarden__factory = IGarden__factory;
+IGarden__factory.abi = _abi;
