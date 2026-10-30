@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IXDaiBridgeL2__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "relayTokens",
@@ -20,16 +20,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IXDaiBridgeL2__factory = /** @class */ (function () {
-    function IXDaiBridgeL2__factory() {
-    }
-    IXDaiBridgeL2__factory.createInterface = function () {
+class IXDaiBridgeL2__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IXDaiBridgeL2__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IXDaiBridgeL2__factory.abi = _abi;
-    return IXDaiBridgeL2__factory;
-}());
+    }
+}
 exports.IXDaiBridgeL2__factory = IXDaiBridgeL2__factory;
+IXDaiBridgeL2__factory.abi = _abi;

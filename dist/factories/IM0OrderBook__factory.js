@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IM0OrderBook__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "isDestinationSupported",
@@ -92,16 +92,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IM0OrderBook__factory = /** @class */ (function () {
-    function IM0OrderBook__factory() {
-    }
-    IM0OrderBook__factory.createInterface = function () {
+class IM0OrderBook__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IM0OrderBook__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IM0OrderBook__factory.abi = _abi;
-    return IM0OrderBook__factory;
-}());
+    }
+}
 exports.IM0OrderBook__factory = IM0OrderBook__factory;
+IM0OrderBook__factory.abi = _abi;

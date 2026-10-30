@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IEcoPortal__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getRewardStatus",
@@ -104,16 +104,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IEcoPortal__factory = /** @class */ (function () {
-    function IEcoPortal__factory() {
-    }
-    IEcoPortal__factory.createInterface = function () {
+class IEcoPortal__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IEcoPortal__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IEcoPortal__factory.abi = _abi;
-    return IEcoPortal__factory;
-}());
+    }
+}
 exports.IEcoPortal__factory = IEcoPortal__factory;
+IEcoPortal__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IKatanaV3Governance__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getRouter",
@@ -20,16 +20,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IKatanaV3Governance__factory = /** @class */ (function () {
-    function IKatanaV3Governance__factory() {
-    }
-    IKatanaV3Governance__factory.createInterface = function () {
+class IKatanaV3Governance__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IKatanaV3Governance__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IKatanaV3Governance__factory.abi = _abi;
-    return IKatanaV3Governance__factory;
-}());
+    }
+}
 exports.IKatanaV3Governance__factory = IKatanaV3Governance__factory;
+IKatanaV3Governance__factory.abi = _abi;

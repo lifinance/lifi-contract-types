@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISupersetPoolManager__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getOmniTokenAddressBook",
@@ -20,16 +20,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var ISupersetPoolManager__factory = /** @class */ (function () {
-    function ISupersetPoolManager__factory() {
-    }
-    ISupersetPoolManager__factory.createInterface = function () {
+class ISupersetPoolManager__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISupersetPoolManager__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISupersetPoolManager__factory.abi = _abi;
-    return ISupersetPoolManager__factory;
-}());
+    }
+}
 exports.ISupersetPoolManager__factory = ISupersetPoolManager__factory;
+ISupersetPoolManager__factory.abi = _abi;

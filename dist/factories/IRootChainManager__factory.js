@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IRootChainManager__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositEtherFor",
@@ -62,16 +62,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IRootChainManager__factory = /** @class */ (function () {
-    function IRootChainManager__factory() {
-    }
-    IRootChainManager__factory.createInterface = function () {
+class IRootChainManager__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IRootChainManager__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IRootChainManager__factory.abi = _abi;
-    return IRootChainManager__factory;
-}());
+    }
+}
 exports.IRootChainManager__factory = IRootChainManager__factory;
+IRootChainManager__factory.abi = _abi;

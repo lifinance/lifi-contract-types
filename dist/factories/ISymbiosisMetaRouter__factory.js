@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISymbiosisMetaRouter__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "metaRoute",
@@ -67,16 +67,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISymbiosisMetaRouter__factory = /** @class */ (function () {
-    function ISymbiosisMetaRouter__factory() {
-    }
-    ISymbiosisMetaRouter__factory.createInterface = function () {
+class ISymbiosisMetaRouter__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISymbiosisMetaRouter__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISymbiosisMetaRouter__factory.abi = _abi;
-    return ISymbiosisMetaRouter__factory;
-}());
+    }
+}
 exports.ISymbiosisMetaRouter__factory = ISymbiosisMetaRouter__factory;
+ISymbiosisMetaRouter__factory.abi = _abi;

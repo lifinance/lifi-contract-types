@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ICurve__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "exchange",
@@ -41,16 +41,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ICurve__factory = /** @class */ (function () {
-    function ICurve__factory() {
-    }
-    ICurve__factory.createInterface = function () {
+class ICurve__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ICurve__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ICurve__factory.abi = _abi;
-    return ICurve__factory;
-}());
+    }
+}
 exports.ICurve__factory = ICurve__factory;
+ICurve__factory.abi = _abi;

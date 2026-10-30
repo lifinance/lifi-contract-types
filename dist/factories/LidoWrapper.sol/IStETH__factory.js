@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IStETH__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "allowance",
@@ -228,16 +228,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IStETH__factory = /** @class */ (function () {
-    function IStETH__factory() {
-    }
-    IStETH__factory.createInterface = function () {
+class IStETH__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IStETH__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IStETH__factory.abi = _abi;
-    return IStETH__factory;
-}());
+    }
+}
 exports.IStETH__factory = IStETH__factory;
+IStETH__factory.abi = _abi;

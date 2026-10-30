@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ICentrifugeTokenBridge__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "send",
@@ -46,16 +46,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ICentrifugeTokenBridge__factory = /** @class */ (function () {
-    function ICentrifugeTokenBridge__factory() {
-    }
-    ICentrifugeTokenBridge__factory.createInterface = function () {
+class ICentrifugeTokenBridge__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ICentrifugeTokenBridge__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ICentrifugeTokenBridge__factory.abi = _abi;
-    return ICentrifugeTokenBridge__factory;
-}());
+    }
+}
 exports.ICentrifugeTokenBridge__factory = ICentrifugeTokenBridge__factory;
+ICentrifugeTokenBridge__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC20Metadata__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "allowance",
@@ -229,16 +229,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IERC20Metadata__factory = /** @class */ (function () {
-    function IERC20Metadata__factory() {
-    }
-    IERC20Metadata__factory.createInterface = function () {
+class IERC20Metadata__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC20Metadata__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC20Metadata__factory.abi = _abi;
-    return IERC20Metadata__factory;
-}());
+    }
+}
 exports.IERC20Metadata__factory = IERC20Metadata__factory;
+IERC20Metadata__factory.abi = _abi;

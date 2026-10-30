@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IPool__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "burn",
@@ -215,16 +215,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IPool__factory = /** @class */ (function () {
-    function IPool__factory() {
-    }
-    IPool__factory.createInterface = function () {
+class IPool__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IPool__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IPool__factory.abi = _abi;
-    return IPool__factory;
-}());
+    }
+}
 exports.IPool__factory = IPool__factory;
+IPool__factory.abi = _abi;

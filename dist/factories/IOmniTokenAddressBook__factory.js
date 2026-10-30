@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IOmniTokenAddressBook__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getAddressForOmniToken",
@@ -26,16 +26,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IOmniTokenAddressBook__factory = /** @class */ (function () {
-    function IOmniTokenAddressBook__factory() {
-    }
-    IOmniTokenAddressBook__factory.createInterface = function () {
+class IOmniTokenAddressBook__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IOmniTokenAddressBook__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IOmniTokenAddressBook__factory.abi = _abi;
-    return IOmniTokenAddressBook__factory;
-}());
+    }
+}
 exports.IOmniTokenAddressBook__factory = IOmniTokenAddressBook__factory;
+IOmniTokenAddressBook__factory.abi = _abi;

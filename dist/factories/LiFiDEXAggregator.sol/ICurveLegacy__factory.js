@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ICurveLegacy__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "exchange",
@@ -35,16 +35,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ICurveLegacy__factory = /** @class */ (function () {
-    function ICurveLegacy__factory() {
-    }
-    ICurveLegacy__factory.createInterface = function () {
+class ICurveLegacy__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ICurveLegacy__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ICurveLegacy__factory.abi = _abi;
-    return ICurveLegacy__factory;
-}());
+    }
+}
 exports.ICurveLegacy__factory = ICurveLegacy__factory;
+ICurveLegacy__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IChainflipVault__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "xCallNative",
@@ -159,16 +159,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IChainflipVault__factory = /** @class */ (function () {
-    function IChainflipVault__factory() {
-    }
-    IChainflipVault__factory.createInterface = function () {
+class IChainflipVault__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IChainflipVault__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IChainflipVault__factory.abi = _abi;
-    return IChainflipVault__factory;
-}());
+    }
+}
 exports.IChainflipVault__factory = IChainflipVault__factory;
+IChainflipVault__factory.abi = _abi;

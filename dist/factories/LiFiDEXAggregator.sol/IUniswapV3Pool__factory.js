@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IUniswapV3Pool__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "swap",
@@ -77,16 +77,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IUniswapV3Pool__factory = /** @class */ (function () {
-    function IUniswapV3Pool__factory() {
-    }
-    IUniswapV3Pool__factory.createInterface = function () {
+class IUniswapV3Pool__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IUniswapV3Pool__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IUniswapV3Pool__factory.abi = _abi;
-    return IUniswapV3Pool__factory;
-}());
+    }
+}
 exports.IUniswapV3Pool__factory = IUniswapV3Pool__factory;
+IUniswapV3Pool__factory.abi = _abi;

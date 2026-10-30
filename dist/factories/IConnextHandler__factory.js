@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IConnextHandler__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "xcall",
@@ -110,16 +110,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IConnextHandler__factory = /** @class */ (function () {
-    function IConnextHandler__factory() {
-    }
-    IConnextHandler__factory.createInterface = function () {
+class IConnextHandler__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IConnextHandler__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IConnextHandler__factory.abi = _abi;
-    return IConnextHandler__factory;
-}());
+    }
+}
 exports.IConnextHandler__factory = IConnextHandler__factory;
+IConnextHandler__factory.abi = _abi;

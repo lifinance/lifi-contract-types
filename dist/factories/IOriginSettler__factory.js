@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IOriginSettler__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "open",
@@ -211,16 +211,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IOriginSettler__factory = /** @class */ (function () {
-    function IOriginSettler__factory() {
-    }
-    IOriginSettler__factory.createInterface = function () {
+class IOriginSettler__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IOriginSettler__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IOriginSettler__factory.abi = _abi;
-    return IOriginSettler__factory;
-}());
+    }
+}
 exports.IOriginSettler__factory = IOriginSettler__factory;
+IOriginSettler__factory.abi = _abi;

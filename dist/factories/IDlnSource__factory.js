@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IDlnSource__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "createOrder",
@@ -111,16 +111,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IDlnSource__factory = /** @class */ (function () {
-    function IDlnSource__factory() {
-    }
-    IDlnSource__factory.createInterface = function () {
+class IDlnSource__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IDlnSource__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IDlnSource__factory.abi = _abi;
-    return IDlnSource__factory;
-}());
+    }
+}
 exports.IDlnSource__factory = IDlnSource__factory;
+IDlnSource__factory.abi = _abi;
