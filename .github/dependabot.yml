@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    groups:
+      bun-minor-patch:
+        update-types: ["minor", "patch"]
