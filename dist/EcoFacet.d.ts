@@ -44,6 +44,7 @@ export declare namespace EcoFacet {
         nonEVMReceiver: PromiseOrValue<BytesLike>;
         prover: PromiseOrValue<string>;
         rewardDeadline: PromiseOrValue<BigNumberish>;
+        intentDestination: PromiseOrValue<BigNumberish>;
         encodedRoute: PromiseOrValue<BytesLike>;
         solanaATA: PromiseOrValue<BytesLike>;
         refundRecipient: PromiseOrValue<string>;
@@ -54,6 +55,7 @@ export declare namespace EcoFacet {
         string,
         string,
         BigNumber,
+        BigNumber,
         string,
         string,
         string,
@@ -63,6 +65,7 @@ export declare namespace EcoFacet {
         nonEVMReceiver: string;
         prover: string;
         rewardDeadline: BigNumber;
+        intentDestination: BigNumber;
         encodedRoute: string;
         solanaATA: string;
         refundRecipient: string;
@@ -101,8 +104,8 @@ export declare namespace LibSwap {
 export interface EcoFacetInterface extends utils.Interface {
     functions: {
         "PORTAL()": FunctionFragment;
-        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
-        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
+        "startBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,address,uint64,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaEco((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,address,uint64,uint64,bytes,bytes32,address,uint256,bytes))": FunctionFragment;
     };
     getFunction(nameOrSignatureOrTopic: "PORTAL" | "startBridgeTokensViaEco" | "swapAndStartBridgeTokensViaEco"): FunctionFragment;
     encodeFunctionData(functionFragment: "PORTAL", values?: undefined): string;
