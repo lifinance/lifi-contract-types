@@ -11,22 +11,32 @@ export declare namespace FeeForwarder {
         recipient: string;
         amount: BigNumber;
     };
+    type FeeShareDistributionStruct = {
+        recipient: PromiseOrValue<string>;
+        share: PromiseOrValue<BigNumberish>;
+    };
+    type FeeShareDistributionStructOutput = [string, BigNumber] & {
+        recipient: string;
+        share: BigNumber;
+    };
 }
 export interface FeeForwarderInterface extends utils.Interface {
     functions: {
         "cancelOwnershipTransfer()": FunctionFragment;
         "confirmOwnershipTransfer()": FunctionFragment;
         "forwardERC20Fees(address,(address,uint256)[])": FunctionFragment;
+        "forwardERC20FeesShares(address,(address,uint64)[])": FunctionFragment;
         "forwardNativeFees((address,uint256)[])": FunctionFragment;
         "owner()": FunctionFragment;
         "pendingOwner()": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
         "withdrawToken(address,address,uint256)": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "forwardERC20Fees" | "forwardNativeFees" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawToken"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "cancelOwnershipTransfer" | "confirmOwnershipTransfer" | "forwardERC20Fees" | "forwardERC20FeesShares" | "forwardNativeFees" | "owner" | "pendingOwner" | "transferOwnership" | "withdrawToken"): FunctionFragment;
     encodeFunctionData(functionFragment: "cancelOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "confirmOwnershipTransfer", values?: undefined): string;
     encodeFunctionData(functionFragment: "forwardERC20Fees", values: [PromiseOrValue<string>, FeeForwarder.FeeDistributionStruct[]]): string;
+    encodeFunctionData(functionFragment: "forwardERC20FeesShares", values: [PromiseOrValue<string>, FeeForwarder.FeeShareDistributionStruct[]]): string;
     encodeFunctionData(functionFragment: "forwardNativeFees", values: [FeeForwarder.FeeDistributionStruct[]]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
@@ -39,6 +49,7 @@ export interface FeeForwarderInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "cancelOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "confirmOwnershipTransfer", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "forwardERC20Fees", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "forwardERC20FeesShares", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "forwardNativeFees", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
@@ -117,6 +128,9 @@ export interface FeeForwarder extends BaseContract {
         forwardERC20Fees(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeDistributionStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        forwardERC20FeesShares(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeShareDistributionStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
         forwardNativeFees(_distributions: FeeForwarder.FeeDistributionStruct[], overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
@@ -138,6 +152,9 @@ export interface FeeForwarder extends BaseContract {
     forwardERC20Fees(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeDistributionStruct[], overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    forwardERC20FeesShares(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeShareDistributionStruct[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     forwardNativeFees(_distributions: FeeForwarder.FeeDistributionStruct[], overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
@@ -153,6 +170,7 @@ export interface FeeForwarder extends BaseContract {
         cancelOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         confirmOwnershipTransfer(overrides?: CallOverrides): Promise<void>;
         forwardERC20Fees(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeDistributionStruct[], overrides?: CallOverrides): Promise<void>;
+        forwardERC20FeesShares(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeShareDistributionStruct[], overrides?: CallOverrides): Promise<void>;
         forwardNativeFees(_distributions: FeeForwarder.FeeDistributionStruct[], overrides?: CallOverrides): Promise<void>;
         owner(overrides?: CallOverrides): Promise<string>;
         pendingOwner(overrides?: CallOverrides): Promise<string>;
@@ -179,6 +197,9 @@ export interface FeeForwarder extends BaseContract {
         forwardERC20Fees(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeDistributionStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        forwardERC20FeesShares(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeShareDistributionStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
         forwardNativeFees(_distributions: FeeForwarder.FeeDistributionStruct[], overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
@@ -199,6 +220,9 @@ export interface FeeForwarder extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         forwardERC20Fees(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeDistributionStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        forwardERC20FeesShares(_token: PromiseOrValue<string>, _distributions: FeeForwarder.FeeShareDistributionStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         forwardNativeFees(_distributions: FeeForwarder.FeeDistributionStruct[], overrides?: PayableOverrides & {
