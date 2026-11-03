@@ -1,0 +1,43 @@
+import type { BaseContract, BytesLike, Signer, utils } from "ethers";
+import type { EventFragment } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export interface LibAttestableSelectorsInterface extends utils.Interface {
+    functions: {};
+    events: {
+        "AttestableSelectorSet(bytes4,bool)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "AttestableSelectorSet"): EventFragment;
+}
+export interface AttestableSelectorSetEventObject {
+    selector: string;
+    enabled: boolean;
+}
+export type AttestableSelectorSetEvent = TypedEvent<[
+    string,
+    boolean
+], AttestableSelectorSetEventObject>;
+export type AttestableSelectorSetEventFilter = TypedEventFilter<AttestableSelectorSetEvent>;
+export interface LibAttestableSelectors extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: LibAttestableSelectorsInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {};
+    callStatic: {};
+    filters: {
+        "AttestableSelectorSet(bytes4,bool)"(selector?: PromiseOrValue<BytesLike> | null, enabled?: null): AttestableSelectorSetEventFilter;
+        AttestableSelectorSet(selector?: PromiseOrValue<BytesLike> | null, enabled?: null): AttestableSelectorSetEventFilter;
+    };
+    estimateGas: {};
+    populateTransaction: {};
+}
