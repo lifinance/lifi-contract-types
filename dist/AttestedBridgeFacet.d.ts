@@ -1,0 +1,89 @@
+import type { BaseContract, BigNumber, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export interface AttestedBridgeFacetInterface extends utils.Interface {
+    functions: {
+        "isAttestableSelector(bytes4)": FunctionFragment;
+        "setAttestableSelector(bytes4,bool)": FunctionFragment;
+        "startBridgeAttested(bytes,bytes)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "isAttestableSelector" | "setAttestableSelector" | "startBridgeAttested"): FunctionFragment;
+    encodeFunctionData(functionFragment: "isAttestableSelector", values: [PromiseOrValue<BytesLike>]): string;
+    encodeFunctionData(functionFragment: "setAttestableSelector", values: [PromiseOrValue<BytesLike>, PromiseOrValue<boolean>]): string;
+    encodeFunctionData(functionFragment: "startBridgeAttested", values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]): string;
+    decodeFunctionResult(functionFragment: "isAttestableSelector", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setAttestableSelector", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeAttested", data: BytesLike): Result;
+    events: {
+        "AttestableSelectorSet(bytes4,bool)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "AttestableSelectorSet"): EventFragment;
+}
+export interface AttestableSelectorSetEventObject {
+    selector: string;
+    enabled: boolean;
+}
+export type AttestableSelectorSetEvent = TypedEvent<[
+    string,
+    boolean
+], AttestableSelectorSetEventObject>;
+export type AttestableSelectorSetEventFilter = TypedEventFilter<AttestableSelectorSetEvent>;
+export interface AttestedBridgeFacet extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: AttestedBridgeFacetInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        isAttestableSelector(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
+        setAttestableSelector(_selector: PromiseOrValue<BytesLike>, _enabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        startBridgeAttested(_facetCalldata: PromiseOrValue<BytesLike>, arg1: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    isAttestableSelector(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+    setAttestableSelector(_selector: PromiseOrValue<BytesLike>, _enabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    startBridgeAttested(_facetCalldata: PromiseOrValue<BytesLike>, arg1: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        isAttestableSelector(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
+        setAttestableSelector(_selector: PromiseOrValue<BytesLike>, _enabled: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
+        startBridgeAttested(_facetCalldata: PromiseOrValue<BytesLike>, arg1: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {
+        "AttestableSelectorSet(bytes4,bool)"(selector?: PromiseOrValue<BytesLike> | null, enabled?: null): AttestableSelectorSetEventFilter;
+        AttestableSelectorSet(selector?: PromiseOrValue<BytesLike> | null, enabled?: null): AttestableSelectorSetEventFilter;
+    };
+    estimateGas: {
+        isAttestableSelector(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
+        setAttestableSelector(_selector: PromiseOrValue<BytesLike>, _enabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        startBridgeAttested(_facetCalldata: PromiseOrValue<BytesLike>, arg1: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        isAttestableSelector(_selector: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        setAttestableSelector(_selector: PromiseOrValue<BytesLike>, _enabled: PromiseOrValue<boolean>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        startBridgeAttested(_facetCalldata: PromiseOrValue<BytesLike>, arg1: PromiseOrValue<BytesLike>, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
