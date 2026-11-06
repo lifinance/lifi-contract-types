@@ -42,7 +42,7 @@
     "elliptic": "6.6.1"
   },
   "devDependencies": {
-    "@types/node": "^24.19.2",
+    "@types/node": "^26.6.6",
     "copyfiles": "^2.4.1",
     "minimatch": "^11.0.3",
     "typescript": "^7.0.2"
