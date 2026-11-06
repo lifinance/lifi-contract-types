@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IL1StandardBridge__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositERC20To",
@@ -86,16 +86,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IL1StandardBridge__factory = /** @class */ (function () {
-    function IL1StandardBridge__factory() {
-    }
-    IL1StandardBridge__factory.createInterface = function () {
+class IL1StandardBridge__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IL1StandardBridge__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IL1StandardBridge__factory.abi = _abi;
-    return IL1StandardBridge__factory;
-}());
+    }
+}
 exports.IL1StandardBridge__factory = IL1StandardBridge__factory;
+IL1StandardBridge__factory.abi = _abi;

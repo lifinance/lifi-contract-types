@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAlgebraPool__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "initialize",
@@ -180,16 +180,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IAlgebraPool__factory = /** @class */ (function () {
-    function IAlgebraPool__factory() {
-    }
-    IAlgebraPool__factory.createInterface = function () {
+class IAlgebraPool__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAlgebraPool__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAlgebraPool__factory.abi = _abi;
-    return IAlgebraPool__factory;
-}());
+    }
+}
 exports.IAlgebraPool__factory = IAlgebraPool__factory;
+IAlgebraPool__factory.abi = _abi;

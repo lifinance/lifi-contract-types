@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IGardenRegistry__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "htlcs",
@@ -26,16 +26,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IGardenRegistry__factory = /** @class */ (function () {
-    function IGardenRegistry__factory() {
-    }
-    IGardenRegistry__factory.createInterface = function () {
+class IGardenRegistry__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IGardenRegistry__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IGardenRegistry__factory.abi = _abi;
-    return IGardenRegistry__factory;
-}());
+    }
+}
 exports.IGardenRegistry__factory = IGardenRegistry__factory;
+IGardenRegistry__factory.abi = _abi;

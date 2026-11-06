@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IRelayDepository__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositErc20",
@@ -89,16 +89,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IRelayDepository__factory = /** @class */ (function () {
-    function IRelayDepository__factory() {
-    }
-    IRelayDepository__factory.createInterface = function () {
+class IRelayDepository__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IRelayDepository__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IRelayDepository__factory.abi = _abi;
-    return IRelayDepository__factory;
-}());
+    }
+}
 exports.IRelayDepository__factory = IRelayDepository__factory;
+IRelayDepository__factory.abi = _abi;

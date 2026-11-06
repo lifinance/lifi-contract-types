@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IVelodromeV2PoolFactory__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getFee",
@@ -31,16 +31,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IVelodromeV2PoolFactory__factory = /** @class */ (function () {
-    function IVelodromeV2PoolFactory__factory() {
-    }
-    IVelodromeV2PoolFactory__factory.createInterface = function () {
+class IVelodromeV2PoolFactory__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IVelodromeV2PoolFactory__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IVelodromeV2PoolFactory__factory.abi = _abi;
-    return IVelodromeV2PoolFactory__factory;
-}());
+    }
+}
 exports.IVelodromeV2PoolFactory__factory = IVelodromeV2PoolFactory__factory;
+IVelodromeV2PoolFactory__factory.abi = _abi;

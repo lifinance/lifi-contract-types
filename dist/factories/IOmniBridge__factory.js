@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IOmniBridge__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "relayTokens",
@@ -43,16 +43,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IOmniBridge__factory = /** @class */ (function () {
-    function IOmniBridge__factory() {
-    }
-    IOmniBridge__factory.createInterface = function () {
+class IOmniBridge__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IOmniBridge__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IOmniBridge__factory.abi = _abi;
-    return IOmniBridge__factory;
-}());
+    }
+}
 exports.IOmniBridge__factory = IOmniBridge__factory;
+IOmniBridge__factory.abi = _abi;

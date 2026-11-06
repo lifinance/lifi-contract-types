@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC721Receiver__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "onERC721Received",
@@ -41,16 +41,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IERC721Receiver__factory = /** @class */ (function () {
-    function IERC721Receiver__factory() {
-    }
-    IERC721Receiver__factory.createInterface = function () {
+class IERC721Receiver__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC721Receiver__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC721Receiver__factory.abi = _abi;
-    return IERC721Receiver__factory;
-}());
+    }
+}
 exports.IERC721Receiver__factory = IERC721Receiver__factory;
+IERC721Receiver__factory.abi = _abi;

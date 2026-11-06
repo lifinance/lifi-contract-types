@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IHyperswapV3Factory__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getPool",
@@ -36,16 +36,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IHyperswapV3Factory__factory = /** @class */ (function () {
-    function IHyperswapV3Factory__factory() {
-    }
-    IHyperswapV3Factory__factory.createInterface = function () {
+class IHyperswapV3Factory__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IHyperswapV3Factory__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IHyperswapV3Factory__factory.abi = _abi;
-    return IHyperswapV3Factory__factory;
-}());
+    }
+}
 exports.IHyperswapV3Factory__factory = IHyperswapV3Factory__factory;
+IHyperswapV3Factory__factory.abi = _abi;

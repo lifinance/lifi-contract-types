@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ILiFi__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "event",
         name: "BridgeToNonEVMChain",
@@ -300,16 +300,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var ILiFi__factory = /** @class */ (function () {
-    function ILiFi__factory() {
-    }
-    ILiFi__factory.createInterface = function () {
+class ILiFi__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ILiFi__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ILiFi__factory.abi = _abi;
-    return ILiFi__factory;
-}());
+    }
+}
 exports.ILiFi__factory = ILiFi__factory;
+ILiFi__factory.abi = _abi;

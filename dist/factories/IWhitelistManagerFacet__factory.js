@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IWhitelistManagerFacet__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "batchSetContractSelectorWhitelist",
@@ -139,16 +139,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IWhitelistManagerFacet__factory = /** @class */ (function () {
-    function IWhitelistManagerFacet__factory() {
-    }
-    IWhitelistManagerFacet__factory.createInterface = function () {
+class IWhitelistManagerFacet__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IWhitelistManagerFacet__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IWhitelistManagerFacet__factory.abi = _abi;
-    return IWhitelistManagerFacet__factory;
-}());
+    }
+}
 exports.IWhitelistManagerFacet__factory = IWhitelistManagerFacet__factory;
+IWhitelistManagerFacet__factory.abi = _abi;

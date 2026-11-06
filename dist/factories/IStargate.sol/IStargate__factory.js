@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IStargate__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "quoteOFT",
@@ -323,16 +323,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IStargate__factory = /** @class */ (function () {
-    function IStargate__factory() {
-    }
-    IStargate__factory.createInterface = function () {
+class IStargate__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IStargate__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IStargate__factory.abi = _abi;
-    return IStargate__factory;
-}());
+    }
+}
 exports.IStargate__factory = IStargate__factory;
+IStargate__factory.abi = _abi;

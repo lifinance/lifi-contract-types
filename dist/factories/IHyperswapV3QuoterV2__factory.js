@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IHyperswapV3QuoterV2__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "quoteExactInputSingle",
@@ -68,16 +68,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IHyperswapV3QuoterV2__factory = /** @class */ (function () {
-    function IHyperswapV3QuoterV2__factory() {
-    }
-    IHyperswapV3QuoterV2__factory.createInterface = function () {
+class IHyperswapV3QuoterV2__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IHyperswapV3QuoterV2__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IHyperswapV3QuoterV2__factory.abi = _abi;
-    return IHyperswapV3QuoterV2__factory;
-}());
+    }
+}
 exports.IHyperswapV3QuoterV2__factory = IHyperswapV3QuoterV2__factory;
+IHyperswapV3QuoterV2__factory.abi = _abi;

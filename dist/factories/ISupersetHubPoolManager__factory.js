@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISupersetHubPoolManager__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "exactInput",
@@ -96,16 +96,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISupersetHubPoolManager__factory = /** @class */ (function () {
-    function ISupersetHubPoolManager__factory() {
-    }
-    ISupersetHubPoolManager__factory.createInterface = function () {
+class ISupersetHubPoolManager__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISupersetHubPoolManager__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISupersetHubPoolManager__factory.abi = _abi;
-    return ISupersetHubPoolManager__factory;
-}());
+    }
+}
 exports.ISupersetHubPoolManager__factory = ISupersetHubPoolManager__factory;
+ISupersetHubPoolManager__factory.abi = _abi;

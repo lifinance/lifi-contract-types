@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IVelodromeV2Router__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "getAmountsOut",
@@ -87,16 +87,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IVelodromeV2Router__factory = /** @class */ (function () {
-    function IVelodromeV2Router__factory() {
-    }
-    IVelodromeV2Router__factory.createInterface = function () {
+class IVelodromeV2Router__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IVelodromeV2Router__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IVelodromeV2Router__factory.abi = _abi;
-    return IVelodromeV2Router__factory;
-}());
+    }
+}
 exports.IVelodromeV2Router__factory = IVelodromeV2Router__factory;
+IVelodromeV2Router__factory.abi = _abi;

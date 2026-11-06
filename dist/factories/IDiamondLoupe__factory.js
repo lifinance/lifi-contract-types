@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IDiamondLoupe__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "facetAddress",
@@ -83,16 +83,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IDiamondLoupe__factory = /** @class */ (function () {
-    function IDiamondLoupe__factory() {
-    }
-    IDiamondLoupe__factory.createInterface = function () {
+class IDiamondLoupe__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IDiamondLoupe__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IDiamondLoupe__factory.abi = _abi;
-    return IDiamondLoupe__factory;
-}());
+    }
+}
 exports.IDiamondLoupe__factory = IDiamondLoupe__factory;
+IDiamondLoupe__factory.abi = _abi;

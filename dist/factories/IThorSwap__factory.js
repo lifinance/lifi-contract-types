@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IThorSwap__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositWithExpiry",
@@ -40,16 +40,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IThorSwap__factory = /** @class */ (function () {
-    function IThorSwap__factory() {
-    }
-    IThorSwap__factory.createInterface = function () {
+class IThorSwap__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IThorSwap__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IThorSwap__factory.abi = _abi;
-    return IThorSwap__factory;
-}());
+    }
+}
 exports.IThorSwap__factory = IThorSwap__factory;
+IThorSwap__factory.abi = _abi;

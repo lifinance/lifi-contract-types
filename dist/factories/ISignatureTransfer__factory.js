@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISignatureTransfer__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "DOMAIN_SEPARATOR",
@@ -399,16 +399,13 @@ var _abi = [
         inputs: [],
     },
 ];
-var ISignatureTransfer__factory = /** @class */ (function () {
-    function ISignatureTransfer__factory() {
-    }
-    ISignatureTransfer__factory.createInterface = function () {
+class ISignatureTransfer__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISignatureTransfer__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISignatureTransfer__factory.abi = _abi;
-    return ISignatureTransfer__factory;
-}());
+    }
+}
 exports.ISignatureTransfer__factory = ISignatureTransfer__factory;
+ISignatureTransfer__factory.abi = _abi;

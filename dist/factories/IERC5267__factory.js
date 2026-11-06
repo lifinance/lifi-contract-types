@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC5267__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "eip712Domain",
@@ -56,16 +56,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IERC5267__factory = /** @class */ (function () {
-    function IERC5267__factory() {
-    }
-    IERC5267__factory.createInterface = function () {
+class IERC5267__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC5267__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC5267__factory.abi = _abi;
-    return IERC5267__factory;
-}());
+    }
+}
 exports.IERC5267__factory = IERC5267__factory;
+IERC5267__factory.abi = _abi;
