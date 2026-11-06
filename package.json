@@ -44,7 +44,7 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "copyfiles": "^2.4.1",
-    "minimatch": "^11.0.3",
+    "minimatch": "^11.0.4",
     "typescript": "^7.0.2"
   },
   "scripts": {
