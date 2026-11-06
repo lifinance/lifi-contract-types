@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISponsoredCCTPSrcPeriphery__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositForBurn",
@@ -117,16 +117,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var ISponsoredCCTPSrcPeriphery__factory = /** @class */ (function () {
-    function ISponsoredCCTPSrcPeriphery__factory() {
-    }
-    ISponsoredCCTPSrcPeriphery__factory.createInterface = function () {
+class ISponsoredCCTPSrcPeriphery__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISponsoredCCTPSrcPeriphery__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISponsoredCCTPSrcPeriphery__factory.abi = _abi;
-    return ISponsoredCCTPSrcPeriphery__factory;
-}());
+    }
+}
 exports.ISponsoredCCTPSrcPeriphery__factory = ISponsoredCCTPSrcPeriphery__factory;
+ISponsoredCCTPSrcPeriphery__factory.abi = _abi;

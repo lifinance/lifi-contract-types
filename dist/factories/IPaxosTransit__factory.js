@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IPaxosTransit__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "submitOrder",
@@ -108,16 +108,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IPaxosTransit__factory = /** @class */ (function () {
-    function IPaxosTransit__factory() {
-    }
-    IPaxosTransit__factory.createInterface = function () {
+class IPaxosTransit__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IPaxosTransit__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IPaxosTransit__factory.abi = _abi;
-    return IPaxosTransit__factory;
-}());
+    }
+}
 exports.IPaxosTransit__factory = IPaxosTransit__factory;
+IPaxosTransit__factory.abi = _abi;

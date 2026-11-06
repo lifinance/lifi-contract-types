@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ILayerSwapDepository__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositERC20",
@@ -53,16 +53,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ILayerSwapDepository__factory = /** @class */ (function () {
-    function ILayerSwapDepository__factory() {
-    }
-    ILayerSwapDepository__factory.createInterface = function () {
+class ILayerSwapDepository__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ILayerSwapDepository__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ILayerSwapDepository__factory.abi = _abi;
-    return ILayerSwapDepository__factory;
-}());
+    }
+}
 exports.ILayerSwapDepository__factory = ILayerSwapDepository__factory;
+ILayerSwapDepository__factory.abi = _abi;

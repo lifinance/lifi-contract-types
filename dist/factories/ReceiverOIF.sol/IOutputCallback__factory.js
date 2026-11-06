@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IOutputCallback__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "outputFilled",
@@ -30,16 +30,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IOutputCallback__factory = /** @class */ (function () {
-    function IOutputCallback__factory() {
-    }
-    IOutputCallback__factory.createInterface = function () {
+class IOutputCallback__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IOutputCallback__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IOutputCallback__factory.abi = _abi;
-    return IOutputCallback__factory;
-}());
+    }
+}
 exports.IOutputCallback__factory = IOutputCallback__factory;
+IOutputCallback__factory.abi = _abi;

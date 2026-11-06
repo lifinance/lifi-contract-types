@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IiZiSwapPool__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "swapX2Y",
@@ -98,16 +98,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IiZiSwapPool__factory = /** @class */ (function () {
-    function IiZiSwapPool__factory() {
-    }
-    IiZiSwapPool__factory.createInterface = function () {
+class IiZiSwapPool__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IiZiSwapPool__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IiZiSwapPool__factory.abi = _abi;
-    return IiZiSwapPool__factory;
-}());
+    }
+}
 exports.IiZiSwapPool__factory = IiZiSwapPool__factory;
+IiZiSwapPool__factory.abi = _abi;

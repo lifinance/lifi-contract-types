@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ICircleBridgeProxy__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "depositForBurn",
@@ -45,16 +45,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var ICircleBridgeProxy__factory = /** @class */ (function () {
-    function ICircleBridgeProxy__factory() {
-    }
-    ICircleBridgeProxy__factory.createInterface = function () {
+class ICircleBridgeProxy__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ICircleBridgeProxy__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ICircleBridgeProxy__factory.abi = _abi;
-    return ICircleBridgeProxy__factory;
-}());
+    }
+}
 exports.ICircleBridgeProxy__factory = ICircleBridgeProxy__factory;
+ICircleBridgeProxy__factory.abi = _abi;

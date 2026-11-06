@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISupersetSpokePoolManager__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "multiHopSwap",
@@ -103,16 +103,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISupersetSpokePoolManager__factory = /** @class */ (function () {
-    function ISupersetSpokePoolManager__factory() {
-    }
-    ISupersetSpokePoolManager__factory.createInterface = function () {
+class ISupersetSpokePoolManager__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISupersetSpokePoolManager__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISupersetSpokePoolManager__factory.abi = _abi;
-    return ISupersetSpokePoolManager__factory;
-}());
+    }
+}
 exports.ISupersetSpokePoolManager__factory = ISupersetSpokePoolManager__factory;
+ISupersetSpokePoolManager__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC165__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "supportsInterface",
@@ -26,16 +26,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IERC165__factory = /** @class */ (function () {
-    function IERC165__factory() {
-    }
-    IERC165__factory.createInterface = function () {
+class IERC165__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC165__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC165__factory.abi = _abi;
-    return IERC165__factory;
-}());
+    }
+}
 exports.IERC165__factory = IERC165__factory;
+IERC165__factory.abi = _abi;

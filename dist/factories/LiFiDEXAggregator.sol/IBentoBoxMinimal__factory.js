@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IBentoBoxMinimal__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "balanceOf",
@@ -340,16 +340,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IBentoBoxMinimal__factory = /** @class */ (function () {
-    function IBentoBoxMinimal__factory() {
-    }
-    IBentoBoxMinimal__factory.createInterface = function () {
+class IBentoBoxMinimal__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IBentoBoxMinimal__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IBentoBoxMinimal__factory.abi = _abi;
-    return IBentoBoxMinimal__factory;
-}());
+    }
+}
 exports.IBentoBoxMinimal__factory = IBentoBoxMinimal__factory;
+IBentoBoxMinimal__factory.abi = _abi;

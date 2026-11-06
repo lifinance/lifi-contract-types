@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IUniswapV2Pair__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "DOMAIN_SEPARATOR",
@@ -658,16 +658,13 @@ var _abi = [
         anonymous: false,
     },
 ];
-var IUniswapV2Pair__factory = /** @class */ (function () {
-    function IUniswapV2Pair__factory() {
-    }
-    IUniswapV2Pair__factory.createInterface = function () {
+class IUniswapV2Pair__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IUniswapV2Pair__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IUniswapV2Pair__factory.abi = _abi;
-    return IUniswapV2Pair__factory;
-}());
+    }
+}
 exports.IUniswapV2Pair__factory = IUniswapV2Pair__factory;
+IUniswapV2Pair__factory.abi = _abi;

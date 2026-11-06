@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IWETH__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "deposit",
@@ -51,16 +51,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IWETH__factory = /** @class */ (function () {
-    function IWETH__factory() {
-    }
-    IWETH__factory.createInterface = function () {
+class IWETH__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IWETH__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IWETH__factory.abi = _abi;
-    return IWETH__factory;
-}());
+    }
+}
 exports.IWETH__factory = IWETH__factory;
+IWETH__factory.abi = _abi;

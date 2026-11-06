@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IEIP712__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "DOMAIN_SEPARATOR",
@@ -20,16 +20,13 @@ var _abi = [
         stateMutability: "view",
     },
 ];
-var IEIP712__factory = /** @class */ (function () {
-    function IEIP712__factory() {
-    }
-    IEIP712__factory.createInterface = function () {
+class IEIP712__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IEIP712__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IEIP712__factory.abi = _abi;
-    return IEIP712__factory;
-}());
+    }
+}
 exports.IEIP712__factory = IEIP712__factory;
+IEIP712__factory.abi = _abi;

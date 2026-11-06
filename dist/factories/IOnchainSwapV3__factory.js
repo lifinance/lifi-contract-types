@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IOnchainSwapV3__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "fee",
@@ -53,16 +53,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IOnchainSwapV3__factory = /** @class */ (function () {
-    function IOnchainSwapV3__factory() {
-    }
-    IOnchainSwapV3__factory.createInterface = function () {
+class IOnchainSwapV3__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IOnchainSwapV3__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IOnchainSwapV3__factory.abi = _abi;
-    return IOnchainSwapV3__factory;
-}());
+    }
+}
 exports.IOnchainSwapV3__factory = IOnchainSwapV3__factory;
+IOnchainSwapV3__factory.abi = _abi;

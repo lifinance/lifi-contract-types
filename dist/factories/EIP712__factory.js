@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EIP712__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "eip712Domain",
@@ -72,16 +72,13 @@ var _abi = [
         ],
     },
 ];
-var EIP712__factory = /** @class */ (function () {
-    function EIP712__factory() {
-    }
-    EIP712__factory.createInterface = function () {
+class EIP712__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    EIP712__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    EIP712__factory.abi = _abi;
-    return EIP712__factory;
-}());
+    }
+}
 exports.EIP712__factory = EIP712__factory;
+EIP712__factory.abi = _abi;

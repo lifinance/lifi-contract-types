@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAlgebraQuoter__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "quoteExactInput",
@@ -143,16 +143,13 @@ var _abi = [
         stateMutability: "nonpayable",
     },
 ];
-var IAlgebraQuoter__factory = /** @class */ (function () {
-    function IAlgebraQuoter__factory() {
-    }
-    IAlgebraQuoter__factory.createInterface = function () {
+class IAlgebraQuoter__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAlgebraQuoter__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAlgebraQuoter__factory.abi = _abi;
-    return IAlgebraQuoter__factory;
-}());
+    }
+}
 exports.IAlgebraQuoter__factory = IAlgebraQuoter__factory;
+IAlgebraQuoter__factory.abi = _abi;

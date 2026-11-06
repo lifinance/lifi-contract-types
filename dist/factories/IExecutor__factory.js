@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IExecutor__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "swapAndCompleteBridgeTokens",
@@ -72,16 +72,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IExecutor__factory = /** @class */ (function () {
-    function IExecutor__factory() {
-    }
-    IExecutor__factory.createInterface = function () {
+class IExecutor__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IExecutor__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IExecutor__factory.abi = _abi;
-    return IExecutor__factory;
-}());
+    }
+}
 exports.IExecutor__factory = IExecutor__factory;
+IExecutor__factory.abi = _abi;

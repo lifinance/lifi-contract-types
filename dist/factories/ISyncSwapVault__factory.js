@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISyncSwapVault__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "deposit",
@@ -31,16 +31,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISyncSwapVault__factory = /** @class */ (function () {
-    function ISyncSwapVault__factory() {
-    }
-    ISyncSwapVault__factory.createInterface = function () {
+class ISyncSwapVault__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISyncSwapVault__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISyncSwapVault__factory.abi = _abi;
-    return ISyncSwapVault__factory;
-}());
+    }
+}
 exports.ISyncSwapVault__factory = ISyncSwapVault__factory;
+ISyncSwapVault__factory.abi = _abi;

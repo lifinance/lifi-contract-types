@@ -4,24 +4,21 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReentrancyGuard__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "error",
         name: "ReentrancyError",
         inputs: [],
     },
 ];
-var ReentrancyGuard__factory = /** @class */ (function () {
-    function ReentrancyGuard__factory() {
-    }
-    ReentrancyGuard__factory.createInterface = function () {
+class ReentrancyGuard__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ReentrancyGuard__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ReentrancyGuard__factory.abi = _abi;
-    return ReentrancyGuard__factory;
-}());
+    }
+}
 exports.ReentrancyGuard__factory = ReentrancyGuard__factory;
+ReentrancyGuard__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IGasZip__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "deposit",
@@ -25,16 +25,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var IGasZip__factory = /** @class */ (function () {
-    function IGasZip__factory() {
-    }
-    IGasZip__factory.createInterface = function () {
+class IGasZip__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IGasZip__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IGasZip__factory.abi = _abi;
-    return IGasZip__factory;
-}());
+    }
+}
 exports.IGasZip__factory = IGasZip__factory;
+IGasZip__factory.abi = _abi;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISquidRouter__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "bridgeCall",
@@ -195,16 +195,13 @@ var _abi = [
         stateMutability: "payable",
     },
 ];
-var ISquidRouter__factory = /** @class */ (function () {
-    function ISquidRouter__factory() {
-    }
-    ISquidRouter__factory.createInterface = function () {
+class ISquidRouter__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISquidRouter__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISquidRouter__factory.abi = _abi;
-    return ISquidRouter__factory;
-}());
+    }
+}
 exports.ISquidRouter__factory = ISquidRouter__factory;
+ISquidRouter__factory.abi = _abi;

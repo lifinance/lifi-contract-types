@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAllowanceTransfer__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         type: "function",
         name: "DOMAIN_SEPARATOR",
@@ -491,16 +491,13 @@ var _abi = [
         ],
     },
 ];
-var IAllowanceTransfer__factory = /** @class */ (function () {
-    function IAllowanceTransfer__factory() {
-    }
-    IAllowanceTransfer__factory.createInterface = function () {
+class IAllowanceTransfer__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAllowanceTransfer__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAllowanceTransfer__factory.abi = _abi;
-    return IAllowanceTransfer__factory;
-}());
+    }
+}
 exports.IAllowanceTransfer__factory = IAllowanceTransfer__factory;
+IAllowanceTransfer__factory.abi = _abi;
