@@ -39,7 +39,8 @@
     "ethers": "^5.8.0"
   },
   "overrides": {
-    "elliptic": "6.6.1"
+    "elliptic": "6.6.1",
+    "ws": "^8.21.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
