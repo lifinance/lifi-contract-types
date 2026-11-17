@@ -18,6 +18,7 @@ export { AcrossV4SwapFacet__factory } from "./AcrossV4SwapFacet__factory";
 export { AllBridgeFacet__factory } from "./AllBridgeFacet__factory";
 export { ArbitrumBridgeFacet__factory } from "./ArbitrumBridgeFacet__factory";
 export { AttestedBridgeFacet__factory } from "./AttestedBridgeFacet__factory";
+export { CCTPFacet__factory } from "./CCTPFacet__factory";
 export { CalldataVerificationFacet__factory } from "./CalldataVerificationFacet__factory";
 export { CelerCircleBridgeFacet__factory } from "./CelerCircleBridgeFacet__factory";
 export { CentrifugeFacet__factory } from "./CentrifugeFacet__factory";

@@ -1,0 +1,429 @@
+import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
+import type { Listener, Provider } from "@ethersproject/providers";
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "./common";
+export declare namespace CCTPFacet {
+    type ChainIdConfigStruct = {
+        chainId: PromiseOrValue<BigNumberish>;
+        domainId: PromiseOrValue<BigNumberish>;
+    };
+    type ChainIdConfigStructOutput = [BigNumber, number] & {
+        chainId: BigNumber;
+        domainId: number;
+    };
+    type CCTPDataStruct = {
+        maxCCTPFee: PromiseOrValue<BigNumberish>;
+        nonEVMReceiver: PromiseOrValue<BytesLike>;
+        solanaReceiverATA: PromiseOrValue<BytesLike>;
+        minFinalityThreshold: PromiseOrValue<BigNumberish>;
+        refundRecipient: PromiseOrValue<string>;
+        hookData: PromiseOrValue<BytesLike>;
+    };
+    type CCTPDataStructOutput = [
+        BigNumber,
+        string,
+        string,
+        number,
+        string,
+        string
+    ] & {
+        maxCCTPFee: BigNumber;
+        nonEVMReceiver: string;
+        solanaReceiverATA: string;
+        minFinalityThreshold: number;
+        refundRecipient: string;
+        hookData: string;
+    };
+}
+export declare namespace ILiFi {
+    type BridgeDataStruct = {
+        transactionId: PromiseOrValue<BytesLike>;
+        bridge: PromiseOrValue<string>;
+        integrator: PromiseOrValue<string>;
+        referrer: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receiver: PromiseOrValue<string>;
+        minAmount: PromiseOrValue<BigNumberish>;
+        destinationChainId: PromiseOrValue<BigNumberish>;
+        hasSourceSwaps: PromiseOrValue<boolean>;
+        hasDestinationCall: PromiseOrValue<boolean>;
+    };
+    type BridgeDataStructOutput = [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        boolean,
+        boolean
+    ] & {
+        transactionId: string;
+        bridge: string;
+        integrator: string;
+        referrer: string;
+        sendingAssetId: string;
+        receiver: string;
+        minAmount: BigNumber;
+        destinationChainId: BigNumber;
+        hasSourceSwaps: boolean;
+        hasDestinationCall: boolean;
+    };
+}
+export declare namespace LibSwap {
+    type SwapDataStruct = {
+        callTo: PromiseOrValue<string>;
+        approveTo: PromiseOrValue<string>;
+        sendingAssetId: PromiseOrValue<string>;
+        receivingAssetId: PromiseOrValue<string>;
+        fromAmount: PromiseOrValue<BigNumberish>;
+        callData: PromiseOrValue<BytesLike>;
+        requiresDeposit: PromiseOrValue<boolean>;
+    };
+    type SwapDataStructOutput = [
+        string,
+        string,
+        string,
+        string,
+        BigNumber,
+        string,
+        boolean
+    ] & {
+        callTo: string;
+        approveTo: string;
+        sendingAssetId: string;
+        receivingAssetId: string;
+        fromAmount: BigNumber;
+        callData: string;
+        requiresDeposit: boolean;
+    };
+}
+export interface CCTPFacetInterface extends utils.Interface {
+    functions: {
+        "CCTP_TOKEN_MESSENGER()": FunctionFragment;
+        "CCTP_USDC()": FunctionFragment;
+        "getCCTPChainIdToDomainId(uint256)": FunctionFragment;
+        "initCCTP((uint256,uint32)[])": FunctionFragment;
+        "setCCTPChainIdToDomainId((uint256,uint32)[])": FunctionFragment;
+        "startBridgeTokensViaCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,bytes32,uint32,address,bytes))": FunctionFragment;
+        "swapAndStartBridgeTokensViaCCTP((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,bytes32,uint32,address,bytes))": FunctionFragment;
+        "unsetCCTPChainIdToDomainId(uint256)": FunctionFragment;
+    };
+    getFunction(nameOrSignatureOrTopic: "CCTP_TOKEN_MESSENGER" | "CCTP_USDC" | "getCCTPChainIdToDomainId" | "initCCTP" | "setCCTPChainIdToDomainId" | "startBridgeTokensViaCCTP" | "swapAndStartBridgeTokensViaCCTP" | "unsetCCTPChainIdToDomainId"): FunctionFragment;
+    encodeFunctionData(functionFragment: "CCTP_TOKEN_MESSENGER", values?: undefined): string;
+    encodeFunctionData(functionFragment: "CCTP_USDC", values?: undefined): string;
+    encodeFunctionData(functionFragment: "getCCTPChainIdToDomainId", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "initCCTP", values: [CCTPFacet.ChainIdConfigStruct[]]): string;
+    encodeFunctionData(functionFragment: "setCCTPChainIdToDomainId", values: [CCTPFacet.ChainIdConfigStruct[]]): string;
+    encodeFunctionData(functionFragment: "startBridgeTokensViaCCTP", values: [ILiFi.BridgeDataStruct, CCTPFacet.CCTPDataStruct]): string;
+    encodeFunctionData(functionFragment: "swapAndStartBridgeTokensViaCCTP", values: [
+        ILiFi.BridgeDataStruct,
+        LibSwap.SwapDataStruct[],
+        CCTPFacet.CCTPDataStruct
+    ]): string;
+    encodeFunctionData(functionFragment: "unsetCCTPChainIdToDomainId", values: [PromiseOrValue<BigNumberish>]): string;
+    decodeFunctionResult(functionFragment: "CCTP_TOKEN_MESSENGER", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "CCTP_USDC", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "getCCTPChainIdToDomainId", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "initCCTP", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setCCTPChainIdToDomainId", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "startBridgeTokensViaCCTP", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "swapAndStartBridgeTokensViaCCTP", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "unsetCCTPChainIdToDomainId", data: BytesLike): Result;
+    events: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)": EventFragment;
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)": EventFragment;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)": EventFragment;
+        "CCTPChainIdToDomainIdSet(uint256,uint32)": EventFragment;
+        "CCTPChainIdToDomainIdUnset(uint256)": EventFragment;
+        "CCTPChainMappingsInitialized(tuple[])": EventFragment;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)": EventFragment;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)": EventFragment;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)": EventFragment;
+        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)": EventFragment;
+        "LiFiTransferStarted(tuple)": EventFragment;
+    };
+    getEvent(nameOrSignatureOrTopic: "AssetSwapped"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChain"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "BridgeToNonEVMChainBytes32"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "CCTPChainIdToDomainIdSet"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "CCTPChainIdToDomainIdUnset"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "CCTPChainMappingsInitialized"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiGenericSwapCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiSwappedGeneric"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiTransferCompleted"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiTransferRecovered"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "LiFiTransferStarted"): EventFragment;
+}
+export interface AssetSwappedEventObject {
+    transactionId: string;
+    dex: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+    timestamp: BigNumber;
+}
+export type AssetSwappedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+], AssetSwappedEventObject>;
+export type AssetSwappedEventFilter = TypedEventFilter<AssetSwappedEvent>;
+export interface BridgeToNonEVMChainEventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainEvent = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainEventObject>;
+export type BridgeToNonEVMChainEventFilter = TypedEventFilter<BridgeToNonEVMChainEvent>;
+export interface BridgeToNonEVMChainBytes32EventObject {
+    transactionId: string;
+    destinationChainId: BigNumber;
+    receiver: string;
+}
+export type BridgeToNonEVMChainBytes32Event = TypedEvent<[
+    string,
+    BigNumber,
+    string
+], BridgeToNonEVMChainBytes32EventObject>;
+export type BridgeToNonEVMChainBytes32EventFilter = TypedEventFilter<BridgeToNonEVMChainBytes32Event>;
+export interface CCTPChainIdToDomainIdSetEventObject {
+    chainId: BigNumber;
+    domainId: number;
+}
+export type CCTPChainIdToDomainIdSetEvent = TypedEvent<[
+    BigNumber,
+    number
+], CCTPChainIdToDomainIdSetEventObject>;
+export type CCTPChainIdToDomainIdSetEventFilter = TypedEventFilter<CCTPChainIdToDomainIdSetEvent>;
+export interface CCTPChainIdToDomainIdUnsetEventObject {
+    chainId: BigNumber;
+}
+export type CCTPChainIdToDomainIdUnsetEvent = TypedEvent<[
+    BigNumber
+], CCTPChainIdToDomainIdUnsetEventObject>;
+export type CCTPChainIdToDomainIdUnsetEventFilter = TypedEventFilter<CCTPChainIdToDomainIdUnsetEvent>;
+export interface CCTPChainMappingsInitializedEventObject {
+    chainIdConfigs: CCTPFacet.ChainIdConfigStructOutput[];
+}
+export type CCTPChainMappingsInitializedEvent = TypedEvent<[
+    CCTPFacet.ChainIdConfigStructOutput[]
+], CCTPChainMappingsInitializedEventObject>;
+export type CCTPChainMappingsInitializedEventFilter = TypedEventFilter<CCTPChainMappingsInitializedEvent>;
+export interface LiFiGenericSwapCompletedEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    receiver: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export type LiFiGenericSwapCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiGenericSwapCompletedEventObject>;
+export type LiFiGenericSwapCompletedEventFilter = TypedEventFilter<LiFiGenericSwapCompletedEvent>;
+export interface LiFiSwappedGenericEventObject {
+    transactionId: string;
+    integrator: string;
+    referrer: string;
+    fromAssetId: string;
+    toAssetId: string;
+    fromAmount: BigNumber;
+    toAmount: BigNumber;
+}
+export type LiFiSwappedGenericEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiSwappedGenericEventObject>;
+export type LiFiSwappedGenericEventFilter = TypedEventFilter<LiFiSwappedGenericEvent>;
+export interface LiFiTransferCompletedEventObject {
+    transactionId: string;
+    receivingAssetId: string;
+    receiver: string;
+    amount: BigNumber;
+    timestamp: BigNumber;
+}
+export type LiFiTransferCompletedEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiTransferCompletedEventObject>;
+export type LiFiTransferCompletedEventFilter = TypedEventFilter<LiFiTransferCompletedEvent>;
+export interface LiFiTransferRecoveredEventObject {
+    transactionId: string;
+    receivingAssetId: string;
+    receiver: string;
+    amount: BigNumber;
+    timestamp: BigNumber;
+}
+export type LiFiTransferRecoveredEvent = TypedEvent<[
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+], LiFiTransferRecoveredEventObject>;
+export type LiFiTransferRecoveredEventFilter = TypedEventFilter<LiFiTransferRecoveredEvent>;
+export interface LiFiTransferStartedEventObject {
+    bridgeData: ILiFi.BridgeDataStructOutput;
+}
+export type LiFiTransferStartedEvent = TypedEvent<[
+    ILiFi.BridgeDataStructOutput
+], LiFiTransferStartedEventObject>;
+export type LiFiTransferStartedEventFilter = TypedEventFilter<LiFiTransferStartedEvent>;
+export interface CCTPFacet extends BaseContract {
+    connect(signerOrProvider: Signer | Provider | string): this;
+    attach(addressOrName: string): this;
+    deployed(): Promise<this>;
+    interface: CCTPFacetInterface;
+    queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
+    listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
+    listeners(eventName?: string): Array<Listener>;
+    removeAllListeners<TEvent extends TypedEvent>(eventFilter: TypedEventFilter<TEvent>): this;
+    removeAllListeners(eventName?: string): this;
+    off: OnEvent<this>;
+    on: OnEvent<this>;
+    once: OnEvent<this>;
+    removeListener: OnEvent<this>;
+    functions: {
+        CCTP_TOKEN_MESSENGER(overrides?: CallOverrides): Promise<[string]>;
+        CCTP_USDC(overrides?: CallOverrides): Promise<[string]>;
+        getCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number] & {
+            domainId: number;
+        }>;
+        initCCTP(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        setCCTPChainIdToDomainId(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        startBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _cctpData: CCTPFacet.CCTPDataStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        swapAndStartBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cctpData: CCTPFacet.CCTPDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+        unsetCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
+    };
+    CCTP_TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
+    CCTP_USDC(overrides?: CallOverrides): Promise<string>;
+    getCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
+    initCCTP(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    setCCTPChainIdToDomainId(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    startBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _cctpData: CCTPFacet.CCTPDataStruct, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    swapAndStartBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cctpData: CCTPFacet.CCTPDataStruct, overrides?: PayableOverrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    unsetCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
+    callStatic: {
+        CCTP_TOKEN_MESSENGER(overrides?: CallOverrides): Promise<string>;
+        CCTP_USDC(overrides?: CallOverrides): Promise<string>;
+        getCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
+        initCCTP(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
+        setCCTPChainIdToDomainId(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
+        startBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _cctpData: CCTPFacet.CCTPDataStruct, overrides?: CallOverrides): Promise<void>;
+        swapAndStartBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cctpData: CCTPFacet.CCTPDataStruct, overrides?: CallOverrides): Promise<void>;
+        unsetCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+    };
+    filters: {
+        "AssetSwapped(bytes32,address,address,address,uint256,uint256,uint256)"(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
+        AssetSwapped(transactionId?: null, dex?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null, timestamp?: null): AssetSwappedEventFilter;
+        "BridgeToNonEVMChain(bytes32,uint256,bytes)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        BridgeToNonEVMChain(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainEventFilter;
+        "BridgeToNonEVMChainBytes32(bytes32,uint256,bytes32)"(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
+        BridgeToNonEVMChainBytes32(transactionId?: PromiseOrValue<BytesLike> | null, destinationChainId?: PromiseOrValue<BigNumberish> | null, receiver?: null): BridgeToNonEVMChainBytes32EventFilter;
+        "CCTPChainIdToDomainIdSet(uint256,uint32)"(chainId?: PromiseOrValue<BigNumberish> | null, domainId?: null): CCTPChainIdToDomainIdSetEventFilter;
+        CCTPChainIdToDomainIdSet(chainId?: PromiseOrValue<BigNumberish> | null, domainId?: null): CCTPChainIdToDomainIdSetEventFilter;
+        "CCTPChainIdToDomainIdUnset(uint256)"(chainId?: PromiseOrValue<BigNumberish> | null): CCTPChainIdToDomainIdUnsetEventFilter;
+        CCTPChainIdToDomainIdUnset(chainId?: PromiseOrValue<BigNumberish> | null): CCTPChainIdToDomainIdUnsetEventFilter;
+        "CCTPChainMappingsInitialized(tuple[])"(chainIdConfigs?: null): CCTPChainMappingsInitializedEventFilter;
+        CCTPChainMappingsInitialized(chainIdConfigs?: null): CCTPChainMappingsInitializedEventFilter;
+        "LiFiGenericSwapCompleted(bytes32,string,string,address,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        LiFiGenericSwapCompleted(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, receiver?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiGenericSwapCompletedEventFilter;
+        "LiFiSwappedGeneric(bytes32,string,string,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        LiFiSwappedGeneric(transactionId?: PromiseOrValue<BytesLike> | null, integrator?: null, referrer?: null, fromAssetId?: null, toAssetId?: null, fromAmount?: null, toAmount?: null): LiFiSwappedGenericEventFilter;
+        "LiFiTransferCompleted(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        LiFiTransferCompleted(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferCompletedEventFilter;
+        "LiFiTransferRecovered(bytes32,address,address,uint256,uint256)"(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        LiFiTransferRecovered(transactionId?: PromiseOrValue<BytesLike> | null, receivingAssetId?: null, receiver?: null, amount?: null, timestamp?: null): LiFiTransferRecoveredEventFilter;
+        "LiFiTransferStarted(tuple)"(bridgeData?: null): LiFiTransferStartedEventFilter;
+        LiFiTransferStarted(bridgeData?: null): LiFiTransferStartedEventFilter;
+    };
+    estimateGas: {
+        CCTP_TOKEN_MESSENGER(overrides?: CallOverrides): Promise<BigNumber>;
+        CCTP_USDC(overrides?: CallOverrides): Promise<BigNumber>;
+        getCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
+        initCCTP(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        setCCTPChainIdToDomainId(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        startBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _cctpData: CCTPFacet.CCTPDataStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        swapAndStartBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cctpData: CCTPFacet.CCTPDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+        unsetCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
+    };
+    populateTransaction: {
+        CCTP_TOKEN_MESSENGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        CCTP_USDC(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        getCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        initCCTP(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        setCCTPChainIdToDomainId(_chainIdConfigs: CCTPFacet.ChainIdConfigStruct[], overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        startBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _cctpData: CCTPFacet.CCTPDataStruct, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        swapAndStartBridgeTokensViaCCTP(_bridgeData: ILiFi.BridgeDataStruct, _swapData: LibSwap.SwapDataStruct[], _cctpData: CCTPFacet.CCTPDataStruct, overrides?: PayableOverrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+        unsetCCTPChainIdToDomainId(_chainId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
+    };
+}
