@@ -35,8 +35,7 @@ bun run build      # tsc into dist/, then copy src/**/*.d.ts into dist/
 ```
 
 `bun run compile` and `bun run copy-dts` are the two halves of `build`. There are no tests and no linter;
-`tsc` passing is the check. The README's `yarn` commands also work (`.yarnrc.yml` sets the node-modules
-linker), but the publishing workflow uses Bun.
+`tsc` passing is the check. The README still shows `yarn`; the publishing workflow and `bun.lock` use Bun.
 
 ## Env
 
