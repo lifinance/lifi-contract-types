@@ -134,8 +134,7 @@ export declare namespace LibSwap {
 export interface FraxFacetInterface extends utils.Interface {
   functions: {
     "FRAX_HOP()": FunctionFragment;
-    "FRAX_PATH_USD()": FunctionFragment;
-    "FRAX_TIP_FEE_MANAGER()": FunctionFragment;
+    "FRAX_TEMPO_WRAPPER()": FunctionFragment;
     "getFraxChainIdToEid(uint256)": FunctionFragment;
     "initFrax((uint256,uint32)[])": FunctionFragment;
     "setFraxChainIdToEid((uint256,uint32)[])": FunctionFragment;
@@ -147,8 +146,7 @@ export interface FraxFacetInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "FRAX_HOP"
-      | "FRAX_PATH_USD"
-      | "FRAX_TIP_FEE_MANAGER"
+      | "FRAX_TEMPO_WRAPPER"
       | "getFraxChainIdToEid"
       | "initFrax"
       | "setFraxChainIdToEid"
@@ -159,11 +157,7 @@ export interface FraxFacetInterface extends utils.Interface {
 
   encodeFunctionData(functionFragment: "FRAX_HOP", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "FRAX_PATH_USD",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "FRAX_TIP_FEE_MANAGER",
+    functionFragment: "FRAX_TEMPO_WRAPPER",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -197,11 +191,7 @@ export interface FraxFacetInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "FRAX_HOP", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "FRAX_PATH_USD",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "FRAX_TIP_FEE_MANAGER",
+    functionFragment: "FRAX_TEMPO_WRAPPER",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -436,9 +426,7 @@ export interface FraxFacet extends BaseContract {
   functions: {
     FRAX_HOP(overrides?: CallOverrides): Promise<[string]>;
 
-    FRAX_PATH_USD(overrides?: CallOverrides): Promise<[string]>;
-
-    FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<[string]>;
+    FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<[string]>;
 
     getFraxChainIdToEid(
       _chainId: PromiseOrValue<BigNumberish>,
@@ -476,9 +464,7 @@ export interface FraxFacet extends BaseContract {
 
   FRAX_HOP(overrides?: CallOverrides): Promise<string>;
 
-  FRAX_PATH_USD(overrides?: CallOverrides): Promise<string>;
-
-  FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<string>;
+  FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<string>;
 
   getFraxChainIdToEid(
     _chainId: PromiseOrValue<BigNumberish>,
@@ -516,9 +502,7 @@ export interface FraxFacet extends BaseContract {
   callStatic: {
     FRAX_HOP(overrides?: CallOverrides): Promise<string>;
 
-    FRAX_PATH_USD(overrides?: CallOverrides): Promise<string>;
-
-    FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<string>;
+    FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<string>;
 
     getFraxChainIdToEid(
       _chainId: PromiseOrValue<BigNumberish>,
@@ -698,9 +682,7 @@ export interface FraxFacet extends BaseContract {
   estimateGas: {
     FRAX_HOP(overrides?: CallOverrides): Promise<BigNumber>;
 
-    FRAX_PATH_USD(overrides?: CallOverrides): Promise<BigNumber>;
-
-    FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<BigNumber>;
+    FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<BigNumber>;
 
     getFraxChainIdToEid(
       _chainId: PromiseOrValue<BigNumberish>,
@@ -739,9 +721,7 @@ export interface FraxFacet extends BaseContract {
   populateTransaction: {
     FRAX_HOP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    FRAX_PATH_USD(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    FRAX_TIP_FEE_MANAGER(
+    FRAX_TEMPO_WRAPPER(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
