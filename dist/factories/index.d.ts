@@ -103,6 +103,7 @@ export { ISupersetSpokePoolManager__factory } from "./ISupersetSpokePoolManager_
 export { ISymbiosisMetaRouter__factory } from "./ISymbiosisMetaRouter__factory";
 export { ISyncSwapPool__factory } from "./ISyncSwapPool__factory";
 export { ISyncSwapVault__factory } from "./ISyncSwapVault__factory";
+export { ITempoFeeInclusiveWrapper__factory } from "./ITempoFeeInclusiveWrapper__factory";
 export { IThorSwap__factory } from "./IThorSwap__factory";
 export { ITokenMessenger__factory } from "./ITokenMessenger__factory";
 export { IVelodromeV2Pool__factory } from "./IVelodromeV2Pool__factory";

@@ -100,8 +100,7 @@ export declare namespace LibSwap {
 export interface FraxFacetInterface extends utils.Interface {
     functions: {
         "FRAX_HOP()": FunctionFragment;
-        "FRAX_PATH_USD()": FunctionFragment;
-        "FRAX_TIP_FEE_MANAGER()": FunctionFragment;
+        "FRAX_TEMPO_WRAPPER()": FunctionFragment;
         "getFraxChainIdToEid(uint256)": FunctionFragment;
         "initFrax((uint256,uint32)[])": FunctionFragment;
         "setFraxChainIdToEid((uint256,uint32)[])": FunctionFragment;
@@ -109,10 +108,9 @@ export interface FraxFacetInterface extends utils.Interface {
         "swapAndStartBridgeTokensViaFrax((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,uint256,address,bytes32))": FunctionFragment;
         "unsetFraxChainIdToEid(uint256[])": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "FRAX_HOP" | "FRAX_PATH_USD" | "FRAX_TIP_FEE_MANAGER" | "getFraxChainIdToEid" | "initFrax" | "setFraxChainIdToEid" | "startBridgeTokensViaFrax" | "swapAndStartBridgeTokensViaFrax" | "unsetFraxChainIdToEid"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "FRAX_HOP" | "FRAX_TEMPO_WRAPPER" | "getFraxChainIdToEid" | "initFrax" | "setFraxChainIdToEid" | "startBridgeTokensViaFrax" | "swapAndStartBridgeTokensViaFrax" | "unsetFraxChainIdToEid"): FunctionFragment;
     encodeFunctionData(functionFragment: "FRAX_HOP", values?: undefined): string;
-    encodeFunctionData(functionFragment: "FRAX_PATH_USD", values?: undefined): string;
-    encodeFunctionData(functionFragment: "FRAX_TIP_FEE_MANAGER", values?: undefined): string;
+    encodeFunctionData(functionFragment: "FRAX_TEMPO_WRAPPER", values?: undefined): string;
     encodeFunctionData(functionFragment: "getFraxChainIdToEid", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "initFrax", values: [FraxFacet.ChainIdConfigStruct[]]): string;
     encodeFunctionData(functionFragment: "setFraxChainIdToEid", values: [FraxFacet.ChainIdConfigStruct[]]): string;
@@ -124,8 +122,7 @@ export interface FraxFacetInterface extends utils.Interface {
     ]): string;
     encodeFunctionData(functionFragment: "unsetFraxChainIdToEid", values: [PromiseOrValue<BigNumberish>[]]): string;
     decodeFunctionResult(functionFragment: "FRAX_HOP", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "FRAX_PATH_USD", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "FRAX_TIP_FEE_MANAGER", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "FRAX_TEMPO_WRAPPER", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getFraxChainIdToEid", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "initFrax", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setFraxChainIdToEid", data: BytesLike): Result;
@@ -314,8 +311,7 @@ export interface FraxFacet extends BaseContract {
     removeListener: OnEvent<this>;
     functions: {
         FRAX_HOP(overrides?: CallOverrides): Promise<[string]>;
-        FRAX_PATH_USD(overrides?: CallOverrides): Promise<[string]>;
-        FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<[string]>;
+        FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<[string]>;
         getFraxChainIdToEid(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[number] & {
             lzEid: number;
         }>;
@@ -336,8 +332,7 @@ export interface FraxFacet extends BaseContract {
         }): Promise<ContractTransaction>;
     };
     FRAX_HOP(overrides?: CallOverrides): Promise<string>;
-    FRAX_PATH_USD(overrides?: CallOverrides): Promise<string>;
-    FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<string>;
+    FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<string>;
     getFraxChainIdToEid(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
     initFrax(_chainIdConfigs: FraxFacet.ChainIdConfigStruct[], overrides?: Overrides & {
         from?: PromiseOrValue<string>;
@@ -356,8 +351,7 @@ export interface FraxFacet extends BaseContract {
     }): Promise<ContractTransaction>;
     callStatic: {
         FRAX_HOP(overrides?: CallOverrides): Promise<string>;
-        FRAX_PATH_USD(overrides?: CallOverrides): Promise<string>;
-        FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<string>;
+        FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<string>;
         getFraxChainIdToEid(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<number>;
         initFrax(_chainIdConfigs: FraxFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
         setFraxChainIdToEid(_chainIdConfigs: FraxFacet.ChainIdConfigStruct[], overrides?: CallOverrides): Promise<void>;
@@ -391,8 +385,7 @@ export interface FraxFacet extends BaseContract {
     };
     estimateGas: {
         FRAX_HOP(overrides?: CallOverrides): Promise<BigNumber>;
-        FRAX_PATH_USD(overrides?: CallOverrides): Promise<BigNumber>;
-        FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<BigNumber>;
+        FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<BigNumber>;
         getFraxChainIdToEid(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         initFrax(_chainIdConfigs: FraxFacet.ChainIdConfigStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;
@@ -412,8 +405,7 @@ export interface FraxFacet extends BaseContract {
     };
     populateTransaction: {
         FRAX_HOP(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        FRAX_PATH_USD(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        FRAX_TIP_FEE_MANAGER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        FRAX_TEMPO_WRAPPER(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getFraxChainIdToEid(_chainId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         initFrax(_chainIdConfigs: FraxFacet.ChainIdConfigStruct[], overrides?: Overrides & {
             from?: PromiseOrValue<string>;

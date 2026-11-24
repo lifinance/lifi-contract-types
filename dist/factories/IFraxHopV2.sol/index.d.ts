@@ -1,3 +1,2 @@
 export { IFraxHopV2__factory } from "./IFraxHopV2__factory";
 export { IFraxOFT__factory } from "./IFraxOFT__factory";
-export { ITipFeeManager__factory } from "./ITipFeeManager__factory";
